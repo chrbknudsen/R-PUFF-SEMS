@@ -1,0 +1,6 @@
+---
+title: "KUB Datalab slides"
+format: html
+---
+
+- [General presentation](slides/datalabpres.qmd)

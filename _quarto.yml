@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "KUB Datalab slides"
+  navbar:
+    left:
+      - text: "KUB Datalab presentation"
+        href: slides/datalabpres.qmd
+        target: _blank
+
+
+
+

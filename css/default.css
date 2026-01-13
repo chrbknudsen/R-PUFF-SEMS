@@ -1,0 +1,15 @@
+div.slide h1 {
+    padding-left: 0;
+    padding-right: 20pt;
+    padding-top: 4pt;
+    padding-bottom: 4pt;
+    margin-top: 20pt;
+    margin-left: 0;
+    margin-right: 60pt;
+    margin-bottom: 0.5em;
+    display: block;
+    font-size: 160%;
+    line-height: 1.2em;
+    background: transparent;
+    color: #a31d20;
+}

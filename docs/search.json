@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "slides/test.html#hyppige-fejl",
+    "href": "slides/test.html#hyppige-fejl",
+    "title": "Statistik",
+    "section": "Hyppige fejl",
+    "text": "Hyppige fejl\nJa, det er fejl I kommer til at begå. For de bliver begået så ofte, at de har fået navne."
+  },
+  {
+    "objectID": "slides/test.html#pas-på-summary-statistics",
+    "href": "slides/test.html#pas-på-summary-statistics",
+    "title": "Statistik",
+    "section": "Pas på summary statistics",
+    "text": "Pas på summary statistics\nSummary statistics kan snyde og missse store forskelle i data. Betragt disse data:\n\n\n# A tibble: 8 × 5\n  variabel middel median stdafv   iqr\n  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 x1         9      9      3.32  5   \n2 x2         9      9      3.32  5   \n3 x3         9      9      3.32  5   \n4 x4         9      8      3.32  0   \n5 y1         7.50   7.58   2.03  2.26\n6 y2         7.50   8.14   2.03  2.25\n7 y3         7.5    7.11   2.03  1.73\n8 y4         7.50   7.04   2.03  2.02\n\n\nDe ser ret ens ud."
+  },
+  {
+    "objectID": "slides/test.html#correlationen-ser-også-fin-ud",
+    "href": "slides/test.html#correlationen-ser-også-fin-ud",
+    "title": "Statistik",
+    "section": "Correlationen ser også fin ud",
+    "text": "Correlationen ser også fin ud\nKorrelationen mellem parrene er også ret ens: der er noget med x4 og y4. Men ellers - ret ens.\n\n\n           y1         y2         y3         y4\nx1  0.8164205  0.8162365  0.8162867 -0.3140467\nx2  0.8164205  0.8162365  0.8162867 -0.3140467\nx3  0.8164205  0.8162365  0.8162867 -0.3140467\nx4 -0.5290927 -0.7184365 -0.3446610  0.8165214\n\n\nMen er de nu også det?"
+  },
+  {
+    "objectID": "slides/test.html#ikke-hvis-vi-plotter-dem",
+    "href": "slides/test.html#ikke-hvis-vi-plotter-dem",
+    "title": "Statistik",
+    "section": "Ikke hvis vi plotter dem:",
+    "text": "Ikke hvis vi plotter dem:\n\nDet er ikke nok at se på summary statistics. Husk at plotte!"
+  },
+  {
+    "objectID": "slides/test.html#kirsebærplukning",
+    "href": "slides/test.html#kirsebærplukning",
+    "title": "Statistik",
+    "section": "Kirsebærplukning",
+    "text": "Kirsebærplukning\nEller på engelsk “Cherry picking”\nNår vi kun udvælger de data der passer med det vi gerne vil vise…"
+  },
+  {
+    "objectID": "slides/test.html#hele-træet",
+    "href": "slides/test.html#hele-træet",
+    "title": "Statistik",
+    "section": "Hele træet",
+    "text": "Hele træet"
+  },
+  {
+    "objectID": "slides/test.html#p-fishing",
+    "href": "slides/test.html#p-fishing",
+    "title": "Statistik",
+    "section": "p-fishing",
+    "text": "p-fishing\nhttps://xkcd.com/882/\nvores p-værdi på 5% - det fortæller os at der er 5% risiko for.\nMatematikken er ikke helt sådan, men intuitivt. Hvis vi tester for 20 forskellige ting, så vil en af dem - helt tilfældigt - have en p-værdi vi kan lide."
+  },
+  {
+    "objectID": "slides/test.html#sampling-bias",
+    "href": "slides/test.html#sampling-bias",
+    "title": "Statistik",
+    "section": "Sampling bias",
+    "text": "Sampling bias\nNår vi konkluderer ud fra et datasæt, der ikke er repræsentativt for den population vi ønsker at undersøge.\nValgprognoser der udelukkende baserer sig på journalister, vil systematisk forudsige flertal til rød blok. https://sketchplanations.com/correlation-is-not-causation"
+  },
+  {
+    "objectID": "slides/test.html#præference-forfalskning",
+    "href": "slides/test.html#præference-forfalskning",
+    "title": "Statistik",
+    "section": "Præference forfalskning",
+    "text": "Præference forfalskning\nDet fænomen at folk svarer det de tror eller mener er det ønskede.\n“Hvor mange genstande drikker du om ugen?”\nHvor ærligt svarer folk?\nHvis vi et øjeblik glemmer at de tilstedeværende nok ikke er specielt repræsentative for hele befolkningen (sampling bias).\nHvem af jer er det?"
+  },
+  {
+    "objectID": "slides/test.html#overlevelsesbias",
+    "href": "slides/test.html#overlevelsesbias",
+    "title": "Statistik",
+    "section": "Overlevelsesbias",
+    "text": "Overlevelsesbias\nNår vi drager konklusioner på basis af et ukomplet datasæt, der består af de data der har overlevet et eller andet udvælgelseskriterium. Dette er klassikeren.\nJagerfly under 2. verdenskrig der overlevede turen over Tyskland havde skudhuller. Her er en visualisering af de skudhuller man observerede (for flere fly) https://en.wikipedia.org/wiki/Survivorship_bias#/media/File:Survivorship-bias.svg\nHvilke dele af flyet skal vi tilfører mere armering?\nDe dele hvor der ikke er skudhuller i de fly der vender tilbage. For det kunne de jo overleve. De fly der ikke når tilbage - de er formentlig blevet ramt andre steder."
+  },
+  {
+    "objectID": "slides/test.html#overfitting",
+    "href": "slides/test.html#overfitting",
+    "title": "Statistik",
+    "section": "Overfitting",
+    "text": "Overfitting\nNår vi skaber en model der er skræddersyet de data vi har - og ikke er repræsentativ for en generel tendens."
+  },
+  {
+    "objectID": "slides/test.html#publicerings-bias",
+    "href": "slides/test.html#publicerings-bias",
+    "title": "Statistik",
+    "section": "Publicerings bias",
+    "text": "Publicerings bias\nDu har to resultater fra din undersøgelse.\nInteressante resultater har større chance for at blive publiceret. Vi hører ikke om de negative resultater (altså dem hvor der ikke er en sammenhæng)"
+  },
+  {
+    "objectID": "slides/test.html#korrelation-er-ikke-kausalitet",
+    "href": "slides/test.html#korrelation-er-ikke-kausalitet",
+    "title": "Statistik",
+    "section": "Korrelation er ikke kausalitet",
+    "text": "Korrelation er ikke kausalitet\nspurious correlations\nhttps://www.tylervigen.com/spurious/correlation/5920_per-capita-consumption-of-margarine_correlates-with_the-divorce-rate-in-maine\nKausalitet betyder at en hændelse er det den direkte konsekvens af en anden. Når jeg trykker på kontakten, tænder lyset. Lyset tænder som en direkte konsekvens af at jeg har trykket på kontakten.\nKorrelation betyder at to hændelser (eller variable) bevæger sig sammen. Når x stiger, stiger y også. Eller, en negativ korrelation. Når x stiger, falder y.\nDer kan være en sammenhæng. Når salget af solcreme stiger, stiger salget af ispinde også. Ikke fordi man får behov for solcreme når man spiser is. Men fordi solskin og godt vejr om sommeren fører til stigende behov for solcreme. Og fordi varmt vejr fører til større efterspørgsel efter ispinde.\nHvordan tester vi for om x og y har en kausal sammenhæng?\nVi designer vores eksperimenter så vi kan afgøre det. Random sampling, dobbelt blindede forsøg, tilpas store sample størrelser.\nOg så kan vi infer en sammenhæng. Men næppe bevise den. https://sketchplanations.com/correlation-is-not-causation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "KUB Datalab slides",
+    "section": "",
+    "text": "General presentation"
+  },
+  {
+    "objectID": "slides/dblabpres.html#kub-datalab",
+    "href": "slides/dblabpres.html#kub-datalab",
+    "title": "KUB Datalab",
+    "section": "KUB Datalab",
+    "text": "KUB Datalab\nKorrekt rød farve: a31d20 s7uk"
+  },
+  {
+    "objectID": "slides/dblabpres.html#who-are-we",
+    "href": "slides/dblabpres.html#who-are-we",
+    "title": "KUB Datalab",
+    "section": "Who are we?",
+    "text": "Who are we?\n\n\n\n Christian Knudsen\n\n\n Søren Davidsen\n\n\n Daniel Pryn"
+  },
+  {
+    "objectID": "slides/dblabpres.html#and-about-6-other-colleagues",
+    "href": "slides/dblabpres.html#and-about-6-other-colleagues",
+    "title": "KUB Datalab",
+    "section": "And about 6 other colleagues",
+    "text": "And about 6 other colleagues\n\nWith less time, but more expertise on:\n\nExcel\nNViVo\nVoyant\nVOSviewer\nSQL\nOrange\nOpenRefine\nMetashape\nRegular Expressions\nMetashape\nstatistics"
+  },
+  {
+    "objectID": "slides/dblabpres.html#what-do-we-offer",
+    "href": "slides/dblabpres.html#what-do-we-offer",
+    "title": "KUB Datalab",
+    "section": "What do we offer?",
+    "text": "What do we offer?\n\nOpen courses\nCourses by request\nIn-class modules\nOpen workshops"
+  },
+  {
+    "objectID": "slides/dblabpres.html#hvad-kan-vi",
+    "href": "slides/dblabpres.html#hvad-kan-vi",
+    "title": "KUB Datalab",
+    "section": "Hvad kan vi?",
+    "text": "Hvad kan vi?\n\nR\nPython\nExcel\nStruktur af data"
+  },
+  {
+    "objectID": "slides/dblabpres.html#contact",
+    "href": "slides/dblabpres.html#contact",
+    "title": "KUB Datalab",
+    "section": "Contact",
+    "text": "Contact\n\nkub.kb.dk/datalab\nkubkalender.kb.dk\nkubdatalab@kb.dk\nOpen Workshops in Library Lighthouse every wednesday 1230 - 1430"
+  },
+  {
+    "objectID": "slides/dblabpres.html#what-might-be-relevant-for-you",
+    "href": "slides/dblabpres.html#what-might-be-relevant-for-you",
+    "title": "KUB Datalab",
+    "section": "What might be relevant for you?",
+    "text": "What might be relevant for you?\n\nR\nPython\nExcel\nSparring on structuring your data and work"
+  },
+  {
+    "objectID": "slides/dblabpres.html#or-just-a-live-rubber-duck",
+    "href": "slides/dblabpres.html#or-just-a-live-rubber-duck",
+    "title": "KUB Datalab",
+    "section": "Or just a live rubber duck",
+    "text": "Or just a live rubber duck"
+  },
+  {
+    "objectID": "slides/datalabpres.html#who-are-we",
+    "href": "slides/datalabpres.html#who-are-we",
+    "title": "KUB Datalab",
+    "section": "Who are we?",
+    "text": "Who are we?\n\n\n\n Christian Knudsen\n\n\n Søren Davidsen\n\n\n Daniel Pryn"
+  },
+  {
+    "objectID": "slides/datalabpres.html#and-about-6-other-colleagues",
+    "href": "slides/datalabpres.html#and-about-6-other-colleagues",
+    "title": "KUB Datalab",
+    "section": "And about 6 other colleagues",
+    "text": "And about 6 other colleagues\n\nWith less time, but more expertise on:\n\nExcel\nNViVo\nVoyant\nVOSviewer\nSQL\nOrange\nOpenRefine\nMetashape\nRegular Expressions\nMetashape\nstatistics"
+  },
+  {
+    "objectID": "slides/datalabpres.html#what-do-we-offer",
+    "href": "slides/datalabpres.html#what-do-we-offer",
+    "title": "KUB Datalab",
+    "section": "What do we offer?",
+    "text": "What do we offer?\n\nOpen courses\nCourses by request\nIn-class modules\nOpen workshops"
+  },
+  {
+    "objectID": "slides/datalabpres.html#what-might-be-relevant-for-you",
+    "href": "slides/datalabpres.html#what-might-be-relevant-for-you",
+    "title": "KUB Datalab",
+    "section": "What might be relevant for you?",
+    "text": "What might be relevant for you?\n\nR\nPython\nExcel\nSparring on structuring your data and work"
+  },
+  {
+    "objectID": "slides/datalabpres.html#or-just-a-live-rubber-duck",
+    "href": "slides/datalabpres.html#or-just-a-live-rubber-duck",
+    "title": "KUB Datalab",
+    "section": "Or just a live rubber duck",
+    "text": "Or just a live rubber duck"
+  },
+  {
+    "objectID": "slides/datalabpres.html#contact",
+    "href": "slides/datalabpres.html#contact",
+    "title": "KUB Datalab",
+    "section": "Contact",
+    "text": "Contact\n\nkub.kb.dk/datalab\nkubkalender.kb.dk\nkubdatalab@kb.dk\nOpen Workshops in Library Lighthouse every wednesday 1230 - 1430"
+  },
+  {
+    "objectID": "slides/datalabpres.html#datalab",
+    "href": "slides/datalabpres.html#datalab",
+    "title": "KUB Datalab",
+    "section": "Datalab",
+    "text": "Datalab\nA service from Copenhagen University Library\nTraining, consultations and sparring for students\nWe try to help you work with data!"
+  }
+]
