@@ -1,108 +1,38 @@
 [
   {
-    "objectID": "slides/test.html#hyppige-fejl",
-    "href": "slides/test.html#hyppige-fejl",
-    "title": "Statistik",
-    "section": "Hyppige fejl",
-    "text": "Hyppige fejl\nJa, det er fejl I kommer til at begå. For de bliver begået så ofte, at de har fået navne."
+    "objectID": "slides/webr.html#webr-i-browseren",
+    "href": "slides/webr.html#webr-i-browseren",
+    "title": "webR demo",
+    "section": "webR i browseren",
+    "text": "webR i browseren"
   },
   {
-    "objectID": "slides/test.html#pas-på-summary-statistics",
-    "href": "slides/test.html#pas-på-summary-statistics",
-    "title": "Statistik",
-    "section": "Pas på summary statistics",
-    "text": "Pas på summary statistics\nSummary statistics kan snyde og missse store forskelle i data. Betragt disse data:\n\n\n# A tibble: 8 × 5\n  variabel middel median stdafv   iqr\n  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 x1         9      9      3.32  5   \n2 x2         9      9      3.32  5   \n3 x3         9      9      3.32  5   \n4 x4         9      8      3.32  0   \n5 y1         7.50   7.58   2.03  2.26\n6 y2         7.50   8.14   2.03  2.25\n7 y3         7.5    7.11   2.03  1.73\n8 y4         7.50   7.04   2.03  2.02\n\n\nDe ser ret ens ud."
+    "objectID": "slides/webr.html#read-only-eksempel",
+    "href": "slides/webr.html#read-only-eksempel",
+    "title": "webR demo",
+    "section": "Read-only eksempel",
+    "text": "Read-only eksempel"
   },
   {
-    "objectID": "slides/test.html#correlationen-ser-også-fin-ud",
-    "href": "slides/test.html#correlationen-ser-også-fin-ud",
-    "title": "Statistik",
-    "section": "Correlationen ser også fin ud",
-    "text": "Correlationen ser også fin ud\nKorrelationen mellem parrene er også ret ens: der er noget med x4 og y4. Men ellers - ret ens.\n\n\n           y1         y2         y3         y4\nx1  0.8164205  0.8162365  0.8162867 -0.3140467\nx2  0.8164205  0.8162365  0.8162867 -0.3140467\nx3  0.8164205  0.8162365  0.8162867 -0.3140467\nx4 -0.5290927 -0.7184365 -0.3446610  0.8165214\n\n\nMen er de nu også det?"
-  },
-  {
-    "objectID": "slides/test.html#ikke-hvis-vi-plotter-dem",
-    "href": "slides/test.html#ikke-hvis-vi-plotter-dem",
-    "title": "Statistik",
-    "section": "Ikke hvis vi plotter dem:",
-    "text": "Ikke hvis vi plotter dem:\n\nDet er ikke nok at se på summary statistics. Husk at plotte!"
-  },
-  {
-    "objectID": "slides/test.html#kirsebærplukning",
-    "href": "slides/test.html#kirsebærplukning",
-    "title": "Statistik",
-    "section": "Kirsebærplukning",
-    "text": "Kirsebærplukning\nEller på engelsk “Cherry picking”\nNår vi kun udvælger de data der passer med det vi gerne vil vise…"
-  },
-  {
-    "objectID": "slides/test.html#hele-træet",
-    "href": "slides/test.html#hele-træet",
-    "title": "Statistik",
-    "section": "Hele træet",
-    "text": "Hele træet"
-  },
-  {
-    "objectID": "slides/test.html#p-fishing",
-    "href": "slides/test.html#p-fishing",
-    "title": "Statistik",
-    "section": "p-fishing",
-    "text": "p-fishing\nhttps://xkcd.com/882/\nvores p-værdi på 5% - det fortæller os at der er 5% risiko for.\nMatematikken er ikke helt sådan, men intuitivt. Hvis vi tester for 20 forskellige ting, så vil en af dem - helt tilfældigt - have en p-værdi vi kan lide."
-  },
-  {
-    "objectID": "slides/test.html#sampling-bias",
-    "href": "slides/test.html#sampling-bias",
-    "title": "Statistik",
-    "section": "Sampling bias",
-    "text": "Sampling bias\nNår vi konkluderer ud fra et datasæt, der ikke er repræsentativt for den population vi ønsker at undersøge.\nValgprognoser der udelukkende baserer sig på journalister, vil systematisk forudsige flertal til rød blok. https://sketchplanations.com/correlation-is-not-causation"
-  },
-  {
-    "objectID": "slides/test.html#præference-forfalskning",
-    "href": "slides/test.html#præference-forfalskning",
-    "title": "Statistik",
-    "section": "Præference forfalskning",
-    "text": "Præference forfalskning\nDet fænomen at folk svarer det de tror eller mener er det ønskede.\n“Hvor mange genstande drikker du om ugen?”\nHvor ærligt svarer folk?\nHvis vi et øjeblik glemmer at de tilstedeværende nok ikke er specielt repræsentative for hele befolkningen (sampling bias).\nHvem af jer er det?"
-  },
-  {
-    "objectID": "slides/test.html#overlevelsesbias",
-    "href": "slides/test.html#overlevelsesbias",
-    "title": "Statistik",
-    "section": "Overlevelsesbias",
-    "text": "Overlevelsesbias\nNår vi drager konklusioner på basis af et ukomplet datasæt, der består af de data der har overlevet et eller andet udvælgelseskriterium. Dette er klassikeren.\nJagerfly under 2. verdenskrig der overlevede turen over Tyskland havde skudhuller. Her er en visualisering af de skudhuller man observerede (for flere fly) https://en.wikipedia.org/wiki/Survivorship_bias#/media/File:Survivorship-bias.svg\nHvilke dele af flyet skal vi tilfører mere armering?\nDe dele hvor der ikke er skudhuller i de fly der vender tilbage. For det kunne de jo overleve. De fly der ikke når tilbage - de er formentlig blevet ramt andre steder."
-  },
-  {
-    "objectID": "slides/test.html#overfitting",
-    "href": "slides/test.html#overfitting",
-    "title": "Statistik",
-    "section": "Overfitting",
-    "text": "Overfitting\nNår vi skaber en model der er skræddersyet de data vi har - og ikke er repræsentativ for en generel tendens."
-  },
-  {
-    "objectID": "slides/test.html#publicerings-bias",
-    "href": "slides/test.html#publicerings-bias",
-    "title": "Statistik",
-    "section": "Publicerings bias",
-    "text": "Publicerings bias\nDu har to resultater fra din undersøgelse.\nInteressante resultater har større chance for at blive publiceret. Vi hører ikke om de negative resultater (altså dem hvor der ikke er en sammenhæng)"
-  },
-  {
-    "objectID": "slides/test.html#korrelation-er-ikke-kausalitet",
-    "href": "slides/test.html#korrelation-er-ikke-kausalitet",
-    "title": "Statistik",
-    "section": "Korrelation er ikke kausalitet",
-    "text": "Korrelation er ikke kausalitet\nspurious correlations\nhttps://www.tylervigen.com/spurious/correlation/5920_per-capita-consumption-of-margarine_correlates-with_the-divorce-rate-in-maine\nKausalitet betyder at en hændelse er det den direkte konsekvens af en anden. Når jeg trykker på kontakten, tænder lyset. Lyset tænder som en direkte konsekvens af at jeg har trykket på kontakten.\nKorrelation betyder at to hændelser (eller variable) bevæger sig sammen. Når x stiger, stiger y også. Eller, en negativ korrelation. Når x stiger, falder y.\nDer kan være en sammenhæng. Når salget af solcreme stiger, stiger salget af ispinde også. Ikke fordi man får behov for solcreme når man spiser is. Men fordi solskin og godt vejr om sommeren fører til stigende behov for solcreme. Og fordi varmt vejr fører til større efterspørgsel efter ispinde.\nHvordan tester vi for om x og y har en kausal sammenhæng?\nVi designer vores eksperimenter så vi kan afgøre det. Random sampling, dobbelt blindede forsøg, tilpas store sample størrelser.\nOg så kan vi infer en sammenhæng. Men næppe bevise den. https://sketchplanations.com/correlation-is-not-causation"
+    "objectID": "slides/webr.html#noget",
+    "href": "slides/webr.html#noget",
+    "title": "webR demo",
+    "section": "noget",
+    "text": "noget"
   },
   {
     "objectID": "slides/power.html",
     "href": "slides/power.html",
     "title": "Powerberegninger",
     "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”."
+    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
   },
   {
     "objectID": "slides/power.html#opgave-2-2025-februar",
     "href": "slides/power.html#opgave-2-2025-februar",
     "title": "Powerberegninger",
     "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”."
+    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
   },
   {
     "objectID": "slides/linreg.html",
@@ -172,7 +102,7 @@
     "href": "index.html",
     "title": "KUB Datalab slides",
     "section": "",
-    "text": "General presentation"
+    "text": "General presentation\nwebr"
   },
   {
     "objectID": "slides/intro.html",
@@ -182,32 +112,25 @@
     "text": "SEMS eksamenerne falder i tre dele. Statistik, epidemiologi og medicinsk sociologi.\nHer kigger vi kun på statistikken.\nI får typisk to opgaver, med del spørgsmål.\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
   },
   {
-    "objectID": "slides/normalfordelingen.html",
-    "href": "slides/normalfordelingen.html",
-    "title": "Normalfordelingen",
-    "section": "",
-    "text": "Når vi undersøger et eller andet, forsøger vi at finde ud af noget om virkeligheden.\nDet kan vi i almindelighed ikke finde ud af. Vi har ikke målt højden af alle mænd i Danmark. Vi har heller ikke været rundt og målt blodtryk for samtlige tyske kvinder i den relevante aldersgruppe.\nMen vi har taget en stikprøve. Og den kan vi bruge til at estimere den sande værdi.\nLige for data fra Danmark, kan vi nu ofte finde den sande værdi, for danskere er meget grundigt registrerede. Det er årsagen til at danske registerdata er så værdifulde. Og derfor ved vi ret præcist hvad den gennemsnitlige højde af danske 18-årige mænd (og om lidt alle danske 18-årige kvinder). Men det er usædvanligt.\nSå hvordan estimerer vi den sande værdi?\nHer skal vi have fat i normalfordelingen. Den kaldes normalfordelingen, fordi den er normal. Ikke normativt normal (noget er ikke forkert fordi det ikke er normalt). Men statistisk normal, fordi:\nNår man undersøger fordelingen af ting, så er denne fordeling “normen”, eller med et andet dansk udtryk - den typiske. Den hyppigst forekommende.\nDet viser sig også at hvis man har mange stikprøver af et eller andet, og beregner middelværdien af alle disse stikprøver, så følger de her mange middelværdier normalfordelingen.\nDet følger af “Den Centrale Grænseværdisætning”. Og den matematik kommer vi ikke til at gå ind i, for det vi skal igennem er rigeligt kompliceret i forvejen.\nSå lad os nøjes med at konstatere at det gælder. Ved tilstrækkeligt mange stikprøver, følger deres middelværdier normalfordelingen. Og den har nogen rare egenskaber som vi har stor glæde af."
-  },
-  {
     "objectID": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
     "href": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
     "title": "Normalfordelingen",
     "section": "Det er en sandsynlighedsfordeling. Hvad er det?",
-    "text": "Det er en sandsynlighedsfordeling. Hvad er det?\nNår vi undersøger et eller andet der kan have forskellige værdier, viser det sig at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg, end omkring 200 mmHg. (eller… I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).\nDe her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer hvordan værdierne egentlig opstår. Så de kan se forskellige ud:\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.1.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\n\n\n\n\nAfhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er den samlede sandsynlighed 100%\nNormalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse."
+    "text": "Det er en sandsynlighedsfordeling. Hvad er det?\nNår vi undersøger et eller andet der kan have forskellige værdier, viser det sig at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg, end omkring 200 mmHg. (eller… I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).\nDe her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer hvordan værdierne egentlig opstår. Så de kan se forskellige ud:\n\nAfhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er den samlede sandsynlighed 100%\nNormalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse."
   },
   {
     "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud",
     "href": "slides/normalfordelingen.html#hvordan-ser-den-ud",
     "title": "Normalfordelingen",
     "section": "Hvordan ser den ud?",
-    "text": "Hvordan ser den ud?\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\nVi kan se at den netop afhænger af to ting. En middelværdi \\(\\mu\\) og en standardafvigelse (I er glade for at kalde den en standarddeviation), \\(\\sigma\\) Men det er ikke så nyttigt.\nillustration - den findes på https://en.wikipedia.org/wiki/File:The_Normal_Distribution.svg Og gemmes lokalt.\nDet her er den normaliserede normalfordeling. Det er den hvor middelværdien er 0, og standardafvigelsen er 1.\nHvilke egenskaber har den?\nR har en række funktioner vi kan bruge:\n\npnorm(-1.96)\n\n[1] 0.0249979\n\nqnorm(0.025)\n\n[1] -1.959964\n\ndnorm(0.025)\n\n[1] 0.3988176\n\n\nBemærk at vi starter længst ude til venstre. Så pnorm(-2)\n\npnorm(-2)\n\n[1] 0.02275013\n\n\nfortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at vi på X-aksen har enheder af sd.\nDen giver os arealet under kurven fra -uendelig til den værdi vi angiver.\nDet betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad arealet fra -uendelig til 1.96 er Og trække arealet fra -uendelig til -1.96 fra:\n\npnorm(1.96)-pnorm(-1.96)\n\n[1] 0.9500042\n\n\nMed andre ord, 95% af observationerne ligger mellem -1.96 og 1.96."
+    "text": "Hvordan ser den ud?\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\nVi kan se at den netop afhænger af to ting. En middelværdi \\(\\mu\\) og en standardafvigelse (I er glade for at kalde den en standarddeviation), \\(\\sigma\\) Men det er ikke så nyttigt.\nillustration - den findes på https://en.wikipedia.org/wiki/File:The_Normal_Distribution.svg Og gemmes lokalt.\nDet her er den normaliserede normalfordeling. Det er den hvor middelværdien er 0, og standardafvigelsen er 1.\nHvilke egenskaber har den?\nR har en række funktioner vi kan bruge:\n\n\n[1] 0.0249979\n\n\n[1] -1.959964\n\n\n[1] 0.3988176\n\n\nBemærk at vi starter længst ude til venstre. Så pnorm(-2)\n\n\n[1] 0.02275013\n\n\nfortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at vi på X-aksen har enheder af sd.\nDen giver os arealet under kurven fra -uendelig til den værdi vi angiver.\nDet betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad arealet fra -uendelig til 1.96 er Og trække arealet fra -uendelig til -1.96 fra:\n\n\n[1] 0.9500042\n\n\nMed andre ord, 95% af observationerne ligger mellem -1.96 og 1.96."
   },
   {
     "objectID": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
     "href": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
     "title": "Normalfordelingen",
     "section": "Og hvad når mine data ikke har en middelværdi på 0?",
-    "text": "Og hvad når mine data ikke har en middelværdi på 0?\nJamen så normerer vi.\nLad os tage nogen mere eller mindre tilfældige tal:\n\nexempel &lt;- c(1,5,7,0,42,10,11,2)\n(middel &lt;- mean(exempel))\n\n[1] 9.75\n\n(sd_afv &lt;- sd(exempel))\n\n[1] 13.64604\n\n\nSå kan vi trække middelværdien fra alle tallene\n\nnorm_middel &lt;- exempel - middel\nmean(norm_middel)\n\n[1] 0\n\n\nStandardafvigelsen er stadig ikke 0:\n\n(stdafv &lt;- sd(norm_middel))\n\n[1] 13.64604\n\n\nMen hvis vi dividerer tallene med standardafvigelsen:\n\nnorm_middel_stdafv &lt;- norm_middel/stdafv\nmean(norm_middel_stdafv)\n\n[1] -1.040834e-17\n\nsd(norm_middel_stdafv)\n\n[1] 1\n\n\nSå har vi såkaldt normerede værdier, eller skalerede om man vil.\nOg deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel) Og deres standardafvigelse er 1.\nSå kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.\nAlternativt bruger vi et trick i pnorm/qnorm:\n\npnorm(1.96, mean = 9.75, sd = 13.64604)\n\n[1] 0.2840467\n\n\nØvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\nqnorm(0.4)\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværd og spredning for den population?\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
+    "text": "Og hvad når mine data ikke har en middelværdi på 0?\nJamen så normerer vi.\nLad os tage nogen mere eller mindre tilfældige tal:\n\n\n[1] 9.75\n\n\n[1] 13.64604\n\n\nSå kan vi trække middelværdien fra alle tallene\n\n\n[1] 0\n\n\nStandardafvigelsen er stadig ikke 0:\n\n\n[1] 13.64604\n\n\nMen hvis vi dividerer tallene med standardafvigelsen:\n\n\n[1] -1.040834e-17\n\n\n[1] 1\n\n\nSå har vi såkaldt normerede værdier, eller skalerede om man vil.\nOg deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel) Og deres standardafvigelse er 1.\nSå kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.\nAlternativt bruger vi et trick i pnorm/qnorm:\n\n\n[1] 0.2840467\n\n\nØvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværd og spredning for den population?\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
   },
   {
     "objectID": "slides/SEM.html",

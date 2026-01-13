@@ -4,3 +4,4 @@ format: html
 ---
 
 - [General presentation](slides/datalabpres.qmd)
+- [webr](slides/webr.qmd)

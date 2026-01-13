@@ -1,6 +1,9 @@
 ---
 title: "Normalfordelingen"
-format: html
+format:
+  revealjs:
+    logo: ../pics/kubdatalab.png
+engine: knitr
 ---
 
 Når vi undersøger et eller andet, forsøger vi at finde ud af noget om virkeligheden.

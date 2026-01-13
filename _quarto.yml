@@ -9,6 +9,9 @@ website:
       - text: "KUB Datalab presentation"
         href: slides/datalabpres.qmd
         target: _blank
+      - text: "normalfordelingen"
+        href: slides/normalfordelingen.qmd
+        target: _blank
 
 
 
