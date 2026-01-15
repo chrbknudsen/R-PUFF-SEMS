@@ -3,8 +3,6 @@ title: webR in Quarto HTML Documents
 format: 
   revealjs:
     css: webr-custom.css
-    include-in-header:
-      - webr-align.js
 engine: knitr
 filters:
   - webr
@@ -26,4 +24,13 @@ plot(mtcars)
 
 ## overskrift 2
 
-tekst 2
+ting
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: true
+fit = lm(mpg ~ am, data = mtcars)
+
+plot(mtcars)
+```
