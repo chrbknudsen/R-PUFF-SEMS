@@ -1,0 +1,47 @@
+---
+title: "webR: skriv kode til venstre → output til højre"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    code-overflow: wrap
+webr:
+  packages: [ggplot2]
+---
+{{< include ../_extensions/live/_knitr.qmd >}}
+
+## webR: én kilde til kode (venstre), output (højre)
+
+*Redigér kun koden i venstre kolonne. Højre kolonne kører den samme kode automatisk via `ref.label`.*
+
+::: columns
+::: {.column width="45%"}
+**Kode (redigér her)**
+
+```{webr-r}
+//| label: code-left
+//| eval: false
+//| code-line-numbers: true
+
+library(ggplot2)
+
+# Eksempel: scatter + regressionslinje
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "CO₂ vs. wt? Bare en demo", x = "Vægt (1000 lbs)", y = "MPG")
+```
+:::
+
+::: {.column width="55%"}
+**Output (køres fra venstre kolonne)**
+
+```{webr-r}
+//| echo: false
+//| ref.label: code-left
+//| fig-width: 6
+//| fig-height: 4
+//| out-width: 100%
+```
+:::
+:::

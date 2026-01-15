@@ -6,11 +6,8 @@ website:
   title: "KUB Datalab slides"
   navbar:
     left:
-      - text: "KUB Datalab presentation"
-        href: slides/datalabpres.qmd
-        target: _blank
       - text: "normalfordelingen"
-        href: slides/normalfordelingen.qmd
+        href: slides/test20260115.qmd
         target: _blank
 
 

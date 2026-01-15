@@ -1,149 +1,23 @@
 [
   {
-    "objectID": "slides/webr.html#webr-i-browseren",
-    "href": "slides/webr.html#webr-i-browseren",
-    "title": "webR demo",
-    "section": "webR i browseren",
-    "text": "webR i browseren"
+    "objectID": "slides/test20260115.html#this-is-a-webr-enabled-code-cell-in-a-quarto-html-document.",
+    "href": "slides/test20260115.html#this-is-a-webr-enabled-code-cell-in-a-quarto-html-document.",
+    "title": "webR in Quarto HTML Documents",
+    "section": "This is a webR-enabled code cell in a Quarto HTML document.",
+    "text": "This is a webR-enabled code cell in a Quarto HTML document.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/webr.html#read-only-eksempel",
-    "href": "slides/webr.html#read-only-eksempel",
-    "title": "webR demo",
-    "section": "Read-only eksempel",
-    "text": "Read-only eksempel"
-  },
-  {
-    "objectID": "slides/webr.html#noget",
-    "href": "slides/webr.html#noget",
-    "title": "webR demo",
-    "section": "noget",
-    "text": "noget"
-  },
-  {
-    "objectID": "slides/power.html",
-    "href": "slides/power.html",
-    "title": "Powerberegninger",
-    "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
-  },
-  {
-    "objectID": "slides/power.html#opgave-2-2025-februar",
-    "href": "slides/power.html#opgave-2-2025-februar",
-    "title": "Powerberegninger",
-    "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
-  },
-  {
-    "objectID": "slides/linreg.html",
-    "href": "slides/linreg.html",
-    "title": "lin reg",
-    "section": "",
-    "text": "analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))\nanalyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))\nHvilke analyser?\nlineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.\nintercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd."
-  },
-  {
-    "objectID": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
-    "href": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
-    "title": "lin reg",
-    "section": "",
-    "text": "analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))\nanalyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))\nHvilke analyser?\nlineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.\nintercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd."
-  },
-  {
-    "objectID": "slides/datalabpres.html#datalab",
-    "href": "slides/datalabpres.html#datalab",
-    "title": "KUB Datalab",
-    "section": "Datalab",
-    "text": "Datalab\nA service from Copenhagen University Library\nTraining, consultations and sparring for students\nWe try to help you work with data!"
-  },
-  {
-    "objectID": "slides/datalabpres.html#who-are-we",
-    "href": "slides/datalabpres.html#who-are-we",
-    "title": "KUB Datalab",
-    "section": "Who are we?",
-    "text": "Who are we?\n\n\n\n Christian Knudsen\n\n\n Søren Davidsen\n\n\n Daniel Pryn"
-  },
-  {
-    "objectID": "slides/datalabpres.html#and-about-6-other-colleagues",
-    "href": "slides/datalabpres.html#and-about-6-other-colleagues",
-    "title": "KUB Datalab",
-    "section": "And about 6 other colleagues",
-    "text": "And about 6 other colleagues\n\nWith less time, but more expertise on:\n\nExcel\nNViVo\nVoyant\nVOSviewer\nSQL\nOrange\nOpenRefine\nMetashape\nRegular Expressions\nMetashape\nstatistics"
-  },
-  {
-    "objectID": "slides/datalabpres.html#what-do-we-offer",
-    "href": "slides/datalabpres.html#what-do-we-offer",
-    "title": "KUB Datalab",
-    "section": "What do we offer?",
-    "text": "What do we offer?\n\nOpen courses\nCourses by request\nIn-class modules\nOpen workshops"
-  },
-  {
-    "objectID": "slides/datalabpres.html#what-might-be-relevant-for-you",
-    "href": "slides/datalabpres.html#what-might-be-relevant-for-you",
-    "title": "KUB Datalab",
-    "section": "What might be relevant for you?",
-    "text": "What might be relevant for you?\n\nR\nPython\nExcel\nSparring on structuring your data and work"
-  },
-  {
-    "objectID": "slides/datalabpres.html#or-just-a-live-rubber-duck",
-    "href": "slides/datalabpres.html#or-just-a-live-rubber-duck",
-    "title": "KUB Datalab",
-    "section": "Or just a live rubber duck",
-    "text": "Or just a live rubber duck"
-  },
-  {
-    "objectID": "slides/datalabpres.html#contact",
-    "href": "slides/datalabpres.html#contact",
-    "title": "KUB Datalab",
-    "section": "Contact",
-    "text": "Contact\n\nkub.kb.dk/datalab\nkubkalender.kb.dk\nkubdatalab@kb.dk\nOpen Workshops in Library Lighthouse every wednesday 1230 - 1430"
+    "objectID": "slides/test20260115.html#overskrift-2",
+    "href": "slides/test20260115.html#overskrift-2",
+    "title": "webR in Quarto HTML Documents",
+    "section": "overskrift 2",
+    "text": "overskrift 2\ntekst 2"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "KUB Datalab slides",
     "section": "",
-    "text": "General presentation\nwebr"
-  },
-  {
-    "objectID": "slides/intro.html",
-    "href": "slides/intro.html",
-    "title": "Intro",
-    "section": "",
-    "text": "SEMS eksamenerne falder i tre dele. Statistik, epidemiologi og medicinsk sociologi.\nHer kigger vi kun på statistikken.\nI får typisk to opgaver, med del spørgsmål.\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
-    "href": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
-    "title": "Normalfordelingen",
-    "section": "Det er en sandsynlighedsfordeling. Hvad er det?",
-    "text": "Det er en sandsynlighedsfordeling. Hvad er det?\nNår vi undersøger et eller andet der kan have forskellige værdier, viser det sig at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg, end omkring 200 mmHg. (eller… I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).\nDe her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer hvordan værdierne egentlig opstår. Så de kan se forskellige ud:\n\nAfhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er den samlede sandsynlighed 100%\nNormalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud",
-    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud",
-    "title": "Normalfordelingen",
-    "section": "Hvordan ser den ud?",
-    "text": "Hvordan ser den ud?\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\nVi kan se at den netop afhænger af to ting. En middelværdi \\(\\mu\\) og en standardafvigelse (I er glade for at kalde den en standarddeviation), \\(\\sigma\\) Men det er ikke så nyttigt.\nillustration - den findes på https://en.wikipedia.org/wiki/File:The_Normal_Distribution.svg Og gemmes lokalt.\nDet her er den normaliserede normalfordeling. Det er den hvor middelværdien er 0, og standardafvigelsen er 1.\nHvilke egenskaber har den?\nR har en række funktioner vi kan bruge:\n\n\n[1] 0.0249979\n\n\n[1] -1.959964\n\n\n[1] 0.3988176\n\n\nBemærk at vi starter længst ude til venstre. Så pnorm(-2)\n\n\n[1] 0.02275013\n\n\nfortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at vi på X-aksen har enheder af sd.\nDen giver os arealet under kurven fra -uendelig til den værdi vi angiver.\nDet betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad arealet fra -uendelig til 1.96 er Og trække arealet fra -uendelig til -1.96 fra:\n\n\n[1] 0.9500042\n\n\nMed andre ord, 95% af observationerne ligger mellem -1.96 og 1.96."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
-    "href": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
-    "title": "Normalfordelingen",
-    "section": "Og hvad når mine data ikke har en middelværdi på 0?",
-    "text": "Og hvad når mine data ikke har en middelværdi på 0?\nJamen så normerer vi.\nLad os tage nogen mere eller mindre tilfældige tal:\n\n\n[1] 9.75\n\n\n[1] 13.64604\n\n\nSå kan vi trække middelværdien fra alle tallene\n\n\n[1] 0\n\n\nStandardafvigelsen er stadig ikke 0:\n\n\n[1] 13.64604\n\n\nMen hvis vi dividerer tallene med standardafvigelsen:\n\n\n[1] -1.040834e-17\n\n\n[1] 1\n\n\nSå har vi såkaldt normerede værdier, eller skalerede om man vil.\nOg deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel) Og deres standardafvigelse er 1.\nSå kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.\nAlternativt bruger vi et trick i pnorm/qnorm:\n\n\n[1] 0.2840467\n\n\nØvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværd og spredning for den population?\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
-  },
-  {
-    "objectID": "slides/SEM.html",
-    "href": "slides/SEM.html",
-    "title": "Standard Error of the Mean",
-    "section": "",
-    "text": "SE = sd/sqrt(n)\nsd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.\nNår vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.\nDet udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:\n\\[SE = \\frac{SD}{\\sqrt(n)}\\]\nHvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven."
-  },
-  {
-    "objectID": "slides/SEM.html#en-opgave",
-    "href": "slides/SEM.html#en-opgave",
-    "title": "Standard Error of the Mean",
-    "section": "En opgave",
-    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\nSE &lt;- 17.4/sqrt(323)\nSE\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n-19.6 + c(1,-1)*1.96*SE\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\nSE &lt;- 19.9/sqrt(318)\nSE\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n-16.6 + c(1,-1)*1.96*SE\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
+    "text": "General presentation"
   }
 ]

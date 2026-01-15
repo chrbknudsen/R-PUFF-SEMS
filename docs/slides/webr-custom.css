@@ -1,0 +1,30 @@
+/* Container for webR code cells */
+.qwebr-interactive-area {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Editor on the left */
+.qwebr-editor {
+  flex: 1;
+  min-width: 45%;
+}
+
+/* Output on the right */
+.qwebr-output-code-area {
+  flex: 1;
+  min-width: 45%;
+}
+
+/* Optional: adjust for smaller screens */
+@media (max-width: 768px) {
+  .qwebr-interactive-area {
+    flex-direction: column;
+  }
+  
+  .qwebr-editor,
+  .qwebr-output-code-area {
+    min-width: 100%;
+  }
+}

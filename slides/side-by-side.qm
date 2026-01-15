@@ -1,0 +1,23 @@
+---
+title: "webR demo"
+format: live-revealjs
+engine: knitr
+---
+
+{{< include ../_extensions/live/_knitr.qmd >}}
+## webR i browseren
+```{webr}
+#| autorun: false
+#| min-lines: 8
+#| caption: "Editor til venstre, output til højre"
+
+summary(cars)
+plot(cars)
+```
+
+## Read-only eksempel
+```{webr}
+#| edit: false
+mean(rnorm(100))
+```
+

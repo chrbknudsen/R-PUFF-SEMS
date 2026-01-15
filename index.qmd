@@ -3,5 +3,5 @@ title: "KUB Datalab slides"
 format: html
 ---
 
-- [General presentation](slides/datalabpres.qmd)
-- [webr](slides/webr.qmd)
+- [General presentation](slides/test20260115.qmd)
+
