@@ -1,0 +1,413 @@
+---
+title: Normalfordelingen
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
+
+## Hvad er en sandsynlighedsfordeling?
+
+:::: {.columns}
+
+:::: {.column}
+Når vi måler når får vi som regel en række forskellige resultater. 
+
+Højde af mænd er et eksempel. Nogen er 1,85 meter. Andre 1,80 meter.
+
+Når vi laver et histogram af alle de målinger, kunne det se således ud:
+::::
+:::: {.column}
+```{r hist-male-height, echo = FALSE}
+rnorm(1000, mean = 181, sd = 6.5) |> hist(main = "Fordelingen af danske mænds højde", xlab = NULL)
+```
+
+Hvad er mest sandsynligt - at være mellem 190 og 195 cm eller at være mellem 180 og 185 cm høj
+::::
+
+::::
+
+
+
+
+## Hvad er normalfordelingen?
+
+De målinger følger en sandsynlighedsfordeling.
+
+Der findes mange forskellige sandsynlighedsfordelinger.
+
+Når vi måler mange forskellige ting.
+Og undersøger hvilke sandsynlighedsfordelinger de følger.
+Så er den hyppigst forekommende "normalfordelingen"
+
+:::: notes
+Det er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommended
+
+::::
+
+## Hvordan ser den ud?
+
+Observationer der er normalfordelte følger denne fordeling:
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+
+$f(x)$ er sandsynligheden for at se en observation med værdien x.
+
+$\mu$ er gennemsnittet af alle observationerne
+
+$\sigma$ er standardafvigelsen af alle observationerne.
+
+Det er der jo ingen der orker at arbejde med...
+
+## Hvordan ser den ud?
+
+```{r normalfordelingen, echo = FALSE}
+library(tidyverse)
+x <- seq(-4, 4, length.out = 100)
+
+# Normal fordeling
+normal <- dnorm(x, mean = 0, sd = 1)
+tibble(x = x, y = normal) |> 
+  ggplot(aes(x, y = normal)) +
+  geom_line()
+```
+
+Her har vi målinger der kan gå fra -4 til 4. Og har $\mu = 0$ og $\sigma = 1$. Arealet under kurven er 1 ~ 100%.
+
+For alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%
+
+## Hvilke egenskaber har den?
+
+Hvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:
+
+1. Hvor mange procent af observationerne er under 0.4?
+2. Hvor mange procent af observationerne ligger mellem -2 og 2?
+3. De 65.5% mindste observationer; hvad er de mindre end?
+4. Indenfor hvilket interval ligger 95.45% af observationerne?
+
+Læg mærke til at 1. og 3. er hinandens "omvendte". 65.5% af observationerne er mindre end 0.4. 0.4 er større end 65.5% af observationerne.
+
+2. og 4. er også hinandens omvendte. 95.45% af observationerne ligger mellem -2 og 2. Og hvis vi vil have 95.45% af observationerne finder vi dem i intervallet fra -2 til 2. Hvis intervallet er centreret om midten.
+
+I vil ofte blive spurgt om hvad referenceintervallet er - i hvilket interval finder vi 95% af observationerne.
+
+## Hvilke andre egenskaber har den?
+
+![](The_Normal_Distribution.svg)
+
+
+## Fine tal - hvordan finder vi dem selv?
+
+pnorm
+qnorm
+dnorm og rnorm findes også - dem har vi sjældent brug for.
+
+pnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.
+
+```{r}
+pnorm(-1)
+```
+
+qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. 
+
+```{r}
+qnorm(0.025)
+```
+
+Eller. pnorm går fra værdi til sandsynlighed.
+qnorm går fra sandsynlighed til værdi
+
+P(X<0) = 0.4 er den notation vi skal have introduceret
+
+## Forskellige normalfordelinger
+
+For mu og sigma kan være forskellige
+
+## Hvorfor er den vigtig?
+
+:::: notes
+vi bruger mænds højde som eksempel - fordi vi gennem session - nu forsvarets dag - faktisk er ret tæt på at have data fra hele populationen. Det illustrerer dog også et par andre udfordringer. Mænd med dværgvækst vil typisk blive fritaget fra session da de alligevel vil blive kasseret. Det betyder at vi kommer til at mangle en række målinger der systematisk påvirker gennemsnittet.
+::::
+
+Normalfordelingen er særligt vigtig på grund af "Den Centrale Grænseværdisætning".
+
+Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
+
+Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen - alle danske mænd - og måler deres højde.
+
+Så beregner vi gennemsnittet og gemmer det.
+
+Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
+
+Det gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normalfordelingen. _Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+
+Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
+
+## Hvorfor er den vigtig for jer?
+
+Ret ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen. 
+
+Og så bruges den i de statistiske tests
+
+## normalisering/skalering
+
+Normalfordelingen er normalt standardiseret. Den har middelværdi 0 og standardafvigelse 1.
+
+Det har vores data normalt _ikke_. Hvad gør vi så?
+
+Vi skalerer vores data. Hvis vi har en række observationer, der har en bestemt middelværdi, og trækker den 
+middelværdi fra alle observationerne - hvad er så den nye middelværdi? 0.
+
+Hvis vi dividerer alle observationerne med sigma - hvad er så den nye standardafvigelse? Den er 1.
+
+Så har vi nu en række observationer med middelværdi 0 og standardafvigelse 1. Det er ikke det samme som at de 
+er normalfordelte
+
+```{r}
+sd(c(rep(5, 10), rep(-5,10))/5.129892)
+```
+
+se også scale funktionen
+
+forskellen på X-bar og mu
+
+pnorm,dnorm, qnorm
+
+## Logaritmering
+
+Ud over skalering af data er der en anden skalering eller transformation vi ofte foretager - logaritmering.
+
+Ting der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til dem.
+
+
+## Eksamen
+
+Der er ofte en opgave hvor I får oplyst nogen egenskaber ved en stikprøve.
+
+Ud fra de egenskaber skal I svare på spørgsmål om hvad vi kan fortælle om populationen - eller stikprøven - ud fra disse egenskaber.
+
+
+
+
+
+
+## Det er en sandsynlighedsfordeling. Hvad er det?
+
+Når vi undersøger et eller andet der kan have forskellige værdier, viser det sig 
+at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler
+der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg,
+end omkring 200 mmHg. (eller... I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).
+
+De her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer 
+hvordan værdierne egentlig opstår. Så de kan se forskellige ud:
+
+```{r 4-distibutions, echo  =F, fig.width=5, fig.height=5 }
+# Generer data
+library(tidyverse)
+x <- seq(-4, 4, length.out = 100)
+
+# Normal fordeling
+normal <- dnorm(x, mean = 0, sd = 1)
+
+# Student's t-fordeling med 3 frihedsgrader
+student_t <- dt(x, df = 3)
+
+# Chi-squared fordeling (forskudt til at passe bedre i plottet)
+chi_sq <- dchisq(x + 2, df = 3)
+
+# F-fordeling (også forskudt)
+f_dist <- df(x + 2, df1 = 3, df2 = 10)
+
+# Kombiner data
+plot_data <- data.frame(x = x,
+                        Normal = normal,
+                        Student_t = student_t,
+                        Chi_squared = chi_sq,
+                        F_distribution = f_dist) |> 
+  pivot_longer(-x, names_to = "Distribution", values_to = "Density")
+
+# Lav plot med facetter
+ggplot(plot_data, aes(x = x, y = Density)) +
+  geom_line(linewidth = 1, colour = "steelblue") +
+  facet_wrap(~Distribution, ncol = 2, scales = "free_y") +
+  theme_minimal() +
+  labs(title = "Four different probability distributions",
+       x = "x",
+       y = "Density") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+Afhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. 
+Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når
+sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er 
+den samlede sandsynlighed 100%
+
+Normalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse.
+
+
+
+R har en række funktioner vi kan bruge:
+```{r}
+pnorm(-1.96)
+qnorm(0.025)
+dnorm(0.025)
+```
+
+Bemærk at vi starter længst ude til venstre. Så pnorm(-2)
+
+
+```{r}
+pnorm(-2)
+```
+
+fortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at 
+vi på X-aksen har enheder af sd. 
+
+Den giver os arealet under kurven fra -uendelig til den værdi vi angiver.
+
+Det betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad 
+arealet fra -uendelig til 1.96 er
+Og trække arealet fra -uendelig til -1.96 fra:
+
+
+```{r}
+pnorm(1.96)-pnorm(-1.96)
+```
+
+Med andre ord, 95% af observationerne ligger mellem -1.96 og 1.96.
+
+## Og hvad når mine data ikke har en middelværdi på 0?
+
+Jamen så normerer vi. 
+
+Lad os tage nogen mere eller mindre tilfældige tal:
+
+
+```{r}
+exempel <- c(1,5,7,0,42,10,11,2)
+(middel <- mean(exempel))
+(sd_afv <- sd(exempel))
+```
+
+Så kan vi trække middelværdien fra alle tallene
+
+```{r}
+norm_middel <- exempel - middel
+mean(norm_middel)
+```
+
+Standardafvigelsen er stadig ikke 0:
+
+
+```{r}
+(stdafv <- sd(norm_middel))
+
+
+
+```
+
+Men hvis vi dividerer tallene med standardafvigelsen:
+```{r}
+norm_middel_stdafv <- norm_middel/stdafv
+mean(norm_middel_stdafv)
+sd(norm_middel_stdafv)
+```
+
+Så har vi såkaldt normerede værdier, eller skalerede om man vil.
+
+Og deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel)
+Og deres standardafvigelse er 1.
+
+Så kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.
+
+Alternativt bruger vi et trick i pnorm/qnorm:
+
+
+```{r}
+pnorm(1.96, mean = 9.75, sd = 13.64604)
+```
+
+## Hvordan gør man det lidt kortere?
+
+Den standardiserede normalfordeling er $N(0, 1)$
+
+Den fordeling vi som regel får er ikke standardiseret, men har formen:
+
+$X(\bar{X},s)$ (skal det været et lille x et sted?)
+
+Og vi vil som regel skrive at  $X(\bar{X},s) \sim N(\mu, \sigma)$ 
+
+Altså at vores fordeling X (som er beskrevet af middelværdi og spredning) er ækvivalent med den standardiserede normalfordeling med 
+
+Der er en modelløsning der vil være fin her.
+
+og så omregningen...
+
+## Øvelse
+
+Indtil andet oplyses, taler vi om en standardiseret normalfordeling med mu = 0, og sigma = 1.
+
+Hvilken andel af observationerne er mindre end -3?
+
+hvilken andel af observationerne er større end -3
+
+hvilken andel af observationerne er større end 1.5?
+
+Hvilken andel af observationerne ligger mellem 1 og 1.5?
+
+Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+
+
+## Øvelse
+
+Hvis vi har en population med normalfordelte værdier der har en spredning på 
+$\sigma = 6.52$ og 40% af værdierne er mindre end 0. Hvad er så middelværdien for
+denne fordeling?
+
+Vi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.
+
+Så den er ikke normaliseret/skaleret. 
+
+vores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)
+
+Så det skal nævnes, at notationen er N(mu, sd)
+
+Vi er på jagt efter P(X<0) = 0.4
+
+Det skal vi have normeret/skaleret:
+
+P((X-mu)/6.52 < (0-mu)/6.52) = 0.4
+
+
+```{r}
+qnorm(0.4)
+```
+
+For at transformere vores værdier, skal vi trække \mu fra, og dividere med 
+standardafvigelsen.
+
+Det gælder også den 0 værdi vi leder efter
+
+(0-mu)/sd
+
+
+Yderligere øvelser
+For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0.
+Og at 60% af værdierne er mindre end 1. Hvad er middelværdi og spredning for den 
+population?
+
+Vi skal tidligere have nævnt medianen og sammenhængen mellem den og gennemsnittet i normalfordelinger
+
+Der skal bruges lidt flere ord på beskrivelsen af fordelingen.
+altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til 
+(X-mu)/sigma.
+
+
+Og så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den.

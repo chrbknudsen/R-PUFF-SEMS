@@ -1,0 +1,272 @@
+---
+title: Lineær regression
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
+
+## de synes den her er sjov
+
+et output hvor noget er redigeret væk
+
+så - hvordan finder man det?
+
+```{r}
+3613.623/7.108
+127.377/15.757
+194.897/17.519
+(1.045/6.075)
+pnorm(1.045/6.075)
+adf
+```
+
+
+## Opgave maj 2025 1 a
+
+vi får en variabelliste.
+Og skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af
+alkohol under graviditeten.
+
+* episodes: Antal episoder med feber under graviditeten (før interview)
+* death: Fosterdød (ja = 1, nej = 0)
+* mage: Moderens alder ved interview
+* smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)
+* alco: Antal genstande pr uge under graviditet
+* weight: Fødselsvægt i gram
+
+Hvilken type analyse vil du udføre for at undersøge den sammenhæng?
+Angiv relevant R-kode med brug af de variabelnavne vi har fået
+
+Her kunne man snyde, og se på opgave b, der angav resultatet af den korrekte analyse
+
+Men. 
+
+Beskriv de enkelte variable. Er de kontinuerte eller kategoriske?
+
+Hvad vil vi forklare?
+
+Hvad vil vi forklare det med?
+
+Hvilken type analyse vil vi bruge?
+Overskriften er lineær regression, så det er ikke en stor overraskelse at det er den vi skal bruge...
+
+lm(weight ~ factor(smoke) + alco)
+
+Man kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable 
+allerede er kodet som kategoriske, kan man spare `factor()`. 
+
+
+## opgave maj 2025 1 b
+
+Vi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "3613.623", "7.108", "508.372", "<2e-16***",
+"factor(smoke)2", "-127.377", "15.757", "", "",
+"factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
+"alco", "1.045", "6.075", "0.172", "0.863"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+Hvad mangler - og hvad skulle der stå?
+
+t-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 	3613.623 og standardfejlen er
+7.108, hvad er t value så?
+
+```{r}
+3613.623/7.108
+```
+
+Det stemmer ikke 100%. For der er afrundingsfejl
+
+Så den manglende t value for factor(smoke)2 hvad er den?
+
+Hvoromkring ligger p-værdien?
+
+```{r}
+-127.377/15.757
+```
+
+Den er bedre end 1.96, og ihvertfald signifikant
+
+Hvad kan vi ellersk konkludere?
+
+jo mere man ryger, jo værre. alkohol har ikke en signifikant betydning. 
+
+## opgave 2025 februar opgave 1 (c)
+
+
+```{r}
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
+"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
+"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
+"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
+"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+
+Hvad er det vi vil forudsige? vi skal nok have tabellen med også?
+
+Det er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.
+
+Det er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?
+
+Logistisk regression.
+det er glm.
+
+I((mage-25)/10)
+𝛽
+^
+=
+0.7423
+,
+  
+𝑝
+=
+0.0005
+β
+^
+	​
+
+=0.7423,p=0.0005
+
+Signifikant positiv effekt.
+
+Variablen er skaleret som:
+
+mage
+−
+25
+10
+10
+mage−25
+	​
+
+
+altså: ændring per 10 års stigning i alder over 25.
+
+I en logistisk model:
+
+odds ratio
+=
+𝑒
+0.7423
+≈
+2.10
+odds ratio=e
+0.7423
+≈2.10
+
+👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.
+
+så det her skal nok flyttes til et sæt slides om logistisk regression
+
+analyse for kvinder
+summary(lm(diff[sex == "female"] ~ factor(group[sex=="female"])))
+
+analyse for mænd
+summary(lm(diff[sex == "male"] ~ factor(group[sex=="male"])))
+
+
+Hvilke analyser?
+
+lineær regression. Diff som respons og group som forklarende variabel. Den forkarende
+variabel er kategorisk.
+
+intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald.
+Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.
+
+## maj 2025 opgave 2 a
+
+givet et estimat på 3613.623 og en standard fejl på 7.108
+og 11279 observationer
+
+beregner vi et 95% konfidensinterval.
+
+bredden af et konfidensinterval er proportionalt med standardfejlen.
+
+Den skalerer som 1 over kvadratroden af antallet af observationer.
+
+Derfor: faktoren er kvadratroden af det gamle antal observationer divideret med det nye antal observationer.
+
+ca 7½ gange. bredere.

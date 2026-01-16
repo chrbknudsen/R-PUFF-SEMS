@@ -1,5 +1,5 @@
 /* Layout: venstre kolonne = editor, højre kolonne = output (tekst + plot) */
-.reveal .qwebr-console-area {
+.reveal .webr-side-by-side .qwebr-console-area {
   display: grid !important;
   grid-template-columns: 45% 55%;
   grid-template-rows: auto auto;
@@ -14,38 +14,38 @@
 }
 
 /* (1) Toolbar: samme bredde som editor-kolonnen */
-.reveal .qwebr-editor-toolbar {
+.reveal .webr-side-by-side .qwebr-editor-toolbar {
   width: 45% !important;
 }
 
 /* Placer elementerne i grid */
-.reveal .qwebr-console-area > .qwebr-editor {
+.reveal .webr-side-by-side .qwebr-console-area > .qwebr-editor {
   grid-area: editor !important;
   min-width: 0 !important;
   width: 100% !important;
 }
 
-.reveal .qwebr-console-area > .qwebr-output-code-area {
+.reveal .webr-side-by-side .qwebr-console-area > .qwebr-output-code-area {
   grid-area: outcode !important;
   min-width: 0 !important;
 }
 
-.reveal .qwebr-console-area > .qwebr-output-graph-area {
+.reveal .webr-side-by-side .qwebr-console-area > .qwebr-output-graph-area {
   grid-area: outplot !important;
   min-width: 0 !important;
 }
 
 /* Monaco (editoren) sætter ofte inline width/height.
    Tving den til at fylde sin grid-celle i bredden. */
-.reveal .qwebr-console-area .monaco-editor,
-.reveal .qwebr-console-area .overflow-guard,
-.reveal .qwebr-console-area .monaco-scrollable-element {
+.reveal .webr-side-by-side .qwebr-console-area .monaco-editor,
+.reveal .webr-side-by-side .qwebr-console-area .overflow-guard,
+.reveal .webr-side-by-side .qwebr-console-area .monaco-scrollable-element {
   width: 100% !important;
 }
 
 /* (2) Plot: fast øverst til højre, uafhængigt af editorens højde.
    Output-kode og plot må gerne overlappe. */
-.reveal .qwebr-output-graph-area {
+.reveal .webr-side-by-side .qwebr-output-graph-area {
   position: absolute !important;
   top: 0 !important;
   left: 45% !important;
@@ -55,14 +55,14 @@
 }
 
 /* Canvas skal ikke være bredere end højre kolonne */
-.reveal .qwebr-output-graph-area canvas {
+.reveal .webr-side-by-side .qwebr-output-graph-area canvas {
   width: 100% !important;
   max-width: 100% !important;
 }
 
 /* Mobil fallback */
 @media (max-width: 900px) {
-  .reveal .qwebr-console-area {
+  .reveal .webr-side-by-side .qwebr-console-area {
     grid-template-columns: 100%;
     grid-template-rows: auto auto auto;
     grid-template-areas:
@@ -72,16 +72,15 @@
   }
 
   /* Toolbar følger editorens bredde på mobil */
-  .reveal .qwebr-editor-toolbar {
+  .reveal .webr-side-by-side .qwebr-editor-toolbar {
     width: 100% !important;
   }
 
   /* På mobil: plot tilbage i normalt flow */
-  .reveal .qwebr-output-graph-area {
+  .reveal .webr-side-by-side .qwebr-output-graph-area {
     position: static !important;
     left: auto !important;
     top: auto !important;
     width: 100% !important;
   }
 }
-
