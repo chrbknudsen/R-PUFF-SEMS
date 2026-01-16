@@ -3,5 +3,10 @@ title: "KUB Datalab slides"
 format: html
 ---
 
-- [General presentation](slides/test20260115.qmd)
+- [side-by-side demo](slides/side-by-side-demo.qmd)
+- [intro](slides/intro.qmd)
+- [normalfordelingen](normalfordelingen.qmd)
+- [lineær regression](linreg.qmd)
+- [power beregninger](power.qmd)
+- [SEM](SEM.qmd)
 

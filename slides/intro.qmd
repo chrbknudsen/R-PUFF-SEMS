@@ -1,13 +1,28 @@
 ---
-title: "Intro"
-format: html
+title: Intro
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
 ---
 
-SEMS eksamenerne falder i tre dele. Statistik, epidemiologi og medicinsk sociologi.
+## Hvad gør vi her?
+
+Fokus på eksamensforberedelse til SEMS
+
+SEMS eksamenssæt kommer i tre dele. Statistik, epidemiologi og medicinsk sociologi.
 
 Her kigger vi kun på statistikken.
 
-I får typisk to opgaver, med del spørgsmål. 
+## Statistikdelens struktur
+
+Der er typisk to opgaver - med delspørgsmål.
+
+
+## noter om historiske opgaver
 
 feb 2025
 1 beregning af konfidensintervaller - og signifikans ud fra det

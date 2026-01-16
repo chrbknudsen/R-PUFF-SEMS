@@ -3,12 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "KUB Datalab slides"
+  title: "PUFF SEMS forberedelse"
   navbar:
     left:
-      - text: "normalfordelingen"
-        href: slides/test20260115.qmd
-        target: _blank
+      - text: "PUFF SEMS forberedelse"
+        href: slides/intro.qmd 
 
 
 

@@ -1,0 +1,186 @@
+---
+title: Logistisk regression
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
+
+## Hvad bruger vi den logistiske regression til?
+
+Den almindelige lineære regression bruger vi når vi forsøger at forudsige en 
+numerisk, kontinuær variabel.
+
+Når vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet.
+Den beskidte matematiske hemmelighed er, at det også er en lineær regression.
+
+I den lineære regression fitter vi
+
+E(Y|X) = beta0  + beta1x
+hvor det er den forventede værdi af Y givet X
+
+Altså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.
+
+
+i den logistiske regression er det:
+
+$$log(\frac{p}{1-p} = \beta_0 + \beta_1x$$
+
+p er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer.
+mere præcist log-odds
+
+også kaldet logit-funktionen.
+
+Vil vi have sandsynligheden, skal vi bruge den inverse logit
+
+$$p = \frac{1}{1+e^{-\eta}}$$
+
+Og vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke 
+piller i den selv.
+
+Hvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.
+
+Hvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det _ikke_ sker 25%.
+forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker,
+som at det ikke sker.
+
+## Hvordan laver vi en logistisk regression?
+
+Hvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:
+
+```{r}
+fit <- glm(am ~ wt, data = mtcars, family = "binomial")
+```
+
+glm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = "binomial" for at angive at den skal lave 
+en logistisk regression
+
+```{r}
+summary(fit)
+```
+
+estimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang
+wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.
+
+```{r}
+exp(coef(fit))
+```
+
+ratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.
+
+Hvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054
+
+Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så 
+
+$3*0.018^{0.5}$
+
+
+
+
+## opgave 2025 februar opgave 1 (c)
+
+
+```{r}
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
+"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
+"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
+"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
+"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+
+Hvad er det vi vil forudsige? vi skal nok have tabellen med også?
+
+Det er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.
+
+Det er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?
+
+Logistisk regression.
+det er glm.
+
+I((mage-25)/10)
+𝛽
+^
+=
+0.7423
+,
+  
+𝑝
+=
+0.0005
+β
+^
+	​
+
+=0.7423,p=0.0005
+
+Signifikant positiv effekt.
+
+Variablen er skaleret som:
+
+mage
+−
+25
+10
+10
+mage−25
+	​
+
+
+altså: ændring per 10 års stigning i alder over 25.
+
+I en logistisk model:
+
+odds ratio
+=
+𝑒
+0.7423
+≈
+2.10
+odds ratio=e
+0.7423
+≈2.10
+
+👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.
+
+så det her skal nok flyttes til et sæt slides om logistisk regression

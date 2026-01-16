@@ -1,0 +1,97 @@
+---
+title: Powerberegninger
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
+
+Når vi laver vores statistiske tests, opstiller vi en null-hypotese. Ofte er det "kunne denne værdi vi har beregnet, i virkeligheden være 0?" 
+
+Fordi vi jo kun ser på stikprøver, så er den værdi vi finder jo ikke den "sande" værdi. Den er et estimat. 
+Det kan være et godt estimat. Det kan være et dårligt estimat. Men det er et estimat. 
+
+Vores tests giver os en p-værdi. p-værdien fortæller os hvor stor risikoen er for at den sande værdi er 0, selvom 
+estimatet måske er 3. 
+
+Det sædvanlige kriterium er at p-værdien skal være mindre end 5% eller 0.05. Hvis p-værdien er mindre end 0.05, er der mindre end 5% risiko for at den sande værdi er 0, selvom vores estimat er noget andet.
+
+Og er p-værdien mindre end 0.05, forkaster vi null-hypotesen. Og accepterer den alternative hypotese.
+
+p-værdien sikrer os mod en måde at tage fejl på - den situation hvor vi tror der er en effekt, men der i virkeligheden ikke er en. Det er en type 1 fejl, eller falsk positiv.
+
+Det kan også gå galt på en anden måde. Vi kan komme til at 
+
+
+
+Der kan være en effekt i virkeligheden. 
+Det kan også være at der ikke er en effekt i virkeligheden.
+
+Vi kan konkludere at der er en effekt.
+Eller vi kan konkludere at der ikke er en effekt.
+
+Hvis vi mener der er en effekt, og der faktisk er en effekt, er alt godt.
+Hvis vi mener der ikke er en effekt, og der faktisk ikke er en effekt. Så er alt også godt.
+
+Men.
+Hvis vi mener der er en effekt, og den i virkeligheden ikke er der. Så har vi begået en fejl - falsk positiv, eller type 1 fejl.
+Og hvis vi mener der ikke er en effekt, men den faktisk er der alligegel. Så har vi også begået en fejl, en falsk negativ. Eller type 2 fejl.
+
+p-værdien fortæller os hvad risikoen er for at begå en type 1 fejl når vi konkluderer.
+
+Risikoen for at begå en type 2 fejl, betegnes $\beta$. Hvis den er eksempelvis 20% så er chancen for at forkaste null-hypotesen 1-beta. Det er sandsynligheden for at vi forkaster null-hypotesen når null-hypotesen faktisk skal forkaste. Det kalder vi også for power.
+
+Når vi designer forsøg er 
+
+hvor mange observationer har vi (brug for)
+Hvor stor effekt ønsker vi at kunne se?
+hvor lille p-værdi ønsker vi?
+hvor stor power ønsker vi?
+
+Det der med effekten kan være lidt bøvlet. det er fint at se et fald på 12 mmHg i det systoliske blodtryk. Men hvis vi måler i en anden enhed bliver tallet anderledes. Så vi standardiserer det fald, ved at dividere med den 
+standardafvigelse vi forventer (eller har). Så hvis vi har et fald på 12 mmHg, og en standardafvigelse på 3,
+ser vi en effekt på 4.
+
+Det optræder typisk opgaver af typen
+
+Man ønsker i et klinisk studie at sammenligne en enzymkoncentration for patienter med en bestemt sygdom
+og kontroller (raske) således, at der er lige mange patienter og kontroller i studiet. Hvor mange patienter
+skal man inkludere i studiet hvis forskelle i enzymkoncentrationen mindre end en standard afvigelse (sd) ikke
+er klinisk relevant? I beregningen ønskes en styrke på 80% og signifikansniveauet sættes stil 5%. Antag at 
+enzymkoncentrationen varierer lige meget blandt patienterne og kontrollerne.
+
+En forskel mindre end 1 sd er ikke klinisk relevant. Så vi vil kunne se effekter derer større end 1. 
+
+det vil sige, at forskellen divideret med sigma er lig 1.
+
+power skal være 80%. Det vil sige at 0.8 = 1 - beta, så beta er 0.2
+
+Bemærk at den formel I får i notat om beregning af stikprøvestørrelse, baserer sig på
+standardnormalfordelingen. Og det er den I skal bruge til eksamen, fordi den er "let" at beregne i hånden.
+
+## Husk dog!
+
+Når I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere
+at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer. 
+
+
+## eksempel
+
+```{r}
+
+power.t.test(delta =1, power = .8, type = "two.sample") 
+```
+## Opgave 2 2025 februar
+Hvis vi godt vil kunne se en bestemt forskel mellem to grupper?
+Hvor stor skal grupperne så være?
+Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?
+
+Hvilken power får man?
+
+det vil nok være en god ide at kunne tage udgangspunkt i "notat om beregning af stikprøvestørrelse".
+notat rekvireret
+
+

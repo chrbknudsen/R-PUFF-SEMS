@@ -1,0 +1,12 @@
+---
+title: Ting at huske
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
+
+Forskellen på kategoriske og kontinuærte variable

@@ -1,7 +1,14 @@
 ---
 title: "Standard Error of the Mean"
-format: html
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
 ---
+
 
 SE = sd/sqrt(n)
 
@@ -68,3 +75,6 @@ Her er 0 heller ikke indeholdt i intervallet - faldet er signifikant.
 Er faldet i blodtryk signifikant forskelligt?
 
 De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige. 
+
+
+## konfidensintervaller
