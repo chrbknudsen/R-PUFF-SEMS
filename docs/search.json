@@ -14,32 +14,186 @@
     "text": "overskrift 2\nting\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/power.html",
-    "href": "slides/power.html",
+    "objectID": "slides/power.html#husk-dog",
+    "href": "slides/power.html#husk-dog",
     "title": "Powerberegninger",
-    "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
+    "section": "Husk dog!",
+    "text": "Husk dog!\nNår I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer."
+  },
+  {
+    "objectID": "slides/power.html#eksempel",
+    "href": "slides/power.html#eksempel",
+    "title": "Powerberegninger",
+    "section": "eksempel",
+    "text": "eksempel\n\n\n\n     Two-sample t test power calculation \n\n              n = 16.71477\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
   },
   {
     "objectID": "slides/power.html#opgave-2-2025-februar",
     "href": "slides/power.html#opgave-2-2025-februar",
     "title": "Powerberegninger",
-    "section": "",
-    "text": "Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
+    "section": "Opgave 2 2025 februar",
+    "text": "Opgave 2 2025 februar\nHvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
   },
   {
-    "objectID": "slides/linreg.html",
-    "href": "slides/linreg.html",
-    "title": "lin reg",
-    "section": "",
-    "text": "analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))\nanalyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))\nHvilke analyser?\nlineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.\nintercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd."
+    "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling",
+    "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling",
+    "title": "Normalfordelingen",
+    "section": "Hvad er en sandsynlighedsfordeling?",
+    "text": "Hvad er en sandsynlighedsfordeling?\n\n\nNår vi måler noget får vi som regel en række forskellige resultater.\nHøjde af mænd er et eksempel. Nogen er 1,85 meter. Andre 1,80 meter.\nNår vi laver et histogram af alle de målinger, kunne det se således ud:\n\n\n\n\n\n\n\n\n\n\nHvad er mest sandsynligt - at være mellem 190 og 195 cm eller at være mellem 180 og 185 cm høj?"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
+    "href": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
+    "title": "Normalfordelingen",
+    "section": "Hvad er normalfordelingen?",
+    "text": "Hvad er normalfordelingen?\nVærdierne vi så før var normalfordelte\nDe fleste eksamensopgaver I støder på, har en formulering om at I kan antage at data er normalfordelte.\nHvad betyder det?\n\nUndersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger\n\n\nSå er den hyppigst forekommende normalfordelingen.\n\n\nDet er den “normale” fordeling\n\nDet er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommende"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud",
+    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud",
+    "title": "Normalfordelingen",
+    "section": "Hvordan ser den ud?",
+    "text": "Hvordan ser den ud?\nObservationer der er normalfordelte, følger denne fordeling:\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\n\\(f(x)\\) er sandsynligheden for at se en observation med værdien x. \\(\\mu\\) og \\(\\sigma\\) har vi mødt før.\n\nDet er der jo ingen der orker at arbejde med…\n\n\nDet vigtige er at den 100% styres af \\(\\mu\\) og \\(\\sigma\\)"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud-1",
+    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud-1",
+    "title": "Normalfordelingen",
+    "section": "Hvordan ser den ud?",
+    "text": "Hvordan ser den ud?\n\n\nHer har vi målinger der kan gå fra -4 til 4.\nOg har \\(\\mu = 0\\) og \\(\\sigma = 1\\).\nArealet under kurven er 1 ~ 100%.\nFor alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
+    "href": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
+    "title": "Normalfordelingen",
+    "section": "Hvilke egenskaber har den?",
+    "text": "Hvilke egenskaber har den?\n\n\nBemærk at enheden på x-aksen er i “standardafvigelser”. At den går fra minus uendelig til uendelig sammenhængen mellem median og middelværdi Læg også mærke til at z-scores er lig med enheden. T-scores er en normalisering fra psykometrien. Den bruger vi ikke her."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
+    "href": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
+    "title": "Normalfordelingen",
+    "section": "Hvilke andre egenskaber har den?",
+    "text": "Hvilke andre egenskaber har den?"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#fine-tal---hvordan-finder-vi-dem-selv",
+    "href": "slides/normalfordelingen.html#fine-tal---hvordan-finder-vi-dem-selv",
+    "title": "Normalfordelingen",
+    "section": "Fine tal - hvordan finder vi dem selv?",
+    "text": "Fine tal - hvordan finder vi dem selv?\nIfølge den fine graf ligger 15.9% af observationerne under \\(-1\\sigma\\).\nHvordan finder vi selv det tal?\n\npnorm\nqnorm"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#forskellige-normalfordelinger",
+    "href": "slides/normalfordelingen.html#forskellige-normalfordelinger",
+    "title": "Normalfordelingen",
+    "section": "Forskellige normalfordelinger",
+    "text": "Forskellige normalfordelinger\nDet er normalfordelingen for en middelværdi \\(\\mu\\) på 0.\nOg en standardafvigelse, \\(\\sigma\\) på 1.\nMen."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig",
+    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig",
+    "title": "Normalfordelingen",
+    "section": "Hvorfor er den vigtig?",
+    "text": "Hvorfor er den vigtig?\nNormalfordelingen er særligt vigtig på grund af “Den Centrale Grænseværdisætning”.\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen - alle danske mænd - og måler deres højde.\nSå beregner vi gennemsnittet og gemmer det.\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\nDet gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normalfordelingen. Uanset hvilken sandsynlighedsfordeling danske mænds højde følger.\nDet kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-for-jer",
+    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-for-jer",
+    "title": "Normalfordelingen",
+    "section": "Hvorfor er den vigtig for jer?",
+    "text": "Hvorfor er den vigtig for jer?\nRet ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen.\nOg så bruges den i de statistiske tests"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normaliseringskalering",
+    "href": "slides/normalfordelingen.html#normaliseringskalering",
+    "title": "Normalfordelingen",
+    "section": "normalisering/skalering",
+    "text": "normalisering/skalering\nNormalfordelingen er normalt standardiseret. Den har middelværdi 0 og standardafvigelse 1.\nDet har vores data normalt ikke. Hvad gør vi så?\nVi skalerer vores data. Hvis vi har en række observationer, der har en bestemt middelværdi, og trækker den middelværdi fra alle observationerne - hvad er så den nye middelværdi? 0.\nHvis vi dividerer alle observationerne med sigma - hvad er så den nye standardafvigelse? Den er 1.\nSå har vi nu en række observationer med middelværdi 0 og standardafvigelse 1. Det er ikke det samme som at de er normalfordelte\n\n\n[1] 1\n\n\nse også scale funktionen\nforskellen på X-bar og mu\npnorm, qnorm"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#logaritmering",
+    "href": "slides/normalfordelingen.html#logaritmering",
+    "title": "Normalfordelingen",
+    "section": "Logaritmering",
+    "text": "Logaritmering\nUd over skalering af data er der en anden skalering eller transformation vi ofte foretager - logaritmering.\nTing der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til dem."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#eksamen",
+    "href": "slides/normalfordelingen.html#eksamen",
+    "title": "Normalfordelingen",
+    "section": "Eksamen",
+    "text": "Eksamen\nDer er ofte en opgave hvor I får oplyst nogen egenskaber ved en stikprøve.\nUd fra de egenskaber skal I svare på spørgsmål om hvad vi kan fortælle om populationen - eller stikprøven - ud fra disse egenskaber."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
+    "href": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
+    "title": "Normalfordelingen",
+    "section": "Det er en sandsynlighedsfordeling. Hvad er det?",
+    "text": "Det er en sandsynlighedsfordeling. Hvad er det?\nNår vi undersøger et eller andet der kan have forskellige værdier, viser det sig at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg, end omkring 200 mmHg. (eller… I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).\nDe her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer hvordan værdierne egentlig opstår. Så de kan se forskellige ud:\n\nAfhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er den samlede sandsynlighed 100%\nNormalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
+    "href": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
+    "title": "Normalfordelingen",
+    "section": "Og hvad når mine data ikke har en middelværdi på 0?",
+    "text": "Og hvad når mine data ikke har en middelværdi på 0?\nJamen så normerer vi.\nLad os tage nogen mere eller mindre tilfældige tal:\n\n\n[1] 9.75\n\n\n[1] 13.64604\n\n\nSå kan vi trække middelværdien fra alle tallene\n\n\n[1] 0\n\n\nStandardafvigelsen er stadig ikke 0:\n\n\n[1] 13.64604\n\n\nMen hvis vi dividerer tallene med standardafvigelsen:\n\n\n[1] -1.040834e-17\n\n\n[1] 1\n\n\nSå har vi såkaldt normerede værdier, eller skalerede om man vil.\nOg deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel) Og deres standardafvigelse er 1.\nSå kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.\nAlternativt bruger vi et trick i pnorm/qnorm:\n\n\n[1] 0.2840467"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvordan-gør-man-det-lidt-kortere",
+    "href": "slides/normalfordelingen.html#hvordan-gør-man-det-lidt-kortere",
+    "title": "Normalfordelingen",
+    "section": "Hvordan gør man det lidt kortere?",
+    "text": "Hvordan gør man det lidt kortere?\nDen standardiserede normalfordeling er \\(N(0, 1)\\)\nDen fordeling vi som regel får er ikke standardiseret, men har formen:\n\\(X(\\bar{X},s)\\) (skal det været et lille x et sted?)\nOg vi vil som regel skrive at \\(X(\\bar{X},s) \\sim N(\\mu, \\sigma)\\)\nAltså at vores fordeling X (som er beskrevet af middelværdi og spredning) er ækvivalent med den standardiserede normalfordeling med\nDer er en modelløsning der vil være fin her.\nog så omregningen…"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse",
+    "href": "slides/normalfordelingen.html#øvelse",
+    "title": "Normalfordelingen",
+    "section": "Øvelse",
+    "text": "Øvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværdi og spredning for den population?\nVi skal tidligere have nævnt medianen og sammenhængen mellem den og gennemsnittet i normalfordelinger\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-1",
+    "href": "slides/normalfordelingen.html#øvelse-1",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 1",
+    "text": "Øvelse 1\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#de-synes-den-her-er-sjov",
+    "href": "slides/linreg.html#de-synes-den-her-er-sjov",
+    "title": "Lineær regression",
+    "section": "de synes den her er sjov",
+    "text": "de synes den her er sjov\net output hvor noget er redigeret væk\nså - hvordan finder man det?\n\n\n[1] 508.3882\n\n\n[1] 8.083836\n\n\n[1] 11.12489\n\n\n[1] 0.1720165\n\n\n[1] 0.5682877"
+  },
+  {
+    "objectID": "slides/linreg.html#opgave-maj-2025-1-a",
+    "href": "slides/linreg.html#opgave-maj-2025-1-a",
+    "title": "Lineær regression",
+    "section": "Opgave maj 2025 1 a",
+    "text": "Opgave maj 2025 1 a\nvi får en variabelliste. Og skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.\n\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\n\nHvilken type analyse vil du udføre for at undersøge den sammenhæng? Angiv relevant R-kode med brug af de variabelnavne vi har fået\nHer kunne man snyde, og se på opgave b, der angav resultatet af den korrekte analyse\nMen.\nBeskriv de enkelte variable. Er de kontinuerte eller kategoriske?\nHvad vil vi forklare?\nHvad vil vi forklare det med?\nHvilken type analyse vil vi bruge? Overskriften er lineær regression, så det er ikke en stor overraskelse at det er den vi skal bruge…\nlm(weight ~ factor(smoke) + alco)\nMan kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable allerede er kodet som kategoriske, kan man spare factor()."
+  },
+  {
+    "objectID": "slides/linreg.html#opgave-maj-2025-1-b",
+    "href": "slides/linreg.html#opgave-maj-2025-1-b",
+    "title": "Lineær regression",
+    "section": "opgave maj 2025 1 b",
+    "text": "opgave maj 2025 1 b\nVi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\nt-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 3613.623 og standardfejlen er 7.108, hvad er t value så?\n\n\n[1] 508.3882\n\n\nDet stemmer ikke 100%. For der er afrundingsfejl\nSå den manglende t value for factor(smoke)2 hvad er den?\nHvoromkring ligger p-værdien?\n\n\n[1] -8.083836\n\n\nDen er bedre end 1.96, og ihvertfald signifikant\nHvad kan vi ellersk konkludere?\njo mere man ryger, jo værre. alkohol har ikke en signifikant betydning."
   },
   {
     "objectID": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
     "href": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
-    "title": "lin reg",
-    "section": "",
-    "text": "analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))\nanalyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))\nHvilke analyser?\nlineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.\nintercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd."
+    "title": "Lineær regression",
+    "section": "opgave 2025 februar opgave 1 (c)",
+    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
+  },
+  {
+    "objectID": "slides/linreg.html#maj-2025-opgave-2-a",
+    "href": "slides/linreg.html#maj-2025-opgave-2-a",
+    "title": "Lineær regression",
+    "section": "maj 2025 opgave 2 a",
+    "text": "maj 2025 opgave 2 a\ngivet et estimat på 3613.623 og en standard fejl på 7.108 og 11279 observationer\nberegner vi et 95% konfidensinterval.\nbredden af et konfidensinterval er proportionalt med standardfejlen.\nDen skalerer som 1 over kvadratroden af antallet af observationer.\nDerfor: faktoren er kvadratroden af det gamle antal observationer divideret med det nye antal observationer.\nca 7½ gange. bredere."
   },
   {
     "objectID": "index.html",
@@ -60,174 +214,195 @@
     "href": "slides/intro.html#statistikdelens-struktur",
     "title": "Intro",
     "section": "Statistikdelens struktur",
-    "text": "Statistikdelens struktur\nI får typisk to opgaver, med del spørgsmål.\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
+    "text": "Statistikdelens struktur\nDer er typisk to opgaver - med delspørgsmål."
   },
   {
-    "objectID": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
-    "href": "slides/normalfordelingen.html#det-er-en-sandsynlighedsfordeling.-hvad-er-det",
-    "title": "Normalfordelingen",
-    "section": "Det er en sandsynlighedsfordeling. Hvad er det?",
-    "text": "Det er en sandsynlighedsfordeling. Hvad er det?\nNår vi undersøger et eller andet der kan have forskellige værdier, viser det sig at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg, end omkring 200 mmHg. (eller… I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).\nDe her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer hvordan værdierne egentlig opstår. Så de kan se forskellige ud:\n\nAfhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er den samlede sandsynlighed 100%\nNormalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse.\nR har en række funktioner vi kan bruge:\n\n\n[1] 0.0249979\n\n\n[1] -1.959964\n\n\n[1] 0.3988176\n\n\nBemærk at vi starter længst ude til venstre. Så pnorm(-2)\n\n\n[1] 0.02275013\n\n\nfortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at vi på X-aksen har enheder af sd.\nDen giver os arealet under kurven fra -uendelig til den værdi vi angiver.\nDet betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad arealet fra -uendelig til 1.96 er Og trække arealet fra -uendelig til -1.96 fra:\n\n\n[1] 0.9500042\n\n\nMed andre ord, 95% af observationerne ligger mellem -1.96 og 1.96."
+    "objectID": "slides/intro.html#noter-om-historiske-opgaver",
+    "href": "slides/intro.html#noter-om-historiske-opgaver",
+    "title": "Intro",
+    "section": "noter om historiske opgaver",
+    "text": "noter om historiske opgaver\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud",
-    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud",
-    "title": "Normalfordelingen",
-    "section": "Hvordan ser den ud?",
-    "text": "Hvordan ser den ud?\nObservationer der er normalfordelte følger denne fordeling:\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\n\\(f(x)\\) er sandsynligheden for at se en observation med værdien x.\n\\(\\mu\\) er gennemsnittet af alle observationerne\n\\(\\sigma\\) er standardafvigelsen af alle observationerne.\nDet er der jo ingen der orker at arbejde med…"
+    "objectID": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
+    "href": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
+    "title": "Logistisk regression",
+    "section": "Hvad bruger vi den logistiske regression til?",
+    "text": "Hvad bruger vi den logistiske regression til?\nDen almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.\nNår vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.\nI den lineære regression fitter vi\nE(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X\nAltså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.\ni den logistiske regression er det:\n\\[log(\\frac{p}{1-p} = \\beta_0 + \\beta_1x\\]\np er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds\nogså kaldet logit-funktionen.\nVil vi have sandsynligheden, skal vi bruge den inverse logit\n\\[p = \\frac{1}{1+e^{-\\eta}}\\]\nOg vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.\nHvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.\nHvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det ikke sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker."
   },
   {
-    "objectID": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
-    "href": "slides/normalfordelingen.html#og-hvad-når-mine-data-ikke-har-en-middelværdi-på-0",
-    "title": "Normalfordelingen",
-    "section": "Og hvad når mine data ikke har en middelværdi på 0?",
-    "text": "Og hvad når mine data ikke har en middelværdi på 0?\nJamen så normerer vi.\nLad os tage nogen mere eller mindre tilfældige tal:\n\n\n[1] 9.75\n\n\n[1] 13.64604\n\n\nSå kan vi trække middelværdien fra alle tallene\n\n\n[1] 0\n\n\nStandardafvigelsen er stadig ikke 0:\n\n\n[1] 13.64604\n\n\nMen hvis vi dividerer tallene med standardafvigelsen:\n\n\n[1] -1.040834e-17\n\n\n[1] 1\n\n\nSå har vi såkaldt normerede værdier, eller skalerede om man vil.\nOg deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel) Og deres standardafvigelse er 1.\nSå kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.\nAlternativt bruger vi et trick i pnorm/qnorm:\n\n\n[1] 0.2840467"
+    "objectID": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
+    "href": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
+    "title": "Logistisk regression",
+    "section": "Hvordan laver vi en logistisk regression?",
+    "text": "Hvordan laver vi en logistisk regression?\nHvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:\nglm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression\n\n\n\nCall:\nglm(formula = am ~ wt, family = \"binomial\", data = mtcars)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept)   12.040      4.510   2.670  0.00759 **\nwt            -4.024      1.436  -2.801  0.00509 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 43.230  on 31  degrees of freedom\nResidual deviance: 19.176  on 30  degrees of freedom\nAIC: 23.176\n\nNumber of Fisher Scoring iterations: 6\n\n\nestimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.\n\n\n (Intercept)           wt \n1.694596e+05 1.788183e-02 \n\n\nratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.\nHvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054\nHvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så\n\\(3*0.018^{0.5}\\)"
   },
   {
-    "objectID": "slides/SEM.html",
-    "href": "slides/SEM.html",
-    "title": "Standard Error of the Mean",
-    "section": "",
-    "text": "SE = sd/sqrt(n)\nsd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.\nNår vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.\nDet udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:\n\\[SE = \\frac{SD}{\\sqrt(n)}\\]\nHvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven."
+    "objectID": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
+    "href": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
+    "title": "Logistisk regression",
+    "section": "opgave 2025 februar opgave 1 (c)",
+    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
   },
   {
     "objectID": "slides/SEM.html#en-opgave",
     "href": "slides/SEM.html#en-opgave",
     "title": "Standard Error of the Mean",
     "section": "En opgave",
-    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\nSE &lt;- 17.4/sqrt(323)\nSE\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n-19.6 + c(1,-1)*1.96*SE\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\nSE &lt;- 19.9/sqrt(318)\nSE\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n-16.6 + c(1,-1)*1.96*SE\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
+    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
   },
   {
-    "objectID": "slides/normalfordelingen.html#stikprøve-vs.-population",
-    "href": "slides/normalfordelingen.html#stikprøve-vs.-population",
-    "title": "Normalfordelingen",
-    "section": "Stikprøve vs. population",
-    "text": "Stikprøve vs. population\nHvad er den gennemsnitlige højde af mænd i Danmark?\nDet vi undersøger er “Mænd i Danmark”.\nMænd i Danmark er populationen vi gerne vil vide noget om.\nMen vi kan ikke måle alle mænd i Danmark.\nSå vi tager en stikprøve\nVi skal selvfølgelig tænke over hvordan vi tager den. Men målet er, at vi ud fra stikprøven kan sige noget om populationen."
+    "objectID": "slides/SEM.html#konfidensintervaller",
+    "href": "slides/SEM.html#konfidensintervaller",
+    "title": "Standard Error of the Mean",
+    "section": "konfidensintervaller",
+    "text": "konfidensintervaller"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling",
-    "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling",
+    "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
+    "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
     "title": "Normalfordelingen",
     "section": "Hvad er en sandsynlighedsfordeling?",
-    "text": "Hvad er en sandsynlighedsfordeling?\n\n\nNår vi måler når får vi som regel en række forskellige resultater.\nHøjde af mænd er et eksempel. Nogen er 1,85 meter. Andre 1,80 meter.\nNår vi laver et histogram af alle de målinger, kunne det se således ud:\n\n\n\n\n\n\n\n\n\n\nHvad er mest sandsynligt - at være mellem 190 og 195 cm eller at være mellem 180 og 185 cm høj"
+    "text": "Hvad er en sandsynlighedsfordeling?\nEn sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.\n\nHvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?"
   },
   {
-    "objectID": "slides/normalfordelingen.html#eksamen",
-    "href": "slides/normalfordelingen.html#eksamen",
+    "objectID": "slides/normalfordelingen.html#de-hænger-sammen",
+    "href": "slides/normalfordelingen.html#de-hænger-sammen",
     "title": "Normalfordelingen",
-    "section": "Eksamen",
-    "text": "Eksamen\nDer er ofte en opgave hvor I får oplyst nogen egenskaber ved en stikprøve.\nUd fra de egenskaber skal I svare på spørgsmål om hvad vi kan fortælle om populationen - eller stikprøven - ud fra disse egenskaber."
+    "section": "De hænger sammen!",
+    "text": "De hænger sammen!\n\nLæg mærke til at 1. og 3. er hinandens “omvendte”. 65.5% af observationerne er mindre end 0.4. 0.4 er større end 65.5% af observationerne.\n\nog 4. er også hinandens omvendte. 95.45% af observationerne ligger mellem -2 og 2. Og hvis vi vil have 95.45% af observationerne finder vi dem i intervallet fra -2 til 2. Hvis intervallet er centreret om midten.\n\n\nI vil ofte blive spurgt om hvad referenceintervallet er - i hvilket interval finder vi 95% af observationerne?"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
-    "href": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
+    "objectID": "slides/normalfordelingen.html#pnorm",
+    "href": "slides/normalfordelingen.html#pnorm",
     "title": "Normalfordelingen",
-    "section": "Hvad er normalfordelingen?",
-    "text": "Hvad er normalfordelingen?\nDe målinger følger en sandsynlighedsfordeling.\nDer findes mange forskellige sandsynlighedsfordelinger.\nNår vi måler mange forskellige ting. Og undersøger hvilke sandsynlighedsfordelinger de følger. Så er den hyppigst forekommende “normalfordelingen”\n\nDet er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommended"
+    "section": "pnorm",
+    "text": "pnorm\npnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.\n\npnorm(-1)\n\n[1] 0.1586553\n\n\nVi kan også skrive det som:\nP(X &lt; -1) = 0.1586553"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig",
-    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig",
+    "objectID": "slides/normalfordelingen.html#qnorm",
+    "href": "slides/normalfordelingen.html#qnorm",
     "title": "Normalfordelingen",
-    "section": "Hvorfor er den vigtig?",
-    "text": "Hvorfor er den vigtig?\n\nvi bruger mænds højde som eksempel - fordi vi gennem session - nu forsvarets dag - faktisk er ret tæt på at have data fra hele populationen. Det illustrerer dog også et par andre udfordringer. Mænd med dværgvækst vil typisk blive fritaget fra session da de alligevel vil blive kasseret. Det betyder at vi kommer til at mangle en række målinger der systematisk påvirker gennemsnittet.\n\nNormalfordelingen er særligt vigtig på grund af “Den Centrale Grænseværdisætning”.\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen - alle danske mænd - og måler deres højde.\nSå beregner vi gennemsnittet og gemmer det.\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\nDet gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normalfordelingen. Uanset hvilken sandsynlighedsfordeling danske mænds højde følger.\nDet kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over."
+    "section": "qnorm",
+    "text": "qnorm\nqnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. \n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nFor hvilken værdi er 0.025 eller 2.5% af observationerne mindre?"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-for-jer",
-    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-for-jer",
+    "objectID": "slides/normalfordelingen.html#eller",
+    "href": "slides/normalfordelingen.html#eller",
     "title": "Normalfordelingen",
-    "section": "Hvorfor er den vigtig for jer?",
-    "text": "Hvorfor er den vigtig for jer?\nRet ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen.\nOg så bruges den i de statistiske tests"
+    "section": "Eller",
+    "text": "Eller\n\npnorm går fra værdi til sandsynlighed.\nqnorm går fra sandsynlighed til værdi.\n\nP(X &lt; værdi) = sandsynlighed\n\nHvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden\nHvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud-1",
-    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud-1",
+    "objectID": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
+    "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
-    "section": "Hvordan ser den ud?",
-    "text": "Hvordan ser den ud?\n\nHer har vi målinger der kan gå fra -4 til 4. Og har \\(\\mu = 0\\) og \\(\\sigma = 1\\). Arealet under kurven er 1 ~ 100%.\nFor alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%"
+    "section": "Hvordan kan vi beskrive alle de her observationer?",
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 178.8 183.8 185.7 178.7 171.3 185.8 184.9 173.9 170.8 181.9 188.9 177.3\n[13] 176.0 176.2 187.8 193.9 188.6 193.2 182.8 180.2 196.0 180.5 182.9 179.1\n[25] 181.8 180.2 176.9 181.6 180.2 188.2 177.9 195.4 187.4 183.1 177.0 179.7\n[37] 179.2 180.0 185.7 181.4 174.5 182.0 183.9 184.6 172.1 190.4 184.8 185.7\n[49] 193.8 185.8\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvordan-ser-den-ud-2",
-    "href": "slides/normalfordelingen.html#hvordan-ser-den-ud-2",
+    "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
+    "href": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
     "title": "Normalfordelingen",
-    "section": "Hvordan ser den ud?",
-    "text": "Hvordan ser den ud?\n\\[\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\]\nVi kan se at den netop afhænger af to ting. En middelværdi \\(\\mu\\) og en standardafvigelse (I er glade for at kalde den en standarddeviation), \\(\\sigma\\) Men det er ikke så nyttigt.\nillustration - den findes på https://en.wikipedia.org/wiki/File:The_Normal_Distribution.svg Og gemmes lokalt.\nDet her er den normaliserede normalfordeling. Det er den hvor middelværdien er 0, og standardafvigelsen er 1.\nHvilke egenskaber har den?\nR har en række funktioner vi kan bruge:\n\n\n[1] 0.0249979\n\n\n[1] -1.959964\n\n\n[1] 0.3988176\n\n\nBemærk at vi starter længst ude til venstre. Så pnorm(-2)\n\n\n[1] 0.02275013\n\n\nfortæller os at 0.02275 eller 2.275% af observationerne er mindre end -2. Og husk at vi på X-aksen har enheder af sd.\nDen giver os arealet under kurven fra -uendelig til den værdi vi angiver.\nDet betyder også at hvis vi skal have arealet mellem to værdier (eksempelvis -1.96 til 1.96), skal vi beregne hvad arealet fra -uendelig til 1.96 er Og trække arealet fra -uendelig til -1.96 fra:\n\n\n[1] 0.9500042\n\n\nMed andre ord, 95% af observationerne ligger mellem -1.96 og 1.96."
+    "section": "Middelværdi og standardafvigelse",
+    "text": "Middelværdi og standardafvigelse\n\\(x\\) er vores målinger. \\(x_i\\) er en fancy måde at skrive at der er flere: \\(x_1, x_2, x_3, ... x_i\\). og vi har ialt \\(N\\) observationer\nMiddelværdien: \\[\\mu = \\frac{\\sum(x_i)}{N}\\]\nStandardafvigelsen\n\\[\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{N}  }\\]"
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
-    "href": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
+    "objectID": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
+    "href": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
     "title": "Normalfordelingen",
-    "section": "Hvilke egenskaber har den?",
-    "text": "Hvilke egenskaber har den?\nHvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:\n\nHvor mange procent af observationerne er under 0.4?\nHvor mange procent af observationerne ligger mellem -2 og 2?\nDe 65.5% mindste observationer; hvad er de mindre end?\nIndenfor hvilket interval ligger 95.45% af observationerne?\n\nLæg mærke til at 1. og 3. er hinandens “omvendte”. 65.5% af observationerne er mindre end 0.4. 0.4 er større end 65.5% af observationerne.\n\nog 4. er også hinandens omvendte. 95.45% af observationerne ligger mellem -2 og 2. Og hvis vi vil have 95.45% af observationerne finder vi dem i intervallet fra -2 til 2. Hvis intervallet er centreret om midten.\n\nI vil ofte blive spurgt om hvad referenceintervallet er - i hvilket interval finder vi 95% af observationerne."
+    "section": "Hvornår bruger vi græske bogstaver?",
+    "text": "Hvornår bruger vi græske bogstaver?\nDet gør vi når vi kender de “sande” værdier:\nMiddelværdi: \\(\\mu\\). Standardafvigelse: \\(\\sigma\\)\nDe latinske bogstaver bruger vi når vi “kun” kender værdierne fra vores stikprøve:\nMiddelværdi: \\(\\bar{x}\\). Standardafvigelse: \\(s\\)\n\nKender vi den sande værdi af gennemsnittet af alle danske mænds højde? Normalt ikke."
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
-    "href": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
+    "objectID": "slides/normalfordelingen.html#og-omvendt",
+    "href": "slides/normalfordelingen.html#og-omvendt",
     "title": "Normalfordelingen",
-    "section": "Hvilke andre egenskaber har den?",
-    "text": "Hvilke andre egenskaber har den?"
+    "section": "Og omvendt?",
+    "text": "Og omvendt?\nHvis sandsynligheden for at at X er mindre end -1 skrives som:\nP(X &lt; -1)\nHvad er så sandsynligheden for at X er større end -1?\n\n1 - P(X &lt; -1)"
   },
   {
-    "objectID": "slides/normalfordelingen.html#forskellige-normalfordelinger",
-    "href": "slides/normalfordelingen.html#forskellige-normalfordelinger",
+    "objectID": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
+    "href": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
     "title": "Normalfordelingen",
-    "section": "Forskellige normalfordelinger",
-    "text": "Forskellige normalfordelinger\nFor mu og sigma kan være forskellige"
+    "section": "Typiske spørgsmål vi får:",
+    "text": "Typiske spørgsmål vi får:\nHvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:\n\nHvor mange procent af observationerne er under 0.4?\nHvor mange procent af observationerne ligger mellem -2 og 2?\nDe 65.5% mindste observationer; hvad er de mindre end?\nIndenfor hvilket interval ligger 95.45% af observationerne?\n\n\nDe hænger sammen. 1 og 3 er hinandens omvendte 2 og 4 er også hinandens omvendte"
   },
   {
-    "objectID": "slides/normalfordelingen.html#normaliseringskalering",
-    "href": "slides/normalfordelingen.html#normaliseringskalering",
+    "objectID": "slides/normalfordelingen.html#standardnormalfordelingen",
+    "href": "slides/normalfordelingen.html#standardnormalfordelingen",
     "title": "Normalfordelingen",
-    "section": "normalisering/skalering",
-    "text": "normalisering/skalering\nNormalfordelingen er normalt standardiseret. Den har middelværdi 0 og standardafvigelse 1.\nDet har vores data normalt ikke. Hvad gør vi så?\nVi skalerer vores data. Hvis vi har en række observationer, der har en bestemt middelværdi, og trækker den middelværdi fra alle observationerne - hvad er så den nye middelværdi? 0.\nHvis vi dividerer alle observationerne med sigma - hvad er så den nye standardafvigelse? Den er 1.\nSå har vi nu en række observationer med middelværdi 0 og standardafvigelse 1. Det er ikke det samme som at de er normalfordelte\n\n\n[1] 1\n\n\nse også scale funktionen\nforskellen på X-bar og mu\npnorm,dnorm, qnorm"
+    "section": "Standardnormalfordelingen",
+    "text": "Standardnormalfordelingen\nNår \\(\\mu = 0\\) og \\(\\sigma = 1\\) kalder vi den for “standardnormalfordelingen”."
   },
   {
-    "objectID": "slides/normalfordelingen.html#logaritmering",
-    "href": "slides/normalfordelingen.html#logaritmering",
+    "objectID": "slides/normalfordelingen.html#flere-øvelser",
+    "href": "slides/normalfordelingen.html#flere-øvelser",
     "title": "Normalfordelingen",
-    "section": "Logaritmering",
-    "text": "Logaritmering\nUd over skalering af data er der en anden skalering eller transformation vi ofte foretager - logaritmering.\nTing der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til dem."
+    "section": "flere øvelser",
+    "text": "flere øvelser\nIndtil andet oplyses, taler vi om en standardiseret normalfordeling med mu = 0, og sigma = 1.\nHvilken andel af observationerne er mindre end -3?\nhvilken andel af observationerne er større end -3\nhvilken andel af observationerne er større end 1.5?\nHvilken andel af observationerne ligger mellem 1 og 1.5?\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?"
   },
   {
-    "objectID": "slides/normalfordelingen.html#fine-tal---hvordan-finder-vi-dem-selv",
-    "href": "slides/normalfordelingen.html#fine-tal---hvordan-finder-vi-dem-selv",
+    "objectID": "slides/normalfordelingen.html#øvelse-2",
+    "href": "slides/normalfordelingen.html#øvelse-2",
     "title": "Normalfordelingen",
-    "section": "Fine tal - hvordan finder vi dem selv?",
-    "text": "Fine tal - hvordan finder vi dem selv?\npnorm qnorm dnorm og rnorm findes også - dem har vi sjældent brug for.\npnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.\n\n\n[1] 0.1586553\n\n\nqnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. \n\n\n[1] -1.959964\n\n\nEller. pnorm går fra værdi til sandsynlighed. qnorm går fra sandsynlighed til værdi\nP(X&lt;0) = 0.4 er den notation vi skal have introduceret"
+    "section": "Øvelse 2",
+    "text": "Øvelse 2\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/normalfordelingen.html#hvordan-gør-man-det-lidt-kortere",
-    "href": "slides/normalfordelingen.html#hvordan-gør-man-det-lidt-kortere",
+    "objectID": "slides/normalfordelingen.html#øvelse-3",
+    "href": "slides/normalfordelingen.html#øvelse-3",
     "title": "Normalfordelingen",
-    "section": "Hvordan gør man det lidt kortere?",
-    "text": "Hvordan gør man det lidt kortere?\nDen standardiserede normalfordeling er \\(N(0, 1)\\)\nDen fordeling vi som regel får er ikke standardiseret, men har formen:\n\\(X(\\bar{X},s)\\) (skal det været et lille x et sted?)\nOg vi vil som regel skrive at \\(X(\\bar{X},s) \\sim N(\\mu, \\sigma)\\)\nAltså at vores fordeling X (som er beskrevet af middelværdi og spredning) er ækvivalent med den standardiserede normalfordeling med\nDer er en modelløsning der vil være fin her.\nog så omregningen…"
+    "section": "Øvelse 3",
+    "text": "Øvelse 3\n\n\nHvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm. Den giver os sandsynligheden for at observationerne er mindre end 2. Sandsynligheden for at observationen er, er 1. Så 1-pnorm(2)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/normalfordelingen.html#øvelse",
-    "href": "slides/normalfordelingen.html#øvelse",
+    "objectID": "slides/normalfordelingen.html#øvelse-4",
+    "href": "slides/normalfordelingen.html#øvelse-4",
     "title": "Normalfordelingen",
-    "section": "Øvelse",
-    "text": "Øvelse\nIndtil andet oplyses, taler vi om en standardiseret normalfordeling med mu = 0, og sigma = 1.\nHvilken andel af observationerne er mindre end -3?\nhvilken andel af observationerne er større end -3\nhvilken andel af observationerne er større end 1.5?\nHvilken andel af observationerne ligger mellem 1 og 1.5?\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?"
+    "section": "Øvelse 4",
+    "text": "Øvelse 4\n\n\nHvad er 25% af observationerne mindre end?\n\nNu kender vi sandsynligheden, og skal have værdien - qnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/normalfordelingen.html#øvelse-1",
-    "href": "slides/normalfordelingen.html#øvelse-1",
+    "objectID": "slides/normalfordelingen.html#øvelse-5",
+    "href": "slides/normalfordelingen.html#øvelse-5",
     "title": "Normalfordelingen",
-    "section": "Øvelse",
-    "text": "Øvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværdi og spredning for den population?\nVi skal tidligere have nævnt medianen og sammenhængen mellem den og gennemsnittet i normalfordelinger\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
+    "section": "Øvelse 5",
+    "text": "Øvelse 5\n\n\nHvad er 40% af observationerne større end?\n\nDet svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/power.html#husk-dog",
-    "href": "slides/power.html#husk-dog",
-    "title": "Powerberegninger",
-    "section": "Husk dog!",
-    "text": "Husk dog!\nNår I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer."
+    "objectID": "slides/normalfordelingen.html#øvelse-6",
+    "href": "slides/normalfordelingen.html#øvelse-6",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 6",
+    "text": "Øvelse 6\n\n\nHvilken andel af observationerne ligger mellem 1 og 1.5?\n\nVi kender værdierne, og skal bruge sandsynlighederne. Så pnorm. Sandsynligheden er arealet under kurven fra -uendelig til værdien. Så. Arealet fra -uendelig til 1.5. Minus arealet fra -uendelig til 1, trukket fra, giver os arealet mellem de to punkter\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/power.html#eksempel",
-    "href": "slides/power.html#eksempel",
-    "title": "Powerberegninger",
-    "section": "eksempel",
-    "text": "eksempel\n\n\n\n     Two-sample t test power calculation \n\n              n = 16.71477\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
+    "objectID": "slides/normalfordelingen.html#øvelse-7",
+    "href": "slides/normalfordelingen.html#øvelse-7",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 7",
+    "text": "Øvelse 7\n\n\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\n\nDet der ligger uden for de 47% er 1 - 0.47 = 0.53. Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.\n0.53/2 = 0.265\nVi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien\nOg er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
+    "href": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
+    "title": "Normalfordelingen",
+    "section": "Gennemsnitshøjden er jo ikke 0?!",
+    "text": "Gennemsnitshøjden er jo ikke 0?!\nDet er vældig fint at vi får at vide at vores data er normalfordelte. Det er en del lettere at regne på en hvis de ikke er.\nDet er en del af årsagen til at I får at vide at data er normalfordelte. Det bliver noget man faktisk kan regne på i hånden. Og så får man testet om I forstår normalfordelinge.\nMen data følger jo ikke standardnormalfordelingen. mu og sigma er ikke hhv 0 og 1.\nHvis bare der var en måde at transformere vores data til at have mu = 0 og sigma =1.\nDet er der heldigvis.\nHvad er gennemsnittet af tallene 1 til 6?\n\n\n[1] 3.5\n\n\nHvad er gennemsnittet af tallene 1 til 6, efter vi har trukket 3.5 fra?\n\n\n[1] 0\n\n\nHvad er deres standardafvigelse?\n\n\n[1] 1.870829\n\n\nHvad er standardafvigelsen af tallene 1 til 6 hvis vi dividerer dem med standardafvigelsen?\n\n\n[1] 1\n\n\nmagi… Eller matematik.\nVi kan godt udlede hvorfor det passer. Nu nøjes vi bare med at konstatere at det gør det."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
+    "href": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
+    "title": "Normalfordelingen",
+    "section": "Hvad kan vi bruge det til?",
+    "text": "Hvad kan vi bruge det til?\nNotationen for normalfordelingen er N(mu,sigma)\nHvis mu er 181 og sigma er 6.5\nog vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\nP(X&lt;170) = P(X&lt; (170 - 181) / 6.5) = -1.692\n\n\n[1] 0.04532299"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelser",
+    "href": "slides/normalfordelingen.html#øvelser",
+    "title": "Normalfordelingen",
+    "section": "Øvelser",
+    "text": "Øvelser\nInklusive\nFor en normalfordelt population ved vi at 50% af værdierne er mindre end 0, og 60% er mindre end 1. Hvad er middelværdi og spredning?\nP(X&lt;0) = 0.5 P(X&lt;1) = 0.6\nP((X-mu)/sd &lt; (0-mu)/sd) = 0.5"
   }
 ]

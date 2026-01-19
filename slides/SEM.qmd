@@ -9,6 +9,9 @@ filters:
   - webr
 ---
 
+Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.
+
+
 
 SE = sd/sqrt(n)
 

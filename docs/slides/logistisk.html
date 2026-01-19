@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>PUFF SEMS forberedelse – Lineær regression</title>
+  <title>PUFF SEMS forberedelse – Logistisk regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,597 +127,89 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Lineær regression</h1>
+  <h1 class="title">Logistisk regression</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="de-synes-den-her-er-sjov" class="slide level2">
-<h2>de synes den her er sjov</h2>
-<p>et output hvor noget er redigeret væk</p>
-<p>så - hvordan finder man det?</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 508.3882</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.083836</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.12489</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1720165</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5682877</code></pre>
-</div>
-</div>
+<section id="hvad-bruger-vi-den-logistiske-regression-til" class="slide level2">
+<h2>Hvad bruger vi den logistiske regression til?</h2>
+<p>Den almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.</p>
+<p>Når vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.</p>
+<p>I den lineære regression fitter vi</p>
+<p>E(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X</p>
+<p>Altså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.</p>
+<p>i den logistiske regression er det:</p>
+<p><span class="math display">\[log(\frac{p}{1-p} = \beta_0 + \beta_1x\]</span></p>
+<p>p er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds</p>
+<p>også kaldet logit-funktionen.</p>
+<p>Vil vi have sandsynligheden, skal vi bruge den inverse logit</p>
+<p><span class="math display">\[p = \frac{1}{1+e^{-\eta}}\]</span></p>
+<p>Og vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.</p>
+<p>Hvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.</p>
+<p>Hvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det <em>ikke</em> sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker.</p>
 </section>
-<section id="opgave-maj-2025-1-a" class="slide level2">
-<h2>Opgave maj 2025 1 a</h2>
-<p>vi får en variabelliste. Og skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.</p>
-<ul>
-<li>episodes: Antal episoder med feber under graviditeten (før interview)</li>
-<li>death: Fosterdød (ja = 1, nej = 0)</li>
-<li>mage: Moderens alder ved interview</li>
-<li>smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)</li>
-<li>alco: Antal genstande pr uge under graviditet</li>
-<li>weight: Fødselsvægt i gram</li>
-</ul>
-<p>Hvilken type analyse vil du udføre for at undersøge den sammenhæng? Angiv relevant R-kode med brug af de variabelnavne vi har fået</p>
-<p>Her kunne man snyde, og se på opgave b, der angav resultatet af den korrekte analyse</p>
-<p>Men.</p>
-<p>Beskriv de enkelte variable. Er de kontinuerte eller kategoriske?</p>
-<p>Hvad vil vi forklare?</p>
-<p>Hvad vil vi forklare det med?</p>
-<p>Hvilken type analyse vil vi bruge? Overskriften er lineær regression, så det er ikke en stor overraskelse at det er den vi skal bruge…</p>
-<p>lm(weight ~ factor(smoke) + alco)</p>
-<p>Man kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable allerede er kodet som kategoriske, kan man spare <code>factor()</code>.</p>
-</section>
-<section id="opgave-maj-2025-1-b" class="slide level2">
-<h2>opgave maj 2025 1 b</h2>
-<p>Vi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="nchtcypkje" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nchtcypkje table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#nchtcypkje thead, #nchtcypkje tbody, #nchtcypkje tfoot, #nchtcypkje tr, #nchtcypkje td, #nchtcypkje th {
-  border-style: none;
-}
-
-#nchtcypkje p {
-  margin: 0;
-  padding: 0;
-}
-
-#nchtcypkje .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#nchtcypkje .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#nchtcypkje .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#nchtcypkje .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#nchtcypkje .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#nchtcypkje .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#nchtcypkje .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#nchtcypkje .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#nchtcypkje .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#nchtcypkje .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#nchtcypkje .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#nchtcypkje .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#nchtcypkje .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#nchtcypkje .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#nchtcypkje .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nchtcypkje .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#nchtcypkje .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#nchtcypkje .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#nchtcypkje .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nchtcypkje .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#nchtcypkje .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nchtcypkje .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#nchtcypkje .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nchtcypkje .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#nchtcypkje .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#nchtcypkje .gt_left {
-  text-align: left;
-}
-
-#nchtcypkje .gt_center {
-  text-align: center;
-}
-
-#nchtcypkje .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#nchtcypkje .gt_font_normal {
-  font-weight: normal;
-}
-
-#nchtcypkje .gt_font_bold {
-  font-weight: bold;
-}
-
-#nchtcypkje .gt_font_italic {
-  font-style: italic;
-}
-
-#nchtcypkje .gt_super {
-  font-size: 65%;
-}
-
-#nchtcypkje .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#nchtcypkje .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#nchtcypkje .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#nchtcypkje .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#nchtcypkje .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#nchtcypkje .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#nchtcypkje .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#nchtcypkje .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#nchtcypkje div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
-<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">3613.623</td>
-<td class="gt_row gt_left" headers="Std. Error">7.108</td>
-<td class="gt_row gt_left" headers="t value">508.372</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(smoke)2</td>
-<td class="gt_row gt_left" headers="Estimate">-127.377</td>
-<td class="gt_row gt_left" headers="Std. Error">15.757</td>
-<td class="gt_row gt_left" headers="t value"></td>
-<td class="gt_row gt_left" headers="Pr(>|t|)"></td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(smoke)3</td>
-<td class="gt_row gt_left" headers="Estimate">-194.897</td>
-<td class="gt_row gt_left" headers="Std. Error">17.519</td>
-<td class="gt_row gt_left" headers="t value">-11.125</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">alco</td>
-<td class="gt_row gt_left" headers="Estimate">1.045</td>
-<td class="gt_row gt_left" headers="Std. Error">6.075</td>
-<td class="gt_row gt_left" headers="t value">0.172</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.863</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvad mangler - og hvad skulle der stå?</p>
-<p>t-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 3613.623 og standardfejlen er 7.108, hvad er t value så?</p>
+<section id="hvordan-laver-vi-en-logistisk-regression" class="slide level2">
+<h2>Hvordan laver vi en logistisk regression?</h2>
+<p>Hvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:</p>
+<p>glm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 508.3882</code></pre>
+<pre><code>
+Call:
+glm(formula = am ~ wt, family = "binomial", data = mtcars)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)   12.040      4.510   2.670  0.00759 **
+wt            -4.024      1.436  -2.801  0.00509 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 43.230  on 31  degrees of freedom
+Residual deviance: 19.176  on 30  degrees of freedom
+AIC: 23.176
+
+Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 </div>
-<p>Det stemmer ikke 100%. For der er afrundingsfejl</p>
-<p>Så den manglende t value for factor(smoke)2 hvad er den?</p>
-<p>Hvoromkring ligger p-værdien?</p>
+<p>estimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -8.083836</code></pre>
+<pre><code> (Intercept)           wt 
+1.694596e+05 1.788183e-02 </code></pre>
 </div>
 </div>
-<p>Den er bedre end 1.96, og ihvertfald signifikant</p>
-<p>Hvad kan vi ellersk konkludere?</p>
-<p>jo mere man ryger, jo værre. alkohol har ikke en signifikant betydning.</p>
+<p>ratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.</p>
+<p>Hvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054</p>
+<p>Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så</p>
+<p><span class="math inline">\(3*0.018^{0.5}\)</span></p>
 </section>
 <section id="opgave-2025-februar-opgave-1-c" class="slide level2">
 <h2>opgave 2025 februar opgave 1 (c)</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pltsvnmohv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pevhkxdwtb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pltsvnmohv table {
+#pevhkxdwtb table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pltsvnmohv thead, #pltsvnmohv tbody, #pltsvnmohv tfoot, #pltsvnmohv tr, #pltsvnmohv td, #pltsvnmohv th {
+#pevhkxdwtb thead, #pevhkxdwtb tbody, #pevhkxdwtb tfoot, #pevhkxdwtb tr, #pevhkxdwtb td, #pevhkxdwtb th {
   border-style: none;
 }
 
-#pltsvnmohv p {
+#pevhkxdwtb p {
   margin: 0;
   padding: 0;
 }
 
-#pltsvnmohv .gt_table {
+#pevhkxdwtb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -743,12 +235,12 @@
   border-left-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_caption {
+#pevhkxdwtb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pltsvnmohv .gt_title {
+#pevhkxdwtb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -760,7 +252,7 @@
   border-bottom-width: 0;
 }
 
-#pltsvnmohv .gt_subtitle {
+#pevhkxdwtb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -772,7 +264,7 @@
   border-top-width: 0;
 }
 
-#pltsvnmohv .gt_heading {
+#pevhkxdwtb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -784,13 +276,13 @@
   border-right-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_bottom_border {
+#pevhkxdwtb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_col_headings {
+#pevhkxdwtb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -805,7 +297,7 @@
   border-right-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_col_heading {
+#pevhkxdwtb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,7 +317,7 @@
   overflow-x: hidden;
 }
 
-#pltsvnmohv .gt_column_spanner_outer {
+#pevhkxdwtb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,15 +329,15 @@
   padding-right: 4px;
 }
 
-#pltsvnmohv .gt_column_spanner_outer:first-child {
+#pevhkxdwtb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pltsvnmohv .gt_column_spanner_outer:last-child {
+#pevhkxdwtb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pltsvnmohv .gt_column_spanner {
+#pevhkxdwtb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -857,11 +349,11 @@
   width: 100%;
 }
 
-#pltsvnmohv .gt_spanner_row {
+#pevhkxdwtb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pltsvnmohv .gt_group_heading {
+#pevhkxdwtb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -887,7 +379,7 @@
   text-align: left;
 }
 
-#pltsvnmohv .gt_empty_group_heading {
+#pevhkxdwtb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -902,15 +394,15 @@
   vertical-align: middle;
 }
 
-#pltsvnmohv .gt_from_md > :first-child {
+#pevhkxdwtb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pltsvnmohv .gt_from_md > :last-child {
+#pevhkxdwtb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pltsvnmohv .gt_row {
+#pevhkxdwtb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -929,7 +421,7 @@
   overflow-x: hidden;
 }
 
-#pltsvnmohv .gt_stub {
+#pevhkxdwtb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -942,7 +434,7 @@
   padding-right: 5px;
 }
 
-#pltsvnmohv .gt_stub_row_group {
+#pevhkxdwtb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -956,15 +448,15 @@
   vertical-align: top;
 }
 
-#pltsvnmohv .gt_row_group_first td {
+#pevhkxdwtb .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#pltsvnmohv .gt_row_group_first th {
+#pevhkxdwtb .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#pltsvnmohv .gt_summary_row {
+#pevhkxdwtb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -974,16 +466,16 @@
   padding-right: 5px;
 }
 
-#pltsvnmohv .gt_first_summary_row {
+#pevhkxdwtb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_first_summary_row.thick {
+#pevhkxdwtb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pltsvnmohv .gt_last_summary_row {
+#pevhkxdwtb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -993,7 +485,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_grand_summary_row {
+#pevhkxdwtb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1003,7 +495,7 @@
   padding-right: 5px;
 }
 
-#pltsvnmohv .gt_first_grand_summary_row {
+#pevhkxdwtb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,7 +505,7 @@
   border-top-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_last_grand_summary_row_top {
+#pevhkxdwtb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1023,11 +515,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_striped {
+#pevhkxdwtb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pltsvnmohv .gt_table_body {
+#pevhkxdwtb .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -1036,7 +528,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_footnotes {
+#pevhkxdwtb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1050,7 +542,7 @@
   border-right-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_footnote {
+#pevhkxdwtb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1059,7 +551,7 @@
   padding-right: 5px;
 }
 
-#pltsvnmohv .gt_sourcenotes {
+#pevhkxdwtb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1073,7 +565,7 @@
   border-right-color: #D3D3D3;
 }
 
-#pltsvnmohv .gt_sourcenote {
+#pevhkxdwtb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1081,72 +573,72 @@
   padding-right: 5px;
 }
 
-#pltsvnmohv .gt_left {
+#pevhkxdwtb .gt_left {
   text-align: left;
 }
 
-#pltsvnmohv .gt_center {
+#pevhkxdwtb .gt_center {
   text-align: center;
 }
 
-#pltsvnmohv .gt_right {
+#pevhkxdwtb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pltsvnmohv .gt_font_normal {
+#pevhkxdwtb .gt_font_normal {
   font-weight: normal;
 }
 
-#pltsvnmohv .gt_font_bold {
+#pevhkxdwtb .gt_font_bold {
   font-weight: bold;
 }
 
-#pltsvnmohv .gt_font_italic {
+#pevhkxdwtb .gt_font_italic {
   font-style: italic;
 }
 
-#pltsvnmohv .gt_super {
+#pevhkxdwtb .gt_super {
   font-size: 65%;
 }
 
-#pltsvnmohv .gt_footnote_marks {
+#pevhkxdwtb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pltsvnmohv .gt_asterisk {
+#pevhkxdwtb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pltsvnmohv .gt_indent_1 {
+#pevhkxdwtb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pltsvnmohv .gt_indent_2 {
+#pevhkxdwtb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pltsvnmohv .gt_indent_3 {
+#pevhkxdwtb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pltsvnmohv .gt_indent_4 {
+#pevhkxdwtb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pltsvnmohv .gt_indent_5 {
+#pevhkxdwtb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pltsvnmohv .katex-display {
+#pevhkxdwtb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pltsvnmohv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pevhkxdwtb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1215,29 +707,14 @@
 <p>altså: ændring per 10 års stigning i alder over 25.</p>
 <p>I en logistisk model:</p>
 </section>
-<section>
 <section id="odds-ratio" class="title-slide slide level1 center">
 <h1>odds ratio</h1>
 <p>𝑒 0.7423 ≈ 2.10 odds ratio=e 0.7423 ≈2.10</p>
 <p>👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.</p>
 <p>så det her skal nok flyttes til et sæt slides om logistisk regression</p>
-<p>analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))</p>
-<p>analyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))</p>
-<p>Hvilke analyser?</p>
-<p>lineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.</p>
-<p>intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.</p>
+
+
 </section>
-<section id="maj-2025-opgave-2-a" class="slide level2">
-<h2>maj 2025 opgave 2 a</h2>
-<p>givet et estimat på 3613.623 og en standard fejl på 7.108 og 11279 observationer</p>
-<p>beregner vi et 95% konfidensinterval.</p>
-<p>bredden af et konfidensinterval er proportionalt med standardfejlen.</p>
-<p>Den skalerer som 1 over kvadratroden af antallet af observationer.</p>
-<p>Derfor: faktoren er kvadratroden af det gamle antal observationer divideret med det nye antal observationer.</p>
-<p>ca 7½ gange. bredere.</p>
-
-
-</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="kubdatalab.png" class="slide-logo"></p>
