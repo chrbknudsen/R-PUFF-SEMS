@@ -11,9 +11,21 @@ filters:
 
 Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.
 
+Men hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.
 
+for standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter
+er oplysninger om hvordan vores middelværdi x, der er et estimat på den "sande" middelværdi mu, afviger fra den sande værdi.
+
+Til det formål bruger vi "SEM", Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.
+
+Det beregner vi således:
 
 SE = sd/sqrt(n)
+
+Så. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven,
+med kvadratroden af n, antallet af observationer i stikprøven.
+
+Og så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer. 
 
 sd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver
 normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller
