@@ -706,3 +706,25 @@ altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til
 
 
 Og så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den.
+
+
+Opgave 1 - Manglende procentil:
+quartoEn normalfordelt population har middelværdi $\mu = 12.5$ og 
+standardafvigelse $\sigma = 3.2$. Hvor stor en andel af værdierne 
+er mindre end 10?
+Opgave 2 - Manglende standardafvigelse:
+quartoI en normalfordelt population er middelværdien $\mu = 85$ og 
+25% af værdierne er større end 95. Hvad er standardafvigelsen 
+$\sigma$ for denne fordeling?
+Opgave 3 - Manglende værdi ved given procentil:
+quartoEn normalfordelt variabel har middelværdi $\mu = 50$ og 
+standardafvigelse $\sigma = 8$. Hvilken værdi $x$ er der tale om, 
+hvis 90% af observationerne er mindre end denne værdi?
+Opgave 4 - Manglende middelværdi (anden variant):
+quartoFor en normalfordeling gælder det at $\sigma = 4.5$ og at 75% af 
+værdierne er mindre end 18. Hvad er middelværdien $\mu$?
+Opgave 5 - Manglende interval-grænse:
+quartoEn normalfordelt population har $\mu = 100$ og $\sigma = 15$. 
+Hvis 80% af værdierne ligger mellem 85 og en øvre grænse $x$, 
+hvad er da denne øvre grænse?
+Alle opgaver kan løses ved at kombinere normalfordelingens egenskaber med z-scores og standardnormaltabellen.
