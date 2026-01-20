@@ -42,6 +42,34 @@
     "text": "Hvad er en sandsynlighedsfordeling?\n\n\nNår vi måler noget får vi som regel en række forskellige resultater.\nHøjde af mænd er et eksempel. Nogen er 1,85 meter. Andre 1,80 meter.\nNår vi laver et histogram af alle de målinger, kunne det se således ud:\n\n\n\n\n\n\n\n\n\n\nHvad er mest sandsynligt - at være mellem 190 og 195 cm eller at være mellem 180 og 185 cm høj?"
   },
   {
+    "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
+    "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
+    "title": "Normalfordelingen",
+    "section": "Hvad er en sandsynlighedsfordeling?",
+    "text": "Hvad er en sandsynlighedsfordeling?\nEn sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.\n\nHvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
+    "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
+    "title": "Normalfordelingen",
+    "section": "Hvordan kan vi beskrive alle de her observationer?",
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 175.1 175.5 178.7 186.4 187.0 185.2 181.0 176.6 184.0 176.6 169.6 179.8\n[13] 186.6 185.7 172.4 188.7 183.5 192.5 183.0 178.9 190.4 182.7 195.2 177.0\n[25] 173.6 179.1 179.2 184.2 183.8 188.6 187.2 188.2 178.5 182.4 171.5 184.0\n[37] 180.3 181.5 179.4 189.8 185.3 180.1 175.2 188.7 182.4 187.8 176.1 181.5\n[49] 180.6 176.5\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
+    "href": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
+    "title": "Normalfordelingen",
+    "section": "Middelværdi og standardafvigelse",
+    "text": "Middelværdi og standardafvigelse\n\\(x\\) er vores målinger. \\(x_i\\) er en fancy måde at skrive at der er flere: \\(x_1, x_2, x_3, ... x_i\\). og vi har ialt \\(N\\) observationer\nMiddelværdien: \\[\\mu = \\frac{\\sum(x_i)}{N}\\]\nStandardafvigelsen\n\\[\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{N}  }\\]"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
+    "href": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
+    "title": "Normalfordelingen",
+    "section": "Hvornår bruger vi græske bogstaver?",
+    "text": "Hvornår bruger vi græske bogstaver?\nDet gør vi når vi kender de “sande” værdier:\nMiddelværdi: \\(\\mu\\). Standardafvigelse: \\(\\sigma\\)\nDe latinske bogstaver bruger vi når vi “kun” kender værdierne fra vores stikprøve:\nMiddelværdi: \\(\\bar{x}\\). Standardafvigelse: \\(s\\)\n\nKender vi den sande værdi af gennemsnittet af alle danske mænds højde? Normalt ikke."
+  },
+  {
     "objectID": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
     "href": "slides/normalfordelingen.html#hvad-er-normalfordelingen",
     "title": "Normalfordelingen",
@@ -63,18 +91,18 @@
     "text": "Hvordan ser den ud?\n\n\nHer har vi målinger der kan gå fra -4 til 4.\nOg har \\(\\mu = 0\\) og \\(\\sigma = 1\\).\nArealet under kurven er 1 ~ 100%.\nFor alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%"
   },
   {
+    "objectID": "slides/normalfordelingen.html#standardnormalfordelingen",
+    "href": "slides/normalfordelingen.html#standardnormalfordelingen",
+    "title": "Normalfordelingen",
+    "section": "Standardnormalfordelingen",
+    "text": "Standardnormalfordelingen\nNår \\(\\mu = 0\\) og \\(\\sigma = 1\\) kalder vi den for “standardnormalfordelingen”."
+  },
+  {
     "objectID": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
     "href": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
     "title": "Normalfordelingen",
     "section": "Hvilke egenskaber har den?",
     "text": "Hvilke egenskaber har den?\n\n\nBemærk at enheden på x-aksen er i “standardafvigelser”. At den går fra minus uendelig til uendelig sammenhængen mellem median og middelværdi Læg også mærke til at z-scores er lig med enheden. T-scores er en normalisering fra psykometrien. Den bruger vi ikke her."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
-    "href": "slides/normalfordelingen.html#hvilke-andre-egenskaber-har-den",
-    "title": "Normalfordelingen",
-    "section": "Hvilke andre egenskaber har den?",
-    "text": "Hvilke andre egenskaber har den?"
   },
   {
     "objectID": "slides/normalfordelingen.html#fine-tal---hvordan-finder-vi-dem-selv",
@@ -84,11 +112,109 @@
     "text": "Fine tal - hvordan finder vi dem selv?\nIfølge den fine graf ligger 15.9% af observationerne under \\(-1\\sigma\\).\nHvordan finder vi selv det tal?\n\npnorm\nqnorm"
   },
   {
-    "objectID": "slides/normalfordelingen.html#forskellige-normalfordelinger",
-    "href": "slides/normalfordelingen.html#forskellige-normalfordelinger",
+    "objectID": "slides/normalfordelingen.html#pnorm",
+    "href": "slides/normalfordelingen.html#pnorm",
     "title": "Normalfordelingen",
-    "section": "Forskellige normalfordelinger",
-    "text": "Forskellige normalfordelinger\nDet er normalfordelingen for en middelværdi \\(\\mu\\) på 0.\nOg en standardafvigelse, \\(\\sigma\\) på 1.\nMen."
+    "section": "pnorm",
+    "text": "pnorm\npnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.\n\npnorm(-1)\n\n[1] 0.1586553\n\n\nVi kan også skrive det som:\nP(X &lt; -1) = 0.1586553"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#og-omvendt",
+    "href": "slides/normalfordelingen.html#og-omvendt",
+    "title": "Normalfordelingen",
+    "section": "Og omvendt?",
+    "text": "Og omvendt?\nHvis sandsynligheden for at at X er mindre end -1 skrives som:\nP(X &lt; -1)\nHvad er så sandsynligheden for at X er større end -1?\n\n1 - P(X &lt; -1)"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#qnorm",
+    "href": "slides/normalfordelingen.html#qnorm",
+    "title": "Normalfordelingen",
+    "section": "qnorm",
+    "text": "qnorm\nqnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. \n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nFor hvilken værdi er 0.025 eller 2.5% af observationerne mindre?"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#eller",
+    "href": "slides/normalfordelingen.html#eller",
+    "title": "Normalfordelingen",
+    "section": "Eller",
+    "text": "Eller\n\npnorm går fra værdi til sandsynlighed.\nqnorm går fra sandsynlighed til værdi.\n\nP(X &lt; værdi) = sandsynlighed\n\nHvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden\nHvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
+    "href": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
+    "title": "Normalfordelingen",
+    "section": "Typiske spørgsmål vi får:",
+    "text": "Typiske spørgsmål vi får:\nHvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:\n\nHvor mange procent af observationerne er under 0.4?\nHvor mange procent af observationerne ligger mellem -2 og 2?\nDe 65.5% mindste observationer; hvad er de mindre end?\nIndenfor hvilket interval ligger 95.45% af observationerne?\n\n\nDe hænger sammen. 1 og 3 er hinandens omvendte 2 og 4 er også hinandens omvendte"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-1",
+    "href": "slides/normalfordelingen.html#øvelse-1",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 1",
+    "text": "Øvelse 1\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-2",
+    "href": "slides/normalfordelingen.html#øvelse-2",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 2",
+    "text": "Øvelse 2\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-3",
+    "href": "slides/normalfordelingen.html#øvelse-3",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 3",
+    "text": "Øvelse 3\n\n\nHvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm. Den giver os sandsynligheden for at observationerne er mindre end 2. Sandsynligheden for at observationen er, er 1. Så 1-pnorm(2)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-4",
+    "href": "slides/normalfordelingen.html#øvelse-4",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 4",
+    "text": "Øvelse 4\n\n\nHvad er 25% af observationerne mindre end?\n\nNu kender vi sandsynligheden, og skal have værdien - qnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-5",
+    "href": "slides/normalfordelingen.html#øvelse-5",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 5",
+    "text": "Øvelse 5\n\n\nHvad er 40% af observationerne større end?\n\nDet svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-6",
+    "href": "slides/normalfordelingen.html#øvelse-6",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 6",
+    "text": "Øvelse 6\n\n\nHvilken andel af observationerne ligger mellem 1 og 1.5?\n\nVi kender værdierne, og skal bruge sandsynlighederne. Så pnorm. Sandsynligheden er arealet under kurven fra -uendelig til værdien. Så. Arealet fra -uendelig til 1.5. Minus arealet fra -uendelig til 1, trukket fra, giver os arealet mellem de to punkter\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-7",
+    "href": "slides/normalfordelingen.html#øvelse-7",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 7",
+    "text": "Øvelse 7\n\n\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\n\nDet der ligger uden for de 47% er 1 - 0.47 = 0.53. Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.\n0.53/2 = 0.265\nVi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien\nOg er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
+    "href": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
+    "title": "Normalfordelingen",
+    "section": "Gennemsnitshøjden er jo ikke 0?!",
+    "text": "Gennemsnitshøjden er jo ikke 0?!\nDet er vældig fint at vi får at vide at vores data er normalfordelte. Det er en del lettere at regne på en hvis de ikke er.\nDet er en del af årsagen til at I får at vide at data er normalfordelte. Det bliver noget man faktisk kan regne på i hånden. Og så får man testet om I forstår normalfordelinge.\nMen data følger jo ikke standardnormalfordelingen. mu og sigma er ikke hhv 0 og 1.\nHvis bare der var en måde at transformere vores data til at have mu = 0 og sigma =1.\nDet er der heldigvis.\nHvad er gennemsnittet af tallene 1 til 6?\n\n\n[1] 3.5\n\n\nHvad er gennemsnittet af tallene 1 til 6, efter vi har trukket 3.5 fra?\n\n\n[1] 0\n\n\nHvad er deres standardafvigelse?\n\n\n[1] 1.870829\n\n\nHvad er standardafvigelsen af tallene 1 til 6 hvis vi dividerer dem med standardafvigelsen?\n\n\n[1] 1\n\n\nmagi… Eller matematik.\nVi kan godt udlede hvorfor det passer. Nu nøjes vi bare med at konstatere at det gør det."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
+    "href": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
+    "title": "Normalfordelingen",
+    "section": "Hvad kan vi bruge det til?",
+    "text": "Hvad kan vi bruge det til?\nNotationen for normalfordelingen er N(mu,sigma)\nHvis mu er 181 og sigma er 6.5\nog vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\nP(X&lt;170) = P(X&lt; (170 - 181) / 6.5) = -1.692\n\n\n[1] 0.04532299"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelser",
+    "href": "slides/normalfordelingen.html#øvelser",
+    "title": "Normalfordelingen",
+    "section": "Øvelser",
+    "text": "Øvelser\nInklusive\nFor en normalfordelt population ved vi at 50% af værdierne er mindre end 0, og 60% er mindre end 1. Hvad er middelværdi og spredning?\nP(X&lt;0) = 0.5 P(X&lt;1) = 0.6\nP((X-mu)/sd &lt; (0-mu)/sd) = 0.5"
   },
   {
     "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig",
@@ -152,13 +278,6 @@
     "title": "Normalfordelingen",
     "section": "Øvelse",
     "text": "Øvelse\nHvis vi har en population med normalfordelte værdier der har en spredning på \\(\\sigma = 6.52\\) og 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nSå det skal nævnes, at notationen er N(mu, sd)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nYderligere øvelser For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0. Og at 60% af værdierne er mindre end 1. Hvad er middelværdi og spredning for den population?\nVi skal tidligere have nævnt medianen og sammenhængen mellem den og gennemsnittet i normalfordelinger\nDer skal bruges lidt flere ord på beskrivelsen af fordelingen. altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til (X-mu)/sigma.\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-1",
-    "href": "slides/normalfordelingen.html#øvelse-1",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 1",
-    "text": "Øvelse 1\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/linreg.html#de-synes-den-her-er-sjov",
@@ -257,152 +376,5 @@
     "title": "Standard Error of the Mean",
     "section": "konfidensintervaller",
     "text": "konfidensintervaller"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
-    "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
-    "title": "Normalfordelingen",
-    "section": "Hvad er en sandsynlighedsfordeling?",
-    "text": "Hvad er en sandsynlighedsfordeling?\nEn sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.\n\nHvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#de-hænger-sammen",
-    "href": "slides/normalfordelingen.html#de-hænger-sammen",
-    "title": "Normalfordelingen",
-    "section": "De hænger sammen!",
-    "text": "De hænger sammen!\n\nLæg mærke til at 1. og 3. er hinandens “omvendte”. 65.5% af observationerne er mindre end 0.4. 0.4 er større end 65.5% af observationerne.\n\nog 4. er også hinandens omvendte. 95.45% af observationerne ligger mellem -2 og 2. Og hvis vi vil have 95.45% af observationerne finder vi dem i intervallet fra -2 til 2. Hvis intervallet er centreret om midten.\n\n\nI vil ofte blive spurgt om hvad referenceintervallet er - i hvilket interval finder vi 95% af observationerne?"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#pnorm",
-    "href": "slides/normalfordelingen.html#pnorm",
-    "title": "Normalfordelingen",
-    "section": "pnorm",
-    "text": "pnorm\npnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.\n\npnorm(-1)\n\n[1] 0.1586553\n\n\nVi kan også skrive det som:\nP(X &lt; -1) = 0.1586553"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#qnorm",
-    "href": "slides/normalfordelingen.html#qnorm",
-    "title": "Normalfordelingen",
-    "section": "qnorm",
-    "text": "qnorm\nqnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. \n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nFor hvilken værdi er 0.025 eller 2.5% af observationerne mindre?"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#eller",
-    "href": "slides/normalfordelingen.html#eller",
-    "title": "Normalfordelingen",
-    "section": "Eller",
-    "text": "Eller\n\npnorm går fra værdi til sandsynlighed.\nqnorm går fra sandsynlighed til værdi.\n\nP(X &lt; værdi) = sandsynlighed\n\nHvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden\nHvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
-    "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
-    "title": "Normalfordelingen",
-    "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 178.8 183.8 185.7 178.7 171.3 185.8 184.9 173.9 170.8 181.9 188.9 177.3\n[13] 176.0 176.2 187.8 193.9 188.6 193.2 182.8 180.2 196.0 180.5 182.9 179.1\n[25] 181.8 180.2 176.9 181.6 180.2 188.2 177.9 195.4 187.4 183.1 177.0 179.7\n[37] 179.2 180.0 185.7 181.4 174.5 182.0 183.9 184.6 172.1 190.4 184.8 185.7\n[49] 193.8 185.8\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
-    "href": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
-    "title": "Normalfordelingen",
-    "section": "Middelværdi og standardafvigelse",
-    "text": "Middelværdi og standardafvigelse\n\\(x\\) er vores målinger. \\(x_i\\) er en fancy måde at skrive at der er flere: \\(x_1, x_2, x_3, ... x_i\\). og vi har ialt \\(N\\) observationer\nMiddelværdien: \\[\\mu = \\frac{\\sum(x_i)}{N}\\]\nStandardafvigelsen\n\\[\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{N}  }\\]"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
-    "href": "slides/normalfordelingen.html#hvornår-bruger-vi-græske-bogstaver",
-    "title": "Normalfordelingen",
-    "section": "Hvornår bruger vi græske bogstaver?",
-    "text": "Hvornår bruger vi græske bogstaver?\nDet gør vi når vi kender de “sande” værdier:\nMiddelværdi: \\(\\mu\\). Standardafvigelse: \\(\\sigma\\)\nDe latinske bogstaver bruger vi når vi “kun” kender værdierne fra vores stikprøve:\nMiddelværdi: \\(\\bar{x}\\). Standardafvigelse: \\(s\\)\n\nKender vi den sande værdi af gennemsnittet af alle danske mænds højde? Normalt ikke."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#og-omvendt",
-    "href": "slides/normalfordelingen.html#og-omvendt",
-    "title": "Normalfordelingen",
-    "section": "Og omvendt?",
-    "text": "Og omvendt?\nHvis sandsynligheden for at at X er mindre end -1 skrives som:\nP(X &lt; -1)\nHvad er så sandsynligheden for at X er større end -1?\n\n1 - P(X &lt; -1)"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
-    "href": "slides/normalfordelingen.html#typiske-spørgsmål-vi-får",
-    "title": "Normalfordelingen",
-    "section": "Typiske spørgsmål vi får:",
-    "text": "Typiske spørgsmål vi får:\nHvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:\n\nHvor mange procent af observationerne er under 0.4?\nHvor mange procent af observationerne ligger mellem -2 og 2?\nDe 65.5% mindste observationer; hvad er de mindre end?\nIndenfor hvilket interval ligger 95.45% af observationerne?\n\n\nDe hænger sammen. 1 og 3 er hinandens omvendte 2 og 4 er også hinandens omvendte"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#standardnormalfordelingen",
-    "href": "slides/normalfordelingen.html#standardnormalfordelingen",
-    "title": "Normalfordelingen",
-    "section": "Standardnormalfordelingen",
-    "text": "Standardnormalfordelingen\nNår \\(\\mu = 0\\) og \\(\\sigma = 1\\) kalder vi den for “standardnormalfordelingen”."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#flere-øvelser",
-    "href": "slides/normalfordelingen.html#flere-øvelser",
-    "title": "Normalfordelingen",
-    "section": "flere øvelser",
-    "text": "flere øvelser\nIndtil andet oplyses, taler vi om en standardiseret normalfordeling med mu = 0, og sigma = 1.\nHvilken andel af observationerne er mindre end -3?\nhvilken andel af observationerne er større end -3\nhvilken andel af observationerne er større end 1.5?\nHvilken andel af observationerne ligger mellem 1 og 1.5?\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-2",
-    "href": "slides/normalfordelingen.html#øvelse-2",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 2",
-    "text": "Øvelse 2\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-3",
-    "href": "slides/normalfordelingen.html#øvelse-3",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 3",
-    "text": "Øvelse 3\n\n\nHvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\nDet er en sandsynlighed vi er på jagt efter så pnorm. Den giver os sandsynligheden for at observationerne er mindre end 2. Sandsynligheden for at observationen er, er 1. Så 1-pnorm(2)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-4",
-    "href": "slides/normalfordelingen.html#øvelse-4",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 4",
-    "text": "Øvelse 4\n\n\nHvad er 25% af observationerne mindre end?\n\nNu kender vi sandsynligheden, og skal have værdien - qnorm\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-5",
-    "href": "slides/normalfordelingen.html#øvelse-5",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 5",
-    "text": "Øvelse 5\n\n\nHvad er 40% af observationerne større end?\n\nDet svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-6",
-    "href": "slides/normalfordelingen.html#øvelse-6",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 6",
-    "text": "Øvelse 6\n\n\nHvilken andel af observationerne ligger mellem 1 og 1.5?\n\nVi kender værdierne, og skal bruge sandsynlighederne. Så pnorm. Sandsynligheden er arealet under kurven fra -uendelig til værdien. Så. Arealet fra -uendelig til 1.5. Minus arealet fra -uendelig til 1, trukket fra, giver os arealet mellem de to punkter\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-7",
-    "href": "slides/normalfordelingen.html#øvelse-7",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 7",
-    "text": "Øvelse 7\n\n\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\n\nDet der ligger uden for de 47% er 1 - 0.47 = 0.53. Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.\n0.53/2 = 0.265\nVi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien\nOg er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
-    "href": "slides/normalfordelingen.html#gennemsnitshøjden-er-jo-ikke-0",
-    "title": "Normalfordelingen",
-    "section": "Gennemsnitshøjden er jo ikke 0?!",
-    "text": "Gennemsnitshøjden er jo ikke 0?!\nDet er vældig fint at vi får at vide at vores data er normalfordelte. Det er en del lettere at regne på en hvis de ikke er.\nDet er en del af årsagen til at I får at vide at data er normalfordelte. Det bliver noget man faktisk kan regne på i hånden. Og så får man testet om I forstår normalfordelinge.\nMen data følger jo ikke standardnormalfordelingen. mu og sigma er ikke hhv 0 og 1.\nHvis bare der var en måde at transformere vores data til at have mu = 0 og sigma =1.\nDet er der heldigvis.\nHvad er gennemsnittet af tallene 1 til 6?\n\n\n[1] 3.5\n\n\nHvad er gennemsnittet af tallene 1 til 6, efter vi har trukket 3.5 fra?\n\n\n[1] 0\n\n\nHvad er deres standardafvigelse?\n\n\n[1] 1.870829\n\n\nHvad er standardafvigelsen af tallene 1 til 6 hvis vi dividerer dem med standardafvigelsen?\n\n\n[1] 1\n\n\nmagi… Eller matematik.\nVi kan godt udlede hvorfor det passer. Nu nøjes vi bare med at konstatere at det gør det."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
-    "href": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
-    "title": "Normalfordelingen",
-    "section": "Hvad kan vi bruge det til?",
-    "text": "Hvad kan vi bruge det til?\nNotationen for normalfordelingen er N(mu,sigma)\nHvis mu er 181 og sigma er 6.5\nog vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\nP(X&lt;170) = P(X&lt; (170 - 181) / 6.5) = -1.692\n\n\n[1] 0.04532299"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelser",
-    "href": "slides/normalfordelingen.html#øvelser",
-    "title": "Normalfordelingen",
-    "section": "Øvelser",
-    "text": "Øvelser\nInklusive\nFor en normalfordelt population ved vi at 50% af værdierne er mindre end 0, og 60% er mindre end 1. Hvad er middelværdi og spredning?\nP(X&lt;0) = 0.5 P(X&lt;1) = 0.6\nP((X-mu)/sd &lt; (0-mu)/sd) = 0.5"
   }
 ]
