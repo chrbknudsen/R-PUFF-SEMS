@@ -63,13 +63,29 @@ $x$ er vores målinger. $x_i$ er en fancy måde at skrive at der er flere:
 $x_1, x_2, x_3, ... x_i$. og vi har ialt $N$ observationer
 
 Middelværdien:
-$$\mu = \frac{\sum(x_i)}{N}$$
+$$\mu = \frac{\sum{x_i}}{N}$$
 
 Standardafvigelsen
 
 $$\sigma = \sqrt{\frac{\sum(x_i - \mu)^2}{N}  }$$
 
+:::: notes
+
+Vi kan forstå standardafvigelsen som den gennemsnitlige forskel der er mellem observationerne og middelværdien.
+
+Hvorfor kvadrerer vi? Forskellen kan være positiv eller negativ. Det betyder at når vi lægger dem sammen, kan resultatet blive 0. Også selvom forskellene faktisk er ret store. Så vi kvadrerer dem. og tager kvadratroden 
+bagefter. Det betyder også at store afvigelser fra middelværdien "fylder" mere i standardafvigelsen.
+
+::::
+
 ## Hvornår bruger vi græske bogstaver?
+
+:::: notes
+Læg mærke til at vi undertiden bruger græske bogstaver.
+
+Kender vi den sande værdi af gennemsnittet af alle danske mænds højde? Normalt ikke.
+
+::::
 
 Det gør vi når vi kender de "sande" værdier:
 
@@ -79,9 +95,6 @@ De latinske bogstaver bruger vi når vi "kun" kender værdierne fra vores stikpr
 
 Middelværdi: $\bar{x}$. Standardafvigelse: $s$
 
-:::: notes
-Kender vi den sande værdi af gennemsnittet af alle danske mænds højde? Normalt ikke.
-::::
 
 ## Hvad er normalfordelingen?
 
@@ -162,6 +175,21 @@ Læg også mærke til at z-scores er lig med enheden. T-scores er en normaliseri
 
 ::::
 
+## Et par hurtige øvelser
+Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
+
+- Hvor mange observationer er mindre end 1 ($\sigma$)?  <span class="fragment">84.1%</span>
+
+. . . 
+
+- Hvor mange observationer er mindre end -2 ($\sigma$)? <span class="fragment"> 2.3%</span>
+
+. . . 
+
+- For hvilken værdi (af $\sigma$) er 15.9% af observationerne mindre (end denne værdi)? <span class="fragment"> -1 ($\sigma$) </span>
+
+
+
 ## Fine tal - hvordan finder vi dem selv?
 
 Ifølge den fine graf ligger 15.9% af observationerne under $-1\sigma$. 
@@ -184,6 +212,12 @@ Vi kan også skrive det som:
 
 P(X < -1) = 0.1586553
 
+. . . 
+
+Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.158osv
+
+Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentielen.
+
 ## Og omvendt?
 
 Hvis sandsynligheden for at at X er mindre end -1 skrives som:
@@ -196,6 +230,8 @@ Hvad er så sandsynligheden for at X er større end -1?
 
 1 - P(X < -1)
 
+X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X _er_ er 1.
+
 ## qnorm
 
 qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. 
@@ -205,6 +241,8 @@ qnorm(0.025)
 ```
 
 For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?
+
+Det kalder vi også for 2.5% kvantilen. På engelsk quantile. Deraf "q".
 
 ## Eller
 
@@ -217,8 +255,7 @@ P(X < værdi) = sandsynlighed
 - Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien
 
 ## Typiske spørgsmål vi får:
-
-Hvis vi har målinger/observationer af et eller andet, kan det være nyttigt at kunne svare på:
+(til eksamen)
 
 1. Hvor mange procent af observationerne er under 0.4?
 2. Hvor mange procent af observationerne ligger mellem -2 og 2?
@@ -399,80 +436,219 @@ Og er er lige mange på hver side, så det giver os den nedre, den øvre er samm
 
 ## Gennemsnitshøjden er jo ikke 0?!
 
-Det er vældig fint at vi får at vide at vores data er normalfordelte. Det er en del
-lettere at regne på en hvis de ikke er.
+Eksamensopgaver omhandler i almindelighed normalfordelte data.
 
-Det er en del af årsagen til at I får at vide at data er normalfordelte. Det bliver 
-noget man faktisk kan regne på i hånden. Og så får man testet om I forstår normalfordelinge.
+Så kan beregningerne lettere laves.
 
-Men data følger jo ikke standardnormalfordelingen. mu og sigma er ikke hhv 0 og 1.
+Og man tester om I har forstået normalfordelingen.
 
-Hvis bare der var en måde at transformere vores data til at have mu = 0 og sigma =1.
+Men middelværdier er sjældent 0. Og standardafvigelser ligeså sjældent 1.
 
-Det er der heldigvis. 
+Hvis bare der var en måde at transformere data til at have $\mu = 0$ og $\sigma =1$.
+
+. . . 
+
+Det er der. 
+
+## Skalering af data - gennemsnittet
 
 Hvad er gennemsnittet af tallene 1 til 6?
 
-```{r}
+. . . 
+
+```{r echo  = TRUE}
 mean(1:6)
 ```
 
+. . . 
+ 
 Hvad er gennemsnittet af tallene 1 til 6, efter vi har trukket 3.5 fra?
 
-```{r}
+. . . 
+
+```{r echo = TRUE}
 mean(1:6 - 3.5)
 ```
 
-Hvad er deres standardafvigelse?
+## Skalering af data - standardafvigelse?
 
-```{r}
+Hvad standardafvigelse af tallene fra 1 til 6?
+
+. . . 
+
+```{r echo = TRUE}
 sd(1:6)
 ```
 
+. . . 
+
 Hvad er standardafvigelsen af tallene 1 til 6 hvis vi dividerer dem med standardafvigelsen?
 
-```{r}
+. . . 
+
+```{r echo = TRUE}
 sd(1:6/sd(1:6))
 ```
 
-magi... Eller matematik.
+. . . 
 
+Magi... eller "bare" matematik.
+
+:::: notes
 Vi kan godt udlede hvorfor det passer. Nu nøjes vi bare med at konstatere at det gør det.
+::::
 
+## Skalering af data - begge parametre
+
+Nu med tallene 1 til 9
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+## Notation
+
+Den standardiserede normalfordeling skriver vi som N(0,1)
+En normalfordeling (der ikke er standardiseret) skriver vi som $N(\mu, \sigma)$
+Når vi har data, X, der er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$
 
 ## Hvad kan vi bruge det til?
 
-Notationen for normalfordelingen er N(mu,sigma)
-
-Hvis mu er 181 og sigma er 6.5
+Hvis $\mu$ er 181 og $\sigma$ er 6.5
 
 og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.
 
-P(X<170) = P(X< (170 - 181) / 6.5) = -1.692
+Det kan vi skrive som:
 
-```{r}
+P(X<170)
+
+Skalerer vi X, skal vi også skalere 170:
+
+$P(X<170) = P(X < \frac{170 - 181}{6.5}) = -1.692$
+
+```{r echo = TRUE}
 pnorm(-1.692)
 ```
 
 ## Øvelser
 
-Inklusive
-
 For en normalfordelt population ved vi at 50% af værdierne er mindre end 0, og 60% er mindre
 end 1. Hvad er middelværdi og spredning?
 
-P(X<0) = 0.5
-P(X<1) = 0.6
+. . . 
 
-P((X-mu)/sd < (0-mu)/sd) = 0.5
+Det kan vi skrive som: 
+ 
+- P(X<0) = 0.5
+- P(X<1) = 0.6
 
 
+## Øvelser
+
+Vi antager at X ~N(mu, sigma)
+
+Skaler til standardnormalfordelingen:
+
+$P(\frac{X-\mu}{\sigma} < \frac{0-\mu}{\sigma})  = 0.5$
+
+$P(\frac{X-\mu}{\sigma} < \frac{1-\mu}{\sigma})  = 0.6$
+
+Husk at når vi kender sandsynligheden for en ukendt værdi, kan vi bruge qnorm til at beregne den ukendte værdi.
+
+dvs.
+
+$\frac{0-\mu}{\sigma}  = qnorm(0.5)$ og
+
+$\frac{1-\mu}{\sigma}  = qnorm(0.6)$
+
+## Øvelser
+
+```{r echo = TRUE}
+qnorm(0.5)
+```
+
+```{r echo = TRUE}
+qnorm(0.6)
+```
+
+så:
+
+$\frac{0-\mu}{\sigma}  = 0$
+
+$\frac{1-\mu}{\sigma}  = 0.25$
+
+Løs først den ene ligning, og så den anden
+
+
+## Øvelser
+
+$\frac{0-\mu}{\sigma}  = 0 \Leftrightarrow 0 - \mu = 0\sigma \Leftrightarrow 0-0\sigma = \mu \Leftrightarrow \mu = 0$
+
+Indsæt i anden ligning:
+
+$\frac{1-\mu}{\sigma}  = 0.25 \Leftrightarrow \frac{1-0}{\sigma} = 0.25 \Leftrightarrow 1 = 0.25\sigma \Leftrightarrow \frac{1}{0.25} = \sigma = 4$
+
+Smutvej: Hvis 50% af observationerne er mindre end 0, betyder det at 0 er medianen. I en normalfordeling er medianen lig middelværdien. Så vi ved meget hurtigt at $\mu = 0$
+
+## Endnu en øvelse
+
+For en population af normalfordelte værdier ved vi at 40% af værdierne er større end 0.1, og 70% af værdierne 
+er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+
+
+```
+
+## Løsning
+
+:::{style="font-size: .4em;"}
+Det er oplyst at $X\sim N(\mu,\sigma)$
+
+$P(X>0.1) = 0.4 \Leftrightarrow P(X<0.1) = 1-0.4 = 0.6$
+
+Standardiseret:
+
+$P(\frac{X-\mu}{\sigma}<\frac{0.1-\mu}{\sigma}) = 0.6 \Rightarrow \frac{0.1-\mu}{\sigma} = qnorm(0.6) = 0.253$
+
+Og:
+ 
+$P(X<1) = 0.7$
+
+Standardiseret:
+
+$P(\frac{X-\mu}{\sigma}<\frac{1-\mu}{\sigma}) = 0.7 \Rightarrow \frac{1-\mu}{\sigma} = qnorm(0.7) = 0.524$
+
+Dermed:
+
+$\frac{0.1-\mu}{\sigma} = 0.253 \Leftrightarrow 0.1-\mu = 0.253\sigma$ 
+
+og 
+
+$\frac{1-\mu}{\sigma} = 0.524 \Leftrightarrow 1-\mu = 0.524\sigma$
+
+Træk første ligning fra den anden og isoler $\sigma$:
+
+$(1 - \mu) - (0.1 - \mu) = 0.524\sigma - 0.253\sigma \Leftrightarrow 1 - \mu - 0.1 + \mu = (0.524-0.253)\sigma$
+
+$1-0.1 = 0.271\sigma \Leftrightarrow \frac{0.9}{0.271} = \sigma = 3.32$
+
+Indsæt i en af ligningerne for at finde $\mu$:
+
+$1-\mu = 0.524\sigma \Leftrightarrow 1 - \mu = 0.534\cdot3.32 \Leftrightarrow 1 - 0.534\cdot3.32 = \mu = -0.77$
+
+::::
 
 ## Hvorfor er den vigtig?
 
-
-
-Normalfordelingen er særligt vigtig på grund af "Den Centrale Grænseværdisætning".
+På grund af "Den Centrale Grænseværdisætning".
 
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
 
@@ -486,35 +662,22 @@ Det gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normal
 
 Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
 
+## En gang til
+
+Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
+
+Bemærk at vi ikke kender disse middelværdiers spredning. Det kommer vi til.
+
+Men. 
+
 ## Hvorfor er den vigtig for jer?
 
 Ret ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen. 
 
-Og så bruges den i de statistiske tests
+Det er sådan nogen vi har været igennem. 
 
-## normalisering/skalering
+Og så bruges den i de statistiske tests. Det kommer vi også til.
 
-Normalfordelingen er normalt standardiseret. Den har middelværdi 0 og standardafvigelse 1.
-
-Det har vores data normalt _ikke_. Hvad gør vi så?
-
-Vi skalerer vores data. Hvis vi har en række observationer, der har en bestemt middelværdi, og trækker den 
-middelværdi fra alle observationerne - hvad er så den nye middelværdi? 0.
-
-Hvis vi dividerer alle observationerne med sigma - hvad er så den nye standardafvigelse? Den er 1.
-
-Så har vi nu en række observationer med middelværdi 0 og standardafvigelse 1. Det er ikke det samme som at de 
-er normalfordelte
-
-```{r}
-sd(c(rep(5, 10), rep(-5,10))/5.129892)
-```
-
-se også scale funktionen
-
-forskellen på X-bar og mu
-
-pnorm, qnorm
 
 ## Logaritmering
 
@@ -523,147 +686,13 @@ Ud over skalering af data er der en anden skalering eller transformation vi ofte
 Ting der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til dem.
 
 
-## Eksamen
-
-Der er ofte en opgave hvor I får oplyst nogen egenskaber ved en stikprøve.
-
-Ud fra de egenskaber skal I svare på spørgsmål om hvad vi kan fortælle om populationen - eller stikprøven - ud fra disse egenskaber.
-
-
-
-
-
-
-## Det er en sandsynlighedsfordeling. Hvad er det?
-
-Når vi undersøger et eller andet der kan have forskellige værdier, viser det sig 
-at disse forskellige værdier optræder med forskellig sandsynlighed. Der er måler
-der ses oftere end andre. I kommer til at se flere systoliske blodtryk omkring 120 mmHg,
-end omkring 200 mmHg. (eller... I kommer nok ikke til at se så mange patienter der klager over at have et normalt blodtryk).
-
-De her sandsynligheder kan fordele sig forskelligt, afhængig af hvad der egentlig styrer 
-hvordan værdierne egentlig opstår. Så de kan se forskellige ud:
-
-```{r 4-distibutions, echo  =F, fig.width=5, fig.height=5 }
-# Generer data
-library(tidyverse)
-x <- seq(-4, 4, length.out = 100)
-
-# Normal fordeling
-normal <- dnorm(x, mean = 0, sd = 1)
-
-# Student's t-fordeling med 3 frihedsgrader
-student_t <- dt(x, df = 3)
-
-# Chi-squared fordeling (forskudt til at passe bedre i plottet)
-chi_sq <- dchisq(x + 2, df = 3)
-
-# F-fordeling (også forskudt)
-f_dist <- df(x + 2, df1 = 3, df2 = 10)
-
-# Kombiner data
-plot_data <- data.frame(x = x,
-                        Normal = normal,
-                        Student_t = student_t,
-                        Chi_squared = chi_sq,
-                        F_distribution = f_dist) |> 
-  pivot_longer(-x, names_to = "Distribution", values_to = "Density")
-
-# Lav plot med facetter
-ggplot(plot_data, aes(x = x, y = Density)) +
-  geom_line(linewidth = 1, colour = "steelblue") +
-  facet_wrap(~Distribution, ncol = 2, scales = "free_y") +
-  theme_minimal() +
-  labs(title = "Four different probability distributions",
-       x = "x",
-       y = "Density") +
-  theme(plot.title = element_text(hjust = 0.5))
-```
-
-Afhængig af den konkrete fordeling, er det forskellige ting der styrer dens udseende. 
-Det de har til fælles er at arealet under kurven er 1. 1 svarer til 100%. Og når
-sandsynlighedsfordelingen beskriver sandsynligheden for alle mulige værdier, så er 
-den samlede sandsynlighed 100%
-
-Normalfordelingen styres af værdiernes middelværdi, og deres standardafvigelse.
-
-
-
-## Og hvad når mine data ikke har en middelværdi på 0?
-
-Jamen så normerer vi. 
-
-Lad os tage nogen mere eller mindre tilfældige tal:
-
-
-```{r}
-exempel <- c(1,5,7,0,42,10,11,2)
-(middel <- mean(exempel))
-(sd_afv <- sd(exempel))
-```
-
-Så kan vi trække middelværdien fra alle tallene
-
-```{r}
-norm_middel <- exempel - middel
-mean(norm_middel)
-```
-
-Standardafvigelsen er stadig ikke 0:
-
-
-```{r}
-(stdafv <- sd(norm_middel))
-
-
-
-```
-
-Men hvis vi dividerer tallene med standardafvigelsen:
-```{r}
-norm_middel_stdafv <- norm_middel/stdafv
-mean(norm_middel_stdafv)
-sd(norm_middel_stdafv)
-```
-
-Så har vi såkaldt normerede værdier, eller skalerede om man vil.
-
-Og deres middelværdi er 0 (eller så tæt på at vi ikke kan se forskel)
-Og deres standardafvigelse er 1.
-
-Så kan vi bruge pnorm og de andre funktioner. Og når vi skal tilbage til de oprindelige tal - så ganger vi med den oprindelige standardafvigelse, og lægger den oprindelige middelværdi til.
-
-Alternativt bruger vi et trick i pnorm/qnorm:
-
-
-```{r}
-pnorm(1.96, mean = 9.75, sd = 13.64604)
-```
-
-## Hvordan gør man det lidt kortere?
-
-Den standardiserede normalfordeling er $N(0, 1)$
-
-Den fordeling vi som regel får er ikke standardiseret, men har formen:
-
-$X(\bar{X},s)$ (skal det været et lille x et sted?)
-
-Og vi vil som regel skrive at  $X(\bar{X},s) \sim N(\mu, \sigma)$ 
-
-Altså at vores fordeling X (som er beskrevet af middelværdi og spredning) er ækvivalent med den standardiserede normalfordeling med 
-
-Der er en modelløsning der vil være fin her.
-
-og så omregningen...
-
-
 
 
 
 ## Øvelse
 
-Hvis vi har en population med normalfordelte værdier der har en spredning på 
-$\sigma = 6.52$ og 40% af værdierne er mindre end 0. Hvad er så middelværdien for
+Givet en population med normalfordelte værdier, der har en spredning på 
+$\sigma = 6.52$ og hvor det oplyses at  40% af værdierne er mindre end 0. Hvad er så middelværdien for
 denne fordeling?
 
 Vi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.
@@ -672,13 +701,20 @@ Så den er ikke normaliseret/skaleret.
 
 vores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)
 
-Så det skal nævnes, at notationen er N(mu, sd)
+
 
 Vi er på jagt efter P(X<0) = 0.4
 
 Det skal vi have normeret/skaleret:
 
 P((X-mu)/6.52 < (0-mu)/6.52) = 0.4
+
+(0-mu)/6.52 = qnorm(0.4) = -0.2533471
+
+0-mu = -0.2533471 * 6.52 = 
+0-mu = -1.651823
+mu = 1.651823
+
 
 
 ```{r}
@@ -693,38 +729,60 @@ Det gælder også den 0 værdi vi leder efter
 (0-mu)/sd
 
 
-Yderligere øvelser
-For en population af normalfordelte værdier ved vi at 50% af værdierne er mindre end 0.
-Og at 60% af værdierne er mindre end 1. Hvad er middelværdi og spredning for den 
-population?
 
-Vi skal tidligere have nævnt medianen og sammenhængen mellem den og gennemsnittet i normalfordelinger
 
-Der skal bruges lidt flere ord på beskrivelsen af fordelingen.
-altså mere generelt at en fordeling X~N(mu,sigma) kan transformeres til 
-(X-mu)/sigma.
+
 
 
 Og så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den.
 
 
-Opgave 1 - Manglende procentil:
-quartoEn normalfordelt population har middelværdi $\mu = 12.5$ og 
+## Øvelse - Manglende procentil:
+En normalfordelt population har middelværdi $\mu = 12.5$ og 
 standardafvigelse $\sigma = 3.2$. Hvor stor en andel af værdierne 
 er mindre end 10?
-Opgave 2 - Manglende standardafvigelse:
-quartoI en normalfordelt population er middelværdien $\mu = 85$ og 
+
+## Øvelse - Manglende standardafvigelse:
+I en normalfordelt population er middelværdien $\mu = 85$ og 
 25% af værdierne er større end 95. Hvad er standardafvigelsen 
 $\sigma$ for denne fordeling?
-Opgave 3 - Manglende værdi ved given procentil:
-quartoEn normalfordelt variabel har middelværdi $\mu = 50$ og 
+
+## Øvelse - Manglende værdi ved given procentil:
+En normalfordelt variabel har middelværdi $\mu = 50$ og 
 standardafvigelse $\sigma = 8$. Hvilken værdi $x$ er der tale om, 
 hvis 90% af observationerne er mindre end denne værdi?
-Opgave 4 - Manglende middelværdi (anden variant):
-quartoFor en normalfordeling gælder det at $\sigma = 4.5$ og at 75% af 
+
+## Øvelse - Manglende middelværdi (anden variant):
+
+For en normalfordeling gælder det at $\sigma = 4.5$ og at 75% af 
 værdierne er mindre end 18. Hvad er middelværdien $\mu$?
-Opgave 5 - Manglende interval-grænse:
-quartoEn normalfordelt population har $\mu = 100$ og $\sigma = 15$. 
+
+P(X<18) = 0.75
+
+(18-mu)/sigma = qnorm(0.75)
+(18-mu)/4.5 = qnorm(0.75)
+18-mu = 4.5*qnorm(0.75)
+18 - 4.5*qnorm(0.75) = mu
+
+## Øvelse - Manglende interval-grænse:
+
+En normalfordelt population har $\mu = 100$ og $\sigma = 15$. 
 Hvis 80% af værdierne ligger mellem 85 og en øvre grænse $x$, 
 hvad er da denne øvre grænse?
-Alle opgaver kan løses ved at kombinere normalfordelingens egenskaber med z-scores og standardnormaltabellen.
+
+Vi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er.
+100-80 = 20% ligger uden for intervallet.
+Hvor mange af værdierne ligger under 85? 
+20% minus denne værdi skal ligge over den øvre grænse vi leder efter.
+
+P(X<85)
+X < (85-100)/15
+
+```{r}
+qnorm(1 - (0.2- pnorm(-1)))*15+100
+```
+
+
+Husk - vi bruger x-bar når vi ikke kender den sande mu.
+
+Vi skal huske at have turen tilbage fra normaliseringen. Den er faktisk ikke berørt endnu.
