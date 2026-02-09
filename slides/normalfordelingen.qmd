@@ -433,6 +433,38 @@ Og er er lige mange på hver side, så det giver os den nedre, den øvre er samm
 ::::
 ::::
 
+## Øvelse 8 - og det vigtigste tal I skal kende!
+
+
+:::: {.columns}
+:::: {.column}
+
+Hvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+::::notes
+Det der ligger uden for de 95% er 1 - 0.95 = 0.05. 
+Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.
+
+0.05/2 = 0.025
+
+Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien
+
+Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
 
 ## Gennemsnitshøjden er jo ikke 0?!
 
@@ -509,11 +541,7 @@ Nu med tallene 1 til 9
 
 ```
 
-## Notation
 
-Den standardiserede normalfordeling skriver vi som N(0,1)
-En normalfordeling (der ikke er standardiseret) skriver vi som $N(\mu, \sigma)$
-Når vi har data, X, der er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$
 
 ## Hvad kan vi bruge det til?
 
@@ -527,11 +555,27 @@ P(X<170)
 
 Skalerer vi X, skal vi også skalere 170:
 
-$P(X<170) = P(X < \frac{170 - 181}{6.5}) = -1.692$
+$P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = -1.692$
 
 ```{r echo = TRUE}
 pnorm(-1.692)
 ```
+
+
+## Notation
+
+Den standardiserede normalfordeling skriver vi som N(0,1)
+En normalfordeling (der ikke er standardiseret) skriver vi som $N(\mu, \sigma)$
+Når vi har data, X, der er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$
+
+Og når vi normaliserer X i udtrykket for sandsynligheden får vi $\frac{X-\mu}{\sigma}$. Det gider vi 
+sjældent skrive, så i stedet skriver vi Z. Lagde I mærke til Z på plottet af normalfordelingen? 
+Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af 
+standardafvigelsen. Den z-score vi så på grafen. Det er det Z. 
+
+Det betyder også at vi undertiden får beregnet Z og bagefter skal finde ud af hvad X egentlig er. 
+Hvis vi ved hvordan vi går fra X til Z (trækker mu fra, og dividerer med sigma), så ved vi også hvordan vi 
+går fra Z til X. Ganger med sigma og lægger mu til. 
 
 ## Øvelser
 
@@ -742,15 +786,32 @@ En normalfordelt population har middelværdi $\mu = 12.5$ og
 standardafvigelse $\sigma = 3.2$. Hvor stor en andel af værdierne 
 er mindre end 10?
 
+P(X < 10 ) = ?
+
+P(Z < 10 - mu / sigma)
+pnorm((10-12.5)/3.2)
 ## Øvelse - Manglende standardafvigelse:
 I en normalfordelt population er middelværdien $\mu = 85$ og 
 25% af værdierne er større end 95. Hvad er standardafvigelsen 
 $\sigma$ for denne fordeling?
 
+P(X>95) = 0.25
+P(X<95) = 1-0.25 = 0.75
+P(Z<(95-mu)/sigma) = 0.75
+(95-85)/sigma = qnorm(0.75)
+10/qnorm(0.75) = sigma
+
 ## Øvelse - Manglende værdi ved given procentil:
 En normalfordelt variabel har middelværdi $\mu = 50$ og 
 standardafvigelse $\sigma = 8$. Hvilken værdi $x$ er der tale om, 
 hvis 90% af observationerne er mindre end denne værdi?
+
+P(X<x) = 0.9
+qnorm(0.9)
+
+```{r}
+qnorm(0.9, mean = 50, sd = 8)
+```
 
 ## Øvelse - Manglende middelværdi (anden variant):
 
@@ -785,4 +846,9 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 
 Husk - vi bruger x-bar når vi ikke kender den sande mu.
 
-Vi skal huske at have turen tilbage fra normaliseringen. Den er faktisk ikke berørt endnu.
+
+
+
+Pointen om at pnorm og qnorm giver os MINDRE END!
+
+tallet 1.96
