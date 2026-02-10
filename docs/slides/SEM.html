@@ -133,9 +133,11 @@
 </div>
 
 </section>
-<section class="slide level2">
-
-<p>Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.</p>
+<section id="hvorfor-var-normalfordelingen-vigtig" class="slide level2">
+<h2>Hvorfor var normalfordelingen vigtig?</h2>
+<p>Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.</p>
+<p>Men den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.</p>
+<p>Altså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.</p>
 <p>Men hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.</p>
 <p>for standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.</p>
 <p>Til det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.</p>
@@ -154,7 +156,8 @@
 <p>Vi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9</p>
 <p>For interventionsgruppen er de tilsvarende tal -19.6 og 17.4</p>
 <p>Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.</p>
-<p>Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:</p>
+<p>Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?</p>
+<p>Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9681619</code></pre>
@@ -187,6 +190,9 @@
 </section>
 <section id="konfidensintervaller" class="slide level2">
 <h2>konfidensintervaller</h2>
+</section>
+<section id="hypotesetests" class="slide level2">
+<h2>Hypotesetests</h2>
 
 
 </section>

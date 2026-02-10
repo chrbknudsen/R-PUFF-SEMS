@@ -53,7 +53,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 189.1 177.8 176.2 182.8 175.6 178.7 168.7 185.1 169.7 190.0 173.6 168.9\n[13] 196.6 181.9 172.6 179.6 176.4 189.4 183.1 184.1 172.3 177.7 185.6 182.5\n[25] 186.9 178.6 182.8 184.6 169.2 190.9 178.7 182.9 176.0 182.1 175.9 164.1\n[37] 182.0 183.4 180.6 178.9 178.5 188.8 162.7 187.7 185.2 182.6 166.4 181.3\n[49] 180.8 181.7\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 183.0 166.1 176.6 197.3 173.6 180.7 176.8 186.1 182.8 180.5 163.3 182.0\n[13] 178.2 180.9 183.9 181.0 184.3 178.4 184.5 187.5 194.3 180.5 181.2 174.9\n[25] 174.5 179.7 168.1 189.3 181.7 182.6 169.8 182.5 171.2 179.9 180.5 189.1\n[37] 182.8 177.7 182.8 188.6 188.4 189.2 183.1 191.5 165.3 188.5 181.7 190.9\n[49] 172.5 178.6\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -207,7 +207,7 @@
     "href": "slides/normalfordelingen.html#hvad-kan-vi-bruge-det-til",
     "title": "Normalfordelingen",
     "section": "Hvad kan vi bruge det til?",
-    "text": "Hvad kan vi bruge det til?\nHvis \\(\\mu\\) er 181 og \\(\\sigma\\) er 6.5\nog vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\nDet kan vi skrive som:\nP(X&lt;170)\nSkalerer vi X, skal vi også skalere 170:\n\\(P(X&lt;170) = P(X &lt; \\frac{170 - 181}{6.5}) = -1.692\\)\n\npnorm(-1.692)\n\n[1] 0.04532299"
+    "text": "Hvad kan vi bruge det til?\nHvis \\(\\mu\\) er 181 og \\(\\sigma\\) er 6.5\nog vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\nDet kan vi skrive som:\nP(X&lt;170)\nSkalerer vi X, skal vi også skalere 170:\n\\(P(X&lt;170) = P(\\frac{X-\\mu}{\\sigma} &lt; \\frac{170 - 181}{6.5}) = -1.692\\)\n\npnorm(-1.692)\n\n[1] 0.04532299"
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelser",
@@ -368,7 +368,7 @@
     "href": "slides/SEM.html#en-opgave",
     "title": "Standard Error of the Mean",
     "section": "En opgave",
-    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
+    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?\nDet kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
   },
   {
     "objectID": "slides/SEM.html#konfidensintervaller",
@@ -417,7 +417,7 @@
     "href": "slides/normalfordelingen.html#notation",
     "title": "Normalfordelingen",
     "section": "Notation",
-    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1) En normalfordeling (der ikke er standardiseret) skriver vi som \\(N(\\mu, \\sigma)\\) Når vi har data, X, der er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)"
+    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1) En normalfordeling (der ikke er standardiseret) skriver vi som \\(N(\\mu, \\sigma)\\) Når vi har data, X, der er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nOg når vi normaliserer X i udtrykket for sandsynligheden får vi \\(\\frac{X-\\mu}{\\sigma}\\). Det gider vi sjældent skrive, så i stedet skriver vi Z. Lagde I mærke til Z på plottet af normalfordelingen? Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af standardafvigelsen. Den z-score vi så på grafen. Det er det Z.\nDet betyder også at vi undertiden får beregnet Z og bagefter skal finde ud af hvad X egentlig er. Hvis vi ved hvordan vi går fra X til Z (trækker mu fra, og dividerer med sigma), så ved vi også hvordan vi går fra Z til X. Ganger med sigma og lægger mu til."
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelser-1",
@@ -466,7 +466,7 @@
     "href": "slides/normalfordelingen.html#øvelse---manglende-procentil",
     "title": "Normalfordelingen",
     "section": "Øvelse - Manglende procentil:",
-    "text": "Øvelse - Manglende procentil:\nEn normalfordelt population har middelværdi \\(\\mu = 12.5\\) og standardafvigelse \\(\\sigma = 3.2\\). Hvor stor en andel af værdierne er mindre end 10?"
+    "text": "Øvelse - Manglende procentil:\nEn normalfordelt population har middelværdi \\(\\mu = 12.5\\) og standardafvigelse \\(\\sigma = 3.2\\). Hvor stor en andel af værdierne er mindre end 10?\nP(X &lt; 10 ) = ?\nP(Z &lt; 10 - mu / sigma) pnorm((10-12.5)/3.2) ## Øvelse - Manglende standardafvigelse: I en normalfordelt population er middelværdien \\(\\mu = 85\\) og 25% af værdierne er større end 95. Hvad er standardafvigelsen \\(\\sigma\\) for denne fordeling?\nP(X&gt;95) = 0.25 P(X&lt;95) = 1-0.25 = 0.75 P(Z&lt;(95-mu)/sigma) = 0.75 (95-85)/sigma = qnorm(0.75) 10/qnorm(0.75) = sigma"
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelse---manglende-standardafvigelse",
@@ -480,7 +480,7 @@
     "href": "slides/normalfordelingen.html#øvelse---manglende-værdi-ved-given-procentil",
     "title": "Normalfordelingen",
     "section": "Øvelse - Manglende værdi ved given procentil:",
-    "text": "Øvelse - Manglende værdi ved given procentil:\nEn normalfordelt variabel har middelværdi \\(\\mu = 50\\) og standardafvigelse \\(\\sigma = 8\\). Hvilken værdi \\(x\\) er der tale om, hvis 90% af observationerne er mindre end denne værdi?"
+    "text": "Øvelse - Manglende værdi ved given procentil:\nEn normalfordelt variabel har middelværdi \\(\\mu = 50\\) og standardafvigelse \\(\\sigma = 8\\). Hvilken værdi \\(x\\) er der tale om, hvis 90% af observationerne er mindre end denne værdi?\nP(X&lt;x) = 0.9 qnorm(0.9)\n\n\n[1] 60.25241"
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelse---manglende-middelværdi-anden-variant",
@@ -494,6 +494,27 @@
     "href": "slides/normalfordelingen.html#øvelse---manglende-interval-grænse",
     "title": "Normalfordelingen",
     "section": "Øvelse - Manglende interval-grænse:",
-    "text": "Øvelse - Manglende interval-grænse:\nEn normalfordelt population har \\(\\mu = 100\\) og \\(\\sigma = 15\\). Hvis 80% af værdierne ligger mellem 85 og en øvre grænse \\(x\\), hvad er da denne øvre grænse?\nVi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er. 100-80 = 20% ligger uden for intervallet. Hvor mange af værdierne ligger under 85? 20% minus denne værdi skal ligge over den øvre grænse vi leder efter.\nP(X&lt;85) X &lt; (85-100)/15\n\n\n[1] 126.0293\n\n\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nVi skal huske at have turen tilbage fra normaliseringen. Den er faktisk ikke berørt endnu."
+    "text": "Øvelse - Manglende interval-grænse:\nEn normalfordelt population har \\(\\mu = 100\\) og \\(\\sigma = 15\\). Hvis 80% af værdierne ligger mellem 85 og en øvre grænse \\(x\\), hvad er da denne øvre grænse?\nVi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er. 100-80 = 20% ligger uden for intervallet. Hvor mange af værdierne ligger under 85? 20% minus denne værdi skal ligge over den øvre grænse vi leder efter.\nP(X&lt;85) X &lt; (85-100)/15\n\n\n[1] 126.0293\n\n\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nPointen om at pnorm og qnorm giver os MINDRE END!\ntallet 1.96"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "href": "slides/normalfordelingen.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 8 - og det vigtigste tal I skal kende!",
+    "text": "Øvelse 8 - og det vigtigste tal I skal kende!\n\n\nHvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?\n\nDet der ligger uden for de 95% er 1 - 0.95 = 0.05. Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.\n0.05/2 = 0.025\nVi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien\nOg er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
+    "href": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
+    "title": "Standard Error of the Mean",
+    "section": "Hvorfor var normalfordelingen vigtig?",
+    "text": "Hvorfor var normalfordelingen vigtig?\nJa, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.\nMen den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.\nAltså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.\nMen hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.\nfor standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.\nTil det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.\nDet beregner vi således:\nSE = sd/sqrt(n)\nSå. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven, med kvadratroden af n, antallet af observationer i stikprøven.\nOg så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer.\nsd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.\nNår vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.\nDet udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:\n\\[SE = \\frac{SD}{\\sqrt(n)}\\]\nHvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven."
+  },
+  {
+    "objectID": "slides/SEM.html#hypotesetests",
+    "href": "slides/SEM.html#hypotesetests",
+    "title": "Standard Error of the Mean",
+    "section": "Hypotesetests",
+    "text": "Hypotesetests"
   }
 ]
