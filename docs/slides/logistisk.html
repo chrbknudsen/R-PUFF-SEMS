@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>PUFF SEMS forberedelse – Standard Error of the Mean</title>
+  <title>PUFF SEMS forberedelse – Logistisk regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,72 +127,591 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Standard Error of the Mean</h1>
+  <h1 class="title">Logistisk regression</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="hvorfor-var-normalfordelingen-vigtig" class="slide level2">
-<h2>Hvorfor var normalfordelingen vigtig?</h2>
-<p>Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.</p>
-<p>Men den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.</p>
-<p>Altså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.</p>
-<p>Men hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.</p>
-<p>for standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.</p>
-<p>Til det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.</p>
-<p>Det beregner vi således:</p>
-<p>SE = sd/sqrt(n)</p>
-<p>Så. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven, med kvadratroden af n, antallet af observationer i stikprøven.</p>
-<p>Og så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer.</p>
-<p>sd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.</p>
-<p>Når vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.</p>
-<p>Det udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:</p>
-<p><span class="math display">\[SE = \frac{SD}{\sqrt(n)}\]</span></p>
-<p>Hvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven.</p>
+<section id="hvad-bruger-vi-den-logistiske-regression-til" class="slide level2">
+<h2>Hvad bruger vi den logistiske regression til?</h2>
+<p>Den almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.</p>
+<p>Når vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.</p>
+<p>I den lineære regression fitter vi</p>
+<p>E(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X</p>
+<p>Altså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.</p>
+<p>i den logistiske regression er det:</p>
+<p><span class="math display">\[log(\frac{p}{1-p} = \beta_0 + \beta_1x\]</span></p>
+<p>p er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds</p>
+<p>også kaldet logit-funktionen.</p>
+<p>Vil vi have sandsynligheden, skal vi bruge den inverse logit</p>
+<p><span class="math display">\[p = \frac{1}{1+e^{-\eta}}\]</span></p>
+<p>Og vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.</p>
+<p>Hvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.</p>
+<p>Hvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det <em>ikke</em> sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker.</p>
 </section>
-<section id="en-opgave" class="slide level2">
-<h2>En opgave</h2>
-<p>Vi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9</p>
-<p>For interventionsgruppen er de tilsvarende tal -19.6 og 17.4</p>
-<p>Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.</p>
-<p>Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?</p>
-<p>Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:</p>
+<section id="hvordan-laver-vi-en-logistisk-regression" class="slide level2">
+<h2>Hvordan laver vi en logistisk regression?</h2>
+<p>Hvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:</p>
+<p>glm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9681619</code></pre>
+<pre><code>
+Call:
+glm(formula = am ~ wt, family = "binomial", data = mtcars)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)   12.040      4.510   2.670  0.00759 **
+wt            -4.024      1.436  -2.801  0.00509 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 43.230  on 31  degrees of freedom
+Residual deviance: 19.176  on 30  degrees of freedom
+AIC: 23.176
+
+Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 </div>
-<p>Konfidensintervallet finder vi ved:</p>
-<p><span class="math display">\[X +/- 1.96*SE\]</span></p>
+<p>estimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -17.7024 -21.4976</code></pre>
+<pre><code> (Intercept)           wt 
+1.694596e+05 1.788183e-02 </code></pre>
 </div>
 </div>
-<p>Hvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.</p>
-<p>Er der et signifikant fald i kontrolgruppen?</p>
-<p>Samme beregninger:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.115937</code></pre>
-</div>
-</div>
-<p>Og konfidensintervallet:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -14.41276 -18.78724</code></pre>
-</div>
-</div>
-<p>Her er 0 heller ikke indeholdt i intervallet - faldet er signifikant.</p>
-<p>Er faldet i blodtryk signifikant forskelligt?</p>
-<p>De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige.</p>
+<p>ratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.</p>
+<p>Hvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054</p>
+<p>Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så</p>
+<p><span class="math inline">\(3*0.018^{0.5}\)</span></p>
 </section>
-<section id="konfidensintervaller" class="slide level2">
-<h2>konfidensintervaller</h2>
+<section id="opgave-2025-februar-opgave-1-c" class="slide level2">
+<h2>opgave 2025 februar opgave 1 (c)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="siefdvfaol" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#siefdvfaol table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#siefdvfaol thead, #siefdvfaol tbody, #siefdvfaol tfoot, #siefdvfaol tr, #siefdvfaol td, #siefdvfaol th {
+  border-style: none;
+}
+
+#siefdvfaol p {
+  margin: 0;
+  padding: 0;
+}
+
+#siefdvfaol .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#siefdvfaol .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#siefdvfaol .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#siefdvfaol .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#siefdvfaol .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#siefdvfaol .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#siefdvfaol .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#siefdvfaol .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#siefdvfaol .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#siefdvfaol .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#siefdvfaol .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#siefdvfaol .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#siefdvfaol .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#siefdvfaol .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#siefdvfaol .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#siefdvfaol .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#siefdvfaol .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#siefdvfaol .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#siefdvfaol .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#siefdvfaol .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#siefdvfaol .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#siefdvfaol .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#siefdvfaol .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#siefdvfaol .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#siefdvfaol .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#siefdvfaol .gt_left {
+  text-align: left;
+}
+
+#siefdvfaol .gt_center {
+  text-align: center;
+}
+
+#siefdvfaol .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#siefdvfaol .gt_font_normal {
+  font-weight: normal;
+}
+
+#siefdvfaol .gt_font_bold {
+  font-weight: bold;
+}
+
+#siefdvfaol .gt_font_italic {
+  font-style: italic;
+}
+
+#siefdvfaol .gt_super {
+  font-size: 65%;
+}
+
+#siefdvfaol .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#siefdvfaol .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#siefdvfaol .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#siefdvfaol .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#siefdvfaol .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#siefdvfaol .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#siefdvfaol .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#siefdvfaol .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#siefdvfaol div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
+<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">-5.0526</td>
+<td class="gt_row gt_left" headers="Std. Error">0.1758</td>
+<td class="gt_row gt_left" headers="z value">-28.725</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">&lt;2e-16***</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">I((mage-25)/10)</td>
+<td class="gt_row gt_left" headers="Estimate">0.7423</td>
+<td class="gt_row gt_left" headers="Std. Error">0.2149</td>
+<td class="gt_row gt_left" headers="z value">3.454</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.0005***</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">episodes</td>
+<td class="gt_row gt_left" headers="Estimate">-0.0752</td>
+<td class="gt_row gt_left" headers="Std. Error">0.2048</td>
+<td class="gt_row gt_left" headers="z value">-0.368</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.713</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">factor(smoke)2</td>
+<td class="gt_row gt_left" headers="Estimate">0.2063</td>
+<td class="gt_row gt_left" headers="Std. Error">0.2569</td>
+<td class="gt_row gt_left" headers="z value">0.803</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.421</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">factor(smoke)3</td>
+<td class="gt_row gt_left" headers="Estimate">0.4364</td>
+<td class="gt_row gt_left" headers="Std. Error">0.2569</td>
+<td class="gt_row gt_left" headers="z value">1.699</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.089</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Hvad er det vi vil forudsige? vi skal nok have tabellen med også?</p>
+<p>Det er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.</p>
+<p>Det er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?</p>
+<p>Logistisk regression. det er glm.</p>
+<p>I((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​</p>
+<p>=0.7423,p=0.0005</p>
+<p>Signifikant positiv effekt.</p>
+<p>Variablen er skaleret som:</p>
+<p>mage − 25 10 10 mage−25 ​</p>
+<p>altså: ændring per 10 års stigning i alder over 25.</p>
+<p>I en logistisk model:</p>
 </section>
-<section id="hypotesetests" class="slide level2">
-<h2>Hypotesetests</h2>
+<section id="odds-ratio" class="title-slide slide level1 center">
+<h1>odds ratio</h1>
+<p>𝑒 0.7423 ≈ 2.10 odds ratio=e 0.7423 ≈2.10</p>
+<p>👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.</p>
+<p>så det her skal nok flyttes til et sæt slides om logistisk regression</p>
 
 
 </section>

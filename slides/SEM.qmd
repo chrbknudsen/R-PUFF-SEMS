@@ -8,9 +8,32 @@ engine: knitr
 filters:
   - webr
 ---
+## Hvorfor var normalfordelingen vigtig?
 
+Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags. 
+
+Men den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den "sande" middelværdi for populationen. Det er ikke den middelværdi 
+I har beregnet.
+
+
+Altså bortset fra at der er en populær typeopgave hvor I testes i 
+Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.
+
+Men hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.
+
+for standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter
+er oplysninger om hvordan vores middelværdi x, der er et estimat på den "sande" middelværdi mu, afviger fra den sande værdi.
+
+Til det formål bruger vi "SEM", Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.
+
+Det beregner vi således:
 
 SE = sd/sqrt(n)
+
+Så. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven,
+med kvadratroden af n, antallet af observationer i stikprøven.
+
+Og så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer. 
 
 sd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver
 normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller
@@ -36,7 +59,10 @@ For interventionsgruppen er de tilsvarende tal -19.6 og 17.4
 
 Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.
 
-Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:
+Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? 
+Kunne det tænkes at den sande middelværdi er 0?
+
+Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:
 
 ```{r}
 SE <- 17.4/sqrt(323)
@@ -78,3 +104,6 @@ De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder 
 
 
 ## konfidensintervaller
+
+
+## Hypotesetests

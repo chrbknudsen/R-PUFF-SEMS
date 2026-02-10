@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>PUFF SEMS forberedelse – Standard Error of the Mean</title>
+  <title>PUFF SEMS forberedelse – Ting at huske</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,72 +127,15 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Standard Error of the Mean</h1>
+  <h1 class="title">Ting at huske</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="hvorfor-var-normalfordelingen-vigtig" class="slide level2">
-<h2>Hvorfor var normalfordelingen vigtig?</h2>
-<p>Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.</p>
-<p>Men den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.</p>
-<p>Altså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.</p>
-<p>Men hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.</p>
-<p>for standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.</p>
-<p>Til det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.</p>
-<p>Det beregner vi således:</p>
-<p>SE = sd/sqrt(n)</p>
-<p>Så. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven, med kvadratroden af n, antallet af observationer i stikprøven.</p>
-<p>Og så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer.</p>
-<p>sd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.</p>
-<p>Når vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.</p>
-<p>Det udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:</p>
-<p><span class="math display">\[SE = \frac{SD}{\sqrt(n)}\]</span></p>
-<p>Hvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven.</p>
-</section>
-<section id="en-opgave" class="slide level2">
-<h2>En opgave</h2>
-<p>Vi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9</p>
-<p>For interventionsgruppen er de tilsvarende tal -19.6 og 17.4</p>
-<p>Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.</p>
-<p>Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?</p>
-<p>Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9681619</code></pre>
-</div>
-</div>
-<p>Konfidensintervallet finder vi ved:</p>
-<p><span class="math display">\[X +/- 1.96*SE\]</span></p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -17.7024 -21.4976</code></pre>
-</div>
-</div>
-<p>Hvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.</p>
-<p>Er der et signifikant fald i kontrolgruppen?</p>
-<p>Samme beregninger:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.115937</code></pre>
-</div>
-</div>
-<p>Og konfidensintervallet:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -14.41276 -18.78724</code></pre>
-</div>
-</div>
-<p>Her er 0 heller ikke indeholdt i intervallet - faldet er signifikant.</p>
-<p>Er faldet i blodtryk signifikant forskelligt?</p>
-<p>De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige.</p>
-</section>
-<section id="konfidensintervaller" class="slide level2">
-<h2>konfidensintervaller</h2>
-</section>
-<section id="hypotesetests" class="slide level2">
-<h2>Hypotesetests</h2>
+<section class="slide level2">
+
+<p>Forskellen på kategoriske og kontinuærte variable</p>
 
 
 </section>

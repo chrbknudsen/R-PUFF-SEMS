@@ -8,6 +8,8 @@ website:
     left:
       - text: "PUFF SEMS forberedelse"
         href: slides/intro.qmd 
+      - text: "normalfordelingen"
+        href: slides/normalfordelingen.html
 
 
 
