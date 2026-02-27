@@ -2069,11 +2069,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Hvordan kan vi beskrive alle de her observationer?</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 183.0 166.1 176.6 197.3 173.6 180.7 176.8 186.1 182.8 180.5 163.3 182.0
-[13] 178.2 180.9 183.9 181.0 184.3 178.4 184.5 187.5 194.3 180.5 181.2 174.9
-[25] 174.5 179.7 168.1 189.3 181.7 182.6 169.8 182.5 171.2 179.9 180.5 189.1
-[37] 182.8 177.7 182.8 188.6 188.4 189.2 183.1 191.5 165.3 188.5 181.7 190.9
-[49] 172.5 178.6</code></pre>
+<pre><code> [1] 179.8 186.2 174.0 176.3 188.8 173.0 170.6 173.5 172.7 190.5 183.1 188.4
+[13] 173.5 172.4 166.5 180.4 180.4 179.1 174.6 177.5 171.3 187.8 170.1 170.9
+[25] 177.0 182.6 184.4 189.0 187.9 176.9 173.7 180.0 194.5 181.6 184.5 172.0
+[37] 191.1 186.3 176.5 180.9 184.7 187.4 178.2 175.5 174.0 177.9 175.5 176.4
+[49] 188.3 181.9</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -2147,7 +2147,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Undersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger</p>
 </div>
 <div class="fragment">
-<p>Så er den hyppigst forekommende normalfordelingen.</p>
+<p>Så er der en bestemt sandsynlighedsfordeling der optræder flere gange end andre.</p>
 </div>
 <div class="fragment">
 <p>Det er den “normale” fordeling</p>
@@ -2250,7 +2250,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>P(X &lt; -1) = 0.1586553</p>
 <div class="fragment">
 <p>Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.158osv</p>
-<p>Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentielen.</p>
+<p>Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentilen.</p>
 </div>
 </section>
 <section id="og-omvendt" class="slide level2">
@@ -2273,13 +2273,13 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </div>
 </div>
 <p>For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?</p>
-<p>Det kalder vi også for 2.5% kvantilen. På engelsk quantile. Deraf “q”.</p>
+<p>Det kalder vi også for 2.5 percentilen. Eller 2.5% kvantilen. På engelsk quantile. Deraf “q”.</p>
 </section>
 <section id="eller" class="slide level2">
 <h2>Eller</h2>
 <ul>
-<li>pnorm går fra værdi til sandsynlighed.</li>
-<li>qnorm går fra sandsynlighed til værdi.</li>
+<li>pnorm går fra kvantil til sandsynlighed.</li>
+<li>qnorm går fra sandsynlighed til kvantil.</li>
 </ul>
 <p>P(X &lt; værdi) = sandsynlighed</p>
 <ul>
@@ -2288,7 +2288,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </ul>
 </section>
 <section id="typiske-spørgsmål-vi-får" class="slide level2">
-<h2>Typiske spørgsmål vi får:</h2>
+<h2>Typiske spørgsmål (v)i får:</h2>
 <p>(til eksamen)</p>
 <ol type="1">
 <li>Hvor mange procent af observationerne er under 0.4?</li>
@@ -2316,7 +2316,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="column">
 <p>Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?</p>
 <aside class="notes">
-<p>Det er en sandsynlighed vi er på jagt efter så pnorm</p>
+<p>Det er en sandsynlighed vi er på jagt efter så pnorm. pnorm(-3) for at være mere præcis.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2385,7 +2385,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="column">
 <p>Hvad er 25% af observationerne mindre end?</p>
 <aside class="notes">
-<p>Nu kender vi sandsynligheden, og skal have værdien - qnorm</p>
+<p>Nu kender vi sandsynligheden, og skal have værdien - qnorm. Mere præcist qnorm(0.25)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2408,7 +2408,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="column">
 <p>Hvad er 40% af observationerne større end?</p>
 <aside class="notes">
-<p>Det svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6</p>
+<p>Det svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6. Så: qnorm(1-0.4) eller qnorm(0.6)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2456,7 +2456,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <aside class="notes">
 <p>Det der ligger uden for de 47% er 1 - 0.47 = 0.53. Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.</p>
 <p>0.53/2 = 0.265</p>
-<p>Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien</p>
+<p>Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien. qnorm(0.265)</p>
 <p>Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2597,8 +2597,23 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
 <p>Den standardiserede normalfordeling skriver vi som N(0,1) En normalfordeling (der ikke er standardiseret) skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span> Når vi har data, X, der er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
-<p>Og når vi normaliserer X i udtrykket for sandsynligheden får vi <span class="math inline">\(\frac{X-\mu}{\sigma}\)</span>. Det gider vi sjældent skrive, så i stedet skriver vi Z. Lagde I mærke til Z på plottet af normalfordelingen? Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af standardafvigelsen. Den z-score vi så på grafen. Det er det Z.</p>
-<p>Det betyder også at vi undertiden får beregnet Z og bagefter skal finde ud af hvad X egentlig er. Hvis vi ved hvordan vi går fra X til Z (trækker mu fra, og dividerer med sigma), så ved vi også hvordan vi går fra Z til X. Ganger med sigma og lægger mu til.</p>
+<p>Eller: P(X &lt; 170) = P(<span class="math inline">\(\frac{X-\mu}{\sigma}\)</span> &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
+<p>Det gider vi ikke skrive, så i stedet skriver vi Z: P(Z &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
+<p>Lagde I mærke til Z på plottet af normalfordelingen? Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af standardafvigelsen. Den z-score vi så på grafen. Det er det Z.</p>
+</section>
+<section id="og-den-anden-vej" class="slide level2">
+<h2>Og den anden vej</h2>
+<p>Så undertiden beregner vi Z. Og så skal vi bagefter finde ud af hvad X er.</p>
+<p>Hvis vi ved hvordan vi går fra X til Z, så ved vi også hvordan vi går fra Z til X.</p>
+<div class="fragment">
+<p>En ene vej trækker vi <span class="math inline">\(\mu\)</span> fra og dividerer med <span class="math inline">\(\sigma\)</span></p>
+</div>
+<div class="fragment">
+<p>Den anden vej?</p>
+</div>
+<div class="fragment">
+<p>Ganger med <span class="math inline">\(\sigma\)</span> og lægger <span class="math inline">\(\mu\)</span> til</p>
+</div>
 </section>
 <section id="øvelser" class="slide level2">
 <h2>Øvelser</h2>
@@ -2653,6 +2668,19 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>For en population af normalfordelte værdier ved vi at 40% af værdierne er større end 0.1, og 70% af værdierne er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?</p>
 <div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="løsning" class="slide level2">
 <h2>Løsning</h2>
@@ -2680,17 +2708,26 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <h2>Hvorfor er den vigtig?</h2>
 <p>På grund af “Den Centrale Grænseværdisætning”.</p>
 <p>Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.</p>
-<p>Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen - alle danske mænd - og måler deres højde.</p>
-<p>Så beregner vi gennemsnittet og gemmer det.</p>
+<p>Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.</p>
+<p>Vi beregner gennemsnittet af den stikprøve og gemmer det.</p>
 <p>Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.</p>
-<p>Det gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normalfordelingen. <em>Uanset</em> hvilken sandsynlighedsfordeling danske mænds højde følger.</p>
+</section>
+<section id="hvorfor-er-den-vigtig-1" class="slide level2">
+<h2>Hvorfor er den vigtig?</h2>
+<p>Det gør vi mange gange.</p>
+<div class="fragment">
+<p>Det giver en masse gennemsnit/middelværdier.</p>
+</div>
+<div class="fragment">
+<p>De middelværdier vil følge normalfordelngen.</p>
+<p><em>Uanset</em> hvilken sandsynlighedsfordeling danske mænds højde følger.</p>
 <p>Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.</p>
+</div>
 </section>
 <section id="en-gang-til" class="slide level2">
 <h2>En gang til</h2>
 <p>Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.</p>
 <p>Bemærk at vi ikke kender disse middelværdiers spredning. Det kommer vi til.</p>
-<p>Men.</p>
 </section>
 <section id="hvorfor-er-den-vigtig-for-jer" class="slide level2">
 <h2>Hvorfor er den vigtig for jer?</h2>
