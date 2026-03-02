@@ -110,7 +110,7 @@ Undersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger
 
 . . . 
 
-Så er den hyppigst forekommende normalfordelingen.
+Så er der en bestemt sandsynlighedsfordeling der optræder flere gange end andre.
 
 . . . 
 
@@ -216,7 +216,7 @@ P(X < -1) = 0.1586553
 
 Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.158osv
 
-Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentielen.
+Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentilen.
 
 ## Og omvendt?
 
@@ -242,19 +242,19 @@ qnorm(0.025)
 
 For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?
 
-Det kalder vi også for 2.5% kvantilen. På engelsk quantile. Deraf "q".
+Det kalder vi også for 2.5 percentilen. Eller 2.5% kvantilen. På engelsk quantile. Deraf "q".
 
 ## Eller
 
-- pnorm går fra værdi til sandsynlighed.
-- qnorm går fra sandsynlighed til værdi.
+- pnorm går fra kvantil til sandsynlighed.
+- qnorm går fra sandsynlighed til kvantil.
 
 P(X < værdi) = sandsynlighed
 
 - Hvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden
 - Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien
 
-## Typiske spørgsmål vi får:
+## Typiske spørgsmål (v)i får:
 (til eksamen)
 
 1. Hvor mange procent af observationerne er under 0.4?
@@ -277,7 +277,7 @@ De hænger sammen. 1 og 3 er hinandens omvendte
 Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?
 
 ::::notes
-Det er en sandsynlighed vi er på jagt efter  så pnorm
+Det er en sandsynlighed vi er på jagt efter  så pnorm. pnorm(-3) for at være mere præcis.
 ::::
 
 ::::
@@ -343,7 +343,7 @@ observationerne er mindre end 2. Sandsynligheden for at observationen er, er 1. 
 Hvad er 25% af observationerne mindre end?
 
 ::::notes
-Nu kender vi sandsynligheden, og skal have værdien - qnorm
+Nu kender vi sandsynligheden, og skal have værdien - qnorm. Mere præcist qnorm(0.25)
 ::::
 
 ::::
@@ -365,7 +365,7 @@ Nu kender vi sandsynligheden, og skal have værdien - qnorm
 Hvad er 40% af observationerne større end?
 
 ::::notes
-Det svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6
+Det svarer til den værdi hvor 60% af observationerne er mindre. så qnorm, men af 0.6. Så: qnorm(1-0.4) eller qnorm(0.6)
 ::::
 
 ::::
@@ -414,11 +414,11 @@ Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal 
 Det der ligger uden for de 47% er 1 - 0.47 = 0.53. 
 Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på den anden.
 
-0.53/2 = 0.265
+0.53/2 = 0.265 
 
-Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien
+Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien. qnorm(0.265)
 
-Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi.
+Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi. 
 
 ::::
 
@@ -568,14 +568,33 @@ Den standardiserede normalfordeling skriver vi som N(0,1)
 En normalfordeling (der ikke er standardiseret) skriver vi som $N(\mu, \sigma)$
 Når vi har data, X, der er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$
 
-Og når vi normaliserer X i udtrykket for sandsynligheden får vi $\frac{X-\mu}{\sigma}$. Det gider vi 
-sjældent skrive, så i stedet skriver vi Z. Lagde I mærke til Z på plottet af normalfordelingen? 
+Eller: P(X < 170) = P($\frac{X-\mu}{\sigma}$ < $\frac{170-\mu}{\sigma}$)
+
+Det gider vi ikke skrive, så i stedet skriver vi Z: P(Z < $\frac{170-\mu}{\sigma}$)
+
+Lagde I mærke til Z på plottet af normalfordelingen? 
 Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af 
 standardafvigelsen. Den z-score vi så på grafen. Det er det Z. 
 
-Det betyder også at vi undertiden får beregnet Z og bagefter skal finde ud af hvad X egentlig er. 
-Hvis vi ved hvordan vi går fra X til Z (trækker mu fra, og dividerer med sigma), så ved vi også hvordan vi 
-går fra Z til X. Ganger med sigma og lægger mu til. 
+
+## Og den anden vej
+
+Så undertiden beregner vi Z. Og så skal vi bagefter finde ud af hvad X er. 
+
+Hvis vi ved hvordan vi går fra X til Z, så ved vi også hvordan vi går fra Z til X.
+
+. . . 
+
+En ene vej trækker vi $\mu$ fra og dividerer med $\sigma$
+
+. . . 
+
+Den anden vej? 
+
+. . . 
+
+Ganger med $\sigma$ og lægger $\mu$ til
+
 
 ## Øvelser
 
@@ -651,6 +670,12 @@ er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?
 
 ```
 
+:::: notes
+
+
+
+::::
+
 ## Løsning
 
 :::{style="font-size: .4em;"}
@@ -696,23 +721,34 @@ På grund af "Den Centrale Grænseværdisætning".
 
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
 
-Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen - alle danske mænd - og måler deres højde.
+Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.
 
-Så beregner vi gennemsnittet og gemmer det.
+Vi beregner gennemsnittet af den stikprøve og gemmer det.
 
 Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
 
-Det gør vi mange gange. Så vil de gennemsnit, middelværdierne - følge normalfordelingen. _Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+## Hvorfor er den vigtig?
+
+Det gør vi mange gange. 
+
+. . . 
+
+Det giver en masse gennemsnit/middelværdier.
+
+. . . 
+
+De middelværdier vil følge normalfordelngen. 
+
+_Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
 
 Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
-
+ 
 ## En gang til
 
 Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
 
 Bemærk at vi ikke kender disse middelværdiers spredning. Det kommer vi til.
 
-Men. 
 
 ## Hvorfor er den vigtig for jer?
 
@@ -782,24 +818,81 @@ Og så yderligere en række øvelser. Typeopgaverne her er tests af om man forst
 
 
 ## Øvelse - Manglende procentil:
+
+:::: {.columns}
+:::: {.column}
 En normalfordelt population har middelværdi $\mu = 12.5$ og 
 standardafvigelse $\sigma = 3.2$. Hvor stor en andel af værdierne 
 er mindre end 10?
 
-P(X < 10 ) = ?
+Med andre ord, hvad er:
 
-P(Z < 10 - mu / sigma)
+$P(X < 10)$
+
+
+
+Transformer til standardnormalfordelingen:
+
+$P(Z < \frac{10 - \mu}{\sigma})$
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+::::notes
+
 pnorm((10-12.5)/3.2)
-## Øvelse - Manglende standardafvigelse:
-I en normalfordelt population er middelværdien $\mu = 85$ og 
-25% af værdierne er større end 95. Hvad er standardafvigelsen 
-$\sigma$ for denne fordeling?
 
-P(X>95) = 0.25
+::::
+
+
+
+## Øvelse - Manglende $\sigma$
+:::: {.columns}
+:::: {.column}
+I en normalfordelt population er $\mu = 85$ og 25% af værdierne er større end 95. Hvad er $\sigma$ for denne fordeling?
+
+::: {.fragment}
+P(X > 95) = 0.25
+:::
+::: {.fragment}
 P(X<95) = 1-0.25 = 0.75
-P(Z<(95-mu)/sigma) = 0.75
-(95-85)/sigma = qnorm(0.75)
-10/qnorm(0.75) = sigma
+:::
+
+::: {.fragment}
+$P(Z< \frac{95-\mu}{\sigma}) = 0.75$
+:::
+
+::: {.fragment}
+$(95-85)/\sigma = qnorm(0.75)$
+:::
+
+::: {.fragment}
+$10/qnorm(0.75) = \sigma$ 
+::::
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
 
 ## Øvelse - Manglende værdi ved given procentil:
 En normalfordelt variabel har middelværdi $\mu = 50$ og 

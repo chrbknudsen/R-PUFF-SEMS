@@ -35,3 +35,23 @@ fit = lm(mpg ~ am, data = mtcars)
 
 plot(mtcars)
 ```
+
+
+## Øvelse 1
+
+:::: {.columns}
+:::: {.column}
+Her skriver vi hvad der skal stå til venstre
+
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
