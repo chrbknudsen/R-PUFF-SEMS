@@ -894,35 +894,97 @@ $10/qnorm(0.75) = \sigma$
 ::::
 
 
-## Øvelse - Manglende værdi ved given procentil:
-En normalfordelt variabel har middelværdi $\mu = 50$ og 
-standardafvigelse $\sigma = 8$. Hvilken værdi $x$ er der tale om, 
-hvis 90% af observationerne er mindre end denne værdi?
+## Manglende værdi, kendt procentil:
+:::: {.columns}
+:::: {.column}
+En normalfordelt variabel har $\mu = 50$ og 
+$\sigma = 8$. For hvilken værdi y er 90% af observationerne < y?
 
-P(X<x) = 0.9
-qnorm(0.9)
+::: {.fragment}
+Find 90%-kvantilen for X ~ N(50,8)
+::::
 
-```{r}
-qnorm(0.9, mean = 50, sd = 8)
+::: {.fragment}
+ $P(Z< \frac{y-\mu}{\sigma}) = 0.9$
+::::
+
+::: {.fragment}
+$P(Z< \frac{y-50}{8}) = 0.9$
+::::
+
+::: {.fragment}
+qnorm(0.9) = 1.2816
+$\frac{y-50}{8} = 1.2816$, isoler y     
+::::
+
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
 
-## Øvelse - Manglende middelværdi (anden variant):
+::::
+::::
 
-For en normalfordeling gælder det at $\sigma = 4.5$ og at 75% af 
-værdierne er mindre end 18. Hvad er middelværdien $\mu$?
+## Manglende middelværdi (variant 2):
+:::: {.columns}
+:::: {.column}
+For en normalfordeling gælder det at $\sigma = 4.5$ og 75% af 
+værdierne er > 18. Hvad er $\mu$?
 
-P(X<18) = 0.75
+::: {.fragment}
+P(X>18) = 0.75
+:::
 
-(18-mu)/sigma = qnorm(0.75)
-(18-mu)/4.5 = qnorm(0.75)
-18-mu = 4.5*qnorm(0.75)
-18 - 4.5*qnorm(0.75) = mu
+::: {.fragment}
+P(X<18) = 1 - 0.75 = 0.25
+:::
 
-## Øvelse - Manglende interval-grænse:
+::: {.fragment}
+Standardiser:
+$P(Z < \frac{18-\mu}{\sigma}) = 0.25$
+:::
 
+::: {.fragment}
+$\frac{18-\mu}{\sigma} = qnorm(.25) = -0.6744898$
+Indsæt $\sigma = 4.5$ og isoler $\mu$
+:::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+```
+
+::::
+::::
+
+## Manglende interval-grænse
+
+:::: {.columns}
+:::: {.column}
 En normalfordelt population har $\mu = 100$ og $\sigma = 15$. 
 Hvis 80% af værdierne ligger mellem 85 og en øvre grænse $x$, 
 hvad er da denne øvre grænse?
+
+eller find z således at: P(85 < X < x) = 0.8
+
+1 - 0.8 = 0.2 ligger udenfor intervallet
+Hvilken andel ligger under 85?
+
+P(X<85) = 0.8
+$P(Z< \frac{85-\mu}{\sigma}) = 0.8$ 
+$\frac{85-\mu}{\sigma} = qnorm(0.8)$
+0.2 - denne andel skal ligge over.
+
 
 Vi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er.
 100-80 = 20% ligger uden for intervallet.
@@ -935,8 +997,16 @@ X < (85-100)/15
 ```{r}
 qnorm(1 - (0.2- pnorm(-1)))*15+100
 ```
-
-
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+```
+::::
+::::
+## lidt mer
 Husk - vi bruger x-bar når vi ikke kender den sande mu.
 
 
