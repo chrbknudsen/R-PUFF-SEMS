@@ -37,7 +37,7 @@ En sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.
 - Hvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?
 - Hvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?
 - Hvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?
-
+- I hvilket interval finder vi en bestemt andel af observationerne?
 
 ## Hvordan kan vi beskrive alle de her observationer?
 
@@ -161,6 +161,34 @@ tibble(x = x, y = normal) |>
 ## Standardnormalfordelingen
 
 Når $\mu = 0$ og $\sigma = 1$ kalder vi den for "standardnormalfordelingen".
+
+Den skriver vi som: $N(1,0)$
+
+. . . 
+
+Andre normale fordelinger findes
+
+. . . 
+
+Dem skriver vi som $X \sim N(\mu,\sigma)$
+
+. . . 
+
+De kan omregnes (skaleres) til standardnormalfordelingen
+
+. . . 
+
+Det kommer vi til at øve!
+
+
+:::: notes
+Det at kunne skalere til og fra standardnormalfordelingen er dels nyttigt for at kunne løse opgaverne. Det tester om I har forstået hvad der foregår,
+og det er ret vigtigt.
+
+Det handler også om at i gamle dage havde vi ikke programmer der kunne lave beregningerne for en hvilken som helst normalfordeling. Så matematikere sad
+møjsommeligt og beregnede værdier for standardnormalfordelingen. Og så kunne man slå op i tabeller.
+::::
+
 
 ## Hvilke egenskaber har den?
 
@@ -771,51 +799,39 @@ Ting der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til de
 
 ## Øvelse
 
-Givet en population med normalfordelte værdier, der har en spredning på 
-$\sigma = 6.52$ og hvor det oplyses at  40% af værdierne er mindre end 0. Hvad er så middelværdien for
-denne fordeling?
+:::: {.columns}
+:::: {.column}
+Vi har en normalfordelt population med $\sigma = 6.52$. 40% af værdierne er mindre end 0. 
+Hvad er så $\mu$ for denne fordeling?
 
-Vi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.
-
-Så den er ikke normaliseret/skaleret. 
-
-vores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)
-
-
-
-Vi er på jagt efter P(X<0) = 0.4
-
-Det skal vi have normeret/skaleret:
-
-P((X-mu)/6.52 < (0-mu)/6.52) = 0.4
-
-(0-mu)/6.52 = qnorm(0.4) = -0.2533471
-
-0-mu = -0.2533471 * 6.52 = 
-0-mu = -1.651823
-mu = 1.651823
+::: {.fragment}
+$X \sim N(\mu, 6.52)$
+::::
+::: {.fragment}
+P(X<0) = 0.4
+::::
+::: {.fragment}
+Skaler:
+$P(Z < \frac{0-\mu}{6.52}) = 0.4$
+::::
+::: {.fragment}
+$\frac{0-\mu}{6.52} = qnorm(0.4) = -0.2533471$
+Isoler $\mu$
+::::
 
 
+::::
+:::: {.column}
 
-```{r}
-qnorm(0.4)
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
 
-For at transformere vores værdier, skal vi trække \mu fra, og dividere med 
-standardafvigelsen.
-
-Det gælder også den 0 værdi vi leder efter
-
-(0-mu)/sd
-
-
-
-
-
-
-
-Og så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den.
-
+::::
+::::
 
 ## Øvelse - Manglende procentil:
 
@@ -1006,12 +1022,29 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 ```
 ::::
 ::::
-## lidt mer
-Husk - vi bruger x-bar når vi ikke kender den sande mu.
+
+## Cowboy trick
+
+Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?
+
+Vi kan skalere de 50, og putte resultatet ind i pnorm.
+
+```{r echo = TRUE}
+pnorm((50-47)/42)
+```
+
+Eller, vi kan lade R gøre det for os:
+
+::: {.fragment}
+
+```{r echo = TRUE}
+pnorm(50, mean = 47, sd = 42)
+```
+
+:::
+
+::: {.fragment}
+For de typeopgaver hvor vi skal finde $\mu$ og/eller $\sigma$ hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt.
+:::
 
 
-
-
-Pointen om at pnorm og qnorm giver os MINDRE END!
-
-tallet 1.96

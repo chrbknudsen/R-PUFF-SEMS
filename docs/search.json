@@ -46,14 +46,14 @@
     "href": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling-1",
     "title": "Normalfordelingen",
     "section": "Hvad er en sandsynlighedsfordeling?",
-    "text": "Hvad er en sandsynlighedsfordeling?\nEn sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.\n\nHvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?"
+    "text": "Hvad er en sandsynlighedsfordeling?\nEn sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.\n\nHvad er sandsynligheden for at se en observation der ligger under en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger over en bestemt værdi?\nHvad er sandsynligheden for at se en observation der ligger mellem to forskellige værdier?\nI hvilket interval finder vi en bestemt andel af observationerne?"
   },
   {
     "objectID": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 190.0 174.0 181.4 181.1 167.6 175.3 175.6 184.9 175.6 180.5 174.9 186.0\n[13] 180.3 181.6 177.3 183.3 182.2 191.6 183.0 185.6 184.6 167.7 177.0 183.4\n[25] 175.0 181.4 163.9 185.8 176.7 179.4 171.9 183.0 179.5 189.1 183.8 169.4\n[37] 177.7 182.6 179.4 184.8 177.1 181.5 188.2 184.4 171.0 183.3 196.0 182.4\n[49] 179.1 180.9\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 184.2 182.6 177.7 178.5 178.0 191.8 178.2 177.9 179.5 186.3 182.9 163.4\n[13] 185.9 178.6 194.1 178.5 188.3 198.5 177.9 185.9 176.7 176.8 181.3 188.4\n[25] 183.6 178.6 178.9 186.2 181.2 171.7 182.1 182.9 187.0 184.8 185.1 179.7\n[37] 185.3 186.6 198.9 195.2 184.0 174.4 195.0 181.0 175.4 180.4 175.5 180.9\n[49] 179.8 184.4\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -95,7 +95,7 @@
     "href": "slides/normalfordelingen.html#standardnormalfordelingen",
     "title": "Normalfordelingen",
     "section": "Standardnormalfordelingen",
-    "text": "Standardnormalfordelingen\nNår \\(\\mu = 0\\) og \\(\\sigma = 1\\) kalder vi den for “standardnormalfordelingen”."
+    "text": "Standardnormalfordelingen\nNår \\(\\mu = 0\\) og \\(\\sigma = 1\\) kalder vi den for “standardnormalfordelingen”.\nDen skriver vi som: \\(N(1,0)\\)\n\nAndre normale fordelinger findes\n\n\nDem skriver vi som \\(X \\sim N(\\mu,\\sigma)\\)\n\n\nDe kan omregnes (skaleres) til standardnormalfordelingen\n\n\nDet kommer vi til at øve!\n\nDet at kunne skalere til og fra standardnormalfordelingen er dels nyttigt for at kunne løse opgaverne. Det tester om I har forstået hvad der foregår, og det er ret vigtigt.\nDet handler også om at i gamle dage havde vi ikke programmer der kunne lave beregningerne for en hvilken som helst normalfordeling. Så matematikere sad møjsommeligt og beregnede værdier for standardnormalfordelingen. Og så kunne man slå op i tabeller."
   },
   {
     "objectID": "slides/normalfordelingen.html#hvilke-egenskaber-har-den",
@@ -326,7 +326,7 @@
     "href": "slides/normalfordelingen.html#øvelse",
     "title": "Normalfordelingen",
     "section": "Øvelse",
-    "text": "Øvelse\nGivet en population med normalfordelte værdier, der har en spredning på \\(\\sigma = 6.52\\) og hvor det oplyses at 40% af værdierne er mindre end 0. Hvad er så middelværdien for denne fordeling?\nVi ved ikke hvad middelværdien er. Men vi ved at standardafvigelsen er 6.52.\nSå den er ikke normaliseret/skaleret.\nvores fordeling kalder vi for X. den er en normalfordeling N(mu, 6.52)\nVi er på jagt efter P(X&lt;0) = 0.4\nDet skal vi have normeret/skaleret:\nP((X-mu)/6.52 &lt; (0-mu)/6.52) = 0.4\n(0-mu)/6.52 = qnorm(0.4) = -0.2533471\n0-mu = -0.2533471 * 6.52 = 0-mu = -1.651823 mu = 1.651823\n\n\n[1] -0.2533471\n\n\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
+    "text": "Øvelse\n\n\nVi har en normalfordelt population med \\(\\sigma = 6.52\\). 40% af værdierne er mindre end 0. Hvad er så \\(\\mu\\) for denne fordeling?\n\n\\(X \\sim N(\\mu, 6.52)\\)\n\n\nP(X&lt;0) = 0.4\n\n\nSkaler: \\(P(Z &lt; \\frac{0-\\mu}{6.52}) = 0.4\\)\n\n\n\\(\\frac{0-\\mu}{6.52} = qnorm(0.4) = -0.2533471\\) Isoler \\(\\mu\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelse---manglende-procentil",
@@ -537,5 +537,26 @@
     "title": "Normalfordelingen",
     "section": "Manglende interval-grænse",
     "text": "Manglende interval-grænse\n\n\nEn normalfordelt population har \\(\\mu = 100\\) og \\(\\sigma = 15\\). Hvis 80% af værdierne ligger mellem 85 og en øvre grænse \\(x\\), hvad er da denne øvre grænse?\neller find z således at: P(85 &lt; X &lt; x) = 0.8\n1 - 0.8 = 0.2 ligger udenfor intervallet Hvilken andel ligger under 85?\nP(X&lt;85) = 0.8 \\(P(Z&lt; \\frac{85-\\mu}{\\sigma}) = 0.8\\) \\(\\frac{85-\\mu}{\\sigma} = qnorm(0.8)\\) 0.2 - denne andel skal ligge over.\nVi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er. 100-80 = 20% ligger uden for intervallet. Hvor mange af værdierne ligger under 85? 20% minus denne værdi skal ligge over den øvre grænse vi leder efter.\nP(X&lt;85) X &lt; (85-100)/15\n\n\n[1] 126.0293\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#øvelse-42",
+    "href": "slides/normalfordelingen.html#øvelse-42",
+    "title": "Normalfordelingen",
+    "section": "Øvelse 42",
+    "text": "Øvelse 42\n\n\nVi har en normalfordelt population med \\(\\sigma = 6.52\\). 40% af værdierne er mindre end 0. Hvad er så \\(\\mu\\) for denne fordeling?\n\\(X \\sim N(\\mu, 6.52)\\)\nP(X&lt;0) = 0.4\nSkaler:\n\\(P(Z &lt; \\frac{0-\\mu}{6.52}) = 0.4\\)\n\\(\\frac{0-\\mu}{6.52} = qnorm(0.4) = -0.2533471\\)\nIsoler \\(\\mu\\)\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\n\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#cowboy-trick",
+    "href": "slides/normalfordelingen.html#cowboy-trick",
+    "title": "Normalfordelingen",
+    "section": "Cowboy trick",
+    "text": "Cowboy trick\nHvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?\nVi kan skalere de 50, og putte resultatet ind i pnorm.\n\npnorm((50-47)/42)\n\n[1] 0.5284717\n\n\nEller, vi kan lade R gøre det for os:\n\n\npnorm(50, mean = 47, sd = 42)\n\n[1] 0.5284717\n\n\n\n\nFor de typeopgaver hvor vi skal finde \\(\\mu\\) og/eller \\(\\sigma\\) hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#lidt",
+    "href": "slides/normalfordelingen.html#lidt",
+    "title": "Normalfordelingen",
+    "section": "lidt",
+    "text": "lidt\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nPointen om at pnorm og qnorm giver os MINDRE END!\ntallet 1.96"
   }
 ]
