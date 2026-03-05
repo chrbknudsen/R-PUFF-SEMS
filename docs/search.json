@@ -53,7 +53,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 184.2 182.6 177.7 178.5 178.0 191.8 178.2 177.9 179.5 186.3 182.9 163.4\n[13] 185.9 178.6 194.1 178.5 188.3 198.5 177.9 185.9 176.7 176.8 181.3 188.4\n[25] 183.6 178.6 178.9 186.2 181.2 171.7 182.1 182.9 187.0 184.8 185.1 179.7\n[37] 185.3 186.6 198.9 195.2 184.0 174.4 195.0 181.0 175.4 180.4 175.5 180.9\n[49] 179.8 184.4\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 171.6 181.0 182.1 189.2 181.8 182.9 188.4 176.0 193.1 168.9 193.3 180.6\n[13] 169.8 174.3 173.0 180.3 170.5 176.9 184.0 179.2 193.6 173.3 179.0 188.7\n[25] 182.2 180.3 188.0 172.3 164.0 183.4 179.3 176.4 184.1 177.2 183.5 173.0\n[37] 178.3 175.8 183.5 176.7 184.4 181.2 188.1 178.0 174.9 186.8 182.0 172.7\n[49] 187.6 170.6\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -558,5 +558,110 @@
     "title": "Normalfordelingen",
     "section": "lidt",
     "text": "lidt\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nPointen om at pnorm og qnorm giver os MINDRE END!\ntallet 1.96"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområdet",
+    "href": "slides/normalfordelingen.html#normalområdet",
+    "title": "Normalfordelingen",
+    "section": "Normalområdet",
+    "text": "Normalområdet\nPopulært spørgsmål - hvad er normalområdet for “noget”?\nHvis de 95% hyppigste observationer i en normalfordelt population er “normalområdet”. I hvilket interval ligger de de så?\n\nHvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor\n\n\nSå 2.5% ligger lavere, og 2.5% ligger højere.\n\n\nKender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområdet---øvelse",
+    "href": "slides/normalfordelingen.html#normalområdet---øvelse",
+    "title": "Normalfordelingen",
+    "section": "Normalområdet - øvelse",
+    "text": "Normalområdet - øvelse\nHvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 mg/dL, hvad er så normalområdet? Defineret som det interval i hvilket 95% af værdierne vil ligge?"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområdet---nedre-grænse",
+    "href": "slides/normalfordelingen.html#normalområdet---nedre-grænse",
+    "title": "Normalfordelingen",
+    "section": "Normalområdet - nedre grænse",
+    "text": "Normalområdet - nedre grænse\n\\(X \\sim N(200, 40)\\)\nNedre grænse så de (100-95)/2 = 2.5% laveste værdier\nP(X &lt; y) = 0.025\nStandardiser:\nP(Z &lt; ) = 0.025\ny-200/40 = qnorm(0.025) = - 1.959964\nIsoler y: -1.959964*40 + 200 = 122\n\nDer er en del domænespecifikke ting der spiller ind her."
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområdet---øvre-grænse",
+    "href": "slides/normalfordelingen.html#normalområdet---øvre-grænse",
+    "title": "Normalfordelingen",
+    "section": "Normalområdet - øvre grænse",
+    "text": "Normalområdet - øvre grænse\nDen øvre grænse er så den grænse under hvilken de 95% i normalområdet og de 2.5% under normalområdet ligger.\nDvs.\nP(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975\nStandardiser:\nP(Z &lt; y - 200 / 40 ) = 0.975\ny - 200 / 40 = qnomr(0.975) = 1.959964\nIsoler y:\ny = 1.959964 * 40 + 200 = 278"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområde---cowboy-trick",
+    "href": "slides/normalfordelingen.html#normalområde---cowboy-trick",
+    "title": "Normalfordelingen",
+    "section": "Normalområde - cowboy trick",
+    "text": "Normalområde - cowboy trick\n1.96 er det magiske tal. Så det er overflødigt at lave standardiseringen.\ngå direkte til middelværdi +/- 1.96*sd\neller\n200 + c(-1,1)* 1.96 * 40"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#cowboy-trick-2",
+    "href": "slides/normalfordelingen.html#cowboy-trick-2",
+    "title": "Normalfordelingen",
+    "section": "Cowboy trick 2",
+    "text": "Cowboy trick 2\nHvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?\nVi kan skalere de 50, og putte resultatet ind i pnorm.\n\npnorm((50-47)/42)\n\n[1] 0.5284717\n\n\nEller, vi kan lade R gøre det for os:\n\n\npnorm(50, mean = 47, sd = 42)\n\n[1] 0.5284717\n\n\n\n\nFor de typeopgaver hvor vi skal finde \\(\\mu\\) og/eller \\(\\sigma\\) hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt."
+  },
+  {
+    "objectID": "slides/linreg.html#hvad-er-det-nu-den-lineære-regression-giver-os",
+    "href": "slides/linreg.html#hvad-er-det-nu-den-lineære-regression-giver-os",
+    "title": "Lineær regression",
+    "section": "Hvad er det nu den lineære regression giver os?",
+    "text": "Hvad er det nu den lineære regression giver os?\n\ndet er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?"
+  },
+  {
+    "objectID": "slides/linreg.html#linreg-2",
+    "href": "slides/linreg.html#linreg-2",
+    "title": "Lineær regression",
+    "section": "linreg 2",
+    "text": "linreg 2\nØvelsen handler altså om at finde den rette linie gennem disse punkter, der bedst beskriver sammenhængen mellem punkterne.\nHer har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)\n\nLinien fortæller os: Hvis x har en bestemt værdi, hvilken værdi burde y så have?\nDen værdi har y ikke. Der er en forskel. Den forskel kalder vi residualen. Størrelsen afhænger naturligvis af hvilken linie vi har lagt.\nIntuitivt: Hvis vi har to linier, og lægger residualerne for alle punkterne sammen for den ene linie. Og gør det samme for alle punkterne for den anden linie. Så er den bedste af de to linier den hvor summen af residualerne er mindst.\nOpgaven er nu at finde den bedst tænkelige linie."
+  },
+  {
+    "objectID": "slides/linreg.html#linreg-3",
+    "href": "slides/linreg.html#linreg-3",
+    "title": "Lineær regression",
+    "section": "linreg 3",
+    "text": "linreg 3\n\nDet er så den bedst tænkelige linie, og den har det udtyk der er vist i grafen."
+  },
+  {
+    "objectID": "slides/linreg.html#linreg-4",
+    "href": "slides/linreg.html#linreg-4",
+    "title": "Lineær regression",
+    "section": "linreg 4",
+    "text": "linreg 4\nLæg mærke til at residualen er negativ for det med rødt markerede punkt. Andre punkter har en positiv værdi. Hvad sker der hvis vi lægger dem alle sammen sammen? Vi risikerer at resultatet bliver 0 - fordi summen af positive og negative tal kan risikere at blive 0.\nDet vi gør er at kvadrere residualerne, vi tager kvadratet, og lægger dem alle sammen. Derfor kalder vi også metoden for “mindste kvadraters metode”.\nDet kunne man gøre med papir, blyant, lineal og lommeregner. Det er der ingen der gider"
+  },
+  {
+    "objectID": "slides/linreg.html#linreg-5-i-praksis",
+    "href": "slides/linreg.html#linreg-5-i-praksis",
+    "title": "Lineær regression",
+    "section": "Linreg 5 i praksis",
+    "text": "Linreg 5 i praksis\nR gør det ved hjælp af funktionen lm. Hvis vi vil finde ud af hvordan x beskriver y, skriver vi\nlm(y ~ x, data = df)\nLæs det som: y som funktion af x.\nDen giver et output:\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nCoefficients:\n(Intercept)            x  \n      44.15        42.76  \n\n\nIkke specielt interessant. Gem resultatet og kør funktionen “summary” på det gemte resultat:\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "slides/linreg.html#linreg-6---læsning-af-output",
+    "href": "slides/linreg.html#linreg-6---læsning-af-output",
+    "title": "Lineær regression",
+    "section": "linreg 6 - læsning af output",
+    "text": "linreg 6 - læsning af output\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nEstimaterne er koefficenterne i y = ax+b. Intercept er b, x er koefficienten der ganges på x værdien, her altså a.\nError er standardfejlen som er i familie med SEM, her er det blot ikke standarderror på “mean” men standardfejlen på estimatet.\nVi er interesserede i at vide om der er en sammenhæng mellem x og y - hvis der er, er estimatet for koefficienten på x forskellig fra 0. For hvis den er 0, så er der ikke en sammenhæng mellem x og y. Det er jo så estimat og standardfejl i de enheder som data nu har. Det er ikke så praktisk, så vi beregner en t-værdi ved at dividere estimatet med standardfejlen. Det fortæller os hvor langt estimatet ligger fra 0 - målt i standardfejl. Vi skifter simpelthen enhed.\nOg hvis vi ved hvor mange standardafvigelser vores estimat ligger fra 0 - så ved vi også hvad sandsynligheden er for at estimatet i virkeligheden er 0, selvom vi ser en værdi der ikke er 0. Den sandsynlighed er p-værdien. Når vi ser &lt; 2e-16 er det fordi p-værdien er så tæt på 0 som den kan komme uden faktisk at være det. R har en grænse for hvor præcist tal kan angives.\nstjernerne betyder noget specifikt - vi har en oversigt over den i linien der starter med “signif. codes”.\nResidual standard error er standardfejlen på residualerne. R-squared er “hvor stor en andel af variationen i data forklares af modellen”. her 97.9%. Det er ret godt, men jeg har også konstrueret data til formålet.\nHvis vi tilføjer variable til modellen, vil R-squared stige. Også selvom variablen intet har med noget at gøre.\nDet vil Adjusted R-squared tage højde for. Den korrigerer for at selvom vi tilføjer noget der forklarer variationen, så hjælper det ikke nødvendigvis modellen. Vi bruger den typisk når vi skal sammenligne to modeller - hvilken er egentlig bedst.\nF-statistic er forholdet mellem den variation modellen forklarer. Og den variation der er tilbage i residualerne. Jo større jo bedre. For det betyder at modellen forklarer meget variation, og residualerne har meget lidt variation tilbage.\nVi kan også forstå den som: Hvor meget bedre er regressionslinien end bare at bruge middelværdien af y."
+  },
+  {
+    "objectID": "slides/linreg.html#multipel-lineær-regression",
+    "href": "slides/linreg.html#multipel-lineær-regression",
+    "title": "Lineær regression",
+    "section": "Multipel lineær regression",
+    "text": "Multipel lineær regression\nDen kan vi ikke visualisere."
+  },
+  {
+    "objectID": "slides/linreg.html#regression-med-kategoriske-variable",
+    "href": "slides/linreg.html#regression-med-kategoriske-variable",
+    "title": "Lineær regression",
+    "section": "regression med kategoriske variable",
+    "text": "regression med kategoriske variable"
+  },
+  {
+    "objectID": "slides/linreg.html#tolkning-generel",
+    "href": "slides/linreg.html#tolkning-generel",
+    "title": "Lineær regression",
+    "section": "tolkning generel",
+    "text": "tolkning generel\nHvis x stiger med 1, vil y, alt andet lige stige med koefficienten på x.\nHvis x er 0, så er værdien af 0 lig intercept.\nHvis p-værdien er lav - er vi ret sikre på at sammenhængen eksisterer\nhvis koefficienten er høj - er effekten af en stigning på 1 stor. Men husk lige hvilke enheder vi er i, og hvad intercept egentlig er. En stigning på 1 kan være meget eller lidt afhængig af enheden.\nR-squared fortælelr os her hvor meget af variationen i data der forklares af modellen"
   }
 ]
