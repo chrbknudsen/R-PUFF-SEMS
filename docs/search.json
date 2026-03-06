@@ -14,6 +14,13 @@
     "text": "overskrift 2\nting\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
+    "objectID": "slides/side-by-side-demo.html#øvelse-1",
+    "href": "slides/side-by-side-demo.html#øvelse-1",
+    "title": "webR in Quarto HTML Documents",
+    "section": "Øvelse 1",
+    "text": "Øvelse 1\n\n\nHer skriver vi hvad der skal stå til venstre\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
     "objectID": "slides/power.html#husk-dog",
     "href": "slides/power.html#husk-dog",
     "title": "Powerberegninger",
@@ -53,7 +60,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 171.6 181.0 182.1 189.2 181.8 182.9 188.4 176.0 193.1 168.9 193.3 180.6\n[13] 169.8 174.3 173.0 180.3 170.5 176.9 184.0 179.2 193.6 173.3 179.0 188.7\n[25] 182.2 180.3 188.0 172.3 164.0 183.4 179.3 176.4 184.1 177.2 183.5 173.0\n[37] 178.3 175.8 183.5 176.7 184.4 181.2 188.1 178.0 174.9 186.8 182.0 172.7\n[49] 187.6 170.6\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 174.2 177.7 180.8 173.2 185.2 179.5 171.3 180.9 177.3 176.3 184.0 180.4\n[13] 169.9 187.9 183.8 183.6 187.1 174.9 188.8 181.6 176.2 177.5 194.3 183.5\n[25] 178.0 174.1 183.9 173.9 185.4 189.4 181.0 172.0 187.1 178.0 187.0 179.3\n[37] 178.7 177.7 187.3 203.3 176.3 187.6 181.2 171.1 187.9 174.3 180.5 188.4\n[49] 181.7 179.1\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -252,6 +259,13 @@
     "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1) En normalfordeling (der ikke er standardiseret) skriver vi som \\(N(\\mu, \\sigma)\\) Når vi har data, X, der er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nEller: P(X &lt; 170) = P(\\(\\frac{X-\\mu}{\\sigma}\\) &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nDet gider vi ikke skrive, så i stedet skriver vi Z: P(Z &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nLagde I mærke til Z på plottet af normalfordelingen? Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af standardafvigelsen. Den z-score vi så på grafen. Det er det Z."
   },
   {
+    "objectID": "slides/normalfordelingen.html#og-den-anden-vej",
+    "href": "slides/normalfordelingen.html#og-den-anden-vej",
+    "title": "Normalfordelingen",
+    "section": "Og den anden vej",
+    "text": "Og den anden vej\nSå undertiden beregner vi Z. Og så skal vi bagefter finde ud af hvad X er.\nHvis vi ved hvordan vi går fra X til Z, så ved vi også hvordan vi går fra Z til X.\n\nEn ene vej trækker vi \\(\\mu\\) fra og dividerer med \\(\\sigma\\)\n\n\nDen anden vej?\n\n\nGanger med \\(\\sigma\\) og lægger \\(\\mu\\) til"
+  },
+  {
     "objectID": "slides/normalfordelingen.html#øvelser",
     "href": "slides/normalfordelingen.html#øvelser",
     "title": "Normalfordelingen",
@@ -301,6 +315,13 @@
     "text": "Hvorfor er den vigtig?\nPå grund af “Den Centrale Grænseværdisætning”.\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\nVi beregner gennemsnittet af den stikprøve og gemmer det.\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit."
   },
   {
+    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-1",
+    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-1",
+    "title": "Normalfordelingen",
+    "section": "Hvorfor er den vigtig?",
+    "text": "Hvorfor er den vigtig?\nDet gør vi mange gange.\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelngen.\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\nDet kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over."
+  },
+  {
     "objectID": "slides/normalfordelingen.html#en-gang-til",
     "href": "slides/normalfordelingen.html#en-gang-til",
     "title": "Normalfordelingen",
@@ -336,179 +357,11 @@
     "text": "Øvelse - Manglende procentil:\n\n\nEn normalfordelt population har middelværdi \\(\\mu = 12.5\\) og standardafvigelse \\(\\sigma = 3.2\\). Hvor stor en andel af værdierne er mindre end 10?\nMed andre ord, hvad er:\n\\(P(X &lt; 10)\\)\nTransformer til standardnormalfordelingen:\n\\(P(Z &lt; \\frac{10 - \\mu}{\\sigma})\\)\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\npnorm((10-12.5)/3.2)"
   },
   {
-    "objectID": "slides/normalfordelingen.html#øvelse---manglende-værdi-ved-given-procentil",
-    "href": "slides/normalfordelingen.html#øvelse---manglende-værdi-ved-given-procentil",
-    "title": "Normalfordelingen",
-    "section": "Øvelse - Manglende værdi ved given procentil:",
-    "text": "Øvelse - Manglende værdi ved given procentil:\n\n\nEn normalfordelt variabel har \\(\\mu = 50\\) og \\(\\sigma = 8\\). For hvilken værdi y er 90% af observationerne er mindre end y?\n\nEller - hvilken kvantil y giver P(X &lt; y) = 0.9?\n\n\nStandardiser: \\(P(Z&lt; \\frac{y-\\mu}{\\sigma}) = 0.9\\)\n\nP(X&lt;x) = 0.9 qnorm(0.9)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse---manglende-middelværdi-anden-variant",
-    "href": "slides/normalfordelingen.html#øvelse---manglende-middelværdi-anden-variant",
-    "title": "Normalfordelingen",
-    "section": "Øvelse - Manglende middelværdi (anden variant):",
-    "text": "Øvelse - Manglende middelværdi (anden variant):\nFor en normalfordeling gælder det at \\(\\sigma = 4.5\\) og at 75% af værdierne er mindre end 18. Hvad er middelværdien \\(\\mu\\)?\nP(X&lt;18) = 0.75\n(18-mu)/sigma = qnorm(0.75) (18-mu)/4.5 = qnorm(0.75) 18-mu = 4.5qnorm(0.75) 18 - 4.5qnorm(0.75) = mu"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse---manglende-interval-grænse",
-    "href": "slides/normalfordelingen.html#øvelse---manglende-interval-grænse",
-    "title": "Normalfordelingen",
-    "section": "Øvelse - Manglende interval-grænse:",
-    "text": "Øvelse - Manglende interval-grænse:\nEn normalfordelt population har \\(\\mu = 100\\) og \\(\\sigma = 15\\). Hvis 80% af værdierne ligger mellem 85 og en øvre grænse \\(x\\), hvad er da denne øvre grænse?\nVi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er. 100-80 = 20% ligger uden for intervallet. Hvor mange af værdierne ligger under 85? 20% minus denne værdi skal ligge over den øvre grænse vi leder efter.\nP(X&lt;85) X &lt; (85-100)/15\n\n\n[1] 126.0293"
-  },
-  {
-    "objectID": "slides/linreg.html#de-synes-den-her-er-sjov",
-    "href": "slides/linreg.html#de-synes-den-her-er-sjov",
-    "title": "Lineær regression",
-    "section": "de synes den her er sjov",
-    "text": "de synes den her er sjov\net output hvor noget er redigeret væk\nså - hvordan finder man det?\n\n\n[1] 508.3882\n\n\n[1] 8.083836\n\n\n[1] 11.12489\n\n\n[1] 0.1720165\n\n\n[1] 0.5682877"
-  },
-  {
-    "objectID": "slides/linreg.html#opgave-maj-2025-1-a",
-    "href": "slides/linreg.html#opgave-maj-2025-1-a",
-    "title": "Lineær regression",
-    "section": "Opgave maj 2025 1 a",
-    "text": "Opgave maj 2025 1 a\nvi får en variabelliste. Og skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.\n\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\n\nHvilken type analyse vil du udføre for at undersøge den sammenhæng? Angiv relevant R-kode med brug af de variabelnavne vi har fået\nHer kunne man snyde, og se på opgave b, der angav resultatet af den korrekte analyse\nMen.\nBeskriv de enkelte variable. Er de kontinuerte eller kategoriske?\nHvad vil vi forklare?\nHvad vil vi forklare det med?\nHvilken type analyse vil vi bruge? Overskriften er lineær regression, så det er ikke en stor overraskelse at det er den vi skal bruge…\nlm(weight ~ factor(smoke) + alco)\nMan kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable allerede er kodet som kategoriske, kan man spare factor()."
-  },
-  {
-    "objectID": "slides/linreg.html#opgave-maj-2025-1-b",
-    "href": "slides/linreg.html#opgave-maj-2025-1-b",
-    "title": "Lineær regression",
-    "section": "opgave maj 2025 1 b",
-    "text": "opgave maj 2025 1 b\nVi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\nt-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 3613.623 og standardfejlen er 7.108, hvad er t value så?\n\n\n[1] 508.3882\n\n\nDet stemmer ikke 100%. For der er afrundingsfejl\nSå den manglende t value for factor(smoke)2 hvad er den?\nHvoromkring ligger p-værdien?\n\n\n[1] -8.083836\n\n\nDen er bedre end 1.96, og ihvertfald signifikant\nHvad kan vi ellersk konkludere?\njo mere man ryger, jo værre. alkohol har ikke en signifikant betydning."
-  },
-  {
-    "objectID": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
-    "href": "slides/linreg.html#opgave-2025-februar-opgave-1-c",
-    "title": "Lineær regression",
-    "section": "opgave 2025 februar opgave 1 (c)",
-    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
-  },
-  {
-    "objectID": "slides/linreg.html#maj-2025-opgave-2-a",
-    "href": "slides/linreg.html#maj-2025-opgave-2-a",
-    "title": "Lineær regression",
-    "section": "maj 2025 opgave 2 a",
-    "text": "maj 2025 opgave 2 a\ngivet et estimat på 3613.623 og en standard fejl på 7.108 og 11279 observationer\nberegner vi et 95% konfidensinterval.\nbredden af et konfidensinterval er proportionalt med standardfejlen.\nDen skalerer som 1 over kvadratroden af antallet af observationer.\nDerfor: faktoren er kvadratroden af det gamle antal observationer divideret med det nye antal observationer.\nca 7½ gange. bredere."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "KUB Datalab slides",
-    "section": "",
-    "text": "side-by-side demo\nintro\nnormalfordelingen\nlineær regression\npower beregninger\nSEM"
-  },
-  {
-    "objectID": "slides/intro.html#hvad-gør-vi-her",
-    "href": "slides/intro.html#hvad-gør-vi-her",
-    "title": "Intro",
-    "section": "Hvad gør vi her?",
-    "text": "Hvad gør vi her?\nFokus på eksamensforberedelse til SEMS\nSEMS eksamenssæt kommer i tre dele. Statistik, epidemiologi og medicinsk sociologi.\nHer kigger vi kun på statistikken."
-  },
-  {
-    "objectID": "slides/intro.html#statistikdelens-struktur",
-    "href": "slides/intro.html#statistikdelens-struktur",
-    "title": "Intro",
-    "section": "Statistikdelens struktur",
-    "text": "Statistikdelens struktur\nDer er typisk to opgaver - med delspørgsmål."
-  },
-  {
-    "objectID": "slides/intro.html#noter-om-historiske-opgaver",
-    "href": "slides/intro.html#noter-om-historiske-opgaver",
-    "title": "Intro",
-    "section": "noter om historiske opgaver",
-    "text": "noter om historiske opgaver\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
-    "href": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
-    "title": "Logistisk regression",
-    "section": "Hvad bruger vi den logistiske regression til?",
-    "text": "Hvad bruger vi den logistiske regression til?\nDen almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.\nNår vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.\nI den lineære regression fitter vi\nE(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X\nAltså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.\ni den logistiske regression er det:\n\\[log(\\frac{p}{1-p} = \\beta_0 + \\beta_1x\\]\np er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds\nogså kaldet logit-funktionen.\nVil vi have sandsynligheden, skal vi bruge den inverse logit\n\\[p = \\frac{1}{1+e^{-\\eta}}\\]\nOg vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.\nHvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.\nHvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det ikke sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
-    "href": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
-    "title": "Logistisk regression",
-    "section": "Hvordan laver vi en logistisk regression?",
-    "text": "Hvordan laver vi en logistisk regression?\nHvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:\nglm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression\n\n\n\nCall:\nglm(formula = am ~ wt, family = \"binomial\", data = mtcars)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept)   12.040      4.510   2.670  0.00759 **\nwt            -4.024      1.436  -2.801  0.00509 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 43.230  on 31  degrees of freedom\nResidual deviance: 19.176  on 30  degrees of freedom\nAIC: 23.176\n\nNumber of Fisher Scoring iterations: 6\n\n\nestimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.\n\n\n (Intercept)           wt \n1.694596e+05 1.788183e-02 \n\n\nratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.\nHvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054\nHvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så\n\\(3*0.018^{0.5}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
-    "href": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
-    "title": "Logistisk regression",
-    "section": "opgave 2025 februar opgave 1 (c)",
-    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
-  },
-  {
-    "objectID": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
-    "href": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
-    "title": "Standard Error of the Mean",
-    "section": "Hvorfor var normalfordelingen vigtig?",
-    "text": "Hvorfor var normalfordelingen vigtig?\nJa, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.\nMen den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.\nAltså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.\nMen hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.\nfor standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.\nTil det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.\nDet beregner vi således:\nSE = sd/sqrt(n)\nSå. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven, med kvadratroden af n, antallet af observationer i stikprøven.\nOg så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer.\nsd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.\nNår vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.\nDet udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:\n\\[SE = \\frac{SD}{\\sqrt(n)}\\]\nHvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven."
-  },
-  {
-    "objectID": "slides/SEM.html#en-opgave",
-    "href": "slides/SEM.html#en-opgave",
-    "title": "Standard Error of the Mean",
-    "section": "En opgave",
-    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?\nDet kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
-  },
-  {
-    "objectID": "slides/SEM.html#konfidensintervaller",
-    "href": "slides/SEM.html#konfidensintervaller",
-    "title": "Standard Error of the Mean",
-    "section": "konfidensintervaller",
-    "text": "konfidensintervaller"
-  },
-  {
-    "objectID": "slides/SEM.html#hypotesetests",
-    "href": "slides/SEM.html#hypotesetests",
-    "title": "Standard Error of the Mean",
-    "section": "Hypotesetests",
-    "text": "Hypotesetests"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#og-den-anden-vej",
-    "href": "slides/normalfordelingen.html#og-den-anden-vej",
-    "title": "Normalfordelingen",
-    "section": "Og den anden vej",
-    "text": "Og den anden vej\nSå undertiden beregner vi Z. Og så skal vi bagefter finde ud af hvad X er.\nHvis vi ved hvordan vi går fra X til Z, så ved vi også hvordan vi går fra Z til X.\n\nEn ene vej trækker vi \\(\\mu\\) fra og dividerer med \\(\\sigma\\)\n\n\nDen anden vej?\n\n\nGanger med \\(\\sigma\\) og lægger \\(\\mu\\) til"
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-1",
-    "href": "slides/normalfordelingen.html#hvorfor-er-den-vigtig-1",
-    "title": "Normalfordelingen",
-    "section": "Hvorfor er den vigtig?",
-    "text": "Hvorfor er den vigtig?\nDet gør vi mange gange.\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelngen.\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\nDet kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over."
-  },
-  {
-    "objectID": "slides/side-by-side-demo.html#øvelse-1",
-    "href": "slides/side-by-side-demo.html#øvelse-1",
-    "title": "webR in Quarto HTML Documents",
-    "section": "Øvelse 1",
-    "text": "Øvelse 1\n\n\nHer skriver vi hvad der skal stå til venstre\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse---manglende-standardafvigelse",
-    "href": "slides/normalfordelingen.html#øvelse---manglende-standardafvigelse",
-    "title": "Normalfordelingen",
-    "section": "Øvelse - Manglende standardafvigelse:",
-    "text": "Øvelse - Manglende standardafvigelse:\n\n\nI en normalfordelt population er \\(\\mu = 85\\) og 25% af værdierne er større end 95. Hvad er \\(\\sigma\\) for denne fordeling?\n\nP(X &gt; 95) = 0.25\n\n\nP(X&lt;95) = 1-0.25 = 0.75\n\n\n\\(P(Z&lt; \\frac{95-\\mu}{\\sigma}) = 0.75\\)\n\n\n\\((95-85)/\\sigma = qnorm(0.75)\\)\n\n\n\\(10/qnorm(0.75) = \\sigma\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\npnorm((10-12.5)/3.2)"
-  },
-  {
     "objectID": "slides/normalfordelingen.html#øvelse---manglende-sigma",
     "href": "slides/normalfordelingen.html#øvelse---manglende-sigma",
     "title": "Normalfordelingen",
     "section": "Øvelse - Manglende \\(\\sigma\\)",
     "text": "Øvelse - Manglende \\(\\sigma\\)\n\n\nI en normalfordelt population er \\(\\mu = 85\\) og 25% af værdierne er større end 95. Hvad er \\(\\sigma\\) for denne fordeling?\n\nP(X &gt; 95) = 0.25\n\n\nP(X&lt;95) = 1-0.25 = 0.75\n\n\n\\(P(Z&lt; \\frac{95-\\mu}{\\sigma}) = 0.75\\)\n\n\n\\((95-85)/\\sigma = qnorm(0.75)\\)\n\n\n\\(10/qnorm(0.75) = \\sigma\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse---manglende-værdi-kendt-procentil",
-    "href": "slides/normalfordelingen.html#øvelse---manglende-værdi-kendt-procentil",
-    "title": "Normalfordelingen",
-    "section": "Øvelse - Manglende værdi, kendt procentil:",
-    "text": "Øvelse - Manglende værdi, kendt procentil:\n\n\nEn normalfordelt variabel har \\(\\mu = 50\\) og \\(\\sigma = 8\\). For hvilken værdi y er 90% af observationerne er mindre end y?\n\nEller - hvilken kvantil y giver P(X &lt; y) = 0.9?\n\n\nStandardiser: \\(P(Z&lt; \\frac{y-\\mu}{\\sigma}) = 0.9\\)\n\nP(X&lt;x) = 0.9 qnorm(0.9)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/normalfordelingen.html#manglende-værdi-kendt-procentil",
@@ -525,39 +378,11 @@
     "text": "Manglende middelværdi (variant 2):\n\n\nFor en normalfordeling gælder det at \\(\\sigma = 4.5\\) og 75% af værdierne er &gt; 18. Hvad er \\(\\mu\\)?\n\nP(X&gt;18) = 0.75\n\n\nP(X&lt;18) = 1 - 0.75 = 0.25\n\n\nStandardiser: \\(P(Z &lt; \\frac{18-\\mu}{\\sigma}) = 0.25\\)\n\n\n\\(\\frac{18-\\mu}{\\sigma} = qnorm(.25) = -0.6744898\\) Indsæt \\(\\sigma = 4.5\\) og isoler \\(\\mu\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/normalfordelingen.html#lidt-mer",
-    "href": "slides/normalfordelingen.html#lidt-mer",
-    "title": "Normalfordelingen",
-    "section": "lidt mer",
-    "text": "lidt mer\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nPointen om at pnorm og qnorm giver os MINDRE END!\ntallet 1.96"
-  },
-  {
     "objectID": "slides/normalfordelingen.html#manglende-interval-grænse",
     "href": "slides/normalfordelingen.html#manglende-interval-grænse",
     "title": "Normalfordelingen",
     "section": "Manglende interval-grænse",
     "text": "Manglende interval-grænse\n\n\nEn normalfordelt population har \\(\\mu = 100\\) og \\(\\sigma = 15\\). Hvis 80% af værdierne ligger mellem 85 og en øvre grænse \\(x\\), hvad er da denne øvre grænse?\neller find z således at: P(85 &lt; X &lt; x) = 0.8\n1 - 0.8 = 0.2 ligger udenfor intervallet Hvilken andel ligger under 85?\nP(X&lt;85) = 0.8 \\(P(Z&lt; \\frac{85-\\mu}{\\sigma}) = 0.8\\) \\(\\frac{85-\\mu}{\\sigma} = qnorm(0.8)\\) 0.2 - denne andel skal ligge over.\nVi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er. 100-80 = 20% ligger uden for intervallet. Hvor mange af værdierne ligger under 85? 20% minus denne værdi skal ligge over den øvre grænse vi leder efter.\nP(X&lt;85) X &lt; (85-100)/15\n\n\n[1] 126.0293\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#øvelse-42",
-    "href": "slides/normalfordelingen.html#øvelse-42",
-    "title": "Normalfordelingen",
-    "section": "Øvelse 42",
-    "text": "Øvelse 42\n\n\nVi har en normalfordelt population med \\(\\sigma = 6.52\\). 40% af værdierne er mindre end 0. Hvad er så \\(\\mu\\) for denne fordeling?\n\\(X \\sim N(\\mu, 6.52)\\)\nP(X&lt;0) = 0.4\nSkaler:\n\\(P(Z &lt; \\frac{0-\\mu}{6.52}) = 0.4\\)\n\\(\\frac{0-\\mu}{6.52} = qnorm(0.4) = -0.2533471\\)\nIsoler \\(\\mu\\)\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nFor at transformere vores værdier, skal vi trække fra, og dividere med standardafvigelsen.\nDet gælder også den 0 værdi vi leder efter\n(0-mu)/sd\n\nOg så yderligere en række øvelser. Typeopgaverne her er tests af om man forstår normalfordelingen, og kan regne på den."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#cowboy-trick",
-    "href": "slides/normalfordelingen.html#cowboy-trick",
-    "title": "Normalfordelingen",
-    "section": "Cowboy trick",
-    "text": "Cowboy trick\nHvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?\nVi kan skalere de 50, og putte resultatet ind i pnorm.\n\npnorm((50-47)/42)\n\n[1] 0.5284717\n\n\nEller, vi kan lade R gøre det for os:\n\n\npnorm(50, mean = 47, sd = 42)\n\n[1] 0.5284717\n\n\n\n\nFor de typeopgaver hvor vi skal finde \\(\\mu\\) og/eller \\(\\sigma\\) hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt."
-  },
-  {
-    "objectID": "slides/normalfordelingen.html#lidt",
-    "href": "slides/normalfordelingen.html#lidt",
-    "title": "Normalfordelingen",
-    "section": "lidt",
-    "text": "lidt\nHusk - vi bruger x-bar når vi ikke kender den sande mu.\nPointen om at pnorm og qnorm giver os MINDRE END!\ntallet 1.96"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområdet",
@@ -586,6 +411,20 @@
     "title": "Normalfordelingen",
     "section": "Normalområdet - øvre grænse",
     "text": "Normalområdet - øvre grænse\nDen øvre grænse er så den grænse under hvilken de 95% i normalområdet og de 2.5% under normalområdet ligger.\nDvs.\nP(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975\nStandardiser:\nP(Z &lt; y - 200 / 40 ) = 0.975\ny - 200 / 40 = qnomr(0.975) = 1.959964\nIsoler y:\ny = 1.959964 * 40 + 200 = 278"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområde---fra-en-eksamensopgave",
+    "href": "slides/normalfordelingen.html#normalområde---fra-en-eksamensopgave",
+    "title": "Normalfordelingen",
+    "section": "Normalområde - fra en eksamensopgave",
+    "text": "Normalområde - fra en eksamensopgave\nVi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:\n\n\n# A tibble: 2 × 4\n  gruppe           Antal Gennemsnit Sprdening\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Diabetikere        227      0.719     0.068\n2 Ikke-diabetikere   140      0.81      0.057\n\n\nBeregn et interval, der indeholder 95% af plasma magnesium målingerne for kontrol populationen (ikke-diabetikere)\nmiddelværdi +/- 1.96*spredning\n0.70 - 0.92"
+  },
+  {
+    "objectID": "slides/normalfordelingen.html#normalområde---fra-en-eksamensopgave-1",
+    "href": "slides/normalfordelingen.html#normalområde---fra-en-eksamensopgave-1",
+    "title": "Normalfordelingen",
+    "section": "Normalområde - fra en eksamensopgave",
+    "text": "Normalområde - fra en eksamensopgave\nhvor stor en andel af plasma magnesium målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nX ~ N(0.719, 0.068)\nEller - hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92)\neller: P(X &lt; 0.92) - P(X &lt; 0.7)\nStandardiser:\nP(Z &lt; 0.92-mu / sd) - P(Z &lt; 0.7 - mu / sd)\nmu 0.719, sigma 0.068\n\n\n[1] 0.6084767\n\n\nJEG SKAL NOK HAVE NOGET MED FOR DENNE MÅDE AT BEHANDLE INTERVALLERNE!"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområde---cowboy-trick",
@@ -663,5 +502,208 @@
     "title": "Lineær regression",
     "section": "tolkning generel",
     "text": "tolkning generel\nHvis x stiger med 1, vil y, alt andet lige stige med koefficienten på x.\nHvis x er 0, så er værdien af 0 lig intercept.\nHvis p-værdien er lav - er vi ret sikre på at sammenhængen eksisterer\nhvis koefficienten er høj - er effekten af en stigning på 1 stor. Men husk lige hvilke enheder vi er i, og hvad intercept egentlig er. En stigning på 1 kan være meget eller lidt afhængig af enheden.\nR-squared fortælelr os her hvor meget af variationen i data der forklares af modellen"
+  },
+  {
+    "objectID": "slides/linreg.html#de-synes-den-her-er-sjov",
+    "href": "slides/linreg.html#de-synes-den-her-er-sjov",
+    "title": "Lineær regression",
+    "section": "de synes den her er sjov",
+    "text": "de synes den her er sjov\net output hvor noget er redigeret væk\nså - hvordan finder man det?\n\n\n[1] 508.3882\n\n\n[1] 8.083836\n\n\n[1] 11.12489\n\n\n[1] 0.1720165\n\n\n[1] 0.5682877"
+  },
+  {
+    "objectID": "slides/linreg.html#opgave-maj-2025-1-a",
+    "href": "slides/linreg.html#opgave-maj-2025-1-a",
+    "title": "Lineær regression",
+    "section": "Opgave maj 2025 1 a",
+    "text": "Opgave maj 2025 1 a\nvi får denne variabelliste.\n\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\n\nOg skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.\nHvilken type analyse vil du udføre for at undersøge den sammenhæng?"
+  },
+  {
+    "objectID": "slides/linreg.html#hvilken-type-analyse",
+    "href": "slides/linreg.html#hvilken-type-analyse",
+    "title": "Lineær regression",
+    "section": "Hvilken type analyse?",
+    "text": "Hvilken type analyse?\nslide fra eget statisikkursus -\nAngiv relevant R-kode med brug af de variabelnavne vi har fået\nMen.\nBeskriv de enkelte variable. Er de kontinuerte eller kategoriske?\nHvad vil vi forklare?\nFødselsvægt - kontinuært\nHvad vil vi forklare det med?\nrygning - kategorisk variabel\nAlcohol - Kontinuært\nHvilken type analyse vil vi bruge? Det vi vil “forudsige” er en kontinuært variabel. Så vi bruger en lineær regression.\nDet vi vil bruge til at forudsige er en kontinuært og en kategorisk variabel\nDet er en lineær regression\nlm(weight ~ factor(smoke) + alco)\nMan kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable allerede er kodet som kategoriske, kan man spare factor()."
+  },
+  {
+    "objectID": "slides/linreg.html#opgave-maj-2025-1-b",
+    "href": "slides/linreg.html#opgave-maj-2025-1-b",
+    "title": "Lineær regression",
+    "section": "opgave maj 2025 1 b",
+    "text": "opgave maj 2025 1 b\nVi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\nt-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 3613.623 og standardfejlen er 7.108, hvad er t value så?\n\n\n[1] 508.3882\n\n\nDet stemmer ikke 100%. For der er afrundingsfejl\nSå den manglende t value for factor(smoke)2 hvad er den?\nHvoromkring ligger p-værdien?\n\n\n[1] -8.083836\n\n\nDen er bedre end 1.96, og ihvertfald signifikant\nHvad kan vi ellersk konkludere?\nBaseline er 0 cigaretter pr dag.\nSom udgangspunkt, for kvinder der hverken ryger eller drikker, er den forventede fødselsvægt 3613 gram. Hvis man ryger 1-10 cigaretter pr dag falder den forventede fødselsvægt, alt andet lige, med 127 gram. Og hvis man ryger mere end 10 cigaretter pr dag falder den, alt andet lige, med 194 gram.\nEstimatet på hvordan alkoholindtaget påvirker fødselsvægten, indikerer at den, alt andet lige, stiger med 1 gram pr genstand man drikker om ugen. Estimatet er dog ikke statistisk signifikant, og vi kan ikke afvise null-hypotesen.\njo mere man ryger, jo værre. alkohol har ikke en signifikant betydning."
+  },
+  {
+    "objectID": "slides/linreg.html#gad-vide-hvor-det-her-kommer-fra",
+    "href": "slides/linreg.html#gad-vide-hvor-det-her-kommer-fra",
+    "title": "Lineær regression",
+    "section": "gad vide hvor det her kommer fra?",
+    "text": "gad vide hvor det her kommer fra?\nanalyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))\nanalyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))\nHvilke analyser?\nlineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.\nintercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "KUB Datalab slides",
+    "section": "",
+    "text": "side-by-side demo\nintro\nnormalfordelingen\nlineær regression\npower beregninger\nSEM"
+  },
+  {
+    "objectID": "slides/intro.html#hvad-gør-vi-her",
+    "href": "slides/intro.html#hvad-gør-vi-her",
+    "title": "Intro",
+    "section": "Hvad gør vi her?",
+    "text": "Hvad gør vi her?\nFokus på eksamensforberedelse til SEMS\nSEMS eksamenssæt kommer i tre dele. Statistik, epidemiologi og medicinsk sociologi.\nHer kigger vi kun på statistikken."
+  },
+  {
+    "objectID": "slides/intro.html#statistikdelens-struktur",
+    "href": "slides/intro.html#statistikdelens-struktur",
+    "title": "Intro",
+    "section": "Statistikdelens struktur",
+    "text": "Statistikdelens struktur\nDer er typisk to opgaver - med delspørgsmål."
+  },
+  {
+    "objectID": "slides/intro.html#typer-af-data",
+    "href": "slides/intro.html#typer-af-data",
+    "title": "Intro",
+    "section": "typer af data",
+    "text": "typer af data\nkontinuærte og kategoriske"
+  },
+  {
+    "objectID": "slides/intro.html#noter-om-historiske-opgaver",
+    "href": "slides/intro.html#noter-om-historiske-opgaver",
+    "title": "Intro",
+    "section": "noter om historiske opgaver",
+    "text": "noter om historiske opgaver\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
+    "href": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
+    "title": "Logistisk regression",
+    "section": "Hvad bruger vi den logistiske regression til?",
+    "text": "Hvad bruger vi den logistiske regression til?\nDen almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.\nNår vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.\nI den lineære regression fitter vi\nE(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X\nAltså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.\ni den logistiske regression er det:\n\\[log(\\frac{p}{1-p} = \\beta_0 + \\beta_1x\\]\np er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds\nogså kaldet logit-funktionen.\nVil vi have sandsynligheden, skal vi bruge den inverse logit\n\\[p = \\frac{1}{1+e^{-\\eta}}\\]\nOg vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.\nHvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.\nHvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det ikke sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
+    "href": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
+    "title": "Logistisk regression",
+    "section": "Hvordan laver vi en logistisk regression?",
+    "text": "Hvordan laver vi en logistisk regression?\nHvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:\nglm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression\n\n\n\nCall:\nglm(formula = am ~ wt, family = \"binomial\", data = mtcars)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept)   12.040      4.510   2.670  0.00759 **\nwt            -4.024      1.436  -2.801  0.00509 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 43.230  on 31  degrees of freedom\nResidual deviance: 19.176  on 30  degrees of freedom\nAIC: 23.176\n\nNumber of Fisher Scoring iterations: 6\n\n\nestimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.\n\n\n (Intercept)           wt \n1.694596e+05 1.788183e-02 \n\n\nratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.\nHvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054\nHvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så\n\\(3*0.018^{0.5}\\)"
+  },
+  {
+    "objectID": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
+    "href": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
+    "title": "Logistisk regression",
+    "section": "opgave 2025 februar opgave 1 (c)",
+    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
+  },
+  {
+    "objectID": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
+    "href": "slides/SEM.html#hvorfor-var-normalfordelingen-vigtig",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvorfor var normalfordelingen vigtig?",
+    "text": "Hvorfor var normalfordelingen vigtig?\nJa, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags.\nMen den var også vigtig fordi den centrale grænseværdisætning fortæller os, at tager vi tilstrækkeligt mange stikprøver, så vil middelværdierne af de stikprøver følge normalfordelingen (tilnærmelsesvist). Den normalfordeling har en middelværdi der er lig med den “sande” middelværdi for populationen. Det er ikke den middelværdi I har beregnet.\nAltså bortset fra at der er en populær typeopgave hvor I testes i Normalfordelingen var vigtig fordi middelværdien af mange stikprøver følger normalfordelingen.\nMen hvilken normalfordeling? Ikke en hvor sigma er standardafvigelsen.\nfor standardafvigelsen beskriver jo hvordan observationerne i vores stikprøve afviger fra middelværdien. Det vi er ude efter er oplysninger om hvordan vores middelværdi x, der er et estimat på den “sande” middelværdi mu, afviger fra den sande værdi.\nTil det formål bruger vi “SEM”, Standard Error of the Mean, der beskriver netop spredningen på vores estimat af middelværdien.\nDet beregner vi således:\nSE = sd/sqrt(n)\nSå. Standardfejlen på vores estimat af den sande middelværdi, finder vi ved at dividere standardafvigelsen på de individuelle observationer i stikprøven, med kvadratroden af n, antallet af observationer i stikprøven.\nOg så kan vi beskrive hvordan målinger af gennemsnittet fra mange stikprøver varierer.\nsd er standardafvigelsen på de enkelte observationer. Den og middelværdien beskriver normalfordelingen. Men hvad er egentlig usikkerheden på den middelværdi? Det fortæller standardafvigelsen intet om, for den forholder sig til de enkelte observationer.\nNår vi skal have standardfejlen på middelværdien giver det intuitiv mening at jo flere observationer der ligger til grund for beregningen af den middelværdi, jo mere sikker er middelværdien som estimat på den sande værdi.\nDet udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Standardfejlen). Og vi finder den ved:\n\\[SE = \\frac{SD}{\\sqrt(n)}\\]\nHvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven."
+  },
+  {
+    "objectID": "slides/SEM.html#hvad-bruger-vi-den-til",
+    "href": "slides/SEM.html#hvad-bruger-vi-den-til",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad bruger vi den til?",
+    "text": "Hvad bruger vi den til?\nVi har målt en middelværdi af et eller andet - et systolisk blodtryk eksempelvis, på en stikprøve fra en population\nsom vi som regel får oplyst er normalfordelt.\nVi får også en standardafvigelse oplyst. Og hvor stor stikprøven var.\nDen middelværdi vil vi gerne bruge til at sige noget om populationen.\nHvor meget stoler vi på middelværdien?"
+  },
+  {
+    "objectID": "slides/SEM.html#konfidensintervaller",
+    "href": "slides/SEM.html#konfidensintervaller",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Konfidensintervaller",
+    "text": "Konfidensintervaller\nDet vi lader som om er at vi måler middelværdien fra mange stikprøver.\nIndenfor hvilket interval kan vi forvente at 95% af de middelværdier vi måler ligger?\nHusk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi finde ud af hvor grænserne for den del der indeholder 95% af observationerne ligger.\nNu gør vi det “bare” med SEM i stedet for sigma.\nOg derfor:\n\\(\\mu \\pm 1.96 SEM\\)"
+  },
+  {
+    "objectID": "slides/SEM.html#en-del-af-en-eksamensopgave",
+    "href": "slides/SEM.html#en-del-af-en-eksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En del af en eksamensopgave",
+    "text": "En del af en eksamensopgave\n\n\nVi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:\n\n\n\n\n\n\n\n\ngruppe\nAntal\nGennemsnit\nSperdning\n\n\n\n\nDiabetikere\n227\n0.719\n0.068\n\n\nIkke-diabetikere\n140\n0.810\n0.057\n\n\n\n\n\n\n\nBeregn 95% konfidensinterval for hver af de to grupper.\n. . .\n\\(SEM = \\frac{\\sigma}{\\sqrt(n)}\\)\n. . .\n\\(SEM_{dia} = \\frac{0.068}{\\sqrt(227)}\\)\n. . .\n\\(SEM_{ikke-dia} = \\frac{0.057}{\\sqrt(140)}\\)\n. . .\n\n\n[1] 0.7095579 0.7284421\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#hypotesetest",
+    "href": "slides/SEM.html#hypotesetest",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hypotesetest",
+    "text": "Hypotesetest\nDen hypotese I typisk bliver bedt om at teste er:\nEr denne værdi i virkeligheden 0?\nVi måler blodtryk for en gruppe der får betablokkere. Og en gruppe der får et placebo.\nVi vil typisk se en forskel. Er den forskel i virkeligheden udtryk for en tilfældig variation, og kunne den lige så godt være 0?\nVi opstiller en null-hypotese, og en alternativ hypotese.\nnull-hypotesen er: der er ingen effekt af medicinen, blodtrykket ændrer sig ikke. Den alternative hypotese er - der er en effekt.\nDer hvor vi skal holde tungen lige i munden er, at vi ikke kan vise at der er en effekt. Men vi kan statistisk afvise null-hypotesen.\nDet kan vi gøre med en vis sikkerhed.\n\nvi har et estimat på en “sand” middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.\ndet bruger vi til at få en p-værdi. Den udtrykker risikoen for at vi tager fejl når vi afviser null-hypotesen. Vi kan sjælden være 100% sikre. Men vi kan være 95% sikre. og det er vi typisk tilfredse med. Men er vi 95% sikre, er der stadig 5% risiko for at vi tager fejl. Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en effekt, men den er der faktisk ikke.\nDer findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet. men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!\nSandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi alpha. Det hænger sammen med power."
+  },
+  {
+    "objectID": "slides/SEM.html#en-opgave",
+    "href": "slides/SEM.html#en-opgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En opgave",
+    "text": "En opgave\nVi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?\nDet kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige."
+  },
+  {
+    "objectID": "slides/SEM.html#konfidensintervaller-1",
+    "href": "slides/SEM.html#konfidensintervaller-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "konfidensintervaller",
+    "text": "konfidensintervaller"
+  },
+  {
+    "objectID": "slides/SEM.html#hypotesetests",
+    "href": "slides/SEM.html#hypotesetests",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hypotesetests",
+    "text": "Hypotesetests"
+  },
+  {
+    "objectID": "slides/SEM.html#maj-2025-opgave-2-a",
+    "href": "slides/SEM.html#maj-2025-opgave-2-a",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "maj 2025 opgave 2 a",
+    "text": "maj 2025 opgave 2 a\nVi får oplyst at et 95% konfidensinterval for en fødselsvægt er 3561.5 gram til 3583.4 gram. Vi får også at vide at beregningen er baseret på 11279 kvinder.\nVi bliver nu spurgt hvor mange gange bredere konfidensintervallet ville blive hvis vi kun havde haft data fra 200 kvinder.\nDen nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien. Den øvore grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.\nMed andre ord afhænger bredden af standardfejlen, SEM.\nSEM finder vi ved at dividere standardafvigelsen med kvadratroden af antallet af observationer.\nSå i konfidensintervallet har vi divideret standardafvigelsen med sqrt(11279)\nNu har vi en stikprøvestørrelse på 200. Så finder vi bredden af konfidensintervallet ved at dividere standardafvigelsen med sqrt(200)\nEller - bredden af det første konfidensinterval er 21.96sd/sqrt(11279)\nbredden af det andet konfidensinterval er 21.96sd/sqrt(200)\nDen ene divideret med den anden:\nbredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5\nca 7½ gange. bredere."
+  },
+  {
+    "objectID": "slides/SEM.html#øvelse-fra-en-eksamensopgave",
+    "href": "slides/SEM.html#øvelse-fra-en-eksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "øvelse fra en eksamensopgave",
+    "text": "øvelse fra en eksamensopgave\nVi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:\n\n\n# A tibble: 2 × 4\n  gruppe           Antal Gennemsnit Sprdening\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Diabetikere        227      0.719     0.068\n2 Ikke-diabetikere   140      0.81      0.057\n\n\nBeregn 95% konfidensinterval for hver af de to grupper.\nSpredningen er for de enkelte målinger. Hvis vi skal beregne konfidensintervallet for estimatet på middelværdien, skal vi have standardfejlen for middelværdien - SEM.\nDen finder vi ved at dividere spredningen med kvadratroden på antallet af observationer.\ndiabetikere: 0.719 + c(-1,1)1.960.068/sqrt(227)\nIkke-diabetikere: 0.810 + c(-1,1)1.960.057/sqrt(140)\nEr der forskel?\nEr der signifikant forskel i niveauet?\nJa, de to konfidensintervaller overlapper ikke."
+  },
+  {
+    "objectID": "slides/SEM.html#hvodan-kan-vi-ellers-beregne-det",
+    "href": "slides/SEM.html#hvodan-kan-vi-ellers-beregne-det",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvodan kan vi ellers beregne det?",
+    "text": "Hvodan kan vi ellers beregne det?\nto-sample t-test\nhvad er forskellen på de to middelværdier?\nHvad er den poolede standardfejl (standardafvigelsen divideret med antallet af observationer, summen af de to, kvadratroden af den sum).\nVore null-hypotese er at de er ens, altså at forskellen er 0.\net 95% konfidensinterval for forskellen er: den observerede forskel +/- 1.96 gange den poolede standardfejl.\nDen omfatter ikke 0 - så der er en statistisk signifikant forskel på de to middelværdier."
+  },
+  {
+    "objectID": "slides/SEM.html#en-anden-eksamensopgave---forskel-på-middelværdier",
+    "href": "slides/SEM.html#en-anden-eksamensopgave---forskel-på-middelværdier",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En anden eksamensopgave - forskel på middelværdier",
+    "text": "En anden eksamensopgave - forskel på middelværdier\nVi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.\nVi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82       152.      18.4\n2 Placebo       90       156.      19.1\n\n\nmå\nVi har to samples. Så vi bruger two-sample t-test. Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.\nVi har to grupper - så vi skal have berenet den poolede standardfejl:\n\n\n[1] 2.860459\n\n\net 95% konfidensinterval for forskellen er derfor:\n4 +/- 1.96*s.e\nDa det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0."
+  },
+  {
+    "objectID": "slides/SEM.html#videre---ønskred-størrelse-af-konfidensinterval",
+    "href": "slides/SEM.html#videre---ønskred-størrelse-af-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "videre - ønskred størrelse af konfidensinterval",
+    "text": "videre - ønskred størrelse af konfidensinterval\nLidt kringlet eksamensspørgsmål\nHvis antallet af forsøgspersoner der skal have den behandlingen kaldes n_1 og antallet af personer i kontrollen (placebo) kaldes n_0. og vi vil have at der er dobbelt så mange i kontrolgruppen som i forsøgsgruppen (n_0 = 2*n_1). hvor mange personer skal vi så have ialt, hvis det 95% konfidensinterval vi beregnede lige før får længden 8. Givet at spredningerne er uændrede.\nPuha.\nSvaret vil være n0 + n1. Eller, 3*n1 fordi n0 er lig 2n1\nKonfidensintervallet skal have en længde på 8.\nSå 1.96*s.e. hvor s.e. er den poolede standardfejl skal være 4. s.e. skal derfor være 4/1.96. Fordi den skal være 4 på hver side.\ns.e. er givet ved\nsqrt((18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2) = s.e.\n(18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2 = s.e.^2\n18.4^2/n1 + 19.1^2/n0 = s.e.^2\n18.4^2 / n1 + 19.1^2/2n1 = s.e^2\n18.4^2 / n1 + 2*19.1^2 / n1 = se^2\n18.4^2 + 219.1^2 = se^2  n1\n1068.18/((4/1.96)^2)\nHer roder jeg ret meget rundt i udlednignen. 4=1.94*se_poolet. svaret er n1 = 125 og n er derfro 375"
+  },
+  {
+    "objectID": "slides/SEM.html#endnu-en-eksamensopgave",
+    "href": "slides/SEM.html#endnu-en-eksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "endnu en eksamensopgave",
+    "text": "endnu en eksamensopgave\nVi har en population - fordelingen er hæmoglobin i populationen er normalfordelt. middelværdi \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelse n. For hver af de stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi mu (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{sqrt{n}}/\\)"
+  },
+  {
+    "objectID": "slides/SEM.html#del-b",
+    "href": "slides/SEM.html#del-b",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "del b",
+    "text": "del b\n\n\nHvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?\n. . .\nP(13.0 &lt; X &lt; 13.6)\n. . .\nP(X &lt; 13.6) - P(X&lt; 13.0)\n. . .\nstandardiser. SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\), \\(\\mu = 13.3\\)\n. . .\n\n\n[1] 0.2891828\n\n\n. . .\n\\(P(Z &lt; \\frac{13.6 - 13.3}{0.2891828}) - P(Z &lt; \\frac{13.0 - 13.3}{0.2891828})\\)\n. . .\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#del-c",
+    "href": "slides/SEM.html#del-c",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "del c",
+    "text": "del c\nHvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem mu-0.2 og mu+0.2\nTja. se*1.96 = .2\n1.96 * sigma/sqrt(n) = 0.2\n1.96sigma = 0.2sqrt(n)\n1.96*sigma / 0.2 = sqrt(n)\n(1.96 * 1.12 / 0.2)^2 = n"
   }
 ]

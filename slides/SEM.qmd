@@ -9,6 +9,11 @@ engine: knitr
 filters:
   - webr
 ---
+
+```{r}
+library(gt)
+library(tidyverse)
+```
 ## Hvorfor var normalfordelingen vigtig?
 
 Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags. 
