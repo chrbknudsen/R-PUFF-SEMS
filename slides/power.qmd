@@ -85,6 +85,8 @@ at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre obse
 power.t.test(delta =1, power = .8, type = "two.sample") 
 ```
 ## Opgave 2 2025 februar
+
+
 Hvis vi godt vil kunne se en bestemt forskel mellem to grupper?
 Hvor stor skal grupperne så være?
 Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?

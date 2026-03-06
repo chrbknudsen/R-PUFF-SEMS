@@ -1086,6 +1086,47 @@ Isoler y:
 
 y = 1.959964 * 40 + 200 = 278
 
+
+## Normalområde - fra en eksamensopgave
+Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+```{r}
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+"Diabetikere", 227, 0.719, 0.068,
+"Ikke-diabetikere", 140, 0.810, 0.057)
+```
+
+Beregn et interval, der indeholder 95% af plasma magnesium målingerne for kontrol populationen (ikke-diabetikere)
+
+middelværdi +/- 1.96*spredning
+
+0.70 - 0.92
+
+## Normalområde - fra en eksamensopgave
+
+hvor stor en andel af plasma magnesium målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
+
+X ~ N(0.719, 0.068)
+
+Eller - hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
+
+Eller: P(0.7 < X < 0.92)
+
+eller: 
+P(X < 0.92) - P(X < 0.7)
+
+Standardiser:
+
+P(Z < 0.92-mu / sd) - P(Z < 0.7 - mu / sd)
+
+mu 0.719, sigma 0.068
+
+```{r}
+pnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)
+```
+
+JEG SKAL NOK HAVE NOGET MED FOR DENNE MÅDE AT BEHANDLE INTERVALLERNE!
+
 ## Normalområde - cowboy trick
 
 1.96 er det magiske tal. Så det er overflødigt at lave standardiseringen.
