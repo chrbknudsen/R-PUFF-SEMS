@@ -1,5 +1,6 @@
 ---
-title: "Standard Error of the Mean"
+title: "Konfidensintervaller og hypotesetests"
+subtitle: "Standard Error of the Mean"
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -8,6 +9,11 @@ engine: knitr
 filters:
   - webr
 ---
+
+```{r}
+library(gt)
+library(tidyverse)
+```
 ## Hvorfor var normalfordelingen vigtig?
 
 Ja, den er jo vigtig fordi I ofte vil få en typeopgave hvor I skal demonstrere at I kan bruge qnorm og pnorm til at regne frem og tilbage, og finde ting der mangler og den slags. 
@@ -48,6 +54,141 @@ Det udtrykker vi som SEM - Standard Error of the Mean (eller ofte blot SE, Stand
 $$SE = \frac{SD}{\sqrt(n)}$$
 
 Hvor SD er standardafvigelsen (standardeviationen) for stikprøven, og n er antallet af observationer i stikprøven.
+
+## Hvad bruger vi den til?
+
+Vi har målt en middelværdi af et eller andet - et systolisk blodtryk eksempelvis, på en stikprøve fra en population
+
+som vi som regel får oplyst er normalfordelt.
+
+Vi får også en standardafvigelse oplyst. Og hvor stor stikprøven var.
+
+Den middelværdi vil vi gerne bruge til at sige noget om populationen.
+
+Hvor meget stoler vi på middelværdien?
+
+## Konfidensintervaller
+
+Det vi lader som om er at vi måler middelværdien fra _mange_ stikprøver. 
+
+Indenfor hvilket interval kan vi forvente at 95% af de middelværdier vi måler ligger?
+
+Husk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi finde ud af hvor 
+grænserne for den del der indeholder 95% af observationerne ligger.
+
+Nu gør vi det "bare" med SEM i stedet for sigma.
+
+Og derfor:
+
+
+$\mu \pm 1.96 SEM$
+
+## En del af en eksamensopgave
+:::: {.columns}
+:::: {.column}
+Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+```{r, echo = FALSE}
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sperdning,
+"Diabetikere", 227, 0.719, 0.068,
+"Ikke-diabetikere", 140, 0.810, 0.057) |> gt()
+```
+
+Beregn 95% konfidensinterval for hver af de to grupper.
+
+. . . 
+
+$SEM = \frac{\sigma}{\sqrt(n)}$
+
+. . . 
+
+$SEM_{dia} = \frac{0.068}{\sqrt(227)}$
+
+. . . 
+
+$SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
+
+. . . 
+
+```{r}
+0.719 + c(-1,1)*1.96*(0.057/sqrt(140))
+```
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+```
+::::
+::::
+
+
+## Hypotesetest
+
+Den hypotese I typisk bliver bedt om at teste er:
+
+Er denne værdi i virkeligheden 0?
+
+Vi måler blodtryk for en gruppe der får betablokkere. Og en gruppe der får et placebo.
+
+Vi vil typisk se en forskel. Er den forskel i virkeligheden udtryk for en tilfældig variation, og kunne den lige så godt være 0?
+
+Vi opstiller en null-hypotese, og en alternativ hypotese.
+
+null-hypotesen er: der er ingen effekt af medicinen, blodtrykket ændrer sig ikke. Den alternative hypotese er - der er en effekt.
+
+Der hvor vi skal holde tungen lige i munden er, at vi ikke kan vise at der er en effekt. Men vi kan statistisk afvise null-hypotesen.
+
+Det kan vi gøre med en vis sikkerhed. 
+
+```{r echo = FALSE}
+library(ggplot2)
+library(dplyr)
+
+mu <- 2
+sigma <- 0.95
+
+lower <- qnorm(0.025, mean = mu, sd = sigma)
+upper <- qnorm(0.975, mean = mu, sd = sigma)
+
+x_vals <- seq(mu - 4 * sigma, mu + 4 * sigma, length.out = 1000)
+
+df <- tibble(
+  x = x_vals,
+  y = dnorm(x, mean = mu, sd = sigma),
+  in_95 = x >= lower & x <= upper
+)
+
+ggplot(df, aes(x, y)) +
+  geom_area(
+    data = df %>% filter(in_95),
+    alpha = 0.5
+  ) +
+  geom_line(linewidth = 1) +
+  geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  annotate(
+    "text",
+    x = 0,
+    y = max(df$y) * 0.15,
+    label = "0",
+    vjust = -0.5
+  ) +  
+  theme_minimal(base_size = 14)
+
+```
+
+vi har et estimat på en "sand" middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.
+
+det bruger vi til at få en p-værdi. Den udtrykker risikoen for at vi tager fejl når vi afviser null-hypotesen. Vi kan sjælden være 100% sikre.
+Men vi kan være 95% sikre. og det er vi typisk tilfredse med. Men er vi 95% sikre, er der stadig 5% risiko for at vi tager fejl. 
+Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en effekt, men den er der faktisk ikke.
+
+Der findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet.
+men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!
+
+Sandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi alpha. Det hænger sammen med power.
 
 ## En opgave
 
@@ -107,3 +248,220 @@ De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder 
 
 
 ## Hypotesetests
+
+
+
+## maj 2025 opgave 2 a
+
+Vi får oplyst at et 95% konfidensinterval for en fødselsvægt er 3561.5 gram til 3583.4 gram. 
+Vi får også at vide at beregningen er baseret på 11279 kvinder.
+
+Vi bliver nu spurgt hvor mange gange bredere konfidensintervallet ville blive hvis vi kun havde haft 
+data fra 200 kvinder.
+
+Den nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien.
+Den øvore grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.
+
+Med andre ord afhænger bredden af standardfejlen, SEM. 
+
+SEM finder vi ved at dividere standardafvigelsen med kvadratroden af antallet af observationer.
+
+Så i konfidensintervallet har vi divideret standardafvigelsen med sqrt(11279)
+
+Nu har vi en stikprøvestørrelse på 200. Så finder vi bredden af konfidensintervallet ved at dividere 
+standardafvigelsen med sqrt(200)
+
+Eller - bredden af det første konfidensinterval er 2*1.96*sd/sqrt(11279)
+
+bredden af det andet konfidensinterval er 2*1.96*sd/sqrt(200)
+
+Den ene divideret med den anden:
+
+bredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5
+
+
+
+ca 7½ gange. bredere.
+
+
+
+## øvelse fra en eksamensopgave
+
+Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+```{r}
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+"Diabetikere", 227, 0.719, 0.068,
+"Ikke-diabetikere", 140, 0.810, 0.057)
+```
+
+Beregn 95% konfidensinterval for hver af de to grupper.
+
+Spredningen er for de enkelte målinger. Hvis vi skal beregne konfidensintervallet for estimatet på middelværdien,
+skal vi have standardfejlen for middelværdien - SEM.
+
+Den finder vi ved at dividere spredningen med kvadratroden på antallet af observationer.
+
+diabetikere:
+0.719 + c(-1,1)*1.96*0.068/sqrt(227)
+
+Ikke-diabetikere:
+0.810 + c(-1,1)*1.96*0.057/sqrt(140)
+
+Er der forskel?
+
+Er der signifikant forskel i niveauet?
+
+Ja, de to konfidensintervaller overlapper ikke.
+
+## Hvodan kan vi ellers beregne det?
+
+to-sample t-test
+
+hvad er forskellen på de to middelværdier?
+
+Hvad er den poolede standardfejl (standardafvigelsen divideret med antallet af observationer, summen af de to, kvadratroden af den sum).
+
+Vore null-hypotese er at de er ens, altså at forskellen er 0.
+
+et 95% konfidensinterval for forskellen er:
+den observerede forskel +/- 1.96 gange den poolede standardfejl.
+
+Den omfatter ikke 0 - så der er en statistisk signifikant forskel på de to middelværdier.
+
+## En anden eksamensopgave - forskel på middelværdier
+
+Vi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo. 
+
+Vi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:
+
+```{r}
+tribble(~Gruppe, ~n, ~gennemsnit, ~spredning,
+"Behandling", 82, 152.5, 18.4,
+"Placebo", 90, 156.5, 19.1)
+```
+må
+
+Vi har to samples. Så vi bruger two-sample t-test.
+Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.
+
+Vi har to grupper - så vi skal have berenet den poolede standardfejl:
+
+
+```{r}
+sqrt((18.4/sqrt(82))^2 + (19.1/sqrt(90))^2)
+```
+
+et 95% konfidensinterval for forskellen er derfor:
+
+4 +/- 1.96*s.e
+
+Da det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.
+
+## videre - ønskred størrelse af konfidensinterval 
+
+Lidt kringlet eksamensspørgsmål
+
+Hvis antallet af forsøgspersoner der skal have den behandlingen kaldes n_1 og antallet af personer i kontrollen (placebo) kaldes n_0.
+og vi vil have at der er dobbelt så mange i kontrolgruppen som i forsøgsgruppen (n_0 = 2*n_1). hvor mange personer skal vi så have ialt,
+hvis det 95% konfidensinterval vi beregnede lige før får længden 8. Givet at spredningerne er uændrede.
+
+Puha.
+
+Svaret vil være n0 + n1. Eller, 3*n1 fordi n0 er lig 2n1
+
+Konfidensintervallet skal have en længde på 8.
+
+Så 1.96*s.e. hvor s.e. er den poolede standardfejl skal være 4. s.e. skal derfor være 4/1.96. Fordi den skal være 4 på hver side.
+
+
+s.e. er givet ved 
+
+sqrt((18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2) = s.e.
+
+(18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2 = s.e.^2
+
+18.4^2/n1 + 19.1^2/n0 = s.e.^2
+
+18.4^2 / n1 + 19.1^2/2n1 = s.e^2
+
+18.4^2 / n1 + 2*19.1^2 / n1 = se^2
+
+18.4^2 + 2*19.1^2  = se^2 * n1
+
+1068.18/((4/1.96)^2)
+
+Her roder jeg ret meget rundt i udlednignen. 4=1.94*se_poolet. svaret er n1 = 125 og n er derfro 375
+
+## endnu en eksamensopgave
+
+
+Vi har en population - fordelingen er hæmoglobin i populationen er normalfordelt.
+middelværdi $\mu$ = 13.3 g/100 ml. Spredning $\sigma$ = 1.12 g/100 ml.
+
+Vi udtager stikprøver af størrelse n. For hver af de stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte
+med middelværdi mu (hvis vi udtager uendeligt mange stikprøver)
+
+Hvad er spredningen i fordelingen af stikprøvegennemsnittene?
+
+. . . 
+
+Det er SEM. Den beregner vi ved $\frac{\sigma}{sqrt{n}}/$
+
+
+## del b
+
+:::: {.columns}
+:::: {.column}
+
+
+Hvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?
+
+. . . 
+
+P(13.0 < X < 13.6)
+
+. . . 
+
+P(X < 13.6) - P(X< 13.0)
+
+. . . 
+
+standardiser. SEM = $\frac{\sigma}{\sqrt{n}}$, $\mu = 13.3$
+
+. . . 
+
+```{r}
+1.12/sqrt(15)
+```
+
+. . . 
+
+$P(Z < \frac{13.6 - 13.3}{0.2891828}) - P(Z < \frac{13.0 - 13.3}{0.2891828})$
+
+. . . 
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+```
+
+::::
+::::
+
+
+## del c
+
+Hvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem mu-0.2 og mu+0.2
+
+Tja. se*1.96 = .2
+
+1.96 * sigma/sqrt(n) = 0.2
+
+1.96*sigma = 0.2*sqrt(n)
+
+1.96*sigma / 0.2 = sqrt(n)
+
+(1.96 * 1.12 / 0.2)^2 = n

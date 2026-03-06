@@ -1023,7 +1023,122 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 ::::
 ::::
 
-## Cowboy trick
+## Normalområdet
+
+Populært spørgsmål - hvad er normalområdet for "noget"?
+
+Hvis de 95% hyppigste observationer i en normalfordelt population er "normalområdet". 
+I hvilket interval ligger de de så?
+
+. . . 
+
+Hvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor
+
+. . . 
+
+Så 2.5% ligger lavere, og 2.5% ligger højere.
+
+. . .
+
+Kender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger
+
+## Normalområdet - øvelse 
+
+Hvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 mg/dL, hvad er så normalområdet? Defineret som det interval i hvilket 95% af værdierne vil ligge?
+
+## Normalområdet - nedre grænse
+
+$X \sim N(200, 40)$
+
+Nedre grænse så de (100-95)/2 = 2.5% laveste værdier
+
+P(X < y) = 0.025
+
+Standardiser:
+
+P(Z < \frac{y-200}{40}) = 0.025
+
+y-200/40 = qnorm(0.025) = - 1.959964
+
+Isoler y:
+-1.959964*40 + 200 = 122
+
+
+:::: notes
+Der er en del domænespecifikke ting der spiller ind her. 
+::::
+
+## Normalområdet - øvre grænse
+
+Den øvre grænse er så den grænse under hvilken de 95% i normalområdet _og_ de 2.5% under normalområdet ligger.
+
+Dvs. 
+
+P(X < y) = 0.95+0.025 = P(X < y) = 0.975
+
+Standardiser:
+
+P(Z < y - 200 / 40 ) = 0.975
+
+y - 200 / 40 = qnomr(0.975) = 1.959964
+
+Isoler y:
+
+y = 1.959964 * 40 + 200 = 278
+
+
+## Normalområde - fra en eksamensopgave
+Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+```{r}
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+"Diabetikere", 227, 0.719, 0.068,
+"Ikke-diabetikere", 140, 0.810, 0.057)
+```
+
+Beregn et interval, der indeholder 95% af plasma magnesium målingerne for kontrol populationen (ikke-diabetikere)
+
+middelværdi +/- 1.96*spredning
+
+0.70 - 0.92
+
+## Normalområde - fra en eksamensopgave
+
+hvor stor en andel af plasma magnesium målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
+
+X ~ N(0.719, 0.068)
+
+Eller - hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
+
+Eller: P(0.7 < X < 0.92)
+
+eller: 
+P(X < 0.92) - P(X < 0.7)
+
+Standardiser:
+
+P(Z < 0.92-mu / sd) - P(Z < 0.7 - mu / sd)
+
+mu 0.719, sigma 0.068
+
+```{r}
+pnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)
+```
+
+JEG SKAL NOK HAVE NOGET MED FOR DENNE MÅDE AT BEHANDLE INTERVALLERNE!
+
+## Normalområde - cowboy trick
+
+1.96 er det magiske tal. Så det er overflødigt at lave standardiseringen.
+
+gå direkte til middelværdi +/- 1.96*sd
+
+eller
+
+200 + c(-1,1)* 1.96 * 40
+
+
+## Cowboy trick 2 
 
 Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?
 

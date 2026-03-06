@@ -2070,11 +2070,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Hvordan kan vi beskrive alle de her observationer?</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 184.2 182.6 177.7 178.5 178.0 191.8 178.2 177.9 179.5 186.3 182.9 163.4
-[13] 185.9 178.6 194.1 178.5 188.3 198.5 177.9 185.9 176.7 176.8 181.3 188.4
-[25] 183.6 178.6 178.9 186.2 181.2 171.7 182.1 182.9 187.0 184.8 185.1 179.7
-[37] 185.3 186.6 198.9 195.2 184.0 174.4 195.0 181.0 175.4 180.4 175.5 180.9
-[49] 179.8 184.4</code></pre>
+<pre><code> [1] 174.2 177.7 180.8 173.2 185.2 179.5 171.3 180.9 177.3 176.3 184.0 180.4
+[13] 169.9 187.9 183.8 183.6 187.1 174.9 188.8 181.6 176.2 177.5 194.3 183.5
+[25] 178.0 174.1 183.9 173.9 185.4 189.4 181.0 172.0 187.1 178.0 187.0 179.3
+[37] 178.7 177.7 187.3 203.3 176.3 187.6 181.2 171.1 187.9 174.3 180.5 188.4
+[49] 181.7 179.1</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -2906,12 +2906,104 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
-<section id="cowboy-trick" class="slide level2">
-<h2>Cowboy trick</h2>
+<section id="normalområdet" class="slide level2">
+<h2>Normalområdet</h2>
+<p>Populært spørgsmål - hvad er normalområdet for “noget”?</p>
+<p>Hvis de 95% hyppigste observationer i en normalfordelt population er “normalområdet”. I hvilket interval ligger de de så?</p>
+<div class="fragment">
+<p>Hvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor</p>
+</div>
+<div class="fragment">
+<p>Så 2.5% ligger lavere, og 2.5% ligger højere.</p>
+</div>
+<div class="fragment">
+<p>Kender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger</p>
+</div>
+</section>
+<section id="normalområdet---øvelse" class="slide level2">
+<h2>Normalområdet - øvelse</h2>
+<p>Hvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 mg/dL, hvad er så normalområdet? Defineret som det interval i hvilket 95% af værdierne vil ligge?</p>
+</section>
+<section id="normalområdet---nedre-grænse" class="slide level2">
+<h2>Normalområdet - nedre grænse</h2>
+<p><span class="math inline">\(X \sim N(200, 40)\)</span></p>
+<p>Nedre grænse så de (100-95)/2 = 2.5% laveste værdier</p>
+<p>P(X &lt; y) = 0.025</p>
+<p>Standardiser:</p>
+<p>P(Z &lt; ) = 0.025</p>
+<p>y-200/40 = qnorm(0.025) = - 1.959964</p>
+<p>Isoler y: -1.959964*40 + 200 = 122</p>
+<aside class="notes">
+<p>Der er en del domænespecifikke ting der spiller ind her.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="normalområdet---øvre-grænse" class="slide level2">
+<h2>Normalområdet - øvre grænse</h2>
+<p>Den øvre grænse er så den grænse under hvilken de 95% i normalområdet <em>og</em> de 2.5% under normalområdet ligger.</p>
+<p>Dvs.</p>
+<p>P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
+<p>Standardiser:</p>
+<p>P(Z &lt; y - 200 / 40 ) = 0.975</p>
+<p>y - 200 / 40 = qnomr(0.975) = 1.959964</p>
+<p>Isoler y:</p>
+<p>y = 1.959964 * 40 + 200 = 278</p>
+</section>
+<section id="normalområde---fra-en-eksamensopgave" class="slide level2">
+<h2>Normalområde - fra en eksamensopgave</h2>
+<p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  gruppe           Antal Gennemsnit Sprdening
+  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+1 Diabetikere        227      0.719     0.068
+2 Ikke-diabetikere   140      0.81      0.057</code></pre>
+</div>
+</div>
+<p>Beregn et interval, der indeholder 95% af plasma magnesium målingerne for kontrol populationen (ikke-diabetikere)</p>
+<p>middelværdi +/- 1.96*spredning</p>
+<p>0.70 - 0.92</p>
+</section>
+<section id="normalområde---fra-en-eksamensopgave-1" class="slide level2">
+<h2>Normalområde - fra en eksamensopgave</h2>
+<p>hvor stor en andel af plasma magnesium målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?</p>
+<p>X ~ N(0.719, 0.068)</p>
+<p>Eller - hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?</p>
+<p>Eller: P(0.7 &lt; X &lt; 0.92)</p>
+<p>eller: P(X &lt; 0.92) - P(X &lt; 0.7)</p>
+<p>Standardiser:</p>
+<p>P(Z &lt; 0.92-mu / sd) - P(Z &lt; 0.7 - mu / sd)</p>
+<p>mu 0.719, sigma 0.068</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6084767</code></pre>
+</div>
+</div>
+<p>JEG SKAL NOK HAVE NOGET MED FOR DENNE MÅDE AT BEHANDLE INTERVALLERNE!</p>
+</section>
+<section id="normalområde---cowboy-trick" class="slide level2">
+<h2>Normalområde - cowboy trick</h2>
+<p>1.96 er det magiske tal. Så det er overflødigt at lave standardiseringen.</p>
+<p>gå direkte til middelværdi +/- 1.96*sd</p>
+<p>eller</p>
+<p>200 + c(-1,1)* 1.96 * 40</p>
+</section>
+<section id="cowboy-trick-2" class="slide level2">
+<h2>Cowboy trick 2</h2>
 <p>Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?</p>
 <p>Vi kan skalere de 50, og putte resultatet ind i pnorm.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">pnorm</span>((<span class="dv">50-47</span>)<span class="sc">/</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">pnorm</span>((<span class="dv">50-47</span>)<span class="sc">/</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5284717</code></pre>
 </div>
@@ -2919,7 +3011,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>Eller, vi kan lade R gøre det for os:</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">47</span>, <span class="at">sd =</span> <span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">47</span>, <span class="at">sd =</span> <span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5284717</code></pre>
 </div>
