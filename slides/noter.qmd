@@ -10,3 +10,231 @@ filters:
 ---
 
 Forskellen på kategoriske og kontinuærte variable
+
+
+
+## en eksamensopgave
+Vi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem 
+denne koncentration og drengenes alder og BMI.
+
+Drengene blev opdelt i aldersgrupper, og vi får oplyst hvor mange der var i hver:
+```{r echo = FALSE}
+tælling <- c(115,44,40,45,43,29,33,38,37,32,32,10)
+names(tælling) <- c("(5,8]","(8,9]"
+, "(9,10]"
+, "(10,11]"
+, "(11,12]"
+, "(12,13]"
+, "(13,14]"
+, "(14,15]"
+, "(15,16]"
+, "(16,17]"
+, "(17,18]"
+, "(18,20]")
+tælling
+```
+
+Vi får også et eksempel på data fra datasættet:
+```{r}
+library(tidyverse)
+
+data_exempel <- tribble(~horm, ~BMI, ~Ald.gr,
+5.72, 15.2, "(5,8]",
+8.71, 15.3, "(5,8]",
+5.80, 14.7, "(5,8]",
+7.17, 16.9, "(5,8]",
+7.46, 17.0, "(9,10]",
+6.51, 16.9, "(9,10]")
+
+
+```
+
+Vi får nu oplyst at der er foretaget følgende analyse:
+
+> model=lm(horm~factor(Ald.gr)+BMI)
+> summary(model)
+
+Hvilket giver dette resultat:
+```{r}
+Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
+, "factor(Ald.gr)(9,10]"
+, "factor(Ald.gr)(10,11]"
+, "factor(Ald.gr)(11,12]"
+, "factor(Ald.gr)(12,13]"
+, "factor(Ald.gr)(13,14]"
+, "factor(Ald.gr)(14,15]"
+, "factor(Ald.gr)(15,16]"
+, "factor(Ald.gr)(16,17]"
+, "factor(Ald.gr)(17,18]"
+, "factor(Ald.gr)(18,20]",
+"BMI")
+Estimate <- c(5.40224, 0.07335, 0.35709,
+              0.57922, 1.08688, 1.37499, 
+              2.28810, 2.11722, 2.23563, 
+              1.71083, 1.72436, 1.31706, 0.05815)
+
+`Std. Error` <- c(0.36791,0.20220,0.19914,0.20870,0.19665,0.22077,0.21874,0.21133,0.20853,0.22950,0.22674,0.32117,0.02176)
+
+`Pr(>|t|)`  <- c("<2e-16 ***",
+                  "0.71700",
+                  "0.07382 .",
+                  "0.00581 **",
+                  "6.42e-08 ***",
+                  "1.37e-09 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "7.30e-13 ***",
+                  "2.71e-13 ***",
+                  "5.14e-05 ***",
+                  "0.00791 **")
+
+tibble(Coefficients, Estimate,`Std. Error`) |> 
+  mutate(`t value` = Estimate/`Std. Error`) |> 
+  mutate(`Pr(>|t|)` = `Pr(>|t|)`)
+
+```
+
+a. Hvilken analyse er der udført.
+
+ud fra "model = lm(osv)" kan vi se at det er en lineær regression. Den er multipel fordi der er mere end en forklarende variabel.
+Vi har alder som kategorisk forklarende variabel, og BMI som kontinuert forklarende variabel.
+
+b. fortolk resultaterne. 
+vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er  hormonniveauet for 
+alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle 
+aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen.
+BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)
+
+c. Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.
+
+Det finder vi ved: 
+Den 6-årige:
+5.40 + 0.058*17 
+
+for den 14-årige
+5.40+0.229+0.058*18
+
+
+## Opgave
+
+Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
+Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
+20% mere end idealvægten.
+
+```{r}
+c(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |> sd()
+```
+
+Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)
+
+a. Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
+
+Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8
+
+Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:
+
+```{r}
+qnorm(0.95)
+```
+
+0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%
+
+Intervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -> s = (136.5-112.8)/1.644854 = 14.4
+
+Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:
+
+14.4/sqrt(18)  =  3.394113
+
+Og så finder vi konfidensintervallet ved:
+112.8 + c(-1,1)*1.96*14.4/sqrt(18)
+
+Og her er der altså en regnefejl i modelløsningen...
+
+b. Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, 
+samt eventuelt relevant estimat.
+
+fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor
+mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 
+112.8 med et 95% KI på det vi tidligere beregnede. 
+
+
+## opgave
+
+1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod 
+specifikke sygdomme, også var en generelt reduceret børne-dødelighed.
+
+Børnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret.
+anden gang ca. 6 måneder senere, hvor der blev fulgt op.
+En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).
+
+Variablene i datasættet oplyses at være:
+alder - alder ved vaccinationen - i år
+status - status ved opfølgning. 1: død, 0: i live
+dtp: blev barnet vaccineret. 1: ja, 0: nej
+vægt;: barnets vægt ved vaccination (i kg)
+etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden
+
+
+Vi får også oplyst de seks første observationer i datasættet:
+
+
+```{r}
+tribble(~alder, ~status, ~dtp, ~etngr, ~vaegt,
+0.592, 0,  1, 1, 5.6,
+0.425, 1 , 1 ,1 , 6.0,
+0.510, 0,  1 ,1, 6.2,
+0.592, 0,1,1, 6.2,
+0.173,0,0,1, 5.6,
+0.173,0,0,1, 5.2)
+```
+
+Og optælling:
+< table(dtp,status)
+
+status
+dtp 0 1 
+0 526 9
+1 892 46
+
+a) Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?
+
+Vi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?
+
+p_0 = 9/(526+9) = 1.7%
+p_1 = 46/(46+892) = 4.9%
+
+Den relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.
+
+Hvad er det tilhørende 95% konfidens interval?
+
+Log(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))
+
+DETTE UDLØSER ET HELT NYT SÆT SLIDES
+og modelløsnignen har tastefejl...
+exp(1.06 + c(-1,1)*1.96*0.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt.
+for H_0 er at RR = 1
+
+b) Hvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?
+
+Det er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial
+glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = "binomial")
+
+Den korrekte analyse gav nedenstående resultat:
+
+
+```{r}
+tribble(~Coefficients, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", 0.05666, 0.02866, 1.98, "0.048 *",
+"factor(dtp)1", 0.02609, 0.01162, 2.25, "0.025 *",
+"factor(etngr)1", 0.02294, 0.01033, 2.22, "0.027 *",
+"alder", 0.05845, 0.03897, 1.50, "0.134",
+"vaegt", -0.01140, 0.00527, -2.16, "0.031 *")
+```
+
+Fortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval
+
+dtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025
+
+OR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på:
+exp(0.026 + c(-1,1)*1.96*0.012)
