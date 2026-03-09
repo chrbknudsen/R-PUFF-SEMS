@@ -9,6 +9,12 @@ filters:
   - webr
 ---
 
+## Kategoriske udfald
+
+Relativ risiko
+
+Odds ratio
+
 ## Hvad bruger vi den logistiske regression til?
 
 Den almindelige lineære regression bruger vi når vi forsøger at forudsige en 
