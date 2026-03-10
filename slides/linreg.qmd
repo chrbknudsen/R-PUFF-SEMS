@@ -442,3 +442,38 @@ variabel er kategorisk.
 
 intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald.
 Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.
+
+
+## Opgave
+
+Vi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er 
+et datasæt med 102 individer, 44 mænd, 58 kvinder.
+
+Der er varibler:
+KØN (1=kvinde, 0= mand)
+FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten
+BLODTRYK: Systolisk blodtryk (i mmHg)
+
+De første 6 observationer, og nogle deskriptive størrelser:
+
+```{r}
+tribble(~KØN, ~FEDME, ~BLODTRYK,
+0, 1.31, 130,
+0, 1.31, 148,
+0, 1.19, 146,
+0, 1.11, 122,
+0, 1.34, 140,
+0, 1.17, 146
+)
+```
+
+`mean(BLODTRYK[KØN==0])`
+127.9545
+`mean(BLODTRYK[KØN==1])`
+126.3103
+`SD(BLODTRYK[KØN==0])`
+16.59077
+`mean(BLODTRYK[KØN==1])`
+19.41893
+
+a) Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?
