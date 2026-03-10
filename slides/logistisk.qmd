@@ -391,3 +391,174 @@ og sandsynligheden:
 ```
 
 Lidt under 2 procent. Her kan vi også beregne konfidensintervallet.
+
+
+## Eksamensopgave
+
+Vi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har været nødt til at bruge ældre donorer, der 
+også kan have været rygere.
+Derer observationer fra 426 patienter og vi har følgende variable:
+Surv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.
+SMOKE: Rygestatus for donor, med værdierne "Never smoker" eller "Smoker or former smoker"
+don_age_cat: Donor alder (<40, 40-55, >= 56). Den sidste kategori er kodet som 56 i data.
+
+De første 6 observationer:
+
+
+```{r}
+tribble(~Surv3y, ~don_age_cat, ~SMOKE,
+0, "0-39", "Never smoker",
+1, "0-39", "Never smoker",
+1, "40-55", "Smoker or former smoker",
+1, "56", "Never smoker",
+1, "40-55", "Smoker or former smoker",
+1, "56", "Smoker or former smoker"
+)
+```
+
+vi får følgende output:
+
+```{r echo = FALSE}
+Surv3y <- c(
+  rep(0,153),
+  rep(0,117),
+  rep(1,68),
+  rep(1,88)
+)
+
+SMOKE <- c(
+  rep("Never smoker",153),
+  rep("Smoker or former smoker",117),
+  rep("Never smoker",68),
+  rep("Smoker or former smoker",88)
+)
+```
+```{r}
+table(Surv3y,SMOKE)
+```
+
+Baseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant
+sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder.
+
+Hvad er sandsynligheden for død inden for de 3 år for de to grupper?
+
+p_NS = 68/(153+68) = 0.308
+p_SM = 88/(117+88) = 0.429
+
+Den relative risiko er så:
+0.429/0.308 = 1.392857
+
+dvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med
+hvis donor ikke har været ryger.
+
+Er det signifikant?
+
+Vi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722
+
+Hvad er standardfejlen?
+1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal 
+observationer i gruppen. kvadratroden af det hele
+sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991
+
+giver os standardfejlen på logaritmen til risikoratio.
+
+Så er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se
+
+Eller: 
+0.34 + c(-1,1)*1.96*0.1290991 = 0.08696576 0.59303424
+
+og derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470
+
+1 er ikke indeholdt, og der er en signifikant sammenhæng.
+
+
+Nu udfører vi en analyse, ogfår følgende output:
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-1.2848", "0.2362", "-5.439", "5.36-8***",
+"factor(SMOKE)Smoker or former smoker", "0.5751", "0.2066", "2.783", "0.00538**",
+"factor(don_age_cat)40-55", "0.4440", "0.2527", "1.757", "0.07896.",
+"factor(don_age_cat)56", "0.9395", "0.2891", "3.249", "0.00116**"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) |>
+  tab_header(
+    title = md("**Call:**"),
+    subtitle = md("`glm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')`")
+  )
+```
+
+b) Hvilken analyse er der tale om? hvad er respons og hvad er forklarende variable
+
+Det er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende
+variable
+
+c) Hvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller
+
+Begge de forklarende variable er signifikante.
+
+SMOKE har en OR på exp(0.5751) = 1.777308
+det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)*1.96*0.21)
+
+dvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder).
+KI indeholder ikke 1, og det er signifikant.
+
+donoralder.
+Her har vi to.
+OR_40-55 = exp(0.444) =  1.55893 og KI: exp(0.444 + c(-1,1)*1.96*0.2527) = 0.9500012 2.5581696
+
+og
+OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)*1.96*0.2891) = 1.451887 4.509273
+
+Dvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med 
+en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.
+
+og
+2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med 
+en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.
+
+d) 
+Endelig blev følgende regnestykke fortaget:
+
+exp(-1.2848)/(1+exp(-1.2848))
+
+-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der
+har fået lunger fra en donor under 40, der var ikkeryger.
+
