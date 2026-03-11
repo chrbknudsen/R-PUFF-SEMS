@@ -555,3 +555,83 @@ KI: exp(log(1.044516) + c(-1,1)*1.96* 0.2567521) = 0.6314854 1.7276943
 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.
 
 Så ilt-regime har betydning for cancerpatienter.
+
+
+## leversygdomseksamensopgave
+Vi har data fra 583 personer, der er blevet henvist til undersøgelse pga mistanke om
+leversygdom. De første 6 observationer er:
+```{r}
+library(tidyverse)
+tribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,
+65, 3.3, 0.90, 3.666667, 1, 1, "F",  -0.1053605,
+62, 3.2, 0.74, 4.324324, 1, 2, "M", -0.3011051,
+62, 3.3, 0.89, 3.707865, 1, 3, "M", -0.1165338,
+58, 3.4,1.00,3.400000,1,4,"M",0,
+72, 2.4, 0.4, 6, 1,5,"M",-0.9162907,
+46, 4.4,1.3,3.384615,1,6,"M",0.2623643
+)
+```
+
+Variable:
+idnr: Løbenummer
+sex: Køn
+age: alder i år
+status: leversygdom, 1=ja
+albumin: serum albumin g/dL
+globulin: serum globulin g/dL
+ratio: ratio m. albumin og globulin
+l_ratio: log(ratio) (den naturlige logaritme)
+
+Vi får denne tabel:
+
+
+```{r}
+status <- c(rep(0, 50 + 117),
+            rep(1, 92 + 324))
+
+sex <- c(rep("F", 50), rep("M", 117),
+         rep("F", 92), rep("M", 324))
+table(status, sex)
+```
+
+Og opyst at log-ratio er normalfordelt.
+
+For status = 0 får vi:
+
+| | Gennemsnit | Spredning (sd)|
+|--|---|--
+|l_ratio | -0.011 | 0.289 |
+|age| 41.2 | 17.0|
+
+og for status = 1
+
+| | Gennemsnit | Spredning (sd)|
+|--|---|--
+|l_ratio | -0.152 | 0.358 |
+|age| 46.2 | 15.7|
+
+a) er der forskel i log-ratio mellem syge og raske, når der ikke tages
+højde for forskell i alder og køn.
+
+Vi skal bestemme ki for log-ratio mellem syge og raske. Det skal vi bruge SEM til.
+Raske der er 50+117 = 167, SEM = 0.289/sqrt(167) =  0.02236349
+for syge:
+92+324 = 416, SEM =  0.358/sqrt(416) = 0.01755239
+
+den poolede sem er derfor: sqrt( 0.02236349^2 + 0.01755239^2) = 0.02842907
+
+Vi skal se om forskellen er 0.
+forskellen observerer vi til: -0.152 - -0.011 = -0.141
+Det giver en teststørrelse på: 
+-0.141/0.02842907 = -4.96
+
+det er klart signifikant (den er næsten fem standardafvigelser fra 0). der er en
+signifikant lavere l_ratio blandt de syge.
+
+b) undersøg om kønsfordelingen er den samme for de syge og de raske.
+Sandsynligheden for at være kvinde blandt de raske:
+p0 = 50/(50+117) 
+Sandsynligheden for at være kvinde blandt de syge:
+p1 = 92/(92+324)
+
+Hvordan beregnes standardfejlen på det?
