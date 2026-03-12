@@ -136,6 +136,1327 @@
 <section class="slide level2">
 
 <p>Forskellen på kategoriske og kontinuærte variable</p>
+</section>
+<section id="en-eksamensopgave" class="slide level2">
+<h2>en eksamensopgave</h2>
+<p>Vi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem denne koncentration og drengenes alder og BMI.</p>
+<p>Drengene blev opdelt i aldersgrupper, og vi får oplyst hvor mange der var i hver:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  (5,8]   (8,9]  (9,10] (10,11] (11,12] (12,13] (13,14] (14,15] (15,16] (16,17] 
+    115      44      40      45      43      29      33      38      37      32 
+(17,18] (18,20] 
+     32      10 </code></pre>
+</div>
+</div>
+<p>Vi får også et eksempel på data fra datasættet:</p>
+<p>Vi får nu oplyst at der er foretaget følgende analyse:</p>
+<blockquote>
+<p>model=lm(horm~factor(Ald.gr)+BMI) summary(model)</p>
+</blockquote>
+<p>Hvilket giver dette resultat:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13 × 5
+   Coefficients          Estimate `Std. Error` `t value` `Pr(&gt;|t|)`  
+   &lt;chr&gt;                    &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+ 1 (Intercept)             5.40         0.368     14.7   &lt;2e-16 ***  
+ 2 factor(Ald.gr)(8,9]     0.0734       0.202      0.363 0.71700     
+ 3 factor(Ald.gr)(9,10]    0.357        0.199      1.79  0.07382 .   
+ 4 factor(Ald.gr)(10,11]   0.579        0.209      2.78  0.00581 **  
+ 5 factor(Ald.gr)(11,12]   1.09         0.197      5.53  6.42e-08 ***
+ 6 factor(Ald.gr)(12,13]   1.37         0.221      6.23  1.37e-09 ***
+ 7 factor(Ald.gr)(13,14]   2.29         0.219     10.5   &lt; 2e-16 *** 
+ 8 factor(Ald.gr)(14,15]   2.12         0.211     10.0   &lt; 2e-16 *** 
+ 9 factor(Ald.gr)(15,16]   2.24         0.209     10.7   &lt; 2e-16 *** 
+10 factor(Ald.gr)(16,17]   1.71         0.230      7.45  7.30e-13 ***
+11 factor(Ald.gr)(17,18]   1.72         0.227      7.61  2.71e-13 ***
+12 factor(Ald.gr)(18,20]   1.32         0.321      4.10  5.14e-05 ***
+13 BMI                     0.0582       0.0218     2.67  0.00791 **  </code></pre>
+</div>
+</div>
+<ol type="a">
+<li>Hvilken analyse er der udført.</li>
+</ol>
+<p>ud fra “model = lm(osv)” kan vi se at det er en lineær regression. Den er multipel fordi der er mere end en forklarende variabel. Vi har alder som kategorisk forklarende variabel, og BMI som kontinuert forklarende variabel.</p>
+<ol start="2" type="a">
+<li><p>fortolk resultaterne. vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er hormonniveauet for alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen. BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)</p></li>
+<li><p>Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.</p></li>
+</ol>
+<p>Det finder vi ved: Den 6-årige: 5.40 + 0.058*17</p>
+<p>for den 14-årige 5.40+0.229+0.058*18</p>
+</section>
+<section id="opgave" class="slide level2">
+<h2>Opgave</h2>
+<p>Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.42447</code></pre>
+</div>
+</div>
+<p>Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)</p>
+<ol type="a">
+<li>Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.</li>
+</ol>
+<p>Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8</p>
+<p>Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+</div>
+<p>0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%</p>
+<p>Intervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4</p>
+<p>Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:</p>
+<p>14.4/sqrt(18) = 3.394113</p>
+<p>Og så finder vi konfidensintervallet ved: 112.8 + c(-1,1)<em>1.96</em>14.4/sqrt(18)</p>
+<p>Og her er der altså en regnefejl i modelløsningen…</p>
+<ol start="2" type="a">
+<li>Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.</li>
+</ol>
+<p>fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede.</p>
+</section>
+<section id="opgave-1" class="slide level2">
+<h2>opgave</h2>
+<p>1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod specifikke sygdomme, også var en generelt reduceret børne-dødelighed.</p>
+<p>Børnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret. anden gang ca. 6 måneder senere, hvor der blev fulgt op. En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).</p>
+<p>Variablene i datasættet oplyses at være: alder - alder ved vaccinationen - i år status - status ved opfølgning. 1: død, 0: i live dtp: blev barnet vaccineret. 1: ja, 0: nej vægt;: barnets vægt ved vaccination (i kg) etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden</p>
+<p>Vi får også oplyst de seks første observationer i datasættet:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  alder status   dtp etngr vaegt
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 0.592      0     1     1   5.6
+2 0.425      1     1     1   6  
+3 0.51       0     1     1   6.2
+4 0.592      0     1     1   6.2
+5 0.173      0     0     1   5.6
+6 0.173      0     0     1   5.2</code></pre>
+</div>
+</div>
+<p>Og optælling: &lt; table(dtp,status)</p>
+<p>status dtp 0 1 0 526 9 1 892 46</p>
+<ol type="a">
+<li>Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?</li>
+</ol>
+<p>Vi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?</p>
+<p>p_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%</p>
+<p>Den relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.</p>
+<p>Hvad er det tilhørende 95% konfidens interval?</p>
+<p>Log(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))</p>
+<p>DETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)<em>1.96</em>0.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1</p>
+<ol start="2" type="a">
+<li>Hvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?</li>
+</ol>
+<p>Det er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)</p>
+<p>Den korrekte analyse gav nedenstående resultat:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`
+  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     
+1 (Intercept)      0.0567      0.0287       1.98 0.048 *   
+2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   
+3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   
+4 alder            0.0584      0.0390       1.5  0.134     
+5 vaegt           -0.0114      0.00527     -2.16 0.031 *   </code></pre>
+</div>
+</div>
+<p>Fortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval</p>
+<p>dtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025</p>
+<p>OR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)<em>1.96</em>0.012)</p>
+</section>
+<section id="øvelse" class="slide level2">
+<h2>Øvelse</h2>
+<p>Vi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.</p>
+<p>Vi har følgende variable</p>
+<p>HBAAlC_dik: 1 hvis HbAlc &lt; 9%, 0 hvis HbAlc &gt;= 9% (note til ikke-medicineren. 1 er godt helbred) SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt AGE: Alder i år SEX: Køn. 0: Kvinde, 1: Mand</p>
+<p>Vi gør i R følgende og får: &gt;table(SRH_dik, HBAlC_dik)</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       HBAlC_dik
+SRH_dik   0   1
+      0 412 264
+      1 354 188</code></pre>
+</div>
+</div>
+<ol type="a">
+<li>Baseret på den tabel - er der sammenhæng mellem de to variable?</li>
+</ol>
+<p>Hvad er den relative risiko for at have godt helbred hvis HbAlc er 1 - altså velreguleret.</p>
+<p>Den relative risiko finder vi ved: (188/(188+264))/(354/(354+412)) = 0.900005 pas på paranteserne!</p>
+<p>Der er dermed reduceret sandsynlighed for godt selvvurderet helbred hvis man er velreguleret. Er det statistisk signifikant?</p>
+<p>Det kræver vi har s.e. for rr sqrt(1/188 - 1/(188+264) + 1/354 - 1/(354+412)) = 0.0680157</p>
+<p>deter standardfejlen på log RR exp(log(0.900005) + c(-1,1)<em>1.96</em>0.0680157) Da det omfatter 1, er den reducerede sandsynlighed ikke signifikant.</p>
+<p>Man kan også bruge chi^2</p>
+<ol start="2" type="a">
+<li>Nu udfører vi denne analyse i R: &gt;model1 &lt;- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = “binomial”) &gt;summary(model1)</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="bctlkwxytj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#bctlkwxytj table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bctlkwxytj thead, #bctlkwxytj tbody, #bctlkwxytj tfoot, #bctlkwxytj tr, #bctlkwxytj td, #bctlkwxytj th {
+  border-style: none;
+}
+
+#bctlkwxytj p {
+  margin: 0;
+  padding: 0;
+}
+
+#bctlkwxytj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bctlkwxytj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bctlkwxytj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bctlkwxytj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bctlkwxytj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bctlkwxytj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bctlkwxytj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bctlkwxytj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bctlkwxytj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bctlkwxytj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bctlkwxytj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bctlkwxytj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bctlkwxytj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bctlkwxytj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bctlkwxytj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bctlkwxytj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bctlkwxytj .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#bctlkwxytj .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#bctlkwxytj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bctlkwxytj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bctlkwxytj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bctlkwxytj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bctlkwxytj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bctlkwxytj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bctlkwxytj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bctlkwxytj .gt_left {
+  text-align: left;
+}
+
+#bctlkwxytj .gt_center {
+  text-align: center;
+}
+
+#bctlkwxytj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bctlkwxytj .gt_font_normal {
+  font-weight: normal;
+}
+
+#bctlkwxytj .gt_font_bold {
+  font-weight: bold;
+}
+
+#bctlkwxytj .gt_font_italic {
+  font-style: italic;
+}
+
+#bctlkwxytj .gt_super {
+  font-size: 65%;
+}
+
+#bctlkwxytj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bctlkwxytj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bctlkwxytj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bctlkwxytj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bctlkwxytj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bctlkwxytj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bctlkwxytj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bctlkwxytj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bctlkwxytj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
+<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">0.717969</td>
+<td class="gt_row gt_left" headers="Std. Error">0.350389</td>
+<td class="gt_row gt_left" headers="t value">2.049</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.04046*</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">factor(HBAlC_dik)1</td>
+<td class="gt_row gt_left" headers="Estimate">-0.188731</td>
+<td class="gt_row gt_left" headers="Std. Error">0.120637</td>
+<td class="gt_row gt_left" headers="t value">-1.564</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.11771</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">factor(SEX)1</td>
+<td class="gt_row gt_left" headers="Estimate">0.252051</td>
+<td class="gt_row gt_left" headers="Std. Error">0.117514</td>
+<td class="gt_row gt_left" headers="t value">2.145</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.03196*</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">AGE</td>
+<td class="gt_row gt_left" headers="Estimate">-0.015573</td>
+<td class="gt_row gt_left" headers="Std. Error">0.005099</td>
+<td class="gt_row gt_left" headers="t value">-3.054</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.00226**</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Hvad har vi gjort, og hvordan fortolker vi resultaterne?</p>
+<p>Vi har gennemført en logistisk regression, med tre forklarende variable, AGE som kontinuert og HBAlC_dik og SEX som kategoriske variabel. Vi ser at HBAlC ikke er signifikant. Både køn og alder er signifikante med tilhørende Odds-ratio på exp(0.252051) = 1.28 for køn, med et 95%KI på exp(0.252051 + c(-1,1)<em>1.96</em>0.117514) Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt.</p>
+<p>Alder er også statistisk signifkant med odds ratio på exp(-0.015573) = 0.9845476 diabetikere har derfor ~1.2% reduceret odds for godt helbred (med fastholdt køn og HBAlC) ved en 1 års øgning ialder. KI:</p>
+<p>exp(-0.015573 + c(-1,1)<em>1.96</em>0.005099)</p>
+<p>Hvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen</p>
+</section>
+<section id="opgave-2---fra-en-eksamen" class="slide level2">
+<h2>opgave 2 - fra en eksamen</h2>
+<p>Vi ser på data fra ca 1000 patienters risiko for at dø ved en operation (laparotomi). Har øget ilt-tilførsel under operationen betydning for død i en opfølgnigsperiode på ca. 3 år. Patienterne blev randomiseret til et af to ilt-regimer</p>
+<p>Vi har følgende variable Allokering: X - patient fik 80% ilt, Y Patient fik 30% ilt diagn_cancer: j: cancer, n: ikke cancer blod: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion bmi: patientens BMI dead: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever</p>
+<p>De første 6 observationer:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  Allokering diagn_cancer blod    bmi  dead
+  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Y          n            n      29.3     0
+2 X          n            n      28.1     0
+3 X          j            n      21.5     1
+4 X          j            n      17.3     1
+5 Y          n            n      24.2     0
+6 Y          n            n      18.2     0</code></pre>
+</div>
+</div>
+<ol type="a">
+<li><p>Hvis vi alene betragter patienternes bmi, hvordan ville vi så undersøge om den har signifikant betydning for risikoen for dø efter operation. Outcome - dead er binær og bmi er kontinuært. Så vi vil modellere et kategorisk outcome med kontinært forklarende variabel: logistisk regression</p></li>
+<li><p>Når vi gør det, får vi følgende resultat (de fortsætter deres juleleg med at fjerne dele af output):</p></li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="qoncjntlaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#qoncjntlaz table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qoncjntlaz thead, #qoncjntlaz tbody, #qoncjntlaz tfoot, #qoncjntlaz tr, #qoncjntlaz td, #qoncjntlaz th {
+  border-style: none;
+}
+
+#qoncjntlaz p {
+  margin: 0;
+  padding: 0;
+}
+
+#qoncjntlaz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qoncjntlaz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qoncjntlaz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qoncjntlaz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qoncjntlaz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qoncjntlaz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qoncjntlaz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qoncjntlaz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qoncjntlaz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qoncjntlaz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qoncjntlaz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qoncjntlaz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qoncjntlaz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qoncjntlaz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qoncjntlaz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qoncjntlaz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qoncjntlaz .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#qoncjntlaz .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#qoncjntlaz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qoncjntlaz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qoncjntlaz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qoncjntlaz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qoncjntlaz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qoncjntlaz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qoncjntlaz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qoncjntlaz .gt_left {
+  text-align: left;
+}
+
+#qoncjntlaz .gt_center {
+  text-align: center;
+}
+
+#qoncjntlaz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qoncjntlaz .gt_font_normal {
+  font-weight: normal;
+}
+
+#qoncjntlaz .gt_font_bold {
+  font-weight: bold;
+}
+
+#qoncjntlaz .gt_font_italic {
+  font-style: italic;
+}
+
+#qoncjntlaz .gt_super {
+  font-size: 65%;
+}
+
+#qoncjntlaz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qoncjntlaz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qoncjntlaz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qoncjntlaz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qoncjntlaz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qoncjntlaz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qoncjntlaz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qoncjntlaz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qoncjntlaz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
+<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">-0.007041</td>
+<td class="gt_row gt_left" headers="Std. Error">0.386263</td>
+<td class="gt_row gt_left" headers="z value">-0.018</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.98546</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">bmi</td>
+<td class="gt_row gt_left" headers="Estimate"></td>
+<td class="gt_row gt_left" headers="Std. Error">0.015385</td>
+<td class="gt_row gt_left" headers="z value">-3.151</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)"></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Hvad kan vi sige ud fra det?</p>
+<p>Vi mangler et estimat for bmi. Det kan vi beregne, fordi z-value finder vi ved at dividere estimatet med standardfejlen. Derfor kan vi finde estimatet ved at gange standardfejl med z value.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.04847813</code></pre>
+</div>
+</div>
+<p>Teststørrelsen er klart signifikant</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.001627125</code></pre>
+</div>
+</div>
+<p>Vi kan beregne OR:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9526782</code></pre>
+</div>
+</div>
+<p>Så holdes alt andet konstant, vil en patient med et bmi der er 1 større end en anden patient, have vil odds for død reduceres med ca 5% for patienten med det højeste bmi.</p>
+<p>Vi kan beregne et 95% KI:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9243794 0.9818433</code></pre>
+</div>
+</div>
+<p>1 er ikke indeholdt i intervallet, og forskellen er derfor signifkant. Det så vi også fra p-værdien vi beregnede tidligere.</p>
+<ol start="3" type="a">
+<li>Nu ser vi bort fra bmi, og betrager ilt-allokering.</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>    Allokering
+dead   X   Y
+   0 414 418
+   1 139 107</code></pre>
+</div>
+</div>
+<p>Hvad kan vi konkludere ud fra det?</p>
+<p>Vi sammenligner død (1) for de to ilt-regimer X og Y: odds_X = 139/414 = 0.3357488 P_y = 107/418 = 0.2559809</p>
+<p>OR (X mod Y) = 0.3357488/0.2559809 = 1.311617 dvs at odds for at dø estimeres at være ca. 31% højere ved det høje ilt-regime, sammenlignet med det lave (alt andet fastholdt)</p>
+<p>95% KI: standardfejlen på log(OR): sqrt(1/139 + 1/414 + 1/107 + 1/418) = 0.146109</p>
+<p>exp(log(1.311617) + c(-1,1)<em>1.96</em>0.146109)</p>
+<p>Det indeholder 1 og estimatet er derfor ikke statistisk signifikant (de er dog i modelbesvarelser glade for at nævne at det er tæt på at være signifikant)</p>
+<p>BETON FORSKEL PÅ OR OG RR!</p>
+<ol start="4" type="a">
+<li>Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>, , diagn_cancer = j
+
+    Allokering
+dead   X   Y
+   0 188 213
+   1 101  74
+
+, , diagn_cancer = n
+
+    Allokering
+dead   X   Y
+   0 226 205
+   1  38  33</code></pre>
+</div>
+</div>
+<p>Giver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.</p>
+<p>Samme øvelse som før, men nu på hver gruppe: Cancerpatienter: OR = (101/188) / (74/213) = 1.546363 s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346 KI: exp(log(1.546363) + c(-1,1)<em>1.96</em>0.1828346) = 1.080636 2.212806</p>
+<p>Så for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i KI.</p>
+<p>non-cancer-patienter:</p>
+<p>OR = (38/226) / (33/205) = 1.044516 se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) = 0.2567521 KI: exp(log(1.044516) + c(-1,1)<em>1.96</em> 0.2567521) = 0.6314854 1.7276943 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.</p>
+<p>Så ilt-regime har betydning for cancerpatienter.</p>
+</section>
+<section id="leversygdomseksamensopgave" class="slide level2">
+<h2>leversygdomseksamensopgave</h2>
+<p>Vi har data fra 583 personer, der er blevet henvist til undersøgelse pga mistanke om leversygdom. De første 6 observationer er:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+    age albumin ratio globulin status  idnr sex   l_ratio
+  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1    65     3.3  0.9      3.67      1     1 F      -0.105
+2    62     3.2  0.74     4.32      1     2 M      -0.301
+3    62     3.3  0.89     3.71      1     3 M      -0.117
+4    58     3.4  1        3.4       1     4 M       0    
+5    72     2.4  0.4      6         1     5 M      -0.916
+6    46     4.4  1.3      3.38      1     6 M       0.262</code></pre>
+</div>
+</div>
+<p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
+<p>Vi får denne tabel:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      sex
+status   F   M
+     0  50 117
+     1  92 324</code></pre>
+</div>
+</div>
+<p>Og opyst at log-ratio er normalfordelt.</p>
+<p>For status = 0 får vi:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Gennemsnit</th>
+<th>Spredning (sd)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>l_ratio</td>
+<td>-0.011</td>
+<td>0.289</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>41.2</td>
+<td>17.0</td>
+</tr>
+</tbody>
+</table>
+<p>og for status = 1</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>Gennemsnit</th>
+<th>Spredning (sd)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>l_ratio</td>
+<td>-0.152</td>
+<td>0.358</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>46.2</td>
+<td>15.7</td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li>er der forskel i log-ratio mellem syge og raske, når der ikke tages højde for forskell i alder og køn.</li>
+</ol>
+<p>Vi skal bestemme ki for log-ratio mellem syge og raske. Det skal vi bruge SEM til. Raske der er 50+117 = 167, SEM = 0.289/sqrt(167) = 0.02236349 for syge: 92+324 = 416, SEM = 0.358/sqrt(416) = 0.01755239</p>
+<p>den poolede sem er derfor: sqrt( 0.02236349^2 + 0.01755239^2) = 0.02842907</p>
+<p>Vi skal se om forskellen er 0. forskellen observerer vi til: -0.152 - -0.011 = -0.141 Det giver en teststørrelse på: -0.141/0.02842907 = -4.96</p>
+<p>det er klart signifikant (den er næsten fem standardafvigelser fra 0). der er en signifikant lavere l_ratio blandt de syge.</p>
+<ol start="2" type="a">
+<li>undersøg om kønsfordelingen er den samme for de syge og de raske. Sandsynligheden for at være kvinde blandt de raske: p0 = 50/(50+117) Sandsynligheden for at være kvinde blandt de syge: p1 = 92/(92+324)</li>
+</ol>
+<p>Hvordan beregnes standardfejlen på det?</p>
 
 
 </section>
