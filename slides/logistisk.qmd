@@ -1,5 +1,6 @@
 ---
-title: Logistisk regression
+title: Kategoriske udfald
+subtitle: Herunder logistisk regression
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -8,6 +9,21 @@ engine: knitr
 filters:
   - webr
 ---
+
+## Kategoriske udfald
+
+Den lineære regression bruger vi når vi har kontinuærte
+resultater. 
+
+Hvordan håndterer vi kategoriske resultater?
+
+Logistisk regression
+
+Relativ risiko
+
+Chi i anden
+
+Odds ratio
 
 ## Hvad bruger vi den logistiske regression til?
 
@@ -186,3 +202,371 @@ odds ratio=e
 👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.
 
 så det her skal nok flyttes til et sæt slides om logistisk regression
+
+
+## Opgave fra opgave maj 2025 1 b
+Vi havde tidligere
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "3613.623", "7.108", "508.372", "<2e-16***",
+"factor(smoke)2", "-127.377", "15.757", "", "",
+"factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
+"alco", "1.045", "6.075", "0.172", "0.863"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+Som måske ikke er så relevant - men vi skal nok have beskrivelsen af data med.
+
+Anyways:
+> table(fever$episodes)
+
+```{r}
+episoder <- c(9693,1872,183,20,3,3,1,1,2)
+names(episoder) <- c(0,1,2,3,4,5,6,7,10)
+episoder 
+```
+
+Er der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig 
+graviditet.
+
+Vi får oplyst at den korrekte analyse gav dette resultat:
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
+"I((mage - 25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
+"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
+"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
+"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+i((mage-25)/10) skal vi lige holde tungen lige i munden. mage er moderens alder ved interview. Vi sætter et nulpunkt der er 25, og 
+måler derefter i enheder af 10 år.
+
+c) Hvad kan vi konkludere på denne analyse?
+
+Vi har en logistisk regression, så koefficienterne er på log-odds skala. 
+For at få odds skal vi derfor tage exponentialfunktionen for at få odds.
+
+
+```{r}
+exp(-5.0526)
+```
+
+0.6% risiko. Det er baselinie for en moder der er 25 år gammel (fordi vi har sat 0 i modellen til 
+25). Ingen episoder og ingen rygning.
+
+Moderens alder - centreret om 25 år, og i enheder af 10 år, har et estimat på 0.7423. Det skal vi
+også tage exponentialfunktionen af:
+
+```{r}
+exp(0.7423)
+```
+Den oddsratio fortæller os, at for hver 10 års stigning i moderesn alder, fordobles odds for
+fosterdød (ca.)
+Vi kan beregne et 95% konfidensinterval:
+
+```{r}
+0.7423 + c(-1,1)*1.96*0.2149
+```
+det er for logodds, oddsratio får vi ved:
+
+
+```{r}
+exp(0.7423 + c(-1,1)*1.96*0.2149)
+```
+
+1 ligger uden for intervallet, så det er statistisk signifikant. det kan vi også se af p-værdien i 
+summary.
+
+Hverken antallet af feberepisoder eller rygning har statistisk signifikant betydning. Vi kan 
+beregne OR på dem og konfidensintervaller. Den der kommer tættest på er rygning niveau 3, men den er 
+ikke signifikant ved et 5% niveau.
+
+d) forudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og
+ikke har feberepisoder
+
+Det har vi lavet - for det er baseline, intercept. 
+
+Logodds er -5.0526. Så oddsratio er:
+```{r}
+exp(-5.0526)
+```
+
+Sandsynligheden er så:
+
+```{r}
+exp(-5.0526)/(1+exp(-5.0526))
+```
+
+0.63%
+
+For en kvinde der er 40 år (og ikke ryger og heller ikke har feberepisoder. )
+
+Det eneste vi skal justere er værdien for I((mage-25)/10). Den er ikke længere 0, men 
+(40-25)/10 = 1.5
+
+Episoder og smoke er 0, så vi finder logodds ved:
+-5.0526+1.5*0.7423 = -3.93915
+
+odds er så:
+
+```{r}
+exp(-3.93915) 
+```
+og sandsynligheden:
+
+
+```{r}
+0.01946475/(1+0.01946475)
+```
+
+Lidt under 2 procent. Her kan vi også beregne konfidensintervallet.
+
+
+## Eksamensopgave
+
+Vi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har været nødt til at bruge ældre donorer, der 
+også kan have været rygere.
+Derer observationer fra 426 patienter og vi har følgende variable:
+Surv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.
+SMOKE: Rygestatus for donor, med værdierne "Never smoker" eller "Smoker or former smoker"
+don_age_cat: Donor alder (<40, 40-55, >= 56). Den sidste kategori er kodet som 56 i data.
+
+De første 6 observationer:
+
+
+```{r}
+tribble(~Surv3y, ~don_age_cat, ~SMOKE,
+0, "0-39", "Never smoker",
+1, "0-39", "Never smoker",
+1, "40-55", "Smoker or former smoker",
+1, "56", "Never smoker",
+1, "40-55", "Smoker or former smoker",
+1, "56", "Smoker or former smoker"
+)
+```
+
+vi får følgende output:
+
+```{r echo = FALSE}
+Surv3y <- c(
+  rep(0,153),
+  rep(0,117),
+  rep(1,68),
+  rep(1,88)
+)
+
+SMOKE <- c(
+  rep("Never smoker",153),
+  rep("Smoker or former smoker",117),
+  rep("Never smoker",68),
+  rep("Smoker or former smoker",88)
+)
+```
+```{r}
+table(Surv3y,SMOKE)
+```
+
+Baseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant
+sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder.
+
+Hvad er sandsynligheden for død inden for de 3 år for de to grupper?
+
+p_NS = 68/(153+68) = 0.308
+p_SM = 88/(117+88) = 0.429
+
+Den relative risiko er så:
+0.429/0.308 = 1.392857
+
+dvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med
+hvis donor ikke har været ryger.
+
+Er det signifikant?
+
+Vi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722
+
+Hvad er standardfejlen?
+1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal 
+observationer i gruppen. kvadratroden af det hele
+sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991
+
+giver os standardfejlen på logaritmen til risikoratio.
+
+Så er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se
+
+Eller: 
+0.34 + c(-1,1)*1.96*0.1290991 = 0.08696576 0.59303424
+
+og derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470
+
+1 er ikke indeholdt, og der er en signifikant sammenhæng.
+
+
+Nu udfører vi en analyse, ogfår følgende output:
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-1.2848", "0.2362", "-5.439", "5.36-8***",
+"factor(SMOKE)Smoker or former smoker", "0.5751", "0.2066", "2.783", "0.00538**",
+"factor(don_age_cat)40-55", "0.4440", "0.2527", "1.757", "0.07896.",
+"factor(don_age_cat)56", "0.9395", "0.2891", "3.249", "0.00116**"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) |>
+  tab_header(
+    title = md("**Call:**"),
+    subtitle = md("`glm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')`")
+  )
+```
+
+b) Hvilken analyse er der tale om? hvad er respons og hvad er forklarende variable
+
+Det er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende
+variable
+
+c) Hvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller
+
+Begge de forklarende variable er signifikante.
+
+SMOKE har en OR på exp(0.5751) = 1.777308
+det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)*1.96*0.21)
+
+dvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder).
+KI indeholder ikke 1, og det er signifikant.
+
+donoralder.
+Her har vi to.
+OR_40-55 = exp(0.444) =  1.55893 og KI: exp(0.444 + c(-1,1)*1.96*0.2527) = 0.9500012 2.5581696
+
+og
+OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)*1.96*0.2891) = 1.451887 4.509273
+
+Dvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med 
+en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.
+
+og
+2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med 
+en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.
+
+d) 
+Endelig blev følgende regnestykke fortaget:
+
+exp(-1.2848)/(1+exp(-1.2848))
+
+-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der
+har fået lunger fra en donor under 40, der var ikkeryger.
+

@@ -442,3 +442,193 @@ variabel er kategorisk.
 
 intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald.
 Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.
+
+
+## Opgave
+
+Vi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er 
+et datasæt med 102 individer, 44 mænd, 58 kvinder.
+
+Der er varibler:
+KØN (1=kvinde, 0= mand)
+FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten
+BLODTRYK: Systolisk blodtryk (i mmHg)
+
+De første 6 observationer, og nogle deskriptive størrelser:
+
+```{r}
+tribble(~KØN, ~FEDME, ~BLODTRYK,
+0, 1.31, 130,
+0, 1.31, 148,
+0, 1.19, 146,
+0, 1.11, 122,
+0, 1.34, 140,
+0, 1.17, 146
+)
+```
+
+`mean(BLODTRYK[KØN==0])`
+127.9545
+`mean(BLODTRYK[KØN==1])`
+126.3103
+`SD(BLODTRYK[KØN==0])`
+16.59077
+`mean(BLODTRYK[KØN==1])`
+19.41893
+
+a) Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?
+
+Der er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne.
+Vi antager at målingerne er normalfordelte. Det betyder at vi kan beregne referenceintervallet for kvinder ved:
+
+$\mu \pm 1.96\sigma$
+
+eller 126.3103 + c(-1,1)*1.96*19.41893
+
+b) undersøg om blodtrykket er ens for de to køn ved en t-test.
+
+Det vi tester er om forskellen i blodtryk er 0. Forskellen i middelværdi er
+127.9545-126. = 1.6442
+
+Vi kan ikke antage at standardafvigelsen er ens i de to grupper. Det kan vi se at den ikke er.
+Og vi skal under alle omstændigheder bruge SEM. Så vi beregner SEM for de to grupper:
+
+SEM_0 = 16.59077/sqrt(44)
+SEM_1 = 19.41893/sqrt(58)
+
+Den poolede SE er så: sqrt(2.501153^2 + 2.54983^2) = 3.57175
+
+Så kan vi beregne et konfidensinterval for forskellen:
+1.6442 + c(-1,1)*1.96*3.57175 = -5.35643 ; 8.64483
+
+O er indeholdt, og vi kan konkludere på et 95% KI at der ikke er forskel på det systoliske blodtryk de to grupper imellem.
+
+c) der bliver lavet en analyse, der giver dette output:
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "96.818", "8.920", "10.86", "<2e-16***",
+"FEDME", "23.001", "6.667", "3.45", "0.000822***"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts())) |> 
+  tab_header(
+    title = md("**Call:**"),
+    subtitle = md("`lm(formula = BLODTRYK ~ FEDME)`")
+  )
+```
+
+c) Hvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi estimaterne
+
+Lineær regression med BLODTRYK som responsvariabel, og FEDME som den uafhængige variabel. Vi estimerer at 
+hvis FEDME graden stiger med 1, vil blodtrykket stige med ca. 23. Dette estimat er statistisk signifant på 95% niveua.
+interceptet svarer til blodtrykket ved en fedmegrad på 0, og kan derfor ikke fortolkes.
+
+d) 
+Så laver vi en anden analyse, hvor vi inddrager KØN. 
+
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "93.287", "8.937", "10.438", "<2e-16***",
+"factor(KØN)1", "-7.730", "3.715", "", "",
+"FEDME", "", "7.172", "4.049", ""
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts())) |> 
+  tab_header(
+    title = md("**Call:**"),
+    subtitle = md("`lm(formula = BLODTRYK ~ factor(KØN) + FEDME)`")
+  )
+```
+
+Fortolk estimater - beregn selv det manglende estimat for FEDME, og konkluder.
+
+Vi mangler et estimat på koefficienten på fedme. Men vi husker at t-værdien findes ved at dividere estimatet med 
+standard fejlen. Så den finder vi ved at gange standardfejlen med t værdien: 7.172*4.049 = 29.03
+
+Vi mangler også en t-værdi for KØN. Den finder vi også let: -7.730/3.715= -2.080754
+
+Tommelfingerreglen er at hvis t-værdien er større end 1.96, er estimatet statistiks signifikant ppå et 5% niveau.
+
+Det fortæller os, at n stigning på 1 i fedmegrad, i gennemsnit, og alt andet holdt lige, vil svare til en stigning på 29 i blodtrykket,
+hvor der er justeret for KØN.
+
+Justeret for FEDME, ser vi at kvinder i gennemsnit har et statistisk signifikant lavere blodtryk (ca. 7.7 mmHg lavere)
+
+e) sammenlign resultaterne i b) og d) og kommenter på en eventuel forskel i betydningen af køn for blodtrykket
+Analyserne i b og d førte til forskellige konklusioner vedr effekten af køn for blodtryk. b justerer ikke for fedme, og konkluderer
+ at der ikke er forskel. Mens d) der justerer for fedme ser en forskel på kønnene. Hvad kan det skyldes? Mon ikke det er fordi
+kvinder har en højere fedmegrad end mænd, og at det maskerer effekten af køn i den ujusterede analyse.
+
+
