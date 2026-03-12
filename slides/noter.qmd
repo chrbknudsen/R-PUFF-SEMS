@@ -630,8 +630,121 @@ signifikant lavere l_ratio blandt de syge.
 
 b) undersøg om kønsfordelingen er den samme for de syge og de raske.
 Sandsynligheden for at være kvinde blandt de raske:
-p0 = 50/(50+117) 
+p0 = 50/(50+117)  = 0.2994012
 Sandsynligheden for at være kvinde blandt de syge:
-p1 = 92/(92+324)
+p1 = 92/(92+324) = 0.2211538
 
 Hvordan beregnes standardfejlen på det?
+
+s.e. for en andel finder vi ved sqrt(p(1-p)/n)
+
+så se_0 = sqrt(0.2994012*(1-0.2994012)/(50+117)) = 0.03544078
+og
+se_1 = sqrt(0.2211538*(1-0.2211538)/(92+324)) = 0.02034822
+
+Er den sande værdi af forskellen på de to andele (af kvinder i hhv syg og rask-grupperne) i virkeligheden
+0?
+
+Vi ved ikke om spredningen er ens i de to grupper. Så vi skal bruge den poolede se.:
+se_p =  sqrt(0.03544078^2+ 0.02034822^2) = 0.04086684
+
+forskellen er:
+0.2994012-0.2211538 = 0.0782474
+
+og den ligger så:
+0.0782474/0.04086684 = 1.914692
+standardfejl fra 0. Og det er ikke signifikant - fordi det er mindre end 1.96.
+
+c)
+Er aldersfordelingen den samme for syge som for raske? Hvordan vil vi undersøge det?
+
+two-sample t-test. så er forskellen på gennemsnitlig alder forskellig fra 0?
+Her nævnte eksamensspørgsmålet specifikt at man blot skulle forklare hvad man ville gøre - 
+man skulle ikke regne.
+
+d)
+Nu laver vi denne analyse i R, hvor vi inddrager alder og køn:
+> analyse1 <- lm(l_ratio~factor(status)+factor(sex)+age)
+> summary(analyse1)
+
+Det gav dette output:
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.1730998", "0.0488724", "3.542", "0.000430***",
+"factor(status)1", "-0.1196883", "0.0310025", "-3.861", "0.000126***",
+"factor(sex)M", "0.0042939", "0.0324442", "0.132", "0.894756",
+"age", "-0.0045177", "0.0008616", "-5.241", "2.24e-7***"
+
+
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af den? Fortolk
+værdier i søjlen "Estimate" svarende til variablene status og age.
+
+Det er en multipel lineær regression med l_ratio som responsvariabel og status, sex og
+age som forklarende variable. age er kontinuer, status og sex er kategoriske (det ser vi
+bladnt andet af "factor"). 
+Syge har i gennemsnit, alt andet lige, en signifikant lavere l_ratio end raske. Den
+estimerer vi til at være ca. 0.12 lavere, jsuteret for køn og alder. Den tilhørende p-værdi
+er 0.0001 og derfor signifikant.
+Alderseffekten er også signifikant (p<0.001), og l_ratio falder, i gennemsnit,
+med 0.0045 pr år. Justeret for status og køn.
+
+e) 
+predikter median-ratio for de syge i studiepopulationen med en alder på 50 år, som er kvinder.
+
+middelværdien kan vie beregne ved:
+0.1730998+-0.1196883+50*-0.0045177 = -0.17
+Vi har fået oplyst at l_ratio er normalfordelt. I så fald er median og middel ens, så det 
+er medianen vi har fundet. Der efterspørges ratio, ikke l_ratio, så vi skal beregne
+exp(-0.17) = 0.8436648
+
+f)
+Hvordan ville vi undersøge om alder, køn og l_ratio er signifikante prædiktorer for sygdomsstatus? Angiv relevant R-kode
+
+Sygdomsstatus er en kategorisk, binær variabel. Så vi ville lave en logistisk regression:
+glm(status~age+factor(sex1)+l_ratio, family="binomial").
+
+Og så ville vi se om p-værdierne var tilstrækkeligt små til at vi kan konkludere at de
+er signifikante. 
+
+
