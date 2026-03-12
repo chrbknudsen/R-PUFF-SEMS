@@ -1,5 +1,6 @@
 ---
-title: Logistisk regression
+title: Kategoriske udfald
+subtitle: Herunder logistisk regression
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -10,6 +11,13 @@ filters:
 ---
 
 ## Kategoriske udfald
+
+Den lineære regression bruger vi når vi har kontinuærte
+resultater. 
+
+Hvordan håndterer vi kategoriske resultater?
+
+Logistisk regression
 
 Relativ risiko
 
@@ -381,7 +389,7 @@ Episoder og smoke er 0, så vi finder logodds ved:
 odds er så:
 
 ```{r}
-exp(-3.93915) = 0.01946475
+exp(-3.93915) 
 ```
 og sandsynligheden:
 

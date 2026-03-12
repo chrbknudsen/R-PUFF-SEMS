@@ -386,7 +386,7 @@ regression
 
 b) Når vi gør det, får vi følgende resultat (de fortsætter deres juleleg med at fjerne dele af output):
 
- ```{r echo = FALSE}
+```{r echo = FALSE}
 library(tidyverse)
 library(gt)
 
