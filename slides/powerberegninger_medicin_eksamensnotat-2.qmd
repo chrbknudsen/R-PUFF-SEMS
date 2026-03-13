@@ -117,6 +117,9 @@ $$
 n = 2\left(\frac{(z_{1-α/2}+z_{1-β})σ}{\delta}\right)^2
 $$
 
+
+Og det er altså n pr gruppe!
+
 ---
 
 # Parrede målinger
@@ -219,3 +222,4 @@ $$
 = z_{1-α/2}+z_{1-β}
 $$
 
+Den standardiserede forskel mellem de to proportioner skal være større end den kritiske grænse bestemt af α og β.

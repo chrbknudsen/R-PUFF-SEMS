@@ -547,11 +547,11 @@ Bemærk: `power.prop.test()` antager lige store grupper.
 
 Ved to grupper er det klassisk, at formel eller software returnerer **n per gruppe**.
 
-## Parret design kræver \(\sigma_d\)
+## Parret design kræver $\sigma_d$
 
 Ved parrede data skal man bruge **standardafvigelsen af forskellene**, ikke standardafvigelsen af de rå målinger.
 
-## \(\delta\) er den forskel man vil kunne opdage
+## $\delta$ er den forskel man vil kunne opdage
 
 Ikke nødvendigvis den forskel der blev set i et tidligere studie.
 
