@@ -10,6 +10,8 @@ website:
         href: slides/intro.qmd 
       - text: "normalfordelingen"
         href: slides/normalfordelingen.html
+      - text: "Powerberegninger"
+        href: slides/powerberegninger_notat.html
 
 
 
