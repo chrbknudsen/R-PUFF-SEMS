@@ -1,0 +1,628 @@
+---
+title: "Powerberegninger – undervisningsnotat"
+author: "Christian Knudsen"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: false
+---
+
+# Formål
+
+Dette notat er en **undervisningsversion** af powerberegninger i medicinsk statistik.  
+Det er lavet til situationer, hvor man hurtigt skal kunne:
+
+- identificere den rigtige type powerberegning
+- opstille den korrekte formel
+- finde **n**, **power**, **δ**, **α** eller en ukendt standardafvigelse
+- skelne mellem situationer med middelværdier, proportioner og ratio-mål
+
+Den gennemgående idé er:
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}}
+=
+\text{kritisk grænse for } \alpha
++
+\text{krav til power}
+$$
+
+altså typisk
+
+$$
+\frac{\text{effekt}}{\text{SE}} = z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+ved en tosidet test.
+
+# Grundbegreber
+
+| Symbol | Betydning |
+|---|---|
+| \(\alpha\) | signifikansniveau = risiko for type I-fejl |
+| \(\beta\) | risiko for type II-fejl |
+| Power | \(1-\beta\) |
+| \(\delta\) | mindste klinisk relevante forskel |
+| \(\sigma\) | populationsstandardafvigelse |
+| \(n\) | stikprøvestørrelse |
+| \(SE\) | standardfejl |
+| \(z_q\) | q-fraktil i standardnormalfordelingen |
+
+Typiske eksamensværdier:
+
+- \(\alpha = 0.05\)
+- power = 0.80 eller 0.90
+
+Hyppige kvantiler:
+
+| Kvantil | Værdi |
+|---|---:|
+| \(z_{0.975}\) | 1.96 |
+| \(z_{0.95}\) | 1.645 |
+| \(z_{0.8}\) | 0.84 |
+| \(z_{0.9}\) | 1.28 |
+
+# t eller z?
+
+I **planlægning** af studier bruges næsten altid **z-fordelingen**.
+
+Det skyldes, at powerberegninger normalt bygger på:
+
+- en antaget kendt eller fastlagt \(\sigma\)
+- normal-approksimation
+- en ønsket teoretisk stikprøvestørrelse
+
+I den efterfølgende analyse bruger man ofte en **t-test**, fordi \(\sigma\) i praksis estimeres fra data.
+
+Derfor:
+
+- **power/stikprøveberegning**: typisk **z**
+- **selve hypotesetesten for middelværdier**: ofte **t**
+
+I mange medicin-eksamener forventes netop denne z-baserede opskrivning.
+
+# Eksamensstrategi
+
+## Trin 1: Hvilken type udfald?
+
+Spørg først:
+
+1. er udfaldet en **middelværdi**?
+2. er udfaldet en **proportion / andel**?
+3. er udfaldet et **ratio-mål** som RR eller OR?
+
+## Trin 2: Hvor mange grupper?
+
+- én gruppe
+- to grupper
+
+## Trin 3: Uafhængige eller parrede data?
+
+- uafhængige grupper
+- parrede målinger / før-efter / matched design
+
+## Trin 4: Hvad skal findes?
+
+Ofte skal man finde:
+
+- \(n\)
+- power
+- \(\delta\)
+- \(\alpha\)
+
+Det er samme formel hver gang; man isolerer bare en anden størrelse.
+
+# 1. Én middelværdi
+
+Vi tester
+
+$$
+H_0:\mu=\mu_0
+$$
+
+og vil kunne opdage en afvigelse
+
+$$
+\delta = |\mu-\mu_0|
+$$
+
+Standardfejlen er
+
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+
+Den klassiske eksamensrelation er
+
+$$
+\frac{\delta}{\sigma/\sqrt{n}} = z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+## Løsning for stikprøvestørrelsen
+
+$$
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+$$
+
+## Løsning for mindste detekterbare forskel
+
+$$
+\delta = (z_{1-\alpha/2}+z_{1-\beta})\frac{\sigma}{\sqrt{n}}
+$$
+
+## Løsning for power
+
+Omskriv først til
+
+$$
+z_{1-\beta}
+=
+\frac{\delta\sqrt{n}}{\sigma}
+-
+z_{1-\alpha/2}
+$$
+
+og dermed
+
+$$
+\text{power}
+=
+\Phi\left(
+\frac{\delta\sqrt{n}}{\sigma}
+-
+z_{1-\alpha/2}
+\right)
+$$
+
+hvor \(\Phi\) er fordelingsfunktionen for standardnormalfordelingen.
+
+# 2. To uafhængige middelværdier
+
+Vi tester
+
+$$
+H_0:\mu_1=\mu_2
+$$
+
+med forskel
+
+$$
+\delta = |\mu_1-\mu_2|
+$$
+
+## Generel formel ved forskellig gruppestørrelse
+
+Hvis grupperne har størrelser \(n_1\) og \(n_2\), og man antager fælles standardafvigelse \(\sigma\), er
+
+$$
+SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
+$$
+
+og powerrelationen bliver
+
+$$
+\frac{\delta}{\sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+Det er **den generelle og statistisk korrekte eksamensversion**.
+
+## Hvis grupperne er lige store
+
+Hvis \(n_1=n_2=n\), fås
+
+$$
+SE = \sigma\sqrt{\frac{2}{n}}
+$$
+
+og dermed
+
+$$
+\frac{\delta}{\sigma\sqrt{2/n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+så
+
+$$
+n
+=
+2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+$$
+
+## Hvis gruppestørrelserne har fast ratio
+
+Lad
+
+$$
+k=\frac{n_2}{n_1}
+$$
+
+så er \(n_2 = kn_1\). Da bliver
+
+$$
+SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
+=
+\sigma\sqrt{\frac{1+1/k}{n_1}}
+$$
+
+Dermed
+
+$$
+n_1
+=
+\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\left(1+\frac{1}{k}\right)
+$$
+
+og
+
+$$
+n_2 = k n_1
+$$
+
+Det er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så stor som interventionsgruppen.
+
+# 3. Parrede målinger
+
+Ved parrede data analyserer man forskellene inden for person.
+
+Lad \(\sigma_d\) være standardafvigelsen af forskellene.
+
+Så er
+
+$$
+SE = \frac{\sigma_d}{\sqrt{n}}
+$$
+
+og powerrelationen bliver
+
+$$
+\frac{\delta}{\sigma_d/\sqrt{n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+så
+
+$$
+n
+=
+\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma_d}{\delta}\right)^2
+$$
+
+Det ligner formlen for én middelværdi, men her er det **forskellene**, der analyseres.
+
+# 4. Én proportion
+
+Vi tester
+
+$$
+H_0:p=p_0
+$$
+
+og ønsker at kunne opdage forskellen
+
+$$
+\delta = |p-p_0|
+$$
+
+Den simple eksamensversion bruger standardfejlen under nulhypotesen:
+
+$$
+SE = \sqrt{\frac{p_0(1-p_0)}{n}}
+$$
+
+Powerrelation:
+
+$$
+\frac{|p-p_0|}{\sqrt{p_0(1-p_0)/n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+Deraf fås
+
+$$
+n
+=
+\frac{(z_{1-\alpha/2}+z_{1-\beta})^2p_0(1-p_0)}{(p-p_0)^2}
+$$
+
+## Løsning for mindste forskel
+
+$$
+|p-p_0|
+=
+(z_{1-\alpha/2}+z_{1-\beta})
+\sqrt{\frac{p_0(1-p_0)}{n}}
+$$
+
+# 5. To proportioner
+
+Vi tester
+
+$$
+H_0:p_1=p_2
+$$
+
+og vil opdage forskellen
+
+$$
+\delta = |p_1-p_2|
+$$
+
+## Generel formel ved forskellig gruppestørrelse
+
+Hvis grupperne har størrelser \(n_1\) og \(n_2\), er
+
+$$
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)}{n_1}
++
+\frac{p_2(1-p_2)}{n_2}
+}
+$$
+
+og powerrelationen bliver
+
+$$
+\frac{|p_1-p_2|}{SE}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+## Lige store grupper
+
+Hvis \(n_1=n_2=n\), fås
+
+$$
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)+p_2(1-p_2)}{n}
+}
+$$
+
+så
+
+$$
+n
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+p_2(1-p_2)\right]
+}{
+(p_1-p_2)^2
+}
+$$
+
+## Fast ratio mellem gruppestørrelser
+
+Hvis \(k=n_2/n_1\), så kan man skrive
+
+$$
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)}{n_1}
++
+\frac{p_2(1-p_2)}{kn_1}
+}
+$$
+
+og derfra isolere \(n_1\):
+
+$$
+n_1
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+\frac{p_2(1-p_2)}{k}\right]
+}{
+(p_1-p_2)^2
+}
+$$
+
+samt
+
+$$
+n_2=kn_1
+$$
+
+# 6. Relativ risiko (RR)
+
+I nogle opgaver arbejder man ikke direkte med forskellen i proportioner, men med en **relativ risiko**
+
+$$
+RR = \frac{p_1}{p_0}
+$$
+
+Her er den mest praktiske eksamensidé ofte:
+
+1. omskriv RR til en alternativ risiko i interventionsgruppen:
+   $$
+   p_1 = RR \cdot p_0
+   $$
+2. brug derefter formlen for **to proportioner**
+
+Det er ofte det niveau, medicin-eksamener forventer.
+
+## Eksempel på omskrivning
+
+Hvis kontrolgruppen forventes at have
+
+$$
+p_0 = 0.20
+$$
+
+og man vil kunne opdage
+
+$$
+RR = 0.70
+$$
+
+så svarer det til
+
+$$
+p_1 = 0.70 \cdot 0.20 = 0.14
+$$
+
+og man fortsætter som en almindelig to-proportions-beregning.
+
+# 7. Odds ratio (OR)
+
+Ved case-control-studier formuleres effekten ofte som en **odds ratio**.
+
+Den fulde powerberegning for OR er mere specialiseret end de klassiske eksamensformler ovenfor.  
+I mange eksamenssammenhænge gør man i stedet ét af følgende:
+
+- man får allerede oplyst sandsynligheder/proportioner i de to grupper og bruger to-proportions-formlen
+- man omsætter en OR til forventede proportioner ud fra en kendt baseline-risiko
+- eller man bruger software
+
+Hvis opgaven ikke specifikt kræver OR-baseret teori, er det som regel bedst at holde sig til proportioner.
+
+# R-funktioner
+
+Når man vil kontrollere sine håndregninger i R, er disse typisk nok:
+
+## Én middelværdi
+
+```r
+power.t.test(
+  delta = 300,
+  sd = 430,
+  sig.level = 0.05,
+  power = 0.90,
+  type = "one.sample"
+)
+```
+
+## To uafhængige middelværdier
+
+```r
+power.t.test(
+  delta = 5,
+  sd = 10,
+  sig.level = 0.05,
+  power = 0.80,
+  type = "two.sample"
+)
+```
+
+## Parrede målinger
+
+```r
+power.t.test(
+  delta = 4,
+  sd = 8,
+  sig.level = 0.05,
+  power = 0.80,
+  type = "paired"
+)
+```
+
+## To proportioner
+
+```r
+power.prop.test(
+  p1 = 0.20,
+  p2 = 0.35,
+  sig.level = 0.05,
+  power = 0.80
+)
+```
+
+Bemærk: `power.prop.test()` antager lige store grupper.
+
+# Typiske eksamensfælder
+
+## n er ofte per gruppe
+
+Ved to grupper er det klassisk, at formel eller software returnerer **n per gruppe**.
+
+## Parret design kræver \(\sigma_d\)
+
+Ved parrede data skal man bruge **standardafvigelsen af forskellene**, ikke standardafvigelsen af de rå målinger.
+
+## \(\delta\) er den forskel man vil kunne opdage
+
+Ikke nødvendigvis den forskel der blev set i et tidligere studie.
+
+## Forskellig gruppestørrelse kræver den generelle formel
+
+Den simple two-sample-formel med faktoren 2 gælder kun ved **lige store grupper**.
+
+## RR og OR skal ofte omskrives
+
+Hvis opgaven giver en RR eller OR, er det tit lettest at omskrive til forventede proportioner og derefter bruge to-proportions-ideen.
+
+# Én samlet huskeregel
+
+De fleste klassiske powerformler kan huskes som
+
+$$
+\frac{\delta}{SE}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+$$
+
+hvor standardfejlen bestemmes af studiedesignet:
+
+| Situation | Standardfejl |
+|---|---|
+| én middelværdi | \(\sigma/\sqrt{n}\) |
+| to middelværdier | \(\sigma\sqrt{1/n_1+1/n_2}\) |
+| parret design | \(\sigma_d/\sqrt{n}\) |
+| én proportion | \(\sqrt{p_0(1-p_0)/n}\) |
+| to proportioner | \(\sqrt{p_1(1-p_1)/n_1 + p_2(1-p_2)/n_2}\) |
+
+# Mini-cheatsheet
+
+## Middelværdier
+
+Én gruppe:
+
+$$
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+$$
+
+To uafhængige grupper, lige store:
+
+$$
+n = 2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+$$
+
+Parrede data:
+
+$$
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma_d}{\delta}\right)^2
+$$
+
+## Proportioner
+
+Én proportion:
+
+$$
+n = \frac{(z_{1-\alpha/2}+z_{1-\beta})^2p_0(1-p_0)}{(p-p_0)^2}
+$$
+
+To proportioner, lige store grupper:
+
+$$
+n
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+p_2(1-p_2)\right]
+}{
+(p_1-p_2)^2
+}
+$$
+

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Christian Knudsen">
+
+<title>Powerberegninger – undervisningsnotat – PUFF SEMS forberedelse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">PUFF SEMS forberedelse</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../slides/intro.html"> 
+<span class="menu-text">PUFF SEMS forberedelse</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../slides/normalfordelingen.html"> 
+<span class="menu-text">normalfordelingen</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Powerberegninger – undervisningsnotat</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Christian Knudsen </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="formål" class="level1">
+<h1>Formål</h1>
+<p>Dette notat er en <strong>undervisningsversion</strong> af powerberegninger i medicinsk statistik.<br>
+Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
+<ul>
+<li>identificere den rigtige type powerberegning</li>
+<li>opstille den korrekte formel</li>
+<li>finde <strong>n</strong>, <strong>power</strong>, <strong>δ</strong>, <strong>α</strong> eller en ukendt standardafvigelse</li>
+<li>skelne mellem situationer med middelværdier, proportioner og ratio-mål</li>
+</ul>
+<p>Den gennemgående idé er:</p>
+<p><span class="math display">\[
+\frac{\text{effekt}}{\text{standardfejl}}
+=
+\text{kritisk grænse for } \alpha
++
+\text{krav til power}
+\]</span></p>
+<p>altså typisk</p>
+<p><span class="math display">\[
+\frac{\text{effekt}}{\text{SE}} = z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>ved en tosidet test.</p>
+</section>
+<section id="grundbegreber" class="level1">
+<h1>Grundbegreber</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Betydning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>()</td>
+<td>signifikansniveau = risiko for type I-fejl</td>
+</tr>
+<tr class="even">
+<td>()</td>
+<td>risiko for type II-fejl</td>
+</tr>
+<tr class="odd">
+<td>Power</td>
+<td>(1-)</td>
+</tr>
+<tr class="even">
+<td>()</td>
+<td>mindste klinisk relevante forskel</td>
+</tr>
+<tr class="odd">
+<td>()</td>
+<td>populationsstandardafvigelse</td>
+</tr>
+<tr class="even">
+<td>(n)</td>
+<td>stikprøvestørrelse</td>
+</tr>
+<tr class="odd">
+<td>(SE)</td>
+<td>standardfejl</td>
+</tr>
+<tr class="even">
+<td>(z_q)</td>
+<td>q-fraktil i standardnormalfordelingen</td>
+</tr>
+</tbody>
+</table>
+<p>Typiske eksamensværdier:</p>
+<ul>
+<li>(= 0.05)</li>
+<li>power = 0.80 eller 0.90</li>
+</ul>
+<p>Hyppige kvantiler:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Kvantil</th>
+<th style="text-align: right;">Værdi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(z_{0.975})</td>
+<td style="text-align: right;">1.96</td>
+</tr>
+<tr class="even">
+<td>(z_{0.95})</td>
+<td style="text-align: right;">1.645</td>
+</tr>
+<tr class="odd">
+<td>(z_{0.8})</td>
+<td style="text-align: right;">0.84</td>
+</tr>
+<tr class="even">
+<td>(z_{0.9})</td>
+<td style="text-align: right;">1.28</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="t-eller-z" class="level1">
+<h1>t eller z?</h1>
+<p>I <strong>planlægning</strong> af studier bruges næsten altid <strong>z-fordelingen</strong>.</p>
+<p>Det skyldes, at powerberegninger normalt bygger på:</p>
+<ul>
+<li>en antaget kendt eller fastlagt ()</li>
+<li>normal-approksimation</li>
+<li>en ønsket teoretisk stikprøvestørrelse</li>
+</ul>
+<p>I den efterfølgende analyse bruger man ofte en <strong>t-test</strong>, fordi () i praksis estimeres fra data.</p>
+<p>Derfor:</p>
+<ul>
+<li><strong>power/stikprøveberegning</strong>: typisk <strong>z</strong></li>
+<li><strong>selve hypotesetesten for middelværdier</strong>: ofte <strong>t</strong></li>
+</ul>
+<p>I mange medicin-eksamener forventes netop denne z-baserede opskrivning.</p>
+</section>
+<section id="eksamensstrategi" class="level1">
+<h1>Eksamensstrategi</h1>
+<section id="trin-1-hvilken-type-udfald" class="level2">
+<h2 class="anchored" data-anchor-id="trin-1-hvilken-type-udfald">Trin 1: Hvilken type udfald?</h2>
+<p>Spørg først:</p>
+<ol type="1">
+<li>er udfaldet en <strong>middelværdi</strong>?</li>
+<li>er udfaldet en <strong>proportion / andel</strong>?</li>
+<li>er udfaldet et <strong>ratio-mål</strong> som RR eller OR?</li>
+</ol>
+</section>
+<section id="trin-2-hvor-mange-grupper" class="level2">
+<h2 class="anchored" data-anchor-id="trin-2-hvor-mange-grupper">Trin 2: Hvor mange grupper?</h2>
+<ul>
+<li>én gruppe</li>
+<li>to grupper</li>
+</ul>
+</section>
+<section id="trin-3-uafhængige-eller-parrede-data" class="level2">
+<h2 class="anchored" data-anchor-id="trin-3-uafhængige-eller-parrede-data">Trin 3: Uafhængige eller parrede data?</h2>
+<ul>
+<li>uafhængige grupper</li>
+<li>parrede målinger / før-efter / matched design</li>
+</ul>
+</section>
+<section id="trin-4-hvad-skal-findes" class="level2">
+<h2 class="anchored" data-anchor-id="trin-4-hvad-skal-findes">Trin 4: Hvad skal findes?</h2>
+<p>Ofte skal man finde:</p>
+<ul>
+<li>(n)</li>
+<li>power</li>
+<li>()</li>
+<li>()</li>
+</ul>
+<p>Det er samme formel hver gang; man isolerer bare en anden størrelse.</p>
+</section>
+</section>
+<section id="én-middelværdi" class="level1">
+<h1>1. Én middelværdi</h1>
+<p>Vi tester</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\]</span></p>
+<p>og vil kunne opdage en afvigelse</p>
+<p><span class="math display">\[
+\delta = |\mu-\mu_0|
+\]</span></p>
+<p>Standardfejlen er</p>
+<p><span class="math display">\[
+SE = \frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>Den klassiske eksamensrelation er</p>
+<p><span class="math display">\[
+\frac{\delta}{\sigma/\sqrt{n}} = z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<section id="løsning-for-stikprøvestørrelsen" class="level2">
+<h2 class="anchored" data-anchor-id="løsning-for-stikprøvestørrelsen">Løsning for stikprøvestørrelsen</h2>
+<p><span class="math display">\[
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\]</span></p>
+</section>
+<section id="løsning-for-mindste-detekterbare-forskel" class="level2">
+<h2 class="anchored" data-anchor-id="løsning-for-mindste-detekterbare-forskel">Løsning for mindste detekterbare forskel</h2>
+<p><span class="math display">\[
+\delta = (z_{1-\alpha/2}+z_{1-\beta})\frac{\sigma}{\sqrt{n}}
+\]</span></p>
+</section>
+<section id="løsning-for-power" class="level2">
+<h2 class="anchored" data-anchor-id="løsning-for-power">Løsning for power</h2>
+<p>Omskriv først til</p>
+<p><span class="math display">\[
+z_{1-\beta}
+=
+\frac{\delta\sqrt{n}}{\sigma}
+-
+z_{1-\alpha/2}
+\]</span></p>
+<p>og dermed</p>
+<p><span class="math display">\[
+\text{power}
+=
+\Phi\left(
+\frac{\delta\sqrt{n}}{\sigma}
+-
+z_{1-\alpha/2}
+\right)
+\]</span></p>
+<p>hvor () er fordelingsfunktionen for standardnormalfordelingen.</p>
+</section>
+</section>
+<section id="to-uafhængige-middelværdier" class="level1">
+<h1>2. To uafhængige middelværdier</h1>
+<p>Vi tester</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2
+\]</span></p>
+<p>med forskel</p>
+<p><span class="math display">\[
+\delta = |\mu_1-\mu_2|
+\]</span></p>
+<section id="generel-formel-ved-forskellig-gruppestørrelse" class="level2">
+<h2 class="anchored" data-anchor-id="generel-formel-ved-forskellig-gruppestørrelse">Generel formel ved forskellig gruppestørrelse</h2>
+<p>Hvis grupperne har størrelser (n_1) og (n_2), og man antager fælles standardafvigelse (), er</p>
+<p><span class="math display">\[
+SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
+\]</span></p>
+<p>og powerrelationen bliver</p>
+<p><span class="math display">\[
+\frac{\delta}{\sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>Det er <strong>den generelle og statistisk korrekte eksamensversion</strong>.</p>
+</section>
+<section id="hvis-grupperne-er-lige-store" class="level2">
+<h2 class="anchored" data-anchor-id="hvis-grupperne-er-lige-store">Hvis grupperne er lige store</h2>
+<p>Hvis (n_1=n_2=n), fås</p>
+<p><span class="math display">\[
+SE = \sigma\sqrt{\frac{2}{n}}
+\]</span></p>
+<p>og dermed</p>
+<p><span class="math display">\[
+\frac{\delta}{\sigma\sqrt{2/n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>så</p>
+<p><span class="math display">\[
+n
+=
+2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\]</span></p>
+</section>
+<section id="hvis-gruppestørrelserne-har-fast-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="hvis-gruppestørrelserne-har-fast-ratio">Hvis gruppestørrelserne har fast ratio</h2>
+<p>Lad</p>
+<p><span class="math display">\[
+k=\frac{n_2}{n_1}
+\]</span></p>
+<p>så er (n_2 = kn_1). Da bliver</p>
+<p><span class="math display">\[
+SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
+=
+\sigma\sqrt{\frac{1+1/k}{n_1}}
+\]</span></p>
+<p>Dermed</p>
+<p><span class="math display">\[
+n_1
+=
+\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\left(1+\frac{1}{k}\right)
+\]</span></p>
+<p>og</p>
+<p><span class="math display">\[
+n_2 = k n_1
+\]</span></p>
+<p>Det er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så stor som interventionsgruppen.</p>
+</section>
+</section>
+<section id="parrede-målinger" class="level1">
+<h1>3. Parrede målinger</h1>
+<p>Ved parrede data analyserer man forskellene inden for person.</p>
+<p>Lad (_d) være standardafvigelsen af forskellene.</p>
+<p>Så er</p>
+<p><span class="math display">\[
+SE = \frac{\sigma_d}{\sqrt{n}}
+\]</span></p>
+<p>og powerrelationen bliver</p>
+<p><span class="math display">\[
+\frac{\delta}{\sigma_d/\sqrt{n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>så</p>
+<p><span class="math display">\[
+n
+=
+\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma_d}{\delta}\right)^2
+\]</span></p>
+<p>Det ligner formlen for én middelværdi, men her er det <strong>forskellene</strong>, der analyseres.</p>
+</section>
+<section id="én-proportion" class="level1">
+<h1>4. Én proportion</h1>
+<p>Vi tester</p>
+<p><span class="math display">\[
+H_0:p=p_0
+\]</span></p>
+<p>og ønsker at kunne opdage forskellen</p>
+<p><span class="math display">\[
+\delta = |p-p_0|
+\]</span></p>
+<p>Den simple eksamensversion bruger standardfejlen under nulhypotesen:</p>
+<p><span class="math display">\[
+SE = \sqrt{\frac{p_0(1-p_0)}{n}}
+\]</span></p>
+<p>Powerrelation:</p>
+<p><span class="math display">\[
+\frac{|p-p_0|}{\sqrt{p_0(1-p_0)/n}}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>Deraf fås</p>
+<p><span class="math display">\[
+n
+=
+\frac{(z_{1-\alpha/2}+z_{1-\beta})^2p_0(1-p_0)}{(p-p_0)^2}
+\]</span></p>
+<section id="løsning-for-mindste-forskel" class="level2">
+<h2 class="anchored" data-anchor-id="løsning-for-mindste-forskel">Løsning for mindste forskel</h2>
+<p><span class="math display">\[
+|p-p_0|
+=
+(z_{1-\alpha/2}+z_{1-\beta})
+\sqrt{\frac{p_0(1-p_0)}{n}}
+\]</span></p>
+</section>
+</section>
+<section id="to-proportioner" class="level1">
+<h1>5. To proportioner</h1>
+<p>Vi tester</p>
+<p><span class="math display">\[
+H_0:p_1=p_2
+\]</span></p>
+<p>og vil opdage forskellen</p>
+<p><span class="math display">\[
+\delta = |p_1-p_2|
+\]</span></p>
+<section id="generel-formel-ved-forskellig-gruppestørrelse-1" class="level2">
+<h2 class="anchored" data-anchor-id="generel-formel-ved-forskellig-gruppestørrelse-1">Generel formel ved forskellig gruppestørrelse</h2>
+<p>Hvis grupperne har størrelser (n_1) og (n_2), er</p>
+<p><span class="math display">\[
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)}{n_1}
++
+\frac{p_2(1-p_2)}{n_2}
+}
+\]</span></p>
+<p>og powerrelationen bliver</p>
+<p><span class="math display">\[
+\frac{|p_1-p_2|}{SE}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+</section>
+<section id="lige-store-grupper" class="level2">
+<h2 class="anchored" data-anchor-id="lige-store-grupper">Lige store grupper</h2>
+<p>Hvis (n_1=n_2=n), fås</p>
+<p><span class="math display">\[
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)+p_2(1-p_2)}{n}
+}
+\]</span></p>
+<p>så</p>
+<p><span class="math display">\[
+n
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+p_2(1-p_2)\right]
+}{
+(p_1-p_2)^2
+}
+\]</span></p>
+</section>
+<section id="fast-ratio-mellem-gruppestørrelser" class="level2">
+<h2 class="anchored" data-anchor-id="fast-ratio-mellem-gruppestørrelser">Fast ratio mellem gruppestørrelser</h2>
+<p>Hvis (k=n_2/n_1), så kan man skrive</p>
+<p><span class="math display">\[
+SE
+=
+\sqrt{
+\frac{p_1(1-p_1)}{n_1}
++
+\frac{p_2(1-p_2)}{kn_1}
+}
+\]</span></p>
+<p>og derfra isolere (n_1):</p>
+<p><span class="math display">\[
+n_1
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+\frac{p_2(1-p_2)}{k}\right]
+}{
+(p_1-p_2)^2
+}
+\]</span></p>
+<p>samt</p>
+<p><span class="math display">\[
+n_2=kn_1
+\]</span></p>
+</section>
+</section>
+<section id="relativ-risiko-rr" class="level1">
+<h1>6. Relativ risiko (RR)</h1>
+<p>I nogle opgaver arbejder man ikke direkte med forskellen i proportioner, men med en <strong>relativ risiko</strong></p>
+<p><span class="math display">\[
+RR = \frac{p_1}{p_0}
+\]</span></p>
+<p>Her er den mest praktiske eksamensidé ofte:</p>
+<ol type="1">
+<li>omskriv RR til en alternativ risiko i interventionsgruppen: <span class="math display">\[
+p_1 = RR \cdot p_0
+\]</span></li>
+<li>brug derefter formlen for <strong>to proportioner</strong></li>
+</ol>
+<p>Det er ofte det niveau, medicin-eksamener forventer.</p>
+<section id="eksempel-på-omskrivning" class="level2">
+<h2 class="anchored" data-anchor-id="eksempel-på-omskrivning">Eksempel på omskrivning</h2>
+<p>Hvis kontrolgruppen forventes at have</p>
+<p><span class="math display">\[
+p_0 = 0.20
+\]</span></p>
+<p>og man vil kunne opdage</p>
+<p><span class="math display">\[
+RR = 0.70
+\]</span></p>
+<p>så svarer det til</p>
+<p><span class="math display">\[
+p_1 = 0.70 \cdot 0.20 = 0.14
+\]</span></p>
+<p>og man fortsætter som en almindelig to-proportions-beregning.</p>
+</section>
+</section>
+<section id="odds-ratio-or" class="level1">
+<h1>7. Odds ratio (OR)</h1>
+<p>Ved case-control-studier formuleres effekten ofte som en <strong>odds ratio</strong>.</p>
+<p>Den fulde powerberegning for OR er mere specialiseret end de klassiske eksamensformler ovenfor.<br>
+I mange eksamenssammenhænge gør man i stedet ét af følgende:</p>
+<ul>
+<li>man får allerede oplyst sandsynligheder/proportioner i de to grupper og bruger to-proportions-formlen</li>
+<li>man omsætter en OR til forventede proportioner ud fra en kendt baseline-risiko</li>
+<li>eller man bruger software</li>
+</ul>
+<p>Hvis opgaven ikke specifikt kræver OR-baseret teori, er det som regel bedst at holde sig til proportioner.</p>
+</section>
+<section id="r-funktioner" class="level1">
+<h1>R-funktioner</h1>
+<p>Når man vil kontrollere sine håndregninger i R, er disse typisk nok:</p>
+<section id="én-middelværdi-1" class="level2">
+<h2 class="anchored" data-anchor-id="én-middelværdi-1">Én middelværdi</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">300</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">430</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.90</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="to-uafhængige-middelværdier-1" class="level2">
+<h2 class="anchored" data-anchor-id="to-uafhængige-middelværdier-1">To uafhængige middelværdier</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">5</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">10</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"two.sample"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="parrede-målinger-1" class="level2">
+<h2 class="anchored" data-anchor-id="parrede-målinger-1">Parrede målinger</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">4</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">8</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"paired"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="to-proportioner-1" class="level2">
+<h2 class="anchored" data-anchor-id="to-proportioner-1">To proportioner</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.prop.test</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.20</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p2 =</span> <span class="fl">0.35</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Bemærk: <code>power.prop.test()</code> antager lige store grupper.</p>
+</section>
+</section>
+<section id="typiske-eksamensfælder" class="level1">
+<h1>Typiske eksamensfælder</h1>
+<section id="n-er-ofte-per-gruppe" class="level2">
+<h2 class="anchored" data-anchor-id="n-er-ofte-per-gruppe">n er ofte per gruppe</h2>
+<p>Ved to grupper er det klassisk, at formel eller software returnerer <strong>n per gruppe</strong>.</p>
+</section>
+<section id="parret-design-kræver-_d" class="level2">
+<h2 class="anchored" data-anchor-id="parret-design-kræver-_d">Parret design kræver (_d)</h2>
+<p>Ved parrede data skal man bruge <strong>standardafvigelsen af forskellene</strong>, ikke standardafvigelsen af de rå målinger.</p>
+</section>
+<section id="er-den-forskel-man-vil-kunne-opdage" class="level2">
+<h2 class="anchored" data-anchor-id="er-den-forskel-man-vil-kunne-opdage">() er den forskel man vil kunne opdage</h2>
+<p>Ikke nødvendigvis den forskel der blev set i et tidligere studie.</p>
+</section>
+<section id="forskellig-gruppestørrelse-kræver-den-generelle-formel" class="level2">
+<h2 class="anchored" data-anchor-id="forskellig-gruppestørrelse-kræver-den-generelle-formel">Forskellig gruppestørrelse kræver den generelle formel</h2>
+<p>Den simple two-sample-formel med faktoren 2 gælder kun ved <strong>lige store grupper</strong>.</p>
+</section>
+<section id="rr-og-or-skal-ofte-omskrives" class="level2">
+<h2 class="anchored" data-anchor-id="rr-og-or-skal-ofte-omskrives">RR og OR skal ofte omskrives</h2>
+<p>Hvis opgaven giver en RR eller OR, er det tit lettest at omskrive til forventede proportioner og derefter bruge to-proportions-ideen.</p>
+</section>
+</section>
+<section id="én-samlet-huskeregel" class="level1">
+<h1>Én samlet huskeregel</h1>
+<p>De fleste klassiske powerformler kan huskes som</p>
+<p><span class="math display">\[
+\frac{\delta}{SE}
+=
+z_{1-\alpha/2}+z_{1-\beta}
+\]</span></p>
+<p>hvor standardfejlen bestemmes af studiedesignet:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Standardfejl</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>én middelværdi</td>
+<td>(/)</td>
+</tr>
+<tr class="even">
+<td>to middelværdier</td>
+<td>()</td>
+</tr>
+<tr class="odd">
+<td>parret design</td>
+<td>(_d/)</td>
+</tr>
+<tr class="even">
+<td>én proportion</td>
+<td>()</td>
+</tr>
+<tr class="odd">
+<td>to proportioner</td>
+<td>()</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mini-cheatsheet" class="level1">
+<h1>Mini-cheatsheet</h1>
+<section id="middelværdier" class="level2">
+<h2 class="anchored" data-anchor-id="middelværdier">Middelværdier</h2>
+<p>Én gruppe:</p>
+<p><span class="math display">\[
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\]</span></p>
+<p>To uafhængige grupper, lige store:</p>
+<p><span class="math display">\[
+n = 2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
+\]</span></p>
+<p>Parrede data:</p>
+<p><span class="math display">\[
+n = \left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma_d}{\delta}\right)^2
+\]</span></p>
+</section>
+<section id="proportioner" class="level2">
+<h2 class="anchored" data-anchor-id="proportioner">Proportioner</h2>
+<p>Én proportion:</p>
+<p><span class="math display">\[
+n = \frac{(z_{1-\alpha/2}+z_{1-\beta})^2p_0(1-p_0)}{(p-p_0)^2}
+\]</span></p>
+<p>To proportioner, lige store grupper:</p>
+<p><span class="math display">\[
+n
+=
+\frac{
+(z_{1-\alpha/2}+z_{1-\beta})^2
+\left[p_1(1-p_1)+p_2(1-p_2)\right]
+}{
+(p_1-p_2)^2
+}
+\]</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

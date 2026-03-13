@@ -1,0 +1,221 @@
+
+---
+title: "Powerberegninger – eksamensoverblik (medicinsk statistik)"
+author: "Noter"
+output: html_document
+---
+
+# Formål
+
+Dette notat giver et **eksamensrelevant overblik over power‑ og stikprøveberegninger** i medicinsk statistik.
+
+I eksamensopgaver kan man typisk blive bedt om at finde:
+
+- stikprøvestørrelse \(n\)
+- power \(1-\beta\)
+- mindste detekterbare forskel \(\delta\)
+- eller signifikansniveau
+
+Alle disse kan findes ved **at isolere den ønskede størrelse i power‑formlerne**.
+
+---
+
+# Grundbegreber
+
+| Symbol | Betydning |
+|------|------|
+| \(α\) | signifikansniveau (type I fejl) |
+| \(β\) | type II fejl |
+| power | \(1-β\) |
+| \(δ\) | mindste klinisk relevante forskel |
+| \(σ\) | populationsstandardafvigelse |
+| \(n\) | stikprøvestørrelse |
+| \(z\) | kvantil fra normalfordelingen |
+
+Typiske værdier i eksamensopgaver
+
+- \(α = 0.05\)
+- power = 0.80 eller 0.90
+
+Kvantilværdier
+
+| kvantil | værdi |
+|---|---|
+| \(z_{0.975}\) | 1.96 |
+| \(z_{0.8}\) | 0.84 |
+| \(z_{0.9}\) | 1.28 |
+
+---
+
+# t‑ vs z‑fordeling
+
+I powerberegninger bruges næsten altid **z‑fordelingen**.
+
+Årsagen er at powerberegninger antager
+
+- kendt populationsspredning \(σ\)
+- asymptotisk normalitet
+
+Selve analysen udføres ofte med **t‑test**, fordi \(σ\) i praksis estimeres fra data.
+
+Derfor bruges normalt
+
+$$
+z_{1-α/2}
+$$
+
+i stikprøveplanlægning.
+
+---
+
+# Én middelværdi
+
+Test
+
+$$
+H_0: \mu = \mu_0
+$$
+
+Power‑relation
+
+$$
+\frac{\delta}{σ/\sqrt{n}} = z_{1-α/2}+z_{1-β}
+$$
+
+Stikprøvestørrelse
+
+$$
+n=\left(\frac{(z_{1-α/2}+z_{1-β})σ}{\delta}\right)^2
+$$
+
+---
+
+# To uafhængige middelværdier
+
+Test
+
+$$
+H_0: \mu_1=\mu_2
+$$
+
+Standardfejl
+
+$$
+SE = σ\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
+$$
+
+Power‑relation
+
+$$
+\frac{\delta}{σ\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+Hvis grupperne er lige store
+
+$$
+n = 2\left(\frac{(z_{1-α/2}+z_{1-β})σ}{\delta}\right)^2
+$$
+
+---
+
+# Parrede målinger
+
+Power‑relation
+
+$$
+\frac{\delta}{σ_d/\sqrt{n}} = z_{1-α/2}+z_{1-β}
+$$
+
+Stikprøvestørrelse
+
+$$
+n=\left(\frac{(z_{1-α/2}+z_{1-β})σ_d}{\delta}\right)^2
+$$
+
+---
+
+# Én proportion
+
+Standardfejl
+
+$$
+SE=\sqrt{\frac{p_0(1-p_0)}{n}}
+$$
+
+Power‑relation
+
+$$
+\frac{|p-p_0|}{\sqrt{p_0(1-p_0)/n}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+Stikprøvestørrelse
+
+$$
+n = \frac{(z_{1-α/2}+z_{1-β})^2 p_0(1-p_0)}{(p-p_0)^2}
+$$
+
+---
+
+# To proportioner
+
+Standardfejl
+
+$$
+SE=\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}
+$$
+
+Power‑relation
+
+$$
+\frac{|p_1-p_2|}{SE}
+= z_{1-α/2}+z_{1-β}
+$$
+
+Hvis grupperne er lige store
+
+$$
+n =
+\frac{(z_{1-α/2}+z_{1-β})^2
+\left[p_1(1-p_1)+p_2(1-p_2)\right]}
+{(p_1-p_2)^2}
+$$
+
+---
+
+# Eksamensstrategi
+
+1. Identificer typen af test
+
+- middelværdi eller proportion
+- én eller to grupper
+- parret eller uafhængig
+
+2. Identificer
+
+- \(δ\)
+- \(σ\) eller \(p\)
+- \(α\)
+- power
+
+3. Brug power‑relationen
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+4. Isolér den ønskede størrelse.
+
+---
+
+# Minimal huskeregel
+
+Powerberegninger bygger næsten altid på
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
