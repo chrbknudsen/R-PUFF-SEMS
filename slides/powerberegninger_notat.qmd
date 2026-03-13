@@ -16,12 +16,12 @@ Det er lavet til situationer, hvor jeg hurtigt skal kunne:
 
 - identificere den rigtige type powerberegning
 - opstille den korrekte formel
-- finde **n**, **power**, **$\delta$**, **$\alpha$** eller en ukendt standardafvigelse
+- finde n, power, $\delta$, $\alpha$ eller en ukendt standardafvigelse
 - skelne mellem situationer med middelværdier, proportioner og ratio-mål
 
 Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.
 
-Den gennemgående idé er:
+Den grundlæggende idé er:
 
 $$
 \frac{\text{effekt}}{\text{standardfejl}}
@@ -31,7 +31,7 @@ $$
 \text{krav til power}
 $$
 
-altså typisk
+Eller:
 
 $$
 \frac{\text{effekt}}{\text{SE}} = z_{1-\alpha/2}+z_{1-\beta}
@@ -46,16 +46,16 @@ ved en tosidet test.
 | $\alpha$ | signifikansniveau = risiko for type I-fejl |
 | $\beta$ | risiko for type II-fejl |
 | Power | $1-\beta$ |
-| $\delta$ | mindste klinisk relevante forskel |
+| $\delta$ | mindste (klinisk relevante, hvis det er medicin) forskel |
 | $\sigma$ | populationsstandardafvigelse |
 | n | stikprøvestørrelse |
 | $SE$ | standardfejl |
 | $z_q$ | q-fraktil i standardnormalfordelingen |
 
-Typiske eksamensværdier:
+Typiske værdier observeret i eksamensopgaver:
 
 - $\alpha = 0.05$
-- power = 0.80 eller 0.90
+- power = 0.80
 
 Hyppige kvantiler:
 
@@ -84,14 +84,14 @@ Derfor:
 - **power/stikprøveberegning**: typisk **z**
 - **selve hypotesetesten for middelværdier**: ofte **t**
 
-Til eksamen forventes normalt det normalt at man baserer sig på z-værdier.
+Til eksamen forventes det normalt at man baserer sig på z-værdier.
 
 
 # Eksamensstrategi
 
 ## Trin 1: Hvilken type udfald?
 
-Spørg først:
+Første spørgsmål:
 
 1. er udfaldet en **middelværdi**?
 2. er udfaldet en **proportion / andel**?
@@ -104,19 +104,19 @@ Spørg først:
 
 ## Trin 3: Uafhængige eller parrede data?
 
-- uafhængige grupper
+- uafhængige grupper / case-control
 - parrede målinger / før-efter / matched design
 
-## Trin 4: Hvad skal findes?
+## Trin 4: Hvad skal vi finde?
 
-Ofte skal man finde:
+Ofte, i rækkefølge af hyppighed:
 
 - n
 - power
 - $\delta$
 - $\alpha$
 
-Det er samme formel hver gang; man isolerer bare en anden størrelse.
+Det er samme formel hver gang - det er bare forskellige ting der skal isoleres.
 
 # 1. Én middelværdi
 
@@ -132,7 +132,7 @@ $$
 \delta = |\mu-\mu_0|
 $$
 
-Standardfejlen er
+Standardfejlen finder vi ved:
 
 $$
 SE = \frac{\sigma}{\sqrt{n}}
@@ -180,7 +180,7 @@ z_{1-\alpha/2}
 \right)
 $$
 
-hvor $\Phi$ er fordelingsfunktionen for standardnormalfordelingen.
+hvor $\Phi$ bare er en fancy måde at skrive `pnorm` på. Det er fordelingsfunktionen for standardnormalfordelingen.
 
 # 2. To uafhængige middelværdier
 
@@ -190,7 +190,7 @@ $$
 H_0:\mu_1=\mu_2
 $$
 
-med forskel
+med forskellen:
 
 $$
 \delta = |\mu_1-\mu_2|
@@ -198,13 +198,13 @@ $$
 
 ## Generel formel ved forskellig gruppestørrelse
 
-Hvis grupperne har størrelser $n_1$ og $n_2$, og man antager fælles standardafvigelse $\sigma$, er
+Hvis grupperne har størrelser $n_1$ og $n_2$, og vi kan antage fælles standardafvigelse $\sigma$, er
 
 $$
 SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
 $$
 
-og powerrelationen bliver
+og powerrelationen bliver så:
 
 $$
 \frac{\delta}{\sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
@@ -212,7 +212,7 @@ $$
 z_{1-\alpha/2}+z_{1-\beta}
 $$
 
-Det er **den generelle og statistisk korrekte eksamensversion**.
+
 
 ## Hvis grupperne er lige store
 
@@ -240,6 +240,7 @@ $$
 
 ## Hvis gruppestørrelserne har fast ratio (k)
 
+Eksempelvis: Den ene gruppe skal være dobbelt så stor som den anden.
 Lad
 
 $$
@@ -254,7 +255,7 @@ SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
 \sigma\sqrt{\frac{1+1/k}{n_1}}
 $$
 
-Dermed
+Dermed får vi:
 
 $$
 n_1
@@ -273,9 +274,9 @@ Det er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så s
 
 # 3. Parrede målinger
 
-Ved parrede data analyserer man forskellene inden for samme person/patient. Ofte før og efter en behandling.
+Ved parrede data analyserer vi forskellene inden for samme person/patient. Ofte før og efter en behandling.
 
-Lad $\sigma_d$ være standardafvigelsen af forskellene.
+Hvis $\sigma_d$ være standardafvigelsen af forskellene.
 
 Så er
 
@@ -321,7 +322,7 @@ $$
 SE = \sqrt{\frac{p_0(1-p_0)}{n}}
 $$
 
-Powerrelation:
+Powerrelationen er så:
 
 $$
 \frac{|p-p_0|}{\sqrt{p_0(1-p_0)/n}}
@@ -338,6 +339,7 @@ n
 $$
 
 ## Løsning for mindste forskel
+Som vi kan forvente at opdage
 
 $$
 |p-p_0|
@@ -384,7 +386,7 @@ $$
 
 ## Lige store grupper
 
-Hvis $n_1=n_2=n$, fås
+Hvis $n_1=n_2=n$, får vi:
 
 $$
 SE
@@ -408,6 +410,8 @@ n
 $$
 
 ## Fast ratio mellem gruppestørrelser
+
+Eksempelvis at den ene gruppe skal være (eller er) dobbet så stor som den anden.
 
 Hvis $k=n_2/n_1$, så kan man skrive
 
@@ -456,7 +460,6 @@ Her er den mest praktiske eksamensidé ofte:
    $$
 2. brug derefter formlen for **to proportioner**
 
-Det er ofte det niveau, medicin-eksamener forventer.
 
 ## Eksempel på omskrivning
 
@@ -484,18 +487,22 @@ og man fortsætter som en almindelig to-proportions-beregning.
 
 Ved case-control-studier formuleres effekten ofte som en **odds ratio**.
 
-Den fulde powerberegning for OR er mere specialiseret end de klassiske eksamensformler ovenfor.  
-I mange eksamenssammenhænge gør man i stedet ét af følgende:
+Den fulde powerberegning for OR er noget mere kompleks end hvad vi ellers har beskæftiget os med. 
+Eksamensspørgsmål vil derfor gøre et af nedenstående:
 
 - man får allerede oplyst sandsynligheder/proportioner i de to grupper og bruger to-proportions-formlen
 - man omsætter en OR til forventede proportioner ud fra en kendt baseline-risiko
 - eller man bruger software
 
-Hvis opgaven ikke specifikt kræver OR-baseret teori, er det som regel bedst at holde sig til proportioner.
 
 # R-funktioner
 
-Når man vil kontrollere sine håndregninger i R, er disse typisk nok. Men husk at eksamen tester at I har forstået metoden. Ikke at I kan plumse til ind i en funktion. Så brug det kun til at tjekke facit. Bemærk at _alle_ parametre er indsat her. Prøver man at køre det direkte vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.
+R kan godt. Og nedenstående er glimrende til at tjekke om man har regnet rigtigt.
+Men husk at eksamen tester om I har forstået metoden. Ikke at I kan plumse tal ind i en funktion. Så brug det kun til at tjekke facit. 
+
+Jeg tror ikke I kan score ekstrapoint ved det, men eksamenstaktisk kan man vise overskud og R-rutine ved at vise hvordan man kunne have taget genvejen _efter_ man har taget den slagne vej.
+
+Bemærk at _alle_ parametre er indsat her. Og det er ikke den måde R forventer at man bruger disse funktioner. Prøver man at køre det direkte, vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.
 
 ## Én middelværdi
 

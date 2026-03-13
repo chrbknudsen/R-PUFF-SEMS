@@ -212,11 +212,11 @@ window.Quarto = {
 <ul>
 <li>identificere den rigtige type powerberegning</li>
 <li>opstille den korrekte formel</li>
-<li>finde <strong>n</strong>, <strong>power</strong>, <strong><span class="math inline">\(\delta\)</span></strong>, <strong><span class="math inline">\(\alpha\)</span></strong> eller en ukendt standardafvigelse</li>
+<li>finde n, power, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(\alpha\)</span> eller en ukendt standardafvigelse</li>
 <li>skelne mellem situationer med middelværdier, proportioner og ratio-mål</li>
 </ul>
 <p>Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.</p>
-<p>Den gennemgående idé er:</p>
+<p>Den grundlæggende idé er:</p>
 <p><span class="math display">\[
 \frac{\text{effekt}}{\text{standardfejl}}
 =
@@ -224,7 +224,7 @@ window.Quarto = {
 +
 \text{krav til power}
 \]</span></p>
-<p>altså typisk</p>
+<p>Eller:</p>
 <p><span class="math display">\[
 \frac{\text{effekt}}{\text{SE}} = z_{1-\alpha/2}+z_{1-\beta}
 \]</span></p>
@@ -254,7 +254,7 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\delta\)</span></td>
-<td>mindste klinisk relevante forskel</td>
+<td>mindste (klinisk relevante, hvis det er medicin) forskel</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\sigma\)</span></td>
@@ -274,10 +274,10 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>Typiske eksamensværdier:</p>
+<p>Typiske værdier observeret i eksamensopgaver:</p>
 <ul>
 <li><span class="math inline">\(\alpha = 0.05\)</span></li>
-<li>power = 0.80 eller 0.90</li>
+<li>power = 0.80</li>
 </ul>
 <p>Hyppige kvantiler:</p>
 <table class="caption-top table">
@@ -327,13 +327,13 @@ window.Quarto = {
 <li><strong>power/stikprøveberegning</strong>: typisk <strong>z</strong></li>
 <li><strong>selve hypotesetesten for middelværdier</strong>: ofte <strong>t</strong></li>
 </ul>
-<p>Til eksamen forventes normalt det normalt at man baserer sig på z-værdier.</p>
+<p>Til eksamen forventes det normalt at man baserer sig på z-værdier.</p>
 </section>
 <section id="eksamensstrategi" class="level1">
 <h1>Eksamensstrategi</h1>
 <section id="trin-1-hvilken-type-udfald" class="level2">
 <h2 class="anchored" data-anchor-id="trin-1-hvilken-type-udfald">Trin 1: Hvilken type udfald?</h2>
-<p>Spørg først:</p>
+<p>Første spørgsmål:</p>
 <ol type="1">
 <li>er udfaldet en <strong>middelværdi</strong>?</li>
 <li>er udfaldet en <strong>proportion / andel</strong>?</li>
@@ -350,20 +350,20 @@ window.Quarto = {
 <section id="trin-3-uafhængige-eller-parrede-data" class="level2">
 <h2 class="anchored" data-anchor-id="trin-3-uafhængige-eller-parrede-data">Trin 3: Uafhængige eller parrede data?</h2>
 <ul>
-<li>uafhængige grupper</li>
+<li>uafhængige grupper / case-control</li>
 <li>parrede målinger / før-efter / matched design</li>
 </ul>
 </section>
-<section id="trin-4-hvad-skal-findes" class="level2">
-<h2 class="anchored" data-anchor-id="trin-4-hvad-skal-findes">Trin 4: Hvad skal findes?</h2>
-<p>Ofte skal man finde:</p>
+<section id="trin-4-hvad-skal-vi-finde" class="level2">
+<h2 class="anchored" data-anchor-id="trin-4-hvad-skal-vi-finde">Trin 4: Hvad skal vi finde?</h2>
+<p>Ofte, i rækkefølge af hyppighed:</p>
 <ul>
 <li>n</li>
 <li>power</li>
 <li><span class="math inline">\(\delta\)</span></li>
 <li><span class="math inline">\(\alpha\)</span></li>
 </ul>
-<p>Det er samme formel hver gang; man isolerer bare en anden størrelse.</p>
+<p>Det er samme formel hver gang - det er bare forskellige ting der skal isoleres.</p>
 </section>
 </section>
 <section id="én-middelværdi" class="level1">
@@ -376,7 +376,7 @@ H_0:\mu=\mu_0
 <p><span class="math display">\[
 \delta = |\mu-\mu_0|
 \]</span></p>
-<p>Standardfejlen er</p>
+<p>Standardfejlen finder vi ved:</p>
 <p><span class="math display">\[
 SE = \frac{\sigma}{\sqrt{n}}
 \]</span></p>
@@ -416,7 +416,7 @@ z_{1-\alpha/2}
 z_{1-\alpha/2}
 \right)
 \]</span></p>
-<p>hvor <span class="math inline">\(\Phi\)</span> er fordelingsfunktionen for standardnormalfordelingen.</p>
+<p>hvor <span class="math inline">\(\Phi\)</span> bare er en fancy måde at skrive <code>pnorm</code> på. Det er fordelingsfunktionen for standardnormalfordelingen.</p>
 </section>
 </section>
 <section id="to-uafhængige-middelværdier" class="level1">
@@ -425,23 +425,22 @@ z_{1-\alpha/2}
 <p><span class="math display">\[
 H_0:\mu_1=\mu_2
 \]</span></p>
-<p>med forskel</p>
+<p>med forskellen:</p>
 <p><span class="math display">\[
 \delta = |\mu_1-\mu_2|
 \]</span></p>
 <section id="generel-formel-ved-forskellig-gruppestørrelse" class="level2">
 <h2 class="anchored" data-anchor-id="generel-formel-ved-forskellig-gruppestørrelse">Generel formel ved forskellig gruppestørrelse</h2>
-<p>Hvis grupperne har størrelser <span class="math inline">\(n_1\)</span> og <span class="math inline">\(n_2\)</span>, og man antager fælles standardafvigelse <span class="math inline">\(\sigma\)</span>, er</p>
+<p>Hvis grupperne har størrelser <span class="math inline">\(n_1\)</span> og <span class="math inline">\(n_2\)</span>, og vi kan antage fælles standardafvigelse <span class="math inline">\(\sigma\)</span>, er</p>
 <p><span class="math display">\[
 SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
 \]</span></p>
-<p>og powerrelationen bliver</p>
+<p>og powerrelationen bliver så:</p>
 <p><span class="math display">\[
 \frac{\delta}{\sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
 =
 z_{1-\alpha/2}+z_{1-\beta}
 \]</span></p>
-<p>Det er <strong>den generelle og statistisk korrekte eksamensversion</strong>.</p>
 </section>
 <section id="hvis-grupperne-er-lige-store" class="level2">
 <h2 class="anchored" data-anchor-id="hvis-grupperne-er-lige-store">Hvis grupperne er lige store</h2>
@@ -464,7 +463,7 @@ n
 </section>
 <section id="hvis-gruppestørrelserne-har-fast-ratio-k" class="level2">
 <h2 class="anchored" data-anchor-id="hvis-gruppestørrelserne-har-fast-ratio-k">Hvis gruppestørrelserne har fast ratio (k)</h2>
-<p>Lad</p>
+<p>Eksempelvis: Den ene gruppe skal være dobbelt så stor som den anden. Lad</p>
 <p><span class="math display">\[
 k=\frac{n_2}{n_1}
 \]</span></p>
@@ -474,7 +473,7 @@ SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
 =
 \sigma\sqrt{\frac{1+1/k}{n_1}}
 \]</span></p>
-<p>Dermed</p>
+<p>Dermed får vi:</p>
 <p><span class="math display">\[
 n_1
 =
@@ -490,8 +489,8 @@ n_2 = k n_1
 </section>
 <section id="parrede-målinger" class="level1">
 <h1>3. Parrede målinger</h1>
-<p>Ved parrede data analyserer man forskellene inden for samme person/patient. Ofte før og efter en behandling.</p>
-<p>Lad <span class="math inline">\(\sigma_d\)</span> være standardafvigelsen af forskellene.</p>
+<p>Ved parrede data analyserer vi forskellene inden for samme person/patient. Ofte før og efter en behandling.</p>
+<p>Hvis <span class="math inline">\(\sigma_d\)</span> være standardafvigelsen af forskellene.</p>
 <p>Så er</p>
 <p><span class="math display">\[
 SE = \frac{\sigma_d}{\sqrt{n}}
@@ -524,7 +523,7 @@ H_0:p=p_0
 <p><span class="math display">\[
 SE = \sqrt{\frac{p_0(1-p_0)}{n}}
 \]</span></p>
-<p>Powerrelation:</p>
+<p>Powerrelationen er så:</p>
 <p><span class="math display">\[
 \frac{|p-p_0|}{\sqrt{p_0(1-p_0)/n}}
 =
@@ -538,6 +537,7 @@ n
 \]</span></p>
 <section id="løsning-for-mindste-forskel" class="level2">
 <h2 class="anchored" data-anchor-id="løsning-for-mindste-forskel">Løsning for mindste forskel</h2>
+<p>Som vi kan forvente at opdage</p>
 <p><span class="math display">\[
 |p-p_0|
 =
@@ -577,7 +577,7 @@ z_{1-\alpha/2}+z_{1-\beta}
 </section>
 <section id="lige-store-grupper" class="level2">
 <h2 class="anchored" data-anchor-id="lige-store-grupper">Lige store grupper</h2>
-<p>Hvis <span class="math inline">\(n_1=n_2=n\)</span>, fås</p>
+<p>Hvis <span class="math inline">\(n_1=n_2=n\)</span>, får vi:</p>
 <p><span class="math display">\[
 SE
 =
@@ -599,6 +599,7 @@ n
 </section>
 <section id="fast-ratio-mellem-gruppestørrelser" class="level2">
 <h2 class="anchored" data-anchor-id="fast-ratio-mellem-gruppestørrelser">Fast ratio mellem gruppestørrelser</h2>
+<p>Eksempelvis at den ene gruppe skal være (eller er) dobbet så stor som den anden.</p>
 <p>Hvis <span class="math inline">\(k=n_2/n_1\)</span>, så kan man skrive</p>
 <p><span class="math display">\[
 SE
@@ -639,7 +640,6 @@ p_1 = RR \cdot p_0
 \]</span></li>
 <li>brug derefter formlen for <strong>to proportioner</strong></li>
 </ol>
-<p>Det er ofte det niveau, medicin-eksamener forventer.</p>
 <section id="eksempel-på-omskrivning" class="level2">
 <h2 class="anchored" data-anchor-id="eksempel-på-omskrivning">Eksempel på omskrivning</h2>
 <p>Hvis kontrolgruppen forventes at have</p>
@@ -660,18 +660,18 @@ p_1 = 0.70 \cdot 0.20 = 0.14
 <section id="odds-ratio-or" class="level1">
 <h1>7. Odds ratio (OR)</h1>
 <p>Ved case-control-studier formuleres effekten ofte som en <strong>odds ratio</strong>.</p>
-<p>Den fulde powerberegning for OR er mere specialiseret end de klassiske eksamensformler ovenfor.<br>
-I mange eksamenssammenhænge gør man i stedet ét af følgende:</p>
+<p>Den fulde powerberegning for OR er noget mere kompleks end hvad vi ellers har beskæftiget os med. Eksamensspørgsmål vil derfor gøre et af nedenstående:</p>
 <ul>
 <li>man får allerede oplyst sandsynligheder/proportioner i de to grupper og bruger to-proportions-formlen</li>
 <li>man omsætter en OR til forventede proportioner ud fra en kendt baseline-risiko</li>
 <li>eller man bruger software</li>
 </ul>
-<p>Hvis opgaven ikke specifikt kræver OR-baseret teori, er det som regel bedst at holde sig til proportioner.</p>
 </section>
 <section id="r-funktioner" class="level1">
 <h1>R-funktioner</h1>
-<p>Når man vil kontrollere sine håndregninger i R, er disse typisk nok. Men husk at eksamen tester at I har forstået metoden. Ikke at I kan plumse til ind i en funktion. Så brug det kun til at tjekke facit. Bemærk at <em>alle</em> parametre er indsat her. Prøver man at køre det direkte vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.</p>
+<p>R kan godt. Og nedenstående er glimrende til at tjekke om man har regnet rigtigt. Men husk at eksamen tester om I har forstået metoden. Ikke at I kan plumse tal ind i en funktion. Så brug det kun til at tjekke facit.</p>
+<p>Jeg tror ikke I kan score ekstrapoint ved det, men eksamenstaktisk kan man vise overskud og R-rutine ved at vise hvordan man kunne have taget genvejen <em>efter</em> man har taget den slagne vej.</p>
+<p>Bemærk at <em>alle</em> parametre er indsat her. Og det er ikke den måde R forventer at man bruger disse funktioner. Prøver man at køre det direkte, vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.</p>
 <section id="én-middelværdi-1" class="level2">
 <h2 class="anchored" data-anchor-id="én-middelværdi-1">Én middelværdi</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
