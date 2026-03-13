@@ -161,6 +161,10 @@ window.Quarto = {
     <a class="nav-link" href="../slides/normalfordelingen.html"> 
 <span class="menu-text">normalfordelingen</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../slides/powerberegninger_notat.html" aria-current="page"> 
+<span class="menu-text">Powerberegninger</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -237,7 +241,7 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\(\)</span>$</td>
+<td><span class="math inline">\(\alpha\)</span></td>
 <td>signifikansniveau = risiko for type I-fejl</td>
 </tr>
 <tr class="even">
@@ -280,7 +284,7 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th>Kvantil</th>
-<th>Værdi</th>
+<th>Værdi (ca.)</th>
 <th>R-function</th>
 </tr>
 </thead>
@@ -427,7 +431,7 @@ H_0:\mu_1=\mu_2
 \]</span></p>
 <section id="generel-formel-ved-forskellig-gruppestørrelse" class="level2">
 <h2 class="anchored" data-anchor-id="generel-formel-ved-forskellig-gruppestørrelse">Generel formel ved forskellig gruppestørrelse</h2>
-<p>Hvis grupperne har størrelser (n_1) og (n_2), og man antager fælles standardafvigelse (), er</p>
+<p>Hvis grupperne har størrelser <span class="math inline">\(n_1\)</span> og <span class="math inline">\(n_2\)</span>, og man antager fælles standardafvigelse <span class="math inline">\(\sigma\)</span>, er</p>
 <p><span class="math display">\[
 SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
 \]</span></p>
@@ -486,7 +490,7 @@ n_2 = k n_1
 </section>
 <section id="parrede-målinger" class="level1">
 <h1>3. Parrede målinger</h1>
-<p>Ved parrede data analyserer man forskellene inden for person.</p>
+<p>Ved parrede data analyserer man forskellene inden for samme person/patient. Ofte før og efter en behandling.</p>
 <p>Lad <span class="math inline">\(\sigma_d\)</span> være standardafvigelsen af forskellene.</p>
 <p>Så er</p>
 <p><span class="math display">\[
@@ -605,7 +609,7 @@ SE
 \frac{p_2(1-p_2)}{kn_1}
 }
 \]</span></p>
-<p>og derfra isolere (n_1):</p>
+<p>og derfra isolere <span class="math inline">\(n_1\)</span>:</p>
 <p><span class="math display">\[
 n_1
 =
@@ -624,7 +628,7 @@ n_2=kn_1
 </section>
 <section id="relativ-risiko-rr" class="level1">
 <h1>6. Relativ risiko (RR)</h1>
-<p>I nogle opgaver arbejder man ikke direkte med forskellen i proportioner, men med en <strong>relativ risiko</strong></p>
+<p>I princippet kunne en opgave spørge til <strong>relativ risiko</strong> i stedet for forskelle i proportioner. Det har jeg dog ikke set i praksis endnu.</p>
 <p><span class="math display">\[
 RR = \frac{p_1}{p_0}
 \]</span></p>
@@ -667,46 +671,52 @@ I mange eksamenssammenhænge gør man i stedet ét af følgende:</p>
 </section>
 <section id="r-funktioner" class="level1">
 <h1>R-funktioner</h1>
-<p>Når man vil kontrollere sine håndregninger i R, er disse typisk nok:</p>
+<p>Når man vil kontrollere sine håndregninger i R, er disse typisk nok. Men husk at eksamen tester at I har forstået metoden. Ikke at I kan plumse til ind i en funktion. Så brug det kun til at tjekke facit. Bemærk at <em>alle</em> parametre er indsat her. Prøver man at køre det direkte vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.</p>
 <section id="én-middelværdi-1" class="level2">
 <h2 class="anchored" data-anchor-id="én-middelværdi-1">Én middelværdi</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">300</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">430</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.90</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fl">23.59185</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">300</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">430</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.90</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="to-uafhængige-middelværdier-1" class="level2">
 <h2 class="anchored" data-anchor-id="to-uafhængige-middelværdier-1">To uafhængige middelværdier</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">5</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">10</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"two.sample"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fl">63.76576</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">5</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">10</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"two.sample"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>NOTE: n is number in <em>each</em> group</p>
 </section>
 <section id="parrede-målinger-1" class="level2">
 <h2 class="anchored" data-anchor-id="parrede-målinger-1">Parrede målinger</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">4</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">8</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"paired"</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fl">33.3672</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">delta =</span> <span class="dv">4</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">8</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"paired"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>NOTE: n is number of <em>pairs</em>, sd is std.dev. of <em>differences</em> within pairs</p>
 </section>
 <section id="to-proportioner-1" class="level2">
 <h2 class="anchored" data-anchor-id="to-proportioner-1">To proportioner</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.prop.test</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.20</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p2 =</span> <span class="fl">0.35</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Bemærk: <code>power.prop.test()</code> antager lige store grupper.</p>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fl">137.9148</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.20</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p2 =</span> <span class="fl">0.35</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>NOTE: n is number in <em>each</em> group Bemærk: <code>power.prop.test()</code> antager lige store grupper.</p>
 </section>
 </section>
 <section id="typiske-eksamensfælder" class="level1">
