@@ -260,18 +260,18 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 <td>stikprøvestørrelse</td>
 </tr>
 <tr class="odd">
-<td>(SE)</td>
+<td><span class="math inline">\(SE\)</span></td>
 <td>standardfejl</td>
 </tr>
 <tr class="even">
-<td>(z_q)</td>
+<td><span class="math inline">\(z_q\)</span></td>
 <td>q-fraktil i standardnormalfordelingen</td>
 </tr>
 </tbody>
 </table>
 <p>Typiske eksamensværdier:</p>
 <ul>
-<li>(= 0.05)</li>
+<li><span class="math inline">\(\alpha = 0.05\)</span></li>
 <li>power = 0.80 eller 0.90</li>
 </ul>
 <p>Hyppige kvantiler:</p>
@@ -280,24 +280,29 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 <tr class="header">
 <th>Kvantil</th>
 <th style="text-align: right;">Værdi</th>
+<th>R-function</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>(z_{0.975})</td>
+<td><span class="math inline">\(z_{0.975}\)</span></td>
 <td style="text-align: right;">1.96</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>(z_{0.95})</td>
+<td><span class="math inline">\(z_{0.95}\)</span></td>
 <td style="text-align: right;">1.645</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>(z_{0.8})</td>
+<td><span class="math inline">\(z_{0.8}\)</span></td>
 <td style="text-align: right;">0.84</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>(z_{0.9})</td>
+<td><span class="math inline">\(z_{0.9}\)</span></td>
 <td style="text-align: right;">1.28</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +312,7 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 <p>I <strong>planlægning</strong> af studier bruges næsten altid <strong>z-fordelingen</strong>.</p>
 <p>Det skyldes, at powerberegninger normalt bygger på:</p>
 <ul>
-<li>en antaget kendt eller fastlagt ()</li>
+<li>en antaget kendt eller fastlagt <span class="math inline">\(\sigma\)</span></li>
 <li>normal-approksimation</li>
 <li>en ønsket teoretisk stikprøvestørrelse</li>
 </ul>
@@ -348,10 +353,10 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 <h2 class="anchored" data-anchor-id="trin-4-hvad-skal-findes">Trin 4: Hvad skal findes?</h2>
 <p>Ofte skal man finde:</p>
 <ul>
-<li>(n)</li>
+<li>n</li>
 <li>power</li>
-<li>()</li>
-<li>()</li>
+<li><span class="math inline">\(\delta\)</span></li>
+<li><span class="math inline">\(\alpha\)</span></li>
 </ul>
 <p>Det er samme formel hver gang; man isolerer bare en anden størrelse.</p>
 </section>
@@ -406,7 +411,7 @@ z_{1-\alpha/2}
 z_{1-\alpha/2}
 \right)
 \]</span></p>
-<p>hvor () er fordelingsfunktionen for standardnormalfordelingen.</p>
+<p>hvor <span class="math inline">\(\Phi\)</span> er fordelingsfunktionen for standardnormalfordelingen.</p>
 </section>
 </section>
 <section id="to-uafhængige-middelværdier" class="level1">
@@ -435,7 +440,7 @@ z_{1-\alpha/2}+z_{1-\beta}
 </section>
 <section id="hvis-grupperne-er-lige-store" class="level2">
 <h2 class="anchored" data-anchor-id="hvis-grupperne-er-lige-store">Hvis grupperne er lige store</h2>
-<p>Hvis (n_1=n_2=n), fås</p>
+<p>Hvis <span class="math inline">\(n_1=n_2=n\)</span>, fås</p>
 <p><span class="math display">\[
 SE = \sigma\sqrt{\frac{2}{n}}
 \]</span></p>
@@ -452,13 +457,13 @@ n
 2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
 \]</span></p>
 </section>
-<section id="hvis-gruppestørrelserne-har-fast-ratio" class="level2">
-<h2 class="anchored" data-anchor-id="hvis-gruppestørrelserne-har-fast-ratio">Hvis gruppestørrelserne har fast ratio</h2>
+<section id="hvis-gruppestørrelserne-har-fast-ratio-k" class="level2">
+<h2 class="anchored" data-anchor-id="hvis-gruppestørrelserne-har-fast-ratio-k">Hvis gruppestørrelserne har fast ratio (k)</h2>
 <p>Lad</p>
 <p><span class="math display">\[
 k=\frac{n_2}{n_1}
 \]</span></p>
-<p>så er (n_2 = kn_1). Da bliver</p>
+<p>så er <span class="math inline">\(n_2 = kn_1\)</span>. Da bliver</p>
 <p><span class="math display">\[
 SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
 =
@@ -481,7 +486,7 @@ n_2 = k n_1
 <section id="parrede-målinger" class="level1">
 <h1>3. Parrede målinger</h1>
 <p>Ved parrede data analyserer man forskellene inden for person.</p>
-<p>Lad (_d) være standardafvigelsen af forskellene.</p>
+<p>Lad <span class="math inline">\(\sigma_d\)</span> være standardafvigelsen af forskellene.</p>
 <p>Så er</p>
 <p><span class="math display">\[
 SE = \frac{\sigma_d}{\sqrt{n}}
@@ -548,7 +553,7 @@ H_0:p_1=p_2
 \]</span></p>
 <section id="generel-formel-ved-forskellig-gruppestørrelse-1" class="level2">
 <h2 class="anchored" data-anchor-id="generel-formel-ved-forskellig-gruppestørrelse-1">Generel formel ved forskellig gruppestørrelse</h2>
-<p>Hvis grupperne har størrelser (n_1) og (n_2), er</p>
+<p>Hvis grupperne har størrelser <span class="math inline">\(n_1\)</span> og <span class="math inline">\(n_2\)</span>, er</p>
 <p><span class="math display">\[
 SE
 =
@@ -567,7 +572,7 @@ z_{1-\alpha/2}+z_{1-\beta}
 </section>
 <section id="lige-store-grupper" class="level2">
 <h2 class="anchored" data-anchor-id="lige-store-grupper">Lige store grupper</h2>
-<p>Hvis (n_1=n_2=n), fås</p>
+<p>Hvis <span class="math inline">\(n_1=n_2=n\)</span>, fås</p>
 <p><span class="math display">\[
 SE
 =
@@ -589,7 +594,7 @@ n
 </section>
 <section id="fast-ratio-mellem-gruppestørrelser" class="level2">
 <h2 class="anchored" data-anchor-id="fast-ratio-mellem-gruppestørrelser">Fast ratio mellem gruppestørrelser</h2>
-<p>Hvis (k=n_2/n_1), så kan man skrive</p>
+<p>Hvis <span class="math inline">\(k=n_2/n_1\)</span>, så kan man skrive</p>
 <p><span class="math display">\[
 SE
 =
@@ -745,23 +750,23 @@ z_{1-\alpha/2}+z_{1-\beta}
 <tbody>
 <tr class="odd">
 <td>én middelværdi</td>
-<td>(/)</td>
+<td><span class="math inline">\(\sigma/\sqrt{n}\)</span></td>
 </tr>
 <tr class="even">
 <td>to middelværdier</td>
-<td>()</td>
+<td><span class="math inline">\(\sigma\sqrt{1/n_1+1/n_2}\)</span></td>
 </tr>
 <tr class="odd">
 <td>parret design</td>
-<td>(_d/)</td>
+<td><span class="math inline">\(\sigma_d\sqrt{n}\)</span></td>
 </tr>
 <tr class="even">
 <td>én proportion</td>
-<td>()</td>
+<td><span class="math inline">\(\sqrt{p_0(1-p_0)/n}\)</span></td>
 </tr>
 <tr class="odd">
 <td>to proportioner</td>
-<td>()</td>
+<td><span class="math inline">\(\sqrt{p_1(1-p_1)/n_1 + p_2(1-p_2)/n_2}\)</span></td>
 </tr>
 </tbody>
 </table>
