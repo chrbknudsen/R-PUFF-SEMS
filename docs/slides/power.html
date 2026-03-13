@@ -128,63 +128,136 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Powerberegninger</h1>
+  <p class="subtitle">Også kendt som styrkeberegninger</p>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section class="slide level2">
-
-<p>Når vi laver vores statistiske tests, opstiller vi en null-hypotese. Ofte er det “kunne denne værdi vi har beregnet, i virkeligheden være 0?”</p>
-<p>Fordi vi jo kun ser på stikprøver, så er den værdi vi finder jo ikke den “sande” værdi. Den er et estimat. Det kan være et godt estimat. Det kan være et dårligt estimat. Men det er et estimat.</p>
-<p>Vores tests giver os en p-værdi. p-værdien fortæller os hvor stor risikoen er for at den sande værdi er 0, selvom estimatet måske er 3.</p>
-<p>Det sædvanlige kriterium er at p-værdien skal være mindre end 5% eller 0.05. Hvis p-værdien er mindre end 0.05, er der mindre end 5% risiko for at den sande værdi er 0, selvom vores estimat er noget andet.</p>
-<p>Og er p-værdien mindre end 0.05, forkaster vi null-hypotesen. Og accepterer den alternative hypotese.</p>
-<p>p-værdien sikrer os mod en måde at tage fejl på - den situation hvor vi tror der er en effekt, men der i virkeligheden ikke er en. Det er en type 1 fejl, eller falsk positiv.</p>
-<p>Det kan også gå galt på en anden måde. Vi kan komme til at</p>
-<p>Der kan være en effekt i virkeligheden. Det kan også være at der ikke er en effekt i virkeligheden.</p>
-<p>Vi kan konkludere at der er en effekt. Eller vi kan konkludere at der ikke er en effekt.</p>
-<p>Hvis vi mener der er en effekt, og der faktisk er en effekt, er alt godt. Hvis vi mener der ikke er en effekt, og der faktisk ikke er en effekt. Så er alt også godt.</p>
-<p>Men. Hvis vi mener der er en effekt, og den i virkeligheden ikke er der. Så har vi begået en fejl - falsk positiv, eller type 1 fejl. Og hvis vi mener der ikke er en effekt, men den faktisk er der alligegel. Så har vi også begået en fejl, en falsk negativ. Eller type 2 fejl.</p>
-<p>p-værdien fortæller os hvad risikoen er for at begå en type 1 fejl når vi konkluderer.</p>
-<p>Risikoen for at begå en type 2 fejl, betegnes <span class="math inline">\(\beta\)</span>. Hvis den er eksempelvis 20% så er chancen for at forkaste null-hypotesen 1-beta. Det er sandsynligheden for at vi forkaster null-hypotesen når null-hypotesen faktisk skal forkaste. Det kalder vi også for power.</p>
-<p>Når vi designer forsøg er</p>
-<p>hvor mange observationer har vi (brug for) Hvor stor effekt ønsker vi at kunne se? hvor lille p-værdi ønsker vi? hvor stor power ønsker vi?</p>
-<p>Det der med effekten kan være lidt bøvlet. det er fint at se et fald på 12 mmHg i det systoliske blodtryk. Men hvis vi måler i en anden enhed bliver tallet anderledes. Så vi standardiserer det fald, ved at dividere med den standardafvigelse vi forventer (eller har). Så hvis vi har et fald på 12 mmHg, og en standardafvigelse på 3, ser vi en effekt på 4.</p>
-<p>Det optræder typisk opgaver af typen</p>
-<p>Man ønsker i et klinisk studie at sammenligne en enzymkoncentration for patienter med en bestemt sygdom og kontroller (raske) således, at der er lige mange patienter og kontroller i studiet. Hvor mange patienter skal man inkludere i studiet hvis forskelle i enzymkoncentrationen mindre end en standard afvigelse (sd) ikke er klinisk relevant? I beregningen ønskes en styrke på 80% og signifikansniveauet sættes stil 5%. Antag at enzymkoncentrationen varierer lige meget blandt patienterne og kontrollerne.</p>
-<p>En forskel mindre end 1 sd er ikke klinisk relevant. Så vi vil kunne se effekter derer større end 1.</p>
-<p>det vil sige, at forskellen divideret med sigma er lig 1.</p>
-<p>power skal være 80%. Det vil sige at 0.8 = 1 - beta, så beta er 0.2</p>
-<p>Bemærk at den formel I får i notat om beregning af stikprøvestørrelse, baserer sig på standardnormalfordelingen. Og det er den I skal bruge til eksamen, fordi den er “let” at beregne i hånden.</p>
+<section id="hvad-katten-er-det" class="slide level2">
+<h2>Hvad katten er det?</h2>
+<p>Når vi laver statistiske test opstiller vi en NULL-hypotese. AKA <span class="math inline">\(H_0\)</span>, og en alternativ hypotese, <span class="math inline">\(H_A\)</span>.</p>
+<p>Grundlæggende: Vi opstiller en hypotese om at der ikke sker noget. Eksempelvis at den sande forskel på to middelværdier er 0.</p>
+<p>Den har vi som regel lyst til at kunne afvise.</p>
+<p>Undertiden er vi dog meget fornøjede med at kunne afvise den.</p>
+</section>
+<section id="vi-har-prøvet-det" class="slide level2">
+<h2>Vi har prøvet det</h2>
+<p>Vi har eksempelvis to grupper, med hver deres middelværdi <span class="math inline">\(\mu\)</span> og standardafvigelse <span class="math inline">\(\sigma\)</span> og angivelse af hvor mange observationer vi har i hver gruppe, n.&nbsp;</p>
+<p>Vi beregner SEM for hver af grupperne: <span class="math inline">\(SEM = \sqrt{\frac{\sigma}{n}}\)</span></p>
+<p>Vi beregner en poolet SEM for differencen: <span class="math inline">\(SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}\)</span></p>
+<p>Og så beregner vi et 95% konfidensinterval:</p>
+<p><span class="math inline">\((\mu_1 - \mu_2) \pm 1.96SEM_{diff}\)</span></p>
+<p>Hvis 0 ligger inden for det interval, er der ingen forskel (på et 5% signifikansniveua), ligger det udenfor, er der forskel, og vi afviser <span class="math inline">\(H_0\)</span> (på et 5% signifikansniveau).</p>
+</section>
+<section id="hvad-betød-det" class="slide level2">
+<h2>Hvad betød det?</h2>
+<p>Vi får undertiden en p-værdi. Den angiver hvor stor risikoen er for at vi afviser <span class="math inline">\(H_0\)</span>. <em>Selvom</em> <span class="math inline">\(H_0\)</span> i virkeligheden er sand.</p>
+<p>Eller: Hvis <span class="math inline">\(H_0\)</span> er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.</p>
+<p>Eller - det er risikoen for en type 1 fejl - en falsk positiv.</p>
+<p>Det ser ud som om der er en effekt. Det ser ud som om der er et positivt resultat.</p>
+<p>Men det er der ikke!</p>
+<p>Vi sætter som regel grænse til 0.05. Vi accepterer at der er 5% risiko for at få en falsk positiv. Den kalder vi også <span class="math inline">\(\alpha\)</span>.</p>
+</section>
+<section id="eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl" class="slide level2">
+<h2>Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl</h2>
+<p>Og eksistensen af <span class="math inline">\(\alpha\)</span> indikerer eksistensen af <span class="math inline">\(\beta\)</span>.</p>
+<p>Vi kan også begå fejl på en anden måde.</p>
+<p>Vi kan også konkludere at der ikke er forskel. <em>Selvom der i virkeligheden er forskel!</em></p>
+<p>Det er en type 2 fejl. En falsk negativ.</p>
+<p>Risikoen for at begå en type 2 fejl kan vi også sætte tal på.</p>
+<p>Den kalder vi <span class="math inline">\(\beta\)</span></p>
+</section>
+<section id="det-omvendte-af-beta" class="slide level2">
+<h2>Det omvendte af <span class="math inline">\(\beta\)</span></h2>
+<p>Det kalder vi power. Det er den styrke vores test har.</p>
+<p>Eller - sandsynligheden for at vores test finder forskellen, når forskellen faktisk findes!</p>
+<p>Hvis <span class="math inline">\(\beta\)</span> er risikoen for at vores test ikke finder forskellen, selvom den findes.</p>
+<p>Så er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.</p>
+<p><span class="math inline">\(power = 1 - \beta\)</span></p>
+</section>
+<section id="hvad-afhænger-de-her-ting-af" class="slide level2">
+<h2>Hvad afhænger de her ting af?</h2>
+<p>Helt intuitiv.</p>
+<p>Jo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).</p>
+<p>Jo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.</p>
+<p>Jo større reel forskel der er, jo lettere bliver det at få øje på den.</p>
+<p>Når <span class="math inline">\(\alpha\)</span> stiger, bliver det lettere at forkaste <span class="math inline">\(H_0\)</span> Det bliver også lettere at finde en forskel (power ~ <span class="math inline">\(\beta\)</span> stiger). Til gengæld stiger risikoen for falsk positive.</p>
+</section>
+<section id="vi-har-fem-parametre" class="slide level2">
+<h2>Vi har fem parametre</h2>
+<ul>
+<li>Stikprøvestørrelserne (n)</li>
+<li>Standardafvigelserne (på stikprøverne, <span class="math inline">\(\sigma\)</span>)</li>
+<li>Ønsket forskel vi vil kunne finde (<span class="math inline">\(\delta\)</span>)</li>
+<li>Risikoen for type 1 fejl (<span class="math inline">\(\alpha\)</span>)</li>
+<li>Risikoen for type 2 fejl (<span class="math inline">\(\beta\)</span>)</li>
+</ul>
+<p>Vi har en hemmelig sjette parameter. Nemlig hvilken test det er vi laver. Sammenligner vi middelværdier? Eller proportioner?</p>
+<p>Hvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femte.</p>
+</section>
+<section id="og-hvad-er-det-så-vi-bliver-bedt-om-i-eksamensopgaver" class="slide level2">
+<h2>Og hvad er det så vi bliver bedt om i eksamensopgaver?</h2>
+<p>Vi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.</p>
+<p>Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?</p>
+</section>
+<section id="det-har-r-funktioner-til." class="slide level2">
+<h2>Det har R funktioner til.</h2>
+<ul>
+<li><code>power.t.test()</code></li>
+<li><code>power.prop.test()</code></li>
+<li><code>power.anova.test()</code></li>
+</ul>
+<p>Den sidste har jeg ikke set i eksamensopgaver, så den springer vi over.</p>
+<p>Der er lidt flere detaljer, two sample eller one sample? Eller parret?</p>
+<p>Men giv dem fire af de fem parametre, og de beregner den femte.</p>
+</section>
+<section id="men-dem-bruger-vi-ikke" class="slide level2">
+<h2>Men dem bruger vi ikke…</h2>
+<p>For eksamen tester ikke om I kan putte tal ind i en funktion, den tester om I har forstået det godt nok til at I kan gøre det i hånden.</p>
+</section>
+<section id="i-stedet" class="slide level2">
+<h2>I stedet</h2>
+<p>💥Powerrelationen!💪</p>
+<p><span class="math display">\[\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+\]</span></p>
+<p>Den effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med <span class="math inline">\(z_{1-α/2}+z_{1-β}\)</span></p>
+<p>Og det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.</p>
+</section>
+<section id="de-sære-tegn" class="slide level2">
+<h2>De sære tegn</h2>
+<p><span class="math inline">\(z_{1-α/2}\)</span> og <span class="math inline">\(z_{1-β}\)</span> kender vi godt.</p>
+<p><span class="math inline">\(z_{1-α/2}\)</span> er kvantilen der matcher 0.975. Det giver:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+</div>
+<p>Den har vi set før. <span class="math inline">\(z_{1-β}\)</span> er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så <span class="math inline">\(\beta = 0.2\)</span>):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8416212</code></pre>
+</div>
+</div>
+</section>
+<section id="hvordan-beregner-vi-så-standardfejlen" class="slide level2">
+<h2>Hvordan beregner vi så standardfejlen?</h2>
+<p>Det har vi også set andetsteds, men lad os lige tage dem alligevel.</p>
+<p>En middelværdi: <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span></p>
+<p>Forskel på to middelværdier: <span class="math inline">\(SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}\)</span></p>
+<p>Forskel på to middelværdier, hvor grupperne er lige store: <span class="math inline">\(SE = \sigma\sqrt{\frac{2}{n}}\)</span></p>
+<p>Parrede målinger: <span class="math inline">\(SE = \frac{\sigma_d}{\sqrt{n}}\)</span> hvor <span class="math inline">\(\sigma_d\)</span> er standardafvigelsen af forskellene</p>
+<p>En proportion: <span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></p>
+<p>Forskel mellem to proportioner: <span class="math inline">\(SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\)</span></p>
+<p>Forskel mellem to proportioner, hvor grupperne er lige store: <span class="math inline">\(SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}\)</span></p>
+</section>
+<section id="så-er-vi-klar-lad-os-tage-et-eksempel" class="slide level2">
+<h2>Så er vi klar, lad os tage et eksempel!</h2>
 </section>
 <section id="husk-dog" class="slide level2">
 <h2>Husk dog!</h2>
 <p>Når I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer.</p>
-</section>
-<section id="eksempel" class="slide level2">
-<h2>eksempel</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Two-sample t test power calculation 
-
-              n = 16.71477
-          delta = 1
-             sd = 1
-      sig.level = 0.05
-          power = 0.8
-    alternative = two.sided
-
-NOTE: n is number in *each* group</code></pre>
-</div>
-</div>
-</section>
-<section id="opgave-2-2025-februar" class="slide level2">
-<h2>Opgave 2 2025 februar</h2>
-<p>Hvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?</p>
-<p>Hvilken power får man?</p>
-<p>det vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret</p>
 
 
 </section>

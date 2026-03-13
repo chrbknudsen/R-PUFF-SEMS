@@ -168,18 +168,18 @@
     "text": "n er ofte per gruppe\nVed to grupper er det klassisk, at formel eller software returnerer n per gruppe."
   },
   {
-    "objectID": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-_d",
-    "href": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-_d",
+    "objectID": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-sigma_d",
+    "href": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-sigma_d",
     "title": "Powerberegninger – undervisningsnotat",
-    "section": "Parret design kræver (_d)",
-    "text": "Parret design kræver (_d)\nVed parrede data skal man bruge standardafvigelsen af forskellene, ikke standardafvigelsen af de rå målinger."
+    "section": "Parret design kræver \\(\\sigma_d\\)",
+    "text": "Parret design kræver \\(\\sigma_d\\)\nVed parrede data skal man bruge standardafvigelsen af forskellene, ikke standardafvigelsen af de rå målinger."
   },
   {
-    "objectID": "slides/powerberegninger_undervisningsnotat.html#er-den-forskel-man-vil-kunne-opdage",
-    "href": "slides/powerberegninger_undervisningsnotat.html#er-den-forskel-man-vil-kunne-opdage",
+    "objectID": "slides/powerberegninger_undervisningsnotat.html#delta-er-den-forskel-man-vil-kunne-opdage",
+    "href": "slides/powerberegninger_undervisningsnotat.html#delta-er-den-forskel-man-vil-kunne-opdage",
     "title": "Powerberegninger – undervisningsnotat",
-    "section": "() er den forskel man vil kunne opdage",
-    "text": "() er den forskel man vil kunne opdage\nIkke nødvendigvis den forskel der blev set i et tidligere studie."
+    "section": "\\(\\delta\\) er den forskel man vil kunne opdage",
+    "text": "\\(\\delta\\) er den forskel man vil kunne opdage\nIkke nødvendigvis den forskel der blev set i et tidligere studie."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#forskellig-gruppestørrelse-kræver-den-generelle-formel",
@@ -214,7 +214,7 @@
     "href": "slides/powerberegninger_medicin_eksamensnotat-2.html",
     "title": "Powerberegninger – eksamensoverblik (medicinsk statistik)",
     "section": "",
-    "text": "Formål\nDette notat giver et eksamensrelevant overblik over power‑ og stikprøveberegninger i medicinsk statistik.\nI eksamensopgaver kan man typisk blive bedt om at finde:\n\nstikprøvestørrelse (n)\npower (1-)\nmindste detekterbare forskel ()\neller signifikansniveau\n\nAlle disse kan findes ved at isolere den ønskede størrelse i power‑formlerne.\n\n\n\nGrundbegreber\n\n\n\nSymbol\nBetydning\n\n\n\n\n(α)\nsignifikansniveau (type I fejl)\n\n\n(β)\ntype II fejl\n\n\npower\n(1-β)\n\n\n(δ)\nmindste klinisk relevante forskel\n\n\n(σ)\npopulationsstandardafvigelse\n\n\n(n)\nstikprøvestørrelse\n\n\n(z)\nkvantil fra normalfordelingen\n\n\n\nTypiske værdier i eksamensopgaver\n\n(α = 0.05)\npower = 0.80 eller 0.90\n\nKvantilværdier\n\n\n\nkvantil\nværdi\n\n\n\n\n(z_{0.975})\n1.96\n\n\n(z_{0.8})\n0.84\n\n\n(z_{0.9})\n1.28\n\n\n\n\n\n\nt‑ vs z‑fordeling\nI powerberegninger bruges næsten altid z‑fordelingen.\nÅrsagen er at powerberegninger antager\n\nkendt populationsspredning (σ)\nasymptotisk normalitet\n\nSelve analysen udføres ofte med t‑test, fordi (σ) i praksis estimeres fra data.\nDerfor bruges normalt\n\\[\nz_{1-α/2}\n\\]\ni stikprøveplanlægning.\n\n\n\nÉn middelværdi\nTest\n\\[\nH_0: \\mu = \\mu_0\n\\]\nPower‑relation\n\\[\n\\frac{\\delta}{σ/\\sqrt{n}} = z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn=\\left(\\frac{(z_{1-α/2}+z_{1-β})σ}{\\delta}\\right)^2\n\\]\n\n\n\nTo uafhængige middelværdier\nTest\n\\[\nH_0: \\mu_1=\\mu_2\n\\]\nStandardfejl\n\\[\nSE = σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\n\\]\nPower‑relation\n\\[\n\\frac{\\delta}{σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n= z_{1-α/2}+z_{1-β}\n\\]\nHvis grupperne er lige store\n\\[\nn = 2\\left(\\frac{(z_{1-α/2}+z_{1-β})σ}{\\delta}\\right)^2\n\\]\n\n\n\nParrede målinger\nPower‑relation\n\\[\n\\frac{\\delta}{σ_d/\\sqrt{n}} = z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn=\\left(\\frac{(z_{1-α/2}+z_{1-β})σ_d}{\\delta}\\right)^2\n\\]\n\n\n\nÉn proportion\nStandardfejl\n\\[\nSE=\\sqrt{\\frac{p_0(1-p_0)}{n}}\n\\]\nPower‑relation\n\\[\n\\frac{|p-p_0|}{\\sqrt{p_0(1-p_0)/n}}\n= z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn = \\frac{(z_{1-α/2}+z_{1-β})^2 p_0(1-p_0)}{(p-p_0)^2}\n\\]\n\n\n\nTo proportioner\nStandardfejl\n\\[\nSE=\\sqrt{\\frac{p_1(1-p_1)}{n_1}+\\frac{p_2(1-p_2)}{n_2}}\n\\]\nPower‑relation\n\\[\n\\frac{|p_1-p_2|}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\nHvis grupperne er lige store\n\\[\nn =\n\\frac{(z_{1-α/2}+z_{1-β})^2\n\\left[p_1(1-p_1)+p_2(1-p_2)\\right]}\n{(p_1-p_2)^2}\n\\]\n\n\n\nEksamensstrategi\n\nIdentificer typen af test\n\n\nmiddelværdi eller proportion\nén eller to grupper\nparret eller uafhængig\n\n\nIdentificer\n\n\n(δ)\n(σ) eller (p)\n(α)\npower\n\n\nBrug power‑relationen\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\n\nIsolér den ønskede størrelse.\n\n\n\n\nMinimal huskeregel\nPowerberegninger bygger næsten altid på\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]"
+    "text": "Formål\nDette notat giver et eksamensrelevant overblik over power‑ og stikprøveberegninger i medicinsk statistik.\nI eksamensopgaver kan man typisk blive bedt om at finde:\n\nstikprøvestørrelse (n)\npower (1-)\nmindste detekterbare forskel ()\neller signifikansniveau\n\nAlle disse kan findes ved at isolere den ønskede størrelse i power‑formlerne.\n\n\n\nGrundbegreber\n\n\n\nSymbol\nBetydning\n\n\n\n\n(α)\nsignifikansniveau (type I fejl)\n\n\n(β)\ntype II fejl\n\n\npower\n(1-β)\n\n\n(δ)\nmindste klinisk relevante forskel\n\n\n(σ)\npopulationsstandardafvigelse\n\n\n(n)\nstikprøvestørrelse\n\n\n(z)\nkvantil fra normalfordelingen\n\n\n\nTypiske værdier i eksamensopgaver\n\n(α = 0.05)\npower = 0.80 eller 0.90\n\nKvantilværdier\n\n\n\nkvantil\nværdi\n\n\n\n\n(z_{0.975})\n1.96\n\n\n(z_{0.8})\n0.84\n\n\n(z_{0.9})\n1.28\n\n\n\n\n\n\nt‑ vs z‑fordeling\nI powerberegninger bruges næsten altid z‑fordelingen.\nÅrsagen er at powerberegninger antager\n\nkendt populationsspredning (σ)\nasymptotisk normalitet\n\nSelve analysen udføres ofte med t‑test, fordi (σ) i praksis estimeres fra data.\nDerfor bruges normalt\n\\[\nz_{1-α/2}\n\\]\ni stikprøveplanlægning.\n\n\n\nÉn middelværdi\nTest\n\\[\nH_0: \\mu = \\mu_0\n\\]\nPower‑relation\n\\[\n\\frac{\\delta}{σ/\\sqrt{n}} = z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn=\\left(\\frac{(z_{1-α/2}+z_{1-β})σ}{\\delta}\\right)^2\n\\]\n\n\n\nTo uafhængige middelværdier\nTest\n\\[\nH_0: \\mu_1=\\mu_2\n\\]\nStandardfejl\n\\[\nSE = σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\n\\]\nPower‑relation\n\\[\n\\frac{\\delta}{σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n= z_{1-α/2}+z_{1-β}\n\\]\nHvis grupperne er lige store\n\\[\nn = 2\\left(\\frac{(z_{1-α/2}+z_{1-β})σ}{\\delta}\\right)^2\n\\]\nOg det er altså n pr gruppe!\n\n\n\nParrede målinger\nPower‑relation\n\\[\n\\frac{\\delta}{σ_d/\\sqrt{n}} = z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn=\\left(\\frac{(z_{1-α/2}+z_{1-β})σ_d}{\\delta}\\right)^2\n\\]\n\n\n\nÉn proportion\nStandardfejl\n\\[\nSE=\\sqrt{\\frac{p_0(1-p_0)}{n}}\n\\]\nPower‑relation\n\\[\n\\frac{|p-p_0|}{\\sqrt{p_0(1-p_0)/n}}\n= z_{1-α/2}+z_{1-β}\n\\]\nStikprøvestørrelse\n\\[\nn = \\frac{(z_{1-α/2}+z_{1-β})^2 p_0(1-p_0)}{(p-p_0)^2}\n\\]\n\n\n\nTo proportioner\nStandardfejl\n\\[\nSE=\\sqrt{\\frac{p_1(1-p_1)}{n_1}+\\frac{p_2(1-p_2)}{n_2}}\n\\]\nPower‑relation\n\\[\n\\frac{|p_1-p_2|}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\nHvis grupperne er lige store\n\\[\nn =\n\\frac{(z_{1-α/2}+z_{1-β})^2\n\\left[p_1(1-p_1)+p_2(1-p_2)\\right]}\n{(p_1-p_2)^2}\n\\]\n\n\n\nEksamensstrategi\n\nIdentificer typen af test\n\n\nmiddelværdi eller proportion\nén eller to grupper\nparret eller uafhængig\n\n\nIdentificer\n\n\n(δ)\n(σ) eller (p)\n(α)\npower\n\n\nBrug power‑relationen\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\n\nIsolér den ønskede størrelse.\n\n\n\n\nMinimal huskeregel\nPowerberegninger bygger næsten altid på\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen standardiserede forskel mellem de to proportioner skal være større end den kritiske grænse bestemt af α og β."
   },
   {
     "objectID": "slides/noter.html#en-eksamensopgave",
@@ -285,6 +285,41 @@
     "title": "Ting at huske",
     "section": "Eksamensopgave 2",
     "text": "Eksamensopgave 2\nVi skal se på et randomiseret klinisk studie udført på seks forskellige europæiske hospitaler. 349 patienter med leversygdom blev randomiseret til enten den eksperimentelle behadnling UDC (176 patienter) eller placebo (173 patienter)\nUdfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.\nVi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet\n\n\n# A tibble: 6 × 3\n      Y     R      X\n  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1     1     1  1.62 \n2     0     1  1.99 \n3     0     1 -0.849\n4     1     1  1.50 \n5     0     1  1.34 \n6     0     1 -0.562\n\n\n\ntable(Y,R) giver:\n\n\n\n   R\nY     0   1\n  0 118 134\n  1  55  42\n\n\n\nbaseret på ovenstående table ønske beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.\n\nRisiko ved behandling: 42/(134+42)= 0.2386364\nRisiko ved placebo: 55/(118+55) = 0.3179191\nRR = 0.2386364/0.3179191 = 0.7506199\nlog(RR) = log(0.7506199) = -0.2868559\nse.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726\net 95% ki for log(rr) findes til; -0.2868559 + c(-1,1)1.960.174726 = -0.62931886 0.05560706\nDerfor er 95% ki for RR: exp(c(-0.62931886, 0.05560706)) = 0.5329547 1.0571822\nRR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822 Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant effekt.\n\nNu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)\n\nder gav dette output:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-1.3922\n0.2088\n-6.668\n2.60e-11***\n\n\nfactor(R)1\n-0.9054\n0.2967\n-3.052\n0.00227**\n\n\nX\n1.2632\n0.1571\n8.043\n8.79e-16***\n\n\n\n\n\n\n\nHvilken analyse er der tale om. Angiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.\nDer er tale om en logistisk regressions analyse, med Y (Treatment failure) som afhængig variabel, og behandling/randomisering som kategorisk uafhængig, forklarende variable, samt X (den standardiserede logartime af bilirubin) som kontinuært forklarende variabel. Såvel behandlingen som X er statistisk signifikante på et 5% niveua.\nFor den forklarende variabel X får vi en estimeret odds ratio (OR) på behandlingen på exp(-0.9054) = 0.4043801 når der kontrolleres for den forklarende variabel X.\nDet tilhøreden 95% konfidensinterval findes ved: exp(-0.9054 + c(-1,1)1.960.2967)\nOR påp 0.4 svarer til en reduktion i odds for treatment failure på ca 60%, ved aktiv behandling vs. placebo, når der kontrolleres for bilirubin. Da KI ikke indeholder 1, er effekten signifikant."
+  },
+  {
+    "objectID": "slides/noter.html#en-ret-sjælden-opgave",
+    "href": "slides/noter.html#en-ret-sjælden-opgave",
+    "title": "Ting at huske",
+    "section": "en ret sjælden opgave",
+    "text": "en ret sjælden opgave\n\nSKAL HAVE JUSTERET LABELS! Hvad kan vi sige om disse fordelinger?\nUd over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte.\n\nVi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59\n\nPolske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61\nBeregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.\nDanske: 0.495/sqrt(59) polske: 0.418/sqrt(61)\n\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\n\ndanske:\n\n\n[1] 3.084691 3.337309\n\n\n\n\n[1] 3.284102 3.493898\n\n\nHvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel.\n\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.\n\nforskel:\n::: {.cell}\n:::\npoolet SEM\nTestværdien:\n\n\n[1] -2.136821\n\n\nTestværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.\np-værdi:\n\n\n[1] 0.03464261\n\n\nOg der skal ganges med to…\n\nangtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\n\nDet danske referenceinterval:\n\n\n[1] 2.24668 4.17532\n\n\nHvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\n\n\n[1] 0.9668844\n\n\nEller vi kan standardisere så vi kan bruge standardnormalfordelingen."
+  },
+  {
+    "objectID": "slides/noter.html#eksamensopgave",
+    "href": "slides/noter.html#eksamensopgave",
+    "title": "Ting at huske",
+    "section": "eksamensopgave",
+    "text": "eksamensopgave\nEt studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% balndt de 1513 kvinder der var med i studiet.\n\nBeregn 95% KI for insidense for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\n\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n\n[1] 0.06172795 0.08827205\n\n\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\n\n[1] 0.03\n\n\nse_dk:\n\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
+  },
+  {
+    "objectID": "slides/noter.html#eksamensopgave-2-1",
+    "href": "slides/noter.html#eksamensopgave-2-1",
+    "title": "Ting at huske",
+    "section": "eksamensopgave 2",
+    "text": "eksamensopgave 2\nVi ser på data for lungetransplanterede patienter. Man har været ndøt til at bruge ældre donorer, der også kan have været rygere. Vi har observationer for 426 patienter.\nDe første 6 observationer er givet:\n\n\n# A tibble: 6 × 4\n  fevl_prior_to_tx fevl_after fevl_diff SMOKE                  \n             &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                  \n1             1.4        3.8       2.4  Never smoker           \n2             0.56       0.95      0.39 Smoker or former smoker\n3             0.37       1.25      0.88 Smoker or former smoker\n4             0.54       2.35      1.81 Smoker or former smoker\n5             0.71       1.6       0.89 Never smoker           \n6             1.78       2.08      0.3  Never smoker           \n\n\nfevl_prior_to_tx: fevl målt før transplantation fevl_after: fevl målet efter transplantation fevl_diff: differencen mellem fevl_after og fevl_prior_to_tx SMOKE: Rygstatus for donor.\nVi får oplyst følgende:\n\n\n\n\nmean\nsd\n\n\n\n\nfevl_prior_to_tx\n0.835086\n0.5365149\n\n\nfevl_after\n2.122762\n0.9459951\n\n\nfevl_diff\n1.279024\n0.9411598\n\n\n\nUndersøg ved brug af relevant statistik metode om patienternes lungefunktion (fevl) har ændret sig efter transplantationen.\nDet er en parret t-test (for vi har målinger på samme patient både før og efter)\n\n\n[1] 28.04918\n\n\nDet er større end 1.96, så statistisk signifikant (nogen føler trang til at sige “klart signifikant”)\n\nNu udførtes følgende analyse: &gt; model &lt;- lm(fevl_diff~factor(SMOKE)) &gt; summary(model)\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?\nDet er en multipel lineær regression med en forklarende kategorisk (og binær) variabel; SMOKE. Responsvariabel er fevl_diff. Ændringen i liungefunktion efter transplantationen er afhængig af om donor var ryger eller ikke-ryger. Det estimeres at lungefunktionen er lavere hvis donor var ryger - denne forskel er statistisk signifikant med p = 0.0485.\n\nFortolk værdierne i søjlen “Estimate”. Beregn tilhørende 95% KI\n\nIntercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:\n\n\n[1] 1.239438 1.499962\n\n\nForbedringen i lungefunktion er lidt mindre for patienter med en donor som var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være 0.19092 laverem, med det tilhørende 95% KI på:\n\n\n[1] -0.3799424 -0.0018976"
+  },
+  {
+    "objectID": "slides/noter.html#sidste-eksamenssæt-1",
+    "href": "slides/noter.html#sidste-eksamenssæt-1",
+    "title": "Ting at huske",
+    "section": "sidste eksamenssæt 1",
+    "text": "sidste eksamenssæt 1\nVi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie, der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret hypertension. Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling. Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen.\nData har følgende variable:\nSBPbl: systolisk blodtryk ved baseline (mmHg) SBP12: systolisk blodtryk efter 12 måneder group (control/treatment) sex (male/female) diff: differensen mellem SBP12 og SBPbl\nGennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9 De tilsvarende tal i interventionsgruppen er -19.6 og 17.4\n\nEr der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.\n\nVi starter med SEM for de to grupper:\nIntervention: n= 323\nSå kan vi beregne 95% KI beregnes for de to grupper:\nintervention:\n\n\n[1] -21.4976 -17.7024\n\n\nkontrol:\n\n\n[1] -18.78724 -14.41276\n\n\nIngen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk signifikant.\n\nEr faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?\n\nDe to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge KI til at konkludere. Vi beregner SEM for differensen:\nDet giver os en teststørrelse på forskellen på de to differenser på:\n\n\n[1] -2.030622\n\n\nSom (i absolutte tal) er større end 1.96 - der er en signifikant forskel.\n\nNu udførtes følgende analyser for mænd og kvinder hver for sig: &gt; summary(lm(diff[sex==“female”]~factor(group[sex==“female”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-16.988\n1.3556\n-12.527\n&lt;2e-16***\n\n\nfactor(group[sex=='female'])treatment\n-5.915\n1.901\n-3.112\n0.002**\n\n\n\n\n\n\n\n\nsummary(lm(diff[sex==“male”]~factor(group[sex==“male”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-15.893\n1.594\n-9.968\n&lt;2e-16***\n\n\nfactor(group[sex=='male'])treatment\n1.692\n2.264\n0.747\n0.456\n\n\n\n\n\n\n\nHvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning af værdierne i “Estimate” søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?\nDer er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.\nFor kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)\nFor mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)"
+  },
+  {
+    "objectID": "slides/noter.html#sidste-eksamenssæt-2",
+    "href": "slides/noter.html#sidste-eksamenssæt-2",
+    "title": "Ting at huske",
+    "section": "sidste eksamenssæt 2",
+    "text": "sidste eksamenssæt 2\nVi ønsker at sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. Hvor mange patienter skal der inkluderes i studiet hvsi forskelle i enzymkoncentrationen på mindre end 1 standardafvigelse (sd) ikke er relevant. Der ønskes en styrke på 80% og signifikansniveauet sættes til 5% Vi får lov at antage at enzymkoncentrationen varierer lige meget blandt patienter og kontroller.\nI powerberegninger har skal vi finde en af fire parametre, de tre andre er normalt givet. - stikprøvestørrelse (n) - power (1-) - mindste detekterbare forskel () - eller signifikansniveau\npower skal være 0.8, så beta er 0.2 delta er 1 (fordi det vi ønsker at kunne se, skal divideres med sd, og det vi ønsker at se er større end sd, så resultatet af det er 1.) signifikansniveauet er 0.05\nNu skal vi så finde n. Det er det totale antal.\nVi har to forskellige middelværdier, så vi skal bruge:\n\\[n = 2\\left(\\frac{(z_{1-α/2}+z_{1-β})σ}{\\delta}\\right)^2\n\\]\n\\(\\delta = \\sigma\\)\nfind de to kvantiler:\n\n\n[1] 1.959964\n\n\n[1] 0.8416212\n\n\nn = 15.7 (og det var pr gruppe!)\n\nHvis vi allerede har målinger af enzym koncentrationen fra 100 kontroller. Hvor mange patienter har vi så brug for (med samme forudsætninger som tidligere). Bemærk at vi nu ikke længere har lige mange i hver gruppe!\n\nNu skal vi så bruge:\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen brugte vi sådan set også før… Effekten er stadig 1 sigma Standardfejlen er:\n\\[\nse = \\sqrt{\\frac{\\sigma^2}{n_1} + \\frac{\\sigma^2}{n_2}} = \\sqrt{\\sigma^2(\\frac{1}{n_1} + \\frac{1}{n_2})} = \\sigma\\sqrt{\\frac{1}{n_1} +\\frac{1}{n_2}}\n\\]\nindsat: \\[\n\\frac{\\delta}{σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n= z_{1-α/2}+z_{1-β}\n\\]\nn_1 = 100. Isoler n_2\n\\[\n\\frac{\\delta}{σ\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\[\n1 = \\frac{\\delta}{σ}\n= (z_{1-α/2}+z_{1-β})\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\n\\]\n\\[\n1^2 = (z_{1-α/2}+z_{1-β})^2(\\frac{1}{n_1}+\\frac{1}{n_2})\n\\]\ndet kan altsammen omskrives til: n_1 = (n_1/100 + 1)(1.96+0.84)^2 og videre til: N_1 = 7.84/(1-7.84/100) = 8.5\ndvs 9 patienter\nVi har nok behov for en del udgaver hvor diverse er reduceret"
   },
   {
     "objectID": "slides/logistisk.html#kategoriske-udfald",
@@ -487,7 +522,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 188.6 187.9 174.0 168.0 185.7 175.7 178.3 184.5 177.9 187.2 164.4 180.6\n[13] 190.1 171.7 180.0 185.8 188.3 176.7 179.2 185.4 182.4 187.1 183.8 176.9\n[25] 177.2 166.0 176.3 183.0 190.7 184.8 177.4 174.2 192.2 176.9 177.1 168.8\n[37] 183.9 176.3 186.2 178.9 181.4 185.0 182.9 189.2 174.7 183.8 186.1 176.0\n[49] 182.2 177.2\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 178.3 182.3 196.5 191.0 187.3 178.0 184.2 182.9 174.2 173.8 177.5 181.2\n[13] 184.2 186.6 191.5 179.0 186.1 189.1 167.0 184.5 178.9 182.3 174.2 188.9\n[25] 183.2 180.0 186.3 180.9 183.1 177.1 176.4 173.9 175.4 177.5 182.6 179.4\n[37] 185.2 169.4 188.8 182.7 169.8 185.8 178.6 185.6 177.3 173.8 183.3 193.5\n[49] 182.1 181.1\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -868,25 +903,109 @@
     "text": "Cowboy trick 2\nHvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?\nVi kan skalere de 50, og putte resultatet ind i pnorm.\n\npnorm((50-47)/42)\n\n[1] 0.5284717\n\n\nEller, vi kan lade R gøre det for os:\n\n\npnorm(50, mean = 47, sd = 42)\n\n[1] 0.5284717\n\n\n\n\nFor de typeopgaver hvor vi skal finde \\(\\mu\\) og/eller \\(\\sigma\\) hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt."
   },
   {
+    "objectID": "slides/power.html#hvad-katten-er-det",
+    "href": "slides/power.html#hvad-katten-er-det",
+    "title": "Powerberegninger",
+    "section": "Hvad katten er det?",
+    "text": "Hvad katten er det?\nNår vi laver statistiske test opstiller vi en NULL-hypotese. AKA \\(H_0\\), og en alternativ hypotese, \\(H_A\\).\nGrundlæggende: Vi opstiller en hypotese om at der ikke sker noget. Eksempelvis at den sande forskel på to middelværdier er 0.\nDen har vi som regel lyst til at kunne afvise.\nUndertiden er vi dog meget fornøjede med at kunne afvise den."
+  },
+  {
+    "objectID": "slides/power.html#vi-har-prøvet-det",
+    "href": "slides/power.html#vi-har-prøvet-det",
+    "title": "Powerberegninger",
+    "section": "Vi har prøvet det",
+    "text": "Vi har prøvet det\nVi har eksempelvis to grupper, med hver deres middelværdi \\(\\mu\\) og standardafvigelse \\(\\sigma\\) og angivelse af hvor mange observationer vi har i hver gruppe, n. \nVi beregner SEM for hver af grupperne: \\(SEM = \\sqrt{\\frac{\\sigma}{n}}\\)\nVi beregner en poolet SEM for differencen: \\(SEM_{diff} = \\sqrt{SEM_{1}^2 + SEM_2^2}\\)\nOg så beregner vi et 95% konfidensinterval:\n\\((\\mu_1 - \\mu_2) \\pm 1.96SEM_{diff}\\)\nHvis 0 ligger inden for det interval, er der ingen forskel (på et 5% signifikansniveua), ligger det udenfor, er der forskel, og vi afviser \\(H_0\\) (på et 5% signifikansniveau)."
+  },
+  {
+    "objectID": "slides/power.html#hvad-betød-det",
+    "href": "slides/power.html#hvad-betød-det",
+    "title": "Powerberegninger",
+    "section": "Hvad betød det?",
+    "text": "Hvad betød det?\nVi får undertiden en p-værdi. Den angiver hvor stor risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) i virkeligheden er sand.\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nEller - det er risikoen for en type 1 fejl - en falsk positiv.\nDet ser ud som om der er en effekt. Det ser ud som om der er et positivt resultat.\nMen det er der ikke!\nVi sætter som regel grænse til 0.05. Vi accepterer at der er 5% risiko for at få en falsk positiv. Den kalder vi også \\(\\alpha\\)."
+  },
+  {
+    "objectID": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
+    "href": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
+    "title": "Powerberegninger",
+    "section": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl",
+    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\nVi kan også begå fejl på en anden måde.\nVi kan også konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\nDet er en type 2 fejl. En falsk negativ.\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\nDen kalder vi \\(\\beta\\)"
+  },
+  {
+    "objectID": "slides/power.html#det-omvendte-af-beta",
+    "href": "slides/power.html#det-omvendte-af-beta",
+    "title": "Powerberegninger",
+    "section": "Det omvendte af \\(\\beta\\)",
+    "text": "Det omvendte af \\(\\beta\\)\nDet kalder vi power. Det er den styrke vores test har.\nEller - sandsynligheden for at vores test finder forskellen, når forskellen faktisk findes!\nHvis \\(\\beta\\) er risikoen for at vores test ikke finder forskellen, selvom den findes.\nSå er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.\n\\(power = 1 - \\beta\\)"
+  },
+  {
+    "objectID": "slides/power.html#hvad-afhænger-de-her-ting-af",
+    "href": "slides/power.html#hvad-afhænger-de-her-ting-af",
+    "title": "Powerberegninger",
+    "section": "Hvad afhænger de her ting af?",
+    "text": "Hvad afhænger de her ting af?\nHelt intuitiv.\nJo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).\nJo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.\nJo større reel forskel der er, jo lettere bliver det at få øje på den.\nNår \\(\\alpha\\) stiger, bliver det lettere at forkaste \\(H_0\\) Det bliver også lettere at finde en forskel (power ~ \\(\\beta\\) stiger). Til gengæld stiger risikoen for falsk positive."
+  },
+  {
+    "objectID": "slides/power.html#vi-har-fem-parametre",
+    "href": "slides/power.html#vi-har-fem-parametre",
+    "title": "Powerberegninger",
+    "section": "Vi har fem parametre",
+    "text": "Vi har fem parametre\n\nStikprøvestørrelserne (n)\nStandardafvigelserne (på stikprøverne, \\(\\sigma\\))\nØnsket forskel vi vil kunne finde (\\(\\delta\\))\nRisikoen for type 1 fejl (\\(\\alpha\\))\nRisikoen for type 2 fejl (\\(\\beta\\))\n\nVi har en hemmelig sjette parameter. Nemlig hvilken test det er vi laver. Sammenligner vi middelværdier? Eller proportioner?\nHvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femte."
+  },
+  {
+    "objectID": "slides/power.html#og-hvad-er-det-så-vi-bliver-bedt-om-i-eksamensopgaver",
+    "href": "slides/power.html#og-hvad-er-det-så-vi-bliver-bedt-om-i-eksamensopgaver",
+    "title": "Powerberegninger",
+    "section": "Og hvad er det så vi bliver bedt om i eksamensopgaver?",
+    "text": "Og hvad er det så vi bliver bedt om i eksamensopgaver?\nVi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?"
+  },
+  {
+    "objectID": "slides/power.html#det-har-r-funktioner-til.",
+    "href": "slides/power.html#det-har-r-funktioner-til.",
+    "title": "Powerberegninger",
+    "section": "Det har R funktioner til.",
+    "text": "Det har R funktioner til.\n\npower.t.test()\npower.prop.test()\npower.anova.test()\n\nDen sidste har jeg ikke set i eksamensopgaver, så den springer vi over.\nDer er lidt flere detaljer, two sample eller one sample? Eller parret?\nMen giv dem fire af de fem parametre, og de beregner den femte."
+  },
+  {
+    "objectID": "slides/power.html#men-dem-bruger-vi-ikke",
+    "href": "slides/power.html#men-dem-bruger-vi-ikke",
+    "title": "Powerberegninger",
+    "section": "Men dem bruger vi ikke…",
+    "text": "Men dem bruger vi ikke…\nFor eksamen tester ikke om I kan putte tal ind i en funktion, den tester om I har forstået det godt nok til at I kan gøre det i hånden."
+  },
+  {
+    "objectID": "slides/power.html#i-stedet",
+    "href": "slides/power.html#i-stedet",
+    "title": "Powerberegninger",
+    "section": "I stedet",
+    "text": "I stedet\n💥Powerrelationen!💪\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nOg det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen."
+  },
+  {
+    "objectID": "slides/power.html#de-sære-tegn",
+    "href": "slides/power.html#de-sære-tegn",
+    "title": "Powerberegninger",
+    "section": "De sære tegn",
+    "text": "De sære tegn\n\\(z_{1-α/2}\\) og \\(z_{1-β}\\) kender vi godt.\n\\(z_{1-α/2}\\) er kvantilen der matcher 0.975. Det giver:\n\n\n[1] 1.959964\n\n\nDen har vi set før. \\(z_{1-β}\\) er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så \\(\\beta = 0.2\\)):\n\n\n[1] 0.8416212"
+  },
+  {
+    "objectID": "slides/power.html#hvordan-beregner-vi-så-standardfejlen",
+    "href": "slides/power.html#hvordan-beregner-vi-så-standardfejlen",
+    "title": "Powerberegninger",
+    "section": "Hvordan beregner vi så standardfejlen?",
+    "text": "Hvordan beregner vi så standardfejlen?\nDet har vi også set andetsteds, men lad os lige tage dem alligevel.\nEn middelværdi: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nForskel på to middelværdier: \\(SE = \\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\\)\nForskel på to middelværdier, hvor grupperne er lige store: \\(SE = \\sigma\\sqrt{\\frac{2}{n}}\\)\nParrede målinger: \\(SE = \\frac{\\sigma_d}{\\sqrt{n}}\\) hvor \\(\\sigma_d\\) er standardafvigelsen af forskellene\nEn proportion: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)\nForskel mellem to proportioner: \\(SE = \\sqrt{\\frac{p_1(1 - p_1)}{n_1} + \\frac{p_2(1-p_2)}{n_2}}\\)\nForskel mellem to proportioner, hvor grupperne er lige store: \\(SE = \\sqrt{\\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}\\)"
+  },
+  {
+    "objectID": "slides/power.html#så-er-vi-klar-lad-os-tage-et-eksempel",
+    "href": "slides/power.html#så-er-vi-klar-lad-os-tage-et-eksempel",
+    "title": "Powerberegninger",
+    "section": "Så er vi klar, lad os tage et eksempel!",
+    "text": "Så er vi klar, lad os tage et eksempel!"
+  },
+  {
     "objectID": "slides/power.html#husk-dog",
     "href": "slides/power.html#husk-dog",
     "title": "Powerberegninger",
     "section": "Husk dog!",
     "text": "Husk dog!\nNår I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer."
-  },
-  {
-    "objectID": "slides/power.html#eksempel",
-    "href": "slides/power.html#eksempel",
-    "title": "Powerberegninger",
-    "section": "eksempel",
-    "text": "eksempel\n\n\n\n     Two-sample t test power calculation \n\n              n = 16.71477\n          delta = 1\n             sd = 1\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group"
-  },
-  {
-    "objectID": "slides/power.html#opgave-2-2025-februar",
-    "href": "slides/power.html#opgave-2-2025-februar",
-    "title": "Powerberegninger",
-    "section": "Opgave 2 2025 februar",
-    "text": "Opgave 2 2025 februar\nHvis vi godt vil kunne se en bestemt forskel mellem to grupper? Hvor stor skal grupperne så være? Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?\nHvilken power får man?\ndet vil nok være en god ide at kunne tage udgangspunkt i “notat om beregning af stikprøvestørrelse”. notat rekvireret"
   },
   {
     "objectID": "slides/powerberegninger_medicin_statistik.html",

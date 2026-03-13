@@ -1,5 +1,6 @@
 ---
 title: Powerberegninger
+subtitle: Også kendt som styrkeberegninger
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -9,68 +10,184 @@ filters:
   - webr
 ---
 
-Når vi laver vores statistiske tests, opstiller vi en null-hypotese. Ofte er det "kunne denne værdi vi har beregnet, i virkeligheden være 0?" 
+## Hvad katten er det?
 
-Fordi vi jo kun ser på stikprøver, så er den værdi vi finder jo ikke den "sande" værdi. Den er et estimat. 
-Det kan være et godt estimat. Det kan være et dårligt estimat. Men det er et estimat. 
+Når vi laver statistiske test opstiller vi en NULL-hypotese. AKA $H_0$, og en alternativ hypotese, $H_A$. 
 
-Vores tests giver os en p-værdi. p-værdien fortæller os hvor stor risikoen er for at den sande værdi er 0, selvom 
-estimatet måske er 3. 
+Grundlæggende: Vi opstiller en hypotese om at der ikke sker noget.
+Eksempelvis at den sande forskel på to middelværdier er 0. 
 
-Det sædvanlige kriterium er at p-værdien skal være mindre end 5% eller 0.05. Hvis p-værdien er mindre end 0.05, er der mindre end 5% risiko for at den sande værdi er 0, selvom vores estimat er noget andet.
+Den har vi som regel lyst til at kunne afvise. 
 
-Og er p-værdien mindre end 0.05, forkaster vi null-hypotesen. Og accepterer den alternative hypotese.
+Undertiden er vi dog meget fornøjede med at kunne afvise den.
 
-p-værdien sikrer os mod en måde at tage fejl på - den situation hvor vi tror der er en effekt, men der i virkeligheden ikke er en. Det er en type 1 fejl, eller falsk positiv.
+## Vi har prøvet det
 
-Det kan også gå galt på en anden måde. Vi kan komme til at 
+Vi har eksempelvis to grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og angivelse af hvor mange observationer vi
+har i hver gruppe, n. 
+
+Vi beregner SEM for hver af grupperne: $SEM = \sqrt{\frac{\sigma}{n}}$
+
+Vi beregner en poolet SEM for differencen: $SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
+
+Og så beregner vi et 95% konfidensinterval:
+
+$(\mu_1 - \mu_2) \pm 1.96SEM_{diff}$
+
+Hvis 0 ligger inden for det interval, er der ingen forskel (på et 5% signifikansniveua), ligger det udenfor, er der forskel, og vi afviser $H_0$ (på et 5% signifikansniveau).
+
+## Hvad betød det?
+
+Vi får undertiden en p-værdi. Den angiver hvor stor risikoen er
+for at vi afviser $H_0$. _Selvom_ $H_0$ i virkeligheden er sand.
+
+Eller: Hvis $H_0$ er sand, så er p-værdien sandsynligheden for at 
+få en forskel på de to middelværdier der er så stor som vi ser.
+
+Eller - det er risikoen for en type 1 fejl - en falsk positiv.
+
+Det ser ud som om der er en effekt. Det ser ud som om der er et 
+positivt resultat.
+
+Men det er der ikke!
+
+Vi sætter som regel grænse til 0.05. Vi accepterer at der er 5% 
+risiko for at få en falsk positiv. Den kalder vi også $\alpha$.
+
+## Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl
+
+Og eksistensen af $\alpha$ indikerer eksistensen af $\beta$.
+
+Vi kan også begå fejl på en anden måde.
+
+Vi kan også konkludere at der ikke er forskel. _Selvom der i virkeligheden er forskel!_ 
+
+Det er en type 2 fejl. En falsk negativ. 
+
+Risikoen for at begå en type 2 fejl kan vi også sætte tal på.
+
+Den kalder vi $\beta$
+
+## Det omvendte af $\beta$
+
+Det kalder vi power. Det er den styrke vores test har. 
+
+Eller - sandsynligheden for at vores test finder forskellen,
+når forskellen faktisk findes!
+
+Hvis $\beta$ er risikoen for at vores test ikke finder forskellen, selvom den findes.
+
+Så er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.
+
+$power = 1 - \beta$
+
+## Hvad afhænger de her ting af?
+
+Helt intuitiv. 
+
+Jo flere observationer vi har - jo større er chancen for at
+vi finder en forskel (der faktisk er der).
+
+Jo mindre standardafvigelser vi har - jo større er chancen
+for at vi kan se forskelle på det vi sammenligner.
+
+Jo større reel forskel der er, jo lettere bliver det at få
+øje på den. 
+
+Når $\alpha$ stiger, bliver det lettere at forkaste $H_0$
+Det bliver også lettere at finde en forskel (power ~ $\beta$ stiger). Til gengæld stiger risikoen for falsk positive.
 
 
+## Vi har fem parametre
 
-Der kan være en effekt i virkeligheden. 
-Det kan også være at der ikke er en effekt i virkeligheden.
+- Stikprøvestørrelserne (n)
+- Standardafvigelserne (på stikprøverne, $\sigma$)
+- Ønsket forskel vi vil kunne finde ($\delta$)
+- Risikoen for type 1 fejl ($\alpha$)
+- Risikoen for type 2 fejl ($\beta$)
 
-Vi kan konkludere at der er en effekt.
-Eller vi kan konkludere at der ikke er en effekt.
+Vi har en hemmelig sjette parameter. Nemlig hvilken
+test det er vi laver. Sammenligner vi middelværdier? Eller
+proportioner?
 
-Hvis vi mener der er en effekt, og der faktisk er en effekt, er alt godt.
-Hvis vi mener der ikke er en effekt, og der faktisk ikke er en effekt. Så er alt også godt.
+Hvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femte.
 
-Men.
-Hvis vi mener der er en effekt, og den i virkeligheden ikke er der. Så har vi begået en fejl - falsk positiv, eller type 1 fejl.
-Og hvis vi mener der ikke er en effekt, men den faktisk er der alligegel. Så har vi også begået en fejl, en falsk negativ. Eller type 2 fejl.
+## Og hvad er det så vi bliver bedt om i eksamensopgaver?
 
-p-værdien fortæller os hvad risikoen er for at begå en type 1 fejl når vi konkluderer.
+Vi får i almindelighed oplyst alt. Undtagen en enkelt af
+parametrene. Det er den vi skal finde.
 
-Risikoen for at begå en type 2 fejl, betegnes $\beta$. Hvis den er eksempelvis 20% så er chancen for at forkaste null-hypotesen 1-beta. Det er sandsynligheden for at vi forkaster null-hypotesen når null-hypotesen faktisk skal forkaste. Det kalder vi også for power.
+Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?
 
-Når vi designer forsøg er 
+## Det har R funktioner til.
 
-hvor mange observationer har vi (brug for)
-Hvor stor effekt ønsker vi at kunne se?
-hvor lille p-værdi ønsker vi?
-hvor stor power ønsker vi?
+- `power.t.test()`
+- `power.prop.test()`
+- `power.anova.test()` 
 
-Det der med effekten kan være lidt bøvlet. det er fint at se et fald på 12 mmHg i det systoliske blodtryk. Men hvis vi måler i en anden enhed bliver tallet anderledes. Så vi standardiserer det fald, ved at dividere med den 
-standardafvigelse vi forventer (eller har). Så hvis vi har et fald på 12 mmHg, og en standardafvigelse på 3,
-ser vi en effekt på 4.
+Den sidste har jeg ikke set i eksamensopgaver, så den
+springer vi over.
 
-Det optræder typisk opgaver af typen
+Der er lidt flere detaljer, two sample eller one sample? Eller parret? 
 
-Man ønsker i et klinisk studie at sammenligne en enzymkoncentration for patienter med en bestemt sygdom
-og kontroller (raske) således, at der er lige mange patienter og kontroller i studiet. Hvor mange patienter
-skal man inkludere i studiet hvis forskelle i enzymkoncentrationen mindre end en standard afvigelse (sd) ikke
-er klinisk relevant? I beregningen ønskes en styrke på 80% og signifikansniveauet sættes stil 5%. Antag at 
-enzymkoncentrationen varierer lige meget blandt patienterne og kontrollerne.
+Men giv dem fire af de fem parametre, og de beregner den femte.
 
-En forskel mindre end 1 sd er ikke klinisk relevant. Så vi vil kunne se effekter derer større end 1. 
+## Men dem bruger vi ikke...
 
-det vil sige, at forskellen divideret med sigma er lig 1.
+For eksamen tester ikke om I kan putte tal ind i en funktion, den tester om I har forstået det godt nok til at I kan gøre det i hånden.
 
-power skal være 80%. Det vil sige at 0.8 = 1 - beta, så beta er 0.2
+## I stedet
 
-Bemærk at den formel I får i notat om beregning af stikprøvestørrelse, baserer sig på
-standardnormalfordelingen. Og det er den I skal bruge til eksamen, fordi den er "let" at beregne i hånden.
+💥Powerrelationen!💪
+
+$$\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+Den effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med 
+$z_{1-α/2}+z_{1-β}$
+
+Og det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen. 
+
+## De sære tegn
+
+
+$z_{1-α/2}$ og $z_{1-β}$ kender vi godt.
+
+$z_{1-α/2}$ er kvantilen der matcher 0.975. Det giver:
+```{r}
+qnorm(1-0.05/2)
+```
+
+Den har vi set før.
+$z_{1-β}$ er kvantilen der matcher vores power.
+En power på 0.8 er populær (og det er så $\beta = 0.2$):
+
+```{r}
+qnorm(1-0.2)
+```
+
+## Hvordan beregner vi så standardfejlen?
+
+Det har vi også set andetsteds, men lad os lige tage dem alligevel.
+
+En middelværdi: $SE = \frac{\sigma}{\sqrt{n}}$
+
+Forskel på to middelværdier: $SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
+
+Forskel på to middelværdier, hvor grupperne er lige store: $SE = \sigma\sqrt{\frac{2}{n}}$
+
+Parrede målinger: $SE = \frac{\sigma_d}{\sqrt{n}}$
+hvor $\sigma_d$ er standardafvigelsen af forskellene
+
+En proportion: $SE = \sqrt{\frac{p(1-p)}{n}}$
+
+Forskel mellem to proportioner: $SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}$
+
+Forskel mellem to proportioner, hvor grupperne er lige store: $SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}$
+
+## Så er vi klar, lad os tage et eksempel!
+
 
 ## Husk dog!
 
@@ -78,22 +195,6 @@ Når I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. 
 at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer. 
 
 
-## eksempel
 
-```{r}
-
-power.t.test(delta =1, power = .8, type = "two.sample") 
-```
-## Opgave 2 2025 februar
-
-
-Hvis vi godt vil kunne se en bestemt forskel mellem to grupper?
-Hvor stor skal grupperne så være?
-Eller - hvis man kender størrelserne af grupperne? Hvor stor forskel kan man så se?
-
-Hvilken power får man?
-
-det vil nok være en god ide at kunne tage udgangspunkt i "notat om beregning af stikprøvestørrelse".
-notat rekvireret
 
 

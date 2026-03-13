@@ -1115,3 +1115,570 @@ exp(-0.9054 + c(-1,1)*1.96*0.2967)
 OR påp 0.4 svarer til en reduktion i odds for treatment failure på 
 ca 60%, ved aktiv behandling vs. placebo, når der kontrolleres for
 bilirubin. Da KI ikke indeholder 1, er effekten signifikant.
+
+
+## en ret sjælden opgave
+
+
+```{r}
+library(tidyverse)
+
+set.seed(47)
+
+n <- 100
+
+# højreskæv
+right_skew <- rgamma(n, shape = 2, scale = 2)
+
+# venstreskæv (spejlet højreskæv)
+left_skew <- max(right_skew) - right_skew
+
+# tilnærmelsesvist normal
+normal <- rnorm(n, mean = 10, sd = 2)
+
+# log-transformerede
+log_right <- log(right_skew)
+log_left  <- log(max(left_skew) + 1 - left_skew)
+
+df <- tibble(
+  value = c(right_skew, left_skew, normal, log_right, log_left),
+  type = rep(
+    c(
+      "Højreskæv",
+      "Venstreskæv",
+      "Tilnærmelsesvist normal",
+      "Log(højreskæv)",
+      "Log(venstreskæv)"
+    ),
+    each = n
+  )
+)
+
+ggplot(df, aes(x = value)) +
+  geom_histogram(bins = 10, fill = "steelblue", color = "white") +
+  facet_wrap(~type, scales = "free") +
+  theme_minimal()
+```
+
+SKAL HAVE JUSTERET LABELS!
+Hvad kan vi sige om disse fordelinger?
+
+Ud over at vi nok vil blive bedt om at 
+forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden.
+Så skal vi kunne fortælle at "denne er højreskæv" "denne er venstreskæv" og de
+log-transformerede data er tilnærmelsesvist normalfordelte.
+
+b)
+Vi får, om logtransformerede data oplyst;
+Danske piger: log(D-vitaminniveau)
+gennemsnit: 3.211
+sd = 0.492
+n = 59
+
+Polske piger: log(D-vitaminniveau)
+gennemsnit: 3.389
+sd = 0.418
+n = 61
+
+Beregn variationen på gennemsnittene for
+det log-transformerede D-vitaminniveau for
+hhv de danske og polske piger.
+
+Danske:
+0.495/sqrt(59)
+polske:
+0.418/sqrt(61)
+
+c) Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om
+forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?
+
+danske: 
+```{r}
+3.211 + c(-1,1)*1.96*0.495/sqrt(59)
+```
+
+
+```{r}
+3.389 + c(-1,1)*1.96*0.418/sqrt(61)
+```
+
+ Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de
+ to grupper.
+ Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere
+ om der er en signifikant forskel.
+
+ d) Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua).
+ Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på
+ d-vitaminniveauet er statistisk signifikant på et 5% niveau.
+
+ forskel:
+ 
+ ```{r}
+ diff <- 3.21-3.389
+ ```
+
+ poolet SEM
+ 
+```{r}
+ SEM_poolet <- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)
+```
+
+ Testværdien:
+ 
+```{r}
+ diff/SEM_poolet
+```
+
+Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.
+
+p-værdi:
+```{r}
+2*pt(diff/SEM_poolet, 59+61)
+```
+Og der skal ganges med to...
+
+e) angtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling.
+Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger.
+Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem
+der forventes at ligge inden for det danske referenceinterval.
+
+Det danske referenceinterval:
+```{r}
+3.211+c(-1,1)*1.96*0.492
+```
+
+Hvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418,
+skal vi beregne:
+P(2.24668 < X < 4.17532) <=>
+P(X < 4.17532) - P(X < 2.24668)
+
+Vi kan bruge pnorm direkte (cowboytricket)
+
+```{r}
+pnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)
+```
+
+Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.
+
+## eksamensopgave
+Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
+incidensen for tidlig fødsel var 7.5% balndt de 1513 kvinder der var med i studiet.
+
+a) Beregn 95% KI for insidense for tidlig fødsel baseret på disse tal.
+phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
+
+```{r}
+se_gb <- sqrt(0.075*(1-0.075)/1513)
+se_gb
+```
+Der er et 0 for lidt i modelbesvarelsen...
+
+
+```{r}
+0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
+```
+
+b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
+Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
+
+forskel:
+
+```{r}
+diff <- 0.075-0.045
+diff
+```
+
+se_dk:
+
+```{r}
+se_dk <- sqrt(0.045*(1-0.045)/51851)
+```
+
+
+```{r}
+se_diff <- sqrt(se_dk^2 + se_gb^2)
+se_diff
+```
+
+et 95% ki for diffen:
+
+```{r}
+diff + c(-1,1)*1.96*se_diff
+```
+Intervallet indeholder _ikke_  0, og vi kan konkludere at der er en statistisk signifikant forskel.
+
+## eksamensopgave 2
+
+Vi ser på data for lungetransplanterede patienter. Man har været ndøt til at bruge
+ældre donorer, der også kan have været rygere. Vi har observationer for 426 
+patienter.
+
+De første 6 observationer er givet:
+
+```{r}
+tribble(~fevl_prior_to_tx, ~fevl_after, ~fevl_diff, ~SMOKE,
+1.40, 3.8, 2.4, "Never smoker",
+0.56, 0.95, 0.39, "Smoker or former smoker",
+0.37, 1.25, 0.88, "Smoker or former smoker",
+0.54, 2.35, 1.81, "Smoker or former smoker",
+0.71, 1.60, 0.89, "Never smoker",
+1.78, 2.08, 0.30, "Never smoker")
+```
+
+fevl_prior_to_tx: fevl målt før transplantation
+fevl_after: fevl målet efter transplantation
+fevl_diff: differencen mellem fevl_after og fevl_prior_to_tx
+SMOKE: Rygstatus for donor.
+
+Vi får oplyst følgende:
+
+| | mean | sd |
+|-|-|-|
+|fevl_prior_to_tx | 0.835086 | 0.5365149 |
+|fevl_after|2.122762|0.9459951|
+|fevl_diff|1.279024|0.9411598|
+
+Undersøg ved brug af relevant statistik metode om patienternes lungefunktion (fevl) har ændret sig efter transplantationen.
+
+Det er en parret t-test (for vi har målinger på samme patient både før og efter)
+
+```{r}
+1.279024/(0.9411598/sqrt(426))
+```
+
+Det er større end 1.96, så statistisk signifikant (nogen føler trang til at sige "klart signifikant")
+
+b) Nu udførtes følgende analyse:
+> model <- lm(fevl_diff~factor(SMOKE))
+> summary(model)
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "1.36970", "0.06646", "20.61", "<2e-16***",
+"factor(SMOKE)Smoker or former smoker", "-0.19092", "0.09644", "-1.98", "0.0485*"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?
+
+Det er en multipel lineær regression med en forklarende kategorisk (og binær) variabel; SMOKE. Responsvariabel er fevl_diff. Ændringen i liungefunktion 
+efter transplantationen er afhængig af om donor var ryger eller ikke-ryger.
+Det estimeres at lungefunktionen er lavere hvis donor var ryger - denne forskel
+er statistisk signifikant med p = 0.0485.
+
+c) Fortolk værdierne i søjlen "Estimate". Beregn tilhørende 95% KI
+
+Intercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. 
+Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:
+
+```{r}
+1.36970 + c(-1,1)*1.96*0.06646
+```
+
+Forbedringen i lungefunktion er lidt mindre for patienter med en donor som
+var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være
+0.19092 laverem, med det tilhørende 95% KI på:
+
+```{r}
+-0.19092+c(-1,1)*1.96*0.09644
+```
+
+## sidste eksamenssæt 1 
+
+Vi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie,
+der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret
+hypertension. 
+Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling
+med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået 
+en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling.
+Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter
+12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen. 
+
+Data har følgende variable:
+
+SBPbl: systolisk blodtryk ved baseline (mmHg)
+SBP12: systolisk blodtryk efter 12 måneder
+group (control/treatment)
+sex (male/female)
+diff: differensen mellem SBP12 og SBPbl
+
+Gennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9
+De tilsvarende tal i interventionsgruppen er -19.6 og 17.4
+
+a) Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode.
+Besvar samme spørgsmål for kontrolgruppen.
+
+Vi starter med SEM for de to grupper:
+
+
+Intervention: n= 323
+
+```{r}
+SEM_intervention <- 17.4/sqrt(323)
+```
+
+```{r}
+SEM_kontrol <- 19.9/sqrt(641-323)
+```
+
+Så kan vi beregne 95% KI beregnes for de to grupper:
+
+intervention:
+
+```{r}
+-19.6+c(-1,1)*1.96*SEM_intervention
+```
+
+kontrol:
+
+```{r}
+-16.6+c(-1,1)*1.96*SEM_kontrol
+```
+
+Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk
+signifikant.
+
+b) Er faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?
+
+De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge
+KI til at konkludere. Vi beregner SEM for differensen:
+
+```{r}
+SEM_diff <- sqrt(SEM_intervention^2 + SEM_kontrol^2)
+```
+
+Det giver os en teststørrelse på forskellen på de to differenser på:
+
+```{r}
+(-19.6- -16.6)/SEM_diff
+```
+
+Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.
+
+c) Nu udførtes følgende analyser for mænd og kvinder hver for sig:
+> summary(lm(diff[sex=="female"]~factor(group[sex=="female"])))
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-16.988", "1.3556", "-12.527", "<2e-16***",
+"factor(group[sex=='female'])treatment", "-5.915", "1.901", "-3.112", "0.002**"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+> summary(lm(diff[sex=="male"]~factor(group[sex=="male"])))
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-15.893", "1.594", "-9.968", "<2e-16***",
+"factor(group[sex=='male'])treatment", "1.692", "2.264", "0.747", "0.456"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+      opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning
+af værdierne i "Estimate" søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?
+
+Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som
+forklarende, kategorisk (og binær) variabel. 
+
+For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)
+
+For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der
+ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
+
+## sidste eksamenssæt 2
+Vi ønsker at sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. 
+Hvor mange patienter skal der inkluderes i studiet hvsi forskelle i enzymkoncentrationen på mindre
+end 1 standardafvigelse (sd) ikke er relevant. Der ønskes en styrke
+på 80% og signifikansniveauet sættes til 5% Vi får lov at antage at
+enzymkoncentrationen varierer lige meget blandt patienter og kontroller.
+
+I powerberegninger har skal vi finde en af fire parametre, de 
+tre andre er normalt givet.
+- stikprøvestørrelse \(n\)
+- power \(1-\beta\)
+- mindste detekterbare forskel \(\delta\)
+- eller signifikansniveau
+
+power skal være 0.8, så beta er 0.2
+delta er 1 (fordi det vi ønsker at kunne se, skal divideres med sd, og det vi ønsker at se er større end sd, så resultatet af det er 1.)
+signifikansniveauet er 0.05
+
+Nu skal vi så finde n. Det er det totale antal.
+
+Vi har to forskellige middelværdier, så vi skal bruge:
+
+$$n = 2\left(\frac{(z_{1-α/2}+z_{1-β})σ}{\delta}\right)^2
+$$
+
+$\delta = \sigma$
+
+find de to kvantiler:
+```{r}
+qnorm(1-0.025)
+qnorm(1-0.2)
+```
+
+n = 15.7 (og det var pr gruppe!)
+
+b) Hvis vi allerede har målinger af enzym koncentrationen fra 100
+kontroller. Hvor mange patienter har vi så brug for (med samme forudsætninger som tidligere). 
+Bemærk at vi nu ikke længere har lige mange i hver gruppe!
+
+Nu skal vi så bruge:
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+Den brugte vi sådan set også før...
+Effekten er stadig 1 sigma
+Standardfejlen er:
+
+$$
+se = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}
+$$
+
+indsat:
+$$
+\frac{\delta}{σ\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+n_1 = 100. Isoler n_2
+
+
+$$
+\frac{\delta}{σ\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+$$
+1 = \frac{\delta}{σ}
+= (z_{1-α/2}+z_{1-β})\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}
+$$
+
+$$
+1^2 = (z_{1-α/2}+z_{1-β})^2(\frac{1}{n_1}+\frac{1}{n_2})
+$$
+
+det kan altsammen omskrives til:
+n_1 = (n_1/100 + 1)(1.96+0.84)^2
+og videre til:
+N_1 = 7.84/(1-7.84/100) = 8.5
+
+dvs 9 patienter
+
+Vi har nok behov for en del udgaver hvor diverse er reduceret
