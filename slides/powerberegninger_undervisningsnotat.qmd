@@ -43,7 +43,7 @@ ved en tosidet test.
 
 | Symbol | Betydning |
 |---|---|
-| $\($\alpha$ | signifikansniveau = risiko for type I-fejl |
+| $\alpha$ | signifikansniveau = risiko for type I-fejl |
 | $\beta$ | risiko for type II-fejl |
 | Power | $1-\beta$ |
 | $\delta$ | mindste klinisk relevante forskel |
@@ -59,7 +59,7 @@ Typiske eksamensværdier:
 
 Hyppige kvantiler:
 
-| Kvantil | Værdi | R-function |
+| Kvantil | Værdi (ca.) | R-function |
 |---|---|--|
 | $z_{0.975}$ | 1.96 | `qnorm(0.975)` |
 | $z_{0.95}$ | 1.645 | `qnorm(0.95)`| 
@@ -273,7 +273,7 @@ Det er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så s
 
 # 3. Parrede målinger
 
-Ved parrede data analyserer man forskellene inden for person.
+Ved parrede data analyserer man forskellene inden for samme person/patient. Ofte før og efter en behandling.
 
 Lad $\sigma_d$ være standardafvigelsen af forskellene.
 
@@ -421,7 +421,7 @@ SE
 }
 $$
 
-og derfra isolere \(n_1\):
+og derfra isolere $n_1$:
 
 $$
 n_1
@@ -442,7 +442,7 @@ $$
 
 # 6. Relativ risiko (RR)
 
-I nogle opgaver arbejder man ikke direkte med forskellen i proportioner, men med en **relativ risiko**
+I princippet kunne en opgave spørge til **relativ risiko** i stedet for forskelle i proportioner. Det har jeg dog ikke set i praksis endnu.
 
 $$
 RR = \frac{p_1}{p_0}
@@ -495,12 +495,13 @@ Hvis opgaven ikke specifikt kræver OR-baseret teori, er det som regel bedst at 
 
 # R-funktioner
 
-Når man vil kontrollere sine håndregninger i R, er disse typisk nok:
+Når man vil kontrollere sine håndregninger i R, er disse typisk nok. Men husk at eksamen tester at I har forstået metoden. Ikke at I kan plumse til ind i en funktion. Så brug det kun til at tjekke facit. Bemærk at _alle_ parametre er indsat her. Prøver man at køre det direkte vil man få at vide at man har givet funktionen for mange parametre, og at en af dem slet ikke skal angives.
 
 ## Én middelværdi
 
 ```r
 power.t.test(
+  n = 23.59185,
   delta = 300,
   sd = 430,
   sig.level = 0.05,
@@ -513,6 +514,7 @@ power.t.test(
 
 ```r
 power.t.test(
+  n = 63.76576,
   delta = 5,
   sd = 10,
   sig.level = 0.05,
@@ -520,11 +522,13 @@ power.t.test(
   type = "two.sample"
 )
 ```
+NOTE: n is number in *each* group
 
 ## Parrede målinger
 
 ```r
 power.t.test(
+  n = 33.3672,
   delta = 4,
   sd = 8,
   sig.level = 0.05,
@@ -532,18 +536,20 @@ power.t.test(
   type = "paired"
 )
 ```
+NOTE: n is number of *pairs*, sd is std.dev. of *differences* within pairs
 
 ## To proportioner
 
 ```r
 power.prop.test(
+  n = 137.9148,
   p1 = 0.20,
   p2 = 0.35,
   sig.level = 0.05,
   power = 0.80
 )
 ```
-
+NOTE: n is number in *each* group
 Bemærk: `power.prop.test()` antager lige store grupper.
 
 # Typiske eksamensfælder
