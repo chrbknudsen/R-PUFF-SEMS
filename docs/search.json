@@ -23,189 +23,189 @@
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html",
     "href": "slides/powerberegninger_undervisningsnotat.html",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "",
-    "text": "Dette notat er en undervisningsversion af powerberegninger i medicinsk statistik.\nDet er lavet til situationer, hvor man hurtigt skal kunne:\n\nidentificere den rigtige type powerberegning\nopstille den korrekte formel\nfinde n, power, δ, α eller en ukendt standardafvigelse\nskelne mellem situationer med middelværdier, proportioner og ratio-mål\n\nDen gennemgående idé er:\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n=\n\\text{kritisk grænse for } \\alpha\n+\n\\text{krav til power}\n\\]\naltså typisk\n\\[\n\\frac{\\text{effekt}}{\\text{SE}} = z_{1-\\alpha/2}+z_{1-\\beta}\n\\]\nved en tosidet test."
+    "text": "Dette er mine noter til hvordan man laver powerberegninger (i medicinsk statistik).\nDet er lavet til situationer, hvor jeg hurtigt skal kunne:\n\nidentificere den rigtige type powerberegning\nopstille den korrekte formel\nfinde n, power, \\(\\delta\\), \\(\\alpha\\) eller en ukendt standardafvigelse\nskelne mellem situationer med middelværdier, proportioner og ratio-mål\n\nDet er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.\nDen gennemgående idé er:\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}}\n=\n\\text{kritisk grænse for } \\alpha\n+\n\\text{krav til power}\n\\]\naltså typisk\n\\[\n\\frac{\\text{effekt}}{\\text{SE}} = z_{1-\\alpha/2}+z_{1-\\beta}\n\\]\nved en tosidet test."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#trin-1-hvilken-type-udfald",
     "href": "slides/powerberegninger_undervisningsnotat.html#trin-1-hvilken-type-udfald",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Trin 1: Hvilken type udfald?",
     "text": "Trin 1: Hvilken type udfald?\nSpørg først:\n\ner udfaldet en middelværdi?\ner udfaldet en proportion / andel?\ner udfaldet et ratio-mål som RR eller OR?"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#trin-2-hvor-mange-grupper",
     "href": "slides/powerberegninger_undervisningsnotat.html#trin-2-hvor-mange-grupper",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Trin 2: Hvor mange grupper?",
     "text": "Trin 2: Hvor mange grupper?\n\nén gruppe\nto grupper"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#trin-3-uafhængige-eller-parrede-data",
     "href": "slides/powerberegninger_undervisningsnotat.html#trin-3-uafhængige-eller-parrede-data",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Trin 3: Uafhængige eller parrede data?",
     "text": "Trin 3: Uafhængige eller parrede data?\n\nuafhængige grupper\nparrede målinger / før-efter / matched design"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#trin-4-hvad-skal-findes",
     "href": "slides/powerberegninger_undervisningsnotat.html#trin-4-hvad-skal-findes",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Trin 4: Hvad skal findes?",
     "text": "Trin 4: Hvad skal findes?\nOfte skal man finde:\n\nn\npower\n\\(\\delta\\)\n\\(\\alpha\\)\n\nDet er samme formel hver gang; man isolerer bare en anden størrelse."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#løsning-for-stikprøvestørrelsen",
     "href": "slides/powerberegninger_undervisningsnotat.html#løsning-for-stikprøvestørrelsen",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Løsning for stikprøvestørrelsen",
     "text": "Løsning for stikprøvestørrelsen\n\\[\nn = \\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma}{\\delta}\\right)^2\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#løsning-for-mindste-detekterbare-forskel",
     "href": "slides/powerberegninger_undervisningsnotat.html#løsning-for-mindste-detekterbare-forskel",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Løsning for mindste detekterbare forskel",
     "text": "Løsning for mindste detekterbare forskel\n\\[\n\\delta = (z_{1-\\alpha/2}+z_{1-\\beta})\\frac{\\sigma}{\\sqrt{n}}\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#løsning-for-power",
     "href": "slides/powerberegninger_undervisningsnotat.html#løsning-for-power",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Løsning for power",
     "text": "Løsning for power\nOmskriv først til\n\\[\nz_{1-\\beta}\n=\n\\frac{\\delta\\sqrt{n}}{\\sigma}\n-\nz_{1-\\alpha/2}\n\\]\nog dermed\n\\[\n\\text{power}\n=\n\\Phi\\left(\n\\frac{\\delta\\sqrt{n}}{\\sigma}\n-\nz_{1-\\alpha/2}\n\\right)\n\\]\nhvor \\(\\Phi\\) er fordelingsfunktionen for standardnormalfordelingen."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#generel-formel-ved-forskellig-gruppestørrelse",
     "href": "slides/powerberegninger_undervisningsnotat.html#generel-formel-ved-forskellig-gruppestørrelse",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Generel formel ved forskellig gruppestørrelse",
     "text": "Generel formel ved forskellig gruppestørrelse\nHvis grupperne har størrelser (n_1) og (n_2), og man antager fælles standardafvigelse (), er\n\\[\nSE = \\sigma \\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\n\\]\nog powerrelationen bliver\n\\[\n\\frac{\\delta}{\\sigma \\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n=\nz_{1-\\alpha/2}+z_{1-\\beta}\n\\]\nDet er den generelle og statistisk korrekte eksamensversion."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#hvis-grupperne-er-lige-store",
     "href": "slides/powerberegninger_undervisningsnotat.html#hvis-grupperne-er-lige-store",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Hvis grupperne er lige store",
     "text": "Hvis grupperne er lige store\nHvis \\(n_1=n_2=n\\), fås\n\\[\nSE = \\sigma\\sqrt{\\frac{2}{n}}\n\\]\nog dermed\n\\[\n\\frac{\\delta}{\\sigma\\sqrt{2/n}}\n=\nz_{1-\\alpha/2}+z_{1-\\beta}\n\\]\nså\n\\[\nn\n=\n2\\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma}{\\delta}\\right)^2\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#hvis-gruppestørrelserne-har-fast-ratio-k",
     "href": "slides/powerberegninger_undervisningsnotat.html#hvis-gruppestørrelserne-har-fast-ratio-k",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Hvis gruppestørrelserne har fast ratio (k)",
     "text": "Hvis gruppestørrelserne har fast ratio (k)\nLad\n\\[\nk=\\frac{n_2}{n_1}\n\\]\nså er \\(n_2 = kn_1\\). Da bliver\n\\[\nSE = \\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{kn_1}}\n=\n\\sigma\\sqrt{\\frac{1+1/k}{n_1}}\n\\]\nDermed\n\\[\nn_1\n=\n\\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma}{\\delta}\\right)^2\n\\left(1+\\frac{1}{k}\\right)\n\\]\nog\n\\[\nn_2 = k n_1\n\\]\nDet er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så stor som interventionsgruppen."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#løsning-for-mindste-forskel",
     "href": "slides/powerberegninger_undervisningsnotat.html#løsning-for-mindste-forskel",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Løsning for mindste forskel",
     "text": "Løsning for mindste forskel\n\\[\n|p-p_0|\n=\n(z_{1-\\alpha/2}+z_{1-\\beta})\n\\sqrt{\\frac{p_0(1-p_0)}{n}}\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#generel-formel-ved-forskellig-gruppestørrelse-1",
     "href": "slides/powerberegninger_undervisningsnotat.html#generel-formel-ved-forskellig-gruppestørrelse-1",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Generel formel ved forskellig gruppestørrelse",
     "text": "Generel formel ved forskellig gruppestørrelse\nHvis grupperne har størrelser \\(n_1\\) og \\(n_2\\), er\n\\[\nSE\n=\n\\sqrt{\n\\frac{p_1(1-p_1)}{n_1}\n+\n\\frac{p_2(1-p_2)}{n_2}\n}\n\\]\nog powerrelationen bliver\n\\[\n\\frac{|p_1-p_2|}{SE}\n=\nz_{1-\\alpha/2}+z_{1-\\beta}\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#lige-store-grupper",
     "href": "slides/powerberegninger_undervisningsnotat.html#lige-store-grupper",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Lige store grupper",
     "text": "Lige store grupper\nHvis \\(n_1=n_2=n\\), fås\n\\[\nSE\n=\n\\sqrt{\n\\frac{p_1(1-p_1)+p_2(1-p_2)}{n}\n}\n\\]\nså\n\\[\nn\n=\n\\frac{\n(z_{1-\\alpha/2}+z_{1-\\beta})^2\n\\left[p_1(1-p_1)+p_2(1-p_2)\\right]\n}{\n(p_1-p_2)^2\n}\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#fast-ratio-mellem-gruppestørrelser",
     "href": "slides/powerberegninger_undervisningsnotat.html#fast-ratio-mellem-gruppestørrelser",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Fast ratio mellem gruppestørrelser",
     "text": "Fast ratio mellem gruppestørrelser\nHvis \\(k=n_2/n_1\\), så kan man skrive\n\\[\nSE\n=\n\\sqrt{\n\\frac{p_1(1-p_1)}{n_1}\n+\n\\frac{p_2(1-p_2)}{kn_1}\n}\n\\]\nog derfra isolere (n_1):\n\\[\nn_1\n=\n\\frac{\n(z_{1-\\alpha/2}+z_{1-\\beta})^2\n\\left[p_1(1-p_1)+\\frac{p_2(1-p_2)}{k}\\right]\n}{\n(p_1-p_2)^2\n}\n\\]\nsamt\n\\[\nn_2=kn_1\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#eksempel-på-omskrivning",
     "href": "slides/powerberegninger_undervisningsnotat.html#eksempel-på-omskrivning",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Eksempel på omskrivning",
     "text": "Eksempel på omskrivning\nHvis kontrolgruppen forventes at have\n\\[\np_0 = 0.20\n\\]\nog man vil kunne opdage\n\\[\nRR = 0.70\n\\]\nså svarer det til\n\\[\np_1 = 0.70 \\cdot 0.20 = 0.14\n\\]\nog man fortsætter som en almindelig to-proportions-beregning."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#én-middelværdi-1",
     "href": "slides/powerberegninger_undervisningsnotat.html#én-middelværdi-1",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Én middelværdi",
     "text": "Én middelværdi\npower.t.test(\n  delta = 300,\n  sd = 430,\n  sig.level = 0.05,\n  power = 0.90,\n  type = \"one.sample\"\n)"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#to-uafhængige-middelværdier-1",
     "href": "slides/powerberegninger_undervisningsnotat.html#to-uafhængige-middelværdier-1",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "To uafhængige middelværdier",
     "text": "To uafhængige middelværdier\npower.t.test(\n  delta = 5,\n  sd = 10,\n  sig.level = 0.05,\n  power = 0.80,\n  type = \"two.sample\"\n)"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#parrede-målinger-1",
     "href": "slides/powerberegninger_undervisningsnotat.html#parrede-målinger-1",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Parrede målinger",
     "text": "Parrede målinger\npower.t.test(\n  delta = 4,\n  sd = 8,\n  sig.level = 0.05,\n  power = 0.80,\n  type = \"paired\"\n)"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#to-proportioner-1",
     "href": "slides/powerberegninger_undervisningsnotat.html#to-proportioner-1",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "To proportioner",
     "text": "To proportioner\npower.prop.test(\n  p1 = 0.20,\n  p2 = 0.35,\n  sig.level = 0.05,\n  power = 0.80\n)\nBemærk: power.prop.test() antager lige store grupper."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#n-er-ofte-per-gruppe",
     "href": "slides/powerberegninger_undervisningsnotat.html#n-er-ofte-per-gruppe",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "n er ofte per gruppe",
     "text": "n er ofte per gruppe\nVed to grupper er det klassisk, at formel eller software returnerer n per gruppe."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-sigma_d",
     "href": "slides/powerberegninger_undervisningsnotat.html#parret-design-kræver-sigma_d",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Parret design kræver \\(\\sigma_d\\)",
     "text": "Parret design kræver \\(\\sigma_d\\)\nVed parrede data skal man bruge standardafvigelsen af forskellene, ikke standardafvigelsen af de rå målinger."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#delta-er-den-forskel-man-vil-kunne-opdage",
     "href": "slides/powerberegninger_undervisningsnotat.html#delta-er-den-forskel-man-vil-kunne-opdage",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "\\(\\delta\\) er den forskel man vil kunne opdage",
     "text": "\\(\\delta\\) er den forskel man vil kunne opdage\nIkke nødvendigvis den forskel der blev set i et tidligere studie."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#forskellig-gruppestørrelse-kræver-den-generelle-formel",
     "href": "slides/powerberegninger_undervisningsnotat.html#forskellig-gruppestørrelse-kræver-den-generelle-formel",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Forskellig gruppestørrelse kræver den generelle formel",
     "text": "Forskellig gruppestørrelse kræver den generelle formel\nDen simple two-sample-formel med faktoren 2 gælder kun ved lige store grupper."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#rr-og-or-skal-ofte-omskrives",
     "href": "slides/powerberegninger_undervisningsnotat.html#rr-og-or-skal-ofte-omskrives",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "RR og OR skal ofte omskrives",
     "text": "RR og OR skal ofte omskrives\nHvis opgaven giver en RR eller OR, er det tit lettest at omskrive til forventede proportioner og derefter bruge to-proportions-ideen."
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#middelværdier",
     "href": "slides/powerberegninger_undervisningsnotat.html#middelværdier",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Middelværdier",
     "text": "Middelværdier\nÉn gruppe:\n\\[\nn = \\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma}{\\delta}\\right)^2\n\\]\nTo uafhængige grupper, lige store:\n\\[\nn = 2\\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma}{\\delta}\\right)^2\n\\]\nParrede data:\n\\[\nn = \\left(\\frac{(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma_d}{\\delta}\\right)^2\n\\]"
   },
   {
     "objectID": "slides/powerberegninger_undervisningsnotat.html#proportioner",
     "href": "slides/powerberegninger_undervisningsnotat.html#proportioner",
-    "title": "Powerberegninger – undervisningsnotat",
+    "title": "Powerberegninger – huskeliste",
     "section": "Proportioner",
     "text": "Proportioner\nÉn proportion:\n\\[\nn = \\frac{(z_{1-\\alpha/2}+z_{1-\\beta})^2p_0(1-p_0)}{(p-p_0)^2}\n\\]\nTo proportioner, lige store grupper:\n\\[\nn\n=\n\\frac{\n(z_{1-\\alpha/2}+z_{1-\\beta})^2\n\\left[p_1(1-p_1)+p_2(1-p_2)\\right]\n}{\n(p_1-p_2)^2\n}\n\\]"
   },
@@ -522,7 +522,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 187.4 195.3 181.7 185.0 177.9 191.4 173.5 182.8 174.7 181.7 174.1 190.2\n[13] 174.5 190.5 184.0 184.7 184.7 174.9 179.7 180.3 177.1 191.2 173.1 180.8\n[25] 179.0 184.7 178.6 183.9 180.5 164.2 168.1 182.7 182.0 180.0 184.7 184.3\n[37] 181.8 174.8 184.7 181.8 175.6 182.2 190.3 182.1 189.4 173.8 182.2 171.2\n[49] 173.6 181.1\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 181.3 181.5 179.7 172.6 174.5 185.1 183.0 173.2 186.1 190.7 171.3 180.1\n[13] 188.9 198.0 190.0 185.0 184.7 175.6 174.2 181.5 192.5 181.8 168.5 176.5\n[25] 179.3 179.0 176.6 192.2 177.4 183.5 182.0 164.5 189.2 178.7 179.6 182.3\n[37] 180.3 190.5 182.5 174.8 170.5 186.6 183.8 170.0 191.8 183.5 177.8 173.3\n[49] 198.3 178.2\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",

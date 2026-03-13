@@ -1,5 +1,5 @@
 ---
-title: "Powerberegninger – undervisningsnotat"
+title: "Powerberegninger – huskeliste"
 author: "Christian Knudsen"
 output:
   html_document:
@@ -10,13 +10,16 @@ output:
 
 # Formål
 
-Dette notat er en **undervisningsversion** af powerberegninger i medicinsk statistik.  
-Det er lavet til situationer, hvor man hurtigt skal kunne:
+Dette er mine noter til hvordan man laver powerberegninger (i medicinsk statistik).
+
+Det er lavet til situationer, hvor jeg hurtigt skal kunne:
 
 - identificere den rigtige type powerberegning
 - opstille den korrekte formel
-- finde **n**, **power**, **δ**, **α** eller en ukendt standardafvigelse
+- finde **n**, **power**, **$\delta$**, **$\alpha$** eller en ukendt standardafvigelse
 - skelne mellem situationer med middelværdier, proportioner og ratio-mål
+
+Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.
 
 Den gennemgående idé er:
 
@@ -40,12 +43,12 @@ ved en tosidet test.
 
 | Symbol | Betydning |
 |---|---|
-| \(\alpha\) | signifikansniveau = risiko for type I-fejl |
-| \(\beta\) | risiko for type II-fejl |
-| Power | \(1-\beta\) |
-| \(\delta\) | mindste klinisk relevante forskel |
-| \(\sigma\) | populationsstandardafvigelse |
-| \(n\) | stikprøvestørrelse |
+| $\($\alpha$ | signifikansniveau = risiko for type I-fejl |
+| $\beta$ | risiko for type II-fejl |
+| Power | $1-\beta$ |
+| $\delta$ | mindste klinisk relevante forskel |
+| $\sigma$ | populationsstandardafvigelse |
+| n | stikprøvestørrelse |
 | $SE$ | standardfejl |
 | $z_q$ | q-fraktil i standardnormalfordelingen |
 
@@ -57,15 +60,16 @@ Typiske eksamensværdier:
 Hyppige kvantiler:
 
 | Kvantil | Værdi | R-function |
-|---|---:|--|
-| $z_{0.975}$ | 1.96 | |
-| $z_{0.95}$ | 1.645 | | 
-| $z_{0.8}$ | 0.84 | | 
-| $z_{0.9}$ | 1.28 | |
+|---|---|--|
+| $z_{0.975}$ | 1.96 | `qnorm(0.975)` |
+| $z_{0.95}$ | 1.645 | `qnorm(0.95)`| 
+| $z_{0.9}$ | 1.28 | `qnorm(0.9)`|
+| $z_{0.8}$ | 0.84 | `qnorm(0.8)`| 
+
 
 # t eller z?
 
-I **planlægning** af studier bruges næsten altid **z-fordelingen**.
+I planlægning af studier bruges næsten altid z-fordelingen.
 
 Det skyldes, at powerberegninger normalt bygger på:
 
@@ -73,14 +77,15 @@ Det skyldes, at powerberegninger normalt bygger på:
 - normal-approksimation
 - en ønsket teoretisk stikprøvestørrelse
 
-I den efterfølgende analyse bruger man ofte en **t-test**, fordi \(\sigma\) i praksis estimeres fra data.
+I den efterfølgende analyse bruger man ofte en t-test, fordi $\sigma$ i praksis estimeres fra data.
 
 Derfor:
 
 - **power/stikprøveberegning**: typisk **z**
 - **selve hypotesetesten for middelværdier**: ofte **t**
 
-I mange medicin-eksamener forventes netop denne z-baserede opskrivning.
+Til eksamen forventes normalt det normalt at man baserer sig på z-værdier.
+
 
 # Eksamensstrategi
 
@@ -193,7 +198,7 @@ $$
 
 ## Generel formel ved forskellig gruppestørrelse
 
-Hvis grupperne har størrelser \(n_1\) og \(n_2\), og man antager fælles standardafvigelse \(\sigma\), er
+Hvis grupperne har størrelser $n_1$ og $n_2$, og man antager fælles standardafvigelse $\sigma$, er
 
 $$
 SE = \sigma \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}

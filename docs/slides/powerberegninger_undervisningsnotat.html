@@ -8,7 +8,7 @@
 
 <meta name="author" content="Christian Knudsen">
 
-<title>Powerberegninger – undervisningsnotat – PUFF SEMS forberedelse</title>
+<title>Powerberegninger – huskeliste – PUFF SEMS forberedelse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -178,7 +178,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Powerberegninger – undervisningsnotat</h1>
+<h1 class="title">Powerberegninger – huskeliste</h1>
 </div>
 
 
@@ -203,14 +203,15 @@ window.Quarto = {
 
 <section id="formål" class="level1">
 <h1>Formål</h1>
-<p>Dette notat er en <strong>undervisningsversion</strong> af powerberegninger i medicinsk statistik.<br>
-Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
+<p>Dette er mine noter til hvordan man laver powerberegninger (i medicinsk statistik).</p>
+<p>Det er lavet til situationer, hvor jeg hurtigt skal kunne:</p>
 <ul>
 <li>identificere den rigtige type powerberegning</li>
 <li>opstille den korrekte formel</li>
-<li>finde <strong>n</strong>, <strong>power</strong>, <strong>δ</strong>, <strong>α</strong> eller en ukendt standardafvigelse</li>
+<li>finde <strong>n</strong>, <strong>power</strong>, <strong><span class="math inline">\(\delta\)</span></strong>, <strong><span class="math inline">\(\alpha\)</span></strong> eller en ukendt standardafvigelse</li>
 <li>skelne mellem situationer med middelværdier, proportioner og ratio-mål</li>
 </ul>
+<p>Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.</p>
 <p>Den gennemgående idé er:</p>
 <p><span class="math display">\[
 \frac{\text{effekt}}{\text{standardfejl}}
@@ -236,27 +237,27 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td>()</td>
+<td><span class="math inline">\(\(\)</span>$</td>
 <td>signifikansniveau = risiko for type I-fejl</td>
 </tr>
 <tr class="even">
-<td>()</td>
+<td><span class="math inline">\(\beta\)</span></td>
 <td>risiko for type II-fejl</td>
 </tr>
 <tr class="odd">
 <td>Power</td>
-<td>(1-)</td>
+<td><span class="math inline">\(1-\beta\)</span></td>
 </tr>
 <tr class="even">
-<td>()</td>
+<td><span class="math inline">\(\delta\)</span></td>
 <td>mindste klinisk relevante forskel</td>
 </tr>
 <tr class="odd">
-<td>()</td>
+<td><span class="math inline">\(\sigma\)</span></td>
 <td>populationsstandardafvigelse</td>
 </tr>
 <tr class="even">
-<td>(n)</td>
+<td>n</td>
 <td>stikprøvestørrelse</td>
 </tr>
 <tr class="odd">
@@ -279,50 +280,50 @@ Det er lavet til situationer, hvor man hurtigt skal kunne:</p>
 <thead>
 <tr class="header">
 <th>Kvantil</th>
-<th style="text-align: right;">Værdi</th>
+<th>Værdi</th>
 <th>R-function</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(z_{0.975}\)</span></td>
-<td style="text-align: right;">1.96</td>
-<td></td>
+<td>1.96</td>
+<td><code>qnorm(0.975)</code></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(z_{0.95}\)</span></td>
-<td style="text-align: right;">1.645</td>
-<td></td>
+<td>1.645</td>
+<td><code>qnorm(0.95)</code></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(z_{0.8}\)</span></td>
-<td style="text-align: right;">0.84</td>
-<td></td>
+<td><span class="math inline">\(z_{0.9}\)</span></td>
+<td>1.28</td>
+<td><code>qnorm(0.9)</code></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(z_{0.9}\)</span></td>
-<td style="text-align: right;">1.28</td>
-<td></td>
+<td><span class="math inline">\(z_{0.8}\)</span></td>
+<td>0.84</td>
+<td><code>qnorm(0.8)</code></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="t-eller-z" class="level1">
 <h1>t eller z?</h1>
-<p>I <strong>planlægning</strong> af studier bruges næsten altid <strong>z-fordelingen</strong>.</p>
+<p>I planlægning af studier bruges næsten altid z-fordelingen.</p>
 <p>Det skyldes, at powerberegninger normalt bygger på:</p>
 <ul>
 <li>en antaget kendt eller fastlagt <span class="math inline">\(\sigma\)</span></li>
 <li>normal-approksimation</li>
 <li>en ønsket teoretisk stikprøvestørrelse</li>
 </ul>
-<p>I den efterfølgende analyse bruger man ofte en <strong>t-test</strong>, fordi () i praksis estimeres fra data.</p>
+<p>I den efterfølgende analyse bruger man ofte en t-test, fordi <span class="math inline">\(\sigma\)</span> i praksis estimeres fra data.</p>
 <p>Derfor:</p>
 <ul>
 <li><strong>power/stikprøveberegning</strong>: typisk <strong>z</strong></li>
 <li><strong>selve hypotesetesten for middelværdier</strong>: ofte <strong>t</strong></li>
 </ul>
-<p>I mange medicin-eksamener forventes netop denne z-baserede opskrivning.</p>
+<p>Til eksamen forventes normalt det normalt at man baserer sig på z-værdier.</p>
 </section>
 <section id="eksamensstrategi" class="level1">
 <h1>Eksamensstrategi</h1>
