@@ -46,22 +46,22 @@ ved en tosidet test.
 | \(\delta\) | mindste klinisk relevante forskel |
 | \(\sigma\) | populationsstandardafvigelse |
 | \(n\) | stikprøvestørrelse |
-| \(SE\) | standardfejl |
-| \(z_q\) | q-fraktil i standardnormalfordelingen |
+| $SE$ | standardfejl |
+| $z_q$ | q-fraktil i standardnormalfordelingen |
 
 Typiske eksamensværdier:
 
-- \(\alpha = 0.05\)
+- $\alpha = 0.05$
 - power = 0.80 eller 0.90
 
 Hyppige kvantiler:
 
-| Kvantil | Værdi |
-|---|---:|
-| \(z_{0.975}\) | 1.96 |
-| \(z_{0.95}\) | 1.645 |
-| \(z_{0.8}\) | 0.84 |
-| \(z_{0.9}\) | 1.28 |
+| Kvantil | Værdi | R-function |
+|---|---:|--|
+| $z_{0.975}$ | 1.96 | |
+| $z_{0.95}$ | 1.645 | | 
+| $z_{0.8}$ | 0.84 | | 
+| $z_{0.9}$ | 1.28 | |
 
 # t eller z?
 
@@ -69,7 +69,7 @@ I **planlægning** af studier bruges næsten altid **z-fordelingen**.
 
 Det skyldes, at powerberegninger normalt bygger på:
 
-- en antaget kendt eller fastlagt \(\sigma\)
+- en antaget kendt eller fastlagt $\sigma$
 - normal-approksimation
 - en ønsket teoretisk stikprøvestørrelse
 
@@ -106,10 +106,10 @@ Spørg først:
 
 Ofte skal man finde:
 
-- \(n\)
+- n
 - power
-- \(\delta\)
-- \(\alpha\)
+- $\delta$
+- $\alpha$
 
 Det er samme formel hver gang; man isolerer bare en anden størrelse.
 
@@ -175,7 +175,7 @@ z_{1-\alpha/2}
 \right)
 $$
 
-hvor \(\Phi\) er fordelingsfunktionen for standardnormalfordelingen.
+hvor $\Phi$ er fordelingsfunktionen for standardnormalfordelingen.
 
 # 2. To uafhængige middelværdier
 
@@ -211,7 +211,7 @@ Det er **den generelle og statistisk korrekte eksamensversion**.
 
 ## Hvis grupperne er lige store
 
-Hvis \(n_1=n_2=n\), fås
+Hvis $n_1=n_2=n$, fås
 
 $$
 SE = \sigma\sqrt{\frac{2}{n}}
@@ -233,7 +233,7 @@ n
 2\left(\frac{(z_{1-\alpha/2}+z_{1-\beta})\sigma}{\delta}\right)^2
 $$
 
-## Hvis gruppestørrelserne har fast ratio
+## Hvis gruppestørrelserne har fast ratio (k)
 
 Lad
 
@@ -241,7 +241,7 @@ $$
 k=\frac{n_2}{n_1}
 $$
 
-så er \(n_2 = kn_1\). Da bliver
+så er $n_2 = kn_1$. Da bliver
 
 $$
 SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{kn_1}}
@@ -270,7 +270,7 @@ Det er nyttigt, hvis opgaven siger at fx kontrolgruppen skal være dobbelt så s
 
 Ved parrede data analyserer man forskellene inden for person.
 
-Lad \(\sigma_d\) være standardafvigelsen af forskellene.
+Lad $\sigma_d$ være standardafvigelsen af forskellene.
 
 Så er
 
@@ -357,7 +357,7 @@ $$
 
 ## Generel formel ved forskellig gruppestørrelse
 
-Hvis grupperne har størrelser \(n_1\) og \(n_2\), er
+Hvis grupperne har størrelser $n_1$ og $n_2$, er
 
 $$
 SE
@@ -379,7 +379,7 @@ $$
 
 ## Lige store grupper
 
-Hvis \(n_1=n_2=n\), fås
+Hvis $n_1=n_2=n$, fås
 
 $$
 SE
@@ -404,7 +404,7 @@ $$
 
 ## Fast ratio mellem gruppestørrelser
 
-Hvis \(k=n_2/n_1\), så kan man skrive
+Hvis $k=n_2/n_1$, så kan man skrive
 
 $$
 SE
@@ -577,11 +577,11 @@ hvor standardfejlen bestemmes af studiedesignet:
 
 | Situation | Standardfejl |
 |---|---|
-| én middelværdi | \(\sigma/\sqrt{n}\) |
-| to middelværdier | \(\sigma\sqrt{1/n_1+1/n_2}\) |
-| parret design | \(\sigma_d/\sqrt{n}\) |
-| én proportion | \(\sqrt{p_0(1-p_0)/n}\) |
-| to proportioner | \(\sqrt{p_1(1-p_1)/n_1 + p_2(1-p_2)/n_2}\) |
+| én middelværdi | $\sigma/\sqrt{n}$ |
+| to middelværdier | $\sigma\sqrt{1/n_1+1/n_2}$ |
+| parret design | $\sigma_d\sqrt{n}$ |
+| én proportion | $\sqrt{p_0(1-p_0)/n}$ |
+| to proportioner | $\sqrt{p_1(1-p_1)/n_1 + p_2(1-p_2)/n_2}$ |
 
 # Mini-cheatsheet
 
