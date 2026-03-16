@@ -806,7 +806,7 @@ Hvad er så $\mu$ for denne fordeling?
 
 ::: {.fragment}
 $X \sim N(\mu, 6.52)$
-::::
+:::
 ::: {.fragment}
 P(X<0) = 0.4
 ::::
