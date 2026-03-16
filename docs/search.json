@@ -522,7 +522,7 @@
     "href": "slides/normalfordelingen.html#hvordan-kan-vi-beskrive-alle-de-her-observationer",
     "title": "Normalfordelingen",
     "section": "Hvordan kan vi beskrive alle de her observationer?",
-    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 180.0 177.8 193.7 176.9 174.4 173.1 172.2 182.6 180.2 161.4 183.6 185.3\n[13] 175.0 177.8 191.7 177.7 177.0 190.0 181.9 187.6 194.6 177.6 187.6 182.2\n[25] 175.2 181.4 183.4 176.0 174.2 183.9 183.3 181.6 184.8 174.2 183.3 188.0\n[37] 181.6 175.8 182.7 176.9 177.7 173.1 186.3 176.2 176.3 184.4 172.4 186.8\n[49] 164.1 176.2\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
+    "text": "Hvordan kan vi beskrive alle de her observationer?\n\n\n [1] 172.0 185.3 182.5 178.2 185.2 187.1 186.5 180.7 174.9 185.6 170.2 193.5\n[13] 175.5 185.5 168.3 180.7 176.1 180.5 171.0 178.9 174.3 189.1 186.5 187.2\n[25] 175.3 191.5 187.1 182.7 190.5 185.1 182.1 166.8 176.9 192.6 183.3 178.6\n[37] 178.5 177.0 182.9 175.0 180.6 179.7 181.8 179.5 183.2 176.8 186.8 180.9\n[49] 178.8 182.0\n\n\n\nGennemsnit\n\n\nStandardafvigelse\n\nVi vil gerne have dem til at sige middelværdi. Og standardafvigelse"
   },
   {
     "objectID": "slides/normalfordelingen.html#middelværdi-og-standardafvigelse",
@@ -914,35 +914,35 @@
     "href": "slides/power.html#vi-har-prøvet-det",
     "title": "Powerberegninger",
     "section": "Vi har prøvet det",
-    "text": "Vi har prøvet det\nVi har eksempelvis to grupper, med hver deres middelværdi \\(\\mu\\) og standardafvigelse \\(\\sigma\\) og angivelse af hvor mange observationer vi har i hver gruppe, n. \nVi beregner SEM for hver af grupperne: \\(SEM = \\sqrt{\\frac{\\sigma}{n}}\\)\nVi beregner en poolet SEM for differencen: \\(SEM_{diff} = \\sqrt{SEM_{1}^2 + SEM_2^2}\\)\nOg så beregner vi et 95% konfidensinterval:\n\\((\\mu_1 - \\mu_2) \\pm 1.96SEM_{diff}\\)\nHvis 0 ligger inden for det interval, er der ingen forskel (på et 5% signifikansniveua), ligger det udenfor, er der forskel, og vi afviser \\(H_0\\) (på et 5% signifikansniveau)."
+    "text": "Vi har prøvet det\nEksempelvis: To grupper, med hver deres middelværdi \\(\\mu\\) og standardafvigelse \\(\\sigma\\) og angivelse af antallet, n, observationer i hver gruppe.\nBeregn SEM for hver af grupperne: \\(SEM = \\sqrt{\\frac{\\sigma}{n}}\\)\nSå beregnes en poolet SEM for differencen: \\(SEM_{diff} = \\sqrt{SEM_{1}^2 + SEM_2^2}\\)\nOg et 95% konfidensinterval:\n\\((\\mu_1 - \\mu_2) \\pm 1.96SEM_{diff}\\)\nLigger 0 inden for intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser \\(H_0\\) (på et 5% signifikansniveau)."
   },
   {
     "objectID": "slides/power.html#hvad-betød-det",
     "href": "slides/power.html#hvad-betød-det",
     "title": "Powerberegninger",
     "section": "Hvad betød det?",
-    "text": "Hvad betød det?\nVi får undertiden en p-værdi. Den angiver hvor stor risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) i virkeligheden er sand.\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nEller - det er risikoen for en type 1 fejl - en falsk positiv.\nDet ser ud som om der er en effekt. Det ser ud som om der er et positivt resultat.\nMen det er der ikke!\nVi sætter som regel grænse til 0.05. Vi accepterer at der er 5% risiko for at få en falsk positiv. Den kalder vi også \\(\\alpha\\)."
+    "text": "Hvad betød det?\nVi får undertiden en p-værdi. Den giver os risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) er sand.\n\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nEller - det er risikoen for en type 1 fejl - en falsk positiv.\n\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!\nVi sætter som regel grænseN til 0.05. Vi accepterer at der er 5% risiko for at få en falsk positiv. Den kalder vi også \\(\\alpha\\)."
   },
   {
     "objectID": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "href": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "title": "Powerberegninger",
     "section": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl",
-    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\nVi kan også begå fejl på en anden måde.\nVi kan også konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\nDet er en type 2 fejl. En falsk negativ.\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\nDen kalder vi \\(\\beta\\)"
+    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\n\nVi kan også begå fejl på en anden måde.\n\n\nVi kan fx konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\n\n\nDet er en type 2 fejl. En falsk negativ.\n\n\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\n\n\nDen kalder vi \\(\\beta\\)"
   },
   {
     "objectID": "slides/power.html#det-omvendte-af-beta",
     "href": "slides/power.html#det-omvendte-af-beta",
     "title": "Powerberegninger",
     "section": "Det omvendte af \\(\\beta\\)",
-    "text": "Det omvendte af \\(\\beta\\)\nDet kalder vi power. Det er den styrke vores test har.\nEller - sandsynligheden for at vores test finder forskellen, når forskellen faktisk findes!\nHvis \\(\\beta\\) er risikoen for at vores test ikke finder forskellen, selvom den findes.\nSå er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.\n\\(power = 1 - \\beta\\)"
+    "text": "Det omvendte af \\(\\beta\\)\n\nKalder vi power. Det er den “styrke” vores test har.\n\n\nEller\n\n\n\nSandsynligheden for at testen finder forskellen, når forskellen faktisk findes!\nPower er sandsynligheden for ikke at begå en type 2 fejl.\n\n\n\nHvis \\(\\beta\\) er risikoen for at vores test ikke finder forskellen, selvom den findes.\n\n\nSå er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.\n\n\n\\(power = 1 - \\beta\\)"
   },
   {
     "objectID": "slides/power.html#hvad-afhænger-de-her-ting-af",
     "href": "slides/power.html#hvad-afhænger-de-her-ting-af",
     "title": "Powerberegninger",
     "section": "Hvad afhænger de her ting af?",
-    "text": "Hvad afhænger de her ting af?\nHelt intuitiv.\nJo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).\nJo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.\nJo større reel forskel der er, jo lettere bliver det at få øje på den.\nNår \\(\\alpha\\) stiger, bliver det lettere at forkaste \\(H_0\\) Det bliver også lettere at finde en forskel (power ~ \\(\\beta\\) stiger). Til gengæld stiger risikoen for falsk positive."
+    "text": "Hvad afhænger de her ting af?\nHelt intuitiv.\n\nJo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).\n\n\nJo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.\n\n\nJo større reel forskel der er, jo lettere bliver det at få øje på den.\n\n\nNår \\(\\alpha\\) stiger, bliver det lettere at forkaste \\(H_0\\) Det bliver også lettere at finde en forskel (power ~ \\(\\beta\\) stiger). Til gengæld stiger risikoen for falsk positive."
   },
   {
     "objectID": "slides/power.html#vi-har-fem-parametre",
@@ -970,21 +970,21 @@
     "href": "slides/power.html#men-dem-bruger-vi-ikke",
     "title": "Powerberegninger",
     "section": "Men dem bruger vi ikke…",
-    "text": "Men dem bruger vi ikke…\nFor eksamen tester ikke om I kan putte tal ind i en funktion, den tester om I har forstået det godt nok til at I kan gøre det i hånden."
+    "text": "Men dem bruger vi ikke…\nFor eksamen tester ikke om I kan putte tal ind i en funktion.\nEksamen tester om I har forstået nok til at I kan gøre det i hånden."
   },
   {
     "objectID": "slides/power.html#i-stedet",
     "href": "slides/power.html#i-stedet",
     "title": "Powerberegninger",
     "section": "I stedet",
-    "text": "I stedet\n💥Powerrelationen!💪\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nOg det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen."
+    "text": "I stedet\n💥Powerrelationen!💪\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nDet gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.\nTænk over hvordan vi beregnede en testværdi. Hvor langt fra 0 ligger det vi observerede, målt i standardafvigelser (eller standardfejl)? Det er samme metode!"
   },
   {
     "objectID": "slides/power.html#de-sære-tegn",
     "href": "slides/power.html#de-sære-tegn",
     "title": "Powerberegninger",
     "section": "De sære tegn",
-    "text": "De sære tegn\n\\(z_{1-α/2}\\) og \\(z_{1-β}\\) kender vi godt.\n\\(z_{1-α/2}\\) er kvantilen der matcher 0.975. Det giver:\n\n\n[1] 1.959964\n\n\nDen har vi set før. \\(z_{1-β}\\) er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så \\(\\beta = 0.2\\)):\n\n\n[1] 0.8416212"
+    "text": "De sære tegn\nLad os lige repetere:\n\\(z_{1-α/2}\\) og \\(z_{1-β}\\) kender vi godt.\n\\(z_{1-α/2}\\) er kvantilen der matcher 0.975. Det giver:\n\nqnorm(1-0.05/2)\n\n[1] 1.959964\n\n\nDen har vi set før.\n\\(z_{1-β}\\) er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så \\(\\beta = 0.2\\)):\n\nqnorm(1-0.2)\n\n[1] 0.8416212"
   },
   {
     "objectID": "slides/power.html#hvordan-beregner-vi-så-standardfejlen",
@@ -1005,7 +1005,7 @@
     "href": "slides/power.html#husk-dog",
     "title": "Powerberegninger",
     "section": "Husk dog!",
-    "text": "Husk dog!\nNår I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer."
+    "text": "Husk dog!\nDet her er til eksamensbrug.\nNår I skal til at lave forskning, så bør I basere jer på t-fordelingen i stedet.\nDen er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres.\nDen kan også klare sig med færre observationer.\nOg når I planlægger forsøget: Så finder I hvor mange observationer/patienter I skal bruge teoretisk.\nOg ganger med 2 for at få noget sikkerhedsmargen på det."
   },
   {
     "objectID": "slides/powerberegninger_medicin_statistik.html",
@@ -1153,5 +1153,40 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hoppeeksamensopgave",
     "text": "Hoppeeksamensopgave\nman har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen gender: Køn, 1 dreng, 2 pige age: barnets alder height: barnets højde i cm cohR: Længde af hop på højre ben (cm) cohL: Længde af hop på venstre ben (cm) diff: forskel på chohR og cohL\nVi får også oplyst de første fire observatiner:\n\n\n# A tibble: 4 × 7\n   idnr gender   age height  cohR  cohL  diff\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1      1    10   148.  186.  207. -21.4\n2     2      2     9   136.  257.  223   34.4\n3     3      1     9   139.  204.  250. -46.8\n4     4      2     9   138.  347   388. -41.4\n\n\nOg noget summarisk data: &gt;mean(cohR) 270.441 &gt;mean(cohL) 265.3871 &gt;mean(diff) 5.053815 &gt;sd(cohR) 74.69524 &gt;sd(cohL) 79.73807 &gt;sd(diff) 37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?\nDet er en parret t-test hvor vi ser på differencen. Vi skal bruge SEM.\nSEM = 37.87201/sqrt(249) = 2.400041\nmiddel/sem = 5.053815/2.400041 = 2.10572 Det udtrykker hvor mange s.e. den observerede differens ligger fra 0. Det er mere end 1.96, så forskellen er signifikant.\nVi finder p-værdien ved 2*pt(-abs(2.10572), df = 248)\n\ngennemsnit og spredning for diff for pigerne beregnes til 12.51 og 36.15\n\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\ndiff for Berit er 250-200 = 50.\nNormalområdet er 12.51 + c(-1,1)1.9636.15 = -58.344 83.364 Berits måling ligger inden for normalområdet.\n\n\n\nNu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen “Estimate” og beregn de tilhørende 95% konfidensintervaller\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel. vi har køn som kategorisk variabel, og 2 er pigerne. Der er en signifikant kønsforskel.\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori) Den er ikke signifikant - da p er over 0.05.\net95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
+  },
+  {
+    "objectID": "slides/power.html#og-spørges-der-til-i-eksamensopgaver",
+    "href": "slides/power.html#og-spørges-der-til-i-eksamensopgaver",
+    "title": "Powerberegninger",
+    "section": "Og spørges der til i eksamensopgaver?",
+    "text": "Og spørges der til i eksamensopgaver?\nVi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?"
+  },
+  {
+    "objectID": "slides/power.html#og-hvad-spørges-der-til-i-eksamensopgaver",
+    "href": "slides/power.html#og-hvad-spørges-der-til-i-eksamensopgaver",
+    "title": "Powerberegninger",
+    "section": "Og hvad spørges der til i eksamensopgaver?",
+    "text": "Og hvad spørges der til i eksamensopgaver?\nVi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?"
+  },
+  {
+    "objectID": "slides/power.html#og-hvad-spørges-der-til-til-eksamen",
+    "href": "slides/power.html#og-hvad-spørges-der-til-til-eksamen",
+    "title": "Powerberegninger",
+    "section": "Og hvad spørges der til til eksamen?",
+    "text": "Og hvad spørges der til til eksamen?\nVi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?"
+  },
+  {
+    "objectID": "slides/power.html#hvordan-beregnes-standardfejlen",
+    "href": "slides/power.html#hvordan-beregnes-standardfejlen",
+    "title": "Powerberegninger",
+    "section": "Hvordan beregnes standardfejlen?",
+    "text": "Hvordan beregnes standardfejlen?\nDet har vi også set andetsteds, men lad os lige tage dem alligevel.\nEn middelværdi: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nForskel på to middelværdier: \\(SE = \\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\\)\nForskel på to middelværdier, hvor grupperne er lige store: \\(SE = \\sigma\\sqrt{\\frac{2}{n}}\\)\nParrede målinger: \\(SE = \\frac{\\sigma_d}{\\sqrt{n}}\\) hvor \\(\\sigma_d\\) er standardafvigelsen af forskellene"
+  },
+  {
+    "objectID": "slides/power.html#hvordan-beregnes-standardfejlen-1",
+    "href": "slides/power.html#hvordan-beregnes-standardfejlen-1",
+    "title": "Powerberegninger",
+    "section": "Hvordan beregnes standardfejlen?",
+    "text": "Hvordan beregnes standardfejlen?\nEn proportion: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)\nForskel mellem to proportioner: \\(SE = \\sqrt{\\frac{p_1(1 - p_1)}{n_1} + \\frac{p_2(1-p_2)}{n_2}}\\)\nForskel mellem to proportioner, hvor grupperne er lige store: \\(SE = \\sqrt{\\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}\\)"
   }
 ]
