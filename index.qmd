@@ -7,6 +7,6 @@ format: html
 - [intro](slides/intro.qmd)
 - [normalfordelingen](slides/normalfordelingen.qmd)
 - [lineær regression](slides/linreg.qmd)
-- [power beregninger](power.qmd)
+- [power beregninger](slides/power.qmd)
 - [SEM](SEM.qmd)
 
