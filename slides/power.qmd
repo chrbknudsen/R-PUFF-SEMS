@@ -12,6 +12,8 @@ filters:
 
 ## Hvad katten er det?
 
+
+
 Når vi laver statistiske test opstiller vi en NULL-hypotese. AKA $H_0$, og en alternativ hypotese, $H_A$. 
 
 Grundlæggende: Vi opstiller en hypotese om at der ikke sker noget.
@@ -68,12 +70,15 @@ Risikoen for at begå en type 2 fejl kan vi også sætte tal på.
 
 Den kalder vi $\beta$
 
+
 ## Det omvendte af $\beta$
 
 Det kalder vi power. Det er den styrke vores test har. 
 
 Eller - sandsynligheden for at vores test finder forskellen,
 når forskellen faktisk findes!
+
+Eller - power er sandsynlighedne for ikke at begå en type II fejl.
 
 Hvis $\beta$ er risikoen for at vores test ikke finder forskellen, selvom den findes.
 
@@ -191,8 +196,12 @@ Forskel mellem to proportioner, hvor grupperne er lige store: $SE = \sqrt{\frac{
 
 ## Husk dog!
 
-Når I skal til at lave forskning, bør I basere jer på t-fordelingen istedet. Den er bredere, og kan håndtere
-at variansen ikke er kendt, men skal estimeres. Og kan klare sig med færre observationer. 
+Det her er til eksamensbrug. Når I skal til at lave forskning, så bør I basere jer på t-fordelingen
+i stedet. Den er bredere, og kan håndtere at variansen ikke er kendt, men skal estimeres.
+Den kan også klare sig med færre observationer.
+
+Og når I planlægger forsøget: Så finder I hvor mange observationer/patienter I skal bruge teoretisk.
+Og ganger med 2 for at få noget sikkerhedsmargen på det.
 
 
 
