@@ -23,11 +23,13 @@ Den har vi som regel lyst til at kunne afvise.
 
 Undertiden er vi dog meget fornøjede med at kunne afvise den.
 
+Denne typeopgavetype er ikke så hyppig.
+
 ## Vi har prøvet det
 
-Eksempelvis: To grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og angivelse af antallet, n, observationer i hver gruppe.
+To grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og angivelse af antallet, n, observationer i hver gruppe.
 
-Beregn SEM for hver af grupperne: $SEM = \sqrt{\frac{\sigma}{n}}$
+Beregn SEM for hver af grupperne: $SEM = \frac{\sigma}{\sqrt{n}}$
 
 Så beregnes en poolet SEM for differencen: $SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
 
@@ -212,7 +214,7 @@ Det har vi også set andetsteds, men lad os lige tage dem alligevel.
 
 En middelværdi: $SE = \frac{\sigma}{\sqrt{n}}$
 
-Forskel på to middelværdier: $SE = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
+Forskel på to middelværdier: $SE = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\left(\frac{\sigma_1}{\sqrt{n_1}}\right)^2 + \left(\frac{\sigma_2}{\sqrt{n_2}}\right)^2} = \sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
 
 Forskel på to middelværdier, hvor grupperne er lige store: $SE = \sigma\sqrt{\frac{2}{n}}$
 
@@ -227,8 +229,285 @@ Forskel mellem to proportioner: $SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2
 
 Forskel mellem to proportioner, hvor grupperne er lige store: $SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}$
 
+## HUSK!
+
+Der er et par fælder. 
+
+Vi runder altid op. Hvis n beregnes til 7.8, runder vi op til 8.
+
+Vi får næsten altid at vide hvor mange observationer der er i hver gruppe.
+
+Hvis n er 8, skal vi bruge 16 observationer.
+
+Undtagelsen er selvfølgelig hvis vi får at vide at der er 100 observationer i den ene
+gruppe. Så får vi svaret på hvor mange vi skal bruge i den anden gruppe.
+
 ## Så er vi klar, lad os tage et eksempel!
 
+Vi skal sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. 
+Hvor mange patienter skal inkluderes i studiet hvis forskelle i enzymkoncentrationen på mindre
+end 1 standardafvigelse (\sigma) ikke er relevante. 
+
+Ønsket styrke er 80% eller 0.8, så $\beta = 1-0.8=0.2$, signifikansniveauet sættes til 5%, så $\alpha = 0.05$.
+
+Vi får lov at antage at enzymkoncentrationen varierer lige meget blandt patienter og kontroller.
+
+## Første trin
+
+Hvilken type udfald?
+
+. . . 
+
+Middelværdier - forskel på to grupper. Grupperne skal være lige store.
+
+. . . 
+
+Hvordan ser vores standardfejl så ud?
+
+. . . 
+
+SE = $\sigma\sqrt{\frac{2}{n}}$
+
+. . . 
+
+Hvilken effekt ønsker vi at kunne se?
+
+. . . 
+
+Ønsket effekt vi vil kunne se er 1$\sigma$
+
+
+## Opstil powerrelationen
+
+$$\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+. . . 
+
+Venstre side:
+
+$\frac{\text{effekt}}{\text{standardfejl}} = \frac{\sigma}{\text{SE}}=  \frac{\sigma}{\sigma\sqrt{\frac{2}{n}}} = \frac{1}{\sqrt{\frac{2}{n}}}$
+
+. . . 
+
+Den skal være lig med 
+
+$z_{1-α/2}+z_{1-β} = z_{1-0.05/2}+z_{1-0.2} = z_{0.975}+z_{0.8}$ 
+
+Eller:
+
+```{r echo = TRUE}
+qnorm(0.975) + qnorm(0.8)
+```
+
+## Så er vi klar til at regne 
+:::: {.columns}
+:::: {.column}
+
+Højre side: 
+
+`qnorm(0.975) + qnorm(0.8)`
+
+::: {.fragment}
+$\frac{1}{\sqrt{\frac{2}{n}}} = 2.801585$
+:::
+::: {.fragment}
+$1 = \sqrt{\frac{2}{n}}\cdot2.801585$
+:::
+::: {.fragment}
+$1^2 = \frac{2}{n}2.801585^2$
+:::
+::: {.fragment}
+$n = 2\cdot2.801585^2$
+:::
+::: {.fragment}
+Og resultatet er pr gruppe! Og husk at runde op!
+:::
+::::
+
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Del to af opgaven
+
+Samme opgave som før. 
+
+Men nu får vi oplyst at der er målinger af enzym koncentrationen fra 100
+kontroller allerede. 
+
+Hvor mange patienter har vi så brug for (med samme forudsætninger som tidligere). 
+
+. . . 
+
+Bemærk at vi nu ikke længere har lige mange i hver gruppe!
+
+## Hvordan ser vores standardfejl så ud?
+
+. . .
+ 
+$$
+\text{SE} = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}
+$$
+
+. . . 
+
+Vi skal stadig bruge powerrelationen:
+
+. . . 
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+. . . 
+ 
+Og effekten er stadig 1$\sigma$
+
+## Næste trin
+Indsæt i powerrelationen:
+
+$$
+\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{σ\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+= z_{1-α/2}+z_{1-β}
+$$
+
+. . . 
+
+$\delta = \sigma$ og $n_1 = 100$
+
+. . . 
+
+Så skal vi "bare" isolere $n_2$
+
+## Så er vi klar til at regne
+
+
+
+:::: {.columns}
+:::: {.column}
+Højre side: 
+
+`qnorm(0.975) + qnorm(0.8)`
+
+$$
+\frac{\sigma}{\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+= 2.801585
+$$
+
+$$
+1 = \frac{\sigma}{\sigma}
+= 2.801585\sqrt{\frac{1}{100}+\frac{1}{n_2}}
+$$
+
+$$
+1^2 = (2.801585)^2(\frac{1}{100}+\frac{1}{n_2})
+$$
+
+det kan altsammen omskrives til:
+n_1 = (n_1/100 + 1)(1.96+0.84)^2
+og videre til:
+N_1 = 7.84/(1-7.84/100) = 8.5
+
+dvs 9 patienter
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Lad os prøve en gang til
+
+Fødselsvægten for børn født indenfor termin med 
+gestationsalder 40 uger antages approksimativt normalfordelt med
+middelværdi 3500 gram og spredning 430 gram. 
+
+Vi får lov at antage at det er populationsværdier. 
+
+Det ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten 
+ har samme middelværdi ($\mu$).
+
+Hvis der indsamles n observationer af fødelsvægten af børn af mødre der røg under hele
+graviditeten, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig $\mu$ = 3500?
+Angiv konkret teststørrelse beregnet baseret på de n observationer.
+
+ Vi vil skulle beregne SEM for disse børn (sd/n), og dernæst
+ teststørrelse: (X-3500)/SEM.
+
+## Svar
+
+Vi vil skulle beregne SEM for disse børn ($\frac{\sigma}{n}$)
+
+Og dernæst teststørrelsen: $\frac{X - 3500}{SEM}$
+
+## Og så til powerberegningen
+
+Hvis den sande $\mu$ er under 3200 gram (eller over 3800 gram),
+og vi kun vil acceptere en 10% risiko for ikke at opdage en sådan
+forskel på de to middelværdier, hvor stor en stikprøve skal der
+så anvendes, med et signifikans niveau på 5%.
+
+Hvad er $H_0$ og $H_A$?
+
+. . . 
+
+$H_0: \mu = 3500$
+
+$H_A: \mu \neq 3500$
+
+## Hvilken forskel vil vi kunne finde?
+
+$\delta = 3800-3500 = 300$
+
+Eller:
+
+$\delta = 3500 - 3200 = 300$
+
+Samplesize beregning for tosidet test af en middelværdi.
+
+Risikoen for ikke at opdage forskellen må være på 10%. Det er beta.
+
+power = 0.9
+
+ ønsket afvigelse vi skal kunne opdage: delta = 300 = 3800-3500
+ den er tilsvarende ned til 3200 gram.
+
+ risikoen for ikke at opdage den må være på 10%. Det svarer til en
+ power på 90% eller 0.9
+ alpha = 0.05
+ beta = 0.1
+ sigma  430
+ delta 300
+
+(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2
+oprundet 22. 
+
+Hvad er standardfejlen på sådan en?
+
+## Del 2
+
+c) Hvis man beslutter sig for en stikprøve på 100, hvor stor 
+en forskel på mu og 3500 kan vi forvente at kunne finde - hvis
+vi bruger de samme forudsætninger?
+Samme formel - men isoler størrelsen - delta i stedet (indsæt 100)
+
+(1.96+1.28)*430/delta = 100^2
+Så vi kan forvente at opdage forskelle på 139 gram (eller over) med
+en sandsynlighed på 90%.
 
 ## Husk dog!
 
