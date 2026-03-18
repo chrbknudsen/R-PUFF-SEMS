@@ -12,48 +12,46 @@ filters:
 
 ## Hvad katten er det?
 
-
-
-Når vi laver statistiske test opstiller vi en NULL-hypotese. AKA $H_0$, og en alternativ hypotese, $H_A$. 
+Når vi laver statistiske test opstiller vi en NULL-hypotese; $H_0$, og en alternativ hypotese, $H_A$. 
 
 Grundlæggende: Vi opstiller en hypotese om at der ikke sker noget.
 Eksempelvis at den sande forskel på to middelværdier er 0. 
 
-Den har vi som regel lyst til at kunne afvise. 
+I de fleste tilfælde vil vi gerne kunne afvise $H_0$.
 
-Undertiden er vi dog meget fornøjede med at kunne afvise den.
-
-Denne typeopgavetype er ikke så hyppig.
 
 ## Vi har prøvet det
 
-To grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og angivelse af antallet, n, observationer i hver gruppe.
+To grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og antal observationer, n, i hver gruppe.
 
 Beregn SEM for hver af grupperne: $SEM = \frac{\sigma}{\sqrt{n}}$
 
-Så beregnes en poolet SEM for differencen: $SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
+Beregn en poolet SEM for differencen: $SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
 
 Og et 95% konfidensinterval:
 
 $(\mu_1 - \mu_2) \pm 1.96SEM_{diff}$
 
-Ligger 0 inden for intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser $H_0$ (på et 5% signifikansniveau).
+Ligger 0 i intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser $H_0$ (på et 5% signifikansniveau).
 
 ## Hvad betød det?
 
-Vi får undertiden en p-værdi. Den giver os risikoen er
-for at vi afviser $H_0$. _Selvom_ $H_0$ er sand.
+Bl.a. at den forskel i middelværdier vi så, ikke var stor nok til at vi kunne konkludere
+at den faktisk eksisterer.
 
-- Eller: Hvis $H_0$ er sand, så er p-værdien sandsynligheden for at 
+p-værdien giver os risikoen er for at vi afviser $H_0$. _Selvom_ $H_0$ er sand.
+
+Eller: Hvis $H_0$ er sand, så er p-værdien sandsynligheden for at 
 få en forskel på de to middelværdier der er så stor som vi ser.
-- Eller - det er risikoen for en type 1 fejl - en falsk positiv.
 
 Type 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!
 
-Vi sætter som regel grænseN til 0.05. Vi accepterer at der er 5% 
-risiko for at få en falsk positiv. Den kalder vi også $\alpha$.
+Grænsen sættes normalt til 0.05: Vi accepterer en 
+risiko for at få en falsk positiv på 5%. Den kalder vi også $\alpha$.
 
 ## Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl
+
+. . . 
 
 Og eksistensen af $\alpha$ indikerer eksistensen af $\beta$.
 
@@ -128,7 +126,7 @@ Jo større reel forskel der er, jo lettere bliver det at få
 . . . 
 
 Når $\alpha$ stiger, bliver det lettere at forkaste $H_0$
-Det bliver også lettere at finde en forskel (power ~ $\beta$ stiger). Til gengæld stiger risikoen for falsk positive.
+Det bliver også lettere at finde en forskel hvis power stiger (~ $\beta$ falder). Til gengæld stiger risikoen for falsk positive.
 
 
 ## Vi har fem parametre
@@ -147,10 +145,11 @@ Hvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femt
 
 ## Og hvad spørges der til til eksamen?
 
-Vi får i almindelighed oplyst alt. Undtagen en enkelt af
-parametrene. Det er den vi skal finde.
+Her er fire værdier. Find den femte.
 
 Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?
+
+Det er dog ikke et specielt hyppigt forekommende eksamensspørgsmål.
 
 ## Det har R funktioner til.
 
@@ -163,7 +162,7 @@ springer vi over.
 
 Der er lidt flere detaljer, two sample eller one sample? Eller parret? 
 
-Men giv dem fire af de fem parametre, og de beregner den femte.
+Giv dem fire af de fem parametre, og de beregner den femte.
 
 ## Men dem bruger vi ikke...
 
@@ -194,7 +193,7 @@ Lad os lige repetere:
 
 $z_{1-α/2}$ og $z_{1-β}$ kender vi godt.
 
-$z_{1-α/2}$ er kvantilen der matcher 0.975. Det giver:
+$z_{1-α/2}$ er kvantilen der matcher 0.975 (% observationer der er mindre end...). Det giver:
 ```{r echo = TRUE}
 qnorm(1-0.05/2)
 ```
@@ -210,7 +209,7 @@ qnorm(1-0.2)
 
 ## Hvordan beregnes standardfejlen?
 
-Det har vi også set andetsteds, men lad os lige tage dem alligevel.
+Det har vi set før:
 
 En middelværdi: $SE = \frac{\sigma}{\sqrt{n}}$
 
@@ -229,9 +228,7 @@ Forskel mellem to proportioner: $SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2
 
 Forskel mellem to proportioner, hvor grupperne er lige store: $SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}$
 
-## HUSK!
-
-Der er et par fælder. 
+## Et par fælder
 
 Vi runder altid op. Hvis n beregnes til 7.8, runder vi op til 8.
 
@@ -316,13 +313,13 @@ $\frac{1}{\sqrt{\frac{2}{n}}} = 2.801585$
 $1 = \sqrt{\frac{2}{n}}\cdot2.801585$
 :::
 ::: {.fragment}
-$1^2 = \frac{2}{n}2.801585^2$
+$1^2 = \frac{2}{n}\cdot2.801585^2$
 :::
 ::: {.fragment}
 $n = 2\cdot2.801585^2$
 :::
 ::: {.fragment}
-Og resultatet er pr gruppe! Og husk at runde op!
+Og resultatet er pr gruppe! Husk at runde op!
 :::
 ::::
 
@@ -340,8 +337,8 @@ Og resultatet er pr gruppe! Og husk at runde op!
 
 Samme opgave som før. 
 
-Men nu får vi oplyst at der er målinger af enzym koncentrationen fra 100
-kontroller allerede. 
+Men nu får vi oplyst at der allerede er målinger af enzym koncentrationen fra 100
+kontroller. 
 
 Hvor mange patienter har vi så brug for (med samme forudsætninger som tidligere). 
 
@@ -394,30 +391,14 @@ Så skal vi "bare" isolere $n_2$
 
 :::: {.columns}
 :::: {.column}
-Højre side: 
-
-`qnorm(0.975) + qnorm(0.8)`
 
 $$
-\frac{\sigma}{\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
-= 2.801585
+\frac{\sigma}{\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \\
+= z_{1-0.05/2}+z_{1-0.2}
 $$
 
-$$
-1 = \frac{\sigma}{\sigma}
-= 2.801585\sqrt{\frac{1}{100}+\frac{1}{n_2}}
-$$
+Det tager vi nok lettest på en tavle
 
-$$
-1^2 = (2.801585)^2(\frac{1}{100}+\frac{1}{n_2})
-$$
-
-det kan altsammen omskrives til:
-n_1 = (n_1/100 + 1)(1.96+0.84)^2
-og videre til:
-N_1 = 7.84/(1-7.84/100) = 8.5
-
-dvs 9 patienter
 ::::
 :::: {.column}
 
@@ -431,28 +412,26 @@ dvs 9 patienter
 ::::
 
 ## Lad os prøve en gang til
-
+:::: smaller
 Fødselsvægten for børn født indenfor termin med 
 gestationsalder 40 uger antages approksimativt normalfordelt med
-middelværdi 3500 gram og spredning 430 gram. 
+middelværdi 3500 gram og spredning 430 gram. Vi antager at det er 
+populationsværdier
 
-Vi får lov at antage at det er populationsværdier. 
+Det ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten har samme middelværdi ($\mu$).
 
-Det ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten 
- har samme middelværdi ($\mu$).
+Hvis der indsamles n observationer af fødelsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig $\mu$ = 3500?
 
-Hvis der indsamles n observationer af fødelsvægten af børn af mødre der røg under hele
-graviditeten, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig $\mu$ = 3500?
 Angiv konkret teststørrelse beregnet baseret på de n observationer.
 
- Vi vil skulle beregne SEM for disse børn (sd/n), og dernæst
- teststørrelse: (X-3500)/SEM.
+::: {.fragment}
 
-## Svar
-
-Vi vil skulle beregne SEM for disse børn ($\frac{\sigma}{n}$)
+Vi vil skulle beregne SEM for disse børn $\left(\frac{\sigma}{\sqrt{n}}\right)$
 
 Og dernæst teststørrelsen: $\frac{X - 3500}{SEM}$
+:::
+
+::::
 
 ## Og så til powerberegningen
 
@@ -469,34 +448,37 @@ $H_0: \mu = 3500$
 
 $H_A: \mu \neq 3500$
 
-## Hvilken forskel vil vi kunne finde?
+## Hvad får vi oplyst?
+
+Ønsket afvigelse vi skal kunne opdage:
+
+. . . 
 
 $\delta = 3800-3500 = 300$
 
-Eller:
+. . . 
 
-$\delta = 3500 - 3200 = 300$
+Risikoen for ikke at opdage forskellen må være på 10%: $\beta = 0.1$ 
+
+Eller: Power = 0.9
+
+. . . 
+
+Signifikansniveau 5%: $\alpha = 0.05$
+
+. . .
+
+Standardafvigelse $\sigma = 430$
+
 
 Samplesize beregning for tosidet test af en middelværdi.
-
-Risikoen for ikke at opdage forskellen må være på 10%. Det er beta.
-
-power = 0.9
-
- ønsket afvigelse vi skal kunne opdage: delta = 300 = 3800-3500
- den er tilsvarende ned til 3200 gram.
-
- risikoen for ikke at opdage den må være på 10%. Det svarer til en
- power på 90% eller 0.9
- alpha = 0.05
- beta = 0.1
- sigma  430
- delta 300
 
 (( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2
 oprundet 22. 
 
 Hvad er standardfejlen på sådan en?
+
+sd/sqrt(n)
 
 ## Del 2
 
