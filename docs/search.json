@@ -1313,7 +1313,7 @@
     "href": "slides/power.html#del-2",
     "title": "Powerberegninger",
     "section": "Del 2",
-    "text": "Del 2\n\nHvis man beslutter sig for en stikprøve på 100, hvor stor en forskel på mu og 3500 kan vi forvente at kunne finde - hvis vi bruger de samme forudsætninger? Samme formel - men isoler størrelsen - delta i stedet (indsæt 100)\n\n(1.96+1.28)*430/delta = 100^2 Så vi kan forvente at opdage forskelle på 139 gram (eller over) med en sandsynlighed på 90%."
+    "text": "Del 2\nHvis vi vil have en stikprøve på 100 - hvor stor en forskel på \\(\\mu\\) og 3500 kan vi forvente at kunne finde.\nSamme forudsætninger som før."
   },
   {
     "objectID": "slides/power.html#et-par-fælder",
@@ -1327,6 +1327,27 @@
     "href": "slides/power.html#hvad-får-vi-oplyst",
     "title": "Powerberegninger",
     "section": "Hvad får vi oplyst?",
-    "text": "Hvad får vi oplyst?\nØnsket afvigelse vi skal kunne opdage:\n\n\\(\\delta = 3800-3500 = 300\\)\n\n\nRisikoen for ikke at opdage forskellen må være på 10%: \\(\\beta = 0.1\\)\nEller: Power = 0.9\n\n\nSignifikansniveau 5%: \\(\\alpha = 0.05\\)\n\n\nStandardafvigelse \\(\\sigma = 430\\)\nSamplesize beregning for tosidet test af en middelværdi.\n(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2 oprundet 22.\nHvad er standardfejlen på sådan en?\nsd/sqrt(n)"
+    "text": "Hvad får vi oplyst?\nØnsket afvigelse vi skal kunne opdage:\n\n\\(\\delta = 3800-3500 = 300\\)\n\n\nRisikoen for ikke at opdage forskellen må være på 10%: \\(\\beta = 0.1\\)\nEller: Power = 0.9\n\n\nSignifikansniveau 5%: \\(\\alpha = 0.05\\)\n\n\nStandardafvigelse \\(\\sigma = 430\\)"
+  },
+  {
+    "objectID": "slides/power.html#powerrelationen-opstilles",
+    "href": "slides/power.html#powerrelationen-opstilles",
+    "title": "Powerberegninger",
+    "section": "Powerrelationen opstilles",
+    "text": "Powerrelationen opstilles\n\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(\\delta = 430\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\)\n\\[\nz_{1-\\alpha/2}+z_{1-\\beta} = \\frac{300}{\\frac{430}{\\sqrt{n}}}\n\\]\nIsoler n - det gør vi på tavlen\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nResultat: k*430/300)^2\n(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2"
+  },
+  {
+    "objectID": "slides/power.html#opstil-powerrelationen-1",
+    "href": "slides/power.html#opstil-powerrelationen-1",
+    "title": "Powerberegninger",
+    "section": "Opstil powerrelationen",
+    "text": "Opstil powerrelationen\n\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\), n = 100\n\\[\nz_{1-\\alpha/2}+z_{1-\\beta} = \\frac{\\delta}{\\frac{430}{\\sqrt{100}}}\n\\]\nIsoler \\(\\delta\\) - det gør vi på tavlen\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nDet er den størrelse vi kan forvente at opdage (mindst) med en sandsynlighed på 90%"
+  },
+  {
+    "objectID": "slides/power.html#noter",
+    "href": "slides/power.html#noter",
+    "title": "Powerberegninger",
+    "section": "noter",
+    "text": "noter\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\), n = 100\nSamme formel, nu skal vi blot isolere \\(\\delta\\)\nDet gør vi på tavlen\nSamme formel - men isoler størrelsen - delta i stedet (indsæt 100)\n(1.96+1.28)*430/delta = 100^2 Så vi kan forvente at opdage forskelle på 139 gram (eller over) med en sandsynlighed på 90%."
   }
 ]

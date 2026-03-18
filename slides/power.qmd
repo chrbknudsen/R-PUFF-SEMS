@@ -470,26 +470,84 @@ Signifikansniveau 5%: $\alpha = 0.05$
 
 Standardafvigelse $\sigma = 430$
 
+## Powerrelationen opstilles
 
-Samplesize beregning for tosidet test af en middelværdi.
+:::: {.columns}
+:::: {.column}
+$$
+\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
+= z_{1-α/2}+z_{1-β}
+$$
+
+$\beta = 0.1$, $\delta = 430$, $SE = \frac{\sigma}{\sqrt{n}}$, $\sigma = 430$
+
+$$
+z_{1-\alpha/2}+z_{1-\beta} = \frac{300}{\frac{430}{\sqrt{n}}}
+$$
+
+Isoler n - det gør vi på tavlen
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+:::: notes
+Resultat: k*430/300)^2
 
 (( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2
-oprundet 22. 
 
-Hvad er standardfejlen på sådan en?
+::::
 
-sd/sqrt(n)
+
 
 ## Del 2
 
-c) Hvis man beslutter sig for en stikprøve på 100, hvor stor 
-en forskel på mu og 3500 kan vi forvente at kunne finde - hvis
-vi bruger de samme forudsætninger?
-Samme formel - men isoler størrelsen - delta i stedet (indsæt 100)
+Hvis vi vil have en stikprøve på 100 - hvor stor en forskel på $\mu$ og 3500 kan vi forvente at kunne finde.
 
-(1.96+1.28)*430/delta = 100^2
-Så vi kan forvente at opdage forskelle på 139 gram (eller over) med
-en sandsynlighed på 90%.
+Samme forudsætninger som før.
+
+## Opstil powerrelationen 
+
+:::: {.columns}
+:::: {.column}
+$$
+\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
+= z_{1-α/2}+z_{1-β}
+$$
+
+$\beta = 0.1$, $SE = \frac{\sigma}{\sqrt{n}}$, $\sigma = 430$, n = 100
+
+$$
+z_{1-\alpha/2}+z_{1-\beta} = \frac{\delta}{\frac{430}{\sqrt{100}}}
+$$
+
+Isoler $\delta$ - det gør vi på tavlen
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+:::{.fragment}
+Det er den størrelse vi kan forvente at opdage (mindst) med en sandsynlighed på 90%
+:::
+
+::::
+::::
+
+
 
 ## Husk dog!
 
