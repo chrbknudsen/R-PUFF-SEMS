@@ -21,6 +21,8 @@ Det er lavet til situationer, hvor jeg hurtigt skal kunne:
 
 Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.
 
+Der tages forbehold for taste og regnefejl! Det er jeres eget ansvar at jeres eksamensbesvarelse er korrekt!
+
 Den grundlæggende idé er:
 
 $$
