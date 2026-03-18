@@ -907,28 +907,28 @@
     "href": "slides/power.html#hvad-katten-er-det",
     "title": "Powerberegninger",
     "section": "Hvad katten er det?",
-    "text": "Hvad katten er det?\nNår vi laver statistiske test opstiller vi en NULL-hypotese. AKA \\(H_0\\), og en alternativ hypotese, \\(H_A\\).\nGrundlæggende: Vi opstiller en hypotese om at der ikke sker noget. Eksempelvis at den sande forskel på to middelværdier er 0.\nDen har vi som regel lyst til at kunne afvise.\nUndertiden er vi dog meget fornøjede med at kunne afvise den.\nDenne typeopgavetype er ikke så hyppig."
+    "text": "Hvad katten er det?\nNår vi laver statistiske test opstiller vi en NULL-hypotese; \\(H_0\\), og en alternativ hypotese, \\(H_A\\).\nGrundlæggende: Vi opstiller en hypotese om at der ikke sker noget. Eksempelvis at den sande forskel på to middelværdier er 0.\nI de fleste tilfælde vil vi gerne kunne afvise \\(H_0\\)."
   },
   {
     "objectID": "slides/power.html#vi-har-prøvet-det",
     "href": "slides/power.html#vi-har-prøvet-det",
     "title": "Powerberegninger",
     "section": "Vi har prøvet det",
-    "text": "Vi har prøvet det\nTo grupper, med hver deres middelværdi \\(\\mu\\) og standardafvigelse \\(\\sigma\\) og angivelse af antallet, n, observationer i hver gruppe.\nBeregn SEM for hver af grupperne: \\(SEM = \\frac{\\sigma}{\\sqrt{n}}\\)\nSå beregnes en poolet SEM for differencen: \\(SEM_{diff} = \\sqrt{SEM_{1}^2 + SEM_2^2}\\)\nOg et 95% konfidensinterval:\n\\((\\mu_1 - \\mu_2) \\pm 1.96SEM_{diff}\\)\nLigger 0 inden for intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser \\(H_0\\) (på et 5% signifikansniveau)."
+    "text": "Vi har prøvet det\nTo grupper, med hver deres middelværdi \\(\\mu\\) og standardafvigelse \\(\\sigma\\) og antal observationer, n, i hver gruppe.\nBeregn SEM for hver af grupperne: \\(SEM = \\frac{\\sigma}{\\sqrt{n}}\\)\nBeregn en poolet SEM for differencen: \\(SEM_{diff} = \\sqrt{SEM_{1}^2 + SEM_2^2}\\)\nOg et 95% konfidensinterval:\n\\((\\mu_1 - \\mu_2) \\pm 1.96SEM_{diff}\\)\nLigger 0 i intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser \\(H_0\\) (på et 5% signifikansniveau)."
   },
   {
     "objectID": "slides/power.html#hvad-betød-det",
     "href": "slides/power.html#hvad-betød-det",
     "title": "Powerberegninger",
     "section": "Hvad betød det?",
-    "text": "Hvad betød det?\nVi får undertiden en p-værdi. Den giver os risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) er sand.\n\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nEller - det er risikoen for en type 1 fejl - en falsk positiv.\n\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!\nVi sætter som regel grænseN til 0.05. Vi accepterer at der er 5% risiko for at få en falsk positiv. Den kalder vi også \\(\\alpha\\)."
+    "text": "Hvad betød det?\nBl.a. at den forskel i middelværdier vi så, ikke var stor nok til at vi kunne konkludere at den faktisk eksisterer.\np-værdien giver os risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) er sand.\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!\nGrænsen sættes normalt til 0.05: Vi accepterer en risiko for at få en falsk positiv på 5%. Den kalder vi også \\(\\alpha\\)."
   },
   {
     "objectID": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "href": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "title": "Powerberegninger",
     "section": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl",
-    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\n\nVi kan også begå fejl på en anden måde.\n\n\nVi kan fx konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\n\n\nDet er en type 2 fejl. En falsk negativ.\n\n\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\n\n\nDen kalder vi \\(\\beta\\)"
+    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\n\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\n\n\nVi kan også begå fejl på en anden måde.\n\n\nVi kan fx konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\n\n\nDet er en type 2 fejl. En falsk negativ.\n\n\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\n\n\nDen kalder vi \\(\\beta\\)"
   },
   {
     "objectID": "slides/power.html#det-omvendte-af-beta",
@@ -942,7 +942,7 @@
     "href": "slides/power.html#hvad-afhænger-de-her-ting-af",
     "title": "Powerberegninger",
     "section": "Hvad afhænger de her ting af?",
-    "text": "Hvad afhænger de her ting af?\nHelt intuitiv.\n\nJo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).\n\n\nJo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.\n\n\nJo større reel forskel der er, jo lettere bliver det at få øje på den.\n\n\nNår \\(\\alpha\\) stiger, bliver det lettere at forkaste \\(H_0\\) Det bliver også lettere at finde en forskel (power ~ \\(\\beta\\) stiger). Til gengæld stiger risikoen for falsk positive."
+    "text": "Hvad afhænger de her ting af?\nHelt intuitiv.\n\nJo flere observationer vi har - jo større er chancen for at vi finder en forskel (der faktisk er der).\n\n\nJo mindre standardafvigelser vi har - jo større er chancen for at vi kan se forskelle på det vi sammenligner.\n\n\nJo større reel forskel der er, jo lettere bliver det at få øje på den.\n\n\nNår \\(\\alpha\\) stiger, bliver det lettere at forkaste \\(H_0\\) Det bliver også lettere at finde en forskel hvis power stiger (~ \\(\\beta\\) falder). Til gengæld stiger risikoen for falsk positive."
   },
   {
     "objectID": "slides/power.html#vi-har-fem-parametre",
@@ -963,7 +963,7 @@
     "href": "slides/power.html#det-har-r-funktioner-til.",
     "title": "Powerberegninger",
     "section": "Det har R funktioner til.",
-    "text": "Det har R funktioner til.\n\npower.t.test()\npower.prop.test()\npower.anova.test()\n\nDen sidste har jeg ikke set i eksamensopgaver, så den springer vi over.\nDer er lidt flere detaljer, two sample eller one sample? Eller parret?\nMen giv dem fire af de fem parametre, og de beregner den femte."
+    "text": "Det har R funktioner til.\n\npower.t.test()\npower.prop.test()\npower.anova.test()\n\nDen sidste har jeg ikke set i eksamensopgaver, så den springer vi over.\nDer er lidt flere detaljer, two sample eller one sample? Eller parret?\nGiv dem fire af de fem parametre, og de beregner den femte."
   },
   {
     "objectID": "slides/power.html#men-dem-bruger-vi-ikke",
@@ -984,7 +984,7 @@
     "href": "slides/power.html#de-sære-tegn",
     "title": "Powerberegninger",
     "section": "De sære tegn",
-    "text": "De sære tegn\nLad os lige repetere:\n\\(z_{1-α/2}\\) og \\(z_{1-β}\\) kender vi godt.\n\\(z_{1-α/2}\\) er kvantilen der matcher 0.975. Det giver:\n\nqnorm(1-0.05/2)\n\n[1] 1.959964\n\n\nDen har vi set før.\n\\(z_{1-β}\\) er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så \\(\\beta = 0.2\\)):\n\nqnorm(1-0.2)\n\n[1] 0.8416212"
+    "text": "De sære tegn\nLad os lige repetere:\n\\(z_{1-α/2}\\) og \\(z_{1-β}\\) kender vi godt.\n\\(z_{1-α/2}\\) er kvantilen der matcher 0.975 (% observationer der er mindre end…). Det giver:\n\nqnorm(1-0.05/2)\n\n[1] 1.959964\n\n\nDen har vi set før.\n\\(z_{1-β}\\) er kvantilen der matcher vores power. En power på 0.8 er populær (og det er så \\(\\beta = 0.2\\)):\n\nqnorm(1-0.2)\n\n[1] 0.8416212"
   },
   {
     "objectID": "slides/power.html#hvordan-beregner-vi-så-standardfejlen",
@@ -1173,14 +1173,14 @@
     "href": "slides/power.html#og-hvad-spørges-der-til-til-eksamen",
     "title": "Powerberegninger",
     "section": "Og hvad spørges der til til eksamen?",
-    "text": "Og hvad spørges der til til eksamen?\nVi får i almindelighed oplyst alt. Undtagen en enkelt af parametrene. Det er den vi skal finde.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?"
+    "text": "Og hvad spørges der til til eksamen?\nHer er fire værdier. Find den femte.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?\nDet er dog ikke et specielt hyppigt forekommende eksamensspørgsmål."
   },
   {
     "objectID": "slides/power.html#hvordan-beregnes-standardfejlen",
     "href": "slides/power.html#hvordan-beregnes-standardfejlen",
     "title": "Powerberegninger",
     "section": "Hvordan beregnes standardfejlen?",
-    "text": "Hvordan beregnes standardfejlen?\nDet har vi også set andetsteds, men lad os lige tage dem alligevel.\nEn middelværdi: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nForskel på to middelværdier: \\(SE = \\sqrt{SE_1^2 + SE_2^2} = \\sqrt{\\left(\\frac{\\sigma_1}{\\sqrt{n_1}}\\right)^2 + \\left(\\frac{\\sigma_2}{\\sqrt{n_2}}\\right)^2} = \\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\\)\nForskel på to middelværdier, hvor grupperne er lige store: \\(SE = \\sigma\\sqrt{\\frac{2}{n}}\\)\nParrede målinger: \\(SE = \\frac{\\sigma_d}{\\sqrt{n}}\\) hvor \\(\\sigma_d\\) er standardafvigelsen af forskellene"
+    "text": "Hvordan beregnes standardfejlen?\nDet har vi set før:\nEn middelværdi: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nForskel på to middelværdier: \\(SE = \\sqrt{SE_1^2 + SE_2^2} = \\sqrt{\\left(\\frac{\\sigma_1}{\\sqrt{n_1}}\\right)^2 + \\left(\\frac{\\sigma_2}{\\sqrt{n_2}}\\right)^2} = \\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\\)\nForskel på to middelværdier, hvor grupperne er lige store: \\(SE = \\sigma\\sqrt{\\frac{2}{n}}\\)\nParrede målinger: \\(SE = \\frac{\\sigma_d}{\\sqrt{n}}\\) hvor \\(\\sigma_d\\) er standardafvigelsen af forskellene"
   },
   {
     "objectID": "slides/power.html#hvordan-beregnes-standardfejlen-1",
@@ -1215,7 +1215,7 @@
     "href": "slides/power.html#del-to-af-opgaven",
     "title": "Powerberegninger",
     "section": "Del to af opgaven",
-    "text": "Del to af opgaven\nSamme opgave som før.\nMen nu får vi oplyst at der er målinger af enzym koncentrationen fra 100 kontroller allerede.\nHvor mange patienter har vi så brug for (med samme forudsætninger som tidligere).\n\nBemærk at vi nu ikke længere har lige mange i hver gruppe!"
+    "text": "Del to af opgaven\nSamme opgave som før.\nMen nu får vi oplyst at der allerede er målinger af enzym koncentrationen fra 100 kontroller.\nHvor mange patienter har vi så brug for (med samme forudsætninger som tidligere).\n\nBemærk at vi nu ikke længere har lige mange i hver gruppe!"
   },
   {
     "objectID": "slides/power.html#trin-1",
@@ -1264,7 +1264,7 @@
     "href": "slides/power.html#så-er-vi-klar-til-at-regne",
     "title": "Powerberegninger",
     "section": "Så er vi klar til at regne",
-    "text": "Så er vi klar til at regne\n\n\nHøjre side:\nqnorm(0.975) + qnorm(0.8)\n\n\\(\\frac{1}{\\sqrt{\\frac{2}{n}}} = 2.801585\\)\n\n\n\\(1 = \\sqrt{\\frac{2}{n}}\\cdot2.801585\\)\n\n\n\\(1^2 = \\frac{2}{n}2.801585^2\\)\n\n\n\\(n = 2\\cdot2.801585^2\\)\n\n\nOg resultatet er pr gruppe! Og husk at runde op!\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Så er vi klar til at regne\n\n\nHøjre side:\nqnorm(0.975) + qnorm(0.8)\n\n\\(\\frac{1}{\\sqrt{\\frac{2}{n}}} = 2.801585\\)\n\n\n\\(1 = \\sqrt{\\frac{2}{n}}\\cdot2.801585\\)\n\n\n\\(1^2 = \\frac{2}{n}\\cdot2.801585^2\\)\n\n\n\\(n = 2\\cdot2.801585^2\\)\n\n\nOg resultatet er pr gruppe! Husk at runde op!\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/power.html#hvordan-ser-vores-standardfejl-så-ud",
@@ -1278,21 +1278,21 @@
     "href": "slides/power.html#så-er-vi-klar-til-at-regne-1",
     "title": "Powerberegninger",
     "section": "Så er vi klar til at regne",
-    "text": "Så er vi klar til at regne\n\n\nHøjre side:\nqnorm(0.975) + qnorm(0.8)\n\\[\n\\frac{\\sigma}{\\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n= 2.801585\n\\]\n\\[\n1 = \\frac{\\sigma}{\\sigma}\n= 2.801585\\sqrt{\\frac{1}{100}+\\frac{1}{n_2}}\n\\]\n\\[\n1^2 = (2.801585)^2(\\frac{1}{100}+\\frac{1}{n_2})\n\\]\ndet kan altsammen omskrives til: n_1 = (n_1/100 + 1)(1.96+0.84)^2 og videre til: N_1 = 7.84/(1-7.84/100) = 8.5\ndvs 9 patienter\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Så er vi klar til at regne\n\n\n\\[\n\\frac{\\sigma}{\\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}} \\\\\n= z_{1-0.05/2}+z_{1-0.2}\n\\]\nDet tager vi nok lettest på en tavle\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/power.html#lad-os-prøve-en-gang-til",
     "href": "slides/power.html#lad-os-prøve-en-gang-til",
     "title": "Powerberegninger",
     "section": "Lad os prøve en gang til",
-    "text": "Lad os prøve en gang til\nFødselsvægten for børn født indenfor termin med gestationsalder 40 uger antages approksimativt normalfordelt med middelværdi 3500 gram og spredning 430 gram.\nVi får lov at antage at det er populationsværdier.\nDet ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten har samme middelværdi (\\(\\mu\\)).\nHvis der indsamles n observationer af fødelsvægten af børn af mødre der røg under hele graviditeten, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig \\(\\mu\\) = 3500? Angiv konkret teststørrelse beregnet baseret på de n observationer.\nVi vil skulle beregne SEM for disse børn (sd/n), og dernæst teststørrelse: (X-3500)/SEM."
+    "text": "Lad os prøve en gang til\n\nFødselsvægten for børn født indenfor termin med gestationsalder 40 uger antages approksimativt normalfordelt med middelværdi 3500 gram og spredning 430 gram. Vi antager at det er populationsværdier\nDet ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten har samme middelværdi (\\(\\mu\\)).\nHvis der indsamles n observationer af fødelsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig \\(\\mu\\) = 3500?\nAngiv konkret teststørrelse beregnet baseret på de n observationer.\n\nVi vil skulle beregne SEM for disse børn \\(\\left(\\frac{\\sigma}{\\sqrt{n}}\\right)\\)\nOg dernæst teststørrelsen: \\(\\frac{X - 3500}{SEM}\\)"
   },
   {
     "objectID": "slides/power.html#svar",
     "href": "slides/power.html#svar",
     "title": "Powerberegninger",
     "section": "Svar",
-    "text": "Svar\nVi vil skulle beregne SEM for disse børn (\\(\\frac{\\sigma}{n}\\))\nOg dernæst teststørrelsen: \\(\\frac{X - 3500}{SEM}\\)"
+    "text": "Svar"
   },
   {
     "objectID": "slides/power.html#og-så-til-powerberegningen",
@@ -1306,13 +1306,48 @@
     "href": "slides/power.html#hvilken-forskel-vil-vi-kunne-finde",
     "title": "Powerberegninger",
     "section": "Hvilken forskel vil vi kunne finde?",
-    "text": "Hvilken forskel vil vi kunne finde?\n\\(\\delta = 3800-3500 = 300\\)\nEller:\n\\(\\delta = 3500 - 3200 = 300\\)\nSamplesize beregning for tosidet test af en middelværdi.\nRisikoen for ikke at opdage forskellen må være på 10%. Det er beta.\npower = 0.9\nønsket afvigelse vi skal kunne opdage: delta = 300 = 3800-3500 den er tilsvarende ned til 3200 gram.\nrisikoen for ikke at opdage den må være på 10%. Det svarer til en power på 90% eller 0.9 alpha = 0.05 beta = 0.1 sigma 430 delta 300\n(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2 oprundet 22.\nHvad er standardfejlen på sådan en?"
+    "text": "Hvilken forskel vil vi kunne finde?\n\\(\\delta = 3800-3500 = 300\\)\nEller:\n\\(\\delta = 3500 - 3200 = 300\\)\nSamplesize beregning for tosidet test af en middelværdi.\nRisikoen for ikke at opdage forskellen må være på 10%. Det er beta.\npower = 0.9\nønsket afvigelse vi skal kunne opdage: delta = 300 = 3800-3500 den er tilsvarende ned til 3200 gram.\nrisikoen for ikke at opdage den må være på 10%. Det svarer til en power på 90% eller 0.9 alpha = 0.05 beta = 0.1 sigma 430 delta 300\n(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2 oprundet 22.\nHvad er standardfejlen på sådan en?\nsd/sqrt(n)"
   },
   {
     "objectID": "slides/power.html#del-2",
     "href": "slides/power.html#del-2",
     "title": "Powerberegninger",
     "section": "Del 2",
-    "text": "Del 2\n\nHvis man beslutter sig for en stikprøve på 100, hvor stor en forskel på mu og 3500 kan vi forvente at kunne finde - hvis vi bruger de samme forudsætninger? Samme formel - men isoler størrelsen - delta i stedet (indsæt 100)\n\n(1.96+1.28)*430/delta = 100^2 Så vi kan forvente at opdage forskelle på 139 gram (eller over) med en sandsynlighed på 90%."
+    "text": "Del 2\nHvis vi vil have en stikprøve på 100 - hvor stor en forskel på \\(\\mu\\) og 3500 kan vi forvente at kunne finde.\nSamme forudsætninger som før."
+  },
+  {
+    "objectID": "slides/power.html#et-par-fælder",
+    "href": "slides/power.html#et-par-fælder",
+    "title": "Powerberegninger",
+    "section": "Et par fælder",
+    "text": "Et par fælder\nVi runder altid op. Hvis n beregnes til 7.8, runder vi op til 8.\nVi får næsten altid at vide hvor mange observationer der er i hver gruppe.\nHvis n er 8, skal vi bruge 16 observationer.\nUndtagelsen er selvfølgelig hvis vi får at vide at der er 100 observationer i den ene gruppe. Så får vi svaret på hvor mange vi skal bruge i den anden gruppe."
+  },
+  {
+    "objectID": "slides/power.html#hvad-får-vi-oplyst",
+    "href": "slides/power.html#hvad-får-vi-oplyst",
+    "title": "Powerberegninger",
+    "section": "Hvad får vi oplyst?",
+    "text": "Hvad får vi oplyst?\nØnsket afvigelse vi skal kunne opdage:\n\n\\(\\delta = 3800-3500 = 300\\)\n\n\nRisikoen for ikke at opdage forskellen må være på 10%: \\(\\beta = 0.1\\)\nEller: Power = 0.9\n\n\nSignifikansniveau 5%: \\(\\alpha = 0.05\\)\n\n\nStandardafvigelse \\(\\sigma = 430\\)"
+  },
+  {
+    "objectID": "slides/power.html#powerrelationen-opstilles",
+    "href": "slides/power.html#powerrelationen-opstilles",
+    "title": "Powerberegninger",
+    "section": "Powerrelationen opstilles",
+    "text": "Powerrelationen opstilles\n\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(\\delta = 430\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\)\n\\[\nz_{1-\\alpha/2}+z_{1-\\beta} = \\frac{300}{\\frac{430}{\\sqrt{n}}}\n\\]\nIsoler n - det gør vi på tavlen\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nResultat: k*430/300)^2\n(( qnorm(1-(0.05/2)) + qnorm(1-0.1))*430 / 300)^2"
+  },
+  {
+    "objectID": "slides/power.html#opstil-powerrelationen-1",
+    "href": "slides/power.html#opstil-powerrelationen-1",
+    "title": "Powerberegninger",
+    "section": "Opstil powerrelationen",
+    "text": "Opstil powerrelationen\n\n\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\), n = 100\n\\[\nz_{1-\\alpha/2}+z_{1-\\beta} = \\frac{\\delta}{\\frac{430}{\\sqrt{100}}}\n\\]\nIsoler \\(\\delta\\) - det gør vi på tavlen\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nDet er den størrelse vi kan forvente at opdage (mindst) med en sandsynlighed på 90%"
+  },
+  {
+    "objectID": "slides/power.html#noter",
+    "href": "slides/power.html#noter",
+    "title": "Powerberegninger",
+    "section": "noter",
+    "text": "noter\n\\[\n\\frac{\\text{effekt}}{\\text{standardfejl}} = \\frac{\\delta}{SE}\n= z_{1-α/2}+z_{1-β}\n\\]\n\\(\\beta = 0.1\\), \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\), \\(\\sigma = 430\\), n = 100\nSamme formel, nu skal vi blot isolere \\(\\delta\\)\nDet gør vi på tavlen\nSamme formel - men isoler størrelsen - delta i stedet (indsæt 100)\n(1.96+1.28)*430/delta = 100^2 Så vi kan forvente at opdage forskelle på 139 gram (eller over) med en sandsynlighed på 90%."
   }
 ]
