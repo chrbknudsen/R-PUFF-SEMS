@@ -1,0 +1,11 @@
+---
+title: "Kategoriske værdier"
+subtitle: "Andele, RR og OR"
+format: 
+  revealjs:
+    logo: "kubdatalab.png"
+    css: webr-custom.css
+engine: knitr
+filters:
+  - webr
+---
