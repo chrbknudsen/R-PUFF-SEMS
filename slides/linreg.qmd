@@ -9,7 +9,7 @@ filters:
   - webr
 ---
 
-## Hvad er det nu den lineære regression giver os?
+## Hvad er det nu den lineære regression er?
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -30,20 +30,62 @@ data %>% ggplot(aes(x,y)) +
   geom_point()
 ```
 
-det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem
+Det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem
 x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?
 
 ## linreg 2
-
-Øvelsen handler altså om at finde den rette linie gennem disse punkter, der bedst beskriver sammenhængen mellem punkterne.
-
 Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)
 ```{r echo = FALSE}
 set.seed(123)
 
-n <- 50
-a <- 42
-b <- 47
+n <- 50; a <- 42; b <- 47
+
+x <- runif(n, 0, 10)
+noise <- rnorm(n, mean = 0, sd = 20)
+y <- a * x + b + noise
+
+data <- tibble(x, y)
+
+# lineær model + forudsigelser + residualer
+model <- lm(y ~ x, data = data)
+
+data2 <- data %>%
+  mutate(
+    y_hat = predict(model),
+    resid = y - y_hat,
+    abs_resid = abs(resid)
+  )
+
+# vælg punktet med størst |residual|
+point <- data2 %>%
+  slice_max(abs_resid, n = 1, with_ties = FALSE)
+
+data2 %>%
+  ggplot(aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) 
+```
+
+## linreg 3
+
+I husker måske at en ret linie kan beskrives som
+
+$y = ax + b$
+
+Opgaven er altså at finde den rette linie, beskrevet ved a og b, der 
+bedst beskriver sammenhængen mellem x og y.
+
+Hvordan gør vi det? 
+
+
+
+## linreg 42
+Linien fortæller: Hvis x har en bestemt værdi, hvilken værdi burde y så have? 
+
+```{r echo = FALSE}
+set.seed(123)
+
+n <- 50; a <- 42; b <- 47
 
 x <- runif(n, 0, 10)
 noise <- rnorm(n, mean = 0, sd = 20)
@@ -79,26 +121,16 @@ data2 %>%
     data = point,
     colour = "red",
     size = 3
-  ) +
-  annotate(
-    "text",
-    x = point$x,
-    y = (point$y + point$y_hat) / 2,
-    label = paste0("residual = ", round(point$resid, 1)),
-    colour = "red",
-    hjust = -0.1
-  )
+  ) 
 ```
 
-Linien fortæller os: Hvis x har en bestemt værdi, hvilken værdi burde y så have? 
+Den værdi har y _ikke_. Forskellen kalder vi "residualen".
 
-Den værdi har y ikke. Der er en forskel. Den forskel kalder vi residualen. Størrelsen afhænger naturligvis af 
-hvilken linie vi har lagt.
+## linreg 47
 
-Intuitivt: Hvis vi har to linier, og lægger residualerne for alle punkterne sammen for den ene linie. Og gør det samme
-for alle punkterne for den anden linie. Så er den bedste af de to linier den hvor summen af residualerne er mindst.
-
-Opgaven er nu at finde den bedst tænkelige linie.
+Alle punkterne har en residual. Størrelsen af dem afhænger af hvor linien ligger. 
+Den "bedste" linie er den hvor summen af residualerne er mindst mulig.
+ 
 
 ## linreg 3
 
