@@ -25,7 +25,7 @@ Og hvor I skal bruge qnorm og pnorm til at regne frem og tilbage.
 
 Den centrale grænseværdisætning:
 
-Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværider
+Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværdier
 følge normalfordelingen.
 
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
