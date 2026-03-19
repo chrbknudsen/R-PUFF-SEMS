@@ -77,7 +77,7 @@ Det interessante er - hvor ligger den sande middelværdi?
 
 Vi beregner et konfidensinterval.
 
-Vi beregner normalt et 95% konfidensinterval.
+Normalt et 95% konfidensinterval.
 
 Det vil fortælle os, indenfor hvilket interval vi, med 95% sikkerhed, kan forvente 
 at finde den sande middelværdi.
@@ -88,9 +88,7 @@ Husk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi fi
 grænserne for den del der indeholder 95% af observationerne ligger.
 
 Nu gør vi det "bare" med SEM i stedet for sigma.
-
-Og derfor:
-
+ 
 $\mu \pm 1.96 SEM$
 
 ## En del af en eksamensopgave
@@ -99,7 +97,7 @@ $\mu \pm 1.96 SEM$
 Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
 plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
 ```{r, echo = FALSE}
-tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sperdning,
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
 "Ikke-diabetikere", 140, 0.810, 0.057) |> gt()
 ```
