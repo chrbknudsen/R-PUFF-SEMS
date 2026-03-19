@@ -22,7 +22,9 @@ Når vi laver et histogram af alle de målinger, kunne det se således ud:
 ::::
 :::: {.column}
 ```{r hist-male-height, echo = FALSE}
-rnorm(1000, mean = 181, sd = 6.5) |> hist(main = "Fordelingen af danske mænds højde", xlab = NULL)
+set.seed(8) 
+højder <- rnorm(50, mean = 181, sd = 6.5) 
+højder |> hist(main = "Fordelingen af danske mænds højde", xlab = NULL)
 ```
 
 Hvad er mest sandsynligt - at være mellem 190 og 195 cm eller at være mellem 180 og 185 cm høj?
@@ -42,7 +44,7 @@ En sandsynlighedsfordeling beskriver hvordan vores målinger fordeler sig.
 ## Hvordan kan vi beskrive alle de her observationer?
 
 ```{r}
-rnorm(50, mean = 181, sd = 6.5) |> round(digits = 1)
+højder
 ```
 
 . . . 
@@ -96,9 +98,90 @@ De latinske bogstaver bruger vi når vi "kun" kender værdierne fra vores stikpr
 Middelværdi: $\bar{x}$. Standardafvigelse: $s$
 
 
+## Hvad hvis de er højder måles i noget andet?
+
+Tommer fx?
+
+:::: {.columns}
+:::: {.column}
+Før:
+
+```{r echo = TRUE}
+breaks <- c(160, 165, 170, 175, 180, 185, 190, 195)
+hist(højder, breaks = breaks)
+```
+::::
+:::: {.column}
+Efter:
+
+```{r echo  = TRUE}
+hist(højder/2.54, breaks = breaks/2.54)
+```
+::::
+::::
+
+## Hvordan kan vi ellers mishandle de tal?
+
+Hvis vi trækker ting fra?
+
+:::: {.columns}
+:::: {.column}
+Før:
+
+```{r echo = TRUE}
+breaks <- c(160, 165, 170, 175, 180, 185, 190, 195)
+hist(højder, breaks = breaks)
+```
+::::
+:::: {.column}
+Efter:
+
+```{r echo  = TRUE}
+middel <- mean(højder)
+hist((højder-middel)/2.54, breaks = (breaks-middel)/2.54)
+```
+::::
+::::
+
+## Hvorfor gør vi det?
+
+Jo, vi har lov at skalere vores data.
+
+Nu har vi et histogram der beskriver fordelingen af højder.
+
+Men på en måde, der beskriver hvordan de fordeler sig omkring gennemsnittet. Vi kan nu se hvor mange der er højere end
+gennemsnittet. 
+
+Og hvor mange der er lavere end gennemsnittet. 
+
+Og vi kan helt selv vælge hvilken enhed vi måler i. 
+
+Er det meget sandsynligt at møde en mand der er 7 tommer højere end
+gennemsnittet?
+
+## Og uintuitive enheder
+
+Vi kan måle i standardafvigelser i stedet for tommer:
+
+
+```{r echo  =TRUE}
+
+enhed <- sd(højder)
+middel <- mean(højder)
+breaks <- (breaks-middel)/enhed
+hist((højder-middel)/enhed, breaks = breaks)
+```
+
+:::: notes
+Er det sandsynligt at møde en mand der er 3 standardafvigelser lavere end gennemsnittet?
+
+::::
+
+
+
 ## Hvad er normalfordelingen?
 
-Værdierne vi så før var normalfordelte
+Højderne fra før var normalfordelte
 
 De fleste eksamensopgaver I støder på, har en formulering om at I kan antage at data er normalfordelte.
 
@@ -120,6 +203,8 @@ Det er den "normale" fordeling
 Det er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommende
 
 ::::
+
+
 
 ## Hvordan ser den ud?
 
@@ -153,7 +238,7 @@ tibble(x = x, y = normal) |>
   geom_line()
 ```
 
-- Her har vi målinger der kan gå fra -4 til 4. 
+- Her har vi målinger der kan gå fra -4 til 4 standardafvigelser. 
 - Og har $\mu = 0$ og $\sigma = 1$. 
 - Arealet under kurven er 1 ~ 100%.
 - For alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%
@@ -178,7 +263,13 @@ De kan omregnes (skaleres) til standardnormalfordelingen
 
 . . . 
 
-Det kommer vi til at øve!
+Det var det vi gjorde da vi trak middelværdien fra højderne.
+For så blev højdernes middelværdi 0.
+
+. . . 
+
+Og da vi dividerede det hele med standardafvigelsen - blev enheden
+på x-aksen målt i standardafvigelser.
 
 
 :::: notes
@@ -217,10 +308,32 @@ Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
 - For hvilken værdi (af $\sigma$) er 15.9% af observationerne mindre (end denne værdi)? <span class="fragment"> -1 ($\sigma$) </span>
 
 
+## Og et par stykker til
+
+Hvis middelværdien af højden af alle danske mænd er 180 cm, og standardafvigelsen er 5 cm.
+
+Hvor stor en andel af dem er så lavere end 170 cm?
+
+. . . 
+
+Forskellen er 170-180 = -10 cm
+
+Hvad er det i standardafvigelser?
+
+. . . 
+
+-10 / 5 = -2
+-2 standardafvigelser fra middelværdien
+
+. . . 
+
+Og lige før så vi at det var 2.3%
+
+
 
 ## Fine tal - hvordan finder vi dem selv?
 
-Ifølge den fine graf ligger 15.9% af observationerne under $-1\sigma$. 
+Ifølge den grafen ligger 15.9% af observationerne under $-1\sigma$. 
 
 Hvordan finder vi selv det tal?
 
@@ -242,9 +355,11 @@ P(X < -1) = 0.1586553
 
 . . . 
 
-Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.158osv
+Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.1586553
 
 Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentilen.
+
+Og det var i standardnormalfordelingen.
 
 ## Og omvendt?
 
@@ -282,6 +397,14 @@ P(X < værdi) = sandsynlighed
 - Hvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden
 - Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien
 
+## HUSK!
+
+Vi får altid svar på "hvor meget er mindre end"?
+
+Som i: X% er mindre end Y værdi (målt i standardafvigelser).
+
+Vi kender enten X eller Y, og skal beregne den anden.
+
 ## Typiske spørgsmål (v)i får:
 (til eksamen)
 
@@ -305,7 +428,7 @@ De hænger sammen. 1 og 3 er hinandens omvendte
 Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?
 
 ::::notes
-Det er en sandsynlighed vi er på jagt efter  så pnorm. pnorm(-3) for at være mere præcis.
+Det er en sandsynlighed vi er på jagt efter så pnorm. pnorm(-3) for at være mere præcis.
 ::::
 
 ::::
@@ -446,7 +569,7 @@ Det ligger symmetrisk, så halvdelen på den ene side og den anden halvdel på d
 
 Vi kender sandsynligheden, så vi skal bruge qnorm for at finde værdien. qnorm(0.265)
 
-Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi. 
+Og er er lige mange på hver side, så det giver os den nedre, den øvre er samme absolutte værdi. den øvre finder vi ved qnorm(1-0.265)
 
 ::::
 
@@ -492,86 +615,68 @@ Og er er lige mange på hver side, så det giver os den nedre, den øvre er samm
 ::::
 ::::
 
+## Hvorfor var det vigtigt?
 
+I vil rigtig mange gange blive spurgt: Indenfor hvilket interval ligger 95% af observationerne?
 
-## Gennemsnitshøjden er jo ikke 0?!
+Nu ved I, at 95% af observationerne ligger mellem -1.96 og 1.96 standardafvigelser fra middelværdien.
 
-Eksamensopgaver omhandler i almindelighed normalfordelte data.
+## Hvad er det egentlig at vi får?
 
-Så kan beregningerne lettere laves.
+Vi spørger generelt om 
 
-Og man tester om I har forstået normalfordelingen.
+Hvad er sandsynligheden for at en observation er mindre end noget.
 
-Men middelværdier er sjældent 0. Og standardafvigelser ligeså sjældent 1.
+Eller, i standardnormalfordelingen:
 
-Hvis bare der var en måde at transformere data til at have $\mu = 0$ og $\sigma =1$.
+P(Z < 2)
 
-. . . 
+Hvor svaret er:
 
-Det er der. 
+```{r echo = TRUE}
+pnorm(2)
+```
 
-## Skalering af data - gennemsnittet
+## Hvad er det egentlig at vi får?
 
-Hvad er gennemsnittet af tallene 1 til 6?
+Eller, omvendt, for hvilken værdi er sandsynligheden for at se
+en værdi der er mindre noget bestemt:
 
-. . . 
+P(Z < ? ) = 0.4
+
+Hvor svaret er:
 
 ```{r echo  = TRUE}
-mean(1:6)
-```
-
-. . . 
- 
-Hvad er gennemsnittet af tallene 1 til 6, efter vi har trukket 3.5 fra?
-
-. . . 
-
-```{r echo = TRUE}
-mean(1:6 - 3.5)
-```
-
-## Skalering af data - standardafvigelse?
-
-Hvad standardafvigelse af tallene fra 1 til 6?
-
-. . . 
-
-```{r echo = TRUE}
-sd(1:6)
-```
-
-. . . 
-
-Hvad er standardafvigelsen af tallene 1 til 6 hvis vi dividerer dem med standardafvigelsen?
-
-. . . 
-
-```{r echo = TRUE}
-sd(1:6/sd(1:6))
-```
-
-. . . 
-
-Magi... eller "bare" matematik.
-
-:::: notes
-Vi kan godt udlede hvorfor det passer. Nu nøjes vi bare med at konstatere at det gør det.
-::::
-
-## Skalering af data - begge parametre
-
-Nu med tallene 1 til 9
-
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
+qnorm(0.4)
 ```
 
 
+## Hvad er det egentlig at vi får?
 
-## Hvad kan vi bruge det til?
+Eller vi bliver spurgt om hvad sandsynligheden er for at vores observationer ligger mellem to værdier:
+
+P(Z < 3) - P(Z < 1)
+
+Hvor svaret er:
+
+```{r}
+pnorm(3) - pnorm(2)
+```
+
+
+## Hvorfor Z?
+
+Og ikke X?
+
+Konventionen er, at i standardnormalfordelingen skriver vi Z.
+
+I en normalfordeling generelt (der ikke er standardnormalfordelingen), skriver vi X
+
+Når vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen. 
+
+Det prøvede vi lige før - det giver den standardiserede værdi.
+
+## Så i praksis?
 
 Hvis $\mu$ er 181 og $\sigma$ er 6.5
 
@@ -583,7 +688,7 @@ P(X<170)
 
 Skalerer vi X, skal vi også skalere 170:
 
-$P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = -1.692$
+$P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = P(Z < -1.692)$
 
 ```{r echo = TRUE}
 pnorm(-1.692)
@@ -689,6 +794,8 @@ Smutvej: Hvis 50% af observationerne er mindre end 0, betyder det at 0 er median
 For en population af normalfordelte værdier ved vi at 40% af værdierne er større end 0.1, og 70% af værdierne 
 er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?
 
+Den tager vi på tavlen.
+
 ```{webr-r}
 #| context: interactive
 #| layout: horizontal
@@ -700,6 +807,13 @@ er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?
 
 :::: notes
 
+P(X < 0.1) = 0.60
+P(X < 1) = 0.7
+Standardiser (og vi får bare Z på venstre side)
+Vi bruger qnorm på 0.6 og 0.7. Det giver to ligninger med to ubekendte.
+
+Facit middel = -0.74
+spredning = 3.32
 
 
 ::::
@@ -745,6 +859,8 @@ $1-\mu = 0.524\sigma \Leftrightarrow 1 - \mu = 0.534\cdot3.32 \Leftrightarrow 1 
 
 ## Hvorfor er den vigtig?
 
+Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?
+
 På grund af "Den Centrale Grænseværdisætning".
 
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
@@ -786,16 +902,93 @@ Det er sådan nogen vi har været igennem.
 
 Og så bruges den i de statistiske tests. Det kommer vi også til.
 
+## Normalområdet
 
-## Logaritmering
+Populært spørgsmål - hvad er normalområdet for "noget"?
 
-Ud over skalering af data er der en anden skalering eller transformation vi ofte foretager - logaritmering.
+Hvis de 95% hyppigste observationer i en normalfordelt population er "normalområdet". 
+I hvilket interval ligger de de så?
 
-Ting der ikke er normalfordelte bliver det ofte hvis man tager logaritmen til dem.
+. . . 
+
+Hvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor
+
+. . . 
+
+Så 2.5% ligger lavere, og 2.5% ligger højere.
+
+. . .
+
+Kender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger
+
+## Normalområdet - øvelse 
+
+Hvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 mg/dL, hvad er så normalområdet? Defineret som det interval i hvilket 95% af værdierne vil ligge?
+
+## Normalområdet - nedre grænse
+
+$X \sim N(200, 40)$
+
+Nedre grænse så de (100-95)/2 = 2.5% laveste værdier
+
+P(X < y) = 0.025
+
+Standardiser:
+
+$P(Z < \frac{y-200}{40}) = 0.025$
+
+y-200/40 = qnorm(0.025) = - 1.959964
+
+Isoler y:
+-1.959964*40 + 200 = 122
 
 
+:::: notes
+Der er en del domænespecifikke ting der spiller ind her. 
+::::
 
+## Normalområdet - øvre grænse
 
+Den øvre grænse er så den grænse under hvilken de 95% i normalområdet _og_ de 2.5% under normalområdet ligger.
+
+Dvs. 
+
+P(X < y) = 0.95+0.025 = P(X < y) = 0.975
+
+Standardiser:
+
+P(Z < y - 200 / 40 ) = 0.975
+
+y - 200 / 40 = qnomr(0.975) = 1.959964
+
+Isoler y:
+
+y = 1.959964 * 40 + 200 = 278
+
+## Normalområdet genvej
+
+Svaret viste sig at være:
+
+- Nedre grænse = middelværdi - 1.96*standardafvigelsen
+- Øvre grænse = middelværdi + 1.96*standardafvigelsen
+
+Eller:
+
+```{r echo = TRUE}
+200 + c(-1,1)*1.96*40
+```
+
+## Hvad hvis det er et 90% interval der er det normale?
+
+Så skal vi bare finde ud af hvad 1.96 skal ændres til.
+
+10% skal ligge udenfor område.
+
+Dvs 5% skal ligge under, og 5% skal ligge over.
+
+```{r echo = TRUE}
+qnorm(1-0.05)
+```
 
 ## Øvelse
 
@@ -1023,75 +1216,14 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 ::::
 ::::
 
-## Normalområdet
 
-Populært spørgsmål - hvad er normalområdet for "noget"?
-
-Hvis de 95% hyppigste observationer i en normalfordelt population er "normalområdet". 
-I hvilket interval ligger de de så?
-
-. . . 
-
-Hvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor
-
-. . . 
-
-Så 2.5% ligger lavere, og 2.5% ligger højere.
-
-. . .
-
-Kender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger
-
-## Normalområdet - øvelse 
-
-Hvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 mg/dL, hvad er så normalområdet? Defineret som det interval i hvilket 95% af værdierne vil ligge?
-
-## Normalområdet - nedre grænse
-
-$X \sim N(200, 40)$
-
-Nedre grænse så de (100-95)/2 = 2.5% laveste værdier
-
-P(X < y) = 0.025
-
-Standardiser:
-
-P(Z < \frac{y-200}{40}) = 0.025
-
-y-200/40 = qnorm(0.025) = - 1.959964
-
-Isoler y:
--1.959964*40 + 200 = 122
-
-
-:::: notes
-Der er en del domænespecifikke ting der spiller ind her. 
-::::
-
-## Normalområdet - øvre grænse
-
-Den øvre grænse er så den grænse under hvilken de 95% i normalområdet _og_ de 2.5% under normalområdet ligger.
-
-Dvs. 
-
-P(X < y) = 0.95+0.025 = P(X < y) = 0.975
-
-Standardiser:
-
-P(Z < y - 200 / 40 ) = 0.975
-
-y - 200 / 40 = qnomr(0.975) = 1.959964
-
-Isoler y:
-
-y = 1.959964 * 40 + 200 = 278
 
 
 ## Normalområde - fra en eksamensopgave
 Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
 plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
 ```{r}
-tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
 "Ikke-diabetikere", 140, 0.810, 0.057)
 ```
@@ -1100,7 +1232,7 @@ Beregn et interval, der indeholder 95% af plasma magnesium målingerne for kontr
 
 middelværdi +/- 1.96*spredning
 
-0.70 - 0.92
+
 
 ## Normalområde - fra en eksamensopgave
 
