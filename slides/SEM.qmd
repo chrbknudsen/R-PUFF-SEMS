@@ -95,7 +95,7 @@ $\mu \pm 1.96 SEM$
 :::: {.columns}
 :::: {.column}
 Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
-plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:
 ```{r, echo = FALSE}
 tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
@@ -104,23 +104,7 @@ tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 
 Beregn 95% konfidensinterval for hver af de to grupper.
 
-. . . 
 
-$SEM = \frac{\sigma}{\sqrt(n)}$
-
-. . . 
-
-$SEM_{dia} = \frac{0.068}{\sqrt(227)}$
-
-. . . 
-
-$SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
-
-. . . 
-
-```{r}
-0.719 + c(-1,1)*1.96*(0.057/sqrt(140))
-```
 
 ::::
 :::: {.column}
@@ -130,6 +114,17 @@ $SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
 #| autorun: false
 ```
 ::::
+::::
+
+:::: notes
+
+$SEM_{dia} = \frac{0.068}{\sqrt(227)}$
+
+
+$SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
+
+det vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere.
+Og omvendt.
 ::::
 
 
