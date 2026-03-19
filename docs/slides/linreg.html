@@ -133,25 +133,37 @@
 </div>
 
 </section>
-<section id="hvad-er-det-nu-den-lineære-regression-giver-os" class="slide level2">
-<h2>Hvad er det nu den lineære regression giver os?</h2>
+<section id="hvad-er-det-nu-den-lineære-regression-er" class="slide level2">
+<h2>Hvad er det nu den lineære regression er?</h2>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?</p>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>Det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?</p>
 </section>
 <section id="linreg-2" class="slide level2">
 <h2>linreg 2</h2>
-<p>Øvelsen handler altså om at finde den rette linie gennem disse punkter, der bedst beskriver sammenhængen mellem punkterne.</p>
 <p>Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)</p>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p>Linien fortæller os: Hvis x har en bestemt værdi, hvilken værdi burde y så have?</p>
-<p>Den værdi har y ikke. Der er en forskel. Den forskel kalder vi residualen. Størrelsen afhænger naturligvis af hvilken linie vi har lagt.</p>
-<p>Intuitivt: Hvis vi har to linier, og lægger residualerne for alle punkterne sammen for den ene linie. Og gør det samme for alle punkterne for den anden linie. Så er den bedste af de to linier den hvor summen af residualerne er mindst.</p>
-<p>Opgaven er nu at finde den bedst tænkelige linie.</p>
-</section>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="linreg-3" class="slide level2">
 <h2>linreg 3</h2>
+<p>I husker måske at en ret linie kan beskrives som</p>
+<p><span class="math inline">\(y = ax + b\)</span></p>
+<p>Opgaven er altså at finde den rette linie, beskrevet ved a og b, der bedst beskriver sammenhængen mellem x og y.</p>
+<p>Hvordan gør vi det?</p>
+</section>
+<section id="linreg-42" class="slide level2">
+<h2>linreg 42</h2>
+<p>Linien fortæller: Hvis x har en bestemt værdi, hvilken værdi burde y så have?</p>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p>Det er så den bedst tænkelige linie, og den har det udtyk der er vist i grafen.</p>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p>Den værdi har y <em>ikke</em>. Forskellen kalder vi “residualen”.</p>
+</section>
+<section id="linreg-47" class="slide level2">
+<h2>linreg 47</h2>
+<p>Alle punkterne har en residual. Størrelsen af dem afhænger af hvor linien ligger. Den “bedste” linie er den hvor summen af residualerne er mindst mulig.</p>
+</section>
+<section id="linreg-3-1" class="slide level2">
+<h2>linreg 3</h2>
+
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p>Det er så den bedst tænkelige linie, og den har det udtyk der er vist i grafen.</p>
 </section>
 <section id="linreg-4" class="slide level2">
 <h2>linreg 4</h2>

@@ -25,7 +25,7 @@ Og hvor I skal bruge qnorm og pnorm til at regne frem og tilbage.
 
 Den centrale grænseværdisætning:
 
-Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværider
+Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværdier
 følge normalfordelingen.
 
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
@@ -73,11 +73,20 @@ standardafvigelsen og hvor stor stikprøven var.
 
 Det interessante er - hvor ligger den sande middelværdi?
 
+## Det minder om normalområdet
+
+Normalområdet var det område hvor vi havde (eksempelvis) 95% af observationerne. 
+
+Eksempelvis inden for hvilket interval vi kan forvente at finde 95% af observationerne af plasma magnesium.
+
+
 ## Konfidensintervaller
+
+DEN HER SKAL MÅSKE FORKLARES LIDT BEDRE.
 
 Vi beregner et konfidensinterval.
 
-Vi beregner normalt et 95% konfidensinterval.
+Normalt et 95% konfidensinterval.
 
 Det vil fortælle os, indenfor hvilket interval vi, med 95% sikkerhed, kan forvente 
 at finde den sande middelværdi.
@@ -88,41 +97,23 @@ Husk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi fi
 grænserne for den del der indeholder 95% af observationerne ligger.
 
 Nu gør vi det "bare" med SEM i stedet for sigma.
-
-Og derfor:
-
+ 
 $\mu \pm 1.96 SEM$
 
 ## En del af en eksamensopgave
 :::: {.columns}
 :::: {.column}
 Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
-plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:
 ```{r, echo = FALSE}
-tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sperdning,
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
 "Ikke-diabetikere", 140, 0.810, 0.057) |> gt()
 ```
 
 Beregn 95% konfidensinterval for hver af de to grupper.
 
-. . . 
 
-$SEM = \frac{\sigma}{\sqrt(n)}$
-
-. . . 
-
-$SEM_{dia} = \frac{0.068}{\sqrt(227)}$
-
-. . . 
-
-$SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
-
-. . . 
-
-```{r}
-0.719 + c(-1,1)*1.96*(0.057/sqrt(140))
-```
 
 ::::
 :::: {.column}
@@ -132,6 +123,17 @@ $SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
 #| autorun: false
 ```
 ::::
+::::
+
+:::: notes
+
+$SEM_{dia} = \frac{0.068}{\sqrt(227)}$
+
+
+$SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
+
+det vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere.
+Og omvendt.
 ::::
 
 
@@ -198,11 +200,20 @@ Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en e
 Der findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet.
 men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!
 
-Sandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi alpha. Det hænger sammen med power.
+Sandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi $\alpha$. Det hænger sammen med power.
+
+## Eller
+
+Ud fra en stikprøve beregner vi en værdi. Er den værdi i virkeligheden
+0?
+
+Ud fra to stikprøver beregner vi to værdier. Er de værdier i virkeligheden forskellige?
+
+
 
 ## En opgave
 
-Vi får oplyst at en gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). De får målt deres blodtryk før behandling (baseline), og efter 12 måneders behandling.
+En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling.
 Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som "diff".
 For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9
 
@@ -321,6 +332,18 @@ Er der signifikant forskel i niveauet?
 Ja, de to konfidensintervaller overlapper ikke.
 
 ## Hvodan kan vi ellers beregne det?
+
+CENTRAL POINTE. grænseværdisætningen gælder en del andet end blot middelværdien.
+
+Vi har SEM. Mere generelt har vi en standardfejl, SE. Det kan være standardfejlen på middelværdien.
+Så er det SEM. Det kan også være standardfejlen på så meget andet.
+
+Men har vi et estimat fra en stikprøve der giver os en værdi, så kan vi beregne 
+konfidensintervallet for den værdi - hvis vi kender standardfejlen.
+
+SEM beregnes på en bestemt måde.
+
+hvordan beregner vi andre standardfejl?
 
 to-sample t-test
 
