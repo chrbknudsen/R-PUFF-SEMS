@@ -247,7 +247,7 @@ tibble(x = x, y = normal) |>
 
 Når $\mu = 0$ og $\sigma = 1$ kalder vi den for "standardnormalfordelingen".
 
-Den skriver vi som: $N(1,0)$
+Den skriver vi som: $N(0,1)$
 
 . . . 
 
@@ -297,7 +297,7 @@ Læg også mærke til at z-scores er lig med enheden. T-scores er en normaliseri
 ## Et par hurtige øvelser
 Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
 
-- Hvor mange observationer er mindre end 1 ($\sigma$)?  <span class="fragment">84.1%</span>
+- Hvor stor en andel af observationerne er mindre end 1 ($\sigma$)?  <span class="fragment">84.1%</span>
 
 . . . 
 
@@ -371,13 +371,23 @@ Hvad er så sandsynligheden for at X er større end -1?
 
 . . . 
 
-1 - P(X < -1)
+P(X > -1)
+
+. . . 
+
+= 1 - P(X < -1)
 
 X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X _er_ er 1.
 
 ## qnorm
 
 qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. 
+
+. . . 
+
+P(X < ?) = 0.025
+
+. . . 
 
 ```{r echo = TRUE}
 qnorm(0.025)
@@ -674,19 +684,32 @@ I en normalfordeling generelt (der ikke er standardnormalfordelingen), skriver v
 
 Når vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen. 
 
-Det prøvede vi lige før - det giver den standardiserede værdi.
+. . . 
+
+$Z = \frac{X-\mu}{\sigma}$
+
+. . . 
+
+Og den anden vej:
+
+$X = Z\sigma + \mu$ 
+
 
 ## Så i praksis?
 
-Hvis $\mu$ er 181 og $\sigma$ er 6.5
+Hvis $\mu$ er 181 og $\sigma$ er 6.5 og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.
 
-og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.
+. . . 
 
-Det kan vi skrive som:
+Det kan vi skrive som: P(X<170)
 
-P(X<170)
+. . .
 
-Skalerer vi X, skal vi også skalere 170:
+Havde vi i stedet haft P(Z < ?) var vi i standardnormalfordelingen og kunne bruge pnorm
+
+. . . 
+
+Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:
 
 $P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = P(Z < -1.692)$
 
@@ -744,13 +767,21 @@ Det kan vi skrive som:
 
 ## Øvelser
 
-Vi antager at X ~N(mu, sigma)
+Vi antager at $X \sim N(\mu, \sigma)$
+
+. . . 
 
 Skaler til standardnormalfordelingen:
 
-$P(\frac{X-\mu}{\sigma} < \frac{0-\mu}{\sigma})  = 0.5$
+. . . 
 
-$P(\frac{X-\mu}{\sigma} < \frac{1-\mu}{\sigma})  = 0.6$
+$P(\frac{X-\mu}{\sigma} < \frac{0-\mu}{\sigma}) = P(Z < \frac{0-\mu}{\sigma}) = 0.5$
+
+. . . 
+
+$P(\frac{X-\mu}{\sigma} < \frac{1-\mu}{\sigma}) = P(Z < \frac{1-\mu}{\sigma})= 0.6$
+
+. . .  
 
 Husk at når vi kender sandsynligheden for en ukendt værdi, kan vi bruge qnorm til at beregne den ukendte værdi.
 
@@ -781,18 +812,26 @@ Løs først den ene ligning, og så den anden
 
 ## Øvelser
 
+Den første er den letteste:
+
 $\frac{0-\mu}{\sigma}  = 0 \Leftrightarrow 0 - \mu = 0\sigma \Leftrightarrow 0-0\sigma = \mu \Leftrightarrow \mu = 0$
+
+. . . 
 
 Indsæt i anden ligning:
 
 $\frac{1-\mu}{\sigma}  = 0.25 \Leftrightarrow \frac{1-0}{\sigma} = 0.25 \Leftrightarrow 1 = 0.25\sigma \Leftrightarrow \frac{1}{0.25} = \sigma = 4$
 
+. . . 
+
 Smutvej: Hvis 50% af observationerne er mindre end 0, betyder det at 0 er medianen. I en normalfordeling er medianen lig middelværdien. Så vi ved meget hurtigt at $\mu = 0$
 
 ## Endnu en øvelse
 
-For en population af normalfordelte værdier ved vi at 40% af værdierne er større end 0.1, og 70% af værdierne 
-er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?
+For en population af normalfordelte værdier ved vi at:  
+40% af værdierne er større end 0.1, og  
+70% af værdierne er mindre end 1.  
+Hvad er middelværdi og spredning i denne normalfordeling?
 
 Den tager vi på tavlen.
 
@@ -861,13 +900,23 @@ $1-\mu = 0.524\sigma \Leftrightarrow 1 - \mu = 0.534\cdot3.32 \Leftrightarrow 1 
 
 Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?
 
+. . . 
+
 På grund af "Den Centrale Grænseværdisætning".
+
+. . . 
 
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
 
+. . . 
+
 Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.
 
+. . . 
+
 Vi beregner gennemsnittet af den stikprøve og gemmer det.
+
+. . . 
 
 Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
 
@@ -881,9 +930,13 @@ Det giver en masse gennemsnit/middelværdier.
 
 . . . 
 
-De middelværdier vil følge normalfordelngen. 
+_De middelværdier vil følge normalfordelngen._ 
+
+. . . 
 
 _Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+
+. . . 
 
 Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
  
@@ -891,7 +944,7 @@ Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst m
 
 Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
 
-Bemærk at vi ikke kender disse middelværdiers spredning. Det kommer vi til.
+Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.
 
 
 ## Hvorfor er den vigtig for jer?
@@ -929,18 +982,29 @@ Hvis middelværdi for serum-kolesterol er 200 mg/dL og standardafgivelsen er 40 
 
 $X \sim N(200, 40)$
 
+. . . 
+
 Nedre grænse så de (100-95)/2 = 2.5% laveste værdier
 
 P(X < y) = 0.025
+
+. . . 
 
 Standardiser:
 
 $P(Z < \frac{y-200}{40}) = 0.025$
 
+. . . 
+
 y-200/40 = qnorm(0.025) = - 1.959964
 
+. . . 
+
 Isoler y:
--1.959964*40 + 200 = 122
+
+. . . 
+
+y = 200 + -1.959964*40  = 122
 
 
 :::: notes
@@ -951,19 +1015,28 @@ Der er en del domænespecifikke ting der spiller ind her.
 
 Den øvre grænse er så den grænse under hvilken de 95% i normalområdet _og_ de 2.5% under normalområdet ligger.
 
-Dvs. 
+. . . 
 
+Dvs.  
 P(X < y) = 0.95+0.025 = P(X < y) = 0.975
+
+. . . 
 
 Standardiser:
 
 P(Z < y - 200 / 40 ) = 0.975
 
+. . . 
+
 y - 200 / 40 = qnomr(0.975) = 1.959964
+
+. . . 
 
 Isoler y:
 
-y = 1.959964 * 40 + 200 = 278
+. . . 
+
+y = 200 + 1.959964 * 40 = 278
 
 ## Normalområdet genvej
 
@@ -971,6 +1044,8 @@ Svaret viste sig at være:
 
 - Nedre grænse = middelværdi - 1.96*standardafvigelsen
 - Øvre grænse = middelværdi + 1.96*standardafvigelsen
+
+. . . 
 
 Eller:
 
@@ -1034,11 +1109,13 @@ En normalfordelt population har middelværdi $\mu = 12.5$ og
 standardafvigelse $\sigma = 3.2$. Hvor stor en andel af værdierne 
 er mindre end 10?
 
+. . . 
+
 Med andre ord, hvad er:
 
 $P(X < 10)$
 
-
+. . . 
 
 Transformer til standardnormalfordelingen:
 
@@ -1114,6 +1191,10 @@ Find 90%-kvantilen for X ~ N(50,8)
 ::::
 
 ::: {.fragment}
+Eller: P(X<y) = 0.9
+::::
+
+::: {.fragment}
  $P(Z< \frac{y-\mu}{\sigma}) = 0.9$
 ::::
 
@@ -1122,8 +1203,7 @@ $P(Z< \frac{y-50}{8}) = 0.9$
 ::::
 
 ::: {.fragment}
-qnorm(0.9) = 1.2816
-$\frac{y-50}{8} = 1.2816$, isoler y     
+$\frac{y-50}{8} = qnorm(0.9)$     
 ::::
 
 
@@ -1184,28 +1264,21 @@ En normalfordelt population har $\mu = 100$ og $\sigma = 15$.
 Hvis 80% af værdierne ligger mellem 85 og en øvre grænse $x$, 
 hvad er da denne øvre grænse?
 
-eller find z således at: P(85 < X < x) = 0.8
+Eller: find y således at:  
+P(85 < X < y) = 0.8
 
-1 - 0.8 = 0.2 ligger udenfor intervallet
-Hvilken andel ligger under 85?
+:::{.fragment}
 
-P(X<85) = 0.8
-$P(Z< \frac{85-\mu}{\sigma}) = 0.8$ 
-$\frac{85-\mu}{\sigma} = qnorm(0.8)$
-0.2 - denne andel skal ligge over.
+Tavle!
+:::
 
-
-Vi leder efter et interval. Det starter ved 85. Vi skal finde ud af hvad den øvre grænse er.
-100-80 = 20% ligger uden for intervallet.
-Hvor mange af værdierne ligger under 85? 
-20% minus denne værdi skal ligge over den øvre grænse vi leder efter.
-
-P(X<85)
-X < (85-100)/15
-
-```{r}
+:::: notes
+```{r echo = TRUE}
 qnorm(1 - (0.2- pnorm(-1)))*15+100
 ```
+
+:::: 
+
 ::::
 :::: {.column}
 ```{webr-r}
@@ -1220,54 +1293,61 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 
 
 ## Normalområde - fra en eksamensopgave
-Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
-plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
+"Summariske regnestørrelser" for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:
 ```{r}
 tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
 "Ikke-diabetikere", 140, 0.810, 0.057)
 ```
 
-Beregn et interval, der indeholder 95% af plasma magnesium målingerne for kontrol populationen (ikke-diabetikere)
+Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).
 
-middelværdi +/- 1.96*spredning
+. . . 
+
+```{r echo  = TRUE}
+0.81 + c(-1,1)*1.96*0.057
+```
 
 
+## Normalområde
+:::: {.columns}
+:::: {.column}
+Hvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
 
-## Normalområde - fra en eksamensopgave
+Eller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
 
-hvor stor en andel af plasma magnesium målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
-
-X ~ N(0.719, 0.068)
-
-Eller - hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
-
-Eller: P(0.7 < X < 0.92)
-
-eller: 
+Eller: P(0.7 < X < 0.92) =  
 P(X < 0.92) - P(X < 0.7)
 
-Standardiser:
 
-P(Z < 0.92-mu / sd) - P(Z < 0.7 - mu / sd)
+::::
+:::: {.column}
+Tavle!
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+```
+::::
+::::
 
-mu 0.719, sigma 0.068
-
+::::notes
 ```{r}
 pnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)
 ```
-
-JEG SKAL NOK HAVE NOGET MED FOR DENNE MÅDE AT BEHANDLE INTERVALLERNE!
+::::
 
 ## Normalområde - cowboy trick
 
 1.96 er det magiske tal. Så det er overflødigt at lave standardiseringen.
 
-gå direkte til middelværdi +/- 1.96*sd
+gå direkte til: 
+
+middelværdi +/- 1.96*sd
 
 eller
 
-200 + c(-1,1)* 1.96 * 40
+middelværdi + c(-1,1)* 1.96 * standardafvigelse
 
 
 ## Cowboy trick 2 
