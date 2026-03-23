@@ -1979,7 +1979,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="men-også-fordi" class="slide level2">
 <h2>Men også fordi!</h2>
 <p>Den centrale grænseværdisætning:</p>
-<p>Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.</p>
+<p>Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.</p>
 <p>Den normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen.</p>
 </section>
 <section id="men-ikke-den-middelværdi-i-får-fra-én-stikprøve" class="slide level2">
@@ -1987,7 +1987,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Så hvad er populationens middelværdi?</p>
 <p>Det kan vi ikke vide. Men vi kan sige noget om den alligevel.</p>
 <p>For vores stikprøves middelværdi vil komme fra fordelingen af middelværdier fra alle stikprøverne fra populationen.</p>
-<p>Men vi ved ikke hvad spredningen på den fordeling er!</p>
+<p>Vi ved dog ikke hvad spredningen på den fordeling er!</p>
 </section>
 <section id="hvad-er-spredningen" class="slide level2">
 <h2>Hvad er spredningen?</h2>
@@ -2023,39 +2023,44 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="konfidensintervaller" class="slide level2">
 <h2>Konfidensintervaller</h2>
-<p>DEN HER SKAL MÅSKE FORKLARES LIDT BEDRE.</p>
-<p>Vi beregner et konfidensinterval.</p>
-<p>Normalt et 95% konfidensinterval.</p>
-<p>Det vil fortælle os, indenfor hvilket interval vi, med 95% sikkerhed, kan forvente at finde den sande middelværdi.</p>
-<p>Den kan ligge udenfor. Det vil den gøre i 5% af tilfældene.</p>
-<p>Husk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi finde ud af hvor grænserne for den del der indeholder 95% af observationerne ligger.</p>
-<p>Nu gør vi det “bare” med SEM i stedet for sigma.</p>
+<p>Det gennemsnit vi finder i vores stikprøve er vores estimat på den sande værdi i populationen.</p>
+<p>Usikkerheden på det estimat bestemmes af stikprøvens størrelse, og variationen i data.</p>
+<p>Standardfejlen på estimatet beregnes ved <span class="math inline">\(SEM = \frac{s}{\sqrt{n}}\)</span>s</p>
+<p>Vi beregner et 95% konfidensinterval ved middelværdien plus/minus 1.96*SEM.</p>
+<p>Som dog teknisk set kun gælder hvis vi kender sigma, eller stikprøven er stor.</p>
+</section>
+<section id="konfidensintervaller-1" class="slide level2">
+<h2>Konfidensintervaller</h2>
+<p>Stringent formuleret:</p>
+<p>Hvis vi gentager forsøget mange gange og hver gang beregner et 95% konfidensinterval, vil ca. 95% af intervallerne indeholde den sande middelværdi 𝜇</p>
 <p><span class="math inline">\(\mu \pm 1.96 SEM\)</span></p>
+<p>Eller, lidt sjusket: Vi er 95% sikre på, at intervallet indeholder den sande middelværdi.</p>
 </section>
 <section id="en-del-af-en-eksamensopgave" class="slide level2">
 <h2>En del af en eksamensopgave</h2>
 <div class="columns">
 <div class="column">
+<div class="evensmaller">
 <p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rzhksyktjn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rzhksyktjn table {
+<div id="qagazorjpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qagazorjpd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rzhksyktjn thead, #rzhksyktjn tbody, #rzhksyktjn tfoot, #rzhksyktjn tr, #rzhksyktjn td, #rzhksyktjn th {
+#qagazorjpd thead, #qagazorjpd tbody, #qagazorjpd tfoot, #qagazorjpd tr, #qagazorjpd td, #qagazorjpd th {
   border-style: none;
 }
 
-#rzhksyktjn p {
+#qagazorjpd p {
   margin: 0;
   padding: 0;
 }
 
-#rzhksyktjn .gt_table {
+#qagazorjpd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2081,12 +2086,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_caption {
+#qagazorjpd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rzhksyktjn .gt_title {
+#qagazorjpd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2098,7 +2103,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#rzhksyktjn .gt_subtitle {
+#qagazorjpd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2110,7 +2115,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#rzhksyktjn .gt_heading {
+#qagazorjpd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2122,13 +2127,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_bottom_border {
+#qagazorjpd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_col_headings {
+#qagazorjpd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2143,7 +2148,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_col_heading {
+#qagazorjpd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2163,7 +2168,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#rzhksyktjn .gt_column_spanner_outer {
+#qagazorjpd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2175,15 +2180,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#rzhksyktjn .gt_column_spanner_outer:first-child {
+#qagazorjpd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rzhksyktjn .gt_column_spanner_outer:last-child {
+#qagazorjpd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rzhksyktjn .gt_column_spanner {
+#qagazorjpd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2195,11 +2200,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#rzhksyktjn .gt_spanner_row {
+#qagazorjpd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rzhksyktjn .gt_group_heading {
+#qagazorjpd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2225,7 +2230,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#rzhksyktjn .gt_empty_group_heading {
+#qagazorjpd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2240,15 +2245,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#rzhksyktjn .gt_from_md > :first-child {
+#qagazorjpd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rzhksyktjn .gt_from_md > :last-child {
+#qagazorjpd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rzhksyktjn .gt_row {
+#qagazorjpd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2267,7 +2272,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#rzhksyktjn .gt_stub {
+#qagazorjpd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2280,7 +2285,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#rzhksyktjn .gt_stub_row_group {
+#qagazorjpd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2294,15 +2299,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#rzhksyktjn .gt_row_group_first td {
+#qagazorjpd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rzhksyktjn .gt_row_group_first th {
+#qagazorjpd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rzhksyktjn .gt_summary_row {
+#qagazorjpd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2312,16 +2317,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#rzhksyktjn .gt_first_summary_row {
+#qagazorjpd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_first_summary_row.thick {
+#qagazorjpd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rzhksyktjn .gt_last_summary_row {
+#qagazorjpd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2331,7 +2336,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_grand_summary_row {
+#qagazorjpd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2341,7 +2346,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#rzhksyktjn .gt_first_grand_summary_row {
+#qagazorjpd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2351,7 +2356,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_last_grand_summary_row_top {
+#qagazorjpd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2361,11 +2366,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_striped {
+#qagazorjpd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rzhksyktjn .gt_table_body {
+#qagazorjpd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2374,7 +2379,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_footnotes {
+#qagazorjpd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2388,7 +2393,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_footnote {
+#qagazorjpd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2397,7 +2402,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#rzhksyktjn .gt_sourcenotes {
+#qagazorjpd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2411,7 +2416,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#rzhksyktjn .gt_sourcenote {
+#qagazorjpd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2419,72 +2424,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#rzhksyktjn .gt_left {
+#qagazorjpd .gt_left {
   text-align: left;
 }
 
-#rzhksyktjn .gt_center {
+#qagazorjpd .gt_center {
   text-align: center;
 }
 
-#rzhksyktjn .gt_right {
+#qagazorjpd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rzhksyktjn .gt_font_normal {
+#qagazorjpd .gt_font_normal {
   font-weight: normal;
 }
 
-#rzhksyktjn .gt_font_bold {
+#qagazorjpd .gt_font_bold {
   font-weight: bold;
 }
 
-#rzhksyktjn .gt_font_italic {
+#qagazorjpd .gt_font_italic {
   font-style: italic;
 }
 
-#rzhksyktjn .gt_super {
+#qagazorjpd .gt_super {
   font-size: 65%;
 }
 
-#rzhksyktjn .gt_footnote_marks {
+#qagazorjpd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rzhksyktjn .gt_asterisk {
+#qagazorjpd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rzhksyktjn .gt_indent_1 {
+#qagazorjpd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rzhksyktjn .gt_indent_2 {
+#qagazorjpd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rzhksyktjn .gt_indent_3 {
+#qagazorjpd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rzhksyktjn .gt_indent_4 {
+#qagazorjpd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rzhksyktjn .gt_indent_5 {
+#qagazorjpd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rzhksyktjn .katex-display {
+#qagazorjpd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rzhksyktjn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qagazorjpd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2518,6 +2523,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>Beregn 95% konfidensinterval for hver af de to grupper.</p>
+<p>Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.</p>
+</div>
 </div><div class="column">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -2525,7 +2532,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <aside class="notes">
 <p><span class="math inline">\(SEM_{dia} = \frac{0.068}{\sqrt(227)}\)</span></p>
 <p><span class="math inline">\(SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}\)</span></p>
-<p>det vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere. Og omvendt.</p>
+<p>det vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere. Og omvendt.<br>
+Er der forskel?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2600,7 +2608,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>maj 2025 opgave 2 a</h2>
 <p>Vi får oplyst at et 95% konfidensinterval for en fødselsvægt er 3561.5 gram til 3583.4 gram. Vi får også at vide at beregningen er baseret på 11279 kvinder.</p>
 <p>Vi bliver nu spurgt hvor mange gange bredere konfidensintervallet ville blive hvis vi kun havde haft data fra 200 kvinder.</p>
-<p>Den nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien. Den øvore grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.</p>
+<p>Den nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien. Den øvre grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.</p>
 <p>Med andre ord afhænger bredden af standardfejlen, SEM.</p>
 <p>SEM finder vi ved at dividere standardafvigelsen med kvadratroden af antallet af observationer.</p>
 <p>Så i konfidensintervallet har vi divideret standardafvigelsen med sqrt(11279)</p>
@@ -2609,7 +2617,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>bredden af det andet konfidensinterval er 2<em>1.96</em>sd/sqrt(200)</p>
 <p>Den ene divideret med den anden:</p>
 <p>bredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5</p>
-<p>ca 7½ gange. bredere.</p>
+<p>ca 7½ gange bredere.</p>
 </section>
 <section id="øvelse-fra-en-eksamensopgave" class="slide level2">
 <h2>øvelse fra en eksamensopgave</h2>
@@ -2661,7 +2669,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>må</p>
 <p>Vi har to samples. Så vi bruger two-sample t-test. Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.</p>
-<p>Vi har to grupper - så vi skal have berenet den poolede standardfejl:</p>
+<p>Vi har to grupper - så vi skal have beregnet den poolede standardfejl:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.860459</code></pre>
@@ -2781,24 +2789,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Nu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="lwqbvphakl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wojromtpcb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#lwqbvphakl table {
+#wojromtpcb table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lwqbvphakl thead, #lwqbvphakl tbody, #lwqbvphakl tfoot, #lwqbvphakl tr, #lwqbvphakl td, #lwqbvphakl th {
+#wojromtpcb thead, #wojromtpcb tbody, #wojromtpcb tfoot, #wojromtpcb tr, #wojromtpcb td, #wojromtpcb th {
   border-style: none;
 }
 
-#lwqbvphakl p {
+#wojromtpcb p {
   margin: 0;
   padding: 0;
 }
 
-#lwqbvphakl .gt_table {
+#wojromtpcb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2824,12 +2832,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_caption {
+#wojromtpcb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lwqbvphakl .gt_title {
+#wojromtpcb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2841,7 +2849,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#lwqbvphakl .gt_subtitle {
+#wojromtpcb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2853,7 +2861,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#lwqbvphakl .gt_heading {
+#wojromtpcb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2865,13 +2873,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_bottom_border {
+#wojromtpcb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_col_headings {
+#wojromtpcb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2886,7 +2894,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_col_heading {
+#wojromtpcb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2906,7 +2914,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#lwqbvphakl .gt_column_spanner_outer {
+#wojromtpcb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2918,15 +2926,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#lwqbvphakl .gt_column_spanner_outer:first-child {
+#wojromtpcb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lwqbvphakl .gt_column_spanner_outer:last-child {
+#wojromtpcb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lwqbvphakl .gt_column_spanner {
+#wojromtpcb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2938,11 +2946,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#lwqbvphakl .gt_spanner_row {
+#wojromtpcb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lwqbvphakl .gt_group_heading {
+#wojromtpcb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2968,7 +2976,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#lwqbvphakl .gt_empty_group_heading {
+#wojromtpcb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2983,15 +2991,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#lwqbvphakl .gt_from_md > :first-child {
+#wojromtpcb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lwqbvphakl .gt_from_md > :last-child {
+#wojromtpcb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lwqbvphakl .gt_row {
+#wojromtpcb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3010,7 +3018,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#lwqbvphakl .gt_stub {
+#wojromtpcb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3023,7 +3031,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#lwqbvphakl .gt_stub_row_group {
+#wojromtpcb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3037,15 +3045,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#lwqbvphakl .gt_row_group_first td {
+#wojromtpcb .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#lwqbvphakl .gt_row_group_first th {
+#wojromtpcb .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#lwqbvphakl .gt_summary_row {
+#wojromtpcb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3055,16 +3063,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#lwqbvphakl .gt_first_summary_row {
+#wojromtpcb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_first_summary_row.thick {
+#wojromtpcb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lwqbvphakl .gt_last_summary_row {
+#wojromtpcb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3074,7 +3082,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_grand_summary_row {
+#wojromtpcb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3084,7 +3092,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#lwqbvphakl .gt_first_grand_summary_row {
+#wojromtpcb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3094,7 +3102,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_last_grand_summary_row_top {
+#wojromtpcb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3104,11 +3112,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_striped {
+#wojromtpcb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lwqbvphakl .gt_table_body {
+#wojromtpcb .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3117,7 +3125,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_footnotes {
+#wojromtpcb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3131,7 +3139,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_footnote {
+#wojromtpcb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3140,7 +3148,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#lwqbvphakl .gt_sourcenotes {
+#wojromtpcb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3154,7 +3162,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#lwqbvphakl .gt_sourcenote {
+#wojromtpcb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3162,72 +3170,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#lwqbvphakl .gt_left {
+#wojromtpcb .gt_left {
   text-align: left;
 }
 
-#lwqbvphakl .gt_center {
+#wojromtpcb .gt_center {
   text-align: center;
 }
 
-#lwqbvphakl .gt_right {
+#wojromtpcb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lwqbvphakl .gt_font_normal {
+#wojromtpcb .gt_font_normal {
   font-weight: normal;
 }
 
-#lwqbvphakl .gt_font_bold {
+#wojromtpcb .gt_font_bold {
   font-weight: bold;
 }
 
-#lwqbvphakl .gt_font_italic {
+#wojromtpcb .gt_font_italic {
   font-style: italic;
 }
 
-#lwqbvphakl .gt_super {
+#wojromtpcb .gt_super {
   font-size: 65%;
 }
 
-#lwqbvphakl .gt_footnote_marks {
+#wojromtpcb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lwqbvphakl .gt_asterisk {
+#wojromtpcb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lwqbvphakl .gt_indent_1 {
+#wojromtpcb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lwqbvphakl .gt_indent_2 {
+#wojromtpcb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lwqbvphakl .gt_indent_3 {
+#wojromtpcb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lwqbvphakl .gt_indent_4 {
+#wojromtpcb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lwqbvphakl .gt_indent_5 {
+#wojromtpcb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lwqbvphakl .katex-display {
+#wojromtpcb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lwqbvphakl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wojromtpcb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
