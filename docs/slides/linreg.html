@@ -136,34 +136,41 @@
 <section id="hvad-er-det-nu-den-lineære-regression-er" class="slide level2">
 <h2>Hvad er det nu den lineære regression er?</h2>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>Det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?</p>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>Vi ved ikke hvad x og y er. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?</p>
 </section>
-<section id="linreg-2" class="slide level2">
-<h2>linreg 2</h2>
+<section id="en-ret-linie" class="slide level2">
+<h2>En ret linie</h2>
 <p>Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)</p>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="linreg-3" class="slide level2">
-<h2>linreg 3</h2>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p>Den beskriver en sammenhæng mellem x og y.</p>
+</section>
+<section id="lineær-regression" class="slide level2">
+<h2>Lineær regression</h2>
 <p>I husker måske at en ret linie kan beskrives som</p>
 <p><span class="math inline">\(y = ax + b\)</span></p>
 <p>Opgaven er altså at finde den rette linie, beskrevet ved a og b, der bedst beskriver sammenhængen mellem x og y.</p>
 <p>Hvordan gør vi det?</p>
 </section>
-<section id="linreg-42" class="slide level2">
-<h2>linreg 42</h2>
+<section id="lineær-regression-1" class="slide level2">
+<h2>Lineær regression</h2>
 <p>Linien fortæller: Hvis x har en bestemt værdi, hvilken værdi burde y så have?</p>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p>Den værdi har y <em>ikke</em>. Forskellen kalder vi “residualen”.</p>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><div class="fragment">
+<p>Den værdi har y <em>ikke</em>. Forskellen kalder vi “residualen”.</p>
+</div>
 </section>
-<section id="linreg-47" class="slide level2">
-<h2>linreg 47</h2>
-<p>Alle punkterne har en residual. Størrelsen af dem afhænger af hvor linien ligger. Den “bedste” linie er den hvor summen af residualerne er mindst mulig.</p>
+<section id="lineær-regression-2" class="slide level2">
+<h2>Lineær regression</h2>
+<p>Alle punkterne har en residual.</p>
+<p>En afvigelse fra den “sande” værdi.</p>
+<p>Vil vil derfor skrive at:</p>
+<p><span class="math inline">\(y = ax + b + \epsilon\)</span></p>
+<p>Den “bedste” linie er den hvor summen af residualerne, <span class="math inline">\(\epsilon\)</span> er mindst mulig.</p>
 </section>
-<section id="linreg-3-1" class="slide level2">
+<section id="linreg-3" class="slide level2">
 <h2>linreg 3</h2>
 
-<img data-src="linreg_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p>Det er så den bedst tænkelige linie, og den har det udtyk der er vist i grafen.</p>
+<img data-src="linreg_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p>Den bedst tænkelige linie er derfor den hvor summen af residualerne er mindst mulig.</p>
 </section>
 <section id="linreg-4" class="slide level2">
 <h2>linreg 4</h2>
@@ -188,6 +195,9 @@ Coefficients:
       44.15        42.76  </code></pre>
 </div>
 </div>
+</section>
+<section id="linreg-6" class="slide level2">
+<h2>linreg 6</h2>
 <p>Ikke specielt interessant. Gem resultatet og kør funktionen “summary” på det gemte resultat:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">

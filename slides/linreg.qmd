@@ -30,10 +30,10 @@ data %>% ggplot(aes(x,y)) +
   geom_point()
 ```
 
-Det er her lige meget hvad x og y egentlig dækker over. Pointen er at det ser ud til at der er en lineær sammenhæng mellem
+Vi ved ikke hvad x og y er. Pointen er at det ser ud til at der er en lineær sammenhæng mellem
 x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?
 
-## linreg 2
+## En ret linie
 Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)
 ```{r echo = FALSE}
 set.seed(123)
@@ -66,7 +66,9 @@ data2 %>%
   geom_smooth(method = "lm", se = FALSE) 
 ```
 
-## linreg 3
+Den beskriver en sammenhæng mellem x og y.
+
+## Lineær regression
 
 I husker måske at en ret linie kan beskrives som
 
@@ -79,7 +81,7 @@ Hvordan gør vi det?
 
 
 
-## linreg 42
+## Lineær regression
 Linien fortæller: Hvis x har en bestemt værdi, hvilken værdi burde y så have? 
 
 ```{r echo = FALSE}
@@ -124,12 +126,21 @@ data2 %>%
   ) 
 ```
 
+. . .  
+
 Den værdi har y _ikke_. Forskellen kalder vi "residualen".
 
-## linreg 47
+## Lineær regression
 
-Alle punkterne har en residual. Størrelsen af dem afhænger af hvor linien ligger. 
-Den "bedste" linie er den hvor summen af residualerne er mindst mulig.
+Alle punkterne har en residual.
+
+En afvigelse fra den "sande" værdi.
+
+Vil vil derfor skrive at:
+
+$y = ax + b + \epsilon$
+
+Den "bedste" linie er den hvor summen af residualerne, $\epsilon$ er mindst mulig.
  
 
 ## linreg 3
@@ -210,7 +221,7 @@ data2 %>%
   )
 ```
 
-Det er så den bedst tænkelige linie, og den har det udtyk der er vist i grafen.
+Den bedst tænkelige linie er derfor den hvor summen af residualerne er mindst mulig.
 
 ## linreg 4
 
@@ -236,6 +247,10 @@ Den giver et output:
 ```{r}
 lm(y ~ x, data = data)
 ```
+
+Det skæringen og hældningen
+
+## linreg 6
 
 Ikke specielt interessant. Gem resultatet og kør funktionen "summary" på det gemte resultat:
 
@@ -282,13 +297,26 @@ Jo større jo bedre. For det betyder at modellen forklarer meget variation, og r
 
 Vi kan også forstå den som: Hvor meget bedre er regressionslinien end bare at bruge middelværdien af y.
 
+## Hvordan estimerer vi Y fra X?
+
+## Hvad er konfidensintervallet på det estimat?
+
+
+
+## Her skal vi have et eksempel på en opgave
+
 ## Multipel lineær regression
 
 Den kan vi ikke visualisere.
 
+Hvad hvis Y afhænger af mere end en variabel?
+
 ## regression med kategoriske variable
 
+Indtil videre har vi lavet regressioner hvor vi har estimeret en kontinuært variabel ved hjælp af 
+en eller flere kontinuærte variable.
 
+Kan vi også bruge en kategorisk variabel?
 
 ## tolkning generel
 

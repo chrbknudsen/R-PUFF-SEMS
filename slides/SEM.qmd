@@ -25,7 +25,7 @@ Og hvor I skal bruge qnorm og pnorm til at regne frem og tilbage.
 
 Den centrale grænseværdisætning:
 
-Tager vi tilstrækkeligt mange stikprøver, vil disse stikprøvers middelværdier
+Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier
 følge normalfordelingen.
 
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
@@ -40,7 +40,7 @@ Det kan vi ikke vide. Men vi kan sige noget om den alligevel.
 For vores stikprøves middelværdi vil komme fra fordelingen af middelværdier fra 
 alle stikprøverne fra populationen.
 
-Men vi ved ikke hvad spredningen på den fordeling er!
+Vi ved dog ikke hvad spredningen på den fordeling er!
 
 ## Hvad er spredningen?
 
@@ -82,27 +82,31 @@ Eksempelvis inden for hvilket interval vi kan forvente at finde 95% af observati
 
 ## Konfidensintervaller
 
-DEN HER SKAL MÅSKE FORKLARES LIDT BEDRE.
+Det gennemsnit vi finder i vores stikprøve er vores estimat på den sande værdi i populationen.
 
-Vi beregner et konfidensinterval.
+Usikkerheden på det estimat bestemmes af stikprøvens størrelse, og variationen i data.
 
-Normalt et 95% konfidensinterval.
+Standardfejlen på estimatet beregnes ved $SEM = \frac{s}{\sqrt{n}}$s
 
-Det vil fortælle os, indenfor hvilket interval vi, med 95% sikkerhed, kan forvente 
-at finde den sande middelværdi.
+Vi beregner et 95% konfidensinterval ved middelværdien plus/minus 1.96*SEM. 
 
-Den kan ligge udenfor. Det vil den gøre i 5% af tilfældene.
+Som dog teknisk set kun gælder hvis vi kender sigma, eller stikprøven er stor.
 
-Husk normalfordelingen. Der er en middelværdi og en spredning. Og så kan vi finde ud af hvor 
-grænserne for den del der indeholder 95% af observationerne ligger.
+## Konfidensintervaller
 
-Nu gør vi det "bare" med SEM i stedet for sigma.
+Stringent formuleret:
+
+Hvis vi gentager forsøget mange gange og hver gang beregner et 95% konfidensinterval, vil ca. 95% af intervallerne indeholde den sande middelværdi 𝜇
  
 $\mu \pm 1.96 SEM$
+
+Eller, lidt sjusket: Vi er 95% sikre på, at intervallet indeholder den sande middelværdi.
+
 
 ## En del af en eksamensopgave
 :::: {.columns}
 :::: {.column}
+:::: evensmaller
 Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
 plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:
 ```{r, echo = FALSE}
@@ -113,7 +117,9 @@ tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 
 Beregn 95% konfidensinterval for hver af de to grupper.
 
+Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.
 
+::::
 
 ::::
 :::: {.column}
@@ -133,7 +139,8 @@ $SEM_{dia} = \frac{0.068}{\sqrt(227)}$
 $SEM_{ikke-dia} = \frac{0.057}{\sqrt(140)}$
 
 det vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere.
-Og omvendt.
+Og omvendt.  
+Er der forskel?
 ::::
 
 
@@ -277,7 +284,7 @@ Vi bliver nu spurgt hvor mange gange bredere konfidensintervallet ville blive hv
 data fra 200 kvinder.
 
 Den nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien.
-Den øvore grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.
+Den øvre grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.
 
 Med andre ord afhænger bredden af standardfejlen, SEM. 
 
@@ -298,7 +305,7 @@ bredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5
 
 
 
-ca 7½ gange. bredere.
+ca 7½ gange bredere.
 
 
 
@@ -374,7 +381,7 @@ må
 Vi har to samples. Så vi bruger two-sample t-test.
 Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.
 
-Vi har to grupper - så vi skal have berenet den poolede standardfejl:
+Vi har to grupper - så vi skal have beregnet den poolede standardfejl:
 
 
 ```{r}
