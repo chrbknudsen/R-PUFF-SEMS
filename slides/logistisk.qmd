@@ -1,6 +1,6 @@
 ---
-title: Kategoriske udfald
-subtitle: Herunder logistisk regression
+title: "Kategoriske udfald"
+subtitle: "Herunder logistisk regression"
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -34,7 +34,7 @@ Her tæller vi. Og vi
 Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig 
 af om der deles sprøjter med andre narkomaner.  
 I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.  
-I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede positive for TB.
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.
 
 Hvor mange tester positiv hhv negativ i hver gruppe?
 ::::
@@ -52,7 +52,6 @@ Hvor mange tester positiv hhv negativ i hver gruppe?
 ::::
 
 ## En opgave
-DEN HER SKAL JEG LIGE HAVE KIGGET NÆRMERE PÅ - FOR JEG TROR DER ER EN GRAVERENDE FEJL I MODELBESVARELSEN.
 
 
 :::: {.columns}
@@ -94,12 +93,6 @@ Metoden har vi set før.
 
 $estimat \pm 1.96 \cdot SE$ 
 
-. . .
-
-:::: evensmaller
-(1.96 betegner vi den kritiske værdi. Den er 1.96 fordi vi antager normalitet. Og har besluttet os for at det er et 95% konfidensinterval vi vil have.)
-::::
- 
 . . . 
 
 Så - hvordan beregner vi en standardfejl på estimatet af en proportion?
@@ -141,37 +134,68 @@ Der var 258 observationer i stikprøven
 :::: smaller
 Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om 
 man deler sprøjte eller ej. Argumenter ud fra relevant KI.
+:::: 
 
 :::: evensmaller
 Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.
 ::::
 
-Hvordan gør vi det?
+Hvordan gør vi det? Eller: Hvad vil  det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?
 
-Vi beregner prævalensen i de to grupper, og de tilhørende standardfejl, og sammenligne de to konfidensintervaller vi så får.
+:::: smaller
 
-Hvis prævalensen af TB for de narkomaner der deler sprøjte er indeholdt i KI for de der ikke deler 
-sprøjte, kan vi ikke afvise at den sande prævalens for de der deler sprøjter, ikke er indeholdt
-i KI for de der ikke deler sprøjter.
+:::: {.fragment}
+I virkeligheden er forskellen på de to prævalenser 0
+:::: 
+
+:::: {.fragment}
+Den ene prævalens divideret med den anden er 1 (for så er de ens)
+::::
+
+:::: {.fragment}
+I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.
+::::
+
+:::: {.fragment}
+Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?
+::::
+::::
+
+## Lad os tage den en for en
+
+:::: smaller
+Er forskellen i virkeligheden 0?
+
+Eller - vi opstiller en NULL-hypotese, $H_0: p_{TB:deler} - p_{TB:delerikke} = 0$
+
+Den alternative hypotese er så at der er forskel på prævalensen.
+
+Samme metode som før: 
+
+$estimat_{diff} \pm 1.96*SE_{diff}$
+
+Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen
+
+Så... Hvordan beregner vi $SE_{diff}$?
+
+
+$SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
+
+Og vi kan godt huske hvordan vi beregnede standardfejlen på de enkelte proportioner:
+
+$SE = \sqrt{\frac{p(1-p)}{n}}$
 
 ::::
 
-## Lad os regne
+## Så kan vi regne
+
+
 :::: {.columns}
 :::: {.column}
-```{r}
-library(tidyverse)
-library(gt)
-tribble(~TB, ~`deler`, ~`deler ikke`,
-"TB-positiv", 24, 28,
-"TB-negativ", 73, 133 ) |> gt()
-```
-
-Og:
-
-$SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
-
-
+- Prævalens af TB blandt de 97 der delte sprøjter: 24.7%
+- Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%
+- $SE = \sqrt{\frac{p(1-p)}{n}}$
+- $SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
 
 ::::
 :::: {.column}
@@ -184,30 +208,68 @@ $SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
 ::::
 ::::
 
+## Kritisk værdi
 
-## En anden måde at regne det samme på
+Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.
 
-KI-tilgangen:
+Vores interval går fra estimat - 1.96*SE til estimat + 1.96*SE
 
-deler: prævalens: 0.247 n = 97
-se_deler = sqrt(0.247*(1-0.247)/97) = 0.0437885
+Når vi beregner et konfidensinterval og tester om 0 er indeholdt. Så tester vi at 
+0 < estimat - 1.96*SE eller 0 > estimat + 1.96*se
 
-deler_ikke: prævalens: 0.174, n = 161
-se_deler_ikke: sqrt(0.174*(1-0.174)/161) = 0.02987801
+I det første tilfælde:
 
-KI_deler 0.247 + c(-1,1)*1.96*0.0437885 = 0.1611745 0.3328255
-KI_deler_ikke: 0.174+c(-1,1)*1.96*0.02987801 = 0.1154391 0.2325609
+0 < estimat - 1.96*SE   <->
+1.96SE < estimat <->
+1.96 < estimat/SE
 
-Vi bemærker at prævalensen for "deler ikke" er indeholdt i KI_deler, og vi kan
-derfor konkludere at der ikke er en signifikant forskel.
+Så hvis estimat/SE er større end 1.96 - så ligger hele vores konfidensinterval over 0.
 
-Alternativt:
-Forskel i prævalens: 0.247-0.174 = 0.073
-SE_diff = sqrt(se_deler^2 + se_deler_ikke^2) = sqrt( 0.0437885^2 + 0.02987801^2) = 0.05301064
+I det andet tilfælde 
 
-teststørrelsen finder vi så ved: 0.073/0.05301064 = 1.377082, der ikke er signifikant (<1.96)
+0 > estimat + 1.96*se <-> 
 
-## risk-ratio
+-1.96SE > estimat <->
+
+-1.96 > estimat/SE
+
+Så hvis estimat/SE er mindre end -1.96. så ligger hele vores konfidensinterval under 0.
+Eller, i absolutte termer
+
+|estimat/se| > 1.96
+
+1.96 er den kritiske værdi.
+
+Man kan også tænke på det som at estimatet skal ligge mindst 1.96 standardfejl fra 0. Så er det langt nok væk til at vi tør stole på det.
+
+
+## Hvad med forholdet for de to prævalenser?
+
+Den hypotese vi så tester er at:
+
+H0: p_deler/p_deler_ikke = 1
+
+For hvis de er (tilstrækkeligt) forskellige - så kan vi konkludere at der er forskel i risikoen.
+
+Vi kalder også prævalenserne for proportioner.
+
+Og i jeres branche kalder man ofte prævalensen for en "Risk". 
+
+og det vi så tester er, om forholdet mellem de to risici er forskelligt fra 1. Eller, om Risk Ratio (RR), 
+er forskellig fra 1. Er den forskellig, kan vi konkludere at derer forskel i risiko. Er den ikke forskellig,
+kan vi ikke konkludere at der er forskel i risikoen.
+
+Metoden er den samme som før. Estimatet +/- 1.96 SE_RR. Er 1 indeholdt.
+
+Eller - Estimat/SE_RR - er det større eller mindre end 1.96
+
+Så skal vi blot vide hvordan vi beregner SE.
+
+Det er bøvlet... Og årsagen til at vi nok ville foretrække at kigge på KI for differencen i stedet.
+
+Men vi skal kunne så...
+
+Det der gør det bøvlet er, at vi ikke har en let formel for SE_RR. Vi har en let formel for standardfejlen af logaritme af RR. 
 
 Forholdet mellem de to proportioner.
 
@@ -224,10 +286,145 @@ Så får vi:
 
 $SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
 
+Så nu ved vi hvad SE er for log(RR). Så skal vi have beregnet log(RR). Og så skal vi have beregnet
+KI for log(RR). og så skal vi have forvandlet det KI fra log(RR) til RR.
+
+## Og så er vi ca. klar til at regne
+
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~TB, ~`deler`, ~`deler ikke`,
+"TB-positiv", 24, 28,
+"TB-negativ", 73, 133 ) |> gt()
+```
+
+$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+
+
+RR = 24/24+73
+
+## Hvad så vi?
+
+Konfidensintervallet indeholder 1. Og derfor kan vi konkludere at der ikke er statistisk signifikant forskel på
+de to risici.
+
+Vi kan også isge log(rr)/se(log(RR)) og få testsstørrelsen ud. Den er midnre end den kritiske værdi. Og vi kan derfor ikke afvise null-hypotesen (på et 5% niveau.)
+
+Vi så også at RR var XX. Det vil vi formulere som at "risikoen er 42% højere" for at være TB+ hvis man deler sprøjter.
 
 ## odds hvad er det?
 
-## odds
+$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+
+Den var træls...
+
+Matematikken viser sig at være en del rarere at arbejde med, hvis vi tænker på sandsynligheder lidt anderledes.
+
+## Hvorfor odds?
+
+Eller rettere - hvorfor log-odds?
+
+Fordi matematikken bliver pæn og nydelig. 
+
+2.5% af observationerne i en normalfordeling ligger over 1.96. Og 2.5% af observationerne ligger under -1.96.
+
+Det er pænt og symmetrisk omkring 0.
+
+Det er lidt vanskeligere ved kategoriske udfald. Der kan vi se hvor mange der har TB. Og hvor mange der ikke har. 
+
+Hvis vi 10 observationer med to mulige udfald A og B.
+
+hvor vi har 1 A og derfor 9 B.
+
+Så er andelen af A: 1/10
+Og andelen af B 9/10
+
+De to er egentlig ækvivalente. Men den ene er 0.1 og den anden er 0.9
+
+Beregner vi i stedet odds:
+
+Så er odds for A 1/9. Og odds for B er 9/1
+
+Det er bare en anden måde at udtrykke det samme på.
+
+Men tager vi logaritmen til begge
+
+```{r echo  = TRUE}
+log(1/9)
+```
+
+```{r echo = TRUE}
+log(9/1)
+```
+
+Hvor er det pænt. 
+
+## fra sandsynlighed til odds
+
+odds = p/(1-p)
+
+Og så er der en særlig funktion det er nyttigt at have hørt om
+
+logit(p) = log(p/(1-p))
+
+logit funktionen tager en sandsynlighed for et givet udfald, og returnerer log-odds for det udfald.
+
+Den omvendte kan også være nyttig. Hvis vi har logodds givet ved x, kan vi få sandsynligheden ved:
+
+p = 1/1+exp(-x)
+
+
+## oddsratio tilgangen
+
+Samme ide som med RR. Hvis odds for at have tb hvis man deler sprøjter, divideret med odss for at have tb når man ikke deler sprøjter, er 1 (eller at vi på 95% konfidensinterval ikke kan afvise at det er 1). Så er der ikke nogen forskel.
+
+Metoden har I set før.
+
+Estimat +/- 1.96*SE_or
+
+Så hvordan finder vi SE_or
+
+Det er et argument for at arbejde med OR i stedet for RR
+
+Det er lidt mere komplkst her, for vi har ikke en let SE beregning for OR. Men vi har en 
+der er simpel for log(OR)
+
+For det generelle forhold:
+
+|                | udfald 1 | udfald 2 |
+|----------------|-----|-----|-------|
+| eksponeret | a  | b  |
+| ikke eksponeret     | c  | d | 
+
+
+Så får vi:
+
+
+$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
+
+
+Det betyder så, at når vi får:
+
+log(or) +/- 1.96*se(log(or))
+
+så vi skal tage logaritmen til vores beregnede OR, så får vi det logaritmerede konfidensinterval.
+
+Det omvendte af logaritmen er exponentialfunktionen. Så vi exponentierer vores logaritmerede konfidensinterval.
+
+Og så har vi svaret. 
+
+## Så er vi klar til at regne
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~TB, ~`deler`, ~`deler ikke`,
+"TB-positiv", 24, 28,
+"TB-negativ", 73, 133 ) |> gt()
+```
+
 
 ```{r}
 library(tidyverse)
@@ -256,39 +453,25 @@ når vi divideder odds for at have tb når man deler med odds for have tb når m
 
 Når vi dividerer odds fo at have tb når man ikke deler med odds fo at have tb når man deler, får vi hvor mange gange større eller mindre odds er for at have tb når man ikke deler, sammenlignet med når man deler.
 
+## Hvad så vi
 
-## Hvor sikre er vi på det estimat?
+OR var 1.56
 
-Det er samme metodik igen-igen.
-estimat +/- 1.96 gange standardfejlen.
+Det vil vi formulere som at odds for at teste positiv for tb er 56% højere.
 
-Det er lidt mere komplkst her, for vi har ikke en let SE beregning for OR. Men vi har en 
-der er simpel for log(or)
-
-For det generelle forhold:
-
-|                | udfald 1 | udfald 2 |
-|----------------|-----|-----|-------|
-| eksponeret | a  | b  |
-| ikke eksponeret     | c  | d | 
-
-
-Så får vi:
-
-
-$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
+Vær skarpe her. Odds er noget andet end risiko.
 
 
 
+## chi-i-anden $\left(\chi^2\right)$ tilgangen
+:::: smaller
+Mere generel - kan håndtere mere end et udfald. 
 
+Optræder sjældent til eksamen - den kræver en del tasteri, og det er ikke hvad I bliver testet for.
 
-## chiianden tilgangen
+Tester forskellen på den fordeling vi ser - og den vi ville forvente
 
-Lidt mere generel - den kan håndtere mere end et udfald.
-
-Vi tester grundlæggende hvor stor forskellen er på hvad vi faktisk observerer. Og hvad vi ville forvente.
-
-Hvis vi kun kender totallerne 
+Hvis vi kun kender totalerne 
 
 |                | TB+ | TB- | Total |
 |----------------|-----|-----|-------|
@@ -299,36 +482,73 @@ Hvis vi kun kender totallerne
 
 Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter
 
-Hvor mange forventer vi så har tb blandt de der deler sprøjter?
+Hvor mange forventer vi så har TB blandt de der deler sprøjter?
 
-52 ud af 258 har tb. Det er den forventede andel. Så når vi har 97 der deler sprøjter så er der
-97*52/258 ~ 20. Det er den forventede værdi. Men der er faktisk 24, 4 flere.
+::::
 
-Blandt de der ikke deler sprøjter ville vi forvente at se 161*52/258 ~32
-Men der var kun 28. fire færre.
+## regne-regne
 
-Chi-i-anden testen laver alle de beregninger, og fortæller os om der er forskel imellem de to grupper.
+52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB. 
 
-Den fortæller os ikke hvilken der har den største prævalens. Blot om der er forskel i fordelingen af tb 
-i mellem de to grupper. Eller om der er forskel i fordelingen af deler/deler ikke mellem de to andre grupper.
+. . . 
+
+Så må der være $\frac{52}{258}\cdot97 \approx 20$ der tester positiv.
+
+. . . 
+
+Det er hvad vi forventer. Men vi ser at der er 24. 
+
+. . . 
+
+Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se $\frac{52}{258}\cdot161 \approx 32$ der tester positiv.
+
+. . . 
+
+Det er hvad vi forventer. Men vi ser at der kun er 28. 
+
+Vi laver de samme beregninger på de to andre celler.
+
+## regne-regne2
+
+:::: smaller
+$\chi^2$ testens $H_0$ er at der ikke er forskel på fordelingen af TB-status i de to grupper.
+
+Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi 
+forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.
+
+Charmen er at den kan håndtere flere udfald end to. 
+
+Udfordringen er at 
+den ikke kan fortælle os hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.
+
+Og så forudsætter $\chi^2$ testen at der er mindst 5 _forventede_ observationer i hver "celle".
+
+Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at 
+vi bør slå korrektionen fra.
+::::
+
+## Hvordan gør vi?
+
+En smule bøvlet - for vi skal have data ind i en matrix.
 
 
 
-Vi har ialt 258 observationer. Af dem har de 52 tb. Så vi forventer at 52/258 er andelen af tb.
+```{r}
+tab <- matrix(
+  c(24, 73,
+    28, 133),
+  nrow = 2,
+  byrow = TRUE
+)
 
-De der deler sprøjter er, dem er der 97 af.
+dimnames(tab) <- list(
+  Exposure = c("Deler", "Deler_ikke"),
+  TB = c("Ja", "Nej")
+)
 
+chisq.test(tab, correct = FALSE)
+```
 
-
-
-
-## teststørrelse tilgangen
-
-vi er interesserede i om et 95% KI indeholder 0.
-
-vores 95% ki er beregnet ved estimatet +/- 1.96 gangen SE
-
-Hvis estimat/SE er mindre end 1.96 - hvad så?
 
 
 ## Sammenfattende
@@ -380,36 +600,7 @@ $$p = \frac{1}{1+e^{-\eta}}$$
 Og vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke 
 piller i den selv.
 
-## Hvorfor odds?
 
-Eller rettere - hvorfor log-odds?
-
-Fordi matematikken bliver pæn og nydelig. 
-
-Ved 10 observationer med to mulige udfald A og B.
-
-hvor vi har 1 A og derfor 9 B.
-
-Så er andelen af A: 1/10
-Og andelen af B 9/10
-
-De to er egentlig ækvivalente. Men den ene er 0.1 og den anden er 0.9
-
-Beregner vi i stedet odds:
-
-Så er odds for A 1/9. Og odds for B er 9/1
-
-Det er bare en anden måde at udtrykke det samme på.
-
-Men tager vi logaritmen til begge
-
-```{r echo  = TRUE}
-log(1/9)
-```
-
-```{r echo = TRUE}
-log(9/1)
-```
 
 Samme værdi, omvendt fortegn. Pænt centreret om 0.
 
@@ -449,7 +640,12 @@ Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så
 
 $3*0.018^{0.5}$
 
+## Hvad skal vi kunne?
 
+Vi skal kunne genkende en logistisk regression
+vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder.
+Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet
+for et givet sæt af observationer.
 
 
 ## opgave 2025 februar opgave 1 (c)
