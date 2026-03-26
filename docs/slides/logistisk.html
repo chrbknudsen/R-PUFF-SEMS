@@ -487,7 +487,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2039,13 +2039,33 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="kategoriske-udfald" class="slide level2">
 <h2>Kategoriske udfald</h2>
-<p>Den lineære regression bruger vi når vi har kontinuærte resultater.</p>
-<p>Hvordan håndterer vi kategoriske resultater?</p>
-<p>Logistisk regression</p>
-<p>Relativ risiko</p>
-<p>Chi i anden</p>
-<p>Odds ratio</p>
-<p>Her tæller vi. Og vi</p>
+<p>Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.</p>
+<p>Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.</p>
+<p>Der er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.</p>
+<p>Men der kan være - socialklasse eg.</p>
+<p>Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?</p>
+<div class="fragment">
+<p>Vi tæller.</p>
+</div>
+</section>
+<section id="kategoriske-udfald-1" class="slide level2">
+<h2>Kategoriske udfald</h2>
+<p>Hvor mange er der af hver?</p>
+<p>Og hvor stor en andel udgør de så af de samlede hele.</p>
+<p>Er der forskel på de andele grupper imellem?</p>
+<p>Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?</p>
+<p>Og hvor sikre er vi på vores estimater?</p>
+</section>
+<section id="kategoriske-udfald-2" class="slide level2">
+<h2>Kategoriske udfald</h2>
+<p>Så vi skal kigge på:</p>
+<ul>
+<li>Proportioner</li>
+<li>Relativ risiko</li>
+<li>Odds ratio</li>
+<li>Chi i anden</li>
+</ul>
+<p>Og lidt senere den logistisk regression</p>
 </section>
 <section id="en-opgave" class="slide level2">
 <h2>En opgave</h2>
@@ -2054,500 +2074,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="smaller">
 <p>Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.<br>
 I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.<br>
-I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede positive for TB.</p>
-<p>Hvor mange tester positiv hhv negativ i hver gruppe?</p>
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.</p>
+<p>Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?</p>
 </div>
 </div><div class="column">
 <div id="qwebr-insertion-location-1"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="en-opgave-1" class="slide level2">
-<h2>En opgave</h2>
-<p>DEN HER SKAL JEG LIGE HAVE KIGGET NÆRMERE PÅ - FOR JEG TROR DER ER EN GRAVERENDE FEJL I MODELBESVARELSEN.</p>
-<div class="columns">
-<div class="column">
-<p>Det gav disse tal:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="lzllxoqcog" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lzllxoqcog table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#lzllxoqcog thead, #lzllxoqcog tbody, #lzllxoqcog tfoot, #lzllxoqcog tr, #lzllxoqcog td, #lzllxoqcog th {
-  border-style: none;
-}
-
-#lzllxoqcog p {
-  margin: 0;
-  padding: 0;
-}
-
-#lzllxoqcog .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#lzllxoqcog .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#lzllxoqcog .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#lzllxoqcog .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#lzllxoqcog .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#lzllxoqcog .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#lzllxoqcog .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#lzllxoqcog .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#lzllxoqcog .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#lzllxoqcog .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#lzllxoqcog .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#lzllxoqcog .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#lzllxoqcog .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#lzllxoqcog .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#lzllxoqcog .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lzllxoqcog .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#lzllxoqcog .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#lzllxoqcog .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#lzllxoqcog .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lzllxoqcog .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#lzllxoqcog .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lzllxoqcog .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#lzllxoqcog .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lzllxoqcog .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lzllxoqcog .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lzllxoqcog .gt_left {
-  text-align: left;
-}
-
-#lzllxoqcog .gt_center {
-  text-align: center;
-}
-
-#lzllxoqcog .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#lzllxoqcog .gt_font_normal {
-  font-weight: normal;
-}
-
-#lzllxoqcog .gt_font_bold {
-  font-weight: bold;
-}
-
-#lzllxoqcog .gt_font_italic {
-  font-style: italic;
-}
-
-#lzllxoqcog .gt_super {
-  font-size: 65%;
-}
-
-#lzllxoqcog .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#lzllxoqcog .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#lzllxoqcog .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#lzllxoqcog .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#lzllxoqcog .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#lzllxoqcog .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#lzllxoqcog .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#lzllxoqcog .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#lzllxoqcog div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
-<th id="deler" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler</th>
-<th id="deler-ikke" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler ikke</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="TB">TB-positiv</td>
-<td class="gt_row gt_right" headers="deler">24</td>
-<td class="gt_row gt_right" headers="deler ikke">28</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="TB">TB-negativ</td>
-<td class="gt_row gt_right" headers="deler">73</td>
-<td class="gt_row gt_right" headers="deler ikke">133</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?</p>
-</div><div class="column">
-<div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 <aside class="notes">
@@ -2564,18 +2095,14 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
           display:block!important;
       }</style></aside>
 </section>
-<section id="hvor-sikker-er-vi-på-det-tal" class="slide level2">
-<h2>Hvor sikker er vi på det tal?</h2>
-<p>Opgaven fortsætter: Angiv også et 95% konfidensinterval på det estimat.</p>
+<section id="hvor-sikre-er-vi-på-det-tal" class="slide level2">
+<h2>Hvor sikre er vi på det tal?</h2>
+<p>Opgaven fortsætter:</p>
+<p>Angiv også et 95% konfidensinterval på det estimat.</p>
 <p>Estimatet er en andel. Også kaldet en proportion</p>
 <p>Metoden har vi set før.</p>
 <div class="fragment">
 <p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
-</div>
-<div class="fragment">
-<div class="evensmaller">
-<p>(1.96 betegner vi den kritiske værdi. Den er 1.96 fordi vi antager normalitet. Og har besluttet os for at det er et 95% konfidensinterval vi vil have.)</p>
-</div>
 </div>
 <div class="fragment">
 <p>Så - hvordan beregner vi en standardfejl på estimatet af en proportion?</p>
@@ -2594,9 +2121,10 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 <p>Standardfejlen er givet ved:</p>
 <p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
 <p>Der var 258 observationer i stikprøven</p>
+<p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
 </div>
 </div><div class="column">
-<div id="qwebr-insertion-location-3"></div>
+<div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -2604,37 +2132,150 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 <h2>Videre med samme opgave</h2>
 <div class="smaller">
 <p>Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.</p>
+</div>
 <div class="evensmaller">
 <p>Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.</p>
 </div>
-<p>Hvordan gør vi det?</p>
-<p>Vi beregner prævalensen i de to grupper, og de tilhørende standardfejl, og sammenligne de to konfidensintervaller vi så får.</p>
-<p>Hvis prævalensen af TB for de narkomaner der deler sprøjte er indeholdt i KI for de der ikke deler sprøjte, kan vi ikke afvise at den sande prævalens for de der deler sprøjter, ikke er indeholdt i KI for de der ikke deler sprøjter.</p>
+<p>Hvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?</p>
+<div class="smaller">
+<div class="fragment">
+<p>At: I virkeligheden er forskellen på de to prævalenser 0</p>
+</div>
+<div class="fragment">
+<p>Den ene prævalens divideret med den anden er 1 (for så er de ens)</p>
+</div>
+<div class="fragment">
+<p>I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.</p>
+</div>
+<div class="fragment">
+<p>Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?</p>
+</div>
+<div class="fragment">
+<p>Vi tager dem en for en</p>
+</div>
 </div>
 </section>
-<section id="lad-os-regne" class="slide level2">
-<h2>Lad os regne</h2>
+<section id="forskel-på-prævalenser" class="slide level2">
+<h2>Forskel på prævalenser</h2>
+<div class="smaller">
+<p>Er forskellen i virkeligheden 0?</p>
+<div class="fragment">
+<p>Eller - vi opstiller en NULL-hypotese, <span class="math inline">\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\)</span></p>
+<p>Den alternative hypotese er så, at der er forskel på prævalensen.</p>
+</div>
+<div class="fragment">
+<p>Samme metode som før:</p>
+<p><span class="math inline">\(estimat_{diff} \pm 1.96*SE_{diff}\)</span></p>
+<p>Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen</p>
+</div>
+<div class="fragment">
+<p>Så… Hvordan beregner vi <span class="math inline">\(SE_{diff}\)</span>?</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></p>
+</div>
+<div class="fragment">
+<p>Og standardfejl på de enkelte proportioner var: <span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></p>
+</div>
+</div>
+</section>
+<section id="så-kan-vi-regne" class="slide level2">
+<h2>Så kan vi regne</h2>
 <div class="columns">
 <div class="column">
+<ul>
+<li>Prævalens af TB blandt de 97 der delte sprøjter: 24.7%</li>
+<li>Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%</li>
+<li><span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></li>
+<li><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></li>
+</ul>
+</div><div class="column">
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="kritisk-værdi" class="slide level2">
+<h2>Kritisk værdi</h2>
+<div class="smaller">
+<p>Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.</p>
+<p><span class="math inline">\(|\frac{\text{estimat}}{SE}| &gt; \text{kritisk værdi}\)</span></p>
+<p>Når vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.</p>
+<p>Venstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.</p>
+<p>Så vi kan ofte springe konfidensintervallet over, konstatere at vi har en <em>test-værdi</em> <span class="math inline">\(|\frac{\text{estimat}}{SE}|\)</span> på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den).</p>
+</div>
+</section>
+<section id="forholdet-mellem-de-to-prævalenser" class="slide level2">
+<h2>Forholdet mellem de to prævalenser?</h2>
+<p>Den hypotese vi så tester er:</p>
+<p><span class="math inline">\(H_0: \frac{p_{deler}}{p_{deler ikke}} = 1\)</span></p>
+<p>Er de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.</p>
+<p>Vi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.</p>
+<p>Metoden er den samme som før. Estimatet +/- 1.96 SE.</p>
+<p>Sådan da…</p>
+</section>
+<section id="komplikationer" class="slide level2">
+<h2>Komplikationer</h2>
+<p>Hvordan beregner vi SE?</p>
+<p>Det er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).</p>
+<p>Vi har ikke en let formel for standardfejlen på en riskratio.</p>
+<p>Det vi har er en formel for standardfejlen af logaritmen af RR.</p>
+<p>Og derfor:</p>
+<p><span class="math inline">\(\log{RR} \pm 1.96 \cdot SE_{\log{RR}}\)</span></p>
+</section>
+<section id="se-for-logrr" class="slide level2">
+<h2>SE for log(RR)</h2>
+<div class="smaller">
+<p>For det generelle forhold:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>udfald 1</th>
+<th>udfald 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eksponeret</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>ikke eksponeret</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>Hvor risikoen for udfald 1 hvis man er eksponeret er: <span class="math inline">\(\frac{a}{a+b}\)</span>, og hvis man ikke er eksponeret: <span class="math inline">\(\frac{c}{c+d}\)</span></p>
+<p>Gælder at:</p>
+<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+</div>
+</section>
+<section id="og-så-er-vi-ca.-klar-til-at-regne" class="slide level2">
+<h2>Og så er vi ca. klar til at regne</h2>
+<div class="columns">
+<div class="column">
+<div class="smaller">
 <div class="cell">
 <div class="cell-output-display">
-<div id="snhrdhtcum" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#snhrdhtcum table {
+<div id="ogpfbeaydm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogpfbeaydm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#snhrdhtcum thead, #snhrdhtcum tbody, #snhrdhtcum tfoot, #snhrdhtcum tr, #snhrdhtcum td, #snhrdhtcum th {
+#ogpfbeaydm thead, #ogpfbeaydm tbody, #ogpfbeaydm tfoot, #ogpfbeaydm tr, #ogpfbeaydm td, #ogpfbeaydm th {
   border-style: none;
 }
 
-#snhrdhtcum p {
+#ogpfbeaydm p {
   margin: 0;
   padding: 0;
 }
 
-#snhrdhtcum .gt_table {
+#ogpfbeaydm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2660,12 +2301,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-left-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_caption {
+#ogpfbeaydm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#snhrdhtcum .gt_title {
+#ogpfbeaydm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2677,7 +2318,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-width: 0;
 }
 
-#snhrdhtcum .gt_subtitle {
+#ogpfbeaydm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2689,7 +2330,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-top-width: 0;
 }
 
-#snhrdhtcum .gt_heading {
+#ogpfbeaydm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2701,13 +2342,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_bottom_border {
+#ogpfbeaydm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_col_headings {
+#ogpfbeaydm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2722,7 +2363,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_col_heading {
+#ogpfbeaydm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2742,7 +2383,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   overflow-x: hidden;
 }
 
-#snhrdhtcum .gt_column_spanner_outer {
+#ogpfbeaydm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2754,15 +2395,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 4px;
 }
 
-#snhrdhtcum .gt_column_spanner_outer:first-child {
+#ogpfbeaydm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#snhrdhtcum .gt_column_spanner_outer:last-child {
+#ogpfbeaydm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#snhrdhtcum .gt_column_spanner {
+#ogpfbeaydm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2774,11 +2415,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   width: 100%;
 }
 
-#snhrdhtcum .gt_spanner_row {
+#ogpfbeaydm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#snhrdhtcum .gt_group_heading {
+#ogpfbeaydm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2804,7 +2445,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   text-align: left;
 }
 
-#snhrdhtcum .gt_empty_group_heading {
+#ogpfbeaydm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2819,15 +2460,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   vertical-align: middle;
 }
 
-#snhrdhtcum .gt_from_md > :first-child {
+#ogpfbeaydm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#snhrdhtcum .gt_from_md > :last-child {
+#ogpfbeaydm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#snhrdhtcum .gt_row {
+#ogpfbeaydm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2846,7 +2487,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   overflow-x: hidden;
 }
 
-#snhrdhtcum .gt_stub {
+#ogpfbeaydm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2859,7 +2500,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#snhrdhtcum .gt_stub_row_group {
+#ogpfbeaydm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2873,15 +2514,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   vertical-align: top;
 }
 
-#snhrdhtcum .gt_row_group_first td {
+#ogpfbeaydm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#snhrdhtcum .gt_row_group_first th {
+#ogpfbeaydm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#snhrdhtcum .gt_summary_row {
+#ogpfbeaydm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2891,16 +2532,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#snhrdhtcum .gt_first_summary_row {
+#ogpfbeaydm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_first_summary_row.thick {
+#ogpfbeaydm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#snhrdhtcum .gt_last_summary_row {
+#ogpfbeaydm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2910,7 +2551,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_grand_summary_row {
+#ogpfbeaydm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2920,7 +2561,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#snhrdhtcum .gt_first_grand_summary_row {
+#ogpfbeaydm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2930,7 +2571,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-top-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_last_grand_summary_row_top {
+#ogpfbeaydm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2940,11 +2581,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_striped {
+#ogpfbeaydm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#snhrdhtcum .gt_table_body {
+#ogpfbeaydm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2953,7 +2594,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_footnotes {
+#ogpfbeaydm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2967,7 +2608,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_footnote {
+#ogpfbeaydm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2976,7 +2617,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#snhrdhtcum .gt_sourcenotes {
+#ogpfbeaydm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2990,7 +2631,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#snhrdhtcum .gt_sourcenote {
+#ogpfbeaydm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2998,72 +2639,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#snhrdhtcum .gt_left {
+#ogpfbeaydm .gt_left {
   text-align: left;
 }
 
-#snhrdhtcum .gt_center {
+#ogpfbeaydm .gt_center {
   text-align: center;
 }
 
-#snhrdhtcum .gt_right {
+#ogpfbeaydm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#snhrdhtcum .gt_font_normal {
+#ogpfbeaydm .gt_font_normal {
   font-weight: normal;
 }
 
-#snhrdhtcum .gt_font_bold {
+#ogpfbeaydm .gt_font_bold {
   font-weight: bold;
 }
 
-#snhrdhtcum .gt_font_italic {
+#ogpfbeaydm .gt_font_italic {
   font-style: italic;
 }
 
-#snhrdhtcum .gt_super {
+#ogpfbeaydm .gt_super {
   font-size: 65%;
 }
 
-#snhrdhtcum .gt_footnote_marks {
+#ogpfbeaydm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#snhrdhtcum .gt_asterisk {
+#ogpfbeaydm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#snhrdhtcum .gt_indent_1 {
+#ogpfbeaydm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#snhrdhtcum .gt_indent_2 {
+#ogpfbeaydm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#snhrdhtcum .gt_indent_3 {
+#ogpfbeaydm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#snhrdhtcum .gt_indent_4 {
+#ogpfbeaydm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#snhrdhtcum .gt_indent_5 {
+#ogpfbeaydm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#snhrdhtcum .katex-display {
+#ogpfbeaydm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#snhrdhtcum div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ogpfbeaydm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3093,26 +2734,86 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 </div>
 </div>
 </div>
-<p>Og:</p>
-<p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
+<div class="smaller">
+<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+</div>
+</div>
 </div><div class="column">
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
-<section id="en-anden-måde-at-regne-det-samme-på" class="slide level2">
-<h2>En anden måde at regne det samme på</h2>
-<p>KI-tilgangen:</p>
-<p>deler: prævalens: 0.247 n = 97 se_deler = sqrt(0.247*(1-0.247)/97) = 0.0437885</p>
-<p>deler_ikke: prævalens: 0.174, n = 161 se_deler_ikke: sqrt(0.174*(1-0.174)/161) = 0.02987801</p>
-<p>KI_deler 0.247 + c(-1,1)<em>1.96</em>0.0437885 = 0.1611745 0.3328255 KI_deler_ikke: 0.174+c(-1,1)<em>1.96</em>0.02987801 = 0.1154391 0.2325609</p>
-<p>Vi bemærker at prævalensen for “deler ikke” er indeholdt i KI_deler, og vi kan derfor konkludere at der ikke er en signifikant forskel.</p>
-<p>Alternativt: Forskel i prævalens: 0.247-0.174 = 0.073 SE_diff = sqrt(se_deler^2 + se_deler_ikke^2) = sqrt( 0.0437885^2 + 0.02987801^2) = 0.05301064</p>
-<p>teststørrelsen finder vi så ved: 0.073/0.05301064 = 1.377082, der ikke er signifikant (&lt;1.96)</p>
+<section id="hvad-så-vi" class="slide level2">
+<h2>Hvad så vi?</h2>
+<div class="smaller">
+<p>RR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.</p>
+<p>Men. KI for RR var [0.877; 2.307]</p>
+<p>Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.</p>
+<p>Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).</p>
+<p>Hvorfor? Fordi log(1) = 0.</p>
+<p>Vi kunne også få teststørrelsen ved <span class="math inline">\(\frac{\log(RR)}{SE(log(RR))}\)</span>. Den var 1.429. Mindre end den kritiske værdi.</p>
+</div>
 </section>
-<section id="risk-ratio" class="slide level2">
-<h2>risk-ratio</h2>
-<p>Forholdet mellem de to proportioner.</p>
+<section id="odds---hvad-er-det" class="slide level2">
+<h2>Odds - hvad er det?</h2>
+<p>Blandt de 97 narkomaner der delte sprøjter var 24 TB+.</p>
+<p>Det gav en risiko for at være TB+ på 24/97.</p>
+<p>Eller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…</p>
+<p>Det kan vi udtrykke anderledes - ved odds.</p>
+<p>Det er antallet af positive udfald divideret med antallet af negative udfald.</p>
+<p>Eller: 24/73</p>
+<p>Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.</p>
+</section>
+<section id="odds---fordelene" class="slide level2">
+<h2>Odds - fordelene</h2>
+<p>Hvis sandsynligheden for et positivt udfald er 10%</p>
+<div class="fragment">
+<p>Er der, ved 10 observationer 1 positivt og 9 negative udfald.</p>
+</div>
+<div class="fragment">
+<p>Som sandsynligheder: 0.1 og 0.9 hhv.</p>
+</div>
+<div class="fragment">
+<p>Som odds: 1/9 og 9/1 hhv.</p>
+<p>Det er intuitivt hinandens modsætninger.</p>
+<p>Og:</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.197225</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">log</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.197225</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Hvor <em>er</em> det bare pænt og symmetrisk!</p>
+</div>
+</section>
+<section id="hvad-tester-vi-så-med-odds" class="slide level2">
+<h2>Hvad tester vi så med odds?</h2>
+<p>(Næsten) det samme som med risiko.</p>
+<p>Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?</p>
+<p>Eller:</p>
+<p>Kan vi afvise at:</p>
+<p><span class="math inline">\(\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1\)</span></p>
+<div class="evensmaller">
+<p>Hov! Det var Odds-Ratio, OR, der dukkede op der!</p>
+</div>
+<p>Samme teknik som før:</p>
+<p><span class="math inline">\(\text{estimat} \pm 1.96\cdot\text{SE}\)</span></p>
+<p>Hvad er SE?</p>
+</section>
+<section id="lignende-problem-som-med-se-for-rr" class="slide level2">
+<h2>Lignende problem som med SE for RR</h2>
+<div class="smaller">
+<p>Vi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))</p>
 <p>For det generelle forhold:</p>
 <table class="caption-top">
 <thead>
@@ -3120,7 +2821,6 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 <th></th>
 <th>udfald 1</th>
 <th>udfald 2</th>
-<th></th>
 </tr>
 </thead>
 <tbody>
@@ -3128,43 +2828,46 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 <td>eksponeret</td>
 <td>a</td>
 <td>b</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>ikke eksponeret</td>
 <td>c</td>
 <td>d</td>
-<td></td>
 </tr>
 </tbody>
 </table>
-<p>Så får vi:</p>
-<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+<div class="fragment">
+<p>Får vi: <span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
+</div>
+<div class="fragment">
+<p>Sammenlign med <span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+<p>Og se hvorfor jeg mener at matematikken bliver enklere med odds…</p>
+</div>
+</div>
 </section>
-<section id="odds-hvad-er-det" class="slide level2">
-<h2>odds hvad er det?</h2>
-</section>
-<section id="odds" class="slide level2">
-<h2>odds</h2>
+<section id="så-er-vi-klar-til-at-regne" class="slide level2">
+<h2>Så er vi klar til at regne</h2>
+<div class="columns">
+<div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<div id="qppaxxqugh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qppaxxqugh table {
+<div id="shwinavveg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#shwinavveg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qppaxxqugh thead, #qppaxxqugh tbody, #qppaxxqugh tfoot, #qppaxxqugh tr, #qppaxxqugh td, #qppaxxqugh th {
+#shwinavveg thead, #shwinavveg tbody, #shwinavveg tfoot, #shwinavveg tr, #shwinavveg td, #shwinavveg th {
   border-style: none;
 }
 
-#qppaxxqugh p {
+#shwinavveg p {
   margin: 0;
   padding: 0;
 }
 
-#qppaxxqugh .gt_table {
+#shwinavveg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3190,12 +2893,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-left-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_caption {
+#shwinavveg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qppaxxqugh .gt_title {
+#shwinavveg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3207,7 +2910,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-width: 0;
 }
 
-#qppaxxqugh .gt_subtitle {
+#shwinavveg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3219,7 +2922,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-top-width: 0;
 }
 
-#qppaxxqugh .gt_heading {
+#shwinavveg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3231,13 +2934,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_bottom_border {
+#shwinavveg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_col_headings {
+#shwinavveg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3252,7 +2955,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_col_heading {
+#shwinavveg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3272,7 +2975,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   overflow-x: hidden;
 }
 
-#qppaxxqugh .gt_column_spanner_outer {
+#shwinavveg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3284,15 +2987,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 4px;
 }
 
-#qppaxxqugh .gt_column_spanner_outer:first-child {
+#shwinavveg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qppaxxqugh .gt_column_spanner_outer:last-child {
+#shwinavveg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qppaxxqugh .gt_column_spanner {
+#shwinavveg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3304,11 +3007,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   width: 100%;
 }
 
-#qppaxxqugh .gt_spanner_row {
+#shwinavveg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qppaxxqugh .gt_group_heading {
+#shwinavveg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3334,7 +3037,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   text-align: left;
 }
 
-#qppaxxqugh .gt_empty_group_heading {
+#shwinavveg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3349,15 +3052,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   vertical-align: middle;
 }
 
-#qppaxxqugh .gt_from_md > :first-child {
+#shwinavveg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qppaxxqugh .gt_from_md > :last-child {
+#shwinavveg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qppaxxqugh .gt_row {
+#shwinavveg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3376,7 +3079,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   overflow-x: hidden;
 }
 
-#qppaxxqugh .gt_stub {
+#shwinavveg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3389,7 +3092,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#qppaxxqugh .gt_stub_row_group {
+#shwinavveg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3403,15 +3106,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   vertical-align: top;
 }
 
-#qppaxxqugh .gt_row_group_first td {
+#shwinavveg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qppaxxqugh .gt_row_group_first th {
+#shwinavveg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qppaxxqugh .gt_summary_row {
+#shwinavveg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3421,16 +3124,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#qppaxxqugh .gt_first_summary_row {
+#shwinavveg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_first_summary_row.thick {
+#shwinavveg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qppaxxqugh .gt_last_summary_row {
+#shwinavveg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3440,7 +3143,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_grand_summary_row {
+#shwinavveg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3450,7 +3153,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#qppaxxqugh .gt_first_grand_summary_row {
+#shwinavveg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3460,7 +3163,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-top-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_last_grand_summary_row_top {
+#shwinavveg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3470,11 +3173,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_striped {
+#shwinavveg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qppaxxqugh .gt_table_body {
+#shwinavveg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3483,7 +3186,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-bottom-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_footnotes {
+#shwinavveg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3497,7 +3200,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_footnote {
+#shwinavveg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3506,7 +3209,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#qppaxxqugh .gt_sourcenotes {
+#shwinavveg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3520,7 +3223,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   border-right-color: #D3D3D3;
 }
 
-#qppaxxqugh .gt_sourcenote {
+#shwinavveg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3528,72 +3231,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
   padding-right: 5px;
 }
 
-#qppaxxqugh .gt_left {
+#shwinavveg .gt_left {
   text-align: left;
 }
 
-#qppaxxqugh .gt_center {
+#shwinavveg .gt_center {
   text-align: center;
 }
 
-#qppaxxqugh .gt_right {
+#shwinavveg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qppaxxqugh .gt_font_normal {
+#shwinavveg .gt_font_normal {
   font-weight: normal;
 }
 
-#qppaxxqugh .gt_font_bold {
+#shwinavveg .gt_font_bold {
   font-weight: bold;
 }
 
-#qppaxxqugh .gt_font_italic {
+#shwinavveg .gt_font_italic {
   font-style: italic;
 }
 
-#qppaxxqugh .gt_super {
+#shwinavveg .gt_super {
   font-size: 65%;
 }
 
-#qppaxxqugh .gt_footnote_marks {
+#shwinavveg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qppaxxqugh .gt_asterisk {
+#shwinavveg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qppaxxqugh .gt_indent_1 {
+#shwinavveg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qppaxxqugh .gt_indent_2 {
+#shwinavveg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qppaxxqugh .gt_indent_3 {
+#shwinavveg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qppaxxqugh .gt_indent_4 {
+#shwinavveg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qppaxxqugh .gt_indent_5 {
+#shwinavveg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qppaxxqugh .katex-display {
+#shwinavveg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qppaxxqugh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#shwinavveg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3623,53 +3326,49 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 </div>
 </div>
 </div>
-<p>odds for tb bland de der deler sprøjter</p>
-<p>24/73</p>
-<p>odds for tb blandt de der ikke deler sprøjter</p>
-<p>28/133</p>
-<p>24/73 divideret med 28/133 - vi ganger med den omvendte.</p>
-<p>Hvor meget større er odds for at have tb i den ene gruppe sammenlignet med den anden?</p>
-<p>Det kommer lidt an på hvad vi dividerer med hvad.</p>
-<p>når vi divideder odds for at have tb når man deler med odds for have tb når man ikke deler - får vi hvor mange gange større (eller mindre) odds er for at have tb når man deler, sammenlignet med når man ikke deler.</p>
-<p>Når vi dividerer odds fo at have tb når man ikke deler med odds fo at have tb når man deler, får vi hvor mange gange større eller mindre odds er for at have tb når man ikke deler, sammenlignet med når man deler.</p>
-</section>
-<section id="hvor-sikre-er-vi-på-det-estimat" class="slide level2">
-<h2>Hvor sikre er vi på det estimat?</h2>
-<p>Det er samme metodik igen-igen. estimat +/- 1.96 gange standardfejlen.</p>
-<p>Det er lidt mere komplkst her, for vi har ikke en let SE beregning for OR. Men vi har en der er simpel for log(or)</p>
-<p>For det generelle forhold:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>udfald 1</th>
-<th>udfald 2</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>eksponeret</td>
-<td>a</td>
-<td>b</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>ikke eksponeret</td>
-<td>c</td>
-<td>d</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Så får vi:</p>
+<div class="smaller">
 <p><span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
+<p><span class="math inline">\(\log{OR} \pm 1.96 \cdot SE(\log{OR})\)</span></p>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
 </section>
-<section id="chiianden-tilgangen" class="slide level2">
-<h2>chiianden tilgangen</h2>
-<p>Lidt mere generel - den kan håndtere mere end et udfald.</p>
-<p>Vi tester grundlæggende hvor stor forskellen er på hvad vi faktisk observerer. Og hvad vi ville forvente.</p>
-<p>Hvis vi kun kender totallerne</p>
+<section id="hvad-så-vi-1" class="slide level2">
+<h2>Hvad så vi</h2>
+<div class="smaller">
+<p>OR var 1.56</p>
+<p>Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.</p>
+<p>Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]</p>
+<p>Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.</p>
+<p>Vi kunne også finde testværdien: <span class="math inline">\(\frac{\log{OR}}{SE(\log{OR})} = 1.420\)</span>. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise <span class="math inline">\(H_0\)</span>.</p>
+<p>95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise <span class="math inline">\(H_0\)</span></p>
+<p>Vær skarpe her. Odds er noget andet end risiko.</p>
+</div>
+</section>
+<section id="fra-sandsynlighed-til-odds" class="slide level2">
+<h2>Fra sandsynlighed til odds</h2>
+<div class="evensmaller">
+<p>Hvordan beregner vi odds hvis vi kender sandsynligheden?</p>
+<p><span class="math inline">\(\text{odds} = \frac{p}{1-p}\)</span></p>
+<p>Hvordan beregner vi sandsynligheden hvis vi kender odds:</p>
+<p><span class="math inline">\(p = \frac{\text{odds}}{1 + \text{odds}}\)</span></p>
+<p>En særlig funktion vi kommer til at møde igen:</p>
+<p><span class="math inline">\(\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)\)</span></p>
+<p>logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.</p>
+<p>Den omvendte kan også være nyttig. Hvis x = logit(p):</p>
+<p><span class="math inline">\(p = \frac{e^x}{1 + e^x}\)</span></p>
+<p>Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.</p>
+</div>
+</section>
+<section id="chi2-tilgangen" class="slide level2">
+<h2><span class="math inline">\(\chi^2\)</span> tilgangen</h2>
+<div class="smaller">
+<p>Mere generel - kan håndtere mere end et udfald.</p>
+<p>Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.</p>
+<p>Tester forskellen på den fordeling vi ser - og den vi ville forvente</p>
+<p>Hvis vi kun kender totalerne</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -3701,73 +3400,84 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede po
 </tbody>
 </table>
 <p>Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter</p>
-<p>Hvor mange forventer vi så har tb blandt de der deler sprøjter?</p>
-<p>52 ud af 258 har tb. Det er den forventede andel. Så når vi har 97 der deler sprøjter så er der 97*52/258 ~ 20. Det er den forventede værdi. Men der er faktisk 24, 4 flere.</p>
-<p>Blandt de der ikke deler sprøjter ville vi forvente at se 161*52/258 ~32 Men der var kun 28. fire færre.</p>
-<p>Chi-i-anden testen laver alle de beregninger, og fortæller os om der er forskel imellem de to grupper.</p>
-<p>Den fortæller os ikke hvilken der har den største prævalens. Blot om der er forskel i fordelingen af tb i mellem de to grupper. Eller om der er forskel i fordelingen af deler/deler ikke mellem de to andre grupper.</p>
-<p>Vi har ialt 258 observationer. Af dem har de 52 tb. Så vi forventer at 52/258 er andelen af tb.</p>
-<p>De der deler sprøjter er, dem er der 97 af.</p>
+<p>Hvor mange forventer vi så har TB blandt de der deler sprøjter?</p>
+</div>
 </section>
-<section id="teststørrelse-tilgangen" class="slide level2">
-<h2>teststørrelse tilgangen</h2>
-<p>vi er interesserede i om et 95% KI indeholder 0.</p>
-<p>vores 95% ki er beregnet ved estimatet +/- 1.96 gangen SE</p>
-<p>Hvis estimat/SE er mindre end 1.96 - hvad så?</p>
+<section id="regne-regne" class="slide level2">
+<h2>Regne-regne</h2>
+<p>52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.</p>
+<div class="fragment">
+<p>Så må der være <span class="math inline">\(\frac{52}{258}\cdot97 \approx 20\)</span> der tester positiv.</p>
+</div>
+<div class="fragment">
+<p>Det er hvad vi forventer. Men vi ser at der er 24.</p>
+</div>
+<div class="fragment">
+<p>Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se <span class="math inline">\(\frac{52}{258}\cdot161 \approx 32\)</span> der tester positiv.</p>
+</div>
+<div class="fragment">
+<p>Det er hvad vi forventer. Men vi ser at der kun er 28.</p>
+<p>Vi laver de samme beregninger på de to andre celler.</p>
+</div>
+</section>
+<section id="regne-regne-1" class="slide level2">
+<h2>Regne-regne</h2>
+<div class="smaller">
+<p><span class="math inline">\(\chi^2\)</span> testens <span class="math inline">\(H_0\)</span> er, at der ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+<p>Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+<p>Styrken er at den kan håndtere flere udfald end to.</p>
+<p>Svagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.</p>
+<p>Og så forudsætter <span class="math inline">\(\chi^2\)</span> testen at der er mindst 5 <em>forventede</em> observationer i hver “celle”.</p>
+<p>Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.</p>
+</div>
+</section>
+<section id="hvordan-gør-vi" class="slide level2">
+<h2>Hvordan gør vi?</h2>
+<p>En smule bøvlet - for vi skal have data ind i en matrix.</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb5-2"><a></a>  <span class="fu">c</span>(<span class="dv">24</span>, <span class="dv">73</span>,</span>
+<span id="cb5-3"><a></a>    <span class="dv">28</span>, <span class="dv">133</span>),</span>
+<span id="cb5-4"><a></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb5-5"><a></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-6"><a></a>)</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a><span class="fu">dimnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb5-9"><a></a>  <span class="at">Exposure =</span> <span class="fu">c</span>(<span class="st">"Deler"</span>, <span class="st">"Deler_ikke"</span>),</span>
+<span id="cb5-10"><a></a>  <span class="at">TB =</span> <span class="fu">c</span>(<span class="st">"Ja"</span>, <span class="st">"Nej"</span>)</span>
+<span id="cb5-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
 </section>
 <section id="sammenfattende" class="slide level2">
 <h2>Sammenfattende</h2>
+<p>Det er ca. altid:</p>
 <p>Estimat +/- 1.96*standardfejlen</p>
-<p>Så hvordan beregner vi standardfejlen ved de forskellige tilgange?</p>
-<p>Så nu kan vi beregne forskelle i proportioner/andel/prevalens</p>
-<p>Vi kan se om 0 er indeholdt i en forskel</p>
-<p>Vi kan beregne ki på RR. Og på Odds</p>
+<p>Undertiden er estimatet logaritmen til det vi er interesseret i. Så er det også standardfejlen på logaritmen til estimatet.</p>
+<p>Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet interval - så er det en anden kritisk værdi. Hint: qnorm.</p>
+<p>Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.</p>
 </section>
 <section id="flere-øvelser" class="slide level2">
 <h2>Flere øvelser</h2>
 </section>
-<section id="hvad-bruger-vi-den-logistiske-regression-til" class="slide level2">
-<h2>Hvad bruger vi den logistiske regression til?</h2>
-<p>Den almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.</p>
-<p>Når vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.</p>
-<p>I den lineære regression fitter vi</p>
-<p>E(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X</p>
-<p>Altså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.</p>
+<section id="logistisk-regression" class="slide level2">
+<h2>Logistisk regression</h2>
+<div class="smaller">
+<p>Vi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.</p>
+<p>Den logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.</p>
+<p>I den lineære regression fittede vi</p>
+<p><span class="math inline">\(y = \beta_0  + \beta_1x\)</span></p>
+<p>Den forventede værdi af y, givet x.</p>
 <p>i den logistiske regression er det:</p>
 <p><span class="math inline">\(log(\frac{p}{1-p}) = \beta_0 + \beta_1x\)</span></p>
-<p>p er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds</p>
-<p>også kaldet logit-funktionen.</p>
-<p>Vil vi have sandsynligheden, skal vi bruge den inverse logit</p>
-<p><span class="math display">\[p = \frac{1}{1+e^{-\eta}}\]</span></p>
-<p>Og vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.</p>
-</section>
-<section id="hvorfor-odds" class="slide level2">
-<h2>Hvorfor odds?</h2>
-<p>Eller rettere - hvorfor log-odds?</p>
-<p>Fordi matematikken bliver pæn og nydelig.</p>
-<p>Ved 10 observationer med to mulige udfald A og B.</p>
-<p>hvor vi har 1 A og derfor 9 B.</p>
-<p>Så er andelen af A: 1/10 Og andelen af B 9/10</p>
-<p>De to er egentlig ækvivalente. Men den ene er 0.1 og den anden er 0.9</p>
-<p>Beregner vi i stedet odds:</p>
-<p>Så er odds for A 1/9. Og odds for B er 9/1</p>
-<p>Det er bare en anden måde at udtrykke det samme på.</p>
-<p>Men tager vi logaritmen til begge</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.197225</code></pre>
+<p>Også kaldet logit-funktionen.</p>
+<p>Så - givet x, får vi log-odds for et bestemt udfald.</p>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">log</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.197225</code></pre>
-</div>
-</div>
-<p>Samme værdi, omvendt fortegn. Pænt centreret om 0.</p>
-<p>Hvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.</p>
-<p>Hvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det <em>ikke</em> sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker.</p>
 </section>
 <section id="hvordan-laver-vi-en-logistisk-regression" class="slide level2">
 <h2>Hvordan laver vi en logistisk regression?</h2>
@@ -3807,28 +3517,32 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <p>Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så</p>
 <p><span class="math inline">\(3*0.018^{0.5}\)</span></p>
 </section>
+<section id="hvad-skal-vi-kunne" class="slide level2">
+<h2>Hvad skal vi kunne?</h2>
+<p>Vi skal kunne genkende en logistisk regression vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder. Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet for et givet sæt af observationer.</p>
+</section>
 <section id="opgave-2025-februar-opgave-1-c" class="slide level2">
 <h2>opgave 2025 februar opgave 1 (c)</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bxefrkxnsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xqsiidxipd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bxefrkxnsy table {
+#xqsiidxipd table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bxefrkxnsy thead, #bxefrkxnsy tbody, #bxefrkxnsy tfoot, #bxefrkxnsy tr, #bxefrkxnsy td, #bxefrkxnsy th {
+#xqsiidxipd thead, #xqsiidxipd tbody, #xqsiidxipd tfoot, #xqsiidxipd tr, #xqsiidxipd td, #xqsiidxipd th {
   border-style: none;
 }
 
-#bxefrkxnsy p {
+#xqsiidxipd p {
   margin: 0;
   padding: 0;
 }
 
-#bxefrkxnsy .gt_table {
+#xqsiidxipd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3854,12 +3568,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_caption {
+#xqsiidxipd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bxefrkxnsy .gt_title {
+#xqsiidxipd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3871,7 +3585,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-width: 0;
 }
 
-#bxefrkxnsy .gt_subtitle {
+#xqsiidxipd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3883,7 +3597,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-width: 0;
 }
 
-#bxefrkxnsy .gt_heading {
+#xqsiidxipd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3895,13 +3609,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_bottom_border {
+#xqsiidxipd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_col_headings {
+#xqsiidxipd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3916,7 +3630,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_col_heading {
+#xqsiidxipd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3936,7 +3650,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#bxefrkxnsy .gt_column_spanner_outer {
+#xqsiidxipd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3948,15 +3662,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 4px;
 }
 
-#bxefrkxnsy .gt_column_spanner_outer:first-child {
+#xqsiidxipd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bxefrkxnsy .gt_column_spanner_outer:last-child {
+#xqsiidxipd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bxefrkxnsy .gt_column_spanner {
+#xqsiidxipd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3968,11 +3682,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   width: 100%;
 }
 
-#bxefrkxnsy .gt_spanner_row {
+#xqsiidxipd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bxefrkxnsy .gt_group_heading {
+#xqsiidxipd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3998,7 +3712,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   text-align: left;
 }
 
-#bxefrkxnsy .gt_empty_group_heading {
+#xqsiidxipd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4013,15 +3727,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: middle;
 }
 
-#bxefrkxnsy .gt_from_md > :first-child {
+#xqsiidxipd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bxefrkxnsy .gt_from_md > :last-child {
+#xqsiidxipd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bxefrkxnsy .gt_row {
+#xqsiidxipd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4040,7 +3754,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#bxefrkxnsy .gt_stub {
+#xqsiidxipd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4053,7 +3767,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#bxefrkxnsy .gt_stub_row_group {
+#xqsiidxipd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4067,15 +3781,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: top;
 }
 
-#bxefrkxnsy .gt_row_group_first td {
+#xqsiidxipd .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#bxefrkxnsy .gt_row_group_first th {
+#xqsiidxipd .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#bxefrkxnsy .gt_summary_row {
+#xqsiidxipd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4085,16 +3799,16 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#bxefrkxnsy .gt_first_summary_row {
+#xqsiidxipd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_first_summary_row.thick {
+#xqsiidxipd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bxefrkxnsy .gt_last_summary_row {
+#xqsiidxipd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4104,7 +3818,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_grand_summary_row {
+#xqsiidxipd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4114,7 +3828,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#bxefrkxnsy .gt_first_grand_summary_row {
+#xqsiidxipd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4124,7 +3838,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_last_grand_summary_row_top {
+#xqsiidxipd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4134,11 +3848,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_striped {
+#xqsiidxipd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bxefrkxnsy .gt_table_body {
+#xqsiidxipd .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4147,7 +3861,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_footnotes {
+#xqsiidxipd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4161,7 +3875,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_footnote {
+#xqsiidxipd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4170,7 +3884,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#bxefrkxnsy .gt_sourcenotes {
+#xqsiidxipd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4184,7 +3898,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bxefrkxnsy .gt_sourcenote {
+#xqsiidxipd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4192,72 +3906,72 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#bxefrkxnsy .gt_left {
+#xqsiidxipd .gt_left {
   text-align: left;
 }
 
-#bxefrkxnsy .gt_center {
+#xqsiidxipd .gt_center {
   text-align: center;
 }
 
-#bxefrkxnsy .gt_right {
+#xqsiidxipd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bxefrkxnsy .gt_font_normal {
+#xqsiidxipd .gt_font_normal {
   font-weight: normal;
 }
 
-#bxefrkxnsy .gt_font_bold {
+#xqsiidxipd .gt_font_bold {
   font-weight: bold;
 }
 
-#bxefrkxnsy .gt_font_italic {
+#xqsiidxipd .gt_font_italic {
   font-style: italic;
 }
 
-#bxefrkxnsy .gt_super {
+#xqsiidxipd .gt_super {
   font-size: 65%;
 }
 
-#bxefrkxnsy .gt_footnote_marks {
+#xqsiidxipd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bxefrkxnsy .gt_asterisk {
+#xqsiidxipd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bxefrkxnsy .gt_indent_1 {
+#xqsiidxipd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bxefrkxnsy .gt_indent_2 {
+#xqsiidxipd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bxefrkxnsy .gt_indent_3 {
+#xqsiidxipd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bxefrkxnsy .gt_indent_4 {
+#xqsiidxipd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bxefrkxnsy .gt_indent_5 {
+#xqsiidxipd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bxefrkxnsy .katex-display {
+#xqsiidxipd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bxefrkxnsy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xqsiidxipd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4338,24 +4052,24 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <p>Vi havde tidligere</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="uqlyeclcjs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="piwycaggzl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#uqlyeclcjs table {
+#piwycaggzl table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uqlyeclcjs thead, #uqlyeclcjs tbody, #uqlyeclcjs tfoot, #uqlyeclcjs tr, #uqlyeclcjs td, #uqlyeclcjs th {
+#piwycaggzl thead, #piwycaggzl tbody, #piwycaggzl tfoot, #piwycaggzl tr, #piwycaggzl td, #piwycaggzl th {
   border-style: none;
 }
 
-#uqlyeclcjs p {
+#piwycaggzl p {
   margin: 0;
   padding: 0;
 }
 
-#uqlyeclcjs .gt_table {
+#piwycaggzl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4381,12 +4095,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_caption {
+#piwycaggzl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uqlyeclcjs .gt_title {
+#piwycaggzl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4398,7 +4112,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-width: 0;
 }
 
-#uqlyeclcjs .gt_subtitle {
+#piwycaggzl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4410,7 +4124,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-width: 0;
 }
 
-#uqlyeclcjs .gt_heading {
+#piwycaggzl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4422,13 +4136,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_bottom_border {
+#piwycaggzl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_col_headings {
+#piwycaggzl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4443,7 +4157,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_col_heading {
+#piwycaggzl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4463,7 +4177,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#uqlyeclcjs .gt_column_spanner_outer {
+#piwycaggzl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4475,15 +4189,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 4px;
 }
 
-#uqlyeclcjs .gt_column_spanner_outer:first-child {
+#piwycaggzl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uqlyeclcjs .gt_column_spanner_outer:last-child {
+#piwycaggzl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uqlyeclcjs .gt_column_spanner {
+#piwycaggzl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4495,11 +4209,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   width: 100%;
 }
 
-#uqlyeclcjs .gt_spanner_row {
+#piwycaggzl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uqlyeclcjs .gt_group_heading {
+#piwycaggzl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4525,7 +4239,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   text-align: left;
 }
 
-#uqlyeclcjs .gt_empty_group_heading {
+#piwycaggzl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4540,15 +4254,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: middle;
 }
 
-#uqlyeclcjs .gt_from_md > :first-child {
+#piwycaggzl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uqlyeclcjs .gt_from_md > :last-child {
+#piwycaggzl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uqlyeclcjs .gt_row {
+#piwycaggzl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4567,7 +4281,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#uqlyeclcjs .gt_stub {
+#piwycaggzl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4580,7 +4294,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#uqlyeclcjs .gt_stub_row_group {
+#piwycaggzl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4594,15 +4308,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: top;
 }
 
-#uqlyeclcjs .gt_row_group_first td {
+#piwycaggzl .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#uqlyeclcjs .gt_row_group_first th {
+#piwycaggzl .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#uqlyeclcjs .gt_summary_row {
+#piwycaggzl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4612,16 +4326,16 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#uqlyeclcjs .gt_first_summary_row {
+#piwycaggzl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_first_summary_row.thick {
+#piwycaggzl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uqlyeclcjs .gt_last_summary_row {
+#piwycaggzl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4631,7 +4345,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_grand_summary_row {
+#piwycaggzl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4641,7 +4355,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#uqlyeclcjs .gt_first_grand_summary_row {
+#piwycaggzl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4651,7 +4365,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_last_grand_summary_row_top {
+#piwycaggzl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4661,11 +4375,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_striped {
+#piwycaggzl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uqlyeclcjs .gt_table_body {
+#piwycaggzl .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4674,7 +4388,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_footnotes {
+#piwycaggzl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4688,7 +4402,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_footnote {
+#piwycaggzl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4697,7 +4411,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#uqlyeclcjs .gt_sourcenotes {
+#piwycaggzl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4711,7 +4425,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#uqlyeclcjs .gt_sourcenote {
+#piwycaggzl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4719,72 +4433,72 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#uqlyeclcjs .gt_left {
+#piwycaggzl .gt_left {
   text-align: left;
 }
 
-#uqlyeclcjs .gt_center {
+#piwycaggzl .gt_center {
   text-align: center;
 }
 
-#uqlyeclcjs .gt_right {
+#piwycaggzl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uqlyeclcjs .gt_font_normal {
+#piwycaggzl .gt_font_normal {
   font-weight: normal;
 }
 
-#uqlyeclcjs .gt_font_bold {
+#piwycaggzl .gt_font_bold {
   font-weight: bold;
 }
 
-#uqlyeclcjs .gt_font_italic {
+#piwycaggzl .gt_font_italic {
   font-style: italic;
 }
 
-#uqlyeclcjs .gt_super {
+#piwycaggzl .gt_super {
   font-size: 65%;
 }
 
-#uqlyeclcjs .gt_footnote_marks {
+#piwycaggzl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uqlyeclcjs .gt_asterisk {
+#piwycaggzl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uqlyeclcjs .gt_indent_1 {
+#piwycaggzl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uqlyeclcjs .gt_indent_2 {
+#piwycaggzl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uqlyeclcjs .gt_indent_3 {
+#piwycaggzl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uqlyeclcjs .gt_indent_4 {
+#piwycaggzl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uqlyeclcjs .gt_indent_5 {
+#piwycaggzl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uqlyeclcjs .katex-display {
+#piwycaggzl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uqlyeclcjs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#piwycaggzl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4846,24 +4560,24 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <p>Vi får oplyst at den korrekte analyse gav dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fmkcfcyrym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="olyrkgavrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fmkcfcyrym table {
+#olyrkgavrx table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fmkcfcyrym thead, #fmkcfcyrym tbody, #fmkcfcyrym tfoot, #fmkcfcyrym tr, #fmkcfcyrym td, #fmkcfcyrym th {
+#olyrkgavrx thead, #olyrkgavrx tbody, #olyrkgavrx tfoot, #olyrkgavrx tr, #olyrkgavrx td, #olyrkgavrx th {
   border-style: none;
 }
 
-#fmkcfcyrym p {
+#olyrkgavrx p {
   margin: 0;
   padding: 0;
 }
 
-#fmkcfcyrym .gt_table {
+#olyrkgavrx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4889,12 +4603,12 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_caption {
+#olyrkgavrx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fmkcfcyrym .gt_title {
+#olyrkgavrx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4906,7 +4620,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-width: 0;
 }
 
-#fmkcfcyrym .gt_subtitle {
+#olyrkgavrx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4918,7 +4632,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-width: 0;
 }
 
-#fmkcfcyrym .gt_heading {
+#olyrkgavrx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4930,13 +4644,13 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_bottom_border {
+#olyrkgavrx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_col_headings {
+#olyrkgavrx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4951,7 +4665,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_col_heading {
+#olyrkgavrx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4971,7 +4685,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#fmkcfcyrym .gt_column_spanner_outer {
+#olyrkgavrx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4983,15 +4697,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 4px;
 }
 
-#fmkcfcyrym .gt_column_spanner_outer:first-child {
+#olyrkgavrx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fmkcfcyrym .gt_column_spanner_outer:last-child {
+#olyrkgavrx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fmkcfcyrym .gt_column_spanner {
+#olyrkgavrx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -5003,11 +4717,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   width: 100%;
 }
 
-#fmkcfcyrym .gt_spanner_row {
+#olyrkgavrx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fmkcfcyrym .gt_group_heading {
+#olyrkgavrx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5033,7 +4747,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   text-align: left;
 }
 
-#fmkcfcyrym .gt_empty_group_heading {
+#olyrkgavrx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5048,15 +4762,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: middle;
 }
 
-#fmkcfcyrym .gt_from_md > :first-child {
+#olyrkgavrx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fmkcfcyrym .gt_from_md > :last-child {
+#olyrkgavrx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fmkcfcyrym .gt_row {
+#olyrkgavrx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5075,7 +4789,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   overflow-x: hidden;
 }
 
-#fmkcfcyrym .gt_stub {
+#olyrkgavrx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5088,7 +4802,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#fmkcfcyrym .gt_stub_row_group {
+#olyrkgavrx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5102,15 +4816,15 @@ Number of Fisher Scoring iterations: 6</code></pre>
   vertical-align: top;
 }
 
-#fmkcfcyrym .gt_row_group_first td {
+#olyrkgavrx .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#fmkcfcyrym .gt_row_group_first th {
+#olyrkgavrx .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#fmkcfcyrym .gt_summary_row {
+#olyrkgavrx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5120,16 +4834,16 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#fmkcfcyrym .gt_first_summary_row {
+#olyrkgavrx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_first_summary_row.thick {
+#olyrkgavrx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fmkcfcyrym .gt_last_summary_row {
+#olyrkgavrx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5139,7 +4853,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_grand_summary_row {
+#olyrkgavrx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5149,7 +4863,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#fmkcfcyrym .gt_first_grand_summary_row {
+#olyrkgavrx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5159,7 +4873,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_last_grand_summary_row_top {
+#olyrkgavrx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5169,11 +4883,11 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_striped {
+#olyrkgavrx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fmkcfcyrym .gt_table_body {
+#olyrkgavrx .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5182,7 +4896,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_footnotes {
+#olyrkgavrx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5196,7 +4910,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_footnote {
+#olyrkgavrx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5205,7 +4919,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#fmkcfcyrym .gt_sourcenotes {
+#olyrkgavrx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5219,7 +4933,7 @@ Number of Fisher Scoring iterations: 6</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#fmkcfcyrym .gt_sourcenote {
+#olyrkgavrx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5227,72 +4941,72 @@ Number of Fisher Scoring iterations: 6</code></pre>
   padding-right: 5px;
 }
 
-#fmkcfcyrym .gt_left {
+#olyrkgavrx .gt_left {
   text-align: left;
 }
 
-#fmkcfcyrym .gt_center {
+#olyrkgavrx .gt_center {
   text-align: center;
 }
 
-#fmkcfcyrym .gt_right {
+#olyrkgavrx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fmkcfcyrym .gt_font_normal {
+#olyrkgavrx .gt_font_normal {
   font-weight: normal;
 }
 
-#fmkcfcyrym .gt_font_bold {
+#olyrkgavrx .gt_font_bold {
   font-weight: bold;
 }
 
-#fmkcfcyrym .gt_font_italic {
+#olyrkgavrx .gt_font_italic {
   font-style: italic;
 }
 
-#fmkcfcyrym .gt_super {
+#olyrkgavrx .gt_super {
   font-size: 65%;
 }
 
-#fmkcfcyrym .gt_footnote_marks {
+#olyrkgavrx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fmkcfcyrym .gt_asterisk {
+#olyrkgavrx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fmkcfcyrym .gt_indent_1 {
+#olyrkgavrx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fmkcfcyrym .gt_indent_2 {
+#olyrkgavrx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fmkcfcyrym .gt_indent_3 {
+#olyrkgavrx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fmkcfcyrym .gt_indent_4 {
+#olyrkgavrx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fmkcfcyrym .gt_indent_5 {
+#olyrkgavrx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fmkcfcyrym .katex-display {
+#olyrkgavrx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fmkcfcyrym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#olyrkgavrx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5456,24 +5170,24 @@ Surv3y Never smoker Smoker or former smoker
 <p>Nu udfører vi en analyse, ogfår følgende output:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ymnogsoffi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dzkyxhvywr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ymnogsoffi table {
+#dzkyxhvywr table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ymnogsoffi thead, #ymnogsoffi tbody, #ymnogsoffi tfoot, #ymnogsoffi tr, #ymnogsoffi td, #ymnogsoffi th {
+#dzkyxhvywr thead, #dzkyxhvywr tbody, #dzkyxhvywr tfoot, #dzkyxhvywr tr, #dzkyxhvywr td, #dzkyxhvywr th {
   border-style: none;
 }
 
-#ymnogsoffi p {
+#dzkyxhvywr p {
   margin: 0;
   padding: 0;
 }
 
-#ymnogsoffi .gt_table {
+#dzkyxhvywr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5499,12 +5213,12 @@ Surv3y Never smoker Smoker or former smoker
   border-left-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_caption {
+#dzkyxhvywr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ymnogsoffi .gt_title {
+#dzkyxhvywr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5516,7 +5230,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-width: 0;
 }
 
-#ymnogsoffi .gt_subtitle {
+#dzkyxhvywr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5528,7 +5242,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-width: 0;
 }
 
-#ymnogsoffi .gt_heading {
+#dzkyxhvywr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5540,13 +5254,13 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_bottom_border {
+#dzkyxhvywr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_col_headings {
+#dzkyxhvywr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5561,7 +5275,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_col_heading {
+#dzkyxhvywr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5581,7 +5295,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#ymnogsoffi .gt_column_spanner_outer {
+#dzkyxhvywr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5593,15 +5307,15 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 4px;
 }
 
-#ymnogsoffi .gt_column_spanner_outer:first-child {
+#dzkyxhvywr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ymnogsoffi .gt_column_spanner_outer:last-child {
+#dzkyxhvywr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ymnogsoffi .gt_column_spanner {
+#dzkyxhvywr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -5613,11 +5327,11 @@ Surv3y Never smoker Smoker or former smoker
   width: 100%;
 }
 
-#ymnogsoffi .gt_spanner_row {
+#dzkyxhvywr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ymnogsoffi .gt_group_heading {
+#dzkyxhvywr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5643,7 +5357,7 @@ Surv3y Never smoker Smoker or former smoker
   text-align: left;
 }
 
-#ymnogsoffi .gt_empty_group_heading {
+#dzkyxhvywr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5658,15 +5372,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: middle;
 }
 
-#ymnogsoffi .gt_from_md > :first-child {
+#dzkyxhvywr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ymnogsoffi .gt_from_md > :last-child {
+#dzkyxhvywr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ymnogsoffi .gt_row {
+#dzkyxhvywr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5685,7 +5399,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#ymnogsoffi .gt_stub {
+#dzkyxhvywr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5698,7 +5412,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ymnogsoffi .gt_stub_row_group {
+#dzkyxhvywr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5712,15 +5426,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: top;
 }
 
-#ymnogsoffi .gt_row_group_first td {
+#dzkyxhvywr .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#ymnogsoffi .gt_row_group_first th {
+#dzkyxhvywr .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#ymnogsoffi .gt_summary_row {
+#dzkyxhvywr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5730,16 +5444,16 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ymnogsoffi .gt_first_summary_row {
+#dzkyxhvywr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_first_summary_row.thick {
+#dzkyxhvywr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ymnogsoffi .gt_last_summary_row {
+#dzkyxhvywr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5749,7 +5463,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_grand_summary_row {
+#dzkyxhvywr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5759,7 +5473,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ymnogsoffi .gt_first_grand_summary_row {
+#dzkyxhvywr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5769,7 +5483,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_last_grand_summary_row_top {
+#dzkyxhvywr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5779,11 +5493,11 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_striped {
+#dzkyxhvywr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ymnogsoffi .gt_table_body {
+#dzkyxhvywr .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5792,7 +5506,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_footnotes {
+#dzkyxhvywr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5806,7 +5520,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_footnote {
+#dzkyxhvywr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5815,7 +5529,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ymnogsoffi .gt_sourcenotes {
+#dzkyxhvywr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5829,7 +5543,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ymnogsoffi .gt_sourcenote {
+#dzkyxhvywr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5837,72 +5551,72 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ymnogsoffi .gt_left {
+#dzkyxhvywr .gt_left {
   text-align: left;
 }
 
-#ymnogsoffi .gt_center {
+#dzkyxhvywr .gt_center {
   text-align: center;
 }
 
-#ymnogsoffi .gt_right {
+#dzkyxhvywr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ymnogsoffi .gt_font_normal {
+#dzkyxhvywr .gt_font_normal {
   font-weight: normal;
 }
 
-#ymnogsoffi .gt_font_bold {
+#dzkyxhvywr .gt_font_bold {
   font-weight: bold;
 }
 
-#ymnogsoffi .gt_font_italic {
+#dzkyxhvywr .gt_font_italic {
   font-style: italic;
 }
 
-#ymnogsoffi .gt_super {
+#dzkyxhvywr .gt_super {
   font-size: 65%;
 }
 
-#ymnogsoffi .gt_footnote_marks {
+#dzkyxhvywr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ymnogsoffi .gt_asterisk {
+#dzkyxhvywr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ymnogsoffi .gt_indent_1 {
+#dzkyxhvywr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ymnogsoffi .gt_indent_2 {
+#dzkyxhvywr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ymnogsoffi .gt_indent_3 {
+#dzkyxhvywr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ymnogsoffi .gt_indent_4 {
+#dzkyxhvywr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ymnogsoffi .gt_indent_5 {
+#dzkyxhvywr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ymnogsoffi .katex-display {
+#dzkyxhvywr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ymnogsoffi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dzkyxhvywr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
