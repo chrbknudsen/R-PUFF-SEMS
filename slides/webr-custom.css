@@ -93,3 +93,11 @@
 .evensmaller {
   font-size: 0.7em;
 }
+
+.reallysmall {
+  font-size: 0.6em;
+}
+
+.tiny {
+  font-size: 0.5em;
+}

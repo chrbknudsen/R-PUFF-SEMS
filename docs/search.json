@@ -259,18 +259,11 @@
     "text": "leversygdomseksamensopgave\nVi har data fra 583 personer, der er blevet henvist til undersøgelse pga mistanke om leversygdom. De første 6 observationer er:\n\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nVariable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)\nVi får denne tabel:\n\n\n      sex\nstatus   F   M\n     0  50 117\n     1  92 324\n\n\nOg opyst at log-ratio er normalfordelt.\nFor status = 0 får vi:\n\n\n\n\nGennemsnit\nSpredning (sd)\n\n\n\n\nl_ratio\n-0.011\n0.289\n\n\nage\n41.2\n17.0\n\n\n\nog for status = 1\n\n\n\n\nGennemsnit\nSpredning (sd)\n\n\n\n\nl_ratio\n-0.152\n0.358\n\n\nage\n46.2\n15.7\n\n\n\n\ner der forskel i log-ratio mellem syge og raske, når der ikke tages højde for forskell i alder og køn.\n\nVi skal bestemme ki for log-ratio mellem syge og raske. Det skal vi bruge SEM til. Raske der er 50+117 = 167, SEM = 0.289/sqrt(167) = 0.02236349 for syge: 92+324 = 416, SEM = 0.358/sqrt(416) = 0.01755239\nden poolede sem er derfor: sqrt( 0.02236349^2 + 0.01755239^2) = 0.02842907\nVi skal se om forskellen er 0. forskellen observerer vi til: -0.152 - -0.011 = -0.141 Det giver en teststørrelse på: -0.141/0.02842907 = -4.96\ndet er klart signifikant (den er næsten fem standardafvigelser fra 0). der er en signifikant lavere l_ratio blandt de syge.\n\nundersøg om kønsfordelingen er den samme for de syge og de raske. Sandsynligheden for at være kvinde blandt de raske: p0 = 50/(50+117) = 0.2994012 Sandsynligheden for at være kvinde blandt de syge: p1 = 92/(92+324) = 0.2211538\n\nHvordan beregnes standardfejlen på det?\ns.e. for en andel finder vi ved sqrt(p(1-p)/n)\nså se_0 = sqrt(0.2994012(1-0.2994012)/(50+117)) = 0.03544078 og se_1 = sqrt(0.2211538(1-0.2211538)/(92+324)) = 0.02034822\nEr den sande værdi af forskellen på de to andele (af kvinder i hhv syg og rask-grupperne) i virkeligheden 0?\nVi ved ikke om spredningen er ens i de to grupper. Så vi skal bruge den poolede se.: se_p = sqrt(0.03544078^2+ 0.02034822^2) = 0.04086684\nforskellen er: 0.2994012-0.2211538 = 0.0782474\nog den ligger så: 0.0782474/0.04086684 = 1.914692 standardfejl fra 0. Og det er ikke signifikant - fordi det er mindre end 1.96.\n\nEr aldersfordelingen den samme for syge som for raske? Hvordan vil vi undersøge det?\n\ntwo-sample t-test. så er forskellen på gennemsnitlig alder forskellig fra 0? Her nævnte eksamensspørgsmålet specifikt at man blot skulle forklare hvad man ville gøre - man skulle ikke regne.\n\nNu laver vi denne analyse i R, hvor vi inddrager alder og køn: &gt; analyse1 &lt;- lm(l_ratio~factor(status)+factor(sex)+age) &gt; summary(analyse1)\n\nDet gav dette output:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.1730998\n0.0488724\n3.542\n0.000430***\n\n\nfactor(status)1\n-0.1196883\n0.0310025\n-3.861\n0.000126***\n\n\nfactor(sex)M\n0.0042939\n0.0324442\n0.132\n0.894756\n\n\nage\n-0.0045177\n0.0008616\n-5.241\n2.24e-7***\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af den? Fortolk værdier i søjlen “Estimate” svarende til variablene status og age.\nDet er en multipel lineær regression med l_ratio som responsvariabel og status, sex og age som forklarende variable. age er kontinuer, status og sex er kategoriske (det ser vi bladnt andet af “factor”). Syge har i gennemsnit, alt andet lige, en signifikant lavere l_ratio end raske. Den estimerer vi til at være ca. 0.12 lavere, jsuteret for køn og alder. Den tilhørende p-værdi er 0.0001 og derfor signifikant. Alderseffekten er også signifikant (p&lt;0.001), og l_ratio falder, i gennemsnit, med 0.0045 pr år. Justeret for status og køn.\n\npredikter median-ratio for de syge i studiepopulationen med en alder på 50 år, som er kvinder.\n\nmiddelværdien kan vie beregne ved: 0.1730998+-0.1196883+50*-0.0045177 = -0.17 Vi har fået oplyst at l_ratio er normalfordelt. I så fald er median og middel ens, så det er medianen vi har fundet. Der efterspørges ratio, ikke l_ratio, så vi skal beregne exp(-0.17) = 0.8436648\n\nHvordan ville vi undersøge om alder, køn og l_ratio er signifikante prædiktorer for sygdomsstatus? Angiv relevant R-kode\n\nSygdomsstatus er en kategorisk, binær variabel. Så vi ville lave en logistisk regression: glm(status~age+factor(sex1)+l_ratio, family=“binomial”).\nOg så ville vi se om p-værdierne var tilstrækkeligt små til at vi kan konkludere at de er signifikante."
   },
   {
-    "objectID": "slides/noter.html#endnu-en-eksamensopgave",
-    "href": "slides/noter.html#endnu-en-eksamensopgave",
-    "title": "Ting at huske",
-    "section": "endnu en eksamensopgave",
-    "text": "endnu en eksamensopgave\nVi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner. I en gruppe er 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB, mens der i en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede positive for TB.\n1a) Hvis vi antager at prævalensen af TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej, hvad vil vi estimere en proportion til at være? Angiv også et 95% KI for det estimat.\nAntal positive: 0.24797 + 0.174161 = (ca) 52 Total i stikprøven: 97+161 = 258 Prævalens: 52/258 = 0.2015504 se på det estimat: sqrt(0.2015504*(1-0.2015504)/258) = 0.02497501\n95% KI: 0.2015504 + c(-1,1)1.960.02497501 = 0.1525994 0.2505014\n1b) Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikek afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI, eller brug statistisk test. Hvis I kigger på modelbesvarelser for denne opgave - bemærk at der er en regnefejl, hvor der byttes om på n for de to grupper.\nKI-tilgangen:\ndeler: prævalens: 0.247 n = 97 se_deler = sqrt(0.247*(1-0.247)/97) = 0.0437885\ndeler_ikke: prævalens: 0.174, n = 161 se_deler_ikke: sqrt(0.174*(1-0.174)/161) = 0.02987801\nKI_deler 0.247 + c(-1,1)1.960.0437885 = 0.1611745 0.3328255 KI_deler_ikke: 0.174+c(-1,1)1.960.02987801 = 0.1154391 0.2325609\nVi bemærker at prævalensen for “deler ikke” er indeholdt i KI_deler, og vi kan derfor konkludere at der ikke er en signifikant forskel.\nAlternatit: Forskel i prævalens: 0.247-0.174 = 0.073 SE_diff = sqrt(se_deler^2 + se_deler_ikke^2) = sqrt( 0.0437885^2 + 0.02987801^2) = 0.05301064\nteststørrelsen finder vi så ved: 0.073/0.05301064 = 1.377082, der ikke er signifikant (&lt;1.96)"
-  },
-  {
     "objectID": "slides/noter.html#eksamen-opgave-2",
     "href": "slides/noter.html#eksamen-opgave-2",
     "title": "Ting at huske",
     "section": "eksamen opgave 2",
-    "text": "eksamen opgave 2\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nVariable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det gier os denne tabel:\n\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\nUndesøg om der er en statistisk signifikant sammenhæng mellem de to variable.\n\nHer kører vi en chi^2 test:\ninput:\n\n\n\n    Pearson's Chi-squared test\n\ndata:  input\nX-squared = 11.709, df = 1, p-value = 0.0006219\n\n\nDet giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.\nDet svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.\n\nNu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)\n\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.postiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
+    "text": "eksamen opgave 2\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nVariable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:\n\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\nUndesøg om der er en statistisk signifikant sammenhæng mellem de to variable.\n\nHer kører vi en chi^2 test:\ninput:\n\n\n\n    Pearson's Chi-squared test\n\ndata:  input\nX-squared = 11.709, df = 1, p-value = 0.0006219\n\n\nDet giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.\nDet svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.\n\nNu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)\n\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.postiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
   },
   {
     "objectID": "slides/noter.html#eksamensopgave-2",
@@ -315,6 +308,20 @@
     "text": "Kategoriske udfald\nKategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.\nKøn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.\nDer er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.\nMen der kan være - socialklasse eg.\nDer kan vi ikke beregne gennemsnit. Så hvad gør vi så?\n\nVi tæller."
   },
   {
+    "objectID": "slides/logistisk.html#kategoriske-udfald-1",
+    "href": "slides/logistisk.html#kategoriske-udfald-1",
+    "title": "Kategoriske udfald",
+    "section": "Kategoriske udfald",
+    "text": "Kategoriske udfald\nHvor mange er der af hver?\nOg hvor stor en andel udgør de så af de samlede hele.\nEr der forskel på de andele grupper imellem?\nKan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?\nOg hvor sikre er vi på vores estimater?"
+  },
+  {
+    "objectID": "slides/logistisk.html#kategoriske-udfald-2",
+    "href": "slides/logistisk.html#kategoriske-udfald-2",
+    "title": "Kategoriske udfald",
+    "section": "Kategoriske udfald",
+    "text": "Kategoriske udfald\nSå vi skal kigge på:\n\nProportioner\nRelativ risiko\nOdds ratio\nChi i anden\n\nOg lidt senere den logistisk regression"
+  },
+  {
     "objectID": "slides/logistisk.html#en-opgave",
     "href": "slides/logistisk.html#en-opgave",
     "title": "Kategoriske udfald",
@@ -322,18 +329,11 @@
     "text": "En opgave\n\n\n\nVi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.\nI en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.\nI en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.\nHvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nHvor mange positive er der? Hvor mange er der ialt? Det er estimatet."
   },
   {
-    "objectID": "slides/logistisk.html#en-opgave-1",
-    "href": "slides/logistisk.html#en-opgave-1",
+    "objectID": "slides/logistisk.html#hvor-sikre-er-vi-på-det-tal",
+    "href": "slides/logistisk.html#hvor-sikre-er-vi-på-det-tal",
     "title": "Kategoriske udfald",
-    "section": "En opgave",
-    "text": "En opgave\n\n\nDet gav disse tal:\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\nHvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nHvor mange positive er der? Hvor mange er der ialt? Det er estimatet."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvor-sikker-er-vi-på-det-tal",
-    "href": "slides/logistisk.html#hvor-sikker-er-vi-på-det-tal",
-    "title": "Kategoriske udfald",
-    "section": "Hvor sikker er vi på det tal?",
-    "text": "Hvor sikker er vi på det tal?\nOpgaven fortsætter: Angiv også et 95% konfidensinterval på det estimat.\nEstimatet er en andel. Også kaldet en proportion\nMetoden har vi set før.\n\n\\(estimat \\pm 1.96 \\cdot SE\\)\n\n\nSå - hvordan beregner vi en standardfejl på estimatet af en proportion?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)"
+    "section": "Hvor sikre er vi på det tal?",
+    "text": "Hvor sikre er vi på det tal?\nOpgaven fortsætter:\nAngiv også et 95% konfidensinterval på det estimat.\nEstimatet er en andel. Også kaldet en proportion\nMetoden har vi set før.\n\n\\(estimat \\pm 1.96 \\cdot SE\\)\n\n\nSå - hvordan beregner vi en standardfejl på estimatet af en proportion?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)"
   },
   {
     "objectID": "slides/logistisk.html#hvor-sikker-var-vi",
@@ -350,60 +350,137 @@
     "text": "Videre med samme opgave\n\nUndersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.\n\n\nHvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.\n\nHvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?\n\n\nAt: I virkeligheden er forskellen på de to prævalenser 0\n\n\nDen ene prævalens divideret med den anden er 1 (for så er de ens)\n\n\nI stedet for prævalenser kan vi beregne odds. Og se om odds er ens.\n\n\nKan vi undersøge om fordelingen af TB er forskellig i de to grupper?\n\n\nVi tager dem en for en"
   },
   {
-    "objectID": "slides/logistisk.html#lad-os-regne",
-    "href": "slides/logistisk.html#lad-os-regne",
+    "objectID": "slides/logistisk.html#forskel-på-prævalenser",
+    "href": "slides/logistisk.html#forskel-på-prævalenser",
     "title": "Kategoriske udfald",
-    "section": "Lad os regne",
-    "text": "Lad os regne\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\nOg:\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "section": "Forskel på prævalenser",
+    "text": "Forskel på prævalenser\n\nEr forskellen i virkeligheden 0?\n\nEller - vi opstiller en NULL-hypotese, \\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\\)\nDen alternative hypotese er så, at der er forskel på prævalensen.\n\n\nSamme metode som før:\n\\(estimat_{diff} \\pm 1.96*SE_{diff}\\)\nEr 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen\n\n\nSå… Hvordan beregner vi \\(SE_{diff}\\)?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\nOg standardfejl på de enkelte proportioner var: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)"
   },
   {
-    "objectID": "slides/logistisk.html#en-anden-måde-at-regne-det-samme-på",
-    "href": "slides/logistisk.html#en-anden-måde-at-regne-det-samme-på",
+    "objectID": "slides/logistisk.html#så-kan-vi-regne",
+    "href": "slides/logistisk.html#så-kan-vi-regne",
     "title": "Kategoriske udfald",
-    "section": "En anden måde at regne det samme på",
-    "text": "En anden måde at regne det samme på\nKI-tilgangen:\ndeler: prævalens: 0.247 n = 97 se_deler = sqrt(0.247*(1-0.247)/97) = 0.0437885\ndeler_ikke: prævalens: 0.174, n = 161 se_deler_ikke: sqrt(0.174*(1-0.174)/161) = 0.02987801\nKI_deler 0.247 + c(-1,1)1.960.0437885 = 0.1611745 0.3328255 KI_deler_ikke: 0.174+c(-1,1)1.960.02987801 = 0.1154391 0.2325609\nVi bemærker at prævalensen for “deler ikke” er indeholdt i KI_deler, og vi kan derfor konkludere at der ikke er en signifikant forskel.\nAlternativt: Forskel i prævalens: 0.247-0.174 = 0.073 SE_diff = sqrt(se_deler^2 + se_deler_ikke^2) = sqrt( 0.0437885^2 + 0.02987801^2) = 0.05301064\nteststørrelsen finder vi så ved: 0.073/0.05301064 = 1.377082, der ikke er signifikant (&lt;1.96)"
+    "section": "Så kan vi regne",
+    "text": "Så kan vi regne\n\n\n\nPrævalens af TB blandt de 97 der delte sprøjter: 24.7%\nPrævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%\n\\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/logistisk.html#risk-ratio",
-    "href": "slides/logistisk.html#risk-ratio",
+    "objectID": "slides/logistisk.html#kritisk-værdi",
+    "href": "slides/logistisk.html#kritisk-værdi",
     "title": "Kategoriske udfald",
-    "section": "risk-ratio",
-    "text": "risk-ratio\nForholdet mellem de to proportioner.\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\n\neksponeret\na\nb\n\n\n\nikke eksponeret\nc\nd\n\n\n\n\nSå får vi:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)"
+    "section": "Kritisk værdi",
+    "text": "Kritisk værdi\n\nHar man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.\n\\(|\\frac{\\text{estimat}}{SE}| &gt; \\text{kritisk værdi}\\)\nNår vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.\nVenstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.\nSå vi kan ofte springe konfidensintervallet over, konstatere at vi har en test-værdi \\(|\\frac{\\text{estimat}}{SE}|\\) på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den)."
   },
   {
-    "objectID": "slides/logistisk.html#odds-hvad-er-det",
-    "href": "slides/logistisk.html#odds-hvad-er-det",
+    "objectID": "slides/logistisk.html#forholdet-mellem-de-to-prævalenser",
+    "href": "slides/logistisk.html#forholdet-mellem-de-to-prævalenser",
     "title": "Kategoriske udfald",
-    "section": "odds hvad er det?",
-    "text": "odds hvad er det?\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nDen var træls…\nMatematikken viser sig at være en del rarere at arbejde med, hvis vi tænker på sandsynligheder lidt anderledes."
+    "section": "Forholdet mellem de to prævalenser?",
+    "text": "Forholdet mellem de to prævalenser?\nDen hypotese vi så tester er:\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nEr de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.\nVi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.\nMetoden er den samme som før. Estimatet +/- 1.96 SE.\nSådan da…"
   },
   {
-    "objectID": "slides/logistisk.html#odds",
-    "href": "slides/logistisk.html#odds",
+    "objectID": "slides/logistisk.html#komplikationer",
+    "href": "slides/logistisk.html#komplikationer",
     "title": "Kategoriske udfald",
-    "section": "odds",
-    "text": "odds\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\nodds for tb bland de der deler sprøjter\n24/73\nodds for tb blandt de der ikke deler sprøjter\n28/133\n24/73 divideret med 28/133 - vi ganger med den omvendte.\nHvor meget større er odds for at have tb i den ene gruppe sammenlignet med den anden?\nDet kommer lidt an på hvad vi dividerer med hvad.\nnår vi divideder odds for at have tb når man deler med odds for have tb når man ikke deler - får vi hvor mange gange større (eller mindre) odds er for at have tb når man deler, sammenlignet med når man ikke deler.\nNår vi dividerer odds fo at have tb når man ikke deler med odds fo at have tb når man deler, får vi hvor mange gange større eller mindre odds er for at have tb når man ikke deler, sammenlignet med når man deler."
+    "section": "Komplikationer",
+    "text": "Komplikationer\nHvordan beregner vi SE?\nDet er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).\nVi har ikke en let formel for standardfejlen på en riskratio.\nDet vi har er en formel for standardfejlen af logaritmen af RR.\nOg derfor:\n\\(\\log{RR} \\pm 1.96 \\cdot SE_{\\log{RR}}\\)"
   },
   {
-    "objectID": "slides/logistisk.html#hvor-sikre-er-vi-på-det-estimat",
-    "href": "slides/logistisk.html#hvor-sikre-er-vi-på-det-estimat",
+    "objectID": "slides/logistisk.html#se-for-logrr",
+    "href": "slides/logistisk.html#se-for-logrr",
     "title": "Kategoriske udfald",
-    "section": "Hvor sikre er vi på det estimat?",
-    "text": "Hvor sikre er vi på det estimat?\nDet er samme metodik igen-igen. estimat +/- 1.96 gange standardfejlen.\nDet er lidt mere komplkst her, for vi har ikke en let SE beregning for OR. Men vi har en der er simpel for log(or)\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\n\neksponeret\na\nb\n\n\n\nikke eksponeret\nc\nd\n\n\n\n\nSå får vi:\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133"
+    "section": "SE for log(RR)",
+    "text": "SE for log(RR)\n\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\nHvor risikoen for udfald 1 hvis man er eksponeret er: \\(\\frac{a}{a+b}\\), og hvis man ikke er eksponeret: \\(\\frac{c}{c+d}\\)\nGælder at:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)"
   },
   {
-    "objectID": "slides/logistisk.html#chiianden-tilgangen",
-    "href": "slides/logistisk.html#chiianden-tilgangen",
+    "objectID": "slides/logistisk.html#og-så-er-vi-ca.-klar-til-at-regne",
+    "href": "slides/logistisk.html#og-så-er-vi-ca.-klar-til-at-regne",
     "title": "Kategoriske udfald",
-    "section": "chiianden tilgangen",
-    "text": "chiianden tilgangen\nLidt mere generel - den kan håndtere mere end et udfald.\nVi tester grundlæggende hvor stor forskellen er på hvad vi faktisk observerer. Og hvad vi ville forvente.\nHvis vi kun kender totallerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har tb blandt de der deler sprøjter?\n52 ud af 258 har tb. Det er den forventede andel. Så når vi har 97 der deler sprøjter så er der 97*52/258 ~ 20. Det er den forventede værdi. Men der er faktisk 24, 4 flere.\nBlandt de der ikke deler sprøjter ville vi forvente at se 161*52/258 ~32 Men der var kun 28. fire færre.\nChi-i-anden testen laver alle de beregninger, og fortæller os om der er forskel imellem de to grupper.\nDen fortæller os ikke hvilken der har den største prævalens. Blot om der er forskel i fordelingen af tb i mellem de to grupper. Eller om der er forskel i fordelingen af deler/deler ikke mellem de to andre grupper.\nVi har ialt 258 observationer. Af dem har de 52 tb. Så vi forventer at 52/258 er andelen af tb.\nDe der deler sprøjter er, dem er der 97 af.\nog regneeksemplet - formattering af table."
+    "section": "Og så er vi ca. klar til at regne",
+    "text": "Og så er vi ca. klar til at regne\n\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/logistisk.html#teststørrelse-tilgangen",
-    "href": "slides/logistisk.html#teststørrelse-tilgangen",
+    "objectID": "slides/logistisk.html#hvad-så-vi",
+    "href": "slides/logistisk.html#hvad-så-vi",
     "title": "Kategoriske udfald",
-    "section": "teststørrelse tilgangen",
-    "text": "teststørrelse tilgangen\nvi er interesserede i om et 95% KI indeholder 0.\nvores 95% ki er beregnet ved estimatet +/- 1.96 gangen SE\nHvis estimat/SE er mindre end 1.96 - hvad så?"
+    "section": "Hvad så vi?",
+    "text": "Hvad så vi?\n\nRR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.\nMen. KI for RR var [0.877; 2.307]\nDet indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.\nVi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).\nHvorfor? Fordi log(1) = 0.\nVi kunne også få teststørrelsen ved \\(\\frac{\\log(RR)}{SE(log(RR))}\\). Den var 1.429. Mindre end den kritiske værdi."
+  },
+  {
+    "objectID": "slides/logistisk.html#odds---hvad-er-det",
+    "href": "slides/logistisk.html#odds---hvad-er-det",
+    "title": "Kategoriske udfald",
+    "section": "Odds - hvad er det?",
+    "text": "Odds - hvad er det?\nBlandt de 97 narkomaner der delte sprøjter var 24 TB+.\nDet gav en risiko for at være TB+ på 24/97.\nEller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…\nDet kan vi udtrykke anderledes - ved odds.\nDet er antallet af positive udfald divideret med antallet af negative udfald.\nEller: 24/73\nHvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds."
+  },
+  {
+    "objectID": "slides/logistisk.html#odds---fordelene",
+    "href": "slides/logistisk.html#odds---fordelene",
+    "title": "Kategoriske udfald",
+    "section": "Odds - fordelene",
+    "text": "Odds - fordelene\nHvis sandsynligheden for et positivt udfald er 10%\n\nEr der, ved 10 observationer 1 positivt og 9 negative udfald.\n\n\nSom sandsynligheder: 0.1 og 0.9 hhv.\n\n\nSom odds: 1/9 og 9/1 hhv.\nDet er intuitivt hinandens modsætninger.\nOg:\n\n\n\nlog(1/9)\n\n[1] -2.197225\n\n\n\nlog(9/1)\n\n[1] 2.197225\n\n\n\n\nHvor er det bare pænt og symmetrisk!"
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-tester-vi-så-med-odds",
+    "href": "slides/logistisk.html#hvad-tester-vi-så-med-odds",
+    "title": "Kategoriske udfald",
+    "section": "Hvad tester vi så med odds?",
+    "text": "Hvad tester vi så med odds?\n(Næsten) det samme som med risiko.\nEr odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?\nEller:\nKan vi afvise at:\n\\(\\frac{\\text{odds}_{\\text{TB+:deler}}}{\\text{odds}_\\text{TB+:deler ikke}} = 1\\)\n\nHov! Det var Odds-Ratio, OR, der dukkede op der!\n\nSamme teknik som før:\n\\(\\text{estimat} \\pm 1.96\\cdot\\text{SE}\\)\nHvad er SE?"
+  },
+  {
+    "objectID": "slides/logistisk.html#lignende-problem-som-med-se-for-rr",
+    "href": "slides/logistisk.html#lignende-problem-som-med-se-for-rr",
+    "title": "Kategoriske udfald",
+    "section": "Lignende problem som med SE for RR",
+    "text": "Lignende problem som med SE for RR\n\nVi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\n\nFår vi: \\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\n\nSammenlign med \\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nOg se hvorfor jeg mener at matematikken bliver enklere med odds…"
+  },
+  {
+    "objectID": "slides/logistisk.html#så-er-vi-klar-til-at-regne",
+    "href": "slides/logistisk.html#så-er-vi-klar-til-at-regne",
+    "title": "Kategoriske udfald",
+    "section": "Så er vi klar til at regne",
+    "text": "Så er vi klar til at regne\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\\(\\log{OR} \\pm 1.96 \\cdot SE(\\log{OR})\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-så-vi-1",
+    "href": "slides/logistisk.html#hvad-så-vi-1",
+    "title": "Kategoriske udfald",
+    "section": "Hvad så vi",
+    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\nVær skarpe her. Odds er noget andet end risiko."
+  },
+  {
+    "objectID": "slides/logistisk.html#fra-sandsynlighed-til-odds",
+    "href": "slides/logistisk.html#fra-sandsynlighed-til-odds",
+    "title": "Kategoriske udfald",
+    "section": "Fra sandsynlighed til odds",
+    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\\(\\text{odds} = \\frac{p}{1-p}\\)\nHvordan beregner vi sandsynligheden hvis vi kender odds:\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nEn særlig funktion vi kommer til at møde igen:\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen."
+  },
+  {
+    "objectID": "slides/logistisk.html#chi2-tilgangen",
+    "href": "slides/logistisk.html#chi2-tilgangen",
+    "title": "Kategoriske udfald",
+    "section": "\\(\\chi^2\\) tilgangen",
+    "text": "\\(\\chi^2\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\nSjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.\nTester forskellen på den fordeling vi ser - og den vi ville forvente\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
+  },
+  {
+    "objectID": "slides/logistisk.html#regne-regne",
+    "href": "slides/logistisk.html#regne-regne",
+    "title": "Kategoriske udfald",
+    "section": "Regne-regne",
+    "text": "Regne-regne\n52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.\n\nSå må der være \\(\\frac{52}{258}\\cdot97 \\approx 20\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der er 24.\n\n\nBlandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se \\(\\frac{52}{258}\\cdot161 \\approx 32\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der kun er 28.\nVi laver de samme beregninger på de to andre celler."
+  },
+  {
+    "objectID": "slides/logistisk.html#regne-regne-1",
+    "href": "slides/logistisk.html#regne-regne-1",
+    "title": "Kategoriske udfald",
+    "section": "Regne-regne",
+    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\nStyrken er at den kan håndtere flere udfald end to.\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvordan-gør-vi",
+    "href": "slides/logistisk.html#hvordan-gør-vi",
+    "title": "Kategoriske udfald",
+    "section": "Hvordan gør vi?",
+    "text": "Hvordan gør vi?\nEn smule bøvlet - for vi skal have data ind i en matrix.\n\n\n\ntab &lt;- matrix(\n  c(24, 73,\n    28, 133),\n  nrow = 2,\n  byrow = TRUE\n)\n\ndimnames(tab) &lt;- list(\n  Exposure = c(\"Deler\", \"Deler_ikke\"),\n  TB = c(\"Ja\", \"Nej\")\n)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/logistisk.html#sammenfattende",
@@ -420,32 +497,74 @@
     "text": "Flere øvelser"
   },
   {
-    "objectID": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
-    "href": "slides/logistisk.html#hvad-bruger-vi-den-logistiske-regression-til",
+    "objectID": "slides/logistisk.html#logistisk-regression",
+    "href": "slides/logistisk.html#logistisk-regression",
     "title": "Kategoriske udfald",
-    "section": "Hvad bruger vi den logistiske regression til?",
-    "text": "Hvad bruger vi den logistiske regression til?\nDen almindelige lineære regression bruger vi når vi forsøger at forudsige en numerisk, kontinuær variabel.\nNår vi skal forudsige en kategorisk variabel bruger vi den logistiske regression i stedet. Den beskidte matematiske hemmelighed er, at det også er en lineær regression.\nI den lineære regression fitter vi\nE(Y|X) = beta0 + beta1x hvor det er den forventede værdi af Y givet X\nAltså, givet værdierne vi bruger til forudsigelsen, hvad forventer vi så Y er.\ni den logistiske regression er det:\n\\(log(\\frac{p}{1-p}) = \\beta_0 + \\beta_1x\\)\np er en sandsynlighed. Men i stedet for en direkte sandsynlighed, er det odds vi modellerer. mere præcist log-odds\nogså kaldet logit-funktionen.\nVil vi have sandsynligheden, skal vi bruge den inverse logit\n\\[p = \\frac{1}{1+e^{-\\eta}}\\]\nOg vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.\nSamme værdi, omvendt fortegn. Pænt centreret om 0.\nHvad er så odds? det er forholdet mellem sandsynligheden af to mulige udfald - at noget sker, og at det ikke sker.\nHvis sandsynligheden for at noget sker er 75%, er sandsynligheden for at det ikke sker 25%. forholdet er derfor 0.75/0.25 = 3. Det vil sige at det er tre gange så sandsynligt at det sker, som at det ikke sker."
+    "section": "Logistisk regression",
+    "text": "Logistisk regression\n\nVi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.\nDen logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.\nI den lineære regression fittede vi\n\\(y = \\beta_0  + \\beta_1x\\)\nDen forventede værdi af y, givet x.\ni den logistiske regression er det:\n\\(log(\\frac{p}{1-p}) = \\beta_0 + \\beta_1x\\)\nOgså kaldet logit-funktionen.\nSå - givet x, får vi log-odds for et bestemt udfald."
   },
   {
-    "objectID": "slides/logistisk.html#hvorfor-odds",
-    "href": "slides/logistisk.html#hvorfor-odds",
+    "objectID": "slides/logistisk.html#hvordan-laves-en-logistisk-regression",
+    "href": "slides/logistisk.html#hvordan-laves-en-logistisk-regression",
     "title": "Kategoriske udfald",
-    "section": "Hvorfor odds?",
-    "text": "Hvorfor odds?\nEller rettere - hvorfor log-odds?\nFordi matematikken bliver pæn og nydelig.\n2.5% af observationerne i en normalfordeling ligger over 1.96. Og 2.5% af observationerne ligger under -1.96.\nDet er pænt og symmetrisk omkring 0.\nDet er lidt vanskeligere ved kategoriske udfald. Der kan vi se hvor mange der har TB. Og hvor mange der ikke har.\nHvis vi 10 observationer med to mulige udfald A og B.\nhvor vi har 1 A og derfor 9 B.\nSå er andelen af A: 1/10 Og andelen af B 9/10\nDe to er egentlig ækvivalente. Men den ene er 0.1 og den anden er 0.9\nBeregner vi i stedet odds:\nSå er odds for A 1/9. Og odds for B er 9/1\nDet er bare en anden måde at udtrykke det samme på.\nMen tager vi logaritmen til begge\n\nlog(1/9)\n\n[1] -2.197225\n\n\n\nlog(9/1)\n\n[1] 2.197225\n\n\nHvor er det pænt."
+    "section": "Hvordan laves en logistisk regression?",
+    "text": "Hvordan laves en logistisk regression?\nDen logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.\nDet er dog ikke “OLS” vi bruger til at regne inde bag ved, men “Maximum Likelihood” i stedet. Det bekymrer vi os ikke om her.\nDet er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere.\nDet betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.\nFunktionen er derfor glm() i stedet or lm()."
   },
   {
-    "objectID": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
-    "href": "slides/logistisk.html#hvordan-laver-vi-en-logistisk-regression",
+    "objectID": "slides/logistisk.html#hvordan-ser-det-ud-i-praksis",
+    "href": "slides/logistisk.html#hvordan-ser-det-ud-i-praksis",
     "title": "Kategoriske udfald",
-    "section": "Hvordan laver vi en logistisk regression?",
-    "text": "Hvordan laver vi en logistisk regression?\nHvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:\nglm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = “binomial” for at angive at den skal lave en logistisk regression\n\n\n\nCall:\nglm(formula = am ~ wt, family = \"binomial\", data = mtcars)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept)   12.040      4.510   2.670  0.00759 **\nwt            -4.024      1.436  -2.801  0.00509 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 43.230  on 31  degrees of freedom\nResidual deviance: 19.176  on 30  degrees of freedom\nAIC: 23.176\n\nNumber of Fisher Scoring iterations: 6\n\n\nestimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.\n\n\n (Intercept)           wt \n1.694596e+05 1.788183e-02 \n\n\nratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.\nHvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054\nHvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så\n\\(3*0.018^{0.5}\\)"
+    "section": "Hvordan ser det ud i praksis?",
+    "text": "Hvordan ser det ud i praksis?\n\nHar vi et datasæt med følgende variable:\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\nKan vi derfor modellere den primære outcome variabel “death” som funktion af rygning, feberepisoder og moderens alder ved:\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")"
   },
   {
-    "objectID": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
-    "href": "slides/logistisk.html#opgave-2025-februar-opgave-1-c",
+    "objectID": "slides/logistisk.html#hvad-betyder-de-enkelte-dele",
+    "href": "slides/logistisk.html#hvad-betyder-de-enkelte-dele",
     "title": "Kategoriske udfald",
-    "section": "opgave 2025 februar opgave 1 (c)",
-    "text": "opgave 2025 februar opgave 1 (c)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nHvad er det vi vil forudsige? vi skal nok have tabellen med også?\nDet er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.\nDet er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?\nLogistisk regression. det er glm.\nI((mage-25)/10) 𝛽 ^ = 0.7423 ,    𝑝 = 0.0005 β ^ ​\n=0.7423,p=0.0005\nSignifikant positiv effekt.\nVariablen er skaleret som:\nmage − 25 10 10 mage−25 ​\naltså: ændring per 10 års stigning i alder over 25.\nI en logistisk model:"
+    "section": "Hvad betyder de enkelte dele?",
+    "text": "Hvad betyder de enkelte dele?\n\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")\n\nHvad får vi ved at trække 25 fra, og dividere mors alder med 10?\n\nMors alder målt i enheden “10 år”, med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse\n\n\nIndpakket i “I()” som specificerer at glm skal behandle (mage-25)/10 som en variabel. Uden, ville glm behandle 25 som en variabel.\n\n\nepisodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.\n\n\nsmoke er den kategoriske variabel der beskriver rygevaner.\n\n\nMen smoke er gemt som tal, så den er pakket ind i factor() for at behandle den som en kategorisk variabel.\n\n\nVi skal specificere hvad datasættet hedder\n\n\nOg fordi glm er en generel funktion, der kan modellere mange forskellige ting, skal vi specificere at det er en logistisk regression. Med family = \"binomial\""
+  },
+  {
+    "objectID": "slides/logistisk.html#hvordan-ser-resultatet-ud",
+    "href": "slides/logistisk.html#hvordan-ser-resultatet-ud",
+    "title": "Kategoriske udfald",
+    "section": "Hvordan ser resultatet ud?",
+    "text": "Hvordan ser resultatet ud?\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\nLogistisk? “z values” i stedet for “t values”. Og opgaven fortalte at responsvariablen var fosterdød. Der er ret kategorisk.\nTolkningen af estimatet vender vi tilbage til.\nz value er testværdien. Hvordan hænger den sammen med Estimate og Std. Error?\np-værdien tester \\(H_0\\): At estimatet i virkeligheden er 0. Det er risikoen/sandsynligheden for at vi afviser \\(H_0\\) selvom den er sand.\np=2⋅P(Z≥∣z∣). Eller: 2*(1 - pnorm(abs(z)))\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#estimaterne",
+    "href": "slides/logistisk.html#estimaterne",
+    "title": "Kategoriske udfald",
+    "section": "Estimaterne",
+    "text": "Estimaterne\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\nFørst og fremmest - “alt andet lige”.\n\n\n(Intercept) log-odds for fosterdød -5.0526 for referencegruppen.\n\n\nHvad er referencegruppen?\n\n\nDe efterfølgende giver os log-odds-ratio (OR). Hvor meget stiger odds med?\n\n\nI((mage-25)/10). Alt andet lige - når mors alder stiger med 10 år (hvorfor), stiger log-odds med 0.7423.\n\n\nepisodes. For hver ekstra feberepisode, stiger log-odds med -0.0752. Det vil sige at den falder.\n\n\nHvis mor har røget i kategori 2 (det var 1-10 cigaretter/dag), stiger log-odds med 0.2063\n\n\nHvis mor har røget i kategori 3 (&gt;10 cigaretter/dag) stiger log-odds med 0.4364\n\n\nMen kun mors alder er statistisk signifikant på 5% niveau. Eller “På et signifikansniveau \\(\\alpha\\) = 0.05.”"
+  },
+  {
+    "objectID": "slides/logistisk.html#hvor-sikre-er-vi-på-de-estimater",
+    "href": "slides/logistisk.html#hvor-sikre-er-vi-på-de-estimater",
+    "title": "Kategoriske udfald",
+    "section": "Hvor sikre er vi på de estimater?",
+    "text": "Hvor sikre er vi på de estimater?\n\n\n\nHvad er et 95% KI på estimatet for “mors alder”?\n\n\\(\\text{Estimate} \\pm1.96\\cdot\\text{SE}\\)\n\n\nEstimate = 0.7423\nSE = 0.2149\n\n\nHusk, det er stadig log-oddsratio!\nSå hvordan finder vi oddsratio?\n\n\nVi exponentierer!\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#prædiktion",
+    "href": "slides/logistisk.html#prædiktion",
+    "title": "Kategoriske udfald",
+    "section": "Prædiktion",
+    "text": "Prædiktion\n\nHvad er odds for forsterdød for en 37 årig mor, der har røget &gt;11 cigaretter/dag, og har haft 3 feberepisoder?\nHvordan gør vi det?\n\nVi indsætter i modellen.\n\n\nSå vi skal bruge estimaterne:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage-25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\n\n\n\\(\\text{logodds} = -5.0526 + 0.7423\\frac{\\text{mage} - 25}{10} - 0.0752\\cdot\\text{episodes} + 0.2063\\cdot\\text{smoke:2} + 0.4364\\cdot\\text{smoke:3}\\)\n\n\n\nmage = 37, episodes = 3, smoke:2 = 0, smoke:3 = 1\n\n\nlogodds = -3.95104\n\n\nodds = exp(-3.95104) = 0.01923469."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-skal-vi-kunne",
+    "href": "slides/logistisk.html#hvad-skal-vi-kunne",
+    "title": "Kategoriske udfald",
+    "section": "Hvad skal vi kunne?",
+    "text": "Hvad skal vi kunne?\nVi skal kunne genkende en logistisk regression vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder. Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet for et givet sæt af observationer."
+  },
+  {
+    "objectID": "slides/logistisk.html#teoridelen-er-done.-nu-er-det-opgaver",
+    "href": "slides/logistisk.html#teoridelen-er-done.-nu-er-det-opgaver",
+    "title": "Kategoriske udfald",
+    "section": "teoridelen er done. Nu er det opgaver!",
+    "text": "teoridelen er done. Nu er det opgaver!"
   },
   {
     "objectID": "slides/logistisk.html#opgave-fra-opgave-maj-2025-1-b",
@@ -565,6 +684,27 @@
     "title": "Lineær regression",
     "section": "linreg 6 - læsning af output",
     "text": "linreg 6 - læsning af output\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nEstimaterne er koefficenterne i y = ax+b. Intercept er b, x er koefficienten der ganges på x værdien, her altså a.\nError er standardfejlen som er i familie med SEM, her er det blot ikke standarderror på “mean” men standardfejlen på estimatet.\nVi er interesserede i at vide om der er en sammenhæng mellem x og y - hvis der er, er estimatet for koefficienten på x forskellig fra 0. For hvis den er 0, så er der ikke en sammenhæng mellem x og y. Det er jo så estimat og standardfejl i de enheder som data nu har. Det er ikke så praktisk, så vi beregner en t-værdi ved at dividere estimatet med standardfejlen. Det fortæller os hvor langt estimatet ligger fra 0 - målt i standardfejl. Vi skifter simpelthen enhed.\nOg hvis vi ved hvor mange standardafvigelser vores estimat ligger fra 0 - så ved vi også hvad sandsynligheden er for at estimatet i virkeligheden er 0, selvom vi ser en værdi der ikke er 0. Den sandsynlighed er p-værdien. Når vi ser &lt; 2e-16 er det fordi p-værdien er så tæt på 0 som den kan komme uden faktisk at være det. R har en grænse for hvor præcist tal kan angives.\nstjernerne betyder noget specifikt - vi har en oversigt over den i linien der starter med “signif. codes”.\nResidual standard error er standardfejlen på residualerne. R-squared er “hvor stor en andel af variationen i data forklares af modellen”. her 97.9%. Det er ret godt, men jeg har også konstrueret data til formålet.\nHvis vi tilføjer variable til modellen, vil R-squared stige. Også selvom variablen intet har med noget at gøre.\nDet vil Adjusted R-squared tage højde for. Den korrigerer for at selvom vi tilføjer noget der forklarer variationen, så hjælper det ikke nødvendigvis modellen. Vi bruger den typisk når vi skal sammenligne to modeller - hvilken er egentlig bedst.\nF-statistic er forholdet mellem den variation modellen forklarer. Og den variation der er tilbage i residualerne. Jo større jo bedre. For det betyder at modellen forklarer meget variation, og residualerne har meget lidt variation tilbage.\nVi kan også forstå den som: Hvor meget bedre er regressionslinien end bare at bruge middelværdien af y."
+  },
+  {
+    "objectID": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
+    "href": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
+    "title": "Lineær regression",
+    "section": "Hvordan estimerer vi Y fra X?",
+    "text": "Hvordan estimerer vi Y fra X?"
+  },
+  {
+    "objectID": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
+    "href": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
+    "title": "Lineær regression",
+    "section": "Hvad er konfidensintervallet på det estimat?",
+    "text": "Hvad er konfidensintervallet på det estimat?"
+  },
+  {
+    "objectID": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
+    "href": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
+    "title": "Lineær regression",
+    "section": "Her skal vi have et eksempel på en opgave",
+    "text": "Her skal vi have et eksempel på en opgave"
   },
   {
     "objectID": "slides/linreg.html#multipel-lineær-regression",
@@ -1461,257 +1601,5 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hoppeeksamensopgave",
     "text": "Hoppeeksamensopgave\nman har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen gender: Køn, 1 dreng, 2 pige age: barnets alder height: barnets højde i cm cohR: Længde af hop på højre ben (cm) cohL: Længde af hop på venstre ben (cm) diff: forskel på chohR og cohL\nVi får også oplyst de første fire observatiner:\n\n\n# A tibble: 4 × 7\n   idnr gender   age height  cohR  cohL  diff\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1      1    10   148.  186.  207. -21.4\n2     2      2     9   136.  257.  223   34.4\n3     3      1     9   139.  204.  250. -46.8\n4     4      2     9   138.  347   388. -41.4\n\n\nOg noget summarisk data: &gt;mean(cohR) 270.441 &gt;mean(cohL) 265.3871 &gt;mean(diff) 5.053815 &gt;sd(cohR) 74.69524 &gt;sd(cohL) 79.73807 &gt;sd(diff) 37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?\nDet er en parret t-test hvor vi ser på differencen. Vi skal bruge SEM.\nSEM = 37.87201/sqrt(249) = 2.400041\nmiddel/sem = 5.053815/2.400041 = 2.10572 Det udtrykker hvor mange s.e. den observerede differens ligger fra 0. Det er mere end 1.96, så forskellen er signifikant.\nVi finder p-værdien ved 2*pt(-abs(2.10572), df = 248)\n\ngennemsnit og spredning for diff for pigerne beregnes til 12.51 og 36.15\n\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\ndiff for Berit er 250-200 = 50.\nNormalområdet er 12.51 + c(-1,1)1.9636.15 = -58.344 83.364 Berits måling ligger inden for normalområdet.\n\n\n\nNu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen “Estimate” og beregn de tilhørende 95% konfidensintervaller\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel. vi har køn som kategorisk variabel, og 2 er pigerne. Der er en signifikant kønsforskel.\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori) Den er ikke signifikant - da p er over 0.05.\net95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
-  },
-  {
-    "objectID": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
-    "href": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
-    "title": "Lineær regression",
-    "section": "Hvordan estimerer vi Y fra X?",
-    "text": "Hvordan estimerer vi Y fra X?"
-  },
-  {
-    "objectID": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
-    "href": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
-    "title": "Lineær regression",
-    "section": "Hvad er konfidensintervallet på det estimat?",
-    "text": "Hvad er konfidensintervallet på det estimat?"
-  },
-  {
-    "objectID": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
-    "href": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
-    "title": "Lineær regression",
-    "section": "Her skal vi have et eksempel på en opgave",
-    "text": "Her skal vi have et eksempel på en opgave"
-  },
-  {
-    "objectID": "slides/logistisk.html#lad-os-tage-den-en-for-en",
-    "href": "slides/logistisk.html#lad-os-tage-den-en-for-en",
-    "title": "Kategoriske udfald",
-    "section": "Lad os tage den en for en",
-    "text": "Lad os tage den en for en\n\nEr forskellen i virkeligheden 0?\nEller - vi opstiller en NULL-hypotese, \\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\\)\nDen alternative hypotese er så at der er forskel på prævalensen.\nSamme metode som før:\n\\(estimat_{diff} \\pm 1.96*SE_{diff}\\)\nEr 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen\nSå… Hvordan beregner vi \\(SE_{diff}\\)?\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\nOg vi kan godt huske hvordan vi beregnede standardfejlen på de enkelte proportioner:\n\\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#så-kan-vi-regne",
-    "href": "slides/logistisk.html#så-kan-vi-regne",
-    "title": "Kategoriske udfald",
-    "section": "Så kan vi regne",
-    "text": "Så kan vi regne\n\n\n\nPrævalens af TB blandt de 97 der delte sprøjter: 24.7%\nPrævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%\n\\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/logistisk.html#kritisk-værdi",
-    "href": "slides/logistisk.html#kritisk-værdi",
-    "title": "Kategoriske udfald",
-    "section": "Kritisk værdi",
-    "text": "Kritisk værdi\n\nHar man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.\n\\(|\\frac{\\text{estimat}}{SE}| &gt; \\text{kritisk værdi}\\)\nNår vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.\nVenstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.\nSå vi kan ofte springe konfidensintervallet over, konstatere at vi har en test-værdi \\(|\\frac{\\text{estimat}}{SE}|\\) på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den)."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-med-forholdet-for-de-to-prævalenser",
-    "href": "slides/logistisk.html#hvad-med-forholdet-for-de-to-prævalenser",
-    "title": "Kategoriske udfald",
-    "section": "Hvad med forholdet for de to prævalenser?",
-    "text": "Hvad med forholdet for de to prævalenser?\nDen hypotese vi så tester er at:\nH0: p_deler/p_deler_ikke = 1\nFor hvis de er (tilstrækkeligt) forskellige - så kan vi konkludere at der er forskel i risikoen.\nVi kalder også prævalenserne for proportioner.\nOg i jeres branche kalder man ofte prævalensen for en “Risk”.\nog det vi så tester er, om forholdet mellem de to risici er forskelligt fra 1. Eller, om Risk Ratio (RR), er forskellig fra 1. Er den forskellig, kan vi konkludere at derer forskel i risiko. Er den ikke forskellig, kan vi ikke konkludere at der er forskel i risikoen.\nMetoden er den samme som før. Estimatet +/- 1.96 SE_RR. Er 1 indeholdt.\nEller - Estimat/SE_RR - er det større eller mindre end 1.96\nSå skal vi blot vide hvordan vi beregner SE.\nDet er bøvlet… Og årsagen til at vi nok ville foretrække at kigge på KI for differencen i stedet.\nMen vi skal kunne så…\nDet der gør det bøvlet er, at vi ikke har en let formel for SE_RR. Vi har en let formel for standardfejlen af logaritme af RR.\nForholdet mellem de to proportioner.\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\n\neksponeret\na\nb\n\n\n\nikke eksponeret\nc\nd\n\n\n\n\nSå får vi:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nSå nu ved vi hvad SE er for log(RR). Så skal vi have beregnet log(RR). Og så skal vi have beregnet KI for log(RR). og så skal vi have forvandlet det KI fra log(RR) til RR."
-  },
-  {
-    "objectID": "slides/logistisk.html#og-så-er-vi-ca.-klar-til-at-regne",
-    "href": "slides/logistisk.html#og-så-er-vi-ca.-klar-til-at-regne",
-    "title": "Kategoriske udfald",
-    "section": "Og så er vi ca. klar til at regne",
-    "text": "Og så er vi ca. klar til at regne\n\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-så-vi",
-    "href": "slides/logistisk.html#hvad-så-vi",
-    "title": "Kategoriske udfald",
-    "section": "Hvad så vi?",
-    "text": "Hvad så vi?\n\nRR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.\nMen. KI for RR var [0.877; 2.307]\nDet indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.\nVi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).\nHvorfor? Fordi log(1) = 0.\nVi kunne også få teststørrelsen ved \\(\\frac{\\log(RR)}{SE(log(RR))}\\). Den var 1.429. Mindre end den kritiske værdi."
-  },
-  {
-    "objectID": "slides/logistisk.html#fra-sandsynlighed-til-odds",
-    "href": "slides/logistisk.html#fra-sandsynlighed-til-odds",
-    "title": "Kategoriske udfald",
-    "section": "Fra sandsynlighed til odds",
-    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\\(\\text{odds} = \\frac{p}{1-p}\\)\nHvordan beregner vi sandsynligheden hvis vi kender odds:\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nEn særlig funktion vi kommer til at møde igen:\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen."
-  },
-  {
-    "objectID": "slides/logistisk.html#oddsratio-tilgangen",
-    "href": "slides/logistisk.html#oddsratio-tilgangen",
-    "title": "Kategoriske udfald",
-    "section": "oddsratio tilgangen",
-    "text": "oddsratio tilgangen\nSamme ide som med RR. Hvis odds for at have tb hvis man deler sprøjter, divideret med odss for at have tb når man ikke deler sprøjter, er 1 (eller at vi på 95% konfidensinterval ikke kan afvise at det er 1). Så er der ikke nogen forskel.\nMetoden har I set før.\nEstimat +/- 1.96*SE_or\nSå hvordan finder vi SE_or\nDet er et argument for at arbejde med OR i stedet for RR\nDet er lidt mere komplkst her, for vi har ikke en let SE beregning for OR. Men vi har en der er simpel for log(OR)\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\n\neksponeret\na\nb\n\n\n\nikke eksponeret\nc\nd\n\n\n\n\nSå får vi:\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\nDet betyder så, at når vi får:\nlog(or) +/- 1.96*se(log(or))\nså vi skal tage logaritmen til vores beregnede OR, så får vi det logaritmerede konfidensinterval.\nDet omvendte af logaritmen er exponentialfunktionen. Så vi exponentierer vores logaritmerede konfidensinterval.\nOg så har vi svaret."
-  },
-  {
-    "objectID": "slides/logistisk.html#så-er-vi-klar-til-at-regne",
-    "href": "slides/logistisk.html#så-er-vi-klar-til-at-regne",
-    "title": "Kategoriske udfald",
-    "section": "Så er vi klar til at regne",
-    "text": "Så er vi klar til at regne\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\\(\\log{OR} \\pm 1.96 \\cdot SE(\\log{OR})\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-skal-vi-kunne",
-    "href": "slides/logistisk.html#hvad-skal-vi-kunne",
-    "title": "Kategoriske udfald",
-    "section": "Hvad skal vi kunne?",
-    "text": "Hvad skal vi kunne?\nVi skal kunne genkende en logistisk regression vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder. Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet for et givet sæt af observationer."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-så-vi-1",
-    "href": "slides/logistisk.html#hvad-så-vi-1",
-    "title": "Kategoriske udfald",
-    "section": "Hvad så vi",
-    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\nVær skarpe her. Odds er noget andet end risiko."
-  },
-  {
-    "objectID": "slides/logistisk.html#chi-i-anden-chi2-tilgangen",
-    "href": "slides/logistisk.html#chi-i-anden-chi2-tilgangen",
-    "title": "Kategoriske udfald",
-    "section": "chi-i-anden (\\(\\chi^2\\)) tilgangen",
-    "text": "chi-i-anden (\\(\\chi^2\\)) tilgangen\nLidt mere generel - den kan håndtere mere end et udfald.\nVi tester grundlæggende hvor stor forskellen er på hvad vi faktisk observerer. Og hvad vi ville forvente.\nHvis vi kun kender totallerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har tb blandt de der deler sprøjter?\n52 ud af 258 har tb. Det er den forventede andel. Så når vi har 97 der deler sprøjter så er der 97*52/258 ~ 20. Det er den forventede værdi. Men der er faktisk 24, 4 flere.\nBlandt de der ikke deler sprøjter ville vi forvente at se 161*52/258 ~32 Men der var kun 28. fire færre.\nChi-i-anden testen laver alle de beregninger, og fortæller os om der er forskel imellem de to grupper.\nDen fortæller os ikke hvilken der har den største prævalens. Blot om der er forskel i fordelingen af tb i mellem de to grupper. Eller om der er forskel i fordelingen af deler/deler ikke mellem de to andre grupper.\nVi har ialt 258 observationer. Af dem har de 52 tb. Så vi forventer at 52/258 er andelen af tb.\nDe der deler sprøjter er, dem er der 97 af.\nog regneeksemplet - formattering af table."
-  },
-  {
-    "objectID": "slides/logistisk.html#chi-i-anden-leftchi2right-tilgangen",
-    "href": "slides/logistisk.html#chi-i-anden-leftchi2right-tilgangen",
-    "title": "Kategoriske udfald",
-    "section": "chi-i-anden \\(\\left(\\chi^2\\right)\\) tilgangen",
-    "text": "chi-i-anden \\(\\left(\\chi^2\\right)\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\nOptræder sjældent til eksamen - den kræver en del tasteri, og det er ikke hvad I bliver testet for.\nTester forskellen på den fordeling vi ser - og den vi ville forvente\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
-  },
-  {
-    "objectID": "slides/logistisk.html#regne-regne",
-    "href": "slides/logistisk.html#regne-regne",
-    "title": "Kategoriske udfald",
-    "section": "Regne-regne",
-    "text": "Regne-regne\n52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.\n\nSå må der være \\(\\frac{52}{258}\\cdot97 \\approx 20\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der er 24.\n\n\nBlandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se \\(\\frac{52}{258}\\cdot161 \\approx 32\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der kun er 28.\nVi laver de samme beregninger på de to andre celler."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvordan-gør-vi",
-    "href": "slides/logistisk.html#hvordan-gør-vi",
-    "title": "Kategoriske udfald",
-    "section": "Hvordan gør vi?",
-    "text": "Hvordan gør vi?\nEn smule bøvlet - for vi skal have data ind i en matrix.\n\n\n\ntab &lt;- matrix(\n  c(24, 73,\n    28, 133),\n  nrow = 2,\n  byrow = TRUE\n)\n\ndimnames(tab) &lt;- list(\n  Exposure = c(\"Deler\", \"Deler_ikke\"),\n  TB = c(\"Ja\", \"Nej\")\n)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "slides/logistisk.html#regne-regne2",
-    "href": "slides/logistisk.html#regne-regne2",
-    "title": "Kategoriske udfald",
-    "section": "regne-regne2",
-    "text": "regne-regne2\n\n\\(\\chi^2\\) testens \\(H_0\\) er at der ikke er forskel på fordelingen af TB-status i de to grupper.\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\nCharmen er at den kan håndtere flere udfald end to.\nUdfordringen er at den ikke kan fortælle os hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvor-sikre-er-vi-på-det-tal",
-    "href": "slides/logistisk.html#hvor-sikre-er-vi-på-det-tal",
-    "title": "Kategoriske udfald",
-    "section": "Hvor sikre er vi på det tal?",
-    "text": "Hvor sikre er vi på det tal?\nOpgaven fortsætter:\nAngiv også et 95% konfidensinterval på det estimat.\nEstimatet er en andel. Også kaldet en proportion\nMetoden har vi set før.\n\n\\(estimat \\pm 1.96 \\cdot SE\\)\n\n\nSå - hvordan beregner vi en standardfejl på estimatet af en proportion?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#kategoriske-udfald-1",
-    "href": "slides/logistisk.html#kategoriske-udfald-1",
-    "title": "Kategoriske udfald",
-    "section": "Kategoriske udfald",
-    "text": "Kategoriske udfald\nHvor mange er der af hver?\nOg hvor stor en andel udgør de så af de samlede hele.\nEr der forskel på de andele grupper imellem?\nKan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?\nOg hvor sikre er vi på vores estimater?"
-  },
-  {
-    "objectID": "slides/logistisk.html#kategoriske-udfald-2",
-    "href": "slides/logistisk.html#kategoriske-udfald-2",
-    "title": "Kategoriske udfald",
-    "section": "Kategoriske udfald",
-    "text": "Kategoriske udfald\nSå vi skal kigge på:\n\nProportioner\nRelativ risiko\nOdds ratio\nChi i anden\n\nOg lidt senere den logistisk regression"
-  },
-  {
-    "objectID": "slides/logistisk.html#forskel-på-prævalenser",
-    "href": "slides/logistisk.html#forskel-på-prævalenser",
-    "title": "Kategoriske udfald",
-    "section": "Forskel på prævalenser",
-    "text": "Forskel på prævalenser\n\nEr forskellen i virkeligheden 0?\n\nEller - vi opstiller en NULL-hypotese, \\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\\)\nDen alternative hypotese er så, at der er forskel på prævalensen.\n\n\nSamme metode som før:\n\\(estimat_{diff} \\pm 1.96*SE_{diff}\\)\nEr 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen\n\n\nSå… Hvordan beregner vi \\(SE_{diff}\\)?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\nOg standardfejl på de enkelte proportioner var: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#forholdet-mellem-de-to-prævalenser",
-    "href": "slides/logistisk.html#forholdet-mellem-de-to-prævalenser",
-    "title": "Kategoriske udfald",
-    "section": "Forholdet mellem de to prævalenser?",
-    "text": "Forholdet mellem de to prævalenser?\nDen hypotese vi så tester er:\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nEr de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.\nVi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.\nMetoden er den samme som før. Estimatet +/- 1.96 SE.\nSådan da…"
-  },
-  {
-    "objectID": "slides/logistisk.html#komplikationer",
-    "href": "slides/logistisk.html#komplikationer",
-    "title": "Kategoriske udfald",
-    "section": "Komplikationer",
-    "text": "Komplikationer\nHvordan beregner vi SE?\nDet er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).\nVi har ikke en let formel for standardfejlen på en riskratio.\nDet vi har er en formel for standardfejlen af logaritmen af RR.\nOg derfor:\n\\(\\log{RR} \\pm 1.96 \\cdot SE_{\\log{RR}}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#se-for-logrr",
-    "href": "slides/logistisk.html#se-for-logrr",
-    "title": "Kategoriske udfald",
-    "section": "SE for log(RR)",
-    "text": "SE for log(RR)\n\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\nHvor risikoen for udfald 1 hvis man er eksponeret er: \\(\\frac{a}{a+b}\\), og hvis man ikke er eksponeret: \\(\\frac{c}{c+d}\\)\nGælder at:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)"
-  },
-  {
-    "objectID": "slides/logistisk.html#odds---hvad-er-det",
-    "href": "slides/logistisk.html#odds---hvad-er-det",
-    "title": "Kategoriske udfald",
-    "section": "Odds - hvad er det?",
-    "text": "Odds - hvad er det?\nBlandt de 97 narkomaner der delte sprøjter var 24 TB+.\nDet gav en risiko for at være TB+ på 24/97.\nEller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…\nDet kan vi udtrykke anderledes - ved odds.\nDet er antallet af positive udfald divideret med antallet af negative udfald.\nEller: 24/73\nHvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds."
-  },
-  {
-    "objectID": "slides/logistisk.html#odds---fordelene",
-    "href": "slides/logistisk.html#odds---fordelene",
-    "title": "Kategoriske udfald",
-    "section": "Odds - fordelene",
-    "text": "Odds - fordelene\nHvis sandsynligheden for et positivt udfald er 10%\n\nEr der, ved 10 observationer 1 positivt og 9 negative udfald.\n\n\nSom sandsynligheder: 0.1 og 0.9 hhv.\n\n\nSom odds: 1/9 og 9/1 hhv.\nDet er intuitivt hinandens modsætninger.\nOg:\n\n\n\nlog(1/9)\n\n[1] -2.197225\n\n\n\nlog(9/1)\n\n[1] 2.197225\n\n\n\n\nHvor er det bare pænt og symmetrisk!"
-  },
-  {
-    "objectID": "slides/logistisk.html#mer-odds",
-    "href": "slides/logistisk.html#mer-odds",
-    "title": "Kategoriske udfald",
-    "section": "Mer odds",
-    "text": "Mer odds\nSE for RR:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nDen var træls…\nMatematikken viser sig at være en del rarere at arbejde med, hvis vi tænker på sandsynligheder lidt anderledes."
-  },
-  {
-    "objectID": "slides/logistisk.html#hvad-tester-vi-så-med-odds",
-    "href": "slides/logistisk.html#hvad-tester-vi-så-med-odds",
-    "title": "Kategoriske udfald",
-    "section": "Hvad tester vi så med odds?",
-    "text": "Hvad tester vi så med odds?\n(Næsten) det samme som med risiko.\nEr odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?\nEller:\nKan vi afvise at:\n\\(\\frac{\\text{odds}_{\\text{TB+:deler}}}{\\text{odds}_\\text{TB+:deler ikke}} = 1\\)\n\nHov! Det var Odds-Ratio, OR, der dukkede op der!\n\nSamme teknik som før:\n\\(\\text{estimat} \\pm 1.96\\cdot\\text{SE}\\)\nHvad er SE?"
-  },
-  {
-    "objectID": "slides/logistisk.html#lignende-problem-som-med-se-for-rr",
-    "href": "slides/logistisk.html#lignende-problem-som-med-se-for-rr",
-    "title": "Kategoriske udfald",
-    "section": "Lignende problem som med SE for RR",
-    "text": "Lignende problem som med SE for RR\n\nVi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\n\nFår vi: \\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\n\nSammenlign med \\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nOg se hvorfor jeg mener at matematikken bliver enklere med odds…"
-  },
-  {
-    "objectID": "slides/logistisk.html#leftchi2right-tilgangen",
-    "href": "slides/logistisk.html#leftchi2right-tilgangen",
-    "title": "Kategoriske udfald",
-    "section": "\\(\\left(\\chi^2\\right)\\) tilgangen",
-    "text": "\\(\\left(\\chi^2\\right)\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\nOptræder sjældent til eksamen - den kræver en del tasteri, og det er ikke hvad I bliver testet for.\nTester forskellen på den fordeling vi ser - og den vi ville forvente\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
-  },
-  {
-    "objectID": "slides/logistisk.html#chi2-tilgangen",
-    "href": "slides/logistisk.html#chi2-tilgangen",
-    "title": "Kategoriske udfald",
-    "section": "\\(\\chi^2\\) tilgangen",
-    "text": "\\(\\chi^2\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\nSjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.\nTester forskellen på den fordeling vi ser - og den vi ville forvente\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
-  },
-  {
-    "objectID": "slides/logistisk.html#regne-regne-1",
-    "href": "slides/logistisk.html#regne-regne-1",
-    "title": "Kategoriske udfald",
-    "section": "Regne-regne",
-    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\nStyrken er at den kan håndtere flere udfald end to.\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra."
-  },
-  {
-    "objectID": "slides/logistisk.html#logistisk-regression",
-    "href": "slides/logistisk.html#logistisk-regression",
-    "title": "Kategoriske udfald",
-    "section": "Logistisk regression",
-    "text": "Logistisk regression\n\nVi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.\nDen logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.\nI den lineære regression fittede vi\n\\(y = \\beta_0  + \\beta_1x\\)\nDen forventede værdi af y, givet x.\ni den logistiske regression er det:\n\\(log(\\frac{p}{1-p}) = \\beta_0 + \\beta_1x\\)\nOgså kaldet logit-funktionen.\nSå - givet x, får vi log-odds for et bestemt udfald."
-  },
-  {
-    "objectID": "slides/logistisk.html#mere",
-    "href": "slides/logistisk.html#mere",
-    "title": "Kategoriske udfald",
-    "section": "mere",
-    "text": "mere\nVil vi have sandsynligheden, skal vi bruge den inverse logit\n\\[p = \\frac{1}{1+e^{-\\eta}}\\]\nOg vi bruger logodds - fordi matematikken bliver enkel og let. Også selvom vi ikke piller i den selv.\nSamme værdi, omvendt fortegn. Pænt centreret om 0."
   }
 ]
