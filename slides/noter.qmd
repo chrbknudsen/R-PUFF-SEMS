@@ -294,16 +294,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "factor(SEX)1", "0.252051", "0.117514", "2.145", "0.03196*",
 "AGE", "-0.015573", "0.005099", "-3.054", "0.00226**"
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -395,9 +395,9 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "bmi", "", "0.015385", "-3.151", ""
 
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
@@ -679,16 +679,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "age", "-0.0045177", "0.0008616", "-5.241", "2.24e-7***"
 
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
