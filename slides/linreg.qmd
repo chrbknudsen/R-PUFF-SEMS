@@ -772,25 +772,6 @@ Estimatet på alkoholindtagets påvirkning af fødselsvægten indikerer at den, 
 
 
 
-
-## gad vide hvor det her kommer fra?
-
-analyse for kvinder
-summary(lm(diff[sex == "female"] ~ factor(group[sex=="female"])))
-
-analyse for mænd
-summary(lm(diff[sex == "male"] ~ factor(group[sex=="male"])))
-
-
-Hvilke analyser?
-
-lineær regression. Diff som respons og group som forklarende variabel. Den forkarende
-variabel er kategorisk.
-
-intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald.
-Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.
-
-
 ## Opgave
 
 Vi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er 
