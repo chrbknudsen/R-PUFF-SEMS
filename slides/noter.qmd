@@ -747,48 +747,6 @@ glm(status~age+factor(sex1)+l_ratio, family="binomial").
 Og så ville vi se om p-værdierne var tilstrækkeligt små til at vi kan konkludere at de
 er signifikante. 
 
-## endnu en eksamensopgave
-
-Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig 
-af om der deles sprøjter med andre narkomaner. I en gruppe er 97 narkomaner
-der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB, mens 
-der i en gruppe på 161 narkomaner der ikke delte sprøjte, var 17.4% der testede positive for TB.
-
-1a) Hvis vi antager at prævalensen af TB for stiknarkomaner ikke afhænger af om
-man deler sprøjte eller ej, hvad vil vi estimere en proportion til at være?
-Angiv også et 95% KI for det estimat.
-
-Antal positive: 0.247*97 + 0.174*161 = (ca) 52
-Total i stikprøven: 97+161 = 258
-Prævalens: 52/258 = 0.2015504
-se på det estimat: sqrt(0.2015504*(1-0.2015504)/258) = 0.02497501
-
-95% KI: 0.2015504 + c(-1,1)*1.96*0.02497501 = 0.1525994 0.2505014
-
-1b) Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikek
-afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI, eller brug 
-statistisk test. Hvis I kigger på modelbesvarelser for denne opgave - bemærk at der 
-er en regnefejl, hvor der byttes om på n for de to grupper.
-
-KI-tilgangen:
-
-deler: prævalens: 0.247 n = 97
-se_deler = sqrt(0.247*(1-0.247)/97) = 0.0437885
-
-deler_ikke: prævalens: 0.174, n = 161
-se_deler_ikke: sqrt(0.174*(1-0.174)/161) = 0.02987801
-
-KI_deler 0.247 + c(-1,1)*1.96*0.0437885 = 0.1611745 0.3328255
-KI_deler_ikke: 0.174+c(-1,1)*1.96*0.02987801 = 0.1154391 0.2325609
-
-Vi bemærker at prævalensen for "deler ikke" er indeholdt i KI_deler, og vi kan
-derfor konkludere at der ikke er en signifikant forskel.
-
-Alternatit:
-Forskel i prævalens: 0.247-0.174 = 0.073
-SE_diff = sqrt(se_deler^2 + se_deler_ikke^2) = sqrt( 0.0437885^2 + 0.02987801^2) = 0.05301064
-
-teststørrelsen finder vi så ved: 0.073/0.05301064 = 1.377082, der ikke er signifikant (<1.96)
 
 ## eksamen opgave 2
 
@@ -817,7 +775,7 @@ ratio: ratio m. albumin og globulin
 l_ratio: log(ratio) (den naturlige logaritme)
 
 Der defineres en binær variabel AG.positiv som ratio < 1.1
-Det gier os denne tabel:
+Det giver os denne tabel:
 
 
 ```{r}

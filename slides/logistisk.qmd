@@ -667,46 +667,285 @@ Så - givet x, får vi log-odds for et bestemt udfald.
 
 
 
-## Hvordan laver vi en logistisk regression?
+## Hvordan laves en logistisk regression?
 
-Hvis vi har et antal biler, der kan have enten automat- (0) eller manuelt (1) gear, og vil forudsige hvilken type gear bilerne har baseret på deres vægt:
+Den logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
 
-```{r}
-fit <- glm(am ~ wt, data = mtcars, family = "binomial")
+Det er dog ikke "OLS" vi bruger til at regne inde bag ved, men "Maximum Likelihood" i stedet. Det bekymrer vi os ikke om her.
+
+Det er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere. 
+
+Det betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.
+
+Funktionen er derfor `glm()` i stedet or `lm()`.
+
+## Hvordan ser det ud i praksis?
+:::: evensmaller 
+Har vi et datasæt med følgende variable:
+
+**episodes**: Antal episoder med feber under graviditeten (før interview)  
+**death**: Fosterdød (ja = 1, nej = 0)  
+**mage**: Moderens alder ved interview  
+**smoke**: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)  
+**alco**: Antal genstande pr uge under graviditet  
+**weight**: Fødselsvægt i gram  
+
+Kan vi derfor modellere den primære outcome variabel "death" som funktion af rygning, feberepisoder og moderens alder ved:
+
+```{r eval = FALSE, echo = TRUE}
+glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = "binomial")
 ```
 
-glm er den generaliserede lineære model. Så den kan alt muligt, og derfor skal vi specificere hvad den skal - det gør vi ved at skrive family = "binomial" for at angive at den skal lave 
-en logistisk regression
+::::
 
-```{r}
-summary(fit)
+## Hvad betyder de enkelte dele?
+
+:::: evensmaller
+
+```{r eval = FALSE, echo = TRUE}
+glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = "binomial")
 ```
 
-estimat er på log-odds skala. Da estimatet for wt er negativt. Det betyder at hver gang
-wt stiger med 1 (1000 pund), stiger log-odds for at bilen er med manuelt gear med -4.024. Da det er negativt, betyder det at jo tungere bilen er, jo lavere odds har den for at være manuel.
+Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?
 
+:::: {.fragment}
+Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse
+::::
+:::: {.fragment}
+Indpakket i "I()" som specificerer at `glm` skal behandle `(mage-25)/10` som en variabel. Uden, ville `glm` behandle `25` som en variabel.
+::::
+:::: {.fragment}
+episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.
+::::
+:::: {.fragment}
+smoke er den kategoriske variabel der beskriver rygevaner.
+::::
+:::: {.fragment}
+Men smoke er gemt som tal, så den er pakket ind i `factor()` for at behandle den som en kategorisk variabel. 
+:::: 
+
+:::: {.fragment}
+Vi skal specificere hvad datasættet hedder
+:::: 
+:::: {.fragment}
+Og fordi `glm` er en generel funktion, der kan modellere mange forskellige ting, skal vi specificere at det er en logistisk regression. Med 
+`family = "binomial"`
+:::: 
+
+::::
+
+## Hvordan ser resultatet ud?
+:::: {.columns}
+:::: {.column}
+:::: {.tiny}
 ```{r}
-exp(coef(fit))
+library(tidyverse)
+library(gt)
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
+"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
+"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
+"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
+"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
 ```
 
-ratio er ikke som sådan et forhold mellem ting, men den rate som odds ændrer sig med.
+Logistisk? "z values" i stedet for "t values". Og opgaven fortalte at responsvariablen var fosterdød. Der er ret kategorisk.
 
-Hvis odds var 3 før, og vægten stiger med 1 enhed (1000 pund), så er odds nu 3*0.018 = 0.054
+Tolkningen af estimatet vender vi tilbage til. 
 
-Hvis den stiger med noget andet end 1, (0.5 enhed, 500 pund) så 
+z value er testværdien. Hvordan hænger den sammen med Estimate og Std. Error?
 
-$3*0.018^{0.5}$
+p-værdien tester $H_0$: At estimatet i virkeligheden er 0. Det er risikoen/sandsynligheden for at vi afviser $H_0$ selvom den er sand.
 
-## Hvad skal vi kunne?
+p=2⋅P(Z≥∣z∣). Eller: 2*(1 - pnorm(abs(z)))
+::::
+::::
 
-Vi skal kunne genkende en logistisk regression
-vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder.
-Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet
-for et givet sæt af observationer.
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Estimaterne
+
+:::: {.tiny}
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
+"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
+"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
+"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
+"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
+) %>%
+
+  gt() %>%
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) %>%
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+::::{.fragment}
+Først og fremmest - "alt andet lige".
+::::
+::::{.fragment}
+(Intercept) log-odds for fosterdød -5.0526 for referencegruppen.
+::::
+::::{.fragment}
+Hvad er referencegruppen?
+::::
+::::{.fragment}
+De efterfølgende giver os log-odds-ratio (OR). Hvor meget stiger odds med?
+::::
+::::{.fragment}
+I((mage-25)/10). Alt andet lige - når mors alder stiger med 10 år (hvorfor), stiger log-odds med 0.7423.
+::::
+::::{.fragment}
+episodes. For hver ekstra feberepisode, stiger log-odds med -0.0752. Det vil sige at den falder.
+::::
+::::{.fragment}
+Hvis mor har røget i kategori 2 (det var 1-10 cigaretter/dag), stiger log-odds med 0.2063
+::::
+::::{.fragment}
+Hvis mor har røget i kategori 3 (>10 cigaretter/dag) stiger log-odds med 0.4364
+::::
+::::{.fragment}
+Men kun mors alder er statistisk signifikant på 5% niveau. Eller "På et signifikansniveau $\alpha$ = 0.05."
+::::
+
+::::
 
 
-## opgave 2025 februar opgave 1 (c)
 
+
+
+
+## Hvor sikre er vi på de estimater?
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+Hvad er et 95% KI på estimatet for "mors alder"?
+
+:::: {.fragment}
+$\text{Estimate} \pm1.96\cdot\text{SE}$
+::::
+
+:::: {.fragment}
+Estimate = 0.7423
+
+SE = 0.2149
+::::
+
+:::: {.fragment}
+Husk, det er stadig log-oddsratio!  
+Så hvordan finder vi oddsratio?
+::::
+
+:::: {.fragment}
+Vi exponentierer!
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Prædiktion
+:::: evensmaller
+Hvad er odds for forsterdød for en 37 årig mor, der har røget >11 cigaretter/dag, og har haft 3 feberepisoder?
+
+Hvordan gør vi det?
+
+:::: {.fragment}
+
+Vi indsætter i modellen. 
+::::
+
+::::{.fragment}
+Så vi skal bruge estimaterne:
 
 ```{r}
 library(tidyverse)
@@ -755,63 +994,36 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
       font = list(google_font("Courier Prime"), default_fonts()))
 ```
 
-
-Hvad er det vi vil forudsige? vi skal nok have tabellen med også?
-
-Det er et kategorisk udfald - i opgaveteksten fremgår at den primære responsvariabel er fosterdød.
-
-Det er et ja/nej spørgsmål, så hvilken analyse/model skal vi bruge?
-
-Logistisk regression.
-det er glm.
-
-I((mage-25)/10)
-𝛽
-^
-=
-0.7423
-,
-  
-𝑝
-=
-0.0005
-β
-^
-	​
-
-=0.7423,p=0.0005
-
-Signifikant positiv effekt.
-
-Variablen er skaleret som:
-
-mage
-−
-25
-10
-10
-mage−25
-	​
+::::
 
 
-altså: ændring per 10 års stigning i alder over 25.
 
-I en logistisk model:
+:::: {.fragment}
+:::: {.reallysmall}
+$\text{logodds} = -5.0526 + 0.7423\frac{\text{mage} - 25}{10} - 0.0752\cdot\text{episodes} + 0.2063\cdot\text{smoke:2} + 0.4364\cdot\text{smoke:3}$
+::::
+::::
+:::: {.fragment}
+mage = 37, episodes = 3, smoke:2 = 0, smoke:3 = 1
+::::
+:::: {.fragment}
+logodds = -3.95104
+::::
+:::: {.fragment}
+odds = exp(-3.95104) = 0.01923469.
+::::
+::::
 
-odds ratio
-=
-𝑒
-0.7423
-≈
-2.10
-odds ratio=e
-0.7423
-≈2.10
 
-👉 Hver 10-års stigning i alder øger odds for udfaldet med ca. 110 %.
+## Hvad skal vi kunne?
 
-så det her skal nok flyttes til et sæt slides om logistisk regression
+Vi skal kunne genkende en logistisk regression
+vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder.
+Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet
+for et givet sæt af observationer.
 
+
+## teoridelen er done. Nu er det opgaver!
 
 ## Opgave fra opgave maj 2025 1 b
 Vi havde tidligere
