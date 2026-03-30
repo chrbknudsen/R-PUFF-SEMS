@@ -42,20 +42,29 @@ jobs:
 
       - name: Show rendered files
         run: |
-          find docs -maxdepth 3 -type f | sort
+          find docs -maxdepth 4 -type f | sort
 
       - name: Install DeckTape
         run: npm install -g decktape
 
       - name: Create PDF from revealjs slides
         run: |
-          mkdir -p downloads
+          mkdir -p docs/downloads
           decktape \
             --chrome-arg=--no-sandbox \
             --chrome-arg=--disable-dev-shm-usage \
             reveal \
             "file://$GITHUB_WORKSPACE/docs/slides/intro.html" \
-            downloads/intro.pdf
+            "docs/downloads/intro.pdf"
+
+      - name: Verify PDF exists
+        run: |
+          ls -l docs/downloads
+          test -f docs/downloads/intro.pdf
+
+      - name: Show files after PDF creation
+        run: |
+          find docs -maxdepth 4 -type f | sort
 
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
