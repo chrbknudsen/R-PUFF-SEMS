@@ -4,81 +4,67 @@ format:
   revealjs:
     logo: "kubdatalab.png"
     css: webr-custom.css
+    pdf-separate-fragments: false
 engine: knitr
 filters:
   - webr
 ---
 
-## Hvad gør vi her?
+## Hvad jeg har aftalt med PUFF
+:::: smaller
+:::: {.fragment}
+Eksamensrelevant. 
+::::
 
-Fokus på eksamensforberedelse til SEMS
-
-SEMS eksamenssæt kommer i tre dele. Statistik, epidemiologi og medicinsk sociologi.
-
-Her kigger vi kun på statistikken.
-
-## Statistikdelens struktur
-
-Der er typisk to opgaver - med delspørgsmål.
-
-## typer af data
-
-kontinuærte og kategoriske
-
-## noter om historiske opgaver
-
-feb 2025
-1 beregning af konfidensintervaller - og signifikans ud fra det
-  lineær regression - og tolkning herpå
-2 powerberegninger
-
-maj 2024
-1 sammenhæng mellem spredning, kvantiler og middelværdier
-2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor.
-    vi skal også frem og tilbage i logaritmer
-    logistisk regression - odds ratios
+:::: {.fragment}
+SEMS eksamenssæt har tre dele
+::::
 
 
-aug 2024
-1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne
-    sammenligning af to forskellige grupper baseret herp
-2 parret t-test
-    lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne
+::: {.incremental}
+- Statistik
+- Epidemiologi
+- Medicinsk sociologi
+:::
 
-aug 2025
-1. tolkning på histogrammer
-    beregning af SEM og konfidensintervaller
-    powerberegning
-    antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.
-
-decemebr 2024
-1 sammenhæng mellem spredning, kvantiler og middelværdier
-2. valg af logistisk regression.
-    tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression
-    odds-ratio og konfidensinterval på sådan
-
-december 2023
-1. log-ratio teststørrelse.
-    two-sample t-test
-    identifikation af og tolkning af resultater fra lineær regresion
-    estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. 
-    skrivning af relevant r-kode for logistisk regression
-
-februar 2024
-1. prevalens for kategorisk variabel - begning af tælletal fra procenter. 
-    konfidensinterval herfor
-2. chi-square test. 
-    identifikation af og tolking på resultat af logistisk regression
-    beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet)
-    prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression
-
-maj 2025
-1. identifikation af korrekt model - kode for
-    tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier
-    Tolkning af yderligere resultat af model
-    prediktion baseret på denne model
-2. vurdering af konfidensinterval baseret på antal observationer.
+:::: {.fragment}
+Vi holder os til statistik...
+::::
 
 
-Vi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus! 
+::: {.incremental}
+- Holde os meget tæt på typeopgaverne til SEMS-eksamen
+- Holde teorien på niveau af det der skal bruges i dem
+- Måske en smule mere - for at binde tingene sammen
+:::
+
+:::: {.fragment}
+Så... Mere eksamensforberedelse end statistikkursus
+::::
+::::
+
+## Noter om historiske opgaver
+
+Der er typisk to opgaver - med delspørgsmål
+
+Beregning af konfidensintervaller og signifikans
+lineær regression og tolkning samt prediktion
+logistisk regression og tolkning
+powerberegninger
+Normalfordelingseksersits
+Sandsynligheder for kategoriske variable
+relativ risiko
+odds ratio 
+Og konfidensintervaller for dem. samt prediktion
+parret t-test
+beregning af SEM og konfidensintervaller for middelværdier
+Chi-i-anden test
+vurdering af konfidensinterval baseret på antal observationer.
+
+## Vi kører slides
+
+Fordi der er mere forklaring end kode.
+
+Og fordi vi kan køre kode inde i slides, men ikke slides inde i kode
+
 

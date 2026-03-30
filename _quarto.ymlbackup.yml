@@ -1,0 +1,16 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "PUFF SEMS forberedelse"
+  navbar:
+    left:
+      - text: "PUFF SEMS forberedelse"
+        href: slides/intro.qmd 
+      - text: "Powerberegninger"
+        href: slides/powerberegninger_notat.html
+
+
+
+
