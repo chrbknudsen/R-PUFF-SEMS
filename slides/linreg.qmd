@@ -36,6 +36,7 @@ x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?
 ## En ret linie
 Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)
 ```{r echo = FALSE}
+library(tidyverse)
 set.seed(123)
 
 n <- 50; a <- 42; b <- 47
@@ -181,7 +182,7 @@ data2 <- data |>
   )
 
 # punkt med største residual
-point <- data2 %>%
+point <- data2 |> 
   slice_max(abs_resid, n = 1, with_ties = FALSE)
 
 # regressionskoefficienter
@@ -193,7 +194,7 @@ eq_label <- paste0(
   round(coefs[1], 2)
 )
 
-data2 %>%
+data2 |> 
   ggplot(aes(x, y)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
@@ -603,16 +604,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "factor(smoke)2", "-127.377", "15.757", "", "",
 "factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
 "alco", "1.045", "6.075", "0.172", "0.863"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -680,7 +681,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -840,16 +841,16 @@ library(gt)
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "96.818", "8.920", "10.86", "<2e-16***",
 "FEDME", "23.001", "6.667", "3.45", "0.000822***"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -899,16 +900,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "93.287", "8.937", "10.438", "<2e-16***",
 "factor(KØN)1", "-7.730", "3.715", "", "",
 "FEDME", "", "7.172", "4.049", ""
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
