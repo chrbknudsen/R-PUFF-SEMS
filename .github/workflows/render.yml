@@ -40,6 +40,10 @@ jobs:
       - name: Render Quarto site
         run: quarto render
 
+      - name: Show rendered files
+        run: |
+          find docs -maxdepth 3 -type f | sort
+
       - name: Install DeckTape
         run: npm install -g decktape
 
@@ -50,8 +54,8 @@ jobs:
             --chrome-arg=--no-sandbox \
             --chrome-arg=--disable-dev-shm-usage \
             reveal \
-            file://$GITHUB_WORKSPACE/_site/slides.html \
-            downloads/slides.pdf
+            "file://$GITHUB_WORKSPACE/docs/slides/intro.html" \
+            downloads/intro.pdf
 
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
