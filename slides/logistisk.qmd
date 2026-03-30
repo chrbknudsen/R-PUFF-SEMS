@@ -747,16 +747,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "episodes", "-0.0752", "0.2048", "-0.368", "0.713",
 "factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
 "factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -819,16 +819,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "episodes", "-0.0752", "0.2048", "-0.368", "0.713",
 "factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
 "factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -956,16 +956,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "episodes", "-0.0752", "0.2048", "-0.368", "0.713",
 "factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
 "factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1036,9 +1036,9 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "factor(smoke)2", "-127.377", "15.757", "", "",
 "factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
 "alco", "1.045", "6.075", "0.172", "0.863"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
