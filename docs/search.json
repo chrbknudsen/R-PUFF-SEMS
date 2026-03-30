@@ -616,11 +616,11 @@
     "text": "noter om historiske opgaver\nfeb 2025 1 beregning af konfidensintervaller - og signifikans ud fra det lineær regression - og tolkning herpå 2 powerberegninger\nmaj 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. sandsynligheder for kategoriske variabele, relativ risiko og konfidensinterval herfor. vi skal også frem og tilbage i logaritmer logistisk regression - odds ratios\naug 2024 1 konfidensinterval for andel (kategorisk variabel/incidens) beregning af SE på denne sammenligning af to forskellige grupper baseret herp 2 parret t-test lineær regression og tolkning af resultater - beregning af konfidensintervaller på estimaterne\naug 2025 1. tolkning på histogrammer beregning af SEM og konfidensintervaller powerberegning antal personer med given fordeling der ligger inden for intervallet i en anden fordeling.\ndecemebr 2024 1 sammenhæng mellem spredning, kvantiler og middelværdier 2. valg af logistisk regression. tolkning af output fra sådan en. beregning af manglende estimat og p-værdi (ud fra z value). konfidensinterval for logistisk regression odds-ratio og konfidensinterval på sådan\ndecember 2023 1. log-ratio teststørrelse. two-sample t-test identifikation af og tolkning af resultater fra lineær regresion estimat af middelværdi - og at det er det samme som medianen fordi der antages normalitet. skrivning af relevant r-kode for logistisk regression\nfebruar 2024 1. prevalens for kategorisk variabel - begning af tælletal fra procenter. konfidensinterval herfor 2. chi-square test. identifikation af og tolking på resultat af logistisk regression beregning af konfidensinterval herfor. OR (ved at exponentiere estimatet) prediktion af sandsynlighed for sygdom ud fra estimater på logistisk regression\nmaj 2025 1. identifikation af korrekt model - kode for tolkning af resultat - nok en god ide at have konfidensintervaller. Og beregning af manglende værdier Tolkning af yderligere resultat af model prediktion baseret på denne model 2. vurdering af konfidensinterval baseret på antal observationer.\nVi kommer til at holde os ret tæt på det her. Det er mere eksamensforberedelse end et statistikkursus!"
   },
   {
-    "objectID": "slides/linreg.html#hvad-er-det-nu-den-lineære-regression-er",
-    "href": "slides/linreg.html#hvad-er-det-nu-den-lineære-regression-er",
+    "objectID": "slides/linreg.html#hvad-er-det-nu-det-er",
+    "href": "slides/linreg.html#hvad-er-det-nu-det-er",
     "title": "Lineær regression",
-    "section": "Hvad er det nu den lineære regression er?",
-    "text": "Hvad er det nu den lineære regression er?\n\nVi ved ikke hvad x og y er. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?"
+    "section": "Hvad er det nu det er?",
+    "text": "Hvad er det nu det er?\n\nVi ved ikke hvad x og y er. Pointen er at det ser ud til at der er en lineær sammenhæng mellem x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?"
   },
   {
     "objectID": "slides/linreg.html#en-ret-linie",
@@ -648,112 +648,175 @@
     "href": "slides/linreg.html#lineær-regression-2",
     "title": "Lineær regression",
     "section": "Lineær regression",
-    "text": "Lineær regression\nAlle punkterne har en residual.\nEn afvigelse fra den “sande” værdi.\nVil vil derfor skrive at:\n\\(y = ax + b + \\epsilon\\)\nDen “bedste” linie er den hvor summen af residualerne, \\(\\epsilon\\) er mindst mulig."
+    "text": "Lineær regression\nAlle punkterne har en residual.\nEn afvigelse fra den “sande” værdi.\nVi vil derfor skrive at:\n\\(y = ax + b + \\epsilon\\)\nDen “bedste” linie er den hvor summen af residualerne, \\(\\epsilon\\), er mindst mulig.\n\nDer er en del sjusk i notationen både her, overalt på nettet og i eksamensopgaver, hvor vi skriver \\(y = ax + b\\). Det er ikke korrekt, for \\(\\epsilon\\) mangler.\n\n\n\\(\\hat{y} = ax + b\\) er mere korrekt."
   },
   {
-    "objectID": "slides/linreg.html#linreg-3",
-    "href": "slides/linreg.html#linreg-3",
+    "objectID": "slides/linreg.html#lineær-regression-3",
+    "href": "slides/linreg.html#lineær-regression-3",
     "title": "Lineær regression",
-    "section": "linreg 3",
-    "text": "linreg 3\n\nDen bedst tænkelige linie er derfor den hvor summen af residualerne er mindst mulig."
+    "section": "Lineær regression",
+    "text": "Lineær regression\n\n\nLæg mærke til at residualen er negativ for det med rødt markerede punkt.\nAndre punkter har en positiv værdi.\n\nHvad sker der hvis vi lægger dem alle sammen sammen?\n\n\nVi risikerer at resultatet bliver 0 - fordi summen af positive og negative tal kan risikere at blive 0."
   },
   {
-    "objectID": "slides/linreg.html#linreg-4",
-    "href": "slides/linreg.html#linreg-4",
+    "objectID": "slides/linreg.html#lineær-regression-4",
+    "href": "slides/linreg.html#lineær-regression-4",
     "title": "Lineær regression",
-    "section": "linreg 4",
-    "text": "linreg 4\nLæg mærke til at residualen er negativ for det med rødt markerede punkt. Andre punkter har en positiv værdi. Hvad sker der hvis vi lægger dem alle sammen sammen? Vi risikerer at resultatet bliver 0 - fordi summen af positive og negative tal kan risikere at blive 0.\nDet vi gør er at kvadrere residualerne, vi tager kvadratet, og lægger dem alle sammen. Derfor kalder vi også metoden for “mindste kvadraters metode”.\nDet kunne man gøre med papir, blyant, lineal og lommeregner. Det er der ingen der gider"
+    "section": "Lineær regression",
+    "text": "Lineær regression\nSå vi kvadrerer residualerne og lægger dem sammen.\n\nDen sum forsøger vi at minimere ved at vælge a og b.\n\n\nDerfor kalder vi også metoden for “mindste kvadraters metode”. Eller OLS - Ordinary Least Squares.\n\n\nDet kunne man gøre med papir, blyant, lineal og lommeregner. Det er der ingen der gider\n\n\nSå vi bruger funktionen lm()"
   },
   {
-    "objectID": "slides/linreg.html#linreg-5-i-praksis",
-    "href": "slides/linreg.html#linreg-5-i-praksis",
+    "objectID": "slides/linreg.html#det-generelle-eksempel",
+    "href": "slides/linreg.html#det-generelle-eksempel",
     "title": "Lineær regression",
-    "section": "Linreg 5 i praksis",
-    "text": "Linreg 5 i praksis\nR gør det ved hjælp af funktionen lm. Hvis vi vil finde ud af hvordan x beskriver y, skriver vi\nlm(y ~ x, data = df)\nLæs det som: y som funktion af x.\nDen giver et output:\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nCoefficients:\n(Intercept)            x  \n      44.15        42.76  \n\n\nDet skæringen og hældningen"
+    "section": "Det generelle eksempel",
+    "text": "Det generelle eksempel\nHvis vi vil finde ud af hvordan x beskriver y, skriver vi:\nlm(y ~ x, data = df)\nLæs det som: y som funktion af x.\nDen giver et output:\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nCoefficients:\n(Intercept)            x  \n      44.15        42.76"
   },
   {
-    "objectID": "slides/linreg.html#linreg-6",
-    "href": "slides/linreg.html#linreg-6",
+    "objectID": "slides/linreg.html#de-enkelte-dele",
+    "href": "slides/linreg.html#de-enkelte-dele",
     "title": "Lineær regression",
-    "section": "linreg 6",
-    "text": "linreg 6\nIkke specielt interessant. Gem resultatet og kør funktionen “summary” på det gemte resultat:\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16"
+    "section": "De enkelte dele",
+    "text": "De enkelte dele\n\nlm(y ~ x, data = data)\n\ny er den afhængige variabel, x er den uafhængige.\nEller:\ny er responsvariabel, og x er forklarende.\nDer gemmer sig mere information!"
   },
   {
-    "objectID": "slides/linreg.html#linreg-6---læsning-af-output",
-    "href": "slides/linreg.html#linreg-6---læsning-af-output",
+    "objectID": "slides/linreg.html#outputtet",
+    "href": "slides/linreg.html#outputtet",
     "title": "Lineær regression",
-    "section": "linreg 6 - læsning af output",
-    "text": "linreg 6 - læsning af output\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nEstimaterne er koefficenterne i y = ax+b. Intercept er b, x er koefficienten der ganges på x værdien, her altså a.\nError er standardfejlen som er i familie med SEM, her er det blot ikke standarderror på “mean” men standardfejlen på estimatet.\nVi er interesserede i at vide om der er en sammenhæng mellem x og y - hvis der er, er estimatet for koefficienten på x forskellig fra 0. For hvis den er 0, så er der ikke en sammenhæng mellem x og y. Det er jo så estimat og standardfejl i de enheder som data nu har. Det er ikke så praktisk, så vi beregner en t-værdi ved at dividere estimatet med standardfejlen. Det fortæller os hvor langt estimatet ligger fra 0 - målt i standardfejl. Vi skifter simpelthen enhed.\nOg hvis vi ved hvor mange standardafvigelser vores estimat ligger fra 0 - så ved vi også hvad sandsynligheden er for at estimatet i virkeligheden er 0, selvom vi ser en værdi der ikke er 0. Den sandsynlighed er p-værdien. Når vi ser &lt; 2e-16 er det fordi p-værdien er så tæt på 0 som den kan komme uden faktisk at være det. R har en grænse for hvor præcist tal kan angives.\nstjernerne betyder noget specifikt - vi har en oversigt over den i linien der starter med “signif. codes”.\nResidual standard error er standardfejlen på residualerne. R-squared er “hvor stor en andel af variationen i data forklares af modellen”. her 97.9%. Det er ret godt, men jeg har også konstrueret data til formålet.\nHvis vi tilføjer variable til modellen, vil R-squared stige. Også selvom variablen intet har med noget at gøre.\nDet vil Adjusted R-squared tage højde for. Den korrigerer for at selvom vi tilføjer noget der forklarer variationen, så hjælper det ikke nødvendigvis modellen. Vi bruger den typisk når vi skal sammenligne to modeller - hvilken er egentlig bedst.\nF-statistic er forholdet mellem den variation modellen forklarer. Og den variation der er tilbage i residualerne. Jo større jo bedre. For det betyder at modellen forklarer meget variation, og residualerne har meget lidt variation tilbage.\nVi kan også forstå den som: Hvor meget bedre er regressionslinien end bare at bruge middelværdien af y."
+    "section": "Outputtet",
+    "text": "Outputtet\n\nGem resultatet og kør funktionen “summary” på det gemte resultat:\n\nlineær_model &lt;- lm(y ~ x, data = data)\nsummary(lineær_model)\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nHyppig eksamensopgave: Her er output af det I burde have svaret i opgave 1a). Hvilken regression er der tale om? Fortolk resultaterne.\nSå lad os kigge på de enkelte dele, så vi ved hvad de dækker over."
+  },
+  {
+    "objectID": "slides/linreg.html#call-og-residuals",
+    "href": "slides/linreg.html#call-og-residuals",
+    "title": "Lineær regression",
+    "section": "Call og Residuals",
+    "text": "Call og Residuals\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nCall er den funktion vi faktisk kørte for at få dette resultat. Den er som regel redigeret væk.\nResiduals er summary statistics på residualerne. Vi bruger dem til at tjekke modellen. De er som regel også redigeret væk."
+  },
+  {
+    "objectID": "slides/linreg.html#koefficienter---estimate",
+    "href": "slides/linreg.html#koefficienter---estimate",
+    "title": "Lineær regression",
+    "section": "Koefficienter - Estimate",
+    "text": "Koefficienter - Estimate\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nEstimaterne er koefficenterne i y = ax+b. Intercept er b, x er koefficienten der ganges på x værdien, her altså a.\nDen model vi har bygget er altså:\n\\(\\hat{y} = 44.153 + 42.764x\\)"
+  },
+  {
+    "objectID": "slides/linreg.html#koefficienter---std.-error",
+    "href": "slides/linreg.html#koefficienter---std.-error",
+    "title": "Lineær regression",
+    "section": "Koefficienter - Std. error",
+    "text": "Koefficienter - Std. error\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nError er standardfejlen (i familie med SEM her dog ikke standarderror på “mean” men SE på estimatet)\n\\(H_0\\) for hvert af estimaterne er at “Estimate = 0”. Det spørgsmål vi som regel forsøger at finde svar på er - hvor meget betyder “x” for værdien af “y”. Eller: “Hvis alder stiger med 1 år, hvor mange mmHg stiger det systoliske blodtryk”.\nHvis estimatet på den koefficient er 0 - har alder så betydning for blodtrykket? Hvis koefficienten i virkeligheden er 0 - så har alder ingen betydning for blodtrykket."
+  },
+  {
+    "objectID": "slides/linreg.html#koefficienter---t-value",
+    "href": "slides/linreg.html#koefficienter---t-value",
+    "title": "Lineær regression",
+    "section": "Koefficienter - t value",
+    "text": "Koefficienter - t value\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nt value er testværdien vi bruger til at afgøre om vi kan afvise \\(H_0\\). Hvad viser den?\n\nHvor mange “Std. Error” ligger vores estimat fra 0?\n\n\nVi finder den ved at dividere “Estimate” med “Std. Error”\n\n\nI kommer til at støde på to typer model- eller regressions output. (multipel) lineær og logistisk. At der står “t value” fortæller os at det er en lineær regression."
+  },
+  {
+    "objectID": "slides/linreg.html#koefficienter---p-value",
+    "href": "slides/linreg.html#koefficienter---p-value",
+    "title": "Lineær regression",
+    "section": "Koefficienter - p-value",
+    "text": "Koefficienter - p-value\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nPr(&gt;|t|) er p-værdien: Risikoen for at vi afviser \\(H_0\\), selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).\nTypisk: Større eller mindre end 0.05."
+  },
+  {
+    "objectID": "slides/linreg.html#populær-ting-i-eksamensopgaver",
+    "href": "slides/linreg.html#populær-ting-i-eksamensopgaver",
+    "title": "Lineær regression",
+    "section": "Populær ting i eksamensopgaver",
+    "text": "Populær ting i eksamensopgaver\n\nDe der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.\nHusk: \\(\\text{t value} = \\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\np-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:\n\\(\\frac{\\text{Estimate}}{\\text{Std. Error}}\\),\nog ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)\n\n\n\nVi kan faktisk godt beregne p-værdien. Den er givet ved: 2*(1-pt(abs(t value), df))\npt er pnorm() blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.\nMen det behøver vi ikke - test-værdien er rigelig."
+  },
+  {
+    "objectID": "slides/linreg.html#resten",
+    "href": "slides/linreg.html#resten",
+    "title": "Lineær regression",
+    "section": "Resten",
+    "text": "Resten\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nResidual standard error er et estimat af standardafvigelsen af residualerne, \\(\\epsilon\\). Den bliver brugt til noget. Men det behøver vi ikke bekymre os så meget om. De “48” frihedsgrader vi så lige før kan vi også aflæse her.\nMultiple R-squared er den andel af variationen i y der forklares af modellen. 0.9786 er utroligt godt.\nAdjusted R-squared er R-squared, hvor vi korrigerer for at vi har lagt flere paramtre ind i modellen. Det har jeg ikke set i eksamensopgaver.\nModellen giver et svar på spørgsmålet: Hvad forventer vi at y ville være hvis x var “noget”. Alternativet til den model ville være at vi svarede “gennemsnittet af alle y-værdierne” uanset hvad x var. F-statistic fortæller om vores modeler signifikant bedre end det."
+  },
+  {
+    "objectID": "slides/linreg.html#hvor-sikre-er-vi-på-estimaterne",
+    "href": "slides/linreg.html#hvor-sikre-er-vi-på-estimaterne",
+    "title": "Lineær regression",
+    "section": "Hvor sikre er vi på estimaterne?",
+    "text": "Hvor sikre er vi på estimaterne?\nVi får som regel lov at antage normalitet, og derfor:\n\\(\\text{estimate} \\pm 1.96\\cdot \\text{Std. Error}\\)\n\nSkal vi være helt korrekte, skal vi beregne den kritiske værdi ud fra t-fordelingen, og kende antallet af frihedsgrader.\nSå ville det blive:\nestimate + c(-1,1)*qt(1-0.025, df = 48)\nDet har jeg ikke set i nogen eksamensopgaver (endnu)."
   },
   {
     "objectID": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
     "href": "slides/linreg.html#hvordan-estimerer-vi-y-fra-x",
     "title": "Lineær regression",
     "section": "Hvordan estimerer vi Y fra X?",
-    "text": "Hvordan estimerer vi Y fra X?"
+    "text": "Hvordan estimerer vi Y fra X?\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\n\nHvis x = 10, hvad forventer vi så y vil være?\n\n\n44.153 + 42.764*10\n\n[1] 471.793"
   },
   {
-    "objectID": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
-    "href": "slides/linreg.html#hvad-er-konfidensintervallet-på-det-estimat",
+    "objectID": "slides/linreg.html#en-rigtig-opgave",
+    "href": "slides/linreg.html#en-rigtig-opgave",
     "title": "Lineær regression",
-    "section": "Hvad er konfidensintervallet på det estimat?",
-    "text": "Hvad er konfidensintervallet på det estimat?"
-  },
-  {
-    "objectID": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
-    "href": "slides/linreg.html#her-skal-vi-have-et-eksempel-på-en-opgave",
-    "title": "Lineær regression",
-    "section": "Her skal vi have et eksempel på en opgave",
-    "text": "Her skal vi have et eksempel på en opgave"
-  },
-  {
-    "objectID": "slides/linreg.html#multipel-lineær-regression",
-    "href": "slides/linreg.html#multipel-lineær-regression",
-    "title": "Lineær regression",
-    "section": "Multipel lineær regression",
-    "text": "Multipel lineær regression\nDen kan vi ikke visualisere.\nHvad hvis Y afhænger af mere end en variabel?"
-  },
-  {
-    "objectID": "slides/linreg.html#regression-med-kategoriske-variable",
-    "href": "slides/linreg.html#regression-med-kategoriske-variable",
-    "title": "Lineær regression",
-    "section": "regression med kategoriske variable",
-    "text": "regression med kategoriske variable\nIndtil videre har vi lavet regressioner hvor vi har estimeret en kontinuært variabel ved hjælp af en eller flere kontinuærte variable.\nKan vi også bruge en kategorisk variabel?"
-  },
-  {
-    "objectID": "slides/linreg.html#tolkning-generel",
-    "href": "slides/linreg.html#tolkning-generel",
-    "title": "Lineær regression",
-    "section": "tolkning generel",
-    "text": "tolkning generel\nHvis x stiger med 1, vil y, alt andet lige stige med koefficienten på x.\nHvis x er 0, så er værdien af 0 lig intercept.\nHvis p-værdien er lav - er vi ret sikre på at sammenhængen eksisterer\nhvis koefficienten er høj - er effekten af en stigning på 1 stor. Men husk lige hvilke enheder vi er i, og hvad intercept egentlig er. En stigning på 1 kan være meget eller lidt afhængig af enheden.\nR-squared fortælelr os her hvor meget af variationen i data der forklares af modellen"
-  },
-  {
-    "objectID": "slides/linreg.html#de-synes-den-her-er-sjov",
-    "href": "slides/linreg.html#de-synes-den-her-er-sjov",
-    "title": "Lineær regression",
-    "section": "de synes den her er sjov",
-    "text": "de synes den her er sjov\net output hvor noget er redigeret væk\nså - hvordan finder man det?\n\n\n[1] 508.3882\n\n\n[1] 8.083836\n\n\n[1] 11.12489\n\n\n[1] 0.1720165\n\n\n[1] 0.5682877"
-  },
-  {
-    "objectID": "slides/linreg.html#opgave-maj-2025-1-a",
-    "href": "slides/linreg.html#opgave-maj-2025-1-a",
-    "title": "Lineær regression",
-    "section": "Opgave maj 2025 1 a",
-    "text": "Opgave maj 2025 1 a\nvi får denne variabelliste.\n\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\n\nOg skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.\nHvilken type analyse vil du udføre for at undersøge den sammenhæng?"
+    "section": "En rigtig opgave",
+    "text": "En rigtig opgave\n\nVi får denne variabelliste:\n- episodes: Antal episoder med feber under graviditeten (før interview)\n- death: Fosterdød (ja = 1, nej = 0)\n- mage: Moderens alder ved interview\n- smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\n- alco: Antal genstande pr uge under graviditet\n- weight: Fødselsvægt i gram\nOg skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af alkohol under graviditeten.\nHvilken type analyse vil du udføre for at undersøge den sammenhæng?"
   },
   {
     "objectID": "slides/linreg.html#hvilken-type-analyse",
     "href": "slides/linreg.html#hvilken-type-analyse",
     "title": "Lineær regression",
     "section": "Hvilken type analyse?",
-    "text": "Hvilken type analyse?\nslide fra eget statisikkursus -\nAngiv relevant R-kode med brug af de variabelnavne vi har fået\nMen.\nBeskriv de enkelte variable. Er de kontinuerte eller kategoriske?\nHvad vil vi forklare?\nFødselsvægt - kontinuært\nHvad vil vi forklare det med?\nrygning - kategorisk variabel\nAlcohol - Kontinuært\nHvilken type analyse vil vi bruge? Det vi vil “forudsige” er en kontinuært variabel. Så vi bruger en lineær regression.\nDet vi vil bruge til at forudsige er en kontinuært og en kategorisk variabel\nDet er en lineær regression\nlm(weight ~ factor(smoke) + alco)\nMan kan vise overskud her og notere, at det jo kommer an på hvordan data er indlæst - hvis de kategoriske variable allerede er kodet som kategoriske, kan man spare factor()."
+    "text": "Hvilken type analyse?\nDer er mange at vælge imellem. Men til eksamen er der to:\n\nLineær regression\nLogistisk regression\n\n\nHvis vi skal forudsige eller forklare noget der er kontinuert: Lineær\n\n\nHvis vi skal forudsige eller forklare noget der er kategorisk: Logistisk\n\n\nHer skal vi forklare/undersøge/forudsige fødselsvægt. Den er kontinuær."
   },
   {
-    "objectID": "slides/linreg.html#opgave-maj-2025-1-b",
-    "href": "slides/linreg.html#opgave-maj-2025-1-b",
+    "objectID": "slides/linreg.html#hvordan-skal-modellen-så-se-ud",
+    "href": "slides/linreg.html#hvordan-skal-modellen-så-se-ud",
     "title": "Lineær regression",
-    "section": "opgave maj 2025 1 b",
-    "text": "opgave maj 2025 1 b\nVi får oplyst at dette er resultatet af den korrekte analyse. De synes det er vældig sjovt at fjerne dele af det\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\nt-value. Det er hvor mange standardfejl estimatet er fra 0. Så hvis estimatet er 3613.623 og standardfejlen er 7.108, hvad er t value så?\n\n\n[1] 508.3882\n\n\nDet stemmer ikke 100%. For der er afrundingsfejl\nSå den manglende t value for factor(smoke)2 hvad er den?\nHvoromkring ligger p-værdien?\n\n\n[1] -8.083836\n\n\nDen er bedre end 1.96, og ihvertfald signifikant\nHvad kan vi ellersk konkludere?\nBaseline er 0 cigaretter pr dag.\nSom udgangspunkt, for kvinder der hverken ryger eller drikker, er den forventede fødselsvægt 3613 gram. Hvis man ryger 1-10 cigaretter pr dag falder den forventede fødselsvægt, alt andet lige, med 127 gram. Og hvis man ryger mere end 10 cigaretter pr dag falder den, alt andet lige, med 194 gram.\nEstimatet på hvordan alkoholindtaget påvirker fødselsvægten, indikerer at den, alt andet lige, stiger med 1 gram pr genstand man drikker om ugen. Estimatet er dog ikke statistisk signifikant, og vi kan ikke afvise null-hypotesen.\njo mere man ryger, jo værre. alkohol har ikke en signifikant betydning."
+    "section": "Hvordan skal modellen så se ud?",
+    "text": "Hvordan skal modellen så se ud?\nVi skal se på sammenhæng mellem fødselsvægt og rygning, samt indtagelse af alkohol under graviditeten.\nSå der er to forklarende variable"
+  },
+  {
+    "objectID": "slides/linreg.html#hov-to-forklarende-variable",
+    "href": "slides/linreg.html#hov-to-forklarende-variable",
+    "title": "Lineær regression",
+    "section": "Hov! To forklarende variable!!",
+    "text": "Hov! To forklarende variable!!\n\nNår vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression.\n. . .\nJeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.\n. . .\nHvad var det?\nJa, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:\nlm(y~x, data = data)\nNu skal vi have en der er mere kompleks:\nlm(y~x+z, data = data)\nDen kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:\n\\(\\hat{y} = ax + bz + c\\)\nEller mere generelt:\n\\(\\hat{y} = \\beta_0 + \\beta_1x + \\beta_2z\\)"
+  },
+  {
+    "objectID": "slides/linreg.html#mer-hov",
+    "href": "slides/linreg.html#mer-hov",
+    "title": "Lineær regression",
+    "section": "Mer hov!",
+    "text": "Mer hov!\nMors rygning under graviditeten:\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nDet er jo ikke kontinuært. Hvordan så?\nlm klarer det fint. Vi skal blot huske at fortælle funktionen at smoke er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen factor()\nMen så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)"
+  },
+  {
+    "objectID": "slides/linreg.html#kategoriske-variable",
+    "href": "slides/linreg.html#kategoriske-variable",
+    "title": "Lineær regression",
+    "section": "Kategoriske variable",
+    "text": "Kategoriske variable\nVariable der kun kan tage èn af flere værdier.\nDe kan være ordnede - så de ligger i en bestemt rækkefølge. Det gør de her, 1 er mindre rygning end 2, som igen er mindre rygning end 3. Der behøver ikke være en “god-dårlig” betydning i det.\nDe kan også være uordnede - så er rækkefølgen ligegyldig. Det kunne være mand-kvinde.\nDet væsentligste er at enten er man i en kategori. Eller også er man i en anden."
+  },
+  {
+    "objectID": "slides/linreg.html#opgaven-fortsætter",
+    "href": "slides/linreg.html#opgaven-fortsætter",
+    "title": "Lineær regression",
+    "section": "Opgaven fortsætter",
+    "text": "Opgaven fortsætter\nAngiv relevant R-kode med brug af de variabelnavne vi har fået.\nHvilken R-kode skriver vi så?\n\nlm(weight ~ factor(smoke) + alco, data = data)\n\n\nVi husker at forklare at det er med smoke, mors rygestatus, som forklarende/uafhængig kategorisk variabel. Og alco, mors alkoholindtag under graviditeten som forklarende/uafhængig kontinuært variabel, og fødselsvægt som den afhængige kontinuærte variabel.\n\n\n\nI den virkelige verden ville vi sørge for at de variable i data der er kategoriske, optræder som kategoriske variable i data. Her skriver vi factor(smoke) fordi vi ikke ved om smoke optræder som kategorisk variabel i datasættet. Og for at vise at vi har forstået at den skal være kategorisk i modellen."
+  },
+  {
+    "objectID": "slides/linreg.html#næste-delspørgsmål",
+    "href": "slides/linreg.html#næste-delspørgsmål",
+    "title": "Lineær regression",
+    "section": "Næste delspørgsmål",
+    "text": "Næste delspørgsmål\nVi får oplyst at dette er resultatet af den korrekte analyse.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nEr det signifikant?\n\n\nTestværdien er &gt;1.96 og Estimate for factor(smoke)2 er derfor signifikant på et \\(\\alpha = 0.05\\) niveau."
+  },
+  {
+    "objectID": "slides/linreg.html#hvordan-tolker-vi-ellers-tallene",
+    "href": "slides/linreg.html#hvordan-tolker-vi-ellers-tallene",
+    "title": "Lineær regression",
+    "section": "Hvordan tolker vi ellers tallene?",
+    "text": "Hvordan tolker vi ellers tallene?\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nIntercept er vores “referencegruppe”. Den forventede fødselsvægt når smoke = 1 (ingen rygning), og alco = 0.\n\nAltså for børn af ikke-rygende mødre, der drikker 0 genstande alkohol pr uge.\n\n\nsmoke = 1 er referenceværdien for smoke. Fordi den står først. Vi kan tvinge modellen til at vælge en anden referencegruppe, 2 fx.\n\n\nHvis mor var i smoke = 2 kategorien, så estimerer vores model at den forventede fødselsvægt er 127 gram lavere, alt andet lige.\n\n\nHvis mor var i smoke = 3 kategorien, så estimerer modellen at den forventede fødselsvægt er 195 gram lavere, alt andet lige.\n\n\nBemærk at Estimate på factor(smoke)2 og factor(smoke)3 ikke skal lægges sammen.\n\n\nFor hver enhed alco stiger, stiger den forventede fødselsvægt, alt andet lige, med ca 1 gram."
+  },
+  {
+    "objectID": "slides/linreg.html#sammenfattende",
+    "href": "slides/linreg.html#sammenfattende",
+    "title": "Lineær regression",
+    "section": "Sammenfattende",
+    "text": "Sammenfattende\n\nEstimatet for fødselsvægt er signifikant lavere for børn af rygende mødre. Effekten er større når der ryges mere. Der findes ikke evidens for en sammenhæng mellem alkoholforbrug og fødselsvægt.\nRyges der 1-10 cigaretter pr dag under graviditeten estimeres det at fødselsvægten er 127 gram lavere med et 95% KI på\n\n\n-127.377 + c(-1,1) * 1.96 * 15.757\n\n[1] -158.26072  -96.49328\n\n\n\n\nRyges der mere end 10 cigaretter om dagen estimeres fødselsvægten til at være 195 gram lavere med et 95% KI på:\n\n\n\n-194.897 + c(-1,1) * 1.96 * 17.519\n\n[1] -229.2342 -160.5598\n\n\nVed fastholdt alkoholindtag.\n\n\nEstimatet på alkoholindtagets påvirkning af fødselsvægten indikerer at den, alt andet lige, stiger med 1 gram pr. genstand mor har drukket om ugen. Estimatet er dog ikke statistisk signifikant, og vi kan ikke afvise null-hypotesen."
   },
   {
     "objectID": "slides/linreg.html#gad-vide-hvor-det-her-kommer-fra",
