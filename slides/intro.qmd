@@ -67,4 +67,4 @@ Fordi der er mere forklaring end kode.
 
 Og fordi vi kan køre kode inde i slides, men ikke slides inde i kode
 
-
+|> i stedet for %>%

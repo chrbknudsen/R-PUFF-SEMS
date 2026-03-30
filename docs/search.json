@@ -1684,6 +1684,6 @@
     "href": "slides/intro.html#vi-kører-slides",
     "title": "Intro",
     "section": "Vi kører slides",
-    "text": "Vi kører slides\nFordi der er mere forklaring end kode.\nOg fordi vi kan køre kode inde i slides, men ikke slides inde i kode"
+    "text": "Vi kører slides\nFordi der er mere forklaring end kode.\nOg fordi vi kan køre kode inde i slides, men ikke slides inde i kode\n|&gt; i stedet for %&gt;%"
   }
 ]
