@@ -9,7 +9,7 @@ filters:
   - webr
 ---
 
-## Hvad er det nu den lineære regression er?
+## Hvad er det nu det er?
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -136,14 +136,23 @@ Alle punkterne har en residual.
 
 En afvigelse fra den "sande" værdi.
 
-Vil vil derfor skrive at:
+Vi vil derfor skrive at:
 
 $y = ax + b + \epsilon$
 
-Den "bedste" linie er den hvor summen af residualerne, $\epsilon$ er mindst mulig.
- 
+Den "bedste" linie er den hvor summen af residualerne, $\epsilon$, er mindst mulig.
 
-## linreg 3
+. . . 
+
+Der er en del sjusk i notationen både her, overalt på nettet og i eksamensopgaver, hvor vi skriver $y = ax + b$. Det er ikke korrekt, for $\epsilon$ mangler.
+
+. . . 
+
+$\hat{y} = ax + b$ er mere korrekt.
+
+
+
+## Lineær regression
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -221,22 +230,45 @@ data2 %>%
   )
 ```
 
-Den bedst tænkelige linie er derfor den hvor summen af residualerne er mindst mulig.
+:::: evensmaller
 
-## linreg 4
+Læg mærke til at residualen er negativ for det med rødt markerede punkt.  
+Andre punkter har en positiv værdi.  
 
-Læg mærke til at residualen er negativ for det med rødt markerede punkt. Andre punkter har en positiv værdi. Hvad sker der
-hvis vi lægger dem alle sammen sammen? Vi risikerer at resultatet bliver 0 - fordi summen af positive og negative tal
-kan risikere at blive 0.
+:::: {.fragment}
 
-Det vi gør er at kvadrere residualerne, vi tager kvadratet, og lægger dem alle sammen. Derfor kalder vi også metoden
-for "mindste kvadraters metode".
+Hvad sker der hvis vi lægger dem alle sammen sammen?  
+
+::::
+:::: {.fragment}
+Vi risikerer at resultatet bliver 0 - fordi summen af positive og negative tal kan risikere at blive 0.
+::::
+::::
+
+## Lineær regression
+
+Så vi kvadrerer residualerne og lægger dem sammen. 
+
+. . . 
+
+Den sum forsøger vi at minimere ved at vælge a og b.
+
+. . . 
+
+Derfor kalder vi også metoden
+for "mindste kvadraters metode". Eller OLS - Ordinary Least Squares.
+
+. . . 
 
 Det kunne man gøre med papir, blyant, lineal og lommeregner. Det er der ingen der gider
 
-## Linreg 5 i praksis
+. . . 
 
-R gør det ved hjælp af funktionen lm. Hvis vi vil finde ud af hvordan x beskriver y, skriver vi
+Så vi bruger funktionen `lm()`
+
+## Det generelle eksempel
+
+Hvis vi vil finde ud af hvordan x beskriver y, skriver vi:
 
 lm(y ~ x, data = df)
 
@@ -248,115 +280,206 @@ Den giver et output:
 lm(y ~ x, data = data)
 ```
 
-Det skæringen og hældningen
 
-## linreg 6
+## De enkelte dele
 
-Ikke specielt interessant. Gem resultatet og kør funktionen "summary" på det gemte resultat:
+```{r echo = TRUE, eval = FALSE}
+lm(y ~ x, data = data)
+```
 
-```{r}
+y er den afhængige variabel, x er den uafhængige. 
+
+Eller:
+
+y er responsvariabel, og x er forklarende. 
+
+Der gemmer sig mere information!
+
+## Outputtet
+
+:::: evensmaller
+
+Gem resultatet og kør funktionen "summary" på det gemte resultat:
+
+```{r echo = TRUE}
 lineær_model <- lm(y ~ x, data = data)
 summary(lineær_model)
 ```
 
+Hyppig eksamensopgave: Her er output af det I burde have svaret i opgave 1a). Hvilken regression er der tale om? Fortolk resultaterne.
 
-## linreg 6 - læsning af output
+Så lad os kigge på de enkelte dele, så vi ved hvad de dækker over.
 
+::::
+
+## Call og Residuals
+:::: evensmaller
+```{r echo = FALSE}
+summary(lineær_model)
+```
+
+Call er den funktion vi faktisk kørte for at få dette resultat. Den er som regel redigeret væk.
+
+Residuals er summary statistics på residualerne. Vi bruger dem til at tjekke modellen. De er som regel også redigeret væk.
+
+::::
+
+## Koefficienter - Estimate
+
+:::: evensmaller
 ```{r echo = FALSE}
 summary(lineær_model)
 ```
 
 Estimaterne er koefficenterne i y = ax+b. Intercept er b, x er koefficienten der ganges på x værdien, her altså a.
 
-Error er standardfejlen som er i familie med SEM, her er det blot ikke standarderror på "mean" men standardfejlen på 
-estimatet.
+Den model vi har bygget er altså:
 
-Vi er interesserede i at vide om der er en sammenhæng mellem x og y - hvis der er, er estimatet for koefficienten på x 
-forskellig fra 0. For hvis den er 0, så er der ikke en sammenhæng mellem x og y. Det er jo så estimat og standardfejl i 
-de enheder som data nu har. Det er ikke så praktisk, så vi beregner en t-værdi ved at dividere estimatet med standardfejlen.
-Det fortæller os hvor langt estimatet ligger fra 0 - målt i standardfejl. Vi skifter simpelthen enhed.
+$\hat{y} = 44.153 + 42.764x$
 
-Og hvis vi ved hvor mange standardafvigelser vores estimat ligger fra 0 - så ved vi også hvad sandsynligheden er for at
-estimatet i virkeligheden er 0, selvom vi ser en værdi der ikke er 0. Den sandsynlighed er p-værdien. Når vi ser
-< 2e-16 er det fordi p-værdien er så tæt på 0 som den kan komme uden faktisk at være det. R har en grænse for hvor præcist
-tal kan angives.
+::::
 
-stjernerne betyder noget specifikt - vi har en oversigt over den i linien der starter med "signif. codes".
+## Koefficienter - Std. error
 
-Residual standard error er standardfejlen på residualerne. R-squared er "hvor stor en andel af variationen i data forklares
-af modellen". her 97.9%. Det er ret godt, men jeg har også konstrueret data til formålet. 
+:::: evensmaller
 
-Hvis vi tilføjer variable til modellen, vil R-squared stige. Også selvom variablen intet har med noget at gøre.
+```{r echo = FALSE}
+summary(lineær_model)
+```
 
-Det vil Adjusted R-squared tage højde for. Den korrigerer for at selvom vi tilføjer noget der forklarer variationen,
-så hjælper det ikke nødvendigvis modellen. Vi bruger den typisk når vi skal sammenligne to modeller - hvilken er egentlig
-bedst. 
+Error er standardfejlen (i familie med SEM her dog ikke standarderror på "mean" men SE på 
+estimatet)  
+$H_0$ for hvert af estimaterne er at "Estimate = 0". Det spørgsmål vi som regel forsøger at finde svar på er - hvor meget betyder
+"x" for værdien af "y". Eller: "Hvis alder stiger med 1 år, hvor mange mmHg stiger det systoliske blodtryk".  
+Hvis estimatet på den koefficient er 0 - har alder så betydning for blodtrykket? Hvis koefficienten i virkeligheden er 0 - så har alder ingen betydning for blodtrykket. 
 
-F-statistic er forholdet mellem den variation modellen forklarer. Og den variation der er tilbage i residualerne.
-Jo større jo bedre. For det betyder at modellen forklarer meget variation, og residualerne har meget lidt variation tilbage.
+::::
 
-Vi kan også forstå den som: Hvor meget bedre er regressionslinien end bare at bruge middelværdien af y.
+## Koefficienter - t value
 
-## Hvordan estimerer vi Y fra X?
+:::: evensmaller
+```{r echo = FALSE}
+summary(lineær_model)
+```
 
-## Hvad er konfidensintervallet på det estimat?
+t value er testværdien vi bruger til at afgøre om vi kan afvise $H_0$. Hvad viser den?
+
+:::: {.fragment}
+Hvor mange "Std. Error" ligger vores estimat fra 0?
+::::
+:::: {.fragment}
+Vi finder den ved at dividere "Estimate" med "Std. Error"
+::::
+:::: {.fragment}
+I kommer til at støde på to typer model- eller regressions output. (multipel) lineær og logistisk. At der står "t value" fortæller os at det er en lineær regression.
+::::
 
 
+::::
 
-## Her skal vi have et eksempel på en opgave
 
-## Multipel lineær regression
+## Koefficienter - p-value
 
-Den kan vi ikke visualisere.
-
-Hvad hvis Y afhænger af mere end en variabel?
-
-## regression med kategoriske variable
-
-Indtil videre har vi lavet regressioner hvor vi har estimeret en kontinuært variabel ved hjælp af 
-en eller flere kontinuærte variable.
-
-Kan vi også bruge en kategorisk variabel?
-
-## tolkning generel
-
-Hvis x stiger med 1, vil y, _alt andet lige_ stige med koefficienten på x.
-
-Hvis x er 0, så er værdien af 0 lig intercept. 
-
-Hvis p-værdien er lav - er vi ret sikre på at sammenhængen eksisterer
-
-hvis koefficienten er høj - er effekten af en stigning på 1 stor. Men husk lige hvilke enheder vi er i, og hvad 
-intercept egentlig er. En stigning på 1 kan være meget eller lidt afhængig af enheden.
-
-R-squared fortælelr os her hvor meget af variationen i data der forklares af modellen
-
-## de synes den her er sjov
-
-et output hvor noget er redigeret væk
-
-så - hvordan finder man det?
-
-```{r}
-3613.623/7.108
-127.377/15.757
-194.897/17.519
-(1.045/6.075)
-pnorm(1.045/6.075)
-
+:::: evensmaller
+```{r echo = FALSE}
+summary(lineær_model)
 ```
 
 
-## Opgave maj 2025 1 a
+Pr(>|t|) er p-værdien: Risikoen for at vi afviser $H_0$, selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).
 
-vi får denne variabelliste.
+Typisk: Større eller mindre end 0.05. 
 
-* episodes: Antal episoder med feber under graviditeten (før interview)
-* death: Fosterdød (ja = 1, nej = 0)
-* mage: Moderens alder ved interview
-* smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)
-* alco: Antal genstande pr uge under graviditet
-* weight: Fødselsvægt i gram
+::::
+
+
+## Populær ting i eksamensopgaver
+
+:::: evensmaller
+
+De der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.
+
+Husk: $\text{t value} = \frac{\text{Estimate}}{\text{Std. Error}}$
+
+
+p-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:  
+$\frac{\text{Estimate}}{\text{Std. Error}}$,  
+og ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)
+
+::::
+
+. . . 
+
+:::: evensmaller
+Vi kan faktisk godt beregne p-værdien. Den er givet ved: `2*(1-pt(abs(`t value`), df))`
+
+`pt` er `pnorm()` blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.
+
+Men det behøver vi ikke - test-værdien er rigelig.
+
+::::
+
+## Resten
+
+:::: tiny
+```{r echo = FALSE}
+summary(lineær_model)
+```
+
+Residual standard error er et estimat af standardafvigelsen af residualerne, $\epsilon$. Den _bliver_ brugt til noget. Men det behøver vi ikke bekymre os så meget om. De "48" frihedsgrader vi så lige før kan vi også aflæse her.
+
+Multiple R-squared er den andel af variationen i y der forklares af modellen. 0.9786 er utroligt godt. 
+
+Adjusted R-squared er R-squared, hvor vi korrigerer for at vi har lagt flere paramtre ind i modellen. Det har jeg ikke set i eksamensopgaver.
+
+Modellen giver et svar på spørgsmålet: Hvad forventer vi at y ville være hvis x var "noget". Alternativet til den model ville være at 
+vi svarede "gennemsnittet af alle y-værdierne" uanset hvad x var. F-statistic fortæller om vores modeler signifikant bedre end det. 
+
+::::
+
+## Hvor sikre er vi på estimaterne?
+
+Vi får som regel lov at antage normalitet, og derfor:
+
+$\text{estimate} \pm 1.96\cdot \text{Std. Error}$
+
+. . . 
+
+Skal vi være helt korrekte, skal vi beregne den kritiske værdi ud fra t-fordelingen, og kende antallet af frihedsgrader.
+
+Så ville det blive:
+
+`estimate + c(-1,1)*qt(1-0.025, df = 48)`
+
+Det har jeg ikke set i nogen eksamensopgaver (endnu).
+
+## Hvordan estimerer vi Y fra X?
+:::: evensmaller
+```{r echo = FALSE}
+summary(lineær_model)
+```
+
+::::
+
+Hvis x = 10, hvad forventer vi så y vil være?
+
+. . . 
+
+```{r echo = TRUE}
+44.153 + 42.764*10
+```
+
+
+## En rigtig opgave
+
+Vi får denne variabelliste.
+
+- episodes: Antal episoder med feber under graviditeten (før interview)  
+- death: Fosterdød (ja = 1, nej = 0)  
+- mage: Moderens alder ved interview  
+- smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)  
+- alco: Antal genstande pr uge under graviditet  
+- weight: Fødselsvægt i gram
 
 Og skal undersøge en evt sammenhæng mellem fødselsvægt og rygning. Vi vil også se på indtagelse af
 alkohol under graviditeten.
@@ -483,6 +606,33 @@ man drikker om ugen. Estimatet er dog ikke statistisk signifikant, og vi kan ikk
 
 jo mere man ryger, jo værre. alkohol har ikke en signifikant betydning. 
 
+
+
+## Multipel lineær regression
+
+Den kan vi ikke visualisere.
+
+Hvad hvis Y afhænger af mere end en variabel?
+
+## regression med kategoriske variable
+
+Indtil videre har vi lavet regressioner hvor vi har estimeret en kontinuært variabel ved hjælp af 
+en eller flere kontinuærte variable.
+
+Kan vi også bruge en kategorisk variabel?
+
+## tolkning generel
+
+Hvis x stiger med 1, vil y, _alt andet lige_ stige med koefficienten på x.
+
+Hvis x er 0, så er værdien af 0 lig intercept. 
+
+Hvis p-værdien er lav - er vi ret sikre på at sammenhængen eksisterer
+
+hvis koefficienten er høj - er effekten af en stigning på 1 stor. Men husk lige hvilke enheder vi er i, og hvad 
+intercept egentlig er. En stigning på 1 kan være meget eller lidt afhængig af enheden.
+
+R-squared fortælelr os her hvor meget af variationen i data der forklares af modellen
 
 
 
