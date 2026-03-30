@@ -9,7 +9,7 @@ website:
   navbar:
     left:
       - text: "PUFF SEMS forberedelse"
-        href: slides/intro.qmd
+        href: slides/intro.html
       - text: "Powerberegninger"
         href: slides/powerberegninger_notat.html
       - text: "Download PDF"
