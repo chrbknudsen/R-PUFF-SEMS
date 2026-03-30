@@ -1,20 +1,16 @@
 project:
   type: website
   output-dir: docs
-  resources:
-    - downloads/*.pdf
 
 website:
   title: "PUFF SEMS forberedelse"
   navbar:
     left:
       - text: "PUFF SEMS forberedelse"
-        href: slides/intro.qmd
+        href: slides/intro.qmd 
       - text: "Powerberegninger"
         href: slides/powerberegninger_notat.html
-      - text: "Download PDF"
-        href: downloads/intro.pdf
 
-format:
-  revealjs:
-    pdf-separate-fragments: false
+
+
+

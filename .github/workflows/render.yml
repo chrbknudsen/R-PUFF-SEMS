@@ -3,28 +3,57 @@ on:
     branches: [main]
 
 name: Render and Publish
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
+      - uses: actions/checkout@v4
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt install libx11-dev pandoc
-          sudo apt-get install -y libcurl4-openssl-dev
-          sudo apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
-          sudo apt-get install -y libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev
-      - uses: actions/checkout@v4
+          sudo apt-get install -y \
+            libx11-dev pandoc \
+            libcurl4-openssl-dev \
+            libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev \
+            libfontconfig1-dev libfribidi-dev libharfbuzz-dev
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - uses: quarto-dev/quarto-actions/setup@v2
+
       - uses: r-lib/actions/setup-r@v2
+
       - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
+
+      - name: Install Chrome Headless Shell
+        run: quarto install chrome-headless-shell
+
+      - name: Render Quarto site
+        run: quarto render
+
+      - name: Install DeckTape
+        run: npm install -g decktape
+
+      - name: Create PDF from revealjs slides
+        run: |
+          mkdir -p downloads
+          decktape \
+            --chrome-arg=--no-sandbox \
+            --chrome-arg=--disable-dev-shm-usage \
+            reveal \
+            file://$GITHUB_WORKSPACE/_site/slides.html \
+            downloads/slides.pdf
+
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          render: false
