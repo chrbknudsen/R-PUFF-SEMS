@@ -404,7 +404,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -822,16 +822,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "age", "0.015131", "0.005927", "2.553", "0.01069*"
 
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -971,16 +971,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "X", "1.2632", "0.1571", "8.043", "8.79e-16***"
 
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `z value` = "z value",
     `Pr(>|z|)` = "Pr(>|z|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1271,16 +1271,16 @@ library(gt)
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "1.36970", "0.06646", "20.61", "<2e-16***",
 "factor(SMOKE)Smoker or former smoker", "-0.19092", "0.09644", "-1.98", "0.0485*"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1414,16 +1414,16 @@ library(gt)
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "-16.988", "1.3556", "-12.527", "<2e-16***",
 "factor(group[sex=='female'])treatment", "-5.915", "1.901", "-3.112", "0.002**"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1460,16 +1460,16 @@ library(gt)
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "-15.893", "1.594", "-9.968", "<2e-16***",
 "factor(group[sex=='male'])treatment", "1.692", "2.264", "0.747", "0.456"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
