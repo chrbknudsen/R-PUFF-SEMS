@@ -57,32 +57,46 @@ jobs:
           find docs/slides -type f -name "*.html" | while read -r html; do
             rel="${html#docs/}"
             qmd="${rel%.html}.qmd"
-            pdf="docs/downloads/$(basename "${html%.html}").pdf"
-            tmp_pdf="$(basename "${html%.html}").pdf"
+            base="$(basename "${html%.html}")"
+
+            pdf="docs/downloads/${base}.pdf"
+            tmp_pdf="${base}.pdf"
+            docs_pdf="docs/${base}.pdf"
+            slides_pdf="slides/${base}.pdf"
 
             echo "----------------------------------------"
-            echo "HTML: $html"
-            echo "QMD:  $qmd"
-            echo "PDF:  $pdf"
+            echo "HTML:   $html"
+            echo "QMD:    $qmd"
+            echo "TARGET: $pdf"
 
             if grep -q 'class="reveal"' "$html" || grep -q 'Reveal.initialize' "$html"; then
               echo "Detected revealjs -> using DeckTape"
+
               decktape \
                 --chrome-arg=--no-sandbox \
                 --chrome-arg=--disable-dev-shm-usage \
                 reveal \
                 "file://$GITHUB_WORKSPACE/$html" \
                 "$pdf"
+
             else
               echo "Detected ordinary HTML page -> using Quarto PDF"
+
               quarto render "$qmd" --to pdf --output "$tmp_pdf"
 
               if [ -f "$tmp_pdf" ]; then
                 mv "$tmp_pdf" "$pdf"
-              elif [ -f "${qmd%.qmd}.pdf" ]; then
-                mv "${qmd%.qmd}.pdf" "$pdf"
+              elif [ -f "$slides_pdf" ]; then
+                mv "$slides_pdf" "$pdf"
+              elif [ -f "$docs_pdf" ]; then
+                mv "$docs_pdf" "$pdf"
               else
                 echo "PDF was not produced for $qmd"
+                echo "Checked:"
+                echo "  $tmp_pdf"
+                echo "  $slides_pdf"
+                echo "  $docs_pdf"
+                find . -maxdepth 3 -type f -name "*.pdf" | sort
                 exit 1
               fi
             fi
