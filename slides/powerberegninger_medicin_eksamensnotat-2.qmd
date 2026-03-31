@@ -1,8 +1,11 @@
-
 ---
 title: "Powerberegninger – eksamensoverblik (medicinsk statistik)"
-author: "Noter"
-output: html_document
+author: "Christian Knudsen"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: false
 ---
 
 # Formål
