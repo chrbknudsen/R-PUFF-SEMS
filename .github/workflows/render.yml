@@ -43,25 +43,30 @@ jobs:
       - name: Render Quarto site
         run: quarto render
 
+      - name: Show rendered files
+        run: |
+          find docs -maxdepth 5 -type f | sort
+
       - name: Install DeckTape
         run: npm install -g decktape
 
-      - name: Create PDFs from revealjs slides
+      - name: Create PDFs from rendered HTML
         run: |
           mkdir -p docs/downloads
 
-          find slides -type f -name "*.qmd" ! -name "powerberegninger_notat.qmd" | while read -r qmd; do
-            rel_no_ext="${qmd%.qmd}"
-            html="docs/${rel_no_ext}.html"
-            pdf_name="$(basename "${rel_no_ext}").pdf"
-            pdf="docs/downloads/${pdf_name}"
+          find docs/slides -type f -name "*.html" | while read -r html; do
+            rel="${html#docs/}"
+            qmd="${rel%.html}.qmd"
+            pdf="docs/downloads/$(basename "${html%.html}").pdf"
+            tmp_pdf="$(basename "${html%.html}").pdf"
 
             echo "----------------------------------------"
-            echo "QMD:  $qmd"
             echo "HTML: $html"
+            echo "QMD:  $qmd"
             echo "PDF:  $pdf"
 
-            if [ -f "$html" ]; then
+            if grep -q 'class="reveal"' "$html" || grep -q 'Reveal.initialize' "$html"; then
+              echo "Detected revealjs -> using DeckTape"
               decktape \
                 --chrome-arg=--no-sandbox \
                 --chrome-arg=--disable-dev-shm-usage \
@@ -69,19 +74,28 @@ jobs:
                 "file://$GITHUB_WORKSPACE/$html" \
                 "$pdf"
             else
-              echo "HTML file not found, skipping: $html"
+              echo "Detected ordinary HTML page -> using Quarto PDF"
+              quarto render "$qmd" --to pdf --output "$tmp_pdf"
+
+              if [ -f "$tmp_pdf" ]; then
+                mv "$tmp_pdf" "$pdf"
+              elif [ -f "${qmd%.qmd}.pdf" ]; then
+                mv "${qmd%.qmd}.pdf" "$pdf"
+              else
+                echo "PDF was not produced for $qmd"
+                exit 1
+              fi
             fi
           done
 
-      - name: Render ordinary page as PDF
-        run: |
-          mkdir -p docs/downloads
-          quarto render slides/powerberegninger_notat.qmd --to pdf --output powerberegninger_notat.pdf
-          mv slides/powerberegninger_notat.pdf docs/downloads/powerberegninger_notat.pdf
-
       - name: Verify PDFs exist
         run: |
+          echo "Generated PDFs:"
           find docs/downloads -maxdepth 1 -type f -name "*.pdf" | sort
+
+      - name: Show files after PDF creation
+        run: |
+          find docs -maxdepth 5 -type f | sort
 
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
