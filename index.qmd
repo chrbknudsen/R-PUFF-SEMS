@@ -3,12 +3,11 @@ title: "KUB Datalab slides"
 format: html
 ---
 
-- [Intro](slides/intro.qmd)
-- [normalfordelingen](slides/normalfordelingen.qmd)
-- [SEM](slides/SEM.qmd)
-- [Kategoriske data](slides/kategoriske.qmd)
-- [Lineær regression](slides/linreg.qmd)
-- [Logistisk regression](slides/logistisk.qmd)
-- [Power beregninger](slides/power.qmd)
-- [side-by-side demo](slides/side-by-side-demo.qmd)
-
+- [Intro](slides/intro.qmd) [pdf](downloads/intro.pdf)
+- [normalfordelingen](slides/normalfordelingen.qmd) [pdf](downloads/normalfordelingen.pdf)
+- [SEM](slides/SEM.qmd) [pdf](downloads/SEM.pdf)
+- [Kategoriske data](slides/kategoriske.qmd) [pdf](downloads/kategoriske.pdf)
+- [Lineær regression](slides/linreg.qmd) [pdf](downloads/linreg.pdf)
+- [Logistisk regression](slides/logistisk.qmd) [pdf](downloads/logistisk.pdf)
+- [Power beregninger](slides/power.qmd) [pdf](downloads/power.pdf)
+ 
