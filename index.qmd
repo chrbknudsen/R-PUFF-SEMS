@@ -3,11 +3,11 @@ title: "KUB Datalab slides"
 format: html
 ---
 
-- [Intro](slides/intro.qmd) [pdf](downloads/intro.pdf)
-- [normalfordelingen](slides/normalfordelingen.qmd) [pdf](downloads/normalfordelingen.pdf)
-- [SEM](slides/SEM.qmd) [pdf](downloads/SEM.pdf)
-- [Kategoriske data](slides/kategoriske.qmd) [pdf](downloads/kategoriske.pdf)
-- [Lineær regression](slides/linreg.qmd) [pdf](downloads/linreg.pdf)
-- [Logistisk regression](slides/logistisk.qmd) [pdf](downloads/logistisk.pdf)
-- [Power beregninger](slides/power.qmd) [pdf](downloads/power.pdf)
+- [Intro](slides/intro.qmd){target="_blank"} [pdf](downloads/intro.pdf){target="_blank"}
+- [normalfordelingen](slides/normalfordelingen.qmd){target="_blank"} [pdf](downloads/normalfordelingen.pdf){target="_blank"}
+- [SEM](slides/SEM.qmd){target="_blank"} [pdf](downloads/SEM.pdf){target="_blank"}
+- [Kategoriske data](slides/kategoriske.qmd){target="_blank"} [pdf](downloads/kategoriske.pdf){target="_blank"}
+- [Lineær regression](slides/linreg.qmd){target="_blank"} [pdf](downloads/linreg.pdf){target="_blank"}
+- [Logistisk regression](slides/logistisk.qmd){target="_blank"} [pdf](downloads/logistisk.pdf){target="_blank"}
+- [Power beregninger](slides/power.qmd){target="_blank"} [pdf](downloads/power.pdf){target="_blank"}
  
