@@ -2080,7 +2080,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <div class="fragment">
-<p>Gennemsnit</p>
+<p>Gennemsnit eller middelværdi. Begge ord bruges!</p>
+</div>
+<div class="fragment">
+<p>Hvordan de varierer</p>
 </div>
 <div class="fragment">
 <p>Standardafvigelse</p>
@@ -2136,13 +2139,21 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<div class="fragment">
 <p>Det gør vi når vi kender de “sande” værdier:</p>
+</div>
+<div class="fragment">
 <p>Middelværdi: <span class="math inline">\(\mu\)</span>. Standardafvigelse: <span class="math inline">\(\sigma\)</span></p>
+</div>
+<div class="fragment">
 <p>De latinske bogstaver bruger vi når vi “kun” kender værdierne fra vores stikprøve:</p>
+</div>
+<div class="fragment">
 <p>Middelværdi: <span class="math inline">\(\bar{x}\)</span>. Standardafvigelse: <span class="math inline">\(s\)</span></p>
+</div>
 </section>
-<section id="hvad-hvis-de-er-højder-måles-i-noget-andet" class="slide level2">
-<h2>Hvad hvis de er højder måles i noget andet?</h2>
+<section id="og-hvis-vi-måler-i-en-anden-enhed" class="slide level2">
+<h2>Og hvis vi måler i en anden enhed?</h2>
 <p>Tommer fx?</p>
 <div class="columns">
 <div class="column">
@@ -2159,9 +2170,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div><div class="column">
+<div class="fragment">
 <p>Efter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">hist</span>(højder<span class="sc">/</span><span class="fl">2.54</span>, <span class="at">breaks =</span> breaks<span class="sc">/</span><span class="fl">2.54</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>breaks <span class="ot">&lt;-</span> breaks<span class="sc">/</span><span class="fl">2.54</span></span>
+<span id="cb3-2"><a></a><span class="fu">hist</span>(højder<span class="sc">/</span><span class="fl">2.54</span>, <span class="at">breaks =</span> breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -2170,10 +2183,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
+</div>
 </div></div>
 </section>
-<section id="hvordan-kan-vi-ellers-mishandle-de-tal" class="slide level2">
-<h2>Hvordan kan vi ellers mishandle de tal?</h2>
+<section id="hvordan-kan-vi-ellers-mishandle-tal" class="slide level2">
+<h2>Hvordan kan vi ellers mishandle tal?</h2>
 <p>Hvis vi trækker ting fra?</p>
 <div class="columns">
 <div class="column">
@@ -2190,10 +2204,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div><div class="column">
+<div class="fragment">
 <p>Efter:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>middel <span class="ot">&lt;-</span> <span class="fu">mean</span>(højder)</span>
-<span id="cb5-2"><a></a><span class="fu">hist</span>((højder<span class="sc">-</span>middel)<span class="sc">/</span><span class="fl">2.54</span>, <span class="at">breaks =</span> (breaks<span class="sc">-</span>middel)<span class="sc">/</span><span class="fl">2.54</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a></a><span class="fu">hist</span>(højder<span class="sc">-</span>middel, <span class="at">breaks =</span> breaks<span class="sc">-</span>middel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -2202,28 +2217,76 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
+</div>
+</div></div>
+</section>
+<section id="og-begge-dele" class="slide level2">
+<h2>Og begge dele</h2>
+<div class="columns">
+<div class="column">
+<p>Før:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">175</span>, <span class="dv">180</span>, <span class="dv">185</span>, <span class="dv">190</span>, <span class="dv">195</span>)</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a><span class="fu">hist</span>(højder, <span class="at">breaks =</span> breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="normalfordelingen_files/figure-revealjs/før-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="fragment">
+<p>Efter:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>middel <span class="ot">&lt;-</span> <span class="fu">mean</span>(højder)</span>
+<span id="cb7-2"><a></a>breaks <span class="ot">&lt;-</span> (breaks <span class="sc">-</span> middel)<span class="sc">/</span><span class="fl">2.54</span></span>
+<span id="cb7-3"><a></a><span class="fu">hist</span>((højder<span class="sc">-</span>middel)<span class="sc">/</span><span class="fl">2.54</span>, <span class="at">breaks =</span> breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="normalfordelingen_files/figure-revealjs/normaliseret-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="hvorfor-gør-vi-det" class="slide level2">
 <h2>Hvorfor gør vi det?</h2>
-<p>Jo, vi har lov at skalere vores data.</p>
-<p>Nu har vi et histogram der beskriver fordelingen af højder.</p>
-<p>Men på en måde, der beskriver hvordan de fordeler sig omkring gennemsnittet. Vi kan nu se hvor mange der er højere end gennemsnittet.</p>
-<p>Og hvor mange der er lavere end gennemsnittet.</p>
-<p>Og vi kan helt selv vælge hvilken enhed vi måler i.</p>
+<div class="fragment">
+<p>Fordi vi kan!</p>
+</div>
+<div class="fragment">
+<p>Vi får et histogram der beskriver fordelingen ganske som før.</p>
+</div>
+<div class="fragment">
+<p>På en måde, der beskriver fordelingen omkring gennemsnittet.</p>
+</div>
+<div class="fragment">
+<p>Vi kan nu se hvor mange der er højere end gennemsnittet.<br>
+Og hvor mange der er lavere end gennemsnittet.<br>
+I enheder vi selv vælger</p>
+</div>
+<div class="fragment">
 <p>Er det meget sandsynligt at møde en mand der er 7 tommer højere end gennemsnittet?</p>
+</div>
 </section>
 <section id="og-uintuitive-enheder" class="slide level2">
 <h2>Og uintuitive enheder</h2>
 <p>Vi kan måle i standardafvigelser i stedet for tommer:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>enhed <span class="ot">&lt;-</span> <span class="fu">sd</span>(højder)</span>
-<span id="cb6-2"><a></a>middel <span class="ot">&lt;-</span> <span class="fu">mean</span>(højder)</span>
-<span id="cb6-3"><a></a>breaks <span class="ot">&lt;-</span> (breaks<span class="sc">-</span>middel)<span class="sc">/</span>enhed</span>
-<span id="cb6-4"><a></a><span class="fu">hist</span>((højder<span class="sc">-</span>middel)<span class="sc">/</span>enhed, <span class="at">breaks =</span> breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">160</span>, <span class="dv">165</span>, <span class="dv">170</span>, <span class="dv">175</span>, <span class="dv">180</span>, <span class="dv">185</span>, <span class="dv">190</span>, <span class="dv">195</span>)</span>
+<span id="cb8-2"><a></a>enhed <span class="ot">&lt;-</span> <span class="fu">sd</span>(højder)</span>
+<span id="cb8-3"><a></a>middel <span class="ot">&lt;-</span> <span class="fu">mean</span>(højder)</span>
+<span id="cb8-4"><a></a>breaks <span class="ot">&lt;-</span> (breaks<span class="sc">-</span>middel)<span class="sc">/</span>enhed</span>
+<span id="cb8-5"><a></a><span class="fu">hist</span>((højder<span class="sc">-</span>middel)<span class="sc">/</span>enhed, <span class="at">breaks =</span> breaks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="normalfordelingen_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><aside class="notes">
+<img data-src="normalfordelingen_files/figure-revealjs/i_enhder_af_sd-1.png" width="960" class="r-stretch"><aside class="notes">
 <p>Er det sandsynligt at møde en mand der er 3 standardafvigelser lavere end gennemsnittet?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2240,8 +2303,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="hvad-er-normalfordelingen" class="slide level2">
 <h2>Hvad er normalfordelingen?</h2>
 <p>Højderne fra før var normalfordelte</p>
+<div class="fragment">
 <p>De fleste eksamensopgaver I støder på, har en formulering om at I kan antage at data er normalfordelte.</p>
 <p>Hvad betyder det?</p>
+</div>
 <div class="fragment">
 <p>Undersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger</p>
 </div>
@@ -2271,7 +2336,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><span class="math display">\[
 f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 \]</span></p>
-<p><span class="math inline">\(f(x)\)</span> er sandsynligheden for at se en observation med værdien x. <span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span> har vi mødt før.</p>
+<p><span class="math inline">\(f(x)\)</span> er sandsynligheden for at se en observation med værdien x.<br>
+<span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span> har vi mødt før.</p>
 <div class="fragment">
 <p>Det er der jo ingen der orker at arbejde med…</p>
 </div>
@@ -2282,12 +2348,15 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="hvordan-ser-den-ud-1" class="slide level2">
 <h2>Hvordan ser den ud?</h2>
 
-<img data-src="normalfordelingen_files/figure-revealjs/normalfordelingen-1.png" width="960" class="r-stretch"><ul>
+<img data-src="normalfordelingen_files/figure-revealjs/normalfordelingen-1.png" width="960" class="r-stretch"><div class="smaller">
+<ul>
 <li>Her har vi målinger der kan gå fra -4 til 4 standardafvigelser.</li>
 <li>Og har <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma = 1\)</span>.</li>
+<li>Husk - det er en sandsynlighedsfordeling</li>
 <li>Arealet under kurven er 1 ~ 100%.</li>
 <li>For alle værdierne er med og sandsynligheden for at vi ser en værdi er 100%</li>
 </ul>
+</div>
 </section>
 <section id="standardnormalfordelingen" class="slide level2">
 <h2>Standardnormalfordelingen</h2>
@@ -2326,7 +2395,10 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="hvilke-egenskaber-har-den" class="slide level2">
 <h2>Hvilke egenskaber har den?</h2>
 
-<img data-src="The_Normal_Distribution.svg" class="r-stretch"><aside class="notes">
+<img data-src="The_Normal_Distribution.svg" class="r-stretch"><div class="tiny">
+<p><a href="The_Normal_Distribution.svg" target="_blank">link</a></p>
+</div>
+<aside class="notes">
 <p>Bemærk at enheden på x-aksen er i “standardafvigelser”. At den går fra minus uendelig til uendelig sammenhængen mellem median og middelværdi Læg også mærke til at z-scores er lig med enheden. T-scores er en normalisering fra psykometrien. Den bruger vi ikke her.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2366,84 +2438,128 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>Hvad er det i standardafvigelser?</p>
 </div>
 <div class="fragment">
-<p>-10 / 5 = -2 -2 standardafvigelser fra middelværdien</p>
+<p>-10 / 5 = -2</p>
+<p>-2 standardafvigelser fra middelværdien</p>
 </div>
 <div class="fragment">
 <p>Og lige før så vi at det var 2.3%</p>
 </div>
+<div class="fragment">
+<p>Så hvis vi skalerer data til standardnormalfordelingen, kan vi “let” se hvor mange der er højere eller lavere end noget bestemt.</p>
+</div>
 </section>
 <section id="fine-tal---hvordan-finder-vi-dem-selv" class="slide level2">
 <h2>Fine tal - hvordan finder vi dem selv?</h2>
-<p>Ifølge den grafen ligger 15.9% af observationerne under <span class="math inline">\(-1\sigma\)</span>.</p>
+<p>Vi ville vide hvor stor en andel af mændene der var lavere end -2 standardafvigelser fra middelværdien.</p>
+<div class="fragment">
+<p>Ifølge grafen lå 2.3% af observationerne under <span class="math inline">\(-2\sigma\)</span>.</p>
+</div>
+<div class="fragment">
 <p>Hvordan finder vi selv det tal?</p>
+</div>
+<div class="fragment">
 <ul>
 <li>pnorm</li>
 <li>qnorm</li>
 </ul>
+</div>
 </section>
 <section id="pnorm" class="slide level2">
 <h2>pnorm</h2>
 <p>pnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1586553</code></pre>
-</div>
-</div>
-<p>Vi kan også skrive det som:</p>
-<p>P(X &lt; -1) = 0.1586553</p>
 <div class="fragment">
-<p>Læses: Sandsynligheden (P) for at værdien (X) er mindre end -1 er 0.1586553</p>
-<p>Vi taler også om at det er 15.8 kvantilen, eller 15.8 percentilen.</p>
-<p>Og det var i standardnormalfordelingen.</p>
+<p>Når x er afstanden til middelværdien, målt i enheder af standardafvigelsen.</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02275013</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Vi kan også skrive det som:</p>
+<p>P(X &lt; -2) = 0.02275013</p>
+</div>
+<div class="fragment">
+<p>Læses: Sandsynligheden (P) for at værdien (X) er mindre end -2 er 0.02275013</p>
+<p>Vi taler også om at det er 2.3% kvantilen, eller 2.3 percentilen.</p>
 </div>
 </section>
 <section id="og-omvendt" class="slide level2">
 <h2>Og omvendt?</h2>
 <p>Hvis sandsynligheden for at at X er mindre end -1 skrives som:</p>
 <p>P(X &lt; -1)</p>
-<p>Hvad er så sandsynligheden for at X er større end -1?</p>
+<p>Hvad er så sandsynligheden for at X er <span class="math inline">\(\geq -1\)</span>?</p>
 <div class="fragment">
-<p>P(X &gt; -1)</p>
+<p><span class="math inline">\(P(X \geq -1)\)</span></p>
 </div>
 <div class="fragment">
-<p>= 1 - P(X &lt; -1)</p>
-<p>X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X <em>er</em> er 1.</p>
+<p>X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X <em>er</em> er 1, så:</p>
+</div>
+<div class="fragment">
+<p>1 - P(X &lt; -1)</p>
 </div>
 </section>
 <section id="qnorm" class="slide level2">
 <h2>qnorm</h2>
 <p>qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p.&nbsp;</p>
 <div class="fragment">
+<p>For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?</p>
+</div>
+<div class="fragment">
 <p>P(X &lt; ?) = 0.025</p>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.959964</code></pre>
 </div>
 </div>
-<p>For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?</p>
+</div>
+<div class="fragment">
 <p>Det kalder vi også for 2.5 percentilen. Eller 2.5% kvantilen. På engelsk quantile. Deraf “q”.</p>
+</div>
+</section>
+<section id="og-omvendt-1" class="slide level2">
+<h2>Og omvendt?</h2>
+<p>For hvilken værdi er 0.025, eller 2.5% af observationerne større (eller lig med)?</p>
+<div class="fragment">
+<p>P(X &gt; ?) = 0.025</p>
+</div>
+<div class="fragment">
+<p>Det er så den værdi hvor 1-0.025 = 0.975 er mindre</p>
+</div>
+<div class="fragment">
+<p>P(X &lt; ?) = 1 - 0.025</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.025</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+</div>
 </div>
 </section>
 <section id="eller" class="slide level2">
 <h2>Eller</h2>
 <ul>
-<li>pnorm går fra kvantil til sandsynlighed.</li>
-<li>qnorm går fra sandsynlighed til kvantil.</li>
+<li><strong>p</strong>norm giver os sandsynligheden <strong>p</strong>, når vi har en kvantil</li>
+<li><strong>q</strong>norm giver os <strong>q</strong>uantilen når vi har en sandsynlighed</li>
 </ul>
-<p>P(X &lt; værdi) = sandsynlighed</p>
+<p>P(X &lt; kvantil) = sandsynlighed</p>
 <ul>
 <li>Hvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden</li>
-<li>Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne værdien</li>
+<li>Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne kvantilen</li>
 </ul>
 </section>
 <section id="husk" class="slide level2">
 <h2>HUSK!</h2>
 <p>Vi får altid svar på “hvor meget er mindre end”?</p>
-<p>Som i: X% er mindre end Y værdi (målt i standardafvigelser).</p>
+<p>Som i: X% er mindre end Y kvantil (målt i standardafvigelser).</p>
 <p>Vi kender enten X eller Y, og skal beregne den anden.</p>
 </section>
 <section id="typiske-spørgsmål-vi-får" class="slide level2">
@@ -2543,6 +2659,9 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="columns">
 <div class="column">
 <p>Hvad er 25% af observationerne mindre end?</p>
+<div class="tiny">
+<p>I standardnormalfordelingen</p>
+</div>
 <aside class="notes">
 <p>Nu kender vi sandsynligheden, og skal have værdien - qnorm. Mere præcist qnorm(0.25)</p>
 <style type="text/css">
@@ -2672,7 +2791,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>P(Z &lt; 2)</p>
 <p>Hvor svaret er:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9772499</code></pre>
 </div>
@@ -2684,7 +2803,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>P(Z &lt; ? ) = 0.4</p>
 <p>Hvor svaret er:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.2533471</code></pre>
 </div>
@@ -2696,6 +2815,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>P(Z &lt; 3) - P(Z &lt; 1)</p>
 <p>Hvor svaret er:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">pnorm</span>(<span class="dv">3</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02140023</code></pre>
 </div>
@@ -2703,10 +2823,18 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="hvorfor-z" class="slide level2">
 <h2>Hvorfor Z?</h2>
+<div class="fragment">
 <p>Og ikke X?</p>
+</div>
+<div class="fragment">
 <p>Konventionen er, at i standardnormalfordelingen skriver vi Z.</p>
+</div>
+<div class="fragment">
 <p>I en normalfordeling generelt (der ikke er standardnormalfordelingen), skriver vi X</p>
+</div>
+<div class="fragment">
 <p>Når vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen.</p>
+</div>
 <div class="fragment">
 <p><span class="math inline">\(Z = \frac{X-\mu}{\sigma}\)</span></p>
 </div>
@@ -2728,7 +2856,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:</p>
 <p><span class="math inline">\(P(X&lt;170) = P(\frac{X-\mu}{\sigma} &lt; \frac{170 - 181}{6.5}) = P(Z &lt; -1.692)\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.692</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.692</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04532299</code></pre>
 </div>
@@ -2737,15 +2865,19 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
-<p>Den standardiserede normalfordeling skriver vi som N(0,1) En normalfordeling (der ikke er standardiseret) skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span> Når vi har data, X, der er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
+<p>Den standardiserede normalfordeling skriver vi som N(0,1)<br>
+En normalfordeling (der ikke er standardiseret) skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span><br>
+Når vi har data, X, der er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
 <p>Eller: P(X &lt; 170) = P(<span class="math inline">\(\frac{X-\mu}{\sigma}\)</span> &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
-<p>Det gider vi ikke skrive, så i stedet skriver vi Z: P(Z &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
-<p>Lagde I mærke til Z på plottet af normalfordelingen? Ikke alene normaliserer vi X til at have en bestemt middelværdi, vi måler den også i enheder af standardafvigelsen. Den z-score vi så på grafen. Det er det Z.</p>
+<p>Eller kortere: P(Z &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
+<p>Når vi normaliserer 170 med <span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span>, får vi en Z-score. Det var den vi så på plottet af normalfordelingen.</p>
 </section>
 <section id="og-den-anden-vej" class="slide level2">
 <h2>Og den anden vej</h2>
 <p>Så undertiden beregner vi Z. Og så skal vi bagefter finde ud af hvad X er.</p>
+<div class="fragment">
 <p>Hvis vi ved hvordan vi går fra X til Z, så ved vi også hvordan vi går fra Z til X.</p>
+</div>
 <div class="fragment">
 <p>En ene vej trækker vi <span class="math inline">\(\mu\)</span> fra og dividerer med <span class="math inline">\(\sigma\)</span></p>
 </div>
@@ -2762,7 +2894,8 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="fragment">
 <p>Det kan vi skrive som:</p>
 <ul>
-<li>P(X&lt;0) = 0.5</li>
+<li>P(X&lt;0) = 0.5<br>
+</li>
 <li>P(X&lt;1) = 0.6</li>
 </ul>
 </div>
@@ -2774,14 +2907,19 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>Skaler til standardnormalfordelingen:</p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(P(\frac{X-\mu}{\sigma} &lt; \frac{0-\mu}{\sigma}) = P(Z &lt; \frac{0-\mu}{\sigma}) = 0.5\)</span></p>
+<p><span class="math inline">\(P(X &lt; 0) = P(\frac{X-\mu}{\sigma} &lt; \frac{0-\mu}{\sigma}) = P(Z &lt; \frac{0-\mu}{\sigma}) = 0.5\)</span></p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(P(\frac{X-\mu}{\sigma} &lt; \frac{1-\mu}{\sigma}) = P(Z &lt; \frac{1-\mu}{\sigma})= 0.6\)</span></p>
+<p><span class="math inline">\(P(X&lt;1) = P(\frac{X-\mu}{\sigma} &lt; \frac{1-\mu}{\sigma}) = P(Z &lt; \frac{1-\mu}{\sigma})= 0.6\)</span></p>
 </div>
 <div class="fragment">
-<p>Husk at når vi kender sandsynligheden for en ukendt værdi, kan vi bruge qnorm til at beregne den ukendte værdi.</p>
-<p>dvs.</p>
+<p>Kender vi sandsynligheden og skal finde kvantilen bruger vi?</p>
+</div>
+<div class="fragment">
+<p>qnorm</p>
+</div>
+<div class="fragment">
+<p>Så:</p>
 <p><span class="math inline">\(\frac{0-\mu}{\sigma}  = qnorm(0.5)\)</span> og</p>
 <p><span class="math inline">\(\frac{1-\mu}{\sigma}  = qnorm(0.6)\)</span></p>
 </div>
@@ -2789,21 +2927,25 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="øvelser-2" class="slide level2">
 <h2>Øvelser</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
+<div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2533471</code></pre>
 </div>
 </div>
-<p>så:</p>
+</div>
+<div class="fragment">
+<p>Derfor:</p>
 <p><span class="math inline">\(\frac{0-\mu}{\sigma}  = 0\)</span></p>
 <p><span class="math inline">\(\frac{1-\mu}{\sigma}  = 0.25\)</span></p>
 <p>Løs først den ene ligning, og så den anden</p>
+</div>
 </section>
 <section id="øvelser-3" class="slide level2">
 <h2>Øvelser</h2>
@@ -2819,6 +2961,9 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="endnu-en-øvelse" class="slide level2">
 <h2>Endnu en øvelse</h2>
+<div class="tiny">
+<p>Nappet direkte fra en eksamensopgave</p>
+</div>
 <p>For en population af normalfordelte værdier ved vi at:<br>
 40% af værdierne er større end 0.1, og<br>
 70% af værdierne er mindre end 1.<br>
@@ -2863,46 +3008,6 @@ Hvad er middelværdi og spredning i denne normalfordeling?</p>
 <p><span class="math inline">\(1-\mu = 0.524\sigma \Leftrightarrow 1 - \mu = 0.534\cdot3.32 \Leftrightarrow 1 - 0.534\cdot3.32 = \mu = -0.77\)</span></p>
 </div>
 </section>
-<section id="hvorfor-er-den-vigtig" class="slide level2">
-<h2>Hvorfor er den vigtig?</h2>
-<p>Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?</p>
-<div class="fragment">
-<p>På grund af “Den Centrale Grænseværdisætning”.</p>
-</div>
-<div class="fragment">
-<p>Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.</p>
-</div>
-<div class="fragment">
-<p>Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.</p>
-</div>
-<div class="fragment">
-<p>Vi beregner gennemsnittet af den stikprøve og gemmer det.</p>
-</div>
-<div class="fragment">
-<p>Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.</p>
-</div>
-</section>
-<section id="hvorfor-er-den-vigtig-1" class="slide level2">
-<h2>Hvorfor er den vigtig?</h2>
-<p>Det gør vi mange gange.</p>
-<div class="fragment">
-<p>Det giver en masse gennemsnit/middelværdier.</p>
-</div>
-<div class="fragment">
-<p><em>De middelværdier vil følge normalfordelngen.</em></p>
-</div>
-<div class="fragment">
-<p><em>Uanset</em> hvilken sandsynlighedsfordeling danske mænds højde følger.</p>
-</div>
-<div class="fragment">
-<p>Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.</p>
-</div>
-</section>
-<section id="en-gang-til" class="slide level2">
-<h2>En gang til</h2>
-<p>Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.</p>
-<p>Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.</p>
-</section>
 <section id="hvorfor-er-den-vigtig-for-jer" class="slide level2">
 <h2>Hvorfor er den vigtig for jer?</h2>
 <p>Ret ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen.</p>
@@ -2914,7 +3019,7 @@ Hvad er middelværdi og spredning i denne normalfordeling?</p>
 <p>Populært spørgsmål - hvad er normalområdet for “noget”?</p>
 <p>Hvis de 95% hyppigste observationer i en normalfordelt population er “normalområdet”. I hvilket interval ligger de de så?</p>
 <div class="fragment">
-<p>Hvis de er centreret om en middelværdi, så ligger 100% - 95% udenfor</p>
+<p>Hvis de er centreret om en middelværdi, så ligger 100% - 95% = 5% udenfor</p>
 </div>
 <div class="fragment">
 <p>Så 2.5% ligger lavere, og 2.5% ligger højere.</p>
@@ -2931,7 +3036,9 @@ Hvad er middelværdi og spredning i denne normalfordeling?</p>
 <h2>Normalområdet - nedre grænse</h2>
 <p><span class="math inline">\(X \sim N(200, 40)\)</span></p>
 <div class="fragment">
-<p>Nedre grænse så de (100-95)/2 = 2.5% laveste værdier</p>
+<p>Nedre grænse er den værdi hvor (100-95)/2 = 2.5% af værdierne er mindre.</p>
+</div>
+<div class="fragment">
 <p>P(X &lt; y) = 0.025</p>
 </div>
 <div class="fragment">
@@ -2965,12 +3072,15 @@ Hvad er middelværdi og spredning i denne normalfordeling?</p>
 <h2>Normalområdet - øvre grænse</h2>
 <p>Den øvre grænse er så den grænse under hvilken de 95% i normalområdet <em>og</em> de 2.5% under normalområdet ligger.</p>
 <div class="fragment">
-<p>Dvs.<br>
-P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
+<p>Dvs. P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
 </div>
 <div class="fragment">
-<p>Standardiser:</p>
-<p>P(Z &lt; y - 200 / 40 ) = 0.975</p>
+<p>Eller der hvor 2.5% ligger over:<br>
+P(X &gt; y) = 0.025 &lt;=&gt; P(X &lt; y) = 1 - 0.025</p>
+</div>
+<div class="fragment">
+<p>Standardiser:<br>
+P(Z &lt; y - 200 / 40 ) = 0.975</p>
 </div>
 <div class="fragment">
 <p>y - 200 / 40 = qnomr(0.975) = 1.959964</p>
@@ -2992,7 +3102,7 @@ P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
 <div class="fragment">
 <p>Eller:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="dv">200</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="dv">40</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="dv">200</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="dv">40</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 121.6 278.4</code></pre>
 </div>
@@ -3001,13 +3111,21 @@ P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
 </section>
 <section id="hvad-hvis-det-er-et-90-interval-der-er-det-normale" class="slide level2">
 <h2>Hvad hvis det er et 90% interval der er det normale?</h2>
+<div class="fragment">
 <p>Så skal vi bare finde ud af hvad 1.96 skal ændres til.</p>
-<p>10% skal ligge udenfor område.</p>
+</div>
+<div class="fragment">
+<p>10% skal ligge udenfor området.</p>
+</div>
+<div class="fragment">
 <p>Dvs 5% skal ligge under, og 5% skal ligge over.</p>
+</div>
+<div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.644854</code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -3038,12 +3156,13 @@ P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975</p>
 <div class="columns">
 <div class="column">
 <p>En normalfordelt population har middelværdi <span class="math inline">\(\mu = 12.5\)</span> og standardafvigelse <span class="math inline">\(\sigma = 3.2\)</span>. Hvor stor en andel af værdierne er mindre end 10?</p>
-<p>. . .</p>
-<p>Med andre ord, hvad er:</p>
-<p><span class="math inline">\(P(X &lt; 10)\)</span></p>
-<p>. . .</p>
-<p>Transformer til standardnormalfordelingen:</p>
-<p><span class="math inline">\(P(Z &lt; \frac{10 - \mu}{\sigma})\)</span></p>
+<div class="fragment">
+<p>Med andre ord, hvad er: <span class="math inline">\(P(X &lt; 10)\)</span></p>
+</div>
+<div class="fragment">
+<p>Transformer til standardnormalfordelingen:<br>
+<span class="math inline">\(P(Z &lt; \frac{10 - \mu}{\sigma})\)</span></p>
+</div>
 </div><div class="column">
 <div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -3146,7 +3265,7 @@ P(85 &lt; X &lt; y) = 0.8</p>
 </div>
 <aside class="notes">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.2</span><span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)))<span class="sc">*</span><span class="dv">15</span><span class="sc">+</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.2</span><span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)))<span class="sc">*</span><span class="dv">15</span><span class="sc">+</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 126.0293</code></pre>
 </div>
@@ -3182,7 +3301,7 @@ P(85 &lt; X &lt; y) = 0.8</p>
 <p>Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fl">0.81</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.057</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fl">0.81</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.057</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.69828 0.92172</code></pre>
 </div>
@@ -3233,7 +3352,7 @@ P(X &lt; 0.92) - P(X &lt; 0.7)</p>
 <p>Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?</p>
 <p>Vi kan skalere de 50, og putte resultatet ind i pnorm.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">pnorm</span>((<span class="dv">50-47</span>)<span class="sc">/</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">pnorm</span>((<span class="dv">50-47</span>)<span class="sc">/</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5284717</code></pre>
 </div>
@@ -3241,7 +3360,7 @@ P(X &lt; 0.92) - P(X &lt; 0.7)</p>
 <p>Eller, vi kan lade R gøre det for os:</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">47</span>, <span class="at">sd =</span> <span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">47</span>, <span class="at">sd =</span> <span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5284717</code></pre>
 </div>

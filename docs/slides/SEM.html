@@ -421,7 +421,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"data <- mean(runif(20))\ndata <- c(data, mean(runif(20)))\nhist(data)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -1982,6 +1982,53 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.</p>
 <p>Den normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen.</p>
 </section>
+<section id="clt-demo" class="slide level2">
+<h2>CLT demo</h2>
+<div class="webr-side-by-side">
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</section>
+<section id="hvorfor-er-den-vigtig" class="slide level2">
+<h2>Hvorfor er den vigtig?</h2>
+<p>Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?</p>
+<div class="fragment">
+<p>På grund af “Den Centrale Grænseværdisætning”.</p>
+</div>
+<div class="fragment">
+<p>Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.</p>
+</div>
+<div class="fragment">
+<p>Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.</p>
+</div>
+<div class="fragment">
+<p>Vi beregner gennemsnittet af den stikprøve og gemmer det.</p>
+</div>
+<div class="fragment">
+<p>Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.</p>
+</div>
+</section>
+<section id="hvorfor-er-den-vigtig-1" class="slide level2">
+<h2>Hvorfor er den vigtig?</h2>
+<p>Det gør vi mange gange.</p>
+<div class="fragment">
+<p>Det giver en masse gennemsnit/middelværdier.</p>
+</div>
+<div class="fragment">
+<p><em>De middelværdier vil følge normalfordelngen.</em></p>
+</div>
+<div class="fragment">
+<p><em>Uanset</em> hvilken sandsynlighedsfordeling danske mænds højde følger.</p>
+</div>
+<div class="fragment">
+<p>Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.</p>
+</div>
+</section>
+<section id="en-gang-til" class="slide level2">
+<h2>En gang til</h2>
+<p>Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.</p>
+<p>Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.</p>
+</section>
 <section id="men-ikke-den-middelværdi-i-får-fra-én-stikprøve" class="slide level2">
 <h2>Men ikke den middelværdi I får fra én stikprøve!</h2>
 <p>Så hvad er populationens middelværdi?</p>
@@ -2025,7 +2072,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Konfidensintervaller</h2>
 <p>Det gennemsnit vi finder i vores stikprøve er vores estimat på den sande værdi i populationen.</p>
 <p>Usikkerheden på det estimat bestemmes af stikprøvens størrelse, og variationen i data.</p>
-<p>Standardfejlen på estimatet beregnes ved <span class="math inline">\(SEM = \frac{s}{\sqrt{n}}\)</span>s</p>
+<p>Standardfejlen på estimatet beregnes ved <span class="math inline">\(SEM = \frac{s}{\sqrt{n}}\)</span></p>
 <p>Vi beregner et 95% konfidensinterval ved middelværdien plus/minus 1.96*SEM.</p>
 <p>Som dog teknisk set kun gælder hvis vi kender sigma, eller stikprøven er stor.</p>
 </section>
@@ -2044,23 +2091,23 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="dwrnjutqqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dwrnjutqqf table {
+<div id="kulhdxqswo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kulhdxqswo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dwrnjutqqf thead, #dwrnjutqqf tbody, #dwrnjutqqf tfoot, #dwrnjutqqf tr, #dwrnjutqqf td, #dwrnjutqqf th {
+#kulhdxqswo thead, #kulhdxqswo tbody, #kulhdxqswo tfoot, #kulhdxqswo tr, #kulhdxqswo td, #kulhdxqswo th {
   border-style: none;
 }
 
-#dwrnjutqqf p {
+#kulhdxqswo p {
   margin: 0;
   padding: 0;
 }
 
-#dwrnjutqqf .gt_table {
+#kulhdxqswo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2086,12 +2133,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_caption {
+#kulhdxqswo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dwrnjutqqf .gt_title {
+#kulhdxqswo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2103,7 +2150,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#dwrnjutqqf .gt_subtitle {
+#kulhdxqswo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2115,7 +2162,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#dwrnjutqqf .gt_heading {
+#kulhdxqswo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2127,13 +2174,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_bottom_border {
+#kulhdxqswo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_col_headings {
+#kulhdxqswo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2148,7 +2195,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_col_heading {
+#kulhdxqswo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2168,7 +2215,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#dwrnjutqqf .gt_column_spanner_outer {
+#kulhdxqswo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2180,15 +2227,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#dwrnjutqqf .gt_column_spanner_outer:first-child {
+#kulhdxqswo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dwrnjutqqf .gt_column_spanner_outer:last-child {
+#kulhdxqswo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dwrnjutqqf .gt_column_spanner {
+#kulhdxqswo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2200,11 +2247,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#dwrnjutqqf .gt_spanner_row {
+#kulhdxqswo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dwrnjutqqf .gt_group_heading {
+#kulhdxqswo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2230,7 +2277,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#dwrnjutqqf .gt_empty_group_heading {
+#kulhdxqswo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2245,15 +2292,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#dwrnjutqqf .gt_from_md > :first-child {
+#kulhdxqswo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dwrnjutqqf .gt_from_md > :last-child {
+#kulhdxqswo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dwrnjutqqf .gt_row {
+#kulhdxqswo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2272,7 +2319,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#dwrnjutqqf .gt_stub {
+#kulhdxqswo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2285,7 +2332,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#dwrnjutqqf .gt_stub_row_group {
+#kulhdxqswo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2299,15 +2346,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#dwrnjutqqf .gt_row_group_first td {
+#kulhdxqswo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dwrnjutqqf .gt_row_group_first th {
+#kulhdxqswo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dwrnjutqqf .gt_summary_row {
+#kulhdxqswo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2317,16 +2364,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#dwrnjutqqf .gt_first_summary_row {
+#kulhdxqswo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_first_summary_row.thick {
+#kulhdxqswo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dwrnjutqqf .gt_last_summary_row {
+#kulhdxqswo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2336,7 +2383,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_grand_summary_row {
+#kulhdxqswo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2346,7 +2393,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#dwrnjutqqf .gt_first_grand_summary_row {
+#kulhdxqswo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2356,7 +2403,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_last_grand_summary_row_top {
+#kulhdxqswo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2366,11 +2413,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_striped {
+#kulhdxqswo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dwrnjutqqf .gt_table_body {
+#kulhdxqswo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2379,7 +2426,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_footnotes {
+#kulhdxqswo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2393,7 +2440,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_footnote {
+#kulhdxqswo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2402,7 +2449,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#dwrnjutqqf .gt_sourcenotes {
+#kulhdxqswo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2416,7 +2463,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#dwrnjutqqf .gt_sourcenote {
+#kulhdxqswo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2424,72 +2471,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#dwrnjutqqf .gt_left {
+#kulhdxqswo .gt_left {
   text-align: left;
 }
 
-#dwrnjutqqf .gt_center {
+#kulhdxqswo .gt_center {
   text-align: center;
 }
 
-#dwrnjutqqf .gt_right {
+#kulhdxqswo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dwrnjutqqf .gt_font_normal {
+#kulhdxqswo .gt_font_normal {
   font-weight: normal;
 }
 
-#dwrnjutqqf .gt_font_bold {
+#kulhdxqswo .gt_font_bold {
   font-weight: bold;
 }
 
-#dwrnjutqqf .gt_font_italic {
+#kulhdxqswo .gt_font_italic {
   font-style: italic;
 }
 
-#dwrnjutqqf .gt_super {
+#kulhdxqswo .gt_super {
   font-size: 65%;
 }
 
-#dwrnjutqqf .gt_footnote_marks {
+#kulhdxqswo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dwrnjutqqf .gt_asterisk {
+#kulhdxqswo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dwrnjutqqf .gt_indent_1 {
+#kulhdxqswo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dwrnjutqqf .gt_indent_2 {
+#kulhdxqswo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dwrnjutqqf .gt_indent_3 {
+#kulhdxqswo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dwrnjutqqf .gt_indent_4 {
+#kulhdxqswo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dwrnjutqqf .gt_indent_5 {
+#kulhdxqswo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dwrnjutqqf .katex-display {
+#kulhdxqswo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dwrnjutqqf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kulhdxqswo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2526,7 +2573,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.</p>
 </div>
 </div><div class="column">
-<div id="qwebr-insertion-location-1"></div>
+<div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 <aside class="notes">
@@ -2707,7 +2754,7 @@ Er der forskel?</p>
 <p>. . .</p>
 <p>Det er SEM. Den beregner vi ved <span class="math inline">\(\frac{\sigma}{sqrt{n}}/\)</span></p>
 </div><div class="column">
-<div id="qwebr-insertion-location-2"></div>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -2732,7 +2779,7 @@ Er der forskel?</p>
 <p><span class="math inline">\(P(Z &lt; \frac{13.6 - 13.3}{0.2891828}) - P(Z &lt; \frac{13.0 - 13.3}{0.2891828})\)</span></p>
 <p>. . .</p>
 </div><div class="column">
-<div id="qwebr-insertion-location-3"></div>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -2750,7 +2797,7 @@ Er der forskel?</p>
 <p>. . .</p>
 <p>Indsæt <span class="math inline">\(\sigma\)</span> og n og løs for n</p>
 </div><div class="column">
-<div id="qwebr-insertion-location-4"></div>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -2789,24 +2836,24 @@ Er der forskel?</p>
 <p>Nu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nkdhuidqua" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bmikshlfot" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nkdhuidqua table {
+#bmikshlfot table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nkdhuidqua thead, #nkdhuidqua tbody, #nkdhuidqua tfoot, #nkdhuidqua tr, #nkdhuidqua td, #nkdhuidqua th {
+#bmikshlfot thead, #bmikshlfot tbody, #bmikshlfot tfoot, #bmikshlfot tr, #bmikshlfot td, #bmikshlfot th {
   border-style: none;
 }
 
-#nkdhuidqua p {
+#bmikshlfot p {
   margin: 0;
   padding: 0;
 }
 
-#nkdhuidqua .gt_table {
+#bmikshlfot .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2832,12 +2879,12 @@ Er der forskel?</p>
   border-left-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_caption {
+#bmikshlfot .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nkdhuidqua .gt_title {
+#bmikshlfot .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2849,7 +2896,7 @@ Er der forskel?</p>
   border-bottom-width: 0;
 }
 
-#nkdhuidqua .gt_subtitle {
+#bmikshlfot .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2861,7 +2908,7 @@ Er der forskel?</p>
   border-top-width: 0;
 }
 
-#nkdhuidqua .gt_heading {
+#bmikshlfot .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2873,13 +2920,13 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_bottom_border {
+#bmikshlfot .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_col_headings {
+#bmikshlfot .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2894,7 +2941,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_col_heading {
+#bmikshlfot .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2914,7 +2961,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#nkdhuidqua .gt_column_spanner_outer {
+#bmikshlfot .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2926,15 +2973,15 @@ Er der forskel?</p>
   padding-right: 4px;
 }
 
-#nkdhuidqua .gt_column_spanner_outer:first-child {
+#bmikshlfot .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nkdhuidqua .gt_column_spanner_outer:last-child {
+#bmikshlfot .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nkdhuidqua .gt_column_spanner {
+#bmikshlfot .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2946,11 +2993,11 @@ Er der forskel?</p>
   width: 100%;
 }
 
-#nkdhuidqua .gt_spanner_row {
+#bmikshlfot .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nkdhuidqua .gt_group_heading {
+#bmikshlfot .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2976,7 +3023,7 @@ Er der forskel?</p>
   text-align: left;
 }
 
-#nkdhuidqua .gt_empty_group_heading {
+#bmikshlfot .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2991,15 +3038,15 @@ Er der forskel?</p>
   vertical-align: middle;
 }
 
-#nkdhuidqua .gt_from_md > :first-child {
+#bmikshlfot .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nkdhuidqua .gt_from_md > :last-child {
+#bmikshlfot .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nkdhuidqua .gt_row {
+#bmikshlfot .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3018,7 +3065,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#nkdhuidqua .gt_stub {
+#bmikshlfot .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3031,7 +3078,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#nkdhuidqua .gt_stub_row_group {
+#bmikshlfot .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3045,15 +3092,15 @@ Er der forskel?</p>
   vertical-align: top;
 }
 
-#nkdhuidqua .gt_row_group_first td {
+#bmikshlfot .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#nkdhuidqua .gt_row_group_first th {
+#bmikshlfot .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#nkdhuidqua .gt_summary_row {
+#bmikshlfot .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3063,16 +3110,16 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#nkdhuidqua .gt_first_summary_row {
+#bmikshlfot .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_first_summary_row.thick {
+#bmikshlfot .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nkdhuidqua .gt_last_summary_row {
+#bmikshlfot .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3082,7 +3129,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_grand_summary_row {
+#bmikshlfot .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3092,7 +3139,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#nkdhuidqua .gt_first_grand_summary_row {
+#bmikshlfot .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3102,7 +3149,7 @@ Er der forskel?</p>
   border-top-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_last_grand_summary_row_top {
+#bmikshlfot .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3112,11 +3159,11 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_striped {
+#bmikshlfot .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nkdhuidqua .gt_table_body {
+#bmikshlfot .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3125,7 +3172,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_footnotes {
+#bmikshlfot .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3139,7 +3186,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_footnote {
+#bmikshlfot .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3148,7 +3195,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#nkdhuidqua .gt_sourcenotes {
+#bmikshlfot .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3162,7 +3209,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#nkdhuidqua .gt_sourcenote {
+#bmikshlfot .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3170,72 +3217,72 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#nkdhuidqua .gt_left {
+#bmikshlfot .gt_left {
   text-align: left;
 }
 
-#nkdhuidqua .gt_center {
+#bmikshlfot .gt_center {
   text-align: center;
 }
 
-#nkdhuidqua .gt_right {
+#bmikshlfot .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nkdhuidqua .gt_font_normal {
+#bmikshlfot .gt_font_normal {
   font-weight: normal;
 }
 
-#nkdhuidqua .gt_font_bold {
+#bmikshlfot .gt_font_bold {
   font-weight: bold;
 }
 
-#nkdhuidqua .gt_font_italic {
+#bmikshlfot .gt_font_italic {
   font-style: italic;
 }
 
-#nkdhuidqua .gt_super {
+#bmikshlfot .gt_super {
   font-size: 65%;
 }
 
-#nkdhuidqua .gt_footnote_marks {
+#bmikshlfot .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nkdhuidqua .gt_asterisk {
+#bmikshlfot .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nkdhuidqua .gt_indent_1 {
+#bmikshlfot .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nkdhuidqua .gt_indent_2 {
+#bmikshlfot .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nkdhuidqua .gt_indent_3 {
+#bmikshlfot .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nkdhuidqua .gt_indent_4 {
+#bmikshlfot .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nkdhuidqua .gt_indent_5 {
+#bmikshlfot .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nkdhuidqua .katex-display {
+#bmikshlfot .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nkdhuidqua div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bmikshlfot div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
