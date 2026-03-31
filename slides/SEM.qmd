@@ -86,7 +86,7 @@ Det gennemsnit vi finder i vores stikprøve er vores estimat på den sande værd
 
 Usikkerheden på det estimat bestemmes af stikprøvens størrelse, og variationen i data.
 
-Standardfejlen på estimatet beregnes ved $SEM = \frac{s}{\sqrt{n}}$s
+Standardfejlen på estimatet beregnes ved $SEM = \frac{s}{\sqrt{n}}$
 
 Vi beregner et 95% konfidensinterval ved middelværdien plus/minus 1.96*SEM. 
 

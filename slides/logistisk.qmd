@@ -668,7 +668,7 @@ Så - givet x, får vi log-odds for et bestemt udfald.
 
 
 ## Hvordan laves en logistisk regression?
-
+:::: smaller
 Den logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
 
 Det er dog ikke "OLS" vi bruger til at regne inde bag ved, men "Maximum Likelihood" i stedet. Det bekymrer vi os ikke om her.
@@ -678,6 +678,8 @@ Det er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds f
 Det betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.
 
 Funktionen er derfor `glm()` i stedet or `lm()`.
+
+::::
 
 ## Hvordan ser det ud i praksis?
 :::: evensmaller 
@@ -1045,7 +1047,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1100,16 +1102,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "episodes", "-0.0752", "0.2048", "-0.368", "0.713",
 "factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
 "factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
@@ -1312,16 +1314,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "factor(SMOKE)Smoker or former smoker", "0.5751", "0.2066", "2.783", "0.00538**",
 "factor(don_age_cat)40-55", "0.4440", "0.2527", "1.757", "0.07896.",
 "factor(don_age_cat)56", "0.9395", "0.2891", "3.249", "0.00116**"
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()
