@@ -6,7 +6,5 @@ website:
   title: "PUFF SEMS forberedelse"
   navbar:
     left:
-      - text: "PUFF SEMS forberedelse"
-        href: slides/intro.html
       - text: "Powerberegninger"
         href: slides/powerberegninger_notat.html
