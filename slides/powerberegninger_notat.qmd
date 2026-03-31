@@ -8,6 +8,10 @@ output:
     number_sections: false
 ---
 
+:::: tiny
+[downloads/intro.pdf](pdf)
+::::
+
 # Formål
 
 Dette er mine noter til hvordan man laver powerberegninger (i medicinsk statistik).
