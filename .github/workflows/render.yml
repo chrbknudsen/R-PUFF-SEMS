@@ -37,34 +37,51 @@ jobs:
       - name: Install Chrome Headless Shell
         run: quarto install chrome-headless-shell
 
+      - name: Install TinyTeX
+        run: quarto install tinytex --update-path
+
       - name: Render Quarto site
         run: quarto render
-
-      - name: Show rendered files
-        run: |
-          find docs -maxdepth 4 -type f | sort
 
       - name: Install DeckTape
         run: npm install -g decktape
 
-      - name: Create PDF from revealjs slides
+      - name: Create PDFs from revealjs slides
         run: |
           mkdir -p docs/downloads
-          decktape \
-            --chrome-arg=--no-sandbox \
-            --chrome-arg=--disable-dev-shm-usage \
-            reveal \
-            "file://$GITHUB_WORKSPACE/docs/slides/intro.html" \
-            "docs/downloads/intro.pdf"
 
-      - name: Verify PDF exists
-        run: |
-          ls -l docs/downloads
-          test -f docs/downloads/intro.pdf
+          find slides -type f -name "*.qmd" ! -name "powerberegninger_notat.qmd" | while read -r qmd; do
+            rel_no_ext="${qmd%.qmd}"
+            html="docs/${rel_no_ext}.html"
+            pdf_name="$(basename "${rel_no_ext}").pdf"
+            pdf="docs/downloads/${pdf_name}"
 
-      - name: Show files after PDF creation
+            echo "----------------------------------------"
+            echo "QMD:  $qmd"
+            echo "HTML: $html"
+            echo "PDF:  $pdf"
+
+            if [ -f "$html" ]; then
+              decktape \
+                --chrome-arg=--no-sandbox \
+                --chrome-arg=--disable-dev-shm-usage \
+                reveal \
+                "file://$GITHUB_WORKSPACE/$html" \
+                "$pdf"
+            else
+              echo "HTML file not found, skipping: $html"
+            fi
+          done
+
+      - name: Render ordinary page as PDF
         run: |
-          find docs -maxdepth 4 -type f | sort
+          mkdir -p docs/downloads
+          quarto render slides/powerberegninger_notat.qmd --to pdf --output powerberegninger_notat.pdf
+          mv slides/powerberegninger_notat.pdf docs/downloads/powerberegninger_notat.pdf
+
+      - name: Verify PDFs exist
+        run: |
+          find docs/downloads -maxdepth 1 -type f -name "*.pdf" | sort
 
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
