@@ -31,6 +31,71 @@ følge normalfordelingen.
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
 populationen.
 
+## CLT demo
+
+::: {.webr-side-by-side}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+data <- mean(runif(20))
+data <- c(data, mean(runif(20)))
+hist(data)
+
+```
+:::
+
+
+## Hvorfor er den vigtig?
+
+Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?
+
+. . . 
+
+På grund af "Den Centrale Grænseværdisætning".
+
+. . . 
+
+Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
+
+. . . 
+
+Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.
+
+. . . 
+
+Vi beregner gennemsnittet af den stikprøve og gemmer det.
+
+. . . 
+
+Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
+
+## Hvorfor er den vigtig?
+
+Det gør vi mange gange. 
+
+. . . 
+
+Det giver en masse gennemsnit/middelværdier.
+
+. . . 
+
+_De middelværdier vil følge normalfordelngen._ 
+
+. . . 
+
+_Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+
+. . . 
+
+Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
+ 
+## En gang til
+
+Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
+
+Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.
+
 ## Men ikke den middelværdi I får fra én stikprøve!
 
 Så hvad er populationens middelværdi?
