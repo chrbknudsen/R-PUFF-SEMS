@@ -10,5 +10,3 @@ website:
         href: slides/intro.html
       - text: "Powerberegninger"
         href: slides/powerberegninger_notat.html
-      - text: "Download PDF"
-        href: downloads/intro.pdf
