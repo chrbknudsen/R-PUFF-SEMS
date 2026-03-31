@@ -182,7 +182,7 @@ df <- tibble(
 
 ggplot(df, aes(x, y)) +
   geom_area(
-    data = df %>% filter(in_95),
+    data = df |> filter(in_95),
     alpha = 0.5
   ) +
   geom_line(linewidth = 1) +
@@ -615,16 +615,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "-3.775", "3.471", "-1.087", "0.27795",
 "factor(gender)2", "16.283", "4.714", "3.454", "0.00065***"
 
-) %>%
+) |> 
 
-  gt() %>%
+  gt() |> 
   cols_label(
     Term = "",
     Estimate = "Estimate",
     `Std. Error` = "Std. Error",
     `t value` = "t value",
     `Pr(>|t|)` = "Pr(>|t|)"
-  ) %>%
+  ) |> 
   cols_align(
     align = "left",
     everything()

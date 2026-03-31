@@ -37,6 +37,7 @@ x og y. Når x stiger, stiger y også. Hvordan ser den lineære sammenhæng ud?
 Her har vi lagt en ret linie ind. Men er det den bedste? (spoiler: Det er den)
 ```{r echo = FALSE}
 library(tidyverse)
+library(tibble)
 set.seed(123)
 
 n <- 50; a <- 42; b <- 47
