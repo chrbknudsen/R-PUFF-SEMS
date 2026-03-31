@@ -7,11 +7,8 @@ name: Render and Publish
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: read
-      pages: write
-      id-token: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -27,13 +24,15 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
       - uses: r-lib/actions/setup-r@v2
 
       - uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
 
       - name: Install Chrome Headless Shell
         run: quarto install chrome-headless-shell
@@ -41,22 +40,33 @@ jobs:
       - name: Render Quarto site
         run: quarto render
 
+      - name: Show rendered files
+        run: |
+          find docs -maxdepth 4 -type f | sort
+
       - name: Install DeckTape
         run: npm install -g decktape
 
-      - name: Create PDF
+      - name: Create PDF from revealjs slides
         run: |
           mkdir -p docs/downloads
           decktape \
             --chrome-arg=--no-sandbox \
+            --chrome-arg=--disable-dev-shm-usage \
             reveal \
             "file://$GITHUB_WORKSPACE/docs/slides/intro.html" \
             "docs/downloads/intro.pdf"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
+      - name: Verify PDF exists
+        run: |
+          ls -l docs/downloads
+          test -f docs/downloads/intro.pdf
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - name: Show files after PDF creation
+        run: |
+          find docs -maxdepth 4 -type f | sort
+
+      - uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          render: false
