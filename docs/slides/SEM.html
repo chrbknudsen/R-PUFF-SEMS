@@ -421,7 +421,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"data <- mean(runif(20))\ndata <- c(data, mean(runif(20)))\nhist(data)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"data <- mean(rexp(20))\ndata <- c(data, mean(rexp(20)))\nhist(data)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -1978,26 +1978,45 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="men-også-fordi" class="slide level2">
 <h2>Men også fordi!</h2>
-<p>Den centrale grænseværdisætning:</p>
+<div class="smaller">
+<div class="fragment">
+<p>Vi kunne <em>rigtig</em> godt tænke os at vide hvad det gennemsnitlige systoliske blodtryk for en gruppe patienter er.</p>
+</div>
+<div class="fragment">
+<p>Det er ikke realistisk at måle blodtryk på <em>alle</em> patienter i den gruppe.</p>
+</div>
+<div class="fragment">
+<p>I stedet kan vi tage en stikprøve, og måle blodtrykket på de patienter.</p>
+</div>
+<div class="fragment">
+<p>Men det fortæller os kun hvad gennemsnittet er i <em>den</em> stikprøve.</p>
+</div>
+<div class="fragment">
+<p>Ikke hvad den “sande” middelværdi for <em>hele</em> populationen er.</p>
+</div>
+<div class="fragment">
+<p>Vi har normalt “kun” en stikprøve, som vi har trukket fra populationen.</p>
+</div>
+<div class="fragment">
+<p>Vi kender ikke den “sande” middelværdi i populationen.</p>
+</div>
+<div class="fragment">
+<p>Eller den “sande” spredning/standardafvigelse</p>
+</div>
+<div class="fragment">
+<p>Men vi vil stadig <em>rigtig</em> gerne kunne sige noget om hvad den “sande” middelværdi er.</p>
+</div>
+</div>
+</section>
+<section id="den-centrale-grænseværdisætning" class="slide level2">
+<h2>Den centrale grænseværdisætning:</h2>
 <p>Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.</p>
 <p>Den normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen.</p>
 </section>
-<section id="clt-demo" class="slide level2">
-<h2>CLT demo</h2>
-<div class="webr-side-by-side">
-<div id="qwebr-insertion-location-1"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</section>
-<section id="hvorfor-er-den-vigtig" class="slide level2">
-<h2>Hvorfor er den vigtig?</h2>
-<p>Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?</p>
-<div class="fragment">
-<p>På grund af “Den Centrale Grænseværdisætning”.</p>
-</div>
-<div class="fragment">
+<section id="clt" class="slide level2">
+<h2>CLT?</h2>
+<div class="smaller">
 <p>Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.</p>
-</div>
 <div class="fragment">
 <p>Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.</p>
 </div>
@@ -2007,41 +2026,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="fragment">
 <p>Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.</p>
 </div>
-</section>
-<section id="hvorfor-er-den-vigtig-1" class="slide level2">
-<h2>Hvorfor er den vigtig?</h2>
+<div class="fragment">
 <p>Det gør vi mange gange.</p>
+</div>
 <div class="fragment">
 <p>Det giver en masse gennemsnit/middelværdier.</p>
 </div>
 <div class="fragment">
-<p><em>De middelværdier vil følge normalfordelngen.</em></p>
+<p><em>De middelværdier vil følge normalfordelingen.</em></p>
 </div>
 <div class="fragment">
 <p><em>Uanset</em> hvilken sandsynlighedsfordeling danske mænds højde følger.</p>
 </div>
 <div class="fragment">
-<p>Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.</p>
+<p>Det kan man føre bevis for. Men det springer vi over.</p>
+</div>
 </div>
 </section>
-<section id="en-gang-til" class="slide level2">
-<h2>En gang til</h2>
+<section id="en-gang-til---det-er-vigtigt" class="slide level2">
+<h2>En gang til - det er vigtigt!</h2>
 <p>Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.</p>
+<p>Det gælder kun hvis stikprøven er tilpas stor. Ofte er 30 nok.</p>
+<p>Hvis populationen selv er normalfordelt, er middelværdien normalfordelt uanset størrelsen af stikprøven.</p>
 <p>Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.</p>
 </section>
-<section id="men-ikke-den-middelværdi-i-får-fra-én-stikprøve" class="slide level2">
-<h2>Men ikke den middelværdi I får fra én stikprøve!</h2>
-<p>Så hvad er populationens middelværdi?</p>
-<p>Det kan vi ikke vide. Men vi kan sige noget om den alligevel.</p>
-<p>For vores stikprøves middelværdi vil komme fra fordelingen af middelværdier fra alle stikprøverne fra populationen.</p>
-<p>Vi ved dog ikke hvad spredningen på den fordeling er!</p>
+<section id="clt-demo" class="slide level2">
+<h2>CLT demo</h2>
+<div class="webr-side-by-side">
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 </section>
-<section id="hvad-er-spredningen" class="slide level2">
-<h2>Hvad er spredningen?</h2>
-<p>Standardafvigelserne fortæller os om spredningen af de enkelte observationer i vores stikprøve. Den fortæller os ikke om hvad spredningen er på middelværdierne fra alle de hypotetiske stikprøver.</p>
-<p>Den spredning kalder vi “Standard Error of the Mean”</p>
-<p>Eller SEM.</p>
-<p>Den beregner vi ved</p>
+<section id="hvordan-hjælper-det-os" class="slide level2">
+<h2>Hvordan hjælper det os?</h2>
+<p>Hvis vi kender spredningen på stikprøvens middelværdi.</p>
+<div class="fragment">
+<p>Kan vi beregne et 95% KI for den middelværdi.</p>
+</div>
+<div class="fragment">
+<p>Det interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="SEM_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="hvad-er-et-95-konfidensinterval" class="slide level2">
+<h2>Hvad er et 95% konfidensinterval?</h2>
+<p>Det er det interval, som, hvis vi beregner det “mange” gange, i 95% af tilfældene vil indeholde den sande værdi.</p>
+<p>Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.</p>
+<p>Men vi kan beregne et interval.</p>
+<p>Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.</p>
+<p>Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.</p>
+<p>Det minder om normal området vi så da vi talte om normalfordelingen. Hvis værdierne var normalfordelte, indenfor hvilket interval ville 95% af dem så ligge. Her er det dog ikke værdierne, men estimaterne vi arbejder med.</p>
+</section>
+<section id="hvordan-beregner-vi-så-det" class="slide level2">
+<h2>Hvordan beregner vi så det?</h2>
+<p>Da vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.</p>
+<p>Standardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.</p>
+<p>Ikke hvordan middelværdierne fra mange stikprøver afviger.</p>
+<p>Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi ” “Standard Error of the Mean”. SEM blandt venner.</p>
+<p>Og vi beregner vi ved</p>
 <p><span class="math display">\[SE = \frac{\sigma}{\sqrt{n}}\]</span></p>
 <aside class="notes">
 <p>Intuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok.</p>
@@ -2091,23 +2141,23 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kulhdxqswo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kulhdxqswo table {
+<div id="znrnitkpan" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#znrnitkpan table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kulhdxqswo thead, #kulhdxqswo tbody, #kulhdxqswo tfoot, #kulhdxqswo tr, #kulhdxqswo td, #kulhdxqswo th {
+#znrnitkpan thead, #znrnitkpan tbody, #znrnitkpan tfoot, #znrnitkpan tr, #znrnitkpan td, #znrnitkpan th {
   border-style: none;
 }
 
-#kulhdxqswo p {
+#znrnitkpan p {
   margin: 0;
   padding: 0;
 }
 
-#kulhdxqswo .gt_table {
+#znrnitkpan .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2133,12 +2183,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_caption {
+#znrnitkpan .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kulhdxqswo .gt_title {
+#znrnitkpan .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2150,7 +2200,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#kulhdxqswo .gt_subtitle {
+#znrnitkpan .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2162,7 +2212,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#kulhdxqswo .gt_heading {
+#znrnitkpan .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2174,13 +2224,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_bottom_border {
+#znrnitkpan .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_col_headings {
+#znrnitkpan .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2195,7 +2245,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_col_heading {
+#znrnitkpan .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2215,7 +2265,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#kulhdxqswo .gt_column_spanner_outer {
+#znrnitkpan .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2227,15 +2277,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#kulhdxqswo .gt_column_spanner_outer:first-child {
+#znrnitkpan .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kulhdxqswo .gt_column_spanner_outer:last-child {
+#znrnitkpan .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kulhdxqswo .gt_column_spanner {
+#znrnitkpan .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2247,11 +2297,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#kulhdxqswo .gt_spanner_row {
+#znrnitkpan .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kulhdxqswo .gt_group_heading {
+#znrnitkpan .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2277,7 +2327,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#kulhdxqswo .gt_empty_group_heading {
+#znrnitkpan .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2292,15 +2342,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#kulhdxqswo .gt_from_md > :first-child {
+#znrnitkpan .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kulhdxqswo .gt_from_md > :last-child {
+#znrnitkpan .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kulhdxqswo .gt_row {
+#znrnitkpan .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2319,7 +2369,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#kulhdxqswo .gt_stub {
+#znrnitkpan .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2332,7 +2382,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#kulhdxqswo .gt_stub_row_group {
+#znrnitkpan .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2346,15 +2396,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#kulhdxqswo .gt_row_group_first td {
+#znrnitkpan .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kulhdxqswo .gt_row_group_first th {
+#znrnitkpan .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kulhdxqswo .gt_summary_row {
+#znrnitkpan .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2364,16 +2414,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#kulhdxqswo .gt_first_summary_row {
+#znrnitkpan .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_first_summary_row.thick {
+#znrnitkpan .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kulhdxqswo .gt_last_summary_row {
+#znrnitkpan .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2383,7 +2433,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_grand_summary_row {
+#znrnitkpan .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2393,7 +2443,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#kulhdxqswo .gt_first_grand_summary_row {
+#znrnitkpan .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2403,7 +2453,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_last_grand_summary_row_top {
+#znrnitkpan .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2413,11 +2463,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_striped {
+#znrnitkpan .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kulhdxqswo .gt_table_body {
+#znrnitkpan .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2426,7 +2476,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_footnotes {
+#znrnitkpan .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2440,7 +2490,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_footnote {
+#znrnitkpan .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2449,7 +2499,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#kulhdxqswo .gt_sourcenotes {
+#znrnitkpan .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2463,7 +2513,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#kulhdxqswo .gt_sourcenote {
+#znrnitkpan .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2471,72 +2521,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#kulhdxqswo .gt_left {
+#znrnitkpan .gt_left {
   text-align: left;
 }
 
-#kulhdxqswo .gt_center {
+#znrnitkpan .gt_center {
   text-align: center;
 }
 
-#kulhdxqswo .gt_right {
+#znrnitkpan .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kulhdxqswo .gt_font_normal {
+#znrnitkpan .gt_font_normal {
   font-weight: normal;
 }
 
-#kulhdxqswo .gt_font_bold {
+#znrnitkpan .gt_font_bold {
   font-weight: bold;
 }
 
-#kulhdxqswo .gt_font_italic {
+#znrnitkpan .gt_font_italic {
   font-style: italic;
 }
 
-#kulhdxqswo .gt_super {
+#znrnitkpan .gt_super {
   font-size: 65%;
 }
 
-#kulhdxqswo .gt_footnote_marks {
+#znrnitkpan .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kulhdxqswo .gt_asterisk {
+#znrnitkpan .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kulhdxqswo .gt_indent_1 {
+#znrnitkpan .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kulhdxqswo .gt_indent_2 {
+#znrnitkpan .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kulhdxqswo .gt_indent_3 {
+#znrnitkpan .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kulhdxqswo .gt_indent_4 {
+#znrnitkpan .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kulhdxqswo .gt_indent_5 {
+#znrnitkpan .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kulhdxqswo .katex-display {
+#znrnitkpan .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kulhdxqswo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#znrnitkpan div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2604,7 +2654,7 @@ Er der forskel?</p>
 <p>Der hvor vi skal holde tungen lige i munden er, at vi ikke kan vise at der er en effekt. Men vi kan statistisk afvise null-hypotesen.</p>
 <p>Det kan vi gøre med en vis sikkerhed.</p>
 
-<img data-src="SEM_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p>vi har et estimat på en “sand” middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.</p>
+<img data-src="SEM_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p>vi har et estimat på en “sand” middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.</p>
 <p>det bruger vi til at få en p-værdi. Den udtrykker risikoen for at vi tager fejl når vi afviser null-hypotesen. Vi kan sjælden være 100% sikre. Men vi kan være 95% sikre. og det er vi typisk tilfredse med. Men er vi 95% sikre, er der stadig 5% risiko for at vi tager fejl. Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en effekt, men den er der faktisk ikke.</p>
 <p>Der findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet. men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!</p>
 <p>Sandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi <span class="math inline">\(\alpha\)</span>. Det hænger sammen med power.</p>
@@ -2836,24 +2886,24 @@ Er der forskel?</p>
 <p>Nu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bmikshlfot" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uyfamlszue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bmikshlfot table {
+#uyfamlszue table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bmikshlfot thead, #bmikshlfot tbody, #bmikshlfot tfoot, #bmikshlfot tr, #bmikshlfot td, #bmikshlfot th {
+#uyfamlszue thead, #uyfamlszue tbody, #uyfamlszue tfoot, #uyfamlszue tr, #uyfamlszue td, #uyfamlszue th {
   border-style: none;
 }
 
-#bmikshlfot p {
+#uyfamlszue p {
   margin: 0;
   padding: 0;
 }
 
-#bmikshlfot .gt_table {
+#uyfamlszue .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2879,12 +2929,12 @@ Er der forskel?</p>
   border-left-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_caption {
+#uyfamlszue .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bmikshlfot .gt_title {
+#uyfamlszue .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2896,7 +2946,7 @@ Er der forskel?</p>
   border-bottom-width: 0;
 }
 
-#bmikshlfot .gt_subtitle {
+#uyfamlszue .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2908,7 +2958,7 @@ Er der forskel?</p>
   border-top-width: 0;
 }
 
-#bmikshlfot .gt_heading {
+#uyfamlszue .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2920,13 +2970,13 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_bottom_border {
+#uyfamlszue .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_col_headings {
+#uyfamlszue .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2941,7 +2991,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_col_heading {
+#uyfamlszue .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2961,7 +3011,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#bmikshlfot .gt_column_spanner_outer {
+#uyfamlszue .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2973,15 +3023,15 @@ Er der forskel?</p>
   padding-right: 4px;
 }
 
-#bmikshlfot .gt_column_spanner_outer:first-child {
+#uyfamlszue .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bmikshlfot .gt_column_spanner_outer:last-child {
+#uyfamlszue .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bmikshlfot .gt_column_spanner {
+#uyfamlszue .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2993,11 +3043,11 @@ Er der forskel?</p>
   width: 100%;
 }
 
-#bmikshlfot .gt_spanner_row {
+#uyfamlszue .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bmikshlfot .gt_group_heading {
+#uyfamlszue .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3023,7 +3073,7 @@ Er der forskel?</p>
   text-align: left;
 }
 
-#bmikshlfot .gt_empty_group_heading {
+#uyfamlszue .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3038,15 +3088,15 @@ Er der forskel?</p>
   vertical-align: middle;
 }
 
-#bmikshlfot .gt_from_md > :first-child {
+#uyfamlszue .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bmikshlfot .gt_from_md > :last-child {
+#uyfamlszue .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bmikshlfot .gt_row {
+#uyfamlszue .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3065,7 +3115,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#bmikshlfot .gt_stub {
+#uyfamlszue .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3078,7 +3128,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#bmikshlfot .gt_stub_row_group {
+#uyfamlszue .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3092,15 +3142,15 @@ Er der forskel?</p>
   vertical-align: top;
 }
 
-#bmikshlfot .gt_row_group_first td {
+#uyfamlszue .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#bmikshlfot .gt_row_group_first th {
+#uyfamlszue .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#bmikshlfot .gt_summary_row {
+#uyfamlszue .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3110,16 +3160,16 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#bmikshlfot .gt_first_summary_row {
+#uyfamlszue .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_first_summary_row.thick {
+#uyfamlszue .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bmikshlfot .gt_last_summary_row {
+#uyfamlszue .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3129,7 +3179,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_grand_summary_row {
+#uyfamlszue .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3139,7 +3189,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#bmikshlfot .gt_first_grand_summary_row {
+#uyfamlszue .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3149,7 +3199,7 @@ Er der forskel?</p>
   border-top-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_last_grand_summary_row_top {
+#uyfamlszue .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3159,11 +3209,11 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_striped {
+#uyfamlszue .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bmikshlfot .gt_table_body {
+#uyfamlszue .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3172,7 +3222,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_footnotes {
+#uyfamlszue .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3186,7 +3236,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_footnote {
+#uyfamlszue .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3195,7 +3245,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#bmikshlfot .gt_sourcenotes {
+#uyfamlszue .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3209,7 +3259,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#bmikshlfot .gt_sourcenote {
+#uyfamlszue .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3217,72 +3267,72 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#bmikshlfot .gt_left {
+#uyfamlszue .gt_left {
   text-align: left;
 }
 
-#bmikshlfot .gt_center {
+#uyfamlszue .gt_center {
   text-align: center;
 }
 
-#bmikshlfot .gt_right {
+#uyfamlszue .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bmikshlfot .gt_font_normal {
+#uyfamlszue .gt_font_normal {
   font-weight: normal;
 }
 
-#bmikshlfot .gt_font_bold {
+#uyfamlszue .gt_font_bold {
   font-weight: bold;
 }
 
-#bmikshlfot .gt_font_italic {
+#uyfamlszue .gt_font_italic {
   font-style: italic;
 }
 
-#bmikshlfot .gt_super {
+#uyfamlszue .gt_super {
   font-size: 65%;
 }
 
-#bmikshlfot .gt_footnote_marks {
+#uyfamlszue .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bmikshlfot .gt_asterisk {
+#uyfamlszue .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bmikshlfot .gt_indent_1 {
+#uyfamlszue .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bmikshlfot .gt_indent_2 {
+#uyfamlszue .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bmikshlfot .gt_indent_3 {
+#uyfamlszue .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bmikshlfot .gt_indent_4 {
+#uyfamlszue .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bmikshlfot .gt_indent_5 {
+#uyfamlszue .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bmikshlfot .katex-display {
+#uyfamlszue .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bmikshlfot div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uyfamlszue div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

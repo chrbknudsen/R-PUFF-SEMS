@@ -1530,7 +1530,7 @@
     "href": "slides/SEM.html#men-også-fordi",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Men også fordi!",
-    "text": "Men også fordi!\nDen centrale grænseværdisætning:\nTager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.\nDen normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen."
+    "text": "Men også fordi!\n\n\nVi kunne rigtig godt tænke os at vide hvad det gennemsnitlige systoliske blodtryk for en gruppe patienter er.\n\n\nDet er ikke realistisk at måle blodtryk på alle patienter i den gruppe.\n\n\nI stedet kan vi tage en stikprøve, og måle blodtrykket på de patienter.\n\n\nMen det fortæller os kun hvad gennemsnittet er i den stikprøve.\n\n\nIkke hvad den “sande” middelværdi for hele populationen er.\n\n\nVi har normalt “kun” en stikprøve, som vi har trukket fra populationen.\n\n\nVi kender ikke den “sande” middelværdi i populationen.\n\n\nEller den “sande” spredning/standardafvigelse\n\n\nMen vi vil stadig rigtig gerne kunne sige noget om hvad den “sande” middelværdi er."
   },
   {
     "objectID": "slides/SEM.html#men-ikke-den-middelværdi-i-får-fra-én-stikprøve",
@@ -1741,5 +1741,47 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "CLT demo",
     "text": "CLT demo\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#clt",
+    "href": "slides/SEM.html#clt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "CLT?",
+    "text": "CLT?\n\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\n\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\n\n\nVi beregner gennemsnittet af den stikprøve og gemmer det.\n\n\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\n\n\nDet gør vi mange gange.\n\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelingen.\n\n\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\n\n\nDet kan man føre bevis for. Men det springer vi over."
+  },
+  {
+    "objectID": "slides/SEM.html#den-centrale-grænseværdisætning",
+    "href": "slides/SEM.html#den-centrale-grænseværdisætning",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den centrale grænseværdisætning:",
+    "text": "Den centrale grænseværdisætning:\nTager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge normalfordelingen.\nDen normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen."
+  },
+  {
+    "objectID": "slides/SEM.html#hvordan-hjælper-det-os",
+    "href": "slides/SEM.html#hvordan-hjælper-det-os",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvordan hjælper det os?",
+    "text": "Hvordan hjælper det os?\nHvis vi kender spredningen på stikprøvens middelværdi.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
+  },
+  {
+    "objectID": "slides/SEM.html#en-gang-til---det-er-vigtigt",
+    "href": "slides/SEM.html#en-gang-til---det-er-vigtigt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En gang til - det er vigtigt!",
+    "text": "En gang til - det er vigtigt!\nHvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.\nDet gælder kun hvis stikprøven er tilpas stor. Ofte er 30 nok.\nHvis populationen selv er normalfordelt, er middelværdien normalfordelt uanset størrelsen af stikprøven.\nBemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til."
+  },
+  {
+    "objectID": "slides/SEM.html#hvad-er-et-95-konfidensinterval",
+    "href": "slides/SEM.html#hvad-er-et-95-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad er et 95% konfidensinterval?",
+    "text": "Hvad er et 95% konfidensinterval?\nDet er det interval, som, hvis vi beregner det “mange” gange, i 95% af tilfældene vil indeholde den sande værdi.\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\nMen vi kan beregne et interval.\nIntuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.\nDet minder om normal området vi så da vi talte om normalfordelingen. Hvis værdierne var normalfordelte, indenfor hvilket interval ville 95% af dem så ligge. Her er det dog ikke værdierne, men estimaterne vi arbejder med."
+  },
+  {
+    "objectID": "slides/SEM.html#hvordan-beregner-vi-så-det",
+    "href": "slides/SEM.html#hvordan-beregner-vi-så-det",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvordan beregner vi så det?",
+    "text": "Hvordan beregner vi så det?\nDa vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.\nStandardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.\nIkke hvordan middelværdierne fra mange stikprøver afviger.\nVi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi ” “Standard Error of the Mean”. SEM blandt venner.\nOg vi beregner vi ved\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\n\nIntuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok."
   }
 ]
