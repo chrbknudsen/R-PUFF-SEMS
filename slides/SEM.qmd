@@ -22,14 +22,102 @@ Der er ofte typeopgaver til eksamen hvor I skal demonstrere at I forstår den
 Og hvor I skal bruge qnorm og pnorm til at regne frem og tilbage.
 
 ## Men også fordi!
+:::: smaller
 
-Den centrale grænseværdisætning:
+:::: {.fragment}
+Vi kunne _rigtig_ godt tænke os at vide hvad det gennemsnitlige systoliske blodtryk for en gruppe patienter er.
+::::
+:::: {.fragment}
+Det er ikke realistisk at måle blodtryk på _alle_ patienter i den gruppe.
+::::
+:::: {.fragment}
+I stedet kan vi tage en stikprøve, og måle blodtrykket på de patienter.
+::::
+:::: {.fragment}
+Men det fortæller os kun hvad gennemsnittet er i _den_ stikprøve.
+::::
+:::: {.fragment}
+Ikke hvad den "sande" middelværdi for _hele_ populationen er.
+::::
+:::: {.fragment}
+Vi har normalt "kun" en stikprøve, som vi har trukket fra populationen.
+::::
+:::: {.fragment}
+Vi kender ikke den "sande" middelværdi i populationen.
+::::
+:::: {.fragment}
+Eller den "sande" spredning/standardafvigelse
+::::
+:::: {.fragment}
+Men vi vil stadig _rigtig_ gerne kunne sige noget om hvad den "sande" middelværdi er.
+:::: 
+:::
+
+## Den centrale grænseværdisætning:
 
 Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier
 følge normalfordelingen.
 
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
 populationen.
+
+
+
+## CLT?
+
+:::: smaller
+Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
+
+:::: {.fragment}
+
+Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.
+
+::::
+:::: {.fragment}
+
+Vi beregner gennemsnittet af den stikprøve og gemmer det.
+
+::::
+:::: {.fragment}
+
+Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
+
+::::
+:::: {.fragment}
+
+Det gør vi mange gange. 
+
+::::
+:::: {.fragment}
+
+Det giver en masse gennemsnit/middelværdier.
+
+::::
+:::: {.fragment}
+
+_De middelværdier vil følge normalfordelingen._ 
+
+::::
+:::: {.fragment}
+
+_Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+
+::::
+:::: {.fragment}
+
+Det kan man føre bevis for. Men det springer vi over.
+:::: 
+::::
+
+## En gang til - det er vigtigt!
+
+Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
+
+Det gælder kun hvis stikprøven er tilpas stor. Ofte er 30 nok.
+
+Hvis populationen selv er normalfordelt, er middelværdien normalfordelt uanset størrelsen af stikprøven.
+
+Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.
 
 ## CLT demo
 
@@ -38,86 +126,121 @@ populationen.
 #| context: interactive
 #| layout: horizontal
 #| autorun: false
-data <- mean(runif(20))
-data <- c(data, mean(runif(20)))
+data <- mean(rexp(20))
+data <- c(data, mean(rexp(20)))
 hist(data)
 
 ```
 :::
 
 
-## Hvorfor er den vigtig?
+## Hvordan hjælper det os?
 
-Nu har vi øvet os på at arbejde med normalfordelingen. Men hvorfor er den så vigtig?
+Hvis vi kender spredningen på stikprøvens middelværdi.
 
-. . . 
+. . .
 
-På grund af "Den Centrale Grænseværdisætning".
+Kan vi beregne et 95% KI for den middelværdi.
 
-. . . 
+. . .
 
-Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
+Det interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen.
 
-. . . 
+```{r}
+library(ggplot2)
 
-Så vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.
+# "Ukendte" parametre (kun til illustration)
+mu <- 100
+sigma <- 15
 
-. . . 
+# En stikprøve giver dette estimat
+xbar <- 104
+se <- 3
 
-Vi beregner gennemsnittet af den stikprøve og gemmer det.
+# 95% konfidensinterval
+lower <- xbar - 1.96 * se
+upper <- xbar + 1.96 * se
 
-. . . 
+# Data til normalfordeling
+df <- data.frame(
+  x = seq(mu - 4*sigma, mu + 4*sigma, length.out = 500)
+)
+df$y <- dnorm(df$x, mean = mu, sd = sigma)
 
-Det gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.
+ggplot(df, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  
+  # Sand middelværdi (ukendt i praksis)
+  geom_vline(xintercept = mu, linetype = 2, linewidth = 1) +
+  
+  # Stikprøvemiddelværdi
+  geom_vline(xintercept = xbar, linewidth = 1) +
+  
+  # 95% konfidensinterval
+  geom_segment(
+    aes(x = lower, xend = upper,
+        y = max(y)*0.15, yend = max(y)*0.15),
+    linewidth = 1.2
+  ) +
+  
+  # Endestykker
+  geom_segment(
+    aes(x = lower, xend = lower,
+        y = max(y)*0.12, yend = max(y)*0.18),
+    linewidth = 1
+  ) +
+  geom_segment(
+    aes(x = upper, xend = upper,
+        y = max(y)*0.12, yend = max(y)*0.18),
+    linewidth = 1
+  ) +
+  
+  # Labels
+  annotate("text", x = mu, y = max(df$y)*0.95,
+           label = "Sand middelværdi (ukendt)",
+           hjust = -0.1) +
+  
+  annotate("text", x = xbar, y = max(df$y)*0.85,
+           label = "Stikprøvemiddelværdi",
+           hjust = -0.1) +
+  
+  annotate("text", x = xbar, y = max(df$y)*0.22,
+           label = "95% konfidensinterval",
+           vjust = 0) +
+  
+  labs(
+    x = "Værdi",
+    y = "Tæthed"
+  ) +
+  
+  theme_minimal()
+```
 
-## Hvorfor er den vigtig?
+## Hvad er et 95% konfidensinterval?
 
-Det gør vi mange gange. 
+Det er det interval, som, hvis vi beregner det "mange" gange, i 95% af tilfældene vil indeholde den sande værdi.
 
-. . . 
+Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den "sande" værdi.
 
-Det giver en masse gennemsnit/middelværdier.
+Men vi kan beregne et interval.
 
-. . . 
+Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.
 
-_De middelværdier vil følge normalfordelngen._ 
+Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
 
-. . . 
+Det minder om normal området vi så da vi talte om normalfordelingen. Hvis værdierne var normalfordelte, indenfor hvilket interval ville 95% af dem så ligge. Her er det dog ikke værdierne, men estimaterne vi arbejder med.
 
-_Uanset_ hvilken sandsynlighedsfordeling danske mænds højde følger.
+## Hvordan beregner vi så det?
 
-. . . 
+Da vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.
 
-Det kan man føre bevis for. Hvis I kan forstå det bevis, skulle I have læst matematik i stedet for medicin. Så det springer vi over.
- 
-## En gang til
+Standardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.
 
-Hvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.
+Ikke hvordan middelværdierne fra mange stikprøver afviger.
 
-Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til.
+Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi " "Standard Error of the Mean". SEM blandt venner.
 
-## Men ikke den middelværdi I får fra én stikprøve!
-
-Så hvad er populationens middelværdi?
-
-Det kan vi ikke vide. Men vi kan sige noget om den alligevel.
-
-For vores stikprøves middelværdi vil komme fra fordelingen af middelværdier fra 
-alle stikprøverne fra populationen.
-
-Vi ved dog ikke hvad spredningen på den fordeling er!
-
-## Hvad er spredningen?
-
-Standardafvigelserne fortæller os om spredningen af de enkelte observationer i
-vores stikprøve. Den fortæller os ikke om hvad spredningen er på middelværdierne
-fra alle de hypotetiske stikprøver.
-
-Den spredning kalder vi "Standard Error of the Mean"
-
-Eller SEM.
-
-Den beregner vi ved
+Og vi beregner vi ved
 
 $$SE = \frac{\sigma}{\sqrt{n}}$$
 
@@ -128,44 +251,6 @@ jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist
 bliver det nok.
 
 ::::
-
-## Hvad bruger vi den til?
-
-Vi har målt en middelværdi af et eller andet - et systolisk blodtryk eksempelvis, på en stikprøve fra en population. 
-
-Vi får ofte oplyst at værdierne i populationen er normalfordelte. Og vi har beregnet
-standardafvigelsen og hvor stor stikprøven var.
-
-Det interessante er - hvor ligger den sande middelværdi?
-
-## Det minder om normalområdet
-
-Normalområdet var det område hvor vi havde (eksempelvis) 95% af observationerne. 
-
-Eksempelvis inden for hvilket interval vi kan forvente at finde 95% af observationerne af plasma magnesium.
-
-
-## Konfidensintervaller
-
-Det gennemsnit vi finder i vores stikprøve er vores estimat på den sande værdi i populationen.
-
-Usikkerheden på det estimat bestemmes af stikprøvens størrelse, og variationen i data.
-
-Standardfejlen på estimatet beregnes ved $SEM = \frac{s}{\sqrt{n}}$
-
-Vi beregner et 95% konfidensinterval ved middelværdien plus/minus 1.96*SEM. 
-
-Som dog teknisk set kun gælder hvis vi kender sigma, eller stikprøven er stor.
-
-## Konfidensintervaller
-
-Stringent formuleret:
-
-Hvis vi gentager forsøget mange gange og hver gang beregner et 95% konfidensinterval, vil ca. 95% af intervallerne indeholde den sande middelværdi 𝜇
- 
-$\mu \pm 1.96 SEM$
-
-Eller, lidt sjusket: Vi er 95% sikre på, at intervallet indeholder den sande middelværdi.
 
 
 ## En del af en eksamensopgave
@@ -208,78 +293,108 @@ Og omvendt.
 Er der forskel?
 ::::
 
+## Testværdi
+
+Vi beregnede et 95% KI for plasma-magnesium for diabetikere til:
+
+[0.7101539, 0.7278461]
+og
+SEM var 0.004513319
+0.719
+
+
+Det betyder - 95% af de gange vi beregner en middelværdi af plasma-magnesium for diabetikere, vil værdien ligge indenfor det interval.
+
+Er 0.73 indeholdt? 
+Eller - ligger det for langt fra middelværdien på 0.719 til at det er med?
+
+Det kan vi se. Vi kan også se at 
+(0.73-0.719)/0.004513319 = 2.437231
+
+Det svarer til at sige at 
+
+0.73 = 0.719 + 2.437*SEM
+
+Vi kalder 2.437231 for testværdien. 
+Den kritiske værdi ved 95% er 1.96. Er 2.437 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra middelværdien. Og så er den ikke indeholdt i de 95%.
 
 ## Hypotesetest
 
-Den hypotese I typisk bliver bedt om at teste er:
+Hvad er en hypotese?
 
-Er denne værdi i virkeligheden 0?
+En hypotese er en påstand om den sande, men ukendte værdi i populationen.
 
-Vi måler blodtryk for en gruppe der får betablokkere. Og en gruppe der får et placebo.
+I det foregående eksempel kunne det være: Der er forskel på plasma Magnesium for diabetikere og ikke-diabetikere.
 
-Vi vil typisk se en forskel. Er den forskel i virkeligheden udtryk for en tilfældig variation, og kunne den lige så godt være 0?
+Vi opstiller altid to hypoteser:
 
-Vi opstiller en null-hypotese, og en alternativ hypotese.
 
-null-hypotesen er: der er ingen effekt af medicinen, blodtrykket ændrer sig ikke. Den alternative hypotese er - der er en effekt.
+H_0 - der er ingen forskel
 
-Der hvor vi skal holde tungen lige i munden er, at vi ikke kan vise at der er en effekt. Men vi kan statistisk afvise null-hypotesen.
+H_a - der er forskel.
 
-Det kan vi gøre med en vis sikkerhed. 
+Vores test kan afvise H_0. Det betyder at data ikke er forenelige med H_0.
+Eller ikke forkaste H_0. Det betyder at data er forenelige med H_0.
 
-```{r echo = FALSE}
-library(ggplot2)
-library(dplyr)
+Bemærk at vi ikke accepterer H_0. Vi kan kun undlade at forkaste den.
 
-mu <- 2
-sigma <- 0.95
+Det vil vi gøre med en vis sikkerhed eller risiko.
 
-lower <- qnorm(0.025, mean = mu, sd = sigma)
-upper <- qnorm(0.975, mean = mu, sd = sigma)
+Så vi vælger et signifikansniveau alpha, som er risikoen for at forkaste H_0, selvom H_0 er sand.
 
-x_vals <- seq(mu - 4 * sigma, mu + 4 * sigma, length.out = 1000)
+alpha = 0.05 er meget populært.
 
-df <- tibble(
-  x = x_vals,
-  y = dnorm(x, mean = mu, sd = sigma),
-  in_95 = x >= lower & x <= upper
-)
+Når vi har opstillet vores hypotese, beregner vi en teststørrelse
 
-ggplot(df, aes(x, y)) +
-  geom_area(
-    data = df |> filter(in_95),
-    alpha = 0.5
-  ) +
-  geom_line(linewidth = 1) +
-  geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.8) +
-  annotate(
-    "text",
-    x = 0,
-    y = max(df$y) * 0.15,
-    label = "0",
-    vjust = -0.5
-  ) +  
-  theme_minimal(base_size = 14)
+test = estimat-hypotese /SE
 
-```
+og sammenligner med den kritiske værdi.
 
-vi har et estimat på en "sand" middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.
+Den kritiske værdi angiver hvor ekstrem teststørrelsen må være, hvis H_0 er sand.
 
-det bruger vi til at få en p-værdi. Den udtrykker risikoen for at vi tager fejl når vi afviser null-hypotesen. Vi kan sjælden være 100% sikre.
-Men vi kan være 95% sikre. og det er vi typisk tilfredse med. Men er vi 95% sikre, er der stadig 5% risiko for at vi tager fejl. 
-Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en effekt, men den er der faktisk ikke.
 
-Der findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet.
-men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!
+For at gøre alt det, skal vi træffe tre valg:
 
-Sandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi $\alpha$. Det hænger sammen med power.
 
-## Eller
+1. Hvad er det vi tester?
+Em middelværdi
+En forskel på to middelværdier
+(senere; andele og ratioer RR/OR)
 
-Ud fra en stikprøve beregner vi en værdi. Er den værdi i virkeligheden
-0?
+Hvordan er vores data:
+En gruppe?
+To grupper
+Hvis der er to grupper, er de parrede eller ikke parrede?
 
-Ud fra to stikprøver beregner vi to værdier. Er de værdier i virkeligheden forskellige?
+Retningen
+Er værdierne forskellige - tosidet
+Er den ene større end den anden - ensidet.
+
+
+Hypotesetest = afstand fra hypotese målt i standardfejl
+
+Eller: test = signal/støj. Hvor støjen er standardfejlen.
+
+## Estimatet
+
+Middelværdien ved vi godt hvordan vi beregner
+
+Til eksamen skal vi ikke selv beregne den. 
+
+Forskellen på middelværdier beregnes ved at trække den ene fra den anden.
+
+Til eksamen får vi den enten oplyst direkte. Eller også får vi de to middelværdier oplyst, og så trækker vi den ene fra den anden.
+
+## Standardfejlen
+
+Afhænger af testen.
+
+For en enkelt middelværdi 
+
+
+## Den kritiske værdi
+
+Hvis kriteriet alpha = 0.05, så leder vi efter 
 
 
 
