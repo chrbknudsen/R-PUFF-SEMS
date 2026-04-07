@@ -136,7 +136,7 @@ hist(data)
 
 ## Hvordan hjælper det os?
 
-Hvis vi kender spredningen på stikprøvens middelværdi.
+Hvis vi kender spredningen på stikprøvens middelværdier.
 
 . . .
 
@@ -218,31 +218,66 @@ ggplot(df, aes(x, y)) +
 
 ## Hvad er et 95% konfidensinterval?
 
+. . .
+
 Det er det interval, som, hvis vi beregner det "mange" gange, i 95% af tilfældene vil indeholde den sande værdi.
+
+. . .
 
 Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den "sande" værdi.
 
+. . .
+
 Men vi kan beregne et interval.
+
+. . .
 
 Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.
 
+. . .
+
 Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
 
-Det minder om normal området vi så da vi talte om normalfordelingen. Hvis værdierne var normalfordelte, indenfor hvilket interval ville 95% af dem så ligge. Her er det dog ikke værdierne, men estimaterne vi arbejder med.
+## Hvad er et 95% konfidensinterval?
+
+Da vi talte om normalfordelingen mødt vi "normalområdet".
+
+. . .
+
+Det område, hvor, hvis værdierne var normalfordelte, hvor vi kan forvente at finde 95% af dem.
+
+. . .
+
+Middelværdierne af stikprøverne vil, når vi har nok af dem, være normalfordelte.
+
+. . .
+
+Så 95% af vores stikprøver vil have en middelværdi der ligger inden for det område.
+
 
 ## Hvordan beregner vi så det?
 
+:::: smaller
 Da vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.
 
+::: {.fragment}
+
 Standardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.
-
+:::
+::: {.fragment}
 Ikke hvordan middelværdierne fra mange stikprøver afviger.
-
+:::
+::: {.fragment}
 Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi " "Standard Error of the Mean". SEM blandt venner.
+:::
+::: {.fragment}
+Og den vi beregner vi ved
 
-Og vi beregner vi ved
+$$SEM = \frac{\sigma}{\sqrt{n}}$$
 
-$$SE = \frac{\sigma}{\sqrt{n}}$$
+:::
+
+::::
 
 :::: notes
 Intuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne
@@ -265,7 +300,7 @@ tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Ikke-diabetikere", 140, 0.810, 0.057) |> gt()
 ```
 
-Beregn 95% konfidensinterval for hver af de to grupper.
+Beregn 95% konfidensinterval (KI) for hver af de to grupper.
 
 Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.
 
@@ -294,111 +329,417 @@ Er der forskel?
 ::::
 
 ## Testværdi
+:::: smaller
+Vi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319
 
-Vi beregnede et 95% KI for plasma-magnesium for diabetikere til:
-
-[0.7101539, 0.7278461]
-og
-SEM var 0.004513319
-0.719
+Det betyder, at tager vi "mange" stikprøver af plasma-magnesium for diabetikere, vil 95% af de konfidensintervaller vi beregner, indeholde
+den sande værdi.
 
 
-Det betyder - 95% af de gange vi beregner en middelværdi af plasma-magnesium for diabetikere, vil værdien ligge indenfor det interval.
+Nu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.
 
-Er 0.73 indeholdt? 
-Eller - ligger det for langt fra middelværdien på 0.719 til at det er med?
+Er den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?
 
-Det kan vi se. Vi kan også se at 
-(0.73-0.719)/0.004513319 = 2.437231
+::::
 
-Det svarer til at sige at 
+## Testværdi
 
-0.73 = 0.719 + 2.437*SEM
+Man kan også se, at:
 
-Vi kalder 2.437231 for testværdien. 
-Den kritiske værdi ved 95% er 1.96. Er 2.437 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra middelværdien. Og så er den ikke indeholdt i de 95%.
+$\frac{0.810-0.719}{SEM} = \frac{0.810-0.719}{0.004513319} = 20.16255$
+
+. . .
+
+Det er det samme som:
+
+$0.81 = 0.719 + 20.16255\cdot SEM$
+
+. . .
+
+Vi kalder 20.16255 for testværdien. 
+
+. . .
+
+Den kritiske værdi ved 95% er 1.96. Er 20.16255 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra (estimatet for) middelværdien. Og så ligger den udenfor 95% konfidensintervallet.
+
+## Visualiseret
+
+```{r}
+library(ggplot2)
+
+# Testværdi
+z_val <- (0.81 - 0.719) / 0.004513319
+
+# Data for standard normal
+x <- seq(-5, 22, length.out = 1000)
+
+df <- data.frame(
+  x = x,
+  y = dnorm(x)
+)
+
+ggplot(df, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  
+  # 95% acceptområde
+  geom_area(
+    data = subset(df, x >= -1.96 & x <= 1.96),
+    aes(x, y),
+    alpha = 0.3
+  ) +
+  
+  # Kritiske værdier
+  geom_vline(xintercept = c(-1.96, 1.96), linetype = "dotted") +
+  
+  # Testværdi
+  geom_vline(xintercept = z_val, linewidth = 1.2) +
+  
+  # Labels
+  annotate("text", x = 1.96, y = 0.35,
+           label = "1.96", hjust = -0.1) +
+  
+  # ← HER: label til venstre for stregen
+  annotate("text", x = z_val - 0.5, y = 0.1,
+           label = paste0("z = ", round(z_val, 2)),
+           hjust = 1) +
+  
+  labs(
+    x = "Antal standardfejl (z)",
+    y = "Tæthed",
+    title = "Hypotesetest på z-skala"
+  ) +
+  
+  theme_minimal(base_size = 16)
+```
+
 
 ## Hypotesetest
 
-Hvad er en hypotese?
+Det var en hypotesetest.
 
-En hypotese er en påstand om den sande, men ukendte værdi i populationen.
+. . .
 
-I det foregående eksempel kunne det være: Der er forskel på plasma Magnesium for diabetikere og ikke-diabetikere.
+Vi testede om 0.810 kunne være indeholdt i konfidensintervallet på [0.7101539, 0.7278461] og SEM =  0.004513319.
 
-Vi opstiller altid to hypoteser:
+. . .
+
+Det kan vi se at den ikke er. Afvigelsen er stor, men det kunne jo være et statistisk tilfælde. 
+
+. . .
+
+Hvordan tester vi det mere generelt?
+
+## Hvad er en hypotese
+:::: smaller
+En antagelse om en parameter i populationen.
+
+- En bestemt middelværdi, eg $\mu = 0.81$
+- En bestemt forskel på to middelværdier, ofte som $\mu_1 - \mu_2 = 0$
+- En bestemt andel eller ratio (senere)
+
+Vi opstiller en null-hypotese $H_0$:
+
+- $\mu = 0.81$
+- $\mu_1 - \mu_2 = 0$
+
+Eller mere generelt $\theta = \theta_0$. Så kan resultatet nemlig bruges til andet end middelværdier. Her er $\theta_0$ den værdi vi tester mod, eg. 0.81 eller 0.
+
+I praksis "ingen forskel" eller "ingen effekt". $H_0$ er en konkret værdi for den parameter vi ønsker at teste.
+::::
+## Den alternative hypotese
+:::: smaller
+Kaldet $H_A$, enten at 
+
+- $\mu \neq 0.81$
+- $\mu_1 - \mu_2 \neq 0$
+
+Det er tosidet.
+
+Eller, ensidet:
+
+- $\mu > 0.81$ eller
+- $\mu < 0.81$
+
+Tosidet: Enhver forskel  
+Ensidet: En forskel i en bestemt retning
+
+::::
+
+## Kernen i hypotesetesten
+
+Vi har et estimat $\hat{\theta}$ fra vores observationer. Og vi har en null-hypotese, $H_0: \theta = \theta_0$.
+
+Vi kigger lige nu på middelværdier og ville normalt skrive $\mu$. Men bruger $\theta$ fordi vi så kan generalisere.
+
+Hvor langt ligger estimatet fra $H_0$, målt i standardfejl?
 
 
-H_0 - der er ingen forskel
+## Hvor langt er for langt?
 
-H_a - der er forskel.
+Hvis estimatet ligger "for langt" fra $H_0$, forkaster vi $H_0$ (og konkluderer at data understøtter $H_A$). 
 
-Vores test kan afvise H_0. Det betyder at data ikke er forenelige med H_0.
-Eller ikke forkaste H_0. Det betyder at data er forenelige med H_0.
+Når vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste $H_0$. Selvom $H_0$ faktisk er sand.
 
-Bemærk at vi ikke accepterer H_0. Vi kan kun undlade at forkaste den.
+Den risiko betegner vi $\alpha$. Normalt sætter vi den til 5%, eller 0.05.
 
-Det vil vi gøre med en vis sikkerhed eller risiko.
+Vær vågne hvis opgaven taler om noget som helst andet!
 
-Så vi vælger et signifikansniveau alpha, som er risikoen for at forkaste H_0, selvom H_0 er sand.
+## Det er den kritiske værdi
 
-alpha = 0.05 er meget populært.
+To-sidet. Hvor vi er interesseret i enhver forskel:
 
-Når vi har opstillet vores hypotese, beregner vi en teststørrelse
+```{r}
+z_crit <- qnorm(0.975)
 
-test = estimat-hypotese /SE
+df_plot <- data.frame(x = seq(-4, 4, length.out = 1000))
+df_plot$y <- dnorm(df_plot$x)
 
-og sammenligner med den kritiske værdi.
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x <= -z_crit),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_area(
+    data = subset(df_plot, x >= z_crit),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = c(-z_crit, z_crit), linetype = 2, linewidth = 1) +
+  
+  annotate("text", x = -z_crit, y = 0.35, label = "-1.96", hjust = 1.1) +
+  annotate("text", x = z_crit, y = 0.35, label = "1.96", hjust = -0.1) +
+  
+  # 🔥 Nye labels
+  annotate("text", x = -2.5, y = 0.05, label = "2.5%") +
+  annotate("text", x =  2.5, y = 0.05, label = "2.5%") +
+  
+  labs(
+    title = "Tosidet test, 5% signifikansniveau",
+    subtitle = "De røde områder er forkastningsområderne",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
 
-Den kritiske værdi angiver hvor ekstrem teststørrelsen må være, hvis H_0 er sand.
+## Ensidet - større end
+
+```{r}
+z_crit_right <- qnorm(0.95)
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x >= z_crit_right),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = z_crit_right, linetype = 2, linewidth = 1) +
+  
+  annotate("text", x = z_crit_right, y = 0.35, label = "1.645", hjust = -0.1) +
+  
+  # 🔥 Nyt: angivelse af alpha
+  annotate("text", x = 2.2, y = 0.05, label = "5%") +
+  
+  labs(
+    title = "Ensidet test: større end",
+    subtitle = "Vi forkaster kun i højre hale",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
 
 
-For at gøre alt det, skal vi træffe tre valg:
+## Ensidigt - mindre end
+
+```{r}
+z_crit_left <- qnorm(0.05)
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x <= z_crit_left),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = z_crit_left, linetype = 2, linewidth = 1) +
+  
+  annotate("text", x = z_crit_left, y = 0.35, label = "-1.645", hjust = 1.1) +
+  
+  # 🔥 Nyt: angivelse af alpha
+  annotate("text", x = -2.2, y = 0.05, label = "5%") +
+  
+  labs(
+    title = "Ensidet test: mindre end",
+    subtitle = "Vi forkaster kun i venstre hale",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
+
+## Den kritiske værdi
+:::: smaller
+Hvis vi vil finde enhver forskel, typisk at mu_1 - mu_2 = 0, er vi ligeglade med om testværdien er "for lille" eller "for stor". De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.
+
+Har vi $\alpha = 0.5$ skal den altså fordeles på begge sider og vi bruger:
+
+```{r echo = TRUE}
+c(-1,1)*qnorm(1 - 0.05/2)
+```
+
+Hvis vi er interesseret i om en værdi er mindre ($H_A: \theta < \theta_0$) - så må testværdien gerne være for stor. Den må blot ikke være for lille.
+
+```{r echo = TRUE}
+qnorm(0.05)
+```
+
+Og hvis vi er interesseret i om en værdi er større ($H_A: \theta > \theta_0$) - så må testværdien gerne være for lille. Den må blot ikke være for stor.
+
+```{r echo = TRUE}
+qnorm(1-0.05)
+```
+
+::::
+
+## Testværdien
+
+Vi har besluttet hvilken hypotese vi vil teste.
+Vi har fundet den kritiske værdi - ud fra ønsket $\alpha$ og retningen af testen.
+
+Så mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.
+
+Der skal bruges to ting. Hvad er afstanden fra vores estimat til $H_0$, og standardfejlen, som vi skal bruge til at beregne den afstand i standardfejl.
 
 
-1. Hvad er det vi tester?
-Em middelværdi
-En forskel på to middelværdier
-(senere; andele og ratioer RR/OR)
 
-Hvordan er vores data:
-En gruppe?
-To grupper
-Hvis der er to grupper, er de parrede eller ikke parrede?
+## Afstanden
 
-Retningen
-Er værdierne forskellige - tosidet
-Er den ene større end den anden - ensidet.
+Vi havde den generelle $H_0: \theta = \theta_0$
 
+Hvis det er middelværdier ved vi godt hvordan vi beregner dem.
+Det skal vi normalt ikke selv gøre til eksamen.
+Har vi to middelværdier hvor vi skal undersøge om de er forskellige, er $H_0$ typisk at forskellen på dem er 0. 
+Den forskel får vi til eksamen enten oplyst direkte. Eller også får vi to middelværdier og så trækker vi den ene fra den anden.
 
-Hypotesetest = afstand fra hypotese målt i standardfejl
+Andele og ratioer kommer vi til senere.
 
-Eller: test = signal/støj. Hvor støjen er standardfejlen.
+Den middelværdi eller forskel på middelværdi betegner vi generelt $\hat{\theta}$
 
-## Estimatet
+$\theta_0$ har vi fra vores null-hypotese. 
 
-Middelværdien ved vi godt hvordan vi beregner
+Så hvis vores estimat var 0.719 og vores null-hypotese var $\mu = 0.81$
 
-Til eksamen skal vi ikke selv beregne den. 
+Er afstanden: 0.719 - 0.81 = -0.091
 
-Forskellen på middelværdier beregnes ved at trække den ene fra den anden.
-
-Til eksamen får vi den enten oplyst direkte. Eller også får vi de to middelværdier oplyst, og så trækker vi den ene fra den anden.
 
 ## Standardfejlen
 
-Afhænger af testen.
+Afhænger af testen - ikke af hypotesen!
 
-For en enkelt middelværdi 
+For en enkelt middelværdi: SEM = $\frac{\sigma}{\sqrt{n}}$
 
+Hvis vi sammenligner to middelværdier der ikke er parrede:
 
-## Den kritiske værdi
-
-Hvis kriteriet alpha = 0.05, så leder vi efter 
-
+$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 
 
-## En opgave
+Og hvis data er parrede:
+
+$SE(\bar{d}) = \frac{s_d}{\sqrt{n}}$
+
+Ofte kender vi ikke den "sande" $\sigma$ men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme.
+
+## Hov! Hvad betyder parret?
+
+Ikke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.
+
+- Behandling vs kontrol
+- Kvinder vs mænd
+
+Her har vi to separate middelværdier. Og undersøger variation mellem personer.
+
+Parrede data kommer fra to grupper der _ikke_ er uafhængige
+
+- Samme individer målt to gange
+- Matchede par
+
+Det kan være 
+
+- Før og efter behandling
+- Tvillinger/matchede personer
+
+Her undersøger vi variation indenfor "samme" person.
+
+## Trin for trin
+
+- Opstil $H_0$
+- Er den alternative hypotese en- eller tosidet?
+- Vælg signifikansniveau (typisk 0.05)
+- Bestem den kritiske værdi (afhænger af: En- eller tosidet og $\alpha$)
+- Beregn estimatet
+- Beregn standardfejlen
+- Beregn testværdien
+- Sammenlign testværdi med kritisk værdi
+- Konkluder: Forkaster vi $H_0$, ja eller nej.
+
+
+## Tilbage til plasma magnesium
+
+Vi fik oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:
+```{r}
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+"Diabetikere", 227, 0.719, 0.068,
+"Ikke-diabetikere", 140, 0.810, 0.057)
+```
+
+Vi beregnede 95% konfidensintervaller på hver af de to grupper, og 
+konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at derfor er er signifikant forskel på niveauet.
+
+Det var i hvert fald konklusionen i modelbesvarelsen.
+
+Hvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning.
+
+## Forskellen på middelværdierne.
+
+Er den 0?
+
+Eller: 
+
+$H_0: \mu_{dia} - \mu_{ejdia} = 0$
+
+
+
+Er den alternative hypotese en eller to sidet?
+vi er ude efter enhver forskel, så to-sidet.
+
+signifikansniveau er 0.05 (et valg vi træffer)
+
+Så den kritiske værdi er $\pm1.96$
+
+Fra $H_0$ får vi (indirekte) estimatet: 0.719-0.810 = -0.091
+
+Og afstanden fra $H_0$ er så 0 - -0.091 = 0.091
+
+Standardfejlen. To samples, ikke parrede: 
+
+$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+
+mu_1 = 0.719, s_1 = 0.068, n_1 = 227
+mu_2 = 0.810, s = 0.057, n_2 = 140
+
+og SE_diff derfor:
+$SE_{diff} = \sqrt{\frac{0.068^2}{227} + \frac{0.057^2}{140}} = 0.00660$
+
+Testværdien er så:
+
+0.091/0.00660 = 13.78788
+
+Den er større end den kritiske værdi, og vi forkaster derfor $H_0$ - at forskellen er 0.
+
+
+
+
+## Endnu en opgave
 
 En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling.
 Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som "diff".
@@ -451,6 +792,7 @@ Er faldet i blodtryk signifikant forskelligt?
 
 De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige. 
 
+Så - forskel?
 
 
 
@@ -489,61 +831,6 @@ ca 7½ gange bredere.
 
 
 
-## øvelse fra en eksamensopgave
-
-Vi får oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere. Vi får lov at antage at 
-plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:
-```{r}
-tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
-"Diabetikere", 227, 0.719, 0.068,
-"Ikke-diabetikere", 140, 0.810, 0.057)
-```
-
-Beregn 95% konfidensinterval for hver af de to grupper.
-
-Spredningen er for de enkelte målinger. Hvis vi skal beregne konfidensintervallet for estimatet på middelværdien,
-skal vi have standardfejlen for middelværdien - SEM.
-
-Den finder vi ved at dividere spredningen med kvadratroden på antallet af observationer.
-
-diabetikere:
-0.719 + c(-1,1)*1.96*0.068/sqrt(227)
-
-Ikke-diabetikere:
-0.810 + c(-1,1)*1.96*0.057/sqrt(140)
-
-Er der forskel?
-
-Er der signifikant forskel i niveauet?
-
-Ja, de to konfidensintervaller overlapper ikke.
-
-## Hvodan kan vi ellers beregne det?
-
-CENTRAL POINTE. grænseværdisætningen gælder en del andet end blot middelværdien.
-
-Vi har SEM. Mere generelt har vi en standardfejl, SE. Det kan være standardfejlen på middelværdien.
-Så er det SEM. Det kan også være standardfejlen på så meget andet.
-
-Men har vi et estimat fra en stikprøve der giver os en værdi, så kan vi beregne 
-konfidensintervallet for den værdi - hvis vi kender standardfejlen.
-
-SEM beregnes på en bestemt måde.
-
-hvordan beregner vi andre standardfejl?
-
-to-sample t-test
-
-hvad er forskellen på de to middelværdier?
-
-Hvad er den poolede standardfejl (standardafvigelsen divideret med antallet af observationer, summen af de to, kvadratroden af den sum).
-
-Vore null-hypotese er at de er ens, altså at forskellen er 0.
-
-et 95% konfidensinterval for forskellen er:
-den observerede forskel +/- 1.96 gange den poolede standardfejl.
-
-Den omfatter ikke 0 - så der er en statistisk signifikant forskel på de to middelværdier.
 
 ## En anden eksamensopgave - forskel på middelværdier
 
@@ -561,6 +848,9 @@ må
 Vi har to samples. Så vi bruger two-sample t-test.
 Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.
 
+
+$H_0: \mu_1 - \mu_2 = 0$
+
 Vi har to grupper - så vi skal have beregnet den poolede standardfejl:
 
 
@@ -573,6 +863,8 @@ et 95% konfidensinterval for forskellen er derfor:
 4 +/- 1.96*s.e
 
 Da det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.
+
+testværdien:
 
 ## videre - ønsket størrelse af konfidensinterval 
 

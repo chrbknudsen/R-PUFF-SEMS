@@ -27,6 +27,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
   <link rel="stylesheet" href="webr-custom.css">
@@ -2059,7 +2125,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="hvordan-hjælper-det-os" class="slide level2">
 <h2>Hvordan hjælper det os?</h2>
-<p>Hvis vi kender spredningen på stikprøvens middelværdi.</p>
+<p>Hvis vi kender spredningen på stikprøvens middelværdier.</p>
 <div class="fragment">
 <p>Kan vi beregne et 95% KI for den middelværdi.</p>
 </div>
@@ -2078,21 +2144,53 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="hvad-er-et-95-konfidensinterval" class="slide level2">
 <h2>Hvad er et 95% konfidensinterval?</h2>
+<div class="fragment">
 <p>Det er det interval, som, hvis vi beregner det “mange” gange, i 95% af tilfældene vil indeholde den sande værdi.</p>
+</div>
+<div class="fragment">
 <p>Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.</p>
+</div>
+<div class="fragment">
 <p>Men vi kan beregne et interval.</p>
+</div>
+<div class="fragment">
 <p>Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.</p>
+</div>
+<div class="fragment">
 <p>Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.</p>
-<p>Det minder om normal området vi så da vi talte om normalfordelingen. Hvis værdierne var normalfordelte, indenfor hvilket interval ville 95% af dem så ligge. Her er det dog ikke værdierne, men estimaterne vi arbejder med.</p>
+</div>
+</section>
+<section id="hvad-er-et-95-konfidensinterval-1" class="slide level2">
+<h2>Hvad er et 95% konfidensinterval?</h2>
+<p>Da vi talte om normalfordelingen mødt vi “normalområdet”.</p>
+<div class="fragment">
+<p>Det område, hvor, hvis værdierne var normalfordelte, hvor vi kan forvente at finde 95% af dem.</p>
+</div>
+<div class="fragment">
+<p>Middelværdierne af stikprøverne vil, når vi har nok af dem, være normalfordelte.</p>
+</div>
+<div class="fragment">
+<p>Så 95% af vores stikprøver vil have en middelværdi der ligger inden for det område.</p>
+</div>
 </section>
 <section id="hvordan-beregner-vi-så-det" class="slide level2">
 <h2>Hvordan beregner vi så det?</h2>
+<div class="smaller">
 <p>Da vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.</p>
+<div class="fragment">
 <p>Standardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.</p>
+</div>
+<div class="fragment">
 <p>Ikke hvordan middelværdierne fra mange stikprøver afviger.</p>
+</div>
+<div class="fragment">
 <p>Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi ” “Standard Error of the Mean”. SEM blandt venner.</p>
-<p>Og vi beregner vi ved</p>
-<p><span class="math display">\[SE = \frac{\sigma}{\sqrt{n}}\]</span></p>
+</div>
+<div class="fragment">
+<p>Og den vi beregner vi ved</p>
+<p><span class="math display">\[SEM = \frac{\sigma}{\sqrt{n}}\]</span></p>
+</div>
+</div>
 <aside class="notes">
 <p>Intuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok.</p>
 <style type="text/css">
@@ -2115,23 +2213,23 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hivufwrlgo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hivufwrlgo table {
+<div id="qgcvttdqnr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qgcvttdqnr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hivufwrlgo thead, #hivufwrlgo tbody, #hivufwrlgo tfoot, #hivufwrlgo tr, #hivufwrlgo td, #hivufwrlgo th {
+#qgcvttdqnr thead, #qgcvttdqnr tbody, #qgcvttdqnr tfoot, #qgcvttdqnr tr, #qgcvttdqnr td, #qgcvttdqnr th {
   border-style: none;
 }
 
-#hivufwrlgo p {
+#qgcvttdqnr p {
   margin: 0;
   padding: 0;
 }
 
-#hivufwrlgo .gt_table {
+#qgcvttdqnr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2157,12 +2255,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_caption {
+#qgcvttdqnr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hivufwrlgo .gt_title {
+#qgcvttdqnr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2174,7 +2272,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#hivufwrlgo .gt_subtitle {
+#qgcvttdqnr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2186,7 +2284,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#hivufwrlgo .gt_heading {
+#qgcvttdqnr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2198,13 +2296,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_bottom_border {
+#qgcvttdqnr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_col_headings {
+#qgcvttdqnr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2219,7 +2317,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_col_heading {
+#qgcvttdqnr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2239,7 +2337,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#hivufwrlgo .gt_column_spanner_outer {
+#qgcvttdqnr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2251,15 +2349,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#hivufwrlgo .gt_column_spanner_outer:first-child {
+#qgcvttdqnr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hivufwrlgo .gt_column_spanner_outer:last-child {
+#qgcvttdqnr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hivufwrlgo .gt_column_spanner {
+#qgcvttdqnr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2271,11 +2369,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#hivufwrlgo .gt_spanner_row {
+#qgcvttdqnr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hivufwrlgo .gt_group_heading {
+#qgcvttdqnr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2301,7 +2399,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#hivufwrlgo .gt_empty_group_heading {
+#qgcvttdqnr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2316,15 +2414,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#hivufwrlgo .gt_from_md > :first-child {
+#qgcvttdqnr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hivufwrlgo .gt_from_md > :last-child {
+#qgcvttdqnr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hivufwrlgo .gt_row {
+#qgcvttdqnr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2343,7 +2441,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#hivufwrlgo .gt_stub {
+#qgcvttdqnr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2356,7 +2454,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#hivufwrlgo .gt_stub_row_group {
+#qgcvttdqnr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2370,15 +2468,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#hivufwrlgo .gt_row_group_first td {
+#qgcvttdqnr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hivufwrlgo .gt_row_group_first th {
+#qgcvttdqnr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hivufwrlgo .gt_summary_row {
+#qgcvttdqnr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2388,16 +2486,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#hivufwrlgo .gt_first_summary_row {
+#qgcvttdqnr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_first_summary_row.thick {
+#qgcvttdqnr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hivufwrlgo .gt_last_summary_row {
+#qgcvttdqnr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2407,7 +2505,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_grand_summary_row {
+#qgcvttdqnr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2417,7 +2515,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#hivufwrlgo .gt_first_grand_summary_row {
+#qgcvttdqnr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2427,7 +2525,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_last_grand_summary_row_top {
+#qgcvttdqnr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2437,11 +2535,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_striped {
+#qgcvttdqnr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hivufwrlgo .gt_table_body {
+#qgcvttdqnr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2450,7 +2548,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_footnotes {
+#qgcvttdqnr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2464,7 +2562,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_footnote {
+#qgcvttdqnr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2473,7 +2571,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#hivufwrlgo .gt_sourcenotes {
+#qgcvttdqnr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2487,7 +2585,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#hivufwrlgo .gt_sourcenote {
+#qgcvttdqnr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2495,72 +2593,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#hivufwrlgo .gt_left {
+#qgcvttdqnr .gt_left {
   text-align: left;
 }
 
-#hivufwrlgo .gt_center {
+#qgcvttdqnr .gt_center {
   text-align: center;
 }
 
-#hivufwrlgo .gt_right {
+#qgcvttdqnr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hivufwrlgo .gt_font_normal {
+#qgcvttdqnr .gt_font_normal {
   font-weight: normal;
 }
 
-#hivufwrlgo .gt_font_bold {
+#qgcvttdqnr .gt_font_bold {
   font-weight: bold;
 }
 
-#hivufwrlgo .gt_font_italic {
+#qgcvttdqnr .gt_font_italic {
   font-style: italic;
 }
 
-#hivufwrlgo .gt_super {
+#qgcvttdqnr .gt_super {
   font-size: 65%;
 }
 
-#hivufwrlgo .gt_footnote_marks {
+#qgcvttdqnr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hivufwrlgo .gt_asterisk {
+#qgcvttdqnr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hivufwrlgo .gt_indent_1 {
+#qgcvttdqnr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hivufwrlgo .gt_indent_2 {
+#qgcvttdqnr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hivufwrlgo .gt_indent_3 {
+#qgcvttdqnr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hivufwrlgo .gt_indent_4 {
+#qgcvttdqnr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hivufwrlgo .gt_indent_5 {
+#qgcvttdqnr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hivufwrlgo .katex-display {
+#qgcvttdqnr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hivufwrlgo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qgcvttdqnr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2593,7 +2691,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>Beregn 95% konfidensinterval for hver af de to grupper.</p>
+<p>Beregn 95% konfidensinterval (KI) for hver af de to grupper.</p>
 <p>Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.</p>
 </div>
 </div><div class="column">
@@ -2619,59 +2717,230 @@ Er der forskel?</p>
 </section>
 <section id="testværdi" class="slide level2">
 <h2>Testværdi</h2>
-<p>Vi beregnede et 95% KI for plasma-magnesium for diabetikere til:</p>
-<p>[0.7101539, 0.7278461] og SEM var 0.004513319 0.719</p>
-<p>Det betyder - 95% af de gange vi beregner en middelværdi af plasma-magnesium for diabetikere, vil værdien ligge indenfor det interval.</p>
-<p>Er 0.73 indeholdt? Eller - ligger det for langt fra middelværdien på 0.719 til at det er med?</p>
-<p>Det kan vi se. Vi kan også se at (0.73-0.719)/0.004513319 = 2.437231</p>
-<p>Det svarer til at sige at</p>
-<p>0.73 = 0.719 + 2.437*SEM</p>
-<p>Vi kalder 2.437231 for testværdien. Den kritiske værdi ved 95% er 1.96. Er 2.437 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra middelværdien. Og så er den ikke indeholdt i de 95%.</p>
+<div class="smaller">
+<p>Vi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319</p>
+<p>Det betyder, at tager vi “mange” stikprøver af plasma-magnesium for diabetikere, vil 95% af de konfidensintervaller vi beregner, indeholde den sande værdi.</p>
+<p>Nu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.</p>
+<p>Er den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?</p>
+</div>
 </section>
+<section id="testværdi-1" class="slide level2">
+<h2>Testværdi</h2>
+<p>Man kan også se, at:</p>
+<p><span class="math inline">\(\frac{0.810-0.719}{SEM} = \frac{0.810-0.719}{0.004513319} = 20.16255\)</span></p>
+<div class="fragment">
+<p>Det er det samme som:</p>
+<p><span class="math inline">\(0.81 = 0.719 + 20.16255\cdot SEM\)</span></p>
+</div>
+<div class="fragment">
+<p>Vi kalder 20.16255 for testværdien.</p>
+</div>
+<div class="fragment">
+<p>Den kritiske værdi ved 95% er 1.96. Er 20.16255 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra (estimatet for) middelværdien. Og så ligger den udenfor 95% konfidensintervallet.</p>
+</div>
+</section>
+<section id="visualiseret" class="slide level2">
+<h2>Visualiseret</h2>
+
+<img data-src="SEM_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="hypotesetest" class="slide level2">
 <h2>Hypotesetest</h2>
-<p>Hvad er en hypotese?</p>
-<p>En hypotese er en påstand om den sande, men ukendte værdi i populationen.</p>
-<p>I det foregående eksempel kunne det være: Der er forskel på plasma Magnesium for diabetikere og ikke-diabetikere.</p>
-<p>Vi opstiller altid to hypoteser:</p>
-<p>H_0 - der er ingen forskel</p>
-<p>H_a - der er forskel.</p>
-<p>Vores test kan afvise H_0. Det betyder at data ikke er forenelige med H_0. Eller ikke forkaste H_0. Det betyder at data er forenelige med H_0.</p>
-<p>Bemærk at vi ikke accepterer H_0. Vi kan kun undlade at forkaste den.</p>
-<p>Det vil vi gøre med en vis sikkerhed eller risiko.</p>
-<p>Så vi vælger et signifikansniveau alpha, som er risikoen for at forkaste H_0, selvom H_0 er sand.</p>
-<p>alpha = 0.05 er meget populært.</p>
-<p>Når vi har opstillet vores hypotese, beregner vi en teststørrelse</p>
-<p>test = estimat-hypotese /SE</p>
-<p>og sammenligner med den kritiske værdi.</p>
-<p>Den kritiske værdi angiver hvor ekstrem teststørrelsen må være, hvis H_0 er sand.</p>
-<p>For at gøre alt det, skal vi træffe tre valg:</p>
-<ol type="1">
-<li>Hvad er det vi tester? Em middelværdi En forskel på to middelværdier (senere; andele og ratioer RR/OR)</li>
-</ol>
-<p>Hvordan er vores data: En gruppe? To grupper Hvis der er to grupper, er de parrede eller ikke parrede?</p>
-<p>Retningen Er værdierne forskellige - tosidet Er den ene større end den anden - ensidet.</p>
-<p>Hypotesetest = afstand fra hypotese målt i standardfejl</p>
-<p>Eller: test = signal/støj. Hvor støjen er standardfejlen.</p>
+<p>Det var en hypotesetest.</p>
+<div class="fragment">
+<p>Vi testede om 0.810 kunne være indeholdt i konfidensintervallet på [0.7101539, 0.7278461] og SEM = 0.004513319.</p>
+</div>
+<div class="fragment">
+<p>Det kan vi se at den ikke er. Afvigelsen er stor, men det kunne jo være et statistisk tilfælde.</p>
+</div>
+<div class="fragment">
+<p>Hvordan tester vi det mere generelt?</p>
+</div>
 </section>
-<section id="estimatet" class="slide level2">
-<h2>Estimatet</h2>
-<p>Middelværdien ved vi godt hvordan vi beregner</p>
-<p>Til eksamen skal vi ikke selv beregne den.</p>
-<p>Forskellen på middelværdier beregnes ved at trække den ene fra den anden.</p>
-<p>Til eksamen får vi den enten oplyst direkte. Eller også får vi de to middelværdier oplyst, og så trækker vi den ene fra den anden.</p>
+<section id="hvad-er-en-hypotese" class="slide level2">
+<h2>Hvad er en hypotese</h2>
+<div class="smaller">
+<p>En antagelse om en parameter i populationen.</p>
+<ul>
+<li>En bestemt middelværdi, eg <span class="math inline">\(\mu = 0.81\)</span></li>
+<li>En bestemt forskel på to middelværdier, ofte som <span class="math inline">\(\mu_1 - \mu_2 = 0\)</span></li>
+<li>En bestemt andel eller ratio (senere)</li>
+</ul>
+<p>Vi opstiller en null-hypotese <span class="math inline">\(H_0\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\mu = 0.81\)</span></li>
+<li><span class="math inline">\(\mu_1 - \mu_2 = 0\)</span></li>
+</ul>
+<p>Eller mere generelt <span class="math inline">\(\theta = \theta_0\)</span>. Så kan resultatet nemlig bruges til andet end middelværdier. Her er <span class="math inline">\(\theta_0\)</span> den værdi vi tester mod, eg. 0.81 eller 0.</p>
+<p>I praksis “ingen forskel” eller “ingen effekt”. <span class="math inline">\(H_0\)</span> er en konkret værdi for den parameter vi ønsker at teste.</p>
+</div>
+</section>
+<section id="den-alternative-hypotese" class="slide level2">
+<h2>Den alternative hypotese</h2>
+<div class="smaller">
+<p>Kaldet <span class="math inline">\(H_A\)</span>, enten at</p>
+<ul>
+<li><span class="math inline">\(\mu \neq 0.81\)</span></li>
+<li><span class="math inline">\(\mu_1 - \mu_2 \neq 0\)</span></li>
+</ul>
+<p>Det er tosidet.</p>
+<p>Eller, ensidet:</p>
+<ul>
+<li><span class="math inline">\(\mu &gt; 0.81\)</span> eller</li>
+<li><span class="math inline">\(\mu &lt; 0.81\)</span></li>
+</ul>
+<p>Tosidet: Enhver forskel<br>
+Ensidet: En forskel i en bestemt retning</p>
+</div>
+</section>
+<section id="kernen-i-hypotesetesten" class="slide level2">
+<h2>Kernen i hypotesetesten</h2>
+<p>Vi har et estimat <span class="math inline">\(\hat{\theta}\)</span> fra vores observationer. Og vi har en null-hypotese, <span class="math inline">\(H_0: \theta = \theta_0\)</span>.</p>
+<p>Vi kigger lige nu på middelværdier og ville normalt skrive <span class="math inline">\(\mu\)</span>. Men bruger <span class="math inline">\(\theta\)</span> fordi vi så kan generalisere.</p>
+<p>Hvor langt ligger estimatet fra <span class="math inline">\(H_0\)</span>, målt i standardfejl?</p>
+</section>
+<section id="hvor-langt-er-for-langt" class="slide level2">
+<h2>Hvor langt er for langt?</h2>
+<p>Hvis estimatet ligger “for langt” fra <span class="math inline">\(H_0\)</span>, forkaster vi <span class="math inline">\(H_0\)</span> (og konkluderer at data understøtter <span class="math inline">\(H_A\)</span>).</p>
+<p>Når vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste <span class="math inline">\(H_0\)</span>. Selvom <span class="math inline">\(H_0\)</span> faktisk er sand.</p>
+<p>Den risiko betegner vi <span class="math inline">\(\alpha\)</span>. Normalt sætter vi den til 5%, eller 0.05.</p>
+<p>Vær vågne hvis opgaven taler om noget som helst andet!</p>
+</section>
+<section id="det-er-den-kritiske-værdi" class="slide level2">
+<h2>Det er den kritiske værdi</h2>
+<p>To-sidet. Hvor vi er interesseret i enhver forskel:</p>
+
+<img data-src="SEM_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="ensidet---større-end" class="slide level2">
+<h2>Ensidet - større end</h2>
+
+<img data-src="SEM_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="ensidigt---mindre-end" class="slide level2">
+<h2>Ensidigt - mindre end</h2>
+
+<img data-src="SEM_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="den-kritiske-værdi" class="slide level2">
+<h2>Den kritiske værdi</h2>
+<div class="smaller">
+<p>Hvis vi vil finde enhver forskel, typisk at mu_1 - mu_2 = 0, er vi ligeglade med om testværdien er “for lille” eller “for stor”. De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.</p>
+<p>Har vi <span class="math inline">\(\alpha = 0.5\)</span> skal den altså fordeles på begge sider og vi bruger:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.959964  1.959964</code></pre>
+</div>
+</div>
+<p>Hvis vi er interesseret i om en værdi er mindre (<span class="math inline">\(H_A: \theta &lt; \theta_0\)</span>) - så må testværdien gerne være for stor. Den må blot ikke være for lille.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.644854</code></pre>
+</div>
+</div>
+<p>Og hvis vi er interesseret i om en værdi er større (<span class="math inline">\(H_A: \theta &gt; \theta_0\)</span>) - så må testværdien gerne være for lille. Den må blot ikke være for stor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="testværdien" class="slide level2">
+<h2>Testværdien</h2>
+<p>Vi har besluttet hvilken hypotese vi vil teste. Vi har fundet den kritiske værdi - ud fra ønsket <span class="math inline">\(\alpha\)</span> og retningen af testen.</p>
+<p>Så mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.</p>
+<p>Der skal bruges to ting. Hvad er afstanden fra vores estimat til <span class="math inline">\(H_0\)</span>, og standardfejlen, som vi skal bruge til at beregne den afstand i standardfejl.</p>
+</section>
+<section id="afstanden" class="slide level2">
+<h2>Afstanden</h2>
+<p>Vi havde den generelle <span class="math inline">\(H_0: \theta = \theta_0\)</span></p>
+<p>Hvis det er middelværdier ved vi godt hvordan vi beregner dem. Det skal vi normalt ikke selv gøre til eksamen. Har vi to middelværdier hvor vi skal undersøge om de er forskellige, er <span class="math inline">\(H_0\)</span> typisk at forskellen på dem er 0. Den forskel får vi til eksamen enten oplyst direkte. Eller også får vi to middelværdier og så trækker vi den ene fra den anden.</p>
+<p>Andele og ratioer kommer vi til senere.</p>
+<p>Den middelværdi eller forskel på middelværdi betegner vi generelt <span class="math inline">\(\hat{\theta}\)</span></p>
+<p><span class="math inline">\(\theta_0\)</span> har vi fra vores null-hypotese.</p>
+<p>Så hvis vores estimat var 0.719 og vores null-hypotese var <span class="math inline">\(\mu = 0.81\)</span></p>
+<p>Er afstanden: 0.719 - 0.81 = -0.091</p>
 </section>
 <section id="standardfejlen" class="slide level2">
 <h2>Standardfejlen</h2>
-<p>Afhænger af testen.</p>
-<p>For en enkelt middelværdi</p>
+<p>Afhænger af testen - ikke af hypotesen!</p>
+<p>For en enkelt middelværdi: SEM = <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span></p>
+<p>Hvis vi sammenligner to middelværdier der ikke er parrede:</p>
+<p><span class="math inline">\(SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)</span></p>
+<p>Og hvis data er parrede:</p>
+<p><span class="math inline">\(SE(\bar{d}) = \frac{s_d}{\sqrt{n}}\)</span></p>
+<p>Ofte kender vi ikke den “sande” <span class="math inline">\(\sigma\)</span> men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme.</p>
 </section>
-<section id="den-kritiske-værdi" class="slide level2">
-<h2>Den kritiske værdi</h2>
-<p>Hvis kriteriet alpha = 0.05, så leder vi efter</p>
+<section id="hov-hvad-betyder-parret" class="slide level2">
+<h2>Hov! Hvad betyder parret?</h2>
+<p>Ikke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.</p>
+<ul>
+<li>Behandling vs kontrol</li>
+<li>Kvinder vs mænd</li>
+</ul>
+<p>Her har vi to separate middelværdier. Og undersøger variation mellem personer.</p>
+<p>Parrede data kommer fra to grupper der <em>ikke</em> er uafhængige</p>
+<ul>
+<li>Samme individer målt to gange</li>
+<li>Matchede par</li>
+</ul>
+<p>Det kan være</p>
+<ul>
+<li>Før og efter behandling</li>
+<li>Tvillinger/matchede personer</li>
+</ul>
+<p>Her undersøger vi variation indenfor “samme” person.</p>
 </section>
-<section id="en-opgave" class="slide level2">
-<h2>En opgave</h2>
+<section id="trin-for-trin" class="slide level2">
+<h2>Trin for trin</h2>
+<ul>
+<li>Opstil <span class="math inline">\(H_0\)</span></li>
+<li>Er den alternative hypotese en- eller tosidet?</li>
+<li>Vælg signifikansniveau (typisk 0.05)</li>
+<li>Bestem den kritiske værdi (afhænger af: En- eller tosidet og <span class="math inline">\(\alpha\)</span>)</li>
+<li>Beregn estimatet</li>
+<li>Beregn standardfejlen</li>
+<li>Beregn testværdien</li>
+<li>Sammenlign testværdi med kritisk værdi</li>
+<li>Konkluder: Forkaster vi <span class="math inline">\(H_0\)</span>, ja eller nej.</li>
+</ul>
+</section>
+<section id="tilbage-til-plasma-magnesium" class="slide level2">
+<h2>Tilbage til plasma magnesium</h2>
+<p>Vi fik oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  gruppe           Antal Gennemsnit Sprdening
+  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+1 Diabetikere        227      0.719     0.068
+2 Ikke-diabetikere   140      0.81      0.057</code></pre>
+</div>
+</div>
+<p>Vi beregnede 95% konfidensintervaller på hver af de to grupper, og konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at derfor er er signifikant forskel på niveauet.</p>
+<p>Det var i hvert fald konklusionen i modelbesvarelsen.</p>
+<p>Hvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning.</p>
+</section>
+<section id="forskellen-på-middelværdierne." class="slide level2">
+<h2>Forskellen på middelværdierne.</h2>
+<p>Er den 0?</p>
+<p>Eller:</p>
+<p><span class="math inline">\(H_0: \mu_{dia} - \mu_{ejdia} = 0\)</span></p>
+<p>Er den alternative hypotese en eller to sidet? vi er ude efter enhver forskel, så to-sidet.</p>
+<p>signifikansniveau er 0.05 (et valg vi træffer)</p>
+<p>Så den kritiske værdi er <span class="math inline">\(\pm1.96\)</span></p>
+<p>Fra <span class="math inline">\(H_0\)</span> får vi (indirekte) estimatet: 0.719-0.810 = -0.091</p>
+<p>Og afstanden fra <span class="math inline">\(H_0\)</span> er så 0 - -0.091 = 0.091</p>
+<p>Standardfejlen. To samples, ikke parrede:</p>
+<p><span class="math inline">\(SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)</span></p>
+<p>mu_1 = 0.719, s_1 = 0.068, n_1 = 227 mu_2 = 0.810, s = 0.057, n_2 = 140</p>
+<p>og SE_diff derfor: <span class="math inline">\(SE_{diff} = \sqrt{\frac{0.068^2}{227} + \frac{0.057^2}{140}} = 0.00660\)</span></p>
+<p>Testværdien er så:</p>
+<p>0.091/0.00660 = 13.78788</p>
+<p>Den er større end den kritiske værdi, og vi forkaster derfor <span class="math inline">\(H_0\)</span> - at forskellen er 0.</p>
+</section>
+<section id="endnu-en-opgave" class="slide level2">
+<h2>Endnu en opgave</h2>
 <p>En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9</p>
 <p>For interventionsgruppen er de tilsvarende tal -19.6 og 17.4</p>
 <p>Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.</p>
@@ -2706,6 +2975,7 @@ Er der forskel?</p>
 <p>Her er 0 heller ikke indeholdt i intervallet - faldet er signifikant.</p>
 <p>Er faldet i blodtryk signifikant forskelligt?</p>
 <p>De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige.</p>
+<p>Så - forskel?</p>
 </section>
 <section id="maj-2025-opgave-2-a" class="slide level2">
 <h2>maj 2025 opgave 2 a</h2>
@@ -2722,41 +2992,6 @@ Er der forskel?</p>
 <p>bredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5</p>
 <p>ca 7½ gange bredere.</p>
 </section>
-<section id="øvelse-fra-en-eksamensopgave" class="slide level2">
-<h2>øvelse fra en eksamensopgave</h2>
-<p>Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 4
-  gruppe           Antal Gennemsnit Sprdening
-  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
-1 Diabetikere        227      0.719     0.068
-2 Ikke-diabetikere   140      0.81      0.057</code></pre>
-</div>
-</div>
-<p>Beregn 95% konfidensinterval for hver af de to grupper.</p>
-<p>Spredningen er for de enkelte målinger. Hvis vi skal beregne konfidensintervallet for estimatet på middelværdien, skal vi have standardfejlen for middelværdien - SEM.</p>
-<p>Den finder vi ved at dividere spredningen med kvadratroden på antallet af observationer.</p>
-<p>diabetikere: 0.719 + c(-1,1)<em>1.96</em>0.068/sqrt(227)</p>
-<p>Ikke-diabetikere: 0.810 + c(-1,1)<em>1.96</em>0.057/sqrt(140)</p>
-<p>Er der forskel?</p>
-<p>Er der signifikant forskel i niveauet?</p>
-<p>Ja, de to konfidensintervaller overlapper ikke.</p>
-</section>
-<section id="hvodan-kan-vi-ellers-beregne-det" class="slide level2">
-<h2>Hvodan kan vi ellers beregne det?</h2>
-<p>CENTRAL POINTE. grænseværdisætningen gælder en del andet end blot middelværdien.</p>
-<p>Vi har SEM. Mere generelt har vi en standardfejl, SE. Det kan være standardfejlen på middelværdien. Så er det SEM. Det kan også være standardfejlen på så meget andet.</p>
-<p>Men har vi et estimat fra en stikprøve der giver os en værdi, så kan vi beregne konfidensintervallet for den værdi - hvis vi kender standardfejlen.</p>
-<p>SEM beregnes på en bestemt måde.</p>
-<p>hvordan beregner vi andre standardfejl?</p>
-<p>to-sample t-test</p>
-<p>hvad er forskellen på de to middelværdier?</p>
-<p>Hvad er den poolede standardfejl (standardafvigelsen divideret med antallet af observationer, summen af de to, kvadratroden af den sum).</p>
-<p>Vore null-hypotese er at de er ens, altså at forskellen er 0.</p>
-<p>et 95% konfidensinterval for forskellen er: den observerede forskel +/- 1.96 gange den poolede standardfejl.</p>
-<p>Den omfatter ikke 0 - så der er en statistisk signifikant forskel på de to middelværdier.</p>
-</section>
 <section id="en-anden-eksamensopgave---forskel-på-middelværdier" class="slide level2">
 <h2>En anden eksamensopgave - forskel på middelværdier</h2>
 <p>Vi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.</p>
@@ -2772,6 +3007,7 @@ Er der forskel?</p>
 </div>
 <p>må</p>
 <p>Vi har to samples. Så vi bruger two-sample t-test. Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.</p>
+<p><span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span></p>
 <p>Vi har to grupper - så vi skal have beregnet den poolede standardfejl:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2781,6 +3017,7 @@ Er der forskel?</p>
 <p>et 95% konfidensinterval for forskellen er derfor:</p>
 <p>4 +/- 1.96*s.e</p>
 <p>Da det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.</p>
+<p>testværdien:</p>
 </section>
 <section id="videre---ønsket-størrelse-af-konfidensinterval" class="slide level2">
 <h2>videre - ønsket størrelse af konfidensinterval</h2>
@@ -2892,24 +3129,24 @@ Er der forskel?</p>
 <p>Nu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pritvutblk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eiobdsaowi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pritvutblk table {
+#eiobdsaowi table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pritvutblk thead, #pritvutblk tbody, #pritvutblk tfoot, #pritvutblk tr, #pritvutblk td, #pritvutblk th {
+#eiobdsaowi thead, #eiobdsaowi tbody, #eiobdsaowi tfoot, #eiobdsaowi tr, #eiobdsaowi td, #eiobdsaowi th {
   border-style: none;
 }
 
-#pritvutblk p {
+#eiobdsaowi p {
   margin: 0;
   padding: 0;
 }
 
-#pritvutblk .gt_table {
+#eiobdsaowi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2935,12 +3172,12 @@ Er der forskel?</p>
   border-left-color: #D3D3D3;
 }
 
-#pritvutblk .gt_caption {
+#eiobdsaowi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pritvutblk .gt_title {
+#eiobdsaowi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2952,7 +3189,7 @@ Er der forskel?</p>
   border-bottom-width: 0;
 }
 
-#pritvutblk .gt_subtitle {
+#eiobdsaowi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2964,7 +3201,7 @@ Er der forskel?</p>
   border-top-width: 0;
 }
 
-#pritvutblk .gt_heading {
+#eiobdsaowi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2976,13 +3213,13 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#pritvutblk .gt_bottom_border {
+#eiobdsaowi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#pritvutblk .gt_col_headings {
+#eiobdsaowi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2997,7 +3234,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#pritvutblk .gt_col_heading {
+#eiobdsaowi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3017,7 +3254,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#pritvutblk .gt_column_spanner_outer {
+#eiobdsaowi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3029,15 +3266,15 @@ Er der forskel?</p>
   padding-right: 4px;
 }
 
-#pritvutblk .gt_column_spanner_outer:first-child {
+#eiobdsaowi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pritvutblk .gt_column_spanner_outer:last-child {
+#eiobdsaowi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pritvutblk .gt_column_spanner {
+#eiobdsaowi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3049,11 +3286,11 @@ Er der forskel?</p>
   width: 100%;
 }
 
-#pritvutblk .gt_spanner_row {
+#eiobdsaowi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pritvutblk .gt_group_heading {
+#eiobdsaowi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3079,7 +3316,7 @@ Er der forskel?</p>
   text-align: left;
 }
 
-#pritvutblk .gt_empty_group_heading {
+#eiobdsaowi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3094,15 +3331,15 @@ Er der forskel?</p>
   vertical-align: middle;
 }
 
-#pritvutblk .gt_from_md > :first-child {
+#eiobdsaowi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pritvutblk .gt_from_md > :last-child {
+#eiobdsaowi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pritvutblk .gt_row {
+#eiobdsaowi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3121,7 +3358,7 @@ Er der forskel?</p>
   overflow-x: hidden;
 }
 
-#pritvutblk .gt_stub {
+#eiobdsaowi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3134,7 +3371,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#pritvutblk .gt_stub_row_group {
+#eiobdsaowi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3148,15 +3385,15 @@ Er der forskel?</p>
   vertical-align: top;
 }
 
-#pritvutblk .gt_row_group_first td {
+#eiobdsaowi .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#pritvutblk .gt_row_group_first th {
+#eiobdsaowi .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#pritvutblk .gt_summary_row {
+#eiobdsaowi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3166,16 +3403,16 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#pritvutblk .gt_first_summary_row {
+#eiobdsaowi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pritvutblk .gt_first_summary_row.thick {
+#eiobdsaowi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pritvutblk .gt_last_summary_row {
+#eiobdsaowi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3185,7 +3422,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pritvutblk .gt_grand_summary_row {
+#eiobdsaowi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3195,7 +3432,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#pritvutblk .gt_first_grand_summary_row {
+#eiobdsaowi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3205,7 +3442,7 @@ Er der forskel?</p>
   border-top-color: #D3D3D3;
 }
 
-#pritvutblk .gt_last_grand_summary_row_top {
+#eiobdsaowi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3215,11 +3452,11 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pritvutblk .gt_striped {
+#eiobdsaowi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pritvutblk .gt_table_body {
+#eiobdsaowi .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3228,7 +3465,7 @@ Er der forskel?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pritvutblk .gt_footnotes {
+#eiobdsaowi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3242,7 +3479,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#pritvutblk .gt_footnote {
+#eiobdsaowi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3251,7 +3488,7 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#pritvutblk .gt_sourcenotes {
+#eiobdsaowi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3265,7 +3502,7 @@ Er der forskel?</p>
   border-right-color: #D3D3D3;
 }
 
-#pritvutblk .gt_sourcenote {
+#eiobdsaowi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3273,72 +3510,72 @@ Er der forskel?</p>
   padding-right: 5px;
 }
 
-#pritvutblk .gt_left {
+#eiobdsaowi .gt_left {
   text-align: left;
 }
 
-#pritvutblk .gt_center {
+#eiobdsaowi .gt_center {
   text-align: center;
 }
 
-#pritvutblk .gt_right {
+#eiobdsaowi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pritvutblk .gt_font_normal {
+#eiobdsaowi .gt_font_normal {
   font-weight: normal;
 }
 
-#pritvutblk .gt_font_bold {
+#eiobdsaowi .gt_font_bold {
   font-weight: bold;
 }
 
-#pritvutblk .gt_font_italic {
+#eiobdsaowi .gt_font_italic {
   font-style: italic;
 }
 
-#pritvutblk .gt_super {
+#eiobdsaowi .gt_super {
   font-size: 65%;
 }
 
-#pritvutblk .gt_footnote_marks {
+#eiobdsaowi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pritvutblk .gt_asterisk {
+#eiobdsaowi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pritvutblk .gt_indent_1 {
+#eiobdsaowi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pritvutblk .gt_indent_2 {
+#eiobdsaowi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pritvutblk .gt_indent_3 {
+#eiobdsaowi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pritvutblk .gt_indent_4 {
+#eiobdsaowi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pritvutblk .gt_indent_5 {
+#eiobdsaowi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pritvutblk .katex-display {
+#eiobdsaowi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pritvutblk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eiobdsaowi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

@@ -60,8 +60,14 @@ ggplot(df_plot, aes(x, y)) +
     fill = "red", alpha = 0.25
   ) +
   geom_vline(xintercept = c(-z_crit, z_crit), linetype = 2, linewidth = 1) +
+  
   annotate("text", x = -z_crit, y = 0.35, label = "-1.96", hjust = 1.1) +
   annotate("text", x = z_crit, y = 0.35, label = "1.96", hjust = -0.1) +
+  
+  # 🔥 Nye labels
+  annotate("text", x = -2.5, y = 0.05, label = "2.5%") +
+  annotate("text", x =  2.5, y = 0.05, label = "2.5%") +
+  
   labs(
     title = "Tosidet test, 5% signifikansniveau",
     subtitle = "De røde områder er forkastningsområderne",
@@ -124,9 +130,14 @@ ggplot(df_plot, aes(x, y)) +
     fill = "red", alpha = 0.25
   ) +
   geom_vline(xintercept = z_crit_left, linetype = 2, linewidth = 1) +
+  
   annotate("text", x = z_crit_left, y = 0.35, label = "-1.645", hjust = 1.1) +
+  
+  # 🔥 Nyt: angivelse af alpha
+  annotate("text", x = -2.2, y = 0.05, label = "5%") +
+  
   labs(
-    title = "Ensided test: mindre end",
+    title = "Ensidet test: mindre end",
     subtitle = "Vi forkaster kun i venstre hale",
     x = "Teststørrelse",
     y = "Tæthed"
