@@ -1,10 +1,10 @@
 ---
-title: "Oversigt over standardfejl og kritiske værdier"
+title: "Oversigt over kritiske værdier"
 format:
   html:
-    toc: true
+    toc: false
 execute:
-  echo: true
+  echo: false
   warning: false
   message: false
 ---
@@ -13,190 +13,33 @@ execute:
 library(ggplot2)
 ```
 
-# Standardfejl — hvad er det?
-
-Standardfejlen er usikkerheden på vores estimat.
-
-Den fortæller, hvor meget estimatet ville variere fra stikprøve til stikprøve.
-
-Den generelle idé er:
-
-$$
-\text{teststørrelse} = \frac{\text{estimat} - \text{hypotese}}{SE}
-$$
-
-Så når vi skal lave hypotesetest eller konfidensintervaller, er standardfejlen det afgørende led.
-
-# De vigtigste situationer
-
-## 1. Én middelværdi
-
-Hvis vi har en stikprøve med middelværdi $\bar{x}$, standardafvigelse $s$ og størrelse $n$, er standardfejlen:
-
-$$
-SE(\bar{x}) = \frac{s}{\sqrt{n}}
-$$
-
-Her er:
-
-- $s$: stikprøvens standardafvigelse
-- $n$: antal observationer
-
-Jo større $n$ er, desto mindre bliver standardfejlen.
-
-## 2. Forskel mellem to middelværdier (ikke-parret)
-
-Hvis vi sammenligner to uafhængige grupper, er estimatet forskellen mellem middelværdierne:
-
-$$
-\bar{x}_1 - \bar{x}_2
-$$
-
-Standardfejlen er:
-
-$$
-SE(\bar{x}_1 - \bar{x}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
-$$
-
-Her er:
-
-- $s_1, s_2$: standardafvigelserne i de to grupper
-- $n_1, n_2$: stikprøvestørrelserne i de to grupper
-
-Usikkerheden kommer altså fra begge grupper.
-
-## 3. Parrede målinger
-
-Ved parrede data laver vi først forskelle for hvert individ:
-
-$$
-d_i = x_i - y_i
-$$
-
-Derefter beregner vi middelværdien af forskellene:
-
-$$
-\bar{d} = \frac{1}{n}\sum_{i=1}^n d_i
-$$
-
-Standardafvigelsen af forskellene er:
-
-$$
-s_d = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (d_i - \bar{d})^2}
-$$
-
-Standardfejlen bliver så:
-
-$$
-SE(\bar{d}) = \frac{s_d}{\sqrt{n}}
-$$
-
-Det afgørende er altså, at vi arbejder med forskellene, ikke med de to måleserier hver for sig.
-
-## 4. Én andel
-
-Hvis vi estimerer en andel $p$, er standardfejlen:
-
-$$
-SE(p) = \sqrt{\frac{p(1-p)}{n}}
-$$
-
-Her er:
-
-- $p$: den observerede andel
-- $n$: stikprøvestørrelsen
-
-Variansen afhænger altså af selve andelen.
-
-## 5. Forskel mellem to andele
-
-Hvis vi sammenligner to andele, er standardfejlen:
-
-$$
-SE(p_1 - p_2) = \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}
-$$
-
-Her kommer der igen et bidrag fra hver gruppe.
-
-## 6. Odds ratio (OR)
-
-For odds ratio arbejder vi på log-skala. Standardfejlen for $\log(OR)$ er:
-
-$$
-SE(\log(OR)) = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}
-$$
-
-hvor $a$, $b$, $c$, $d$ er cellerne i en 2x2-tabel.
-
-Konfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen.
-
-## 7. Risk ratio (RR)
-
-For risk ratio arbejder vi også på log-skala. Standardfejlen for $\log(RR)$ er:
-
-$$
-SE(\log(RR)) = \sqrt{\frac{1}{a} - \frac{1}{a+b} + \frac{1}{c} - \frac{1}{c+d}}
-$$
-
-Igen er $a$, $b$, $c$, $d$ cellerne i en 2x2-tabel.
-
 # Kritiske værdier
 
-Den kritiske værdi afhænger af to ting:
+Når vi har beregnet vores testværdi - og den afhang af hvad vi ville teste, skal vi sammenligne den med _den kritiske værdi_.
+
+Den afhænger af to ting:
 
 1. hvilken fordeling vi bruger
 2. om testen er tosidet eller ensidet
 
-Den afhænger ikke af om vi tester middelværdi, andel, OR eller RR. Det er standardfejlen, der ændrer sig mellem situationerne.
+Den er uafhængig af om vi tester middelværdi, andel, OR eller RR. Det er standardfejlen, der ændrer sig mellem situationerne.
 
-## Z-fordeling
+Testværdien fortæller os hvor langt væk vi er fra null-hypotesen. Hvis vi er langt nok væk, kan vi afvise den. 
 
-Ved z-tests er de vigtigste kritiske værdier:
+Den kritiske værdi fortæller os hvor langt væk vi skal være, for at være langt nok væk.
 
-- tosidet 5%: $\pm 1.96$
-- ensidet 5%: $1.645$ eller $-1.645$
+Det kan vi illustere:
 
-I R:
+# Tosidet kritisk område
 
-```{r}
-qnorm(0.975)
-qnorm(0.95)
-qnorm(0.05)
-```
+Her tester vi om vores estimat er forskelligt fra en bestemt værdi. Eksempelvis om om forskellen på to middelværdier er forskellig fra 0. 
 
-## t-fordeling
+$H_0: \mu_1 = \mu_2$
 
-Ved t-tests afhænger den kritiske værdi af frihedsgraderne.
+$H_A: \mu_1 \neg \mu_2$
 
-For én stikprøve er frihedsgraderne typisk:
+Testværdien kan både være så stor at vi kan afvise $H_0$. Den kan også være så lille, at vi kan forkaste $H_0$ (og dermed gå med den alternative hypotese, at de to middelværdier er forskellige).
 
-$$
-df = n - 1
-$$
-
-I R:
-
-```{r}
-qt(0.975, df = 24)
-qt(0.95, df = 24)
-qt(0.05, df = 24)
-```
-
-Jo større stikprøven er, desto mere ligner t-fordelingen normalfordelingen.
-
-# Oversigt
-
-| Situation | Standardfejl | Kritisk værdi |
-|---|---|---|
-| Én middelværdi | $s / \sqrt{n}$ | t |
-| To middelværdier, ikke-parret | $\sqrt{s_1^2/n_1 + s_2^2/n_2}$ | t |
-| Parrede målinger | $s_d / \sqrt{n}$ | t |
-| Én andel | $\sqrt{p(1-p)/n}$ | z |
-| To andele | $\sqrt{p_1(1-p_1)/n_1 + p_2(1-p_2)/n_2}$ | z |
-| OR | $SE(\log(OR))$ | z |
-| RR | $SE(\log(RR))$ | z |
-
-# Illustration 1: tosidet kritisk område
 
 ```{r}
 z_crit <- qnorm(0.975)
@@ -226,7 +69,15 @@ ggplot(df_plot, aes(x, y)) +
   theme_minimal()
 ```
 
-# Illustration 2: ensidet test, større end
+# Ensidet test, større end
+
+Her tester vi om det estimat vi har fundet, er større end en bestemt værdi. 
+
+$H_0: \mu_1 = \mu_2$
+
+$H_A: \mu_1 > \mu_2$
+
+Nu gør det ikke noget at testværdien er (meget) mindre, tværtimod. Så vi forkaster $H_0$ hvis testværdien er større end den kritiske værdi. 
 
 ```{r}
 z_crit_right <- qnorm(0.95)
@@ -240,7 +91,7 @@ ggplot(df_plot, aes(x, y)) +
   geom_vline(xintercept = z_crit_right, linetype = 2, linewidth = 1) +
   annotate("text", x = z_crit_right, y = 0.35, label = "1.645", hjust = -0.1) +
   labs(
-    title = "Ensided test: større end",
+    title = "Ensidet test: større end",
     subtitle = "Vi forkaster kun i højre hale",
     x = "Teststørrelse",
     y = "Tæthed"
@@ -248,7 +99,18 @@ ggplot(df_plot, aes(x, y)) +
   theme_minimal()
 ```
 
-# Illustration 3: ensidet test, mindre end
+# Ensidet test, mindre end
+
+Her er vi interesserede i om værdien er mindre end en bestemt værdi. 
+
+Her tester vi om det estimat vi har fundet, er mindre end en bestemt værdi. 
+
+$H_0: \mu_1 = \mu_2$
+
+$H_A: \mu_1 < \mu_2$
+
+Nu gør det ikke noget at testværdien er (meget) større, tværtimod. Så vi forkaster $H_0$ hvis testværdien er mindre end den kritiske værdi.
+
 
 ```{r}
 z_crit_left <- qnorm(0.05)
@@ -270,7 +132,50 @@ ggplot(df_plot, aes(x, y)) +
   theme_minimal()
 ```
 
-# Illustration 4: t-fordeling vs normalfordeling
+
+## Z-fordeling
+
+Bruger vi når vi får at vide at vi må antage normalitet.
+
+Ved z-tests er de vigtigste kritiske værdier:
+
+- tosidet 5%: $\pm 1.96$
+- ensidet 5%: $\pm 1.645$
+
+I R:
+
+```{r echo = TRUE}
+qnorm(0.975)
+qnorm(0.95)
+qnorm(0.05)
+```
+
+## t-fordeling
+
+
+Ved t-tests afhænger den kritiske værdi af frihedsgraderne.
+
+For én stikprøve er frihedsgraderne typisk:
+
+$$
+df = n - 1
+$$
+
+Den er ikke set i eksamensopgaver. Skulle den mod forventning optræde alligevel - så er det "bare" at beregne den rigtige kritiske værdi.
+
+Det gør I i R:
+
+```{r echo  = TRUE}
+qt(0.975, df = 24)
+qt(0.95, df = 24)
+qt(0.05, df = 24)
+```
+
+Jo større stikprøven er, desto mere ligner t-fordelingen normalfordelingen. 
+
+# t-fordeling vs normalfordeling
+
+Den praktiske forskel er at halerne i t-fordelingen er "tykkere". Der ligger mere "sandsynlighed" ude i enderne, og effekten er at testværdien skal ligge længere væk fra null-hypotesen i en t-test end i en z-test for at vi må afvise den. Man kan tænke på t-fordelingen - og dermed t-testen som et mere konservativt estimat.
 
 ```{r}
 df_compare <- data.frame(
@@ -292,31 +197,5 @@ ggplot(df_compare, aes(x, y, linetype = model)) +
   theme_minimal()
 ```
 
-# Den centrale pointe
 
-Det er standardfejlen, der afhænger af situationen.
 
-Det er den kritiske værdi næsten ikke.
-
-Ved 5% niveau kan man ofte tænke:
-
-- tosidet: omkring 2
-- ensidet: omkring 1.65
-
-For middelværdier med små stikprøver bruger vi dog t-fordelingen i stedet for z-fordelingen.
-
-# Kort opsummering
-
-Når vi laver en hypotesetest, skal vi kunne tre ting:
-
-1. beregne estimatet
-2. beregne standardfejlen
-3. finde den kritiske værdi
-
-Derefter sammenligner vi:
-
-$$
-\frac{\text{estimat} - \text{hypotese}}{SE}
-$$
-
-med den kritiske værdi.
