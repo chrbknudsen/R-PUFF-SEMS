@@ -9,6 +9,8 @@ execute:
   message: false
 ---
 
+[pdf](downloads/kritiske_vaerdier.pdf){target="_blank"}
+
 ```{r}
 library(ggplot2)
 ```

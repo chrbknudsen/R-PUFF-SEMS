@@ -5,6 +5,8 @@ format:
     toc: false
 ---
 
+[pdf](downloads/standardfejl_oversigt.pdf){target="_blank"}
+
 # Standardfejl — hvad er det?
 
 Standardfejlen er usikkerheden på vores estimat.
