@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Oversigt over standardfejl – PUFF SEMS forberedelse</title>
+<title>Oversigt over kritiske værdier – PUFF SEMS forberedelse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -122,7 +157,7 @@ window.Quarto = {
 <span class="menu-text">Powerberegninger</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../slides/standardfejl_oversigt.html" aria-current="page"> 
+    <a class="nav-link" href="../slides/standardfejl_oversigt.html"> 
 <span class="menu-text">Standardfejl oversigt</span></a>
   </li>  
 </ul>
@@ -142,7 +177,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Oversigt over standardfejl</h1>
+<h1 class="title">Oversigt over kritiske værdier</h1>
 </div>
 
 
@@ -159,164 +194,130 @@ window.Quarto = {
 </header>
 
 
-<p><a href="downloads/standardfejl_oversigt.pdf" target="_blank">pdf</a></p>
-<section id="standardfejl-hvad-er-det" class="level1">
-<h1>Standardfejl — hvad er det?</h1>
-<p>Standardfejlen er usikkerheden på vores estimat.</p>
-<p>Den fortæller os, hvor meget estimatet ville variere fra stikprøve til stikprøve, hvis vi tog “tilstrækkeligt mange” stikprøver.</p>
-<p>Helt generelt gælder:</p>
-<p><span class="math display">\[
-\text{teststørrelse} = \frac{\text{estimat} - \text{hypotese}}{SE}
-\]</span></p>
-<p>Så når vi skal lave hypotesetests eller beregne konfidensintervaller, er standardfejlen det afgørende led.</p>
+<p><a href="downloads/kritiske_vaerdier.pdf" target="_blank">pdf</a></p>
+<section id="kritiske-værdier" class="level1">
+<h1>Kritiske værdier</h1>
+<p>Når vi har beregnet vores testværdi - og den afhang af hvad vi ville teste, skal vi sammenligne den med <em>den kritiske værdi</em>.</p>
+<p>Den afhænger af to ting:</p>
+<ol type="1">
+<li>hvilken fordeling vi bruger</li>
+<li>om testen er tosidet eller ensidet</li>
+</ol>
+<p>Den er uafhængig af om vi tester middelværdi, andel, OR eller RR. Det er standardfejlen, der ændrer sig mellem situationerne.</p>
+<p>Testværdien fortæller os hvor langt væk vi er fra null-hypotesen. Hvis vi er langt nok væk, kan vi afvise den.</p>
+<p>Den kritiske værdi fortæller os hvor langt væk vi skal være, for at være langt nok væk.</p>
+<p>Det kan vi illustere:</p>
 </section>
-<section id="de-vigtigste-situationer" class="level1">
-<h1>De vigtigste situationer</h1>
-<section id="én-middelværdi" class="level2">
-<h2 class="anchored" data-anchor-id="én-middelværdi">1. Én middelværdi</h2>
-<p>Hvis vi har en stikprøve med middelværdi <span class="math inline">\(\bar{x}\)</span>, standardafvigelse <span class="math inline">\(s\)</span> og størrelse <span class="math inline">\(n\)</span>, er standardfejlen:</p>
-<p><span class="math display">\[
-SE(\bar{x}) = \frac{s}{\sqrt{n}}
-\]</span></p>
-<p>Her er:</p>
+<section id="tosidet-kritisk-område" class="level1">
+<h1>Tosidet kritisk område</h1>
+<p>Her tester vi om vores estimat er forskelligt fra en bestemt værdi. Eksempelvis om om forskellen på to middelværdier er forskellig fra 0.</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></p>
+<p><span class="math inline">\(H_A: \mu_1 \neg \mu_2\)</span></p>
+<p>Testværdien kan både være så stor at vi kan afvise <span class="math inline">\(H_0\)</span>. Den kan også være så lille, at vi kan forkaste <span class="math inline">\(H_0\)</span> (og dermed gå med den alternative hypotese, at de to middelværdier er forskellige).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kritiske_vaerdier_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ensidet-test-større-end" class="level1">
+<h1>Ensidet test, større end</h1>
+<p>Her tester vi om det estimat vi har fundet, er større end en bestemt værdi.</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></p>
+<p><span class="math inline">\(H_A: \mu_1 &gt; \mu_2\)</span></p>
+<p>Nu gør det ikke noget at testværdien er (meget) mindre, tværtimod. Så vi forkaster <span class="math inline">\(H_0\)</span> hvis testværdien er større end den kritiske værdi.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kritiske_vaerdier_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ensidet-test-mindre-end" class="level1">
+<h1>Ensidet test, mindre end</h1>
+<p>Her er vi interesserede i om værdien er mindre end en bestemt værdi.</p>
+<p>Her tester vi om det estimat vi har fundet, er mindre end en bestemt værdi.</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></p>
+<p><span class="math inline">\(H_A: \mu_1 &lt; \mu_2\)</span></p>
+<p>Nu gør det ikke noget at testværdien er (meget) større, tværtimod. Så vi forkaster <span class="math inline">\(H_0\)</span> hvis testværdien er mindre end den kritiske værdi.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kritiske_vaerdier_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="z-fordeling" class="level2">
+<h2 class="anchored" data-anchor-id="z-fordeling">Z-fordeling</h2>
+<p>Bruger vi når vi får at vide at vi må antage normalitet.</p>
+<p>Ved z-tests er de vigtigste kritiske værdier:</p>
 <ul>
-<li><span class="math inline">\(s\)</span>: stikprøvens standardafvigelse</li>
-<li><span class="math inline">\(n\)</span>: antal observationer</li>
+<li>tosidet 5%: <span class="math inline">\(\pm 1.96\)</span></li>
+<li>ensidet 5%: <span class="math inline">\(\pm 1.645\)</span></li>
 </ul>
-<p>Jo større <span class="math inline">\(n\)</span> er, desto mindre bliver standardfejlen.</p>
+<p>I R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.644854</code></pre>
+</div>
+</div>
 </section>
-<section id="forskel-mellem-to-middelværdier-ikke-parret" class="level2">
-<h2 class="anchored" data-anchor-id="forskel-mellem-to-middelværdier-ikke-parret">2. Forskel mellem to middelværdier (ikke-parret)</h2>
-<p>Når vi sammenligner to uafhængige grupper, er estimatet (praktisk taget altid) forskellen mellem middelværdierne:</p>
+<section id="t-fordeling" class="level2">
+<h2 class="anchored" data-anchor-id="t-fordeling">t-fordeling</h2>
+<p>Ved t-tests afhænger den kritiske værdi af frihedsgraderne.</p>
+<p>For én stikprøve er frihedsgraderne typisk:</p>
 <p><span class="math display">\[
-\bar{x}_1 - \bar{x}_2
+df = n - 1
 \]</span></p>
-<p>Standardfejlen er:</p>
-<p><span class="math display">\[
-SE(\bar{x}_1 - \bar{x}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
-\]</span></p>
-<p>Vi skriver ofte: <span class="math inline">\(SE_{diff}\)</span></p>
-<p>Her er:</p>
-<ul>
-<li><span class="math inline">\(s_1, s_2\)</span>: standardafvigelserne i de to grupper</li>
-<li><span class="math inline">\(n_1, n_2\)</span>: stikprøvestørrelserne i de to grupper</li>
-</ul>
-<p>Usikkerheden kommer derfor fra begge grupper.</p>
-</section>
-<section id="parrede-målinger" class="level2">
-<h2 class="anchored" data-anchor-id="parrede-målinger">3. Parrede målinger</h2>
-<p>Ved parrede data beregner vi først forskelle for hvert individ (eller hvad vi nu undersøger):</p>
-<p><span class="math display">\[
-d_i = x_i - y_i
-\]</span></p>
-<p>Derefter beregnes middelværdien af forskellene:</p>
-<p><span class="math display">\[
-\bar{d} = \frac{1}{n}\sum_{i=1}^n d_i
-\]</span></p>
-<p>Standardafvigelsen af forskellene er givet ved:</p>
-<p><span class="math display">\[
-s_d = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (d_i - \bar{d})^2}
-\]</span></p>
-<p>Standardfejlen bliver så:</p>
-<p><span class="math display">\[
-SE(\bar{d}) = \frac{s_d}{\sqrt{n}}
-\]</span></p>
-<p>Det afgørende er altså, at vi arbejder med forskellene, ikke med de to måleserier hver for sig. I eksamenssituationer vil vi normalt få oplyst standardafvigelsen og antallet af observationer, og skal så beregne standardfejlen selv.</p>
-</section>
-<section id="én-andel" class="level2">
-<h2 class="anchored" data-anchor-id="én-andel">4. Én andel</h2>
-<p>Når vi estimerer en andel <span class="math inline">\(p\)</span>, er standardfejlen givet ved:</p>
-<p><span class="math display">\[
-SE(p) = \sqrt{\frac{p(1-p)}{n}}
-\]</span></p>
-<p>Her er:</p>
-<ul>
-<li><span class="math inline">\(p\)</span>: den observerede andel</li>
-<li><span class="math inline">\(n\)</span>: stikprøvestørrelsen</li>
-</ul>
-<p>Standardfejlen afhænger altså af selve andelen.</p>
-</section>
-<section id="forskel-mellem-to-andele" class="level2">
-<h2 class="anchored" data-anchor-id="forskel-mellem-to-andele">5. Forskel mellem to andele</h2>
-<p>Når vi sammenligner to andele, er standardfejlen givet ved:</p>
-<p><span class="math display">\[
-SE(p_1 - p_2) = \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}
-\]</span></p>
-<p>Her er der igen bidrag fra begge grupper.</p>
-</section>
-<section id="odds-ratio-or" class="level2">
-<h2 class="anchored" data-anchor-id="odds-ratio-or">6. Odds ratio (OR)</h2>
-<p>For odds ratio arbejder vi på log-skala. Standardfejlen for <span class="math inline">\(\log(OR)\)</span> er:</p>
-<p><span class="math display">\[
-SE(\log(OR)) = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}
-\]</span></p>
-<p>hvor <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span> er cellerne i en 2x2-tabel.</p>
-<p>Konfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen. En klassisk fejl er at glemme at logaritmere estimatet.</p>
-</section>
-<section id="risk-ratio-rr" class="level2">
-<h2 class="anchored" data-anchor-id="risk-ratio-rr">7. Risk ratio (RR)</h2>
-<p>For risk ratio arbejder vi også på log-skala. Standardfejlen for <span class="math inline">\(\log(RR)\)</span> er:</p>
-<p><span class="math display">\[
-SE(\log(RR)) = \sqrt{\frac{1}{a} - \frac{1}{a+b} + \frac{1}{c} - \frac{1}{c+d}}
-\]</span></p>
-<p>Igen er <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span> cellerne i en 2x2-tabel.</p>
-<p>Konfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen. En klassisk fejl er at glemme at logaritmere estimatet.</p>
-<section id="hvad-er-hvad" class="level3">
-<h3 class="anchored" data-anchor-id="hvad-er-hvad">Hvad er hvad?</h3>
-<p>Vi antager en 2x2-tabel af formen:</p>
-<p><span class="math display">\[
-\begin{array}{c|cc}
-&amp; \text{Udfald}=1 &amp; \text{Udfald}=0 \\
-\hline
-\text{Eksponeret} &amp; a &amp; b \\
-\text{Ikke-eksponeret} &amp; c &amp; d
-\end{array}
-\]</span></p>
-<p>Her er risikoen i den eksponerede gruppe:</p>
-<p><span class="math display">\[
-\frac{a}{a+b}
-\]</span></p>
-<p>og risikoen i den ikke-eksponerede gruppe:</p>
-<p><span class="math display">\[
-\frac{c}{c+d}
-\]</span></p>
+<p>Den er ikke set i eksamensopgaver. Skulle den mod forventning optræde alligevel - så er det “bare” at beregne den rigtige kritiske værdi.</p>
+<p>Det gør I i R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.063899</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.710882</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.710882</code></pre>
+</div>
+</div>
+<p>Jo større stikprøven er, desto mere ligner t-fordelingen normalfordelingen.</p>
 </section>
 </section>
-</section>
-<section id="det-gennemgående-mønster" class="level1">
-<h1>Det gennemgående mønster</h1>
-<p>Ideen er den samme uanset situationen:</p>
-<ul>
-<li>mere variation giver større standardfejl</li>
-<li>større stikprøver giver mindre standardfejl</li>
-</ul>
-<p>Man kan tænke det som:</p>
-<p><span class="math display">\[
-\text{standardfejl} \approx \frac{\text{spredning}}{\text{mængde data}}
-\]</span></p>
-</section>
-<section id="kobling-til-hypotesetest" class="level1">
-<h1>Kobling til hypotesetest</h1>
-<p>Når vi har et estimat og dets standardfejl, kan vi beregne en teststørrelse:</p>
-<p><span class="math display">\[
-\frac{\text{estimat} - \text{hypotetisk værdi}}{SE}
-\]</span></p>
-<p>Det er den grundidé, der går igen i:</p>
-<ul>
-<li>z-tests</li>
-<li>t-tests</li>
-<li>tests for andele</li>
-<li>tests for OR og RR</li>
-</ul>
-</section>
-<section id="kort-opsummering" class="level1">
-<h1>Kort opsummering</h1>
-<p>Det centrale er:</p>
-<ul>
-<li>først finder vi det rigtige estimat</li>
-<li>derefter finder vi standardfejlen for netop dét estimat</li>
-<li>så kan vi lave hypotesetest og konfidensintervaller</li>
-</ul>
+<section id="t-fordeling-vs-normalfordeling" class="level1">
+<h1>t-fordeling vs normalfordeling</h1>
+<p>Den praktiske forskel er at halerne i t-fordelingen er “tykkere”. Der ligger mere “sandsynlighed” ude i enderne, og effekten er at testværdien skal ligge længere væk fra null-hypotesen i en t-test end i en z-test for at vi må afvise den. Man kan tænke på t-fordelingen - og dermed t-testen som et mere konservativt estimat.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kritiske_vaerdier_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
