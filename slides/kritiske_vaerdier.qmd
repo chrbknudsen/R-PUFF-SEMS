@@ -1,0 +1,203 @@
+---
+title: "Oversigt over kritiske værdier"
+format:
+  html:
+    toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[pdf](downloads/kritiske_vaerdier.pdf){target="_blank"}
+
+```{r}
+library(ggplot2)
+```
+
+# Kritiske værdier
+
+Når vi har beregnet vores testværdi - og den afhang af hvad vi ville teste, skal vi sammenligne den med _den kritiske værdi_.
+
+Den afhænger af to ting:
+
+1. hvilken fordeling vi bruger
+2. om testen er tosidet eller ensidet
+
+Den er uafhængig af om vi tester middelværdi, andel, OR eller RR. Det er standardfejlen, der ændrer sig mellem situationerne.
+
+Testværdien fortæller os hvor langt væk vi er fra null-hypotesen. Hvis vi er langt nok væk, kan vi afvise den. 
+
+Den kritiske værdi fortæller os hvor langt væk vi skal være, for at være langt nok væk.
+
+Det kan vi illustere:
+
+# Tosidet kritisk område
+
+Her tester vi om vores estimat er forskelligt fra en bestemt værdi. Eksempelvis om om forskellen på to middelværdier er forskellig fra 0. 
+
+$H_0: \mu_1 = \mu_2$
+
+$H_A: \mu_1 \neg \mu_2$
+
+Testværdien kan både være så stor at vi kan afvise $H_0$. Den kan også være så lille, at vi kan forkaste $H_0$ (og dermed gå med den alternative hypotese, at de to middelværdier er forskellige).
+
+
+```{r}
+z_crit <- qnorm(0.975)
+
+df_plot <- data.frame(x = seq(-4, 4, length.out = 1000))
+df_plot$y <- dnorm(df_plot$x)
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x <= -z_crit),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_area(
+    data = subset(df_plot, x >= z_crit),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = c(-z_crit, z_crit), linetype = 2, linewidth = 1) +
+  annotate("text", x = -z_crit, y = 0.35, label = "-1.96", hjust = 1.1) +
+  annotate("text", x = z_crit, y = 0.35, label = "1.96", hjust = -0.1) +
+  labs(
+    title = "Tosidet test, 5% signifikansniveau",
+    subtitle = "De røde områder er forkastningsområderne",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
+
+# Ensidet test, større end
+
+Her tester vi om det estimat vi har fundet, er større end en bestemt værdi. 
+
+$H_0: \mu_1 = \mu_2$
+
+$H_A: \mu_1 > \mu_2$
+
+Nu gør det ikke noget at testværdien er (meget) mindre, tværtimod. Så vi forkaster $H_0$ hvis testværdien er større end den kritiske værdi. 
+
+```{r}
+z_crit_right <- qnorm(0.95)
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x >= z_crit_right),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = z_crit_right, linetype = 2, linewidth = 1) +
+  annotate("text", x = z_crit_right, y = 0.35, label = "1.645", hjust = -0.1) +
+  labs(
+    title = "Ensidet test: større end",
+    subtitle = "Vi forkaster kun i højre hale",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
+
+# Ensidet test, mindre end
+
+Her er vi interesserede i om værdien er mindre end en bestemt værdi. 
+
+Her tester vi om det estimat vi har fundet, er mindre end en bestemt værdi. 
+
+$H_0: \mu_1 = \mu_2$
+
+$H_A: \mu_1 < \mu_2$
+
+Nu gør det ikke noget at testværdien er (meget) større, tværtimod. Så vi forkaster $H_0$ hvis testværdien er mindre end den kritiske værdi.
+
+
+```{r}
+z_crit_left <- qnorm(0.05)
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(linewidth = 1) +
+  geom_area(
+    data = subset(df_plot, x <= z_crit_left),
+    fill = "red", alpha = 0.25
+  ) +
+  geom_vline(xintercept = z_crit_left, linetype = 2, linewidth = 1) +
+  annotate("text", x = z_crit_left, y = 0.35, label = "-1.645", hjust = 1.1) +
+  labs(
+    title = "Ensided test: mindre end",
+    subtitle = "Vi forkaster kun i venstre hale",
+    x = "Teststørrelse",
+    y = "Tæthed"
+  ) +
+  theme_minimal()
+```
+
+
+## Z-fordeling
+
+Bruger vi når vi får at vide at vi må antage normalitet.
+
+Ved z-tests er de vigtigste kritiske værdier:
+
+- tosidet 5%: $\pm 1.96$
+- ensidet 5%: $\pm 1.645$
+
+I R:
+
+```{r echo = TRUE}
+qnorm(0.975)
+qnorm(0.95)
+qnorm(0.05)
+```
+
+## t-fordeling
+
+
+Ved t-tests afhænger den kritiske værdi af frihedsgraderne.
+
+For én stikprøve er frihedsgraderne typisk:
+
+$$
+df = n - 1
+$$
+
+Den er ikke set i eksamensopgaver. Skulle den mod forventning optræde alligevel - så er det "bare" at beregne den rigtige kritiske værdi.
+
+Det gør I i R:
+
+```{r echo  = TRUE}
+qt(0.975, df = 24)
+qt(0.95, df = 24)
+qt(0.05, df = 24)
+```
+
+Jo større stikprøven er, desto mere ligner t-fordelingen normalfordelingen. 
+
+# t-fordeling vs normalfordeling
+
+Den praktiske forskel er at halerne i t-fordelingen er "tykkere". Der ligger mere "sandsynlighed" ude i enderne, og effekten er at testværdien skal ligge længere væk fra null-hypotesen i en t-test end i en z-test for at vi må afvise den. Man kan tænke på t-fordelingen - og dermed t-testen som et mere konservativt estimat.
+
+```{r}
+df_compare <- data.frame(
+  x = rep(seq(-4, 4, length.out = 1000), 2),
+  y = c(dt(seq(-4, 4, length.out = 1000), df = 5),
+        dnorm(seq(-4, 4, length.out = 1000))),
+  model = rep(c("t-fordeling, df = 5", "normalfordeling"), each = 1000)
+)
+
+ggplot(df_compare, aes(x, y, linetype = model)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "t-fordeling og normalfordeling",
+    subtitle = "Ved få frihedsgrader har t-fordelingen tykkere haler",
+    x = "Teststørrelse",
+    y = "Tæthed",
+    linetype = ""
+  ) +
+  theme_minimal()
+```
+
+
+

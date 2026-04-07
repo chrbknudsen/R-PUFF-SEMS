@@ -8,3 +8,5 @@ website:
     left:
       - text: "Powerberegninger"
         href: slides/powerberegninger_notat.html
+      - text: "Standardfejl oversigt"
+        href: slides/standardfejl_oversigt.html

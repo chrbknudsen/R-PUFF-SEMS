@@ -1586,7 +1586,7 @@
     "href": "slides/SEM.html#hypotesetest",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hypotesetest",
-    "text": "Hypotesetest\nDen hypotese I typisk bliver bedt om at teste er:\nEr denne værdi i virkeligheden 0?\nVi måler blodtryk for en gruppe der får betablokkere. Og en gruppe der får et placebo.\nVi vil typisk se en forskel. Er den forskel i virkeligheden udtryk for en tilfældig variation, og kunne den lige så godt være 0?\nVi opstiller en null-hypotese, og en alternativ hypotese.\nnull-hypotesen er: der er ingen effekt af medicinen, blodtrykket ændrer sig ikke. Den alternative hypotese er - der er en effekt.\nDer hvor vi skal holde tungen lige i munden er, at vi ikke kan vise at der er en effekt. Men vi kan statistisk afvise null-hypotesen.\nDet kan vi gøre med en vis sikkerhed.\n\nvi har et estimat på en “sand” middelværdi. Vi har også en spredning (SEM) på det estimat. 95% af observationerne ligger inden for +/- 1.96 gange den spredning. Hvis 0 ligger inden for det interval, kan vi ikke afvise at den sande værdi er 0.\ndet bruger vi til at få en p-værdi. Den udtrykker risikoen for at vi tager fejl når vi afviser null-hypotesen. Vi kan sjælden være 100% sikre. Men vi kan være 95% sikre. og det er vi typisk tilfredse med. Men er vi 95% sikre, er der stadig 5% risiko for at vi tager fejl. Det kalder vi ofte for en type 1 fejl. Den er falsk positiv. Vi tror vi ser en effekt, men den er der faktisk ikke.\nDer findes også en type 2 fejl. det er det der sker når vi konkluderer at der ikke er en effekt fordi 0 er indeholdt i intervallet. men at der faktisk er en effekt. det er en falsk negativ. Vi konkluderer at medicinen ikke har en virking. Men det har den!\nSandsynligheden for at begå en type 2 fejl kalder vi beta. type 1 kalder vi \\(\\alpha\\). Det hænger sammen med power."
+    "text": "Hypotesetest\nHvad er en hypotese?\nEn hypotese er en påstand om den sande, men ukendte værdi i populationen.\nI det foregående eksempel kunne det være: Der er forskel på plasma Magnesium for diabetikere og ikke-diabetikere.\nVi opstiller altid to hypoteser:\nH_0 - der er ingen forskel\nH_a - der er forskel.\nVores test kan afvise H_0. Det betyder at data ikke er forenelige med H_0. Eller ikke forkaste H_0. Det betyder at data er forenelige med H_0.\nBemærk at vi ikke accepterer H_0. Vi kan kun undlade at forkaste den.\nDet vil vi gøre med en vis sikkerhed eller risiko.\nSå vi vælger et signifikansniveau alpha, som er risikoen for at forkaste H_0, selvom H_0 er sand.\nalpha = 0.05 er meget populært.\nNår vi har opstillet vores hypotese, beregner vi en teststørrelse\ntest = estimat-hypotese /SE\nog sammenligner med den kritiske værdi.\nDen kritiske værdi angiver hvor ekstrem teststørrelsen må være, hvis H_0 er sand.\nFor at gøre alt det, skal vi træffe tre valg:\n\nHvad er det vi tester? Em middelværdi En forskel på to middelværdier (senere; andele og ratioer RR/OR)\n\nHvordan er vores data: En gruppe? To grupper Hvis der er to grupper, er de parrede eller ikke parrede?\nRetningen Er værdierne forskellige - tosidet Er den ene større end den anden - ensidet.\nHypotesetest = afstand fra hypotese målt i standardfejl\nEller: test = signal/støj. Hvor støjen er standardfejlen."
   },
   {
     "objectID": "slides/SEM.html#eller",
@@ -1783,5 +1783,159 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvordan beregner vi så det?",
     "text": "Hvordan beregner vi så det?\nDa vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.\nStandardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.\nIkke hvordan middelværdierne fra mange stikprøver afviger.\nVi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi ” “Standard Error of the Mean”. SEM blandt venner.\nOg vi beregner vi ved\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\n\nIntuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok."
+  },
+  {
+    "objectID": "slides/SEM.html#testværdi",
+    "href": "slides/SEM.html#testværdi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Testværdi",
+    "text": "Testværdi\nVi beregnede et 95% KI for plasma-magnesium for diabetikere til:\n[0.7101539, 0.7278461] og SEM var 0.004513319 0.719\nDet betyder - 95% af de gange vi beregner en middelværdi af plasma-magnesium for diabetikere, vil værdien ligge indenfor det interval.\nEr 0.73 indeholdt? Eller - ligger det for langt fra middelværdien på 0.719 til at det er med?\nDet kan vi se. Vi kan også se at (0.73-0.719)/0.004513319 = 2.437231\nDet svarer til at sige at\n0.73 = 0.719 + 2.437*SEM\nVi kalder 2.437231 for testværdien. Den kritiske værdi ved 95% er 1.96. Er 2.437 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra middelværdien. Og så er den ikke indeholdt i de 95%."
+  },
+  {
+    "objectID": "slides/SEM.html#estimatet",
+    "href": "slides/SEM.html#estimatet",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Estimatet",
+    "text": "Estimatet\nMiddelværdien ved vi godt hvordan vi beregner\nTil eksamen skal vi ikke selv beregne den.\nForskellen på middelværdier beregnes ved at trække den ene fra den anden.\nTil eksamen får vi den enten oplyst direkte. Eller også får vi de to middelværdier oplyst, og så trækker vi den ene fra den anden."
+  },
+  {
+    "objectID": "slides/SEM.html#standardfejlen",
+    "href": "slides/SEM.html#standardfejlen",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Standardfejlen",
+    "text": "Standardfejlen\nAfhænger af testen.\nFor en enkelt middelværdi"
+  },
+  {
+    "objectID": "slides/SEM.html#den-kritiske-værdi",
+    "href": "slides/SEM.html#den-kritiske-værdi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den kritiske værdi",
+    "text": "Den kritiske værdi\nHvis kriteriet alpha = 0.05, så leder vi efter"
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html",
+    "href": "slides/standardfejl_oversigt.html",
+    "title": "Oversigt over standardfejl",
+    "section": "",
+    "text": "Standardfejlen er usikkerheden på vores estimat.\nDen fortæller os, hvor meget estimatet ville variere fra stikprøve til stikprøve, hvis vi tog “tilstrækkeligt mange” stikprøver.\nHelt generelt gælder:\n\\[\n\\text{teststørrelse} = \\frac{\\text{estimat} - \\text{hypotese}}{SE}\n\\]\nSå når vi skal lave hypotesetests eller beregne konfidensintervaller, er standardfejlen det afgørende led."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#én-middelværdi",
+    "href": "slides/standardfejl_oversigt.html#én-middelværdi",
+    "title": "Oversigt over standardfejl",
+    "section": "1. Én middelværdi",
+    "text": "1. Én middelværdi\nHvis vi har en stikprøve med middelværdi \\(\\bar{x}\\), standardafvigelse \\(s\\) og størrelse \\(n\\), er standardfejlen:\n\\[\nSE(\\bar{x}) = \\frac{s}{\\sqrt{n}}\n\\]\nHer er:\n\n\\(s\\): stikprøvens standardafvigelse\n\\(n\\): antal observationer\n\nJo større \\(n\\) er, desto mindre bliver standardfejlen."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#forskel-mellem-to-middelværdier-ikke-parret",
+    "href": "slides/standardfejl_oversigt.html#forskel-mellem-to-middelværdier-ikke-parret",
+    "title": "Oversigt over standardfejl",
+    "section": "2. Forskel mellem to middelværdier (ikke-parret)",
+    "text": "2. Forskel mellem to middelværdier (ikke-parret)\nNår vi sammenligner to uafhængige grupper, er estimatet (praktisk taget altid) forskellen mellem middelværdierne:\n\\[\n\\bar{x}_1 - \\bar{x}_2\n\\]\nStandardfejlen er:\n\\[\nSE(\\bar{x}_1 - \\bar{x}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\n\\]\nVi skriver ofte: \\(SE_{diff}\\)\nHer er:\n\n\\(s_1, s_2\\): standardafvigelserne i de to grupper\n\\(n_1, n_2\\): stikprøvestørrelserne i de to grupper\n\nUsikkerheden kommer derfor fra begge grupper."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#parrede-målinger",
+    "href": "slides/standardfejl_oversigt.html#parrede-målinger",
+    "title": "Oversigt over standardfejl",
+    "section": "3. Parrede målinger",
+    "text": "3. Parrede målinger\nVed parrede data beregner vi først forskelle for hvert individ (eller hvad vi nu undersøger):\n\\[\nd_i = x_i - y_i\n\\]\nDerefter beregnes middelværdien af forskellene:\n\\[\n\\bar{d} = \\frac{1}{n}\\sum_{i=1}^n d_i\n\\]\nStandardafvigelsen af forskellene er givet ved:\n\\[\ns_d = \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^n (d_i - \\bar{d})^2}\n\\]\nStandardfejlen bliver så:\n\\[\nSE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\n\\]\nDet afgørende er altså, at vi arbejder med forskellene, ikke med de to måleserier hver for sig. I eksamenssituationer vil vi normalt få oplyst standardafvigelsen og antallet af observationer, og skal så beregne standardfejlen selv."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#én-andel",
+    "href": "slides/standardfejl_oversigt.html#én-andel",
+    "title": "Oversigt over standardfejl",
+    "section": "4. Én andel",
+    "text": "4. Én andel\nNår vi estimerer en andel \\(p\\), er standardfejlen givet ved:\n\\[\nSE(p) = \\sqrt{\\frac{p(1-p)}{n}}\n\\]\nHer er:\n\n\\(p\\): den observerede andel\n\\(n\\): stikprøvestørrelsen\n\nStandardfejlen afhænger altså af selve andelen."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#forskel-mellem-to-andele",
+    "href": "slides/standardfejl_oversigt.html#forskel-mellem-to-andele",
+    "title": "Oversigt over standardfejl",
+    "section": "5. Forskel mellem to andele",
+    "text": "5. Forskel mellem to andele\nNår vi sammenligner to andele, er standardfejlen givet ved:\n\\[\nSE(p_1 - p_2) = \\sqrt{\\frac{p_1(1-p_1)}{n_1} + \\frac{p_2(1-p_2)}{n_2}}\n\\]\nHer er der igen bidrag fra begge grupper."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#odds-ratio-or",
+    "href": "slides/standardfejl_oversigt.html#odds-ratio-or",
+    "title": "Oversigt over standardfejl",
+    "section": "6. Odds ratio (OR)",
+    "text": "6. Odds ratio (OR)\nFor odds ratio arbejder vi på log-skala. Standardfejlen for \\(\\log(OR)\\) er:\n\\[\nSE(\\log(OR)) = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}\n\\]\nhvor \\(a\\), \\(b\\), \\(c\\), \\(d\\) er cellerne i en 2x2-tabel.\nKonfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen. En klassisk fejl er at glemme at logaritmere estimatet."
+  },
+  {
+    "objectID": "slides/standardfejl_oversigt.html#risk-ratio-rr",
+    "href": "slides/standardfejl_oversigt.html#risk-ratio-rr",
+    "title": "Oversigt over standardfejl",
+    "section": "7. Risk ratio (RR)",
+    "text": "7. Risk ratio (RR)\nFor risk ratio arbejder vi også på log-skala. Standardfejlen for \\(\\log(RR)\\) er:\n\\[\nSE(\\log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a+b} + \\frac{1}{c} - \\frac{1}{c+d}}\n\\]\nIgen er \\(a\\), \\(b\\), \\(c\\), \\(d\\) cellerne i en 2x2-tabel.\nKonfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen. En klassisk fejl er at glemme at logaritmere estimatet.\n\nHvad er hvad?\nVi antager en 2x2-tabel af formen:\n\\[\n\\begin{array}{c|cc}\n& \\text{Udfald}=1 & \\text{Udfald}=0 \\\\\n\\hline\n\\text{Eksponeret} & a & b \\\\\n\\text{Ikke-eksponeret} & c & d\n\\end{array}\n\\]\nHer er risikoen i den eksponerede gruppe:\n\\[\n\\frac{a}{a+b}\n\\]\nog risikoen i den ikke-eksponerede gruppe:\n\\[\n\\frac{c}{c+d}\n\\]"
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html",
+    "title": "Oversigt over kritiske værdier",
+    "section": "",
+    "text": "Når vi har beregnet vores testværdi - og den afhang af hvad vi ville teste, skal vi sammenligne den med den kritiske værdi.\nDen afhænger af to ting:\n\nhvilken fordeling vi bruger\nom testen er tosidet eller ensidet\n\nDen er uafhængig af om vi tester middelværdi, andel, OR eller RR. Det er standardfejlen, der ændrer sig mellem situationerne.\nTestværdien fortæller os hvor langt væk vi er fra null-hypotesen. Hvis vi er langt nok væk, kan vi afvise den.\nDen kritiske værdi fortæller os hvor langt væk vi skal være, for at være langt nok væk.\nDet kan vi illustere:"
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#én-middelværdi",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#én-middelværdi",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "1. Én middelværdi",
+    "text": "1. Én middelværdi\nHvis vi har en stikprøve med middelværdi \\(\\bar{x}\\), standardafvigelse \\(s\\) og størrelse \\(n\\), er standardfejlen:\n\\[\nSE(\\bar{x}) = \\frac{s}{\\sqrt{n}}\n\\]\nHer er:\n\n\\(s\\): stikprøvens standardafvigelse\n\\(n\\): antal observationer\n\nJo større \\(n\\) er, desto mindre bliver standardfejlen."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#forskel-mellem-to-middelværdier-ikke-parret",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#forskel-mellem-to-middelværdier-ikke-parret",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "2. Forskel mellem to middelværdier (ikke-parret)",
+    "text": "2. Forskel mellem to middelværdier (ikke-parret)\nHvis vi sammenligner to uafhængige grupper, er estimatet forskellen mellem middelværdierne:\n\\[\n\\bar{x}_1 - \\bar{x}_2\n\\]\nStandardfejlen er:\n\\[\nSE(\\bar{x}_1 - \\bar{x}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\n\\]\nHer er:\n\n\\(s_1, s_2\\): standardafvigelserne i de to grupper\n\\(n_1, n_2\\): stikprøvestørrelserne i de to grupper\n\nUsikkerheden kommer altså fra begge grupper."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#parrede-målinger",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#parrede-målinger",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "3. Parrede målinger",
+    "text": "3. Parrede målinger\nVed parrede data laver vi først forskelle for hvert individ:\n\\[\nd_i = x_i - y_i\n\\]\nDerefter beregner vi middelværdien af forskellene:\n\\[\n\\bar{d} = \\frac{1}{n}\\sum_{i=1}^n d_i\n\\]\nStandardafvigelsen af forskellene er:\n\\[\ns_d = \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^n (d_i - \\bar{d})^2}\n\\]\nStandardfejlen bliver så:\n\\[\nSE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\n\\]\nDet afgørende er altså, at vi arbejder med forskellene, ikke med de to måleserier hver for sig."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#én-andel",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#én-andel",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "4. Én andel",
+    "text": "4. Én andel\nHvis vi estimerer en andel \\(p\\), er standardfejlen:\n\\[\nSE(p) = \\sqrt{\\frac{p(1-p)}{n}}\n\\]\nHer er:\n\n\\(p\\): den observerede andel\n\\(n\\): stikprøvestørrelsen\n\nVariansen afhænger altså af selve andelen."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#forskel-mellem-to-andele",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#forskel-mellem-to-andele",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "5. Forskel mellem to andele",
+    "text": "5. Forskel mellem to andele\nHvis vi sammenligner to andele, er standardfejlen:\n\\[\nSE(p_1 - p_2) = \\sqrt{\\frac{p_1(1-p_1)}{n_1} + \\frac{p_2(1-p_2)}{n_2}}\n\\]\nHer kommer der igen et bidrag fra hver gruppe."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#odds-ratio-or",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#odds-ratio-or",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "6. Odds ratio (OR)",
+    "text": "6. Odds ratio (OR)\nFor odds ratio arbejder vi på log-skala. Standardfejlen for \\(\\log(OR)\\) er:\n\\[\nSE(\\log(OR)) = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}\n\\]\nhvor \\(a\\), \\(b\\), \\(c\\), \\(d\\) er cellerne i en 2x2-tabel.\nKonfidensinterval og test laves på log-skala og kan bagefter transformeres tilbage ved at tage exponentialfunktionen."
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#risk-ratio-rr",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#risk-ratio-rr",
+    "title": "Oversigt over standardfejl og kritiske værdier",
+    "section": "7. Risk ratio (RR)",
+    "text": "7. Risk ratio (RR)\nFor risk ratio arbejder vi også på log-skala. Standardfejlen for \\(\\log(RR)\\) er:\n\\[\nSE(\\log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a+b} + \\frac{1}{c} - \\frac{1}{c+d}}\n\\]\nIgen er \\(a\\), \\(b\\), \\(c\\), \\(d\\) cellerne i en 2x2-tabel.\n\nHvad er hvad?\nVi antager en 2x2-tabel af formen:\n\\[\n\\begin{array}{c|cc}\n& \\text{Udfald}=1 & \\text{Udfald}=0 \\\\\n\\hline\n\\text{Eksponeret} & a & b \\\\\n\\text{Ikke-eksponeret} & c & d\n\\end{array}\n\\]\nHer er risikoen i den eksponerede gruppe:\n\\[\n\\frac{a}{a+b}\n\\]\nog risikoen i den ikke-eksponerede gruppe:\n\\[\n\\frac{c}{c+d}\n\\]"
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#z-fordeling",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#z-fordeling",
+    "title": "Oversigt over kritiske værdier",
+    "section": "Z-fordeling",
+    "text": "Z-fordeling\nBruger vi når vi får at vide at vi må antage normalitet.\nVed z-tests er de vigtigste kritiske værdier:\n\ntosidet 5%: \\(\\pm 1.96\\)\nensidet 5%: \\(\\pm 1.645\\)\n\nI R:\n\nqnorm(0.975)\n\n[1] 1.959964\n\nqnorm(0.95)\n\n[1] 1.644854\n\nqnorm(0.05)\n\n[1] -1.644854"
+  },
+  {
+    "objectID": "slides/standardfejl_og_kritiske_vaerdier.html#t-fordeling",
+    "href": "slides/standardfejl_og_kritiske_vaerdier.html#t-fordeling",
+    "title": "Oversigt over kritiske værdier",
+    "section": "t-fordeling",
+    "text": "t-fordeling\nVed t-tests afhænger den kritiske værdi af frihedsgraderne.\nFor én stikprøve er frihedsgraderne typisk:\n\\[\ndf = n - 1\n\\]\nDen er ikke set i eksamensopgaver. Skulle den mod forventning optræde alligevel - så er det “bare” at beregne den rigtige kritiske værdi.\nDet gør I i R:\n\nqt(0.975, df = 24)\n\n[1] 2.063899\n\nqt(0.95, df = 24)\n\n[1] 1.710882\n\nqt(0.05, df = 24)\n\n[1] -1.710882\n\n\nJo større stikprøven er, desto mere ligner t-fordelingen normalfordelingen."
   }
 ]
