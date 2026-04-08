@@ -40,9 +40,6 @@ jobs:
       - name: Install TinyTeX
         run: quarto install tinytex --update-path
 
-      - name: Install DeckTape
-        run: npm install -g decktape
-
       - name: Render Quarto site
         run: quarto render
 
@@ -50,55 +47,56 @@ jobs:
         run: |
           find docs -maxdepth 5 -type f | sort
 
-      - name: Create PDFs from source qmd files
+      - name: Install DeckTape
+        run: npm install -g decktape
+
+      - name: Create PDFs from rendered HTML
         run: |
-          set -euo pipefail
-
           mkdir -p docs/downloads
-          mkdir -p _pdf_tmp
 
-          shopt -s nullglob
-          for qmd in slides/*.qmd; do
-            base="$(basename "${qmd%.qmd}")"
+          find docs/slides -type f -name "*.html" | while read -r html; do
+            rel="${html#docs/}"
+            qmd="${rel%.html}.qmd"
+            base="$(basename "${html%.html}")"
+
             pdf="docs/downloads/${base}.pdf"
-            tmp_html="_pdf_tmp/${base}.html"
+            tmp_pdf="${base}.pdf"
+            docs_pdf="docs/${base}.pdf"
+            slides_pdf="slides/${base}.pdf"
 
             echo "----------------------------------------"
-            echo "QMD: $qmd"
-            echo "PDF: $pdf"
+            echo "HTML:   $html"
+            echo "QMD:    $qmd"
+            echo "TARGET: $pdf"
 
-            if grep -Eq '^[[:space:]]*revealjs:' "$qmd" || \
-               grep -Eq '^[[:space:]]*format:[[:space:]]*revealjs[[:space:]]*$' "$qmd"; then
-
-              echo "Detected revealjs source -> render temporary HTML + DeckTape"
-
-              quarto render "$qmd" \
-                --to revealjs \
-                --output-dir "_pdf_tmp" \
-                --output "${base}.html"
-
-              if [ ! -f "$tmp_html" ]; then
-                echo "Temporary reveal HTML was not produced: $tmp_html"
-                exit 1
-              fi
+            if grep -q 'class="reveal"' "$html" || grep -q 'Reveal.initialize' "$html"; then
+              echo "Detected revealjs -> using DeckTape"
 
               decktape \
                 --chrome-arg=--no-sandbox \
                 --chrome-arg=--disable-dev-shm-usage \
                 reveal \
-                "file://$GITHUB_WORKSPACE/$tmp_html" \
+                "file://$GITHUB_WORKSPACE/$html" \
                 "$pdf"
 
             else
-              echo "Detected ordinary qmd page -> render directly to PDF"
+              echo "Detected ordinary HTML page -> using Quarto PDF"
 
-              quarto render "$qmd" \
-                --to pdf \
-                --output-dir "docs/downloads" \
-                --output "${base}.pdf"
+              quarto render "$qmd" --to pdf --output "$tmp_pdf"
 
-              if [ ! -f "$pdf" ]; then
+              if [ -f "$tmp_pdf" ]; then
+                mv "$tmp_pdf" "$pdf"
+              elif [ -f "$slides_pdf" ]; then
+                mv "$slides_pdf" "$pdf"
+              elif [ -f "$docs_pdf" ]; then
+                mv "$docs_pdf" "$pdf"
+              else
                 echo "PDF was not produced for $qmd"
+                echo "Checked:"
+                echo "  $tmp_pdf"
+                echo "  $slides_pdf"
+                echo "  $docs_pdf"
+                find . -maxdepth 3 -type f -name "*.pdf" | sort
                 exit 1
               fi
             fi
