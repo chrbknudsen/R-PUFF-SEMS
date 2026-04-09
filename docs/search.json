@@ -1628,7 +1628,7 @@
     "href": "slides/SEM.html#en-anden-eksamensopgave---forskel-på-middelværdier",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "En anden eksamensopgave - forskel på middelværdier",
-    "text": "En anden eksamensopgave - forskel på middelværdier\nVi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.\nVi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82       152.      18.4\n2 Placebo       90       156.      19.1\n\n\nmå\nVi har to samples. Så vi bruger two-sample t-test. Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.\n\\(H_0: \\mu_1 - \\mu_2 = 0\\)\nVi har to grupper - så vi skal have beregnet den poolede standardfejl:\n\n\n[1] 2.860459\n\n\net 95% konfidensinterval for forskellen er derfor:\n4 +/- 1.96*s.e\nDa det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.\ntestværdien:"
+    "text": "En anden eksamensopgave - forskel på middelværdier\nVi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.\nVi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82       152.      18.4\n2 Placebo       90       156.      19.1\n\n\nmå\nVi har to samples. Så vi bruger two-sample t-test. Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.\n\\(H_0: \\mu_1 - \\mu_2 = 0\\)\nVi har to grupper - så vi skal have beregnet den samlede standardfejl:\n\n\n[1] 2.860459\n\n\net 95% konfidensinterval for forskellen er derfor:\n4 +/- 1.96*s.e\nDa det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.\ntestværdien:"
   },
   {
     "objectID": "slides/SEM.html#videre---ønsket-størrelse-af-konfidensinterval",
@@ -1761,7 +1761,7 @@
     "href": "slides/SEM.html#hvordan-hjælper-det-os",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvordan hjælper det os?",
-    "text": "Hvordan hjælper det os?\nHvis vi kender spredningen på stikprøvens middelværdier.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
+    "text": "Hvordan hjælper det os?\n\nHvis vi kender spredningen på stikprøvens middelværdier.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
   },
   {
     "objectID": "slides/SEM.html#en-gang-til---det-er-vigtigt",
@@ -1782,14 +1782,14 @@
     "href": "slides/SEM.html#hvordan-beregner-vi-så-det",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvordan beregner vi så det?",
-    "text": "Hvordan beregner vi så det?\n\nDa vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.\n\nStandardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.\n\n\nIkke hvordan middelværdierne fra mange stikprøver afviger.\n\n\nVi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi ” “Standard Error of the Mean”. SEM blandt venner.\n\n\nOg den vi beregner vi ved\n\\[SEM = \\frac{\\sigma}{\\sqrt{n}}\\]\n\n\n\nIntuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok."
+    "text": "Hvordan beregner vi så det?\n\nDa vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.\n\nStandardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.\n\n\nIkke hvordan middelværdierne fra mange stikprøver afviger.\n\n\nVi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi “Standard Error of the Mean”. SEM blandt venner.\n\n\nOg den vi beregner vi ved\n\\[SEM = \\frac{\\sigma}{\\sqrt{n}}\\]\n\n\n\nIntuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok."
   },
   {
     "objectID": "slides/SEM.html#testværdi",
     "href": "slides/SEM.html#testværdi",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Testværdi",
-    "text": "Testværdi\n\nVi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319\nDet betyder, at tager vi “mange” stikprøver af plasma-magnesium for diabetikere, vil 95% af de konfidensintervaller vi beregner, indeholde den sande værdi.\nNu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.\nEr den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?"
+    "text": "Testværdi\n\nVi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319\nNu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.\nEr den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?\n\nVi kan intuitivt se at hvis 0.810 ikke er indeholdt i KI, og KI med 95% sikkerhed indeholder den sande værdi - så er 0.810 nok så langt væk fra den sande værdi, at der må være en forskel.\n\n\nEller at 0.81 ligger så langt væk fra 0.719, at sandsynligheden for at 0.81 er indeholdt i konfidensintervallet, er meget lille."
   },
   {
     "objectID": "slides/SEM.html#estimatet",
@@ -1803,7 +1803,7 @@
     "href": "slides/SEM.html#standardfejlen",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Standardfejlen",
-    "text": "Standardfejlen\nAfhænger af testen - ikke af hypotesen!\nFor en enkelt middelværdi: SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\nHvis vi sammenligner to middelværdier der ikke er parrede:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\nOg hvis data er parrede:\n\\(SE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\\)\nOfte kender vi ikke den “sande” \\(\\sigma\\) men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme."
+    "text": "Standardfejlen\nVi skulle måle afstanden i enheder af standardfejlen.\n\nDen afhænger af hvad vi tester - ikke af hypotesen!\n\n\nFor en enkelt middelværdi: SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\nHvis vi sammenligner to middelværdier der ikke er parrede:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\nOg hvis data er parrede:\n\\(SE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\\)\n\n\n\nOfte kender vi ikke den “sande” \\(\\sigma\\) men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme."
   },
   {
     "objectID": "slides/SEM.html#den-kritiske-værdi",
@@ -1999,28 +1999,28 @@
     "href": "slides/SEM.html#hvad-er-en-hypotese",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvad er en hypotese",
-    "text": "Hvad er en hypotese\n\nEn antagelse om en parameter i populationen.\n\nEn bestemt middelværdi, eg \\(\\mu = 0.81\\)\nEn bestemt forskel på to middelværdier, ofte som \\(\\mu_1 - \\mu_2 = 0\\)\nEn bestemt andel eller ratio (senere)\n\nVi opstiller en null-hypotese \\(H_0\\):\n\n\\(\\mu = 0.81\\)\n\\(\\mu_1 - \\mu_2 = 0\\)\n\nEller mere generelt \\(\\theta = \\theta_0\\). Så kan resultatet nemlig bruges til andet end middelværdier. Her er \\(\\theta_0\\) den værdi vi tester mod, eg. 0.81 eller 0.\nI praksis “ingen forskel” eller “ingen effekt”. \\(H_0\\) er en konkret værdi for den parameter vi ønsker at teste."
+    "text": "Hvad er en hypotese\n\nEn antagelse om en parameter i populationen.\n\nEn bestemt middelværdi, eg \\(\\mu = 0.81\\)\nEn bestemt forskel på to middelværdier, ofte som \\(\\mu_1 - \\mu_2 = 0\\)\nEn bestemt andel eller ratio (senere)\n\n\nVi opstiller en null-hypotese \\(H_0\\):\n\n\n\n\\(\\mu = 0.81\\)\n\\(\\mu_1 - \\mu_2 = 0\\)\n\n\n\nEller mere generelt \\(\\theta = \\theta_0\\). \\(\\theta_0\\) den konkrete værdi vi tester parameteren imod, eg. 0.81 eller 0.\n\n\nI praksis “ingen forskel” eller “ingen effekt”."
   },
   {
     "objectID": "slides/SEM.html#den-alternative-hypotese",
     "href": "slides/SEM.html#den-alternative-hypotese",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Den alternative hypotese",
-    "text": "Den alternative hypotese\n\nKaldet \\(H_A\\), enten at\n\n\\(\\mu \\neq 0.81\\)\n\\(\\mu_1 - \\mu_2 \\neq 0\\)\n\nDet er tosidet.\nEller, ensidet:\n\n\\(\\mu &gt; 0.81\\) eller\n\\(\\mu &lt; 0.81\\)\n\nTosidet: Enhver forskel\nEnsidet: En forskel i en bestemt retning"
+    "text": "Den alternative hypotese\n\n\nKaldet \\(H_A\\), enten at\n\n\n\n\\(\\mu \\neq 0.81\\)\n\\(\\mu_1 - \\mu_2 \\neq 0\\)\n\n\n\nDet er tosidet.\n\n\nEller, ensidet:\n\n\\(\\mu &gt; 0.81\\) eller\n\\(\\mu &lt; 0.81\\)\n\n\n\nTosidet: Enhver forskel\nEnsidet: En forskel i en bestemt retning"
   },
   {
     "objectID": "slides/SEM.html#kernen-i-hypotesetesten",
     "href": "slides/SEM.html#kernen-i-hypotesetesten",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Kernen i hypotesetesten",
-    "text": "Kernen i hypotesetesten\nVi har et estimat \\(\\hat{\\theta}\\) fra vores observationer. Og vi har en null-hypotese, \\(H_0: \\theta = \\theta_0\\).\nVi kigger lige nu på middelværdier og ville normalt skrive \\(\\mu\\). Men bruger \\(\\theta\\) fordi vi så kan generalisere.\nHvor langt ligger estimatet fra \\(H_0\\), målt i standardfejl?"
+    "text": "Kernen i hypotesetesten\nVi har en null-hypotese, \\(H_0: \\theta = \\theta_0\\).\n\nHvor vi tester om \\(\\theta_0\\) kunne være den “sande” værdi i populationen; givet vores data, som har givet os et estimat \\(\\hat{\\theta}\\) fra vores observationer.\n\n\nVi kigger lige nu på middelværdier og ville normalt skrive \\(\\mu\\). Men bruger \\(\\theta\\) fordi vi så kan generalisere.\n\n\nHvor langt ligger estimatet fra \\(H_0\\), målt i standardfejl?\n\n\nLigger den for langt væk, forkaster vi \\(H_0\\). Det betyder ikke (!) at \\(H_A\\) er sand eller bevist."
   },
   {
     "objectID": "slides/SEM.html#hvor-langt-er-for-langt",
     "href": "slides/SEM.html#hvor-langt-er-for-langt",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvor langt er for langt?",
-    "text": "Hvor langt er for langt?\nHvis estimatet ligger “for langt” fra \\(H_0\\), forkaster vi \\(H_0\\) (og konkluderer at data understøtter \\(H_A\\)).\nNår vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste \\(H_0\\). Selvom \\(H_0\\) faktisk er sand.\nDen risiko betegner vi \\(\\alpha\\). Normalt sætter vi den til 5%, eller 0.05.\nVær vågne hvis opgaven taler om noget som helst andet!"
+    "text": "Hvor langt er for langt?\n\nHvis estimatet ligger “for langt” fra \\(H_0\\), forkaster vi \\(H_0\\) (og konkluderer at data understøtter \\(H_A\\)).\n\n\nNår vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste \\(H_0\\). Selvom \\(H_0\\) faktisk er sand.\n\n\nDen risiko betegner vi \\(\\alpha\\). Normalt sætter vi den til 5%, eller 0.05.\n\n\nVær vågne hvis opgaven taler om noget som helst andet!"
   },
   {
     "objectID": "slides/SEM.html#det-er-den-kritiske-værdi",
@@ -2055,28 +2055,28 @@
     "href": "slides/SEM.html#testværdien",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Testværdien",
-    "text": "Testværdien\nVi har besluttet hvilken hypotese vi vil teste. Vi har fundet den kritiske værdi - ud fra ønsket \\(\\alpha\\) og retningen af testen.\nSå mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.\nDer skal bruges to ting. Hvad er afstanden fra vores estimat til \\(H_0\\), og standardfejlen, som vi skal bruge til at beregne den afstand i standardfejl."
+    "text": "Testværdien\n\nVi har besluttet hvilken hypotese vi vil teste.\n\n\nVi har fundet den kritiske værdi - ud fra ønsket \\(\\alpha\\) og retningen af testen.\n\n\nSå mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.\n\n\nDer skal bruges to ting:\nHvad er afstanden fra vores estimat til \\(H_0\\), og\nstandardfejlen, som vi skal bruge til at beregne den afstand målt i standardfejl."
   },
   {
     "objectID": "slides/SEM.html#afstanden",
     "href": "slides/SEM.html#afstanden",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Afstanden",
-    "text": "Afstanden\nVi havde den generelle \\(H_0: \\theta = \\theta_0\\)\nHvis det er middelværdier ved vi godt hvordan vi beregner dem. Det skal vi normalt ikke selv gøre til eksamen. Har vi to middelværdier hvor vi skal undersøge om de er forskellige, er \\(H_0\\) typisk at forskellen på dem er 0. Den forskel får vi til eksamen enten oplyst direkte. Eller også får vi to middelværdier og så trækker vi den ene fra den anden.\nAndele og ratioer kommer vi til senere.\nDen middelværdi eller forskel på middelværdi betegner vi generelt \\(\\hat{\\theta}\\)\n\\(\\theta_0\\) har vi fra vores null-hypotese.\nSå hvis vores estimat var 0.719 og vores null-hypotese var \\(\\mu = 0.81\\)\nEr afstanden: 0.719 - 0.81 = -0.091"
+    "text": "Afstanden\nVi havde den generelle \\(H_0: \\theta = \\theta_0\\)\n\nEller hvis vi taler om middelværdier: \\(H_0: \\mu = \\mu_0\\)\n\n\nVi havde også et estimat på hvad \\(\\mu\\) kunne være. Det fik vi fra vores data.\n\n\nAfstanden finder vi så ved at trække \\(\\mu_0\\) fra \\(\\hat{\\mu}\\)\n\n\n\nMiddelværdier ved vi godt hvordan vi beregner.\nMen vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.\nHvis vi skal sammenligne to middelværdier er \\(H_0\\) typisk at forskellen på dem er 0.\nTil eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.\nEller også får vi oplyst hvad forskellen er på dem.\nSå hvis vores estimat var 0.719 og vores null-hypotese var \\(\\mu = 0.81\\)\nEr afstanden: 0.719 - 0.81 = -0.091"
   },
   {
     "objectID": "slides/SEM.html#hov-hvad-betyder-parret",
     "href": "slides/SEM.html#hov-hvad-betyder-parret",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hov! Hvad betyder parret?",
-    "text": "Hov! Hvad betyder parret?\nIkke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.\n\nBehandling vs kontrol\nKvinder vs mænd\n\nHer har vi to separate middelværdier. Og undersøger variation mellem personer.\nParrede data kommer fra to grupper der ikke er uafhængige\n\nSamme individer målt to gange\nMatchede par\n\nDet kan være\n\nFør og efter behandling\nTvillinger/matchede personer\n\nHer undersøger vi variation indenfor “samme” person."
+    "text": "Hov! Hvad betyder parret?\n\nIkke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.\n\nBehandling vs kontrol\nKvinder vs mænd\n\nHer har vi to separate middelværdier. Og undersøger variation mellem personer.\nParrede data kommer fra to grupper der ikke er uafhængige. Så de afhænger!\n\nSamme individer målt to gange\nMatchede par\n\nDet kan være\n\nFør og efter behandling\nTvillinger/matchede personer\n\nHer undersøger vi variation indenfor “samme” person."
   },
   {
     "objectID": "slides/SEM.html#trin-for-trin",
     "href": "slides/SEM.html#trin-for-trin",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Trin for trin",
-    "text": "Trin for trin\n\nOpstil \\(H_0\\)\nEr den alternative hypotese en- eller tosidet?\nVælg signifikansniveau (typisk 0.05)\nBestem den kritiske værdi (afhænger af: En- eller tosidet og \\(\\alpha\\))\nBeregn estimatet\nBeregn standardfejlen\nBeregn testværdien\nSammenlign testværdi med kritisk værdi\nKonkluder: Forkaster vi \\(H_0\\), ja eller nej."
+    "text": "Trin for trin\n\nOpstil \\(H_0\\)\nEr den alternative hypotese en- eller tosidet?\nVælg signifikansniveau (typisk 0.05)\nBestem den kritiske værdi (afhænger af: En- eller tosidet og \\(\\alpha\\))\nBeregn estimatet\nBeregn standardfejlen\nBeregn testværdien\nSammenlign testværdi med kritisk værdi\nKonkluder: Forkaster vi \\(H_0\\)? ja eller nej."
   },
   {
     "objectID": "slides/SEM.html#tilbage-til-plasma-magnesium",

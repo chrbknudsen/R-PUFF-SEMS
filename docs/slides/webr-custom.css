@@ -101,3 +101,12 @@
 .tiny {
   font-size: 0.5em;
 }
+
+
+.reveal ul,
+.reveal ol,
+.reveal li {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  line-height: 0.8;
+}
