@@ -136,16 +136,18 @@ hist(data)
 
 ## Hvordan hjælper det os?
 
+:::: evensmaller
+
 Hvis vi kender spredningen på stikprøvens middelværdier.
 
-. . .
-
+:::: {.fragment}
 Kan vi beregne et 95% KI for den middelværdi.
-
-. . .
+::::
+:::: {.fragment}
 
 Det interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen.
-
+::::
+:::: {.fragment}
 ```{r}
 library(ggplot2)
 
@@ -171,10 +173,10 @@ ggplot(df, aes(x, y)) +
   geom_line(linewidth = 1) +
   
   # Sand middelværdi (ukendt i praksis)
-  geom_vline(xintercept = mu, linetype = 2, linewidth = 1) +
+  geom_vline(xintercept = mu, linetype = 2, linewidth = 1, color = "blue") +
   
   # Stikprøvemiddelværdi
-  geom_vline(xintercept = xbar, linewidth = 1) +
+  geom_vline(xintercept = xbar, linewidth = 1, color = "red") +
   
   # 95% konfidensinterval
   geom_segment(
@@ -196,13 +198,15 @@ ggplot(df, aes(x, y)) +
   ) +
   
   # Labels
-  annotate("text", x = mu, y = max(df$y)*0.95,
-           label = "Sand middelværdi (ukendt)",
-           hjust = -0.1) +
+  annotate("text", x = mu-15, y = max(df$y)*0.95,
+           label = "Sand middelværdi\n(ukendt)",
+           vjust = -0.1,
+           color = "blue") +
   
   annotate("text", x = xbar, y = max(df$y)*0.85,
            label = "Stikprøvemiddelværdi",
-           hjust = -0.1) +
+           hjust = -0.1,
+           color = "red") +
   
   annotate("text", x = xbar, y = max(df$y)*0.22,
            label = "95% konfidensinterval",
@@ -215,6 +219,8 @@ ggplot(df, aes(x, y)) +
   
   theme_minimal()
 ```
+::::
+::::
 
 ## Hvad er et 95% konfidensinterval?
 
@@ -268,7 +274,7 @@ Standardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve af
 Ikke hvordan middelværdierne fra mange stikprøver afviger.
 :::
 ::: {.fragment}
-Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi " "Standard Error of the Mean". SEM blandt venner.
+Vi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi "Standard Error of the Mean". SEM blandt venner.
 :::
 ::: {.fragment}
 Og den vi beregner vi ved
@@ -332,13 +338,21 @@ Er der forskel?
 :::: smaller
 Vi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319
 
-Det betyder, at tager vi "mange" stikprøver af plasma-magnesium for diabetikere, vil 95% af de konfidensintervaller vi beregner, indeholde
-den sande værdi.
-
-
 Nu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.
 
 Er den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?
+
+:::: {.fragment}
+
+Vi kan intuitivt se at hvis 0.810 ikke er indeholdt i KI, og KI med 95% sikkerhed indeholder den sande værdi - så er 0.810 nok så langt væk fra den sande værdi, at der må være en forskel.
+
+::::
+
+:::: {.fragment}
+
+Eller at 0.81 ligger så langt væk fra 0.719, at sandsynligheden for at 0.81 er indeholdt i konfidensintervallet, er _meget_ lille.
+
+::::
 
 ::::
 
@@ -433,54 +447,91 @@ Hvordan tester vi det mere generelt?
 :::: smaller
 En antagelse om en parameter i populationen.
 
+:::: {.incremental}
 - En bestemt middelværdi, eg $\mu = 0.81$
 - En bestemt forskel på to middelværdier, ofte som $\mu_1 - \mu_2 = 0$
 - En bestemt andel eller ratio (senere)
-
+::::
+:::: {.fragment}
 Vi opstiller en null-hypotese $H_0$:
+::::
+:::: {.fragment}
 
 - $\mu = 0.81$
 - $\mu_1 - \mu_2 = 0$
+::::
+:::: {.fragment}
 
-Eller mere generelt $\theta = \theta_0$. Så kan resultatet nemlig bruges til andet end middelværdier. Her er $\theta_0$ den værdi vi tester mod, eg. 0.81 eller 0.
+Eller mere generelt $\theta = \theta_0$. $\theta_0$ den konkrete værdi vi tester parameteren imod, eg. 0.81 eller 0.
+::::
+:::: {.fragment}
 
-I praksis "ingen forskel" eller "ingen effekt". $H_0$ er en konkret værdi for den parameter vi ønsker at teste.
+I praksis "ingen forskel" eller "ingen effekt".
+::::
 ::::
 ## Den alternative hypotese
 :::: smaller
-Kaldet $H_A$, enten at 
 
+:::: {.fragment}
+Kaldet $H_A$, enten at 
+::::
+:::: {.fragment}
 - $\mu \neq 0.81$
 - $\mu_1 - \mu_2 \neq 0$
-
+::::
+:::: {.fragment}
 Det er tosidet.
-
+::::
+:::: {.fragment}
 Eller, ensidet:
 
 - $\mu > 0.81$ eller
 - $\mu < 0.81$
 
+::::
+:::: {.fragment}
 Tosidet: Enhver forskel  
 Ensidet: En forskel i en bestemt retning
-
+::::
 ::::
 
 ## Kernen i hypotesetesten
 
-Vi har et estimat $\hat{\theta}$ fra vores observationer. Og vi har en null-hypotese, $H_0: \theta = \theta_0$.
+Vi har en null-hypotese, $H_0: \theta = \theta_0$.
+
+. . . 
+
+Hvor vi tester om $\theta_0$ kunne være den "sande" værdi i populationen; givet vores data, som har givet os et estimat 
+$\hat{\theta}$ fra vores observationer.
+
+. . .
 
 Vi kigger lige nu på middelværdier og ville normalt skrive $\mu$. Men bruger $\theta$ fordi vi så kan generalisere.
 
+. . .
+
 Hvor langt ligger estimatet fra $H_0$, målt i standardfejl?
+
+. . .
+
+Ligger den for langt væk, _forkaster_ vi $H_0$. Det betyder _ikke_ (!) at $H_A$ er sand eller bevist.
 
 
 ## Hvor langt er for langt?
 
+. . .
+
 Hvis estimatet ligger "for langt" fra $H_0$, forkaster vi $H_0$ (og konkluderer at data understøtter $H_A$). 
+
+. . .
 
 Når vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste $H_0$. Selvom $H_0$ faktisk er sand.
 
+. . .
+
 Den risiko betegner vi $\alpha$. Normalt sætter vi den til 5%, eller 0.05.
+
+. . . 
 
 Vær vågne hvis opgaven taler om noget som helst andet!
 
@@ -603,12 +654,23 @@ qnorm(1-0.05)
 
 ## Testværdien
 
+. . .
+
 Vi har besluttet hvilken hypotese vi vil teste.
+
+. . .
+
 Vi har fundet den kritiske værdi - ud fra ønsket $\alpha$ og retningen af testen.
+
+. . .
 
 Så mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.
 
-Der skal bruges to ting. Hvad er afstanden fra vores estimat til $H_0$, og standardfejlen, som vi skal bruge til at beregne den afstand i standardfejl.
+. . .
+
+Der skal bruges to ting:  
+Hvad er afstanden fra vores estimat til $H_0$, og  
+standardfejlen, som vi skal bruge til at beregne den afstand målt i standardfejl.
 
 
 
@@ -616,41 +678,66 @@ Der skal bruges to ting. Hvad er afstanden fra vores estimat til $H_0$, og stand
 
 Vi havde den generelle $H_0: \theta = \theta_0$
 
-Hvis det er middelværdier ved vi godt hvordan vi beregner dem.
-Det skal vi normalt ikke selv gøre til eksamen.
-Har vi to middelværdier hvor vi skal undersøge om de er forskellige, er $H_0$ typisk at forskellen på dem er 0. 
-Den forskel får vi til eksamen enten oplyst direkte. Eller også får vi to middelværdier og så trækker vi den ene fra den anden.
+. . .
 
-Andele og ratioer kommer vi til senere.
+Eller hvis vi taler om middelværdier: $H_0: \mu = \mu_0$
 
-Den middelværdi eller forskel på middelværdi betegner vi generelt $\hat{\theta}$
+. . .
 
-$\theta_0$ har vi fra vores null-hypotese. 
+Vi havde også et estimat på hvad $\mu$ kunne være. Det fik vi fra vores data.
+
+. . .
+
+Afstanden finder vi så ved at trække $\mu_0$ fra $\hat{\mu}$
+
+. . .
+
+:::: evensmaller
+
+Middelværdier ved vi godt hvordan vi beregner.  
+Men vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.  
+Hvis vi skal sammenligne to middelværdier er $H_0$ typisk at forskellen på dem er 0.  
+Til eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.  
+Eller også får vi oplyst hvad forskellen er på dem.
 
 Så hvis vores estimat var 0.719 og vores null-hypotese var $\mu = 0.81$
 
 Er afstanden: 0.719 - 0.81 = -0.091
 
+::::
 
 ## Standardfejlen
 
-Afhænger af testen - ikke af hypotesen!
+Vi skulle måle afstanden i enheder af standardfejlen.
+
+. . .
+
+Den afhænger af _hvad_ vi tester - ikke af hypotesen!
+
+. . . 
 
 For en enkelt middelværdi: SEM = $\frac{\sigma}{\sqrt{n}}$
+
+. . .
 
 Hvis vi sammenligner to middelværdier der ikke er parrede:
 
 $SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 
+. . .
 
 Og hvis data er parrede:
 
 $SE(\bar{d}) = \frac{s_d}{\sqrt{n}}$
 
+. . .
+
+:::: evensmaller
 Ofte kender vi ikke den "sande" $\sigma$ men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme.
+::::
 
 ## Hov! Hvad betyder parret?
-
+:::: evensmaller
 Ikke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.
 
 - Behandling vs kontrol
@@ -658,7 +745,7 @@ Ikke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i
 
 Her har vi to separate middelværdier. Og undersøger variation mellem personer.
 
-Parrede data kommer fra to grupper der _ikke_ er uafhængige
+Parrede data kommer fra to grupper der _ikke_ er uafhængige. Så de afhænger!
 
 - Samme individer målt to gange
 - Matchede par
@@ -669,8 +756,10 @@ Det kan være
 - Tvillinger/matchede personer
 
 Her undersøger vi variation indenfor "samme" person.
-
+::::
 ## Trin for trin
+
+:::: {.incremental}
 
 - Opstil $H_0$
 - Er den alternative hypotese en- eller tosidet?
@@ -680,8 +769,8 @@ Her undersøger vi variation indenfor "samme" person.
 - Beregn standardfejlen
 - Beregn testværdien
 - Sammenlign testværdi med kritisk værdi
-- Konkluder: Forkaster vi $H_0$, ja eller nej.
-
+- Konkluder: Forkaster vi $H_0$? ja eller nej.
+::::
 
 ## Tilbage til plasma magnesium
 
@@ -851,7 +940,7 @@ Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifik
 
 $H_0: \mu_1 - \mu_2 = 0$
 
-Vi har to grupper - så vi skal have beregnet den poolede standardfejl:
+Vi har to grupper - så vi skal have beregnet den samlede standardfejl:
 
 
 ```{r}
