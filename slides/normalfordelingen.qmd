@@ -246,19 +246,19 @@ Hvad betyder det?
 
 . . .
 
-Undersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger
+Undersøger vi hvilke sandsynlighedsfordelinger mange forskellige ting følger
 
 . . . 
 
-Så er der en bestemt sandsynlighedsfordeling der optræder flere gange end andre.
+Så er der _en_ bestemt sandsynlighedsfordeling der optræder flere gange end andre.
 
 . . . 
 
 Det er den "normale" fordeling
 
-:::: notes
-Det er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommende
 
+:::: tiny
+Det er _ikke_ en normativ betegnelse, normal i denne kontekst betyder blot den hyppigst forekommende
 ::::
 
 
@@ -378,7 +378,7 @@ Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
 
 ## Og et par stykker til
 
-Hvis middelværdien af højden af alle danske mænd er 180 cm, og standardafvigelsen er 5 cm.
+Hvis højden af alle danske mænd er normalfordelt med en middelværdi på 180 cm, og standardafvigelse på 5 cm.
 
 Hvor stor en andel af dem er så lavere end 170 cm?
 
@@ -422,7 +422,7 @@ Hvordan finder vi selv det tal?
 
 ## pnorm
 
-pnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.
+pnorm(x) fortæller hvad sandsynligheden _p_ er for at se en observation der er mindre end _x_.
 
 . . . 
 
@@ -470,7 +470,7 @@ X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X 
 
 ## qnorm
 
-qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p. 
+qnorm(p) fortæller os den værdi _x_, hvor sandsynligheden for at være mindre end _x_ er _p_. 
 
 . . . 
 
@@ -802,11 +802,11 @@ Og ikke X?
 
 . . .
 
-Konventionen er, at i standardnormalfordelingen skriver vi Z.
+Det er en konvention: I standardnormalfordelingen skriver vi Z.
 
 . . .
 
-I en normalfordeling generelt (der ikke er standardnormalfordelingen), skriver vi X
+I en normalfordeling generelt, skriver vi X
 
 . . .
 
@@ -822,6 +822,9 @@ Og den anden vej:
 
 $X = Z\sigma + \mu$ 
 
+. . .
+
+Det kalder vi at "skalere".
 
 ## Så i praksis?
 
@@ -841,16 +844,21 @@ Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:
 
 $P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = P(Z < -1.692)$
 
+. . . 
+
 ```{r echo = TRUE}
 pnorm(-1.692)
 ```
 
+:::: tiny
+Og det er sandsynligheden for at være 1.7 standardafvigelser lavere end gennemsnittet.   
+::::
 
 ## Notation
 
 Den standardiserede normalfordeling skriver vi som N(0,1)  
-En normalfordeling (der ikke er standardiseret) skriver vi som $N(\mu, \sigma)$  
-Når vi har data, X, der er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$  
+En generelt normalfordeling skriver vi som $N(\mu, \sigma)$  
+Når data, X, er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$  
 
 Eller: P(X < 170) = P($\frac{X-\mu}{\sigma}$ < $\frac{170-\mu}{\sigma}$)
 
@@ -1127,7 +1135,7 @@ P(Z < y - 200 / 40 ) = 0.975
 
 . . . 
 
-y - 200 / 40 = qnomr(0.975) = 1.959964
+y - 200 / 40 = qnorm(0.975) = 1.959964
 
 . . . 
 
@@ -1325,7 +1333,7 @@ $\frac{y-50}{8} = qnorm(0.9)$
 ## Manglende middelværdi (variant 2):
 :::: {.columns}
 :::: {.column}
-For en normalfordeling gælder det at $\sigma = 4.5$ og 75% af 
+For en normalfordeling gælder at $\sigma = 4.5$ og 75% af 
 værdierne er > 18. Hvad er $\mu$?
 
 ::: {.fragment}
@@ -1394,7 +1402,7 @@ qnorm(1 - (0.2- pnorm(-1)))*15+100
 
 
 
-## Normalområde - fra en eksamensopgave
+## Normalområde - en eksamensopgave
 "Summariske regnestørrelser" for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:
 ```{r}
 tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
@@ -1453,7 +1461,7 @@ middelværdi + c(-1,1)* 1.96 * standardafvigelse
 
 
 ## Cowboy trick 2 
-
+:::: smaller
 Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?
 
 Vi kan skalere de 50, og putte resultatet ind i pnorm.
@@ -1476,4 +1484,4 @@ pnorm(50, mean = 47, sd = 42)
 For de typeopgaver hvor vi skal finde $\mu$ og/eller $\sigma$ hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt.
 :::
 
-
+:::: 

@@ -53,10 +53,19 @@ Men vi vil stadig _rigtig_ gerne kunne sige noget om hvad den "sande" middelvær
 :::: 
 :::
 
-## Den centrale grænseværdisætning:
+## Den centrale grænseværdisætning
+
+. . .
 
 Tager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier
-følge normalfordelingen.
+følge en fordeling.
+
+. . .
+
+Det vil være en normalfordeling
+
+. . .
+
 
 Den normalfordeling vil have en middelværdi der er lig med den "sande" middelværdi for
 populationen.
@@ -128,13 +137,67 @@ Bemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelvær
 #| autorun: false
 data <- mean(rexp(20))
 data <- c(data, mean(rexp(20)))
-hist(data)
+hist(data, main = length(data))
 
 ```
 :::
 
 
 ## Hvordan hjælper det os?
+
+Vi har tidligere set hvordan vi beregnede et 95% normalområde for en værdi.
+
+. . .
+
+Det krævede at vi havde middelværdien, og standardafvigelsen.
+
+. . .
+
+Nu har vi mange middelværdier. Hvis vi havde "standardafvigelsen" for de middelværdier.
+
+. . .
+
+Så kunne vi beregne et interval, hvor 95% af middelværdierne fra stikprøverne var.
+
+. . .
+
+Det kalder vi et 95% konfidensinterval
+
+## Hvad er et 95% konfidensinterval?
+
+. . .
+
+Det område, hvor, hvis værdierne var normalfordelte, vi kan forvente at finde 95% af dem.
+
+. . .
+
+Middelværdierne af stikprøverne vil, når vi har nok af dem, være normalfordelte.
+
+. . .
+
+Så 95% af vores stikprøver vil have en middelværdi der ligger inden for det område.
+
+## Hvad er et 95% konfidensinterval?
+
+Vi kan også formulere det som:
+
+. . .
+
+Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den "sande" værdi.
+
+. . .
+
+Men vi kan beregne et interval.
+
+. . .
+
+Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.
+
+. . .
+
+Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
+
+## så
 
 :::: evensmaller
 
@@ -222,43 +285,6 @@ ggplot(df, aes(x, y)) +
 ::::
 ::::
 
-## Hvad er et 95% konfidensinterval?
-
-. . .
-
-Det er det interval, som, hvis vi beregner det "mange" gange, i 95% af tilfældene vil indeholde den sande værdi.
-
-. . .
-
-Vi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den "sande" værdi.
-
-. . .
-
-Men vi kan beregne et interval.
-
-. . .
-
-Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.
-
-. . .
-
-Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
-
-## Hvad er et 95% konfidensinterval?
-
-Da vi talte om normalfordelingen mødt vi "normalområdet".
-
-. . .
-
-Det område, hvor, hvis værdierne var normalfordelte, hvor vi kan forvente at finde 95% af dem.
-
-. . .
-
-Middelværdierne af stikprøverne vil, når vi har nok af dem, være normalfordelte.
-
-. . .
-
-Så 95% af vores stikprøver vil have en middelværdi der ligger inden for det område.
 
 
 ## Hvordan beregner vi så det?
@@ -281,6 +307,10 @@ Og den vi beregner vi ved
 
 $$SEM = \frac{\sigma}{\sqrt{n}}$$
 
+:::: {.tiny}
+Vi har et estimat på "mean". Der ikke 100% korrekt. Det har en fejl, "error". Hvad er vores bedste bud på størrelsen af den fejl? SEM.
+::::
+
 :::
 
 ::::
@@ -293,6 +323,37 @@ bliver det nok.
 
 ::::
 
+## Hvordan regner vi så?
+
+. . .
+
+Vi fandt 95% normalområdet ved
+
+. . .
+
+$\mu \pm 1.96\cdot\sigma$
+
+. . .
+
+Vi finder så 95% konfidensintervallet ved
+
+. . .
+
+$\hat{x} \pm 1.96\cdot\text{SEM}$
+
+. . .
+
+Og SEM fandt vi ved:
+
+. . .
+
+$\text{SEM} = \frac{s}{\sqrt{n}}$
+
+n er antallet af observationer. Og vi skriver $s$ i stedet for $\sigma$ fordi? 
+
+. . .
+
+$\sigma$ er den "sande" standardafvigelse i populationen. Vi har ikke målt på hele populationen. Så den kender vi ikke, og derfor bruger vi $s$ i stedet.
 
 ## En del af en eksamensopgave
 :::: {.columns}
@@ -444,7 +505,7 @@ Det kan vi se at den ikke er. Afvigelsen er stor, men det kunne jo være et stat
 Hvordan tester vi det mere generelt?
 
 ## Hvad er en hypotese
-:::: smaller
+:::: evensmaller
 En antagelse om en parameter i populationen.
 
 :::: {.incremental}
@@ -467,7 +528,13 @@ Eller mere generelt $\theta = \theta_0$. $\theta_0$ den konkrete værdi vi teste
 :::: {.fragment}
 
 I praksis "ingen forskel" eller "ingen effekt".
+
+:::: tiny
+Vi skriver $\theta$ fordi theta starter med t, og det er vores testværdi. Det er mere generelt end $\mu$, og tillader os at bruge samme notation uanset om det er middelværdier eller noget andet vi tester.
+Vi kalder $H_0$ for "null"-hypotesen, fordi "null" er en prætentiøs måde at sige "ingenting". Og vi tester om der ingen effekt er. Ofte kalder vi den så nul-hypotesen i stedet, fordi vi jo skriver 0 i $H_0$.
 ::::
+::::
+
 ::::
 ## Den alternative hypotese
 :::: smaller
@@ -480,7 +547,7 @@ Kaldet $H_A$, enten at
 - $\mu_1 - \mu_2 \neq 0$
 ::::
 :::: {.fragment}
-Det er tosidet.
+Det er tosidet. Der $\mu$ kan være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.
 ::::
 :::: {.fragment}
 Eller, ensidet:
@@ -630,7 +697,9 @@ ggplot(df_plot, aes(x, y)) +
 
 ## Den kritiske værdi
 :::: smaller
-Hvis vi vil finde enhver forskel, typisk at mu_1 - mu_2 = 0, er vi ligeglade med om testværdien er "for lille" eller "for stor". De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.
+Hvis vi vil finde enhver forskel, typisk at $mu_1 - mu_2 = 0$, er vi ligeglade med om testværdien er "for lille" eller "for stor". De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.
+
+:::: {.fragment}
 
 Har vi $\alpha = 0.5$ skal den altså fordeles på begge sider og vi bruger:
 
@@ -638,11 +707,16 @@ Har vi $\alpha = 0.5$ skal den altså fordeles på begge sider og vi bruger:
 c(-1,1)*qnorm(1 - 0.05/2)
 ```
 
+::::
+:::: {.fragment}
 Hvis vi er interesseret i om en værdi er mindre ($H_A: \theta < \theta_0$) - så må testværdien gerne være for stor. Den må blot ikke være for lille.
 
 ```{r echo = TRUE}
 qnorm(0.05)
 ```
+
+::::
+:::: {.fragment}
 
 Og hvis vi er interesseret i om en værdi er større ($H_A: \theta > \theta_0$) - så må testværdien gerne være for lille. Den må blot ikke være for stor.
 
@@ -651,7 +725,7 @@ qnorm(1-0.05)
 ```
 
 ::::
-
+::::
 ## Testværdien
 
 . . .
@@ -670,7 +744,8 @@ Så mangler vi blot testværdien, som vi skal sammenligne med den kritiske værd
 
 Der skal bruges to ting:  
 Hvad er afstanden fra vores estimat til $H_0$, og  
-standardfejlen, som vi skal bruge til at beregne den afstand målt i standardfejl.
+Hvad er standardfejlen  
+Den skal vi nemlig bruge beregne afstanden målt i standardfejl.
 
 
 
@@ -684,7 +759,7 @@ Eller hvis vi taler om middelværdier: $H_0: \mu = \mu_0$
 
 . . .
 
-Vi havde også et estimat på hvad $\mu$ kunne være. Det fik vi fra vores data.
+Vi havde også et estimat på hvad $\mu$ kunne være. Det fik vi fra vores data. Vi bør kalde den for $\hat{\mu}$.
 
 . . .
 
@@ -692,17 +767,17 @@ Afstanden finder vi så ved at trække $\mu_0$ fra $\hat{\mu}$
 
 . . .
 
-:::: evensmaller
+Så hvis vores estimat var 0.719 og vores null-hypotese var $\mu = 0.81$
+
+Er afstanden: 0.719 - 0.81 = -0.091
+
+:::: tiny
 
 Middelværdier ved vi godt hvordan vi beregner.  
 Men vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.  
 Hvis vi skal sammenligne to middelværdier er $H_0$ typisk at forskellen på dem er 0.  
 Til eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.  
 Eller også får vi oplyst hvad forskellen er på dem.
-
-Så hvis vores estimat var 0.719 og vores null-hypotese var $\mu = 0.81$
-
-Er afstanden: 0.719 - 0.81 = -0.091
 
 ::::
 
@@ -774,6 +849,8 @@ Her undersøger vi variation indenfor "samme" person.
 
 ## Tilbage til plasma magnesium
 
+:::: smaller
+
 Vi fik oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:
 ```{r}
 tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
@@ -782,49 +859,132 @@ tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
 ```
 
 Vi beregnede 95% konfidensintervaller på hver af de to grupper, og 
-konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at derfor er er signifikant forskel på niveauet.
+konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at der derfor var signifikant forskel på niveauet.
 
 Det var i hvert fald konklusionen i modelbesvarelsen.
 
-Hvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning.
+Hvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning?
 
-## Forskellen på middelværdierne.
+::::
+
+## Forskellen på middelværdierne
+
+. . .
 
 Er den 0?
 
-Eller: 
+. . .
+
+Eller:
+
+. . .
 
 $H_0: \mu_{dia} - \mu_{ejdia} = 0$
 
+. . .
 
+Er den alternative hypotese en- eller to-sidet?
 
-Er den alternative hypotese en eller to sidet?
-vi er ude efter enhver forskel, så to-sidet.
+. . .
 
-signifikansniveau er 0.05 (et valg vi træffer)
+Vi er ude efter enhver forskel, så to-sidet.
 
-Så den kritiske værdi er $\pm1.96$
+. . .
 
-Fra $H_0$ får vi (indirekte) estimatet: 0.719-0.810 = -0.091
+Signifikansniveau?
 
-Og afstanden fra $H_0$ er så 0 - -0.091 = 0.091
+. . .
 
-Standardfejlen. To samples, ikke parrede: 
+$\alpha = 0.05$
+
+Det er et valg vi træffer.
+
+## Forskellen på middelværdierne
+
+Hvad er så den kritiske værdi?
+
+. . .
+
+1.96
+
+. . .
+
+eller
+
+```{r echo = TRUE}
+c(-1,1)*qnorm(1-0.05/2)
+```
+
+## Forskellen på middelværdierne
+
+Og hvor langt er vores estimat fra $H_0$?
+
+. . .
+
+$H_0: \mu_{dia} - \mu_{ejdia} = 0$
+
+. . .
+
+$\mu_{dia} = 0.719, \mu_{ejdia} = 0.810$, så vores estimat er:
+
+0.719-0.810 = -0.091
+
+. . . 
+
+Og afstanden fra $H_0$ er så:  0 - -0.091 = 0.091
+
+## Forskellen på middelværdierne
+
+Hvad er standardfejlen?
+
+. . .
+
+Hvor mange samples?
+
+. . .
+
+To. Er de parrede?
+
+. . .
+
+Nej.
+
+. . .
+
+Så skal vi bruge:
 
 $SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 
-mu_1 = 0.719, s_1 = 0.068, n_1 = 227
-mu_2 = 0.810, s = 0.057, n_2 = 140
+$s_1 = 0.068$, $n_1 = 227$  
+$s_2 = 0.057$, $n_2 = 140$
 
-og SE_diff derfor:
+. . .
+
+og derfor:
 $SE_{diff} = \sqrt{\frac{0.068^2}{227} + \frac{0.057^2}{140}} = 0.00660$
 
-Testværdien er så:
+## Forskellen på middelværdierne
+
+Hvor stor er forskellen så, målt i standardfejl?
+
+. . .
 
 0.091/0.00660 = 13.78788
 
-Den er større end den kritiske værdi, og vi forkaster derfor $H_0$ - at forskellen er 0.
+. . .
 
+Er den større end den kritiske værdi?
+
+. . .
+
+Ja.  
+Hvad betyder det?
+
+. . .
+
+At vores estimat ligger så langt fra $H_0$, at vi kan forkaste $H_0$, at forskellen på de to middelværdier er 0.
+
+Og det kan vi med en sikkerhed på $\alpha = 0.05$
 
 
 

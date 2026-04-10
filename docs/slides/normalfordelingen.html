@@ -2308,26 +2308,16 @@ I enheder vi selv vælger</p>
 <p>Hvad betyder det?</p>
 </div>
 <div class="fragment">
-<p>Undersøger vi hvilken sandsynlighedsfordelinger mange forskellige ting følger</p>
+<p>Undersøger vi hvilke sandsynlighedsfordelinger mange forskellige ting følger</p>
 </div>
 <div class="fragment">
-<p>Så er der en bestemt sandsynlighedsfordeling der optræder flere gange end andre.</p>
+<p>Så er der <em>en</em> bestemt sandsynlighedsfordeling der optræder flere gange end andre.</p>
 </div>
 <div class="fragment">
 <p>Det er den “normale” fordeling</p>
-<aside class="notes">
-<p>Det er ikke en normativ betegnelse, normal i denne kontekst blot den hyppigst forekommende</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<div class="tiny">
+<p>Det er <em>ikke</em> en normativ betegnelse, normal i denne kontekst betyder blot den hyppigst forekommende</p>
+</div>
 </div>
 </section>
 <section id="hvordan-ser-den-ud" class="slide level2">
@@ -2431,7 +2421,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="og-et-par-stykker-til" class="slide level2">
 <h2>Og et par stykker til</h2>
-<p>Hvis middelværdien af højden af alle danske mænd er 180 cm, og standardafvigelsen er 5 cm.</p>
+<p>Hvis højden af alle danske mænd er normalfordelt med en middelværdi på 180 cm, og standardafvigelse på 5 cm.</p>
 <p>Hvor stor en andel af dem er så lavere end 170 cm?</p>
 <div class="fragment">
 <p>Forskellen er 170-180 = -10 cm</p>
@@ -2466,7 +2456,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="pnorm" class="slide level2">
 <h2>pnorm</h2>
-<p>pnorm(x) fortæller hvad sandsynligheden p er for at se en observation der er mindre end x.</p>
+<p>pnorm(x) fortæller hvad sandsynligheden <em>p</em> er for at se en observation der er mindre end <em>x</em>.</p>
 <div class="fragment">
 <p>Når x er afstanden til middelværdien, målt i enheder af standardafvigelsen.</p>
 </div>
@@ -2504,7 +2494,7 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="qnorm" class="slide level2">
 <h2>qnorm</h2>
-<p>qnorm(p) fortæller os den værdi x, hvor sandsynligheden for at være mindre end x er p.&nbsp;</p>
+<p>qnorm(p) fortæller os den værdi <em>x</em>, hvor sandsynligheden for at være mindre end <em>x</em> er <em>p</em>.</p>
 <div class="fragment">
 <p>For hvilken værdi er 0.025 eller 2.5% af observationerne mindre?</p>
 </div>
@@ -2827,10 +2817,10 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>Og ikke X?</p>
 </div>
 <div class="fragment">
-<p>Konventionen er, at i standardnormalfordelingen skriver vi Z.</p>
+<p>Det er en konvention: I standardnormalfordelingen skriver vi Z.</p>
 </div>
 <div class="fragment">
-<p>I en normalfordeling generelt (der ikke er standardnormalfordelingen), skriver vi X</p>
+<p>I en normalfordeling generelt, skriver vi X</p>
 </div>
 <div class="fragment">
 <p>Når vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen.</p>
@@ -2841,6 +2831,9 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="fragment">
 <p>Og den anden vej:</p>
 <p><span class="math inline">\(X = Z\sigma + \mu\)</span></p>
+</div>
+<div class="fragment">
+<p>Det kalder vi at “skalere”.</p>
 </div>
 </section>
 <section id="så-i-praksis" class="slide level2">
@@ -2855,19 +2848,24 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="fragment">
 <p>Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:</p>
 <p><span class="math inline">\(P(X&lt;170) = P(\frac{X-\mu}{\sigma} &lt; \frac{170 - 181}{6.5}) = P(Z &lt; -1.692)\)</span></p>
+</div>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.692</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04532299</code></pre>
 </div>
 </div>
+<div class="tiny">
+<p>Og det er sandsynligheden for at være 1.7 standardafvigelser lavere end gennemsnittet.</p>
+</div>
 </div>
 </section>
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
 <p>Den standardiserede normalfordeling skriver vi som N(0,1)<br>
-En normalfordeling (der ikke er standardiseret) skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span><br>
-Når vi har data, X, der er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
+En generelt normalfordeling skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span><br>
+Når data, X, er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
 <p>Eller: P(X &lt; 170) = P(<span class="math inline">\(\frac{X-\mu}{\sigma}\)</span> &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
 <p>Eller kortere: P(Z &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
 <p>Når vi normaliserer 170 med <span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span>, får vi en Z-score. Det var den vi så på plottet af normalfordelingen.</p>
@@ -3083,7 +3081,7 @@ P(X &gt; y) = 0.025 &lt;=&gt; P(X &lt; y) = 1 - 0.025</p>
 P(Z &lt; y - 200 / 40 ) = 0.975</p>
 </div>
 <div class="fragment">
-<p>y - 200 / 40 = qnomr(0.975) = 1.959964</p>
+<p>y - 200 / 40 = qnorm(0.975) = 1.959964</p>
 </div>
 <div class="fragment">
 <p>Isoler y:</p>
@@ -3235,7 +3233,7 @@ P(Z &lt; y - 200 / 40 ) = 0.975</p>
 <h2>Manglende middelværdi (variant 2):</h2>
 <div class="columns">
 <div class="column">
-<p>For en normalfordeling gælder det at <span class="math inline">\(\sigma = 4.5\)</span> og 75% af værdierne er &gt; 18. Hvad er <span class="math inline">\(\mu\)</span>?</p>
+<p>For en normalfordeling gælder at <span class="math inline">\(\sigma = 4.5\)</span> og 75% af værdierne er &gt; 18. Hvad er <span class="math inline">\(\mu\)</span>?</p>
 <div class="fragment">
 <p>P(X&gt;18) = 0.75</p>
 </div>
@@ -3286,8 +3284,8 @@ P(85 &lt; X &lt; y) = 0.8</p>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
-<section id="normalområde---fra-en-eksamensopgave" class="slide level2">
-<h2>Normalområde - fra en eksamensopgave</h2>
+<section id="normalområde---en-eksamensopgave" class="slide level2">
+<h2>Normalområde - en eksamensopgave</h2>
 <p>“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -3349,6 +3347,7 @@ P(X &lt; 0.92) - P(X &lt; 0.7)</p>
 </section>
 <section id="cowboy-trick-2" class="slide level2">
 <h2>Cowboy trick 2</h2>
+<div class="smaller">
 <p>Hvor stor en andel af observationerne er mindre end 50 når middelværdien er 47 og standardafvigelsen er 42?</p>
 <p>Vi kan skalere de 50, og putte resultatet ind i pnorm.</p>
 <div class="cell">
@@ -3368,6 +3367,7 @@ P(X &lt; 0.92) - P(X &lt; 0.7)</p>
 </div>
 <div class="fragment">
 <p>For de typeopgaver hvor vi skal finde <span class="math inline">\(\mu\)</span> og/eller <span class="math inline">\(\sigma\)</span> hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt.</p>
+</div>
 </div>
 
 
