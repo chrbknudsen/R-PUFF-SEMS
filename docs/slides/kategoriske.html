@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>PUFF SEMS forberedelse – Kategoriske værdier</title>
+  <title>PUFF SEMS forberedelse – Kategoriske udfald</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +27,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
   <link rel="stylesheet" href="webr-custom.css">
@@ -121,21 +187,3283 @@
       margin-right: 0; 
     }
   </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+  <style type="text/css">
+  .monaco-editor pre {
+    background-color: unset !important;
+  }
+
+  .qwebr-editor-toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .qwebr-editor-toolbar-left-buttons, .qwebr-editor-toolbar-right-buttons {
+    display: flex;
+  }
+
+  .qwebr-non-interactive-loading-container.qwebr-cell-needs-evaluation, .qwebr-non-interactive-loading-container.qwebr-cell-evaluated {
+    justify-content: center;
+    display: flex;
+    background-color: rgba(250, 250, 250, 0.65);
+    border: 1px solid rgba(233, 236, 239, 0.65);
+    border-radius: 0.5rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .qwebr-r-project-logo {
+    color: #2767B0; /* R Project's blue color */
+  }
+
+  .qwebr-icon-status-spinner {
+    color: #7894c4;
+  }
+
+  .qwebr-icon-run-code {
+    color: #0d9c29
+  }
+
+  body.quarto-light .qwebr-output-code-stdout {
+    color: #111;
+  }
+
+  body.quarto-dark .qwebr-output-code-stdout {
+    color: #EEE;
+  }
+
+  .qwebr-output-code-stderr {
+    color: #db4133;
+  }
+
+  body.quarto-light .qwebr-editor {
+    border: 1px solid #EEEEEE;
+  }
+
+  body.quarto-light .qwebr-editor-toolbar {
+    background-color: #EEEEEE;
+    padding: 0.2rem 0.5rem;
+  }
+
+  body.quarto-dark .qwebr-editor {
+    border: 1px solid #111;
+  }
+
+  body.quarto-dark .qwebr-editor-toolbar {
+    background-color: #111;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .qwebr-button {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.375rem 0.75rem;
+    font-size: .9rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+
+  body.quarto-light .qwebr-button {
+    background-color: #EEEEEE;
+    color: #000;
+    border-color: #dee2e6;
+    border: 1px solid rgba(0,0,0,0);
+  }
+
+  body.quarto-dark .qwebr-button {
+    background-color: #111;
+    color: #EEE;
+    border-color: #dee2e6;
+    border: 1px solid rgba(0,0,0,0);
+  }
+
+  body.quarto-light .qwebr-button:hover {
+    color: #000;
+    background-color: #d9dce0;
+    border-color: #c8ccd0;
+  }
+
+  body.quarto-dark .qwebr-button:hover {
+    color: #d9dce0;
+    background-color: #323232;
+    border-color: #d9dce0;
+  }
+
+  .qwebr-button:disabled,.qwebr-button.disabled,fieldset:disabled .qwebr-button {
+    pointer-events: none;
+    opacity: .65
+  }
+
+  .qwebr-button-reset {
+    color: #696969; /*#4682b4;*/
+  }
+
+  .qwebr-button-copy {
+    color: #696969;
+  }
+
+  /* Style the code highlight lines */
+  body.quarto-light .qwebr-editor-highlight-line {
+    background-color: lightblue;
+  }
+
+  body.quarto-dark .qwebr-editor-highlight-line {
+    background-color: darkblue;
+  }
+
+  /* Style the modal pop-up */
+
+  /* The Modal (background) */
+  .qwebr-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content */
+  .qwebr-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  .qwebr-modal-content-code {
+    max-height: 50vh;
+    min-height: 5vh;
+    overflow: scroll;
+    border: 1px solid #888;
+  }
+
+  /* The Close Button */
+  .qwebr-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .qwebr-modal-close:hover,
+  .qwebr-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .qwebr-download-btn {
+    margin-top: 10px;
+    text-decoration: none !important;
+  }
+
+  /* Styling to download image that is created */
+
+  .qwebr-canvas-image {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .qwebr-canvas-image-download-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+
+  figure:hover .qwebr-canvas-image-download-btn {
+    display: block;
+  }
+
+  /* Custom styling for RevealJS Presentations*/
+
+  /* Reset the style of the interactive area */
+  .reveal div.qwebr-interactive-area {
+    display: block;
+    box-shadow: none;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Provide space to entries */
+  .reveal div.qwebr-output-code-area pre div {
+    margin: 1px 2px 1px 10px;
+  }
+
+  /* Collapse the inside code tags to avoid extra space between line outputs */
+  .reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
+    padding: 0;
+    display: contents;
+  }
+
+  body.reveal.quarto-light pre div code.qwebr-output-code-stdout {
+    color: #111;
+  }
+
+  body.reveal.quarto-dark pre div code.qwebr-output-code-stdout {
+    color: #EEEEEE;
+  }
+
+  .reveal pre div code.qwebr-output-code-stderr {
+    color: #db4133;
+  }
+
+
+  /* Create a border around console and output (does not effect graphs) */
+  body.reveal.quarto-light div.qwebr-console-area {
+    border: 1px solid #EEEEEE;
+    box-shadow: 2px 2px 10px #EEEEEE;
+  }
+
+  body.reveal.quarto-dark div.qwebr-console-area {
+    border: 1px solid #111;
+    box-shadow: 2px 2px 10px #111;
+  }
+
+
+  /* Cap output height and allow text to scroll */
+  /* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
+  .reveal div.qwebr-output-code-area pre {
+    max-height: 400px;
+    overflow: scroll;
+  }
+
+  iframe.qwebr-output-code-browse {
+    width: 100%;
+
+    /*
+      TODO: How to make the height automatic according to the widget size,
+      or respect the quarto code block options?
+    */
+    min-height: 500px;
+  }
+
+  </style>
+  <script type="module">
+  // Document level settings ----
+
+  // Determine if we need to install R packages
+  globalThis.qwebrInstallRPackagesList = [''];
+
+  // Specify possible locations to search for the repository
+  globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
+
+  // Check to see if we have an empty array, if we do set to skip the installation.
+  globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1);
+  globalThis.qwebrAutoloadRPackages = true;
+
+  // Display a startup message?
+  globalThis.qwebrShowStartupMessage = true;
+  globalThis.qwebrShowHeaderMessage = false;
+
+  // Describe the webR settings that should be used
+  globalThis.qwebrCustomizedWebROptions = {
+    "baseURL": "https://webr.r-wasm.org/v0.5.7/",
+    "serviceWorkerUrl": "",
+    "homedir": "/home/web_user", 
+    "channelType": "ChannelType.Automatic"
+  };
+
+  // Store cell data
+  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+
+  </script>
+  <script type="module">
+  // Declare startupMessageQWebR globally
+  globalThis.qwebrStartupMessage = document.createElement("p");
+
+  // Verify if OffScreenCanvas is supported
+  globalThis.qwebrOffScreenCanvasSupport = function() {
+    return typeof OffscreenCanvas !== 'undefined'
+  }
+
+  // Function to set the button text
+  globalThis.qwebrSetInteractiveButtonState = function(buttonText, enableCodeButton = true) {
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+      btn.innerHTML = buttonText;
+      btn.disabled = !enableCodeButton;
+    });
+  }
+
+  // Function to update the status message in non-interactive cells
+  globalThis.qwebrUpdateStatusMessage = function(message) {
+    document.querySelectorAll(".qwebr-status-text.qwebr-cell-needs-evaluation").forEach((elem) => {
+      elem.innerText = message;
+    });
+  }
+
+  // Function to update the status message
+  globalThis.qwebrUpdateStatusHeader = function(message) {
+    qwebrStartupMessage.innerHTML = `
+      <i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i>
+      <span>${message}</span>`;
+  }
+
+  // Function to return true if element is found, false if not
+  globalThis.qwebrCheckHTMLElementExists = function(selector) {
+    const element = document.querySelector(selector);
+    return !!element;
+  }
+
+  // Function that detects whether reveal.js slides are present
+  globalThis.qwebrIsRevealJS = function() {
+    // If the '.reveal .slides' selector exists, RevealJS is likely present
+    return qwebrCheckHTMLElementExists('.reveal .slides');
+  }
+
+  // Initialize the Quarto sidebar element
+  function qwebrSetupQuartoSidebar() {
+    var newSideBarDiv = document.createElement('div');
+    newSideBarDiv.id = 'quarto-margin-sidebar';
+    newSideBarDiv.className = 'sidebar margin-sidebar';
+    newSideBarDiv.style.top = '0px';
+    newSideBarDiv.style.maxHeight = 'calc(0px + 100vh)';
+
+    return newSideBarDiv;
+  }
+
+  // Position the sidebar in the document
+  function qwebrPlaceQuartoSidebar() {
+    // Get the reference to the element with id 'quarto-document-content'
+    var referenceNode = document.getElementById('quarto-document-content');
+
+    // Create the new div element
+    var newSideBarDiv = qwebrSetupQuartoSidebar();
+
+    // Insert the new div before the 'quarto-document-content' element
+    referenceNode.parentNode.insertBefore(newSideBarDiv, referenceNode);
+  }
+
+  function qwebrPlaceMessageContents(content, html_location = "title-block-header", revealjs_location = "title-slide") {
+
+    // Get references to header elements
+    const headerHTML = document.getElementById(html_location);
+    const headerRevealJS = document.getElementById(revealjs_location);
+
+    // Determine where to insert the quartoTitleMeta element
+    if (headerHTML || headerRevealJS) {
+      // Append to the existing "title-block-header" element or "title-slide" div
+      (headerHTML || headerRevealJS).appendChild(content);
+    } else {
+      // If neither headerHTML nor headerRevealJS is found, insert after "webr-monaco-editor-init" script
+      const monacoScript = document.getElementById("qwebr-monaco-editor-init");
+      const header = document.createElement("header");
+      header.setAttribute("id", "title-block-header");
+      header.appendChild(content);
+      monacoScript.after(header);
+    }
+  }
+
+
+
+  function qwebrOffScreenCanvasSupportWarningMessage() {
+    
+    // Verify canvas is supported.
+    if(qwebrOffScreenCanvasSupport()) return;
+
+    // Create the main container div
+    var calloutContainer = document.createElement('div');
+    calloutContainer.classList.add('callout', 'callout-style-default', 'callout-warning', 'callout-titled');
+
+    // Create the header div
+    var headerDiv = document.createElement('div');
+    headerDiv.classList.add('callout-header', 'd-flex', 'align-content-center');
+
+    // Create the icon container div
+    var iconContainer = document.createElement('div');
+    iconContainer.classList.add('callout-icon-container');
+
+    // Create the icon element
+    var iconElement = document.createElement('i');
+    iconElement.classList.add('callout-icon');
+
+    // Append the icon element to the icon container
+    iconContainer.appendChild(iconElement);
+
+    // Create the title container div
+    var titleContainer = document.createElement('div');
+    titleContainer.classList.add('callout-title-container', 'flex-fill');
+    titleContainer.innerText = 'Warning: Web Browser Does Not Support Graphing!';
+
+    // Append the icon container and title container to the header div
+    headerDiv.appendChild(iconContainer);
+    headerDiv.appendChild(titleContainer);
+
+    // Create the body container div
+    var bodyContainer = document.createElement('div');
+    bodyContainer.classList.add('callout-body-container', 'callout-body');
+
+    // Create the paragraph element for the body content
+    var paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = 'This web browser does not have support for displaying graphs through the <code>quarto-webr</code> extension since it lacks an <code>OffScreenCanvas</code>. Please upgrade your web browser to one that supports <code>OffScreenCanvas</code>.';
+
+    // Append the paragraph element to the body container
+    bodyContainer.appendChild(paragraphElement);
+
+    // Append the header div and body container to the main container div
+    calloutContainer.appendChild(headerDiv);
+    calloutContainer.appendChild(bodyContainer);
+
+    // Append the main container div to the document depending on format
+    qwebrPlaceMessageContents(calloutContainer, "title-block-header"); 
+
+  }
+
+
+  // Function that attaches the document status message and diagnostics
+  function displayStartupMessage(showStartupMessage, showHeaderMessage) {
+    if (!showStartupMessage) {
+      return;
+    }
+
+    // Create the outermost div element for metadata
+    const quartoTitleMeta = document.createElement("div");
+    quartoTitleMeta.classList.add("quarto-title-meta");
+
+    // Create the first inner div element
+    const firstInnerDiv = document.createElement("div");
+    firstInnerDiv.setAttribute("id", "qwebr-status-message-area");
+
+    // Create the second inner div element for "WebR Status" heading and contents
+    const secondInnerDiv = document.createElement("div");
+    secondInnerDiv.setAttribute("id", "qwebr-status-message-title");
+    secondInnerDiv.classList.add("quarto-title-meta-heading");
+    secondInnerDiv.innerText = "WebR Status";
+
+    // Create another inner div for contents
+    const secondInnerDivContents = document.createElement("div");
+    secondInnerDivContents.setAttribute("id", "qwebr-status-message-body");
+    secondInnerDivContents.classList.add("quarto-title-meta-contents");
+
+    // Describe the WebR state
+    qwebrStartupMessage.innerText = "🟡 Loading...";
+    qwebrStartupMessage.setAttribute("id", "qwebr-status-message-text");
+    // Add `aria-live` to auto-announce the startup status to screen readers
+    qwebrStartupMessage.setAttribute("aria-live", "assertive");
+
+    // Append the startup message to the contents
+    secondInnerDivContents.appendChild(qwebrStartupMessage);
+
+    // Add a status indicator for COOP and COEP Headers if needed
+    if (showHeaderMessage) {
+      const crossOriginMessage = document.createElement("p");
+      crossOriginMessage.innerText = `${crossOriginIsolated ? '🟢' : '🟡'} COOP & COEP Headers`;
+      crossOriginMessage.setAttribute("id", "qwebr-coop-coep-header");
+      secondInnerDivContents.appendChild(crossOriginMessage);
+    }
+
+    // Combine the inner divs and contents
+    firstInnerDiv.appendChild(secondInnerDiv);
+    firstInnerDiv.appendChild(secondInnerDivContents);
+    quartoTitleMeta.appendChild(firstInnerDiv);
+
+    // Place message on webpage
+    qwebrPlaceMessageContents(quartoTitleMeta); 
+  }
+
+  function qwebrAddCommandHistoryModal() {
+    // Create the modal div
+    var modalDiv = document.createElement('div');
+    modalDiv.id = 'qwebr-history-modal';
+    modalDiv.className = 'qwebr-modal';
+
+    // Create the modal content div
+    var modalContentDiv = document.createElement('div');
+    modalContentDiv.className = 'qwebr-modal-content';
+
+    // Create the span for closing the modal
+    var closeSpan = document.createElement('span');
+    closeSpan.id = 'qwebr-command-history-close-btn';
+    closeSpan.className = 'qwebr-modal-close';
+    closeSpan.innerHTML = '&times;';
+
+    // Create the h1 element for the modal
+    var modalH1 = document.createElement('h1');
+    modalH1.textContent = 'R History Command Contents';
+
+    // Create an anchor element for downloading the Rhistory file 
+    var downloadLink = document.createElement('a');
+    downloadLink.href = '#';
+    downloadLink.id = 'qwebr-download-history-btn';
+    downloadLink.className = 'qwebr-download-btn';
+
+    // Create an 'i' element for the icon
+    var icon = document.createElement('i');
+    icon.className = 'bi bi-file-code';
+
+    // Append the icon to the anchor element
+    downloadLink.appendChild(icon);
+
+    // Add the text 'Download R History' to the anchor element
+    downloadLink.appendChild(document.createTextNode(' Download R History File'));
+
+    // Create the pre for command history contents
+    var commandContentsPre = document.createElement('pre');
+    commandContentsPre.id = 'qwebr-command-history-contents';
+    commandContentsPre.className = 'qwebr-modal-content-code';
+
+    // Append the close span, h1, and history contents pre to the modal content div
+    modalContentDiv.appendChild(closeSpan);
+    modalContentDiv.appendChild(modalH1);
+    modalContentDiv.appendChild(downloadLink);
+    modalContentDiv.appendChild(commandContentsPre);
+
+    // Append the modal content div to the modal div
+    modalDiv.appendChild(modalContentDiv);
+
+    // Append the modal div to the body
+    document.body.appendChild(modalDiv);
+  }
+
+  function qwebrRegisterRevealJSCommandHistoryModal() {
+    // Select the <ul> element inside the <div> with data-panel="Custom0"
+    let ulElement = document.querySelector('div[data-panel="Custom0"] > ul.slide-menu-items');
+
+    // Find the last <li> element with class slide-tool-item
+    let lastItem = ulElement.querySelector('li.slide-tool-item:last-child');
+
+    // Calculate the next data-item value
+    let nextItemValue = 0;
+    if (lastItem) {
+        nextItemValue = parseInt(lastItem.dataset.item) + 1;
+    }
+
+    // Create a new <li> element
+    let newListItem = document.createElement('li');
+    newListItem.className = 'slide-tool-item';
+    newListItem.dataset.item = nextItemValue.toString(); // Set the next available data-item value
+
+    // Create the <a> element inside the <li>
+    let newLink = document.createElement('a');
+    newLink.href = '#';
+    newLink.id = 'qwebrRHistoryButton'; // Set the ID for the new link
+    
+    // Create the <kbd> element inside the <a>
+    let newKbd = document.createElement('kbd');
+    newKbd.textContent = ' '; // Set to empty as we are not registering a keyboard shortcut
+
+    // Create text node for the link text
+    let newText = document.createTextNode(' View R History');
+
+    // Append <kbd> and text node to <a>
+    newLink.appendChild(newKbd);
+    newLink.appendChild(newText);
+
+    // Append <a> to <li>
+    newListItem.appendChild(newLink);
+
+    // Append <li> to <ul>
+    ulElement.appendChild(newListItem);
+  }
+
+  // Handle setting up the R history modal
+  function qwebrCodeLinks() {
+
+    if (qwebrIsRevealJS()) {
+      qwebrRegisterRevealJSCommandHistoryModal();
+      return;
+    }
+
+    // Create the container div
+    var containerDiv = document.createElement('div');
+    containerDiv.className = 'quarto-code-links';
+
+    // Create the h2 element
+    var h2 = document.createElement('h2');
+    h2.textContent = 'webR Code Links';
+
+    // Create the ul element
+    var ul = document.createElement('ul');
+
+    // Create the li element
+    var li = document.createElement('li');
+
+    // Create the a_history_btn element
+    var a_history_btn = document.createElement('a');
+    a_history_btn.href = 'javascript:void(0)';
+    a_history_btn.setAttribute('id', 'qwebrRHistoryButton');
+
+    // Create the i_history_btn element
+    var i_history_btn = document.createElement('i');
+    i_history_btn.className = 'bi bi-file-code';
+
+    // Create the text node for the link text
+    var text_history_btn = document.createTextNode('View R History');
+
+    // Append the icon element and link text to the a element
+    a_history_btn.appendChild(i_history_btn);
+    a_history_btn.appendChild(text_history_btn);
+
+    // Append the a element to the li element
+    li.appendChild(a_history_btn);
+
+    // Append the li element to the ul element
+    ul.appendChild(li);
+
+    // Append the h2 and ul elements to the container div
+    containerDiv.appendChild(h2);
+    containerDiv.appendChild(ul);
+
+    // Append the container div to the element with the ID 'quarto-margin-sidebar'
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+      
+    // If the sidebar element is not found, create it
+    if(!sidebar) {
+      qwebrPlaceQuartoSidebar();
+    }
+    
+    // Re-select the sidebar element (if it was just created)
+    sidebar = document.getElementById('quarto-margin-sidebar');   
+
+
+    // If the sidebar element exists, append the container div to it
+    if(sidebar) {
+      // Append the container div to the sidebar
+      sidebar.appendChild(containerDiv);
+      // Force the sidebar to be clickable by removing the 'zindex-bottom' class
+      // added in pre-release: https://github.com/quarto-dev/quarto-cli/commit/f0c53a1ffcaa1de4eccbf07803b096898248adcc
+      sidebar.className = 'sidebar margin-sidebar';
+    } else {
+      // Get a debugger ...
+      console.warn('Element with ID "quarto-margin-sidebar" not found.');
+    }
+  }
+
+  // Call the function to append the code links for qwebR into the right sidebar
+  qwebrCodeLinks();
+
+  // Add the command history modal
+  qwebrAddCommandHistoryModal();
+
+  displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
+  qwebrOffScreenCanvasSupportWarningMessage();
+  </script>
+  <script type="module">
+  // Define a global storage and retrieval solution ----
+
+  // Store commands executed in R
+  globalThis.qwebrRCommandHistory = [];
+
+  // Function to retrieve the command history
+  globalThis.qwebrFormatRHistory = function() {
+     return qwebrRCommandHistory.join("\n\n");
+  }
+
+  // Retrieve HTML Elements ----
+
+  // Get the command modal
+  const command_history_modal = document.getElementById("qwebr-history-modal");
+
+  // Get the button that opens the command modal
+  const command_history_btn = document.getElementById("qwebrRHistoryButton");
+
+  // Get the <span> element that closes the command modal
+  const command_history_close_span = document.getElementById("qwebr-command-history-close-btn");
+
+  // Get the download button for r history information
+  const command_history_download_btn = document.getElementById("qwebr-download-history-btn");
+
+  // Plug in command history into modal/download button ----
+
+  // Function to populate the modal with command history
+  function populateCommandHistoryModal() {
+      document.getElementById("qwebr-command-history-contents").innerHTML = qwebrFormatRHistory() || "No commands have been executed yet.";
+  }
+
+  // Function to format the current date and time to
+  // a string with the format YYYY-MM-DD-HH-MM-SS
+  function formatDateTime() {
+      const now = new Date();
+
+      const year = now.getFullYear();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      return `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
+  }
+
+
+  // Function to convert document title with datetime to a safe filename
+  function safeFileName() {
+      // Get the current page title
+      let pageTitle = document.title;
+
+      // Combine the current page title with the current date and time
+      let pageNameWithDateTime = `Rhistory-${pageTitle}-${formatDateTime()}`;
+
+      // Replace unsafe characters with safe alternatives
+      let safeFilename = pageNameWithDateTime.replace(/[\\/:\*\?! "<>\|]/g, '-');
+
+      return safeFilename;
+  }
+
+
+  // Function to download list contents as text file
+  function downloadRHistory() {
+      // Get the current page title + datetime and use it as the filename
+      const filename = `${safeFileName()}.R`;
+
+      // Get the text contents of the R History list
+      const text = qwebrFormatRHistory();
+
+      // Create a new Blob object with the text contents
+      const blob = new Blob([text], { type: 'text/plain' });
+    
+      // Create a new anchor element for the download
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+
+      // Append the anchor to the body, click it, and remove it
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+  }
+
+  // Register event handlers ----
+
+  // When the user clicks the View R History button, open the command modal
+  command_history_btn.onclick = function() {
+      populateCommandHistoryModal();
+      command_history_modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the command modal
+  command_history_close_span.onclick = function() {
+      command_history_modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the command modal, close it
+  window.onclick = function(event) {
+      if (event.target == command_history_modal) {
+          command_history_modal.style.display = "none";
+      }
+  }
+
+  // Add an onclick event listener to the download button so that
+  // the user can download the R history as a text file
+  command_history_download_btn.onclick = function() {
+      downloadRHistory();
+  };
+  </script>
+  <script type="module">
+  // Supported Evaluation Types for Context
+  globalThis.EvalTypes = Object.freeze({
+    Interactive: 'interactive',
+    Setup: 'setup',
+    Output: 'output',
+  });
+
+  // Function that obtains the font size for a given element 
+  globalThis.qwebrCurrentFontSizeOnElement = function(element, cssProperty = 'font-size') {
+
+    const currentFontSize = parseFloat(
+      window
+      .getComputedStyle(element)
+      .getPropertyValue(cssProperty)
+    );
+    
+    return currentFontSize;
+  }
+
+  // Function to determine font scaling
+  globalThis.qwebrScaledFontSize = function(div, qwebrOptions) {
+    // Determine if we should compute font-size using RevealJS's `--r-main-font-size` 
+    // or if we can directly use the document's `font-size`.
+    const cssProperty = document.body.classList.contains('reveal') ? 
+      "--r-main-font-size" : "font-size";
+    
+    // Get the current font size on the div element
+    const elementFontSize = qwebrCurrentFontSizeOnElement(div, cssProperty);
+
+    // Determine the scaled font size value
+    const scaledFontSize = ((qwebrOptions['editor-font-scale'] ?? 1) * elementFontSize) ?? 17.5;
+
+    return scaledFontSize;
+  }
+
+
+  // Function that dispatches the creation request
+  globalThis.qwebrCreateHTMLElement = function (
+    cellData
+  ) {
+
+    // Extract key components
+    const evalType = cellData.options.context;
+    const qwebrCounter = cellData.id;
+
+    // We make an assumption that insertion points are defined by the Lua filter as:
+    // qwebr-insertion-location-{qwebrCounter} 
+    const elementLocator = document.getElementById(`qwebr-insertion-location-${qwebrCounter}`);
+
+    // Figure out the routine to use to insert the element.
+    let qwebrElement;
+    switch ( evalType ) {
+      case EvalTypes.Interactive:
+        qwebrElement = qwebrCreateInteractiveElement(qwebrCounter, cellData.options);
+        break;
+      case EvalTypes.Output: 
+        qwebrElement = qwebrCreateNonInteractiveOutputElement(qwebrCounter, cellData.options);
+        break;
+      case EvalTypes.Setup: 
+        qwebrElement = qwebrCreateNonInteractiveSetupElement(qwebrCounter, cellData.options);
+        break;
+      default: 
+        qwebrElement = document.createElement('div');
+        qwebrElement.textContent = 'Error creating `quarto-webr` element';
+    }
+
+    // Insert the dynamically generated object at the document location.
+    elementLocator.appendChild(qwebrElement);
+  };
+
+  // Function that setups the interactive element creation
+  globalThis.qwebrCreateInteractiveElement = function (qwebrCounter, qwebrOptions) {
+
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = 'qwebr-interactive-area-' + qwebrCounter;
+    mainDiv.className = `qwebr-interactive-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+
+    // Create toolbar div
+    var toolbarDiv = document.createElement('div');
+    toolbarDiv.className = 'qwebr-editor-toolbar';
+    toolbarDiv.id = 'qwebr-editor-toolbar-' + qwebrCounter;
+
+    // Create a div to hold the left buttons
+    var leftButtonsDiv = document.createElement('div');
+    leftButtonsDiv.className = 'qwebr-editor-toolbar-left-buttons';
+
+    // Create a div to hold the right buttons
+    var rightButtonsDiv = document.createElement('div');
+    rightButtonsDiv.className = 'qwebr-editor-toolbar-right-buttons';
+
+    // Create Run Code button
+    var runCodeButton = document.createElement('button');
+    runCodeButton.className = 'btn btn-default qwebr-button qwebr-button-run';
+    runCodeButton.disabled = true;
+    runCodeButton.type = 'button';
+    runCodeButton.id = 'qwebr-button-run-' + qwebrCounter;
+    runCodeButton.textContent = '🟡 Loading webR...';
+    runCodeButton.title = `Run code (Shift + Enter)`;
+
+    // Append buttons to the leftButtonsDiv
+    leftButtonsDiv.appendChild(runCodeButton);
+
+    // Create Reset button
+    var resetButton = document.createElement('button');
+    resetButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-reset';
+    resetButton.type = 'button';
+    resetButton.id = 'qwebr-button-reset-' + qwebrCounter;
+    resetButton.title = 'Start over';
+    resetButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+    // Create Copy button
+    var copyButton = document.createElement('button');
+    copyButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-copy';
+    copyButton.type = 'button';
+    copyButton.id = 'qwebr-button-copy-' + qwebrCounter;
+    copyButton.title = 'Copy code';
+    copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+
+    // Append buttons to the rightButtonsDiv
+    rightButtonsDiv.appendChild(resetButton);
+    rightButtonsDiv.appendChild(copyButton);
+
+    // Create console area div
+    var consoleAreaDiv = document.createElement('div');
+    consoleAreaDiv.id = 'qwebr-console-area-' + qwebrCounter;
+    consoleAreaDiv.className = 'qwebr-console-area';
+
+    // Create editor div
+    var editorDiv = document.createElement('div');
+    editorDiv.id = 'qwebr-editor-' + qwebrCounter;
+    editorDiv.className = 'qwebr-editor';
+
+    // Create output code area div
+    var outputCodeAreaDiv = document.createElement('div');
+    outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+    outputCodeAreaDiv.className = 'qwebr-output-code-area';
+    outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+    // Create pre element inside output code area
+    var preElement = document.createElement('pre');
+    preElement.style.visibility = 'hidden';
+    outputCodeAreaDiv.appendChild(preElement);
+
+    // Create output graph area div
+    var outputGraphAreaDiv = document.createElement('div');
+    outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+    outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+    // Append buttons to the toolbar
+    toolbarDiv.appendChild(leftButtonsDiv);
+    toolbarDiv.appendChild(rightButtonsDiv);
+
+    // Append all elements to the main div
+    mainDiv.appendChild(toolbarDiv);
+    consoleAreaDiv.appendChild(editorDiv);
+    consoleAreaDiv.appendChild(outputCodeAreaDiv);
+    mainDiv.appendChild(consoleAreaDiv);
+    mainDiv.appendChild(outputGraphAreaDiv);
+
+    return mainDiv;
+  }
+
+  // Function that adds output structure for non-interactive output
+  globalThis.qwebrCreateNonInteractiveOutputElement = function(qwebrCounter, qwebrOptions) {
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = 'qwebr-noninteractive-area-' + qwebrCounter;
+    mainDiv.className = `qwebr-noninteractive-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+    
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+    
+    // Create a status container div
+    var statusContainer = createLoadingContainer(qwebrCounter);
+
+    // Create output code area div
+    var outputCodeAreaDiv = document.createElement('div');
+    outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+    outputCodeAreaDiv.className = 'qwebr-output-code-area';
+    outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+    // Create pre element inside output code area
+    var preElement = document.createElement('pre');
+    preElement.style.visibility = 'hidden';
+    outputCodeAreaDiv.appendChild(preElement);
+
+    // Create output graph area div
+    var outputGraphAreaDiv = document.createElement('div');
+    outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+    outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+    // Append all elements to the main div
+    mainDiv.appendChild(statusContainer);
+    mainDiv.appendChild(outputCodeAreaDiv);
+    mainDiv.appendChild(outputGraphAreaDiv);
+
+    return mainDiv;
+  };
+
+  // Function that adds a stub in the page to indicate a setup cell was used.
+  globalThis.qwebrCreateNonInteractiveSetupElement = function(qwebrCounter, qwebrOptions) {
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = `qwebr-noninteractive-setup-area-${qwebrCounter}`;
+    mainDiv.className = `qwebr-noninteractive-setup-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+
+
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+
+    // Create a status container div
+    var statusContainer = createLoadingContainer(qwebrCounter);
+
+    // Append status onto the main div
+    mainDiv.appendChild(statusContainer);
+
+    return mainDiv;
+  }
+
+
+  // Function to create loading container with specified ID
+  globalThis.createLoadingContainer = function(qwebrCounter) {
+
+    // Create a status container
+    const container = document.createElement('div');
+    container.id = `qwebr-non-interactive-loading-container-${qwebrCounter}`;
+    container.className = 'qwebr-non-interactive-loading-container qwebr-cell-needs-evaluation';
+
+    // Create an R project logo to indicate its a code space
+    const rProjectIcon = document.createElement('i');
+    rProjectIcon.className = 'fa-brands fa-r-project fa-3x qwebr-r-project-logo';
+
+    // Setup a loading icon from font awesome
+    const spinnerIcon = document.createElement('i');
+    spinnerIcon.className = 'fa-solid fa-spinner fa-spin fa-1x qwebr-icon-status-spinner';
+
+    // Add a section for status text
+    const statusText = document.createElement('p');
+    statusText.id = `qwebr-status-text-${qwebrCounter}`;
+    statusText.className = `qwebr-status-text qwebr-cell-needs-evaluation`;
+    statusText.innerText = 'Loading webR...';
+
+    // Incorporate an inner container
+    const innerContainer = document.createElement('div');
+
+    // Append elements to the inner container
+    innerContainer.appendChild(spinnerIcon);
+    innerContainer.appendChild(statusText);
+
+    // Append elements to the main container
+    container.appendChild(rProjectIcon);
+    container.appendChild(innerContainer);
+
+    return container;
+  }
+  </script>
+  <script type="module">
+  // Function to install a single package
+  async function qwebrInstallRPackage(packageName) {
+    await mainWebR.evalRVoid(`webr::install('${packageName}');`);
+  }
+
+  // Function to load a single package
+  async function qwebrLoadRPackage(packageName) {
+    await mainWebR.evalRVoid(`require('${packageName}', quietly = TRUE)`);
+  }
+
+  // Generic function to process R packages
+  async function qwebrProcessRPackagesWithStatus(packages, processType, displayStatusMessageUpdate = true) {
+    // Switch between contexts
+    const messagePrefix = processType === 'install' ? 'Installing' : 'Loading';
+
+    // Modify button state
+    qwebrSetInteractiveButtonState(`🟡 ${messagePrefix} package ...`, false);
+
+    // Iterate over packages
+    for (let i = 0; i < packages.length; i++) {
+      const activePackage = packages[i];
+      const formattedMessage = `${messagePrefix} package ${i + 1} out of ${packages.length}: ${activePackage}`;
+
+      // Display the update in header
+      if (displayStatusMessageUpdate) {
+        qwebrUpdateStatusHeader(formattedMessage);
+      }
+
+      // Display the update in non-active areas
+      qwebrUpdateStatusMessage(formattedMessage);
+
+      // Run package installation
+      if (processType === 'install') {
+        await qwebrInstallRPackage(activePackage);
+      } else {
+        await qwebrLoadRPackage(activePackage);
+      }
+    }
+
+    // Clean slate
+    if (processType === 'load') {
+      await mainWebR.flush();
+    }
+  }
+
+  // Start a timer
+  const initializeWebRTimerStart = performance.now();
+
+  // Encase with a dynamic import statement
+  globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs").then(
+    async ({ WebR, ChannelType }) => {
+      // Populate WebR options with defaults or new values based on `webr` meta
+      globalThis.mainWebR = new WebR(qwebrCustomizedWebROptions);
+
+      // Initialization WebR
+      await mainWebR.init();
+
+      // Setup a shelter
+      globalThis.mainWebRCodeShelter = await new mainWebR.Shelter();
+
+      // Setup a pager to allow processing help documentation
+      await mainWebR.evalRVoid('webr::pager_install()');
+
+      // Setup a viewer to allow processing htmlwidgets.
+      // This might not be available in old webr version
+      await mainWebR.evalRVoid('try({ webr::viewer_install() })');
+
+      // Override the existing install.packages() to use webr::install()
+      await mainWebR.evalRVoid('webr::shim_install()');
+
+      // Specify the repositories to pull from
+      // Note: webR does not use the `repos` option, but instead uses `webr_pkg_repos`
+      // inside of `install()`. However, other R functions still pull from `repos`.
+      await mainWebR.evalRVoid(`
+        options(
+          webr_pkg_repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')}),
+          repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')})
+        )
+      `);
+
+      // Check to see if any packages need to be installed
+      if (qwebrSetupRPackages) {
+        // Obtain only a unique list of packages
+        const uniqueRPackageList = Array.from(new Set(qwebrInstallRPackagesList));
+
+        // Install R packages one at a time (either silently or with a status update)
+        await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'install', qwebrShowStartupMessage);
+
+        if (qwebrAutoloadRPackages) {
+          // Load R packages one at a time (either silently or with a status update)
+          await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'load', qwebrShowStartupMessage);
+        }
+      }
+    }
+  );
+
+  // Stop timer
+  const initializeWebRTimerEnd = performance.now();
+
+  </script>
+  <script type="module">
+  // Function to verify a given JavaScript Object is empty
+  globalThis.qwebrIsObjectEmpty = function (arr) {
+      return Object.keys(arr).length === 0;
+  }
+
+  // Global version of the Escape HTML function that converts HTML
+  // characters to their HTML entities.
+  globalThis.qwebrEscapeHTMLCharacters = function(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+  };
+
+  // Passthrough results
+  globalThis.qwebrIdentity = function(x) {
+      return x;
+  };
+
+  // Append a comment
+  globalThis.qwebrPrefixComment = function(x, comment) {
+      return `${comment}${x}`;
+  };
+
+  // Function to store the code in the history
+  globalThis.qwebrLogCodeToHistory = function(codeToRun, options) {
+      qwebrRCommandHistory.push(
+          `# Ran code in ${options.label} at ${new Date().toLocaleString()} ----\n${codeToRun}`
+      );
+  };
+
+  // Function to attach a download button onto the canvas
+  // allowing the user to download the image.
+  function qwebrImageCanvasDownloadButton(canvas, canvasContainer) {
+
+      // Create the download button
+      const downloadButton = document.createElement('button');
+      downloadButton.className = 'qwebr-canvas-image-download-btn';
+      downloadButton.textContent = 'Download Image';
+      canvasContainer.appendChild(downloadButton);
+
+      // Trigger a download of the image when the button is clicked
+      downloadButton.addEventListener('click', function() {
+          const image = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = image;
+          link.download = 'qwebr-canvas-image.png';
+          link.click();
+      });
+  }
+
+
+  // Function to parse the pager results
+  globalThis.qwebrParseTypePager = async function (msg) {
+
+      // Split out the event data
+      const { path, title, deleteFile } = msg.data;
+
+      // Process the pager data by reading the information from disk
+      const paged_data = await mainWebR.FS.readFile(path).then((data) => {
+          // Obtain the file content
+          let content = new TextDecoder().decode(data);
+
+          // Remove excessive backspace characters until none remain
+          while(content.match(/.[\b]/)){
+              content = content.replace(/.[\b]/g, '');
+          }
+
+          // Returned cleaned data
+          return content;
+      });
+
+      // Unlink file if needed
+      if (deleteFile) {
+          await mainWebR.FS.unlink(path);
+      }
+
+      // Return extracted data with spaces
+      return paged_data;
+  };
+
+
+  // Function to parse the browse results
+  globalThis.qwebrParseTypeBrowse = async function (msg) {
+
+      // msg.type === "browse"
+      const path = msg.data.url;
+
+      // Process the browse data by reading the information from disk
+      const browse_data = await mainWebR.FS.readFile(path).then((data) => {
+          // Obtain the file content
+          let content = new TextDecoder().decode(data);
+
+          return content;
+      });
+
+      // Return extracted data as-is
+      return browse_data;
+  };
+
+  // Function to run the code using webR and parse the output
+  globalThis.qwebrComputeEngine = async function(
+      codeToRun,
+      elements,
+      options) {
+
+      // Call into the R compute engine that persists within the document scope.
+      // To be prepared for all scenarios, the following happens:
+      // 1. We setup a canvas device to write to by making a namespace call into the {webr} package
+      // 2. We use values inside of the options array to set the figure size.
+      // 3. We capture the output stream information (STDOUT and STERR)
+      // 4. We disable the current device's image creation.
+      // 5. Piece-wise parse the results into the different output areas
+
+      // Create a pager variable for help/file contents
+      let pager = [];
+
+      // Handle how output is processed
+      let showMarkup = options.results === "markup" && options.output !== "asis";
+      let processOutput;
+
+      if (showMarkup) {
+          processOutput = qwebrEscapeHTMLCharacters;
+      } else {
+          processOutput = qwebrIdentity;
+      }
+
+      // ----
+      // Convert from Inches to Pixels by using DPI (dots per inch)
+      // for bitmap devices (dpi * inches = pixels)
+      let fig_width = options["fig-width"] * options["dpi"];
+      let fig_height = options["fig-height"] * options["dpi"];
+
+      // Initialize webR
+      await mainWebR.init();
+
+      // Configure capture output
+      let captureOutputOptions = {
+          withAutoprint: true,
+          captureStreams: true,
+          captureConditions: false,
+          // env: webR.objs.emptyEnv, // maintain a global environment for webR v0.2.0
+      };
+
+      // Determine if the browser supports OffScreen
+      if (qwebrOffScreenCanvasSupport()) {
+          // Mirror default options of webr::canvas()
+          // with changes to figure height and width.
+          captureOutputOptions.captureGraphics = {
+              width: fig_width,
+              height: fig_height,
+              bg: "white", // default: transparent
+              pointsize: 12,
+              capture: true
+          };
+      }  else {
+          // Disable generating graphics
+          captureOutputOptions.captureGraphics = false;
+      }
+
+      // Store the code to run in history
+      qwebrLogCodeToHistory(codeToRun, options);
+
+      // Setup a webR canvas by making a namespace call into the {webr} package
+      // Evaluate the R code
+      // Remove the active canvas silently
+      const result = await mainWebRCodeShelter.captureR(
+          `${codeToRun}`,
+          captureOutputOptions
+      );
+
+      // -----
+
+      // Start attempting to parse the result data
+      processResultOutput:try {
+
+          // Avoid running through output processing
+          if (options.results === "hide" || options.output === "false") {
+              break processResultOutput;
+          }
+
+          // Merge output streams of STDOUT and STDErr (messages and errors are combined.)
+          // Require both `warning` and `message` to be true to display `STDErr`.
+          const out = result.output
+          .filter(
+              evt => evt.type === "stdout" ||
+              ( evt.type === "stderr" && (options.warning === "true" && options.message === "true"))
+          )
+          .map((evt, index) => {
+              const className = `qwebr-output-code-${evt.type}`;
+              const outputResult = qwebrPrefixComment(processOutput(evt.data), options.comment);
+              return `<code id="${className}-editor-${elements.id}-result-${index + 1}" class="${className}">${outputResult}</code>`;
+          })
+          .join("\n");
+
+
+          // Clean the state
+          // We're now able to process pager events.
+          // As a result, we cannot maintain a true 1-to-1 output order
+          // without individually feeding each line
+          const msgs = await mainWebR.flush();
+
+          // Use `map` to process the filtered "pager" events asynchronously
+          const pager = [];
+          const browse = [];
+
+          await Promise.all(
+              msgs.map(
+                  async (msg) => {
+
+                      const msgType = msg.type || "unknown";
+
+                      switch(msgType) {
+                          case 'pager':
+                              const pager_data = await qwebrParseTypePager(msg);
+                              pager.push(pager_data);
+                              break;
+                          case 'browse':
+                              const browse_data = await qwebrParseTypeBrowse(msg);
+                              browse.push(browse_data);
+                              break;
+                      }
+                      return;
+                  }
+              )
+          );
+
+          // Nullify the output area of content
+          elements.outputCodeDiv.innerHTML = "";
+          elements.outputGraphDiv.innerHTML = "";
+
+          // Design an output object for messages
+          const pre = document.createElement("pre");
+          if (/\S/.test(out)) {
+              // Display results as HTML elements to retain output styling
+              const div = document.createElement("div");
+              div.innerHTML = out;
+
+              // Calculate a scaled font-size value
+              const scaledFontSize = qwebrScaledFontSize(
+                  elements.outputCodeDiv, options);
+
+              // Override output code cell size
+              pre.style.fontSize = `${scaledFontSize}px`;
+              pre.appendChild(div);
+          } else {
+              // If nothing is present, hide the element.
+              pre.style.visibility = "hidden";
+          }
+
+          elements.outputCodeDiv.appendChild(pre);
+
+          // Determine if we have graphs to display
+          if (result.images.length > 0) {
+
+              // Create figure element
+              const figureElement = document.createElement("figure");
+              figureElement.className = "qwebr-canvas-image";
+
+              // Place each rendered graphic onto a canvas element
+              result.images.forEach((img) => {
+
+                  // Construct canvas for object
+                  const canvas = document.createElement("canvas");
+
+                  // Add an image download button
+                  qwebrImageCanvasDownloadButton(canvas, figureElement);
+
+                  // Set canvas size to image
+                  canvas.width = img.width;
+                  canvas.height = img.height;
+
+                  // Apply output truncations
+                  canvas.style.width = options["out-width"] ? options["out-width"] : `${fig_width}px`;
+                  if (options["out-height"]) {
+                      canvas.style.height = options["out-height"];
+                  }
+
+                  // Apply styling
+                  canvas.style.display = "block";
+                  canvas.style.margin = "auto";
+
+                  // Draw image onto Canvas
+                  const ctx = canvas.getContext("2d");
+                  ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                  // Append canvas to figure output area
+                  figureElement.appendChild(canvas);
+
+              });
+
+              if (options['fig-cap']) {
+                  // Create figcaption element
+                  const figcaptionElement = document.createElement('figcaption');
+                  figcaptionElement.innerText = options['fig-cap'];
+                  // Append figcaption to figure
+                  figureElement.appendChild(figcaptionElement);
+              }
+
+              elements.outputGraphDiv.appendChild(figureElement);
+
+          }
+
+          // Display the pager data
+          if (pager.length > 0) {
+              // Use the `pre` element to preserve whitespace.
+              pager.forEach((paged_data, index) => {
+                  const pre_pager = document.createElement("pre");
+                  pre_pager.innerText = paged_data;
+                  pre_pager.classList.add("qwebr-output-code-pager");
+                  pre_pager.setAttribute("id", `qwebr-output-code-pager-editor-${elements.id}-result-${index + 1}`);
+                  elements.outputCodeDiv.appendChild(pre_pager);
+              });
+          }
+
+          // Display the browse data
+          if (browse.length > 0) {
+              // Use the `pre` element to preserve whitespace.
+              browse.forEach((browse_data, index) => {
+                  const iframe_browse = document.createElement('iframe');
+                  iframe_browse.classList.add("qwebr-output-code-browse");
+                  iframe_browse.setAttribute("id", `qwebr-output-code-browse-editor-${elements.id}-result-${index + 1}`);
+                  iframe_browse.style.width = "100%";
+                  iframe_browse.style.minHeight = "500px";
+                  elements.outputCodeDiv.appendChild(iframe_browse);
+
+                  iframe_browse.contentWindow.document.open();
+                  iframe_browse.contentWindow.document.write(browse_data);
+                  iframe_browse.contentWindow.document.close();
+              });
+          }
+      } finally {
+          // Clean up the remaining code
+          mainWebRCodeShelter.purge();
+      }
+  };
+
+  // Function to execute the code (accepts code as an argument)
+  globalThis.qwebrExecuteCode = async function (
+      codeToRun,
+      id,
+      options = {}) {
+
+      // If options are not passed, we fall back on the bare minimum to handle the computation
+      if (qwebrIsObjectEmpty(options)) {
+          options = {
+              "context": "interactive",
+              "fig-width": 7, "fig-height": 5,
+              "out-width": "700px", "out-height": "",
+              "dpi": 72,
+              "results": "markup",
+              "warning": "true", "message": "true",
+          };
+      }
+
+      // Next, we access the compute areas values
+      const elements = {
+          runButton: document.getElementById(`qwebr-button-run-${id}`),
+          outputCodeDiv: document.getElementById(`qwebr-output-code-area-${id}`),
+          outputGraphDiv: document.getElementById(`qwebr-output-graph-area-${id}`),
+          id: id,
+      }
+
+      // Disallowing execution of other code cells
+      document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+          btn.disabled = true;
+      });
+
+      if (options.context == EvalTypes.Interactive) {
+          // Emphasize the active code cell
+          elements.runButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i> <span>Run Code</span>';
+      }
+
+      // Evaluate the code and parse the output into the document
+      await qwebrComputeEngine(codeToRun, elements, options);
+
+      // Switch to allowing execution of code
+      document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+          btn.disabled = false;
+      });
+
+      if (options.context == EvalTypes.Interactive) {
+          // Revert to the initial code cell state
+          elements.runButton.innerHTML = '<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>';
+      }
+  }
+
+  </script>
 </head>
 <body class="quarto-light">
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+<script type="module" id="qwebr-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs'
+    }
+  });
+</script>
+<script type="module">
+// Function to update Monaco Editors when body class changes
+function updateMonacoEditorsOnBodyClassChange() {
+    // Select the body element
+    const body = document.querySelector('body');
+
+    // Options for the observer (which mutations to observe)
+    const observerOptions = {
+        attributes: true,  // Observe changes to attributes
+        attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+    };
+
+    // Callback function to execute when mutations are observed
+    const bodyClassChangeCallback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // Class attribute has changed
+                // Update all Monaco Editors on the page
+                updateMonacoEditorTheme();
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(bodyClassChangeCallback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(body, observerOptions);
+}
+
+// Function to update all instances of Monaco Editors on the page
+function updateMonacoEditorTheme() {
+    // Determine what VS Theme to use
+    const vsThemeToUse = document.body.classList.contains("quarto-dark") ? 'vs-dark' : 'vs' ;
+
+    // Iterate through all initialized Monaco Editors
+    qwebrEditorInstances.forEach( function(editorInstance) { 
+        editorInstance.updateOptions({ theme: vsThemeToUse }); 
+    });
+}
+
+// Call the function to start observing changes to body class
+updateMonacoEditorsOnBodyClassChange();
+</script>
+<script type="module">
+// Global array to store Monaco Editor instances
+globalThis.qwebrEditorInstances = [];
+
+function isValidCodeLineNumbers(stringCodeLineNumbers) {
+  // Regular expression to match valid input strings
+  const regex = /^(\d+(-\d+)?)(,\d+(-\d+)?)*$/;
+  return regex.test(stringCodeLineNumbers);
+}
+
+// Function that builds and registers a Monaco Editor instance    
+globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
+
+  const initialCode = cellData.code;
+  const qwebrCounter = cellData.id;
+  const qwebrOptions = cellData.options;
+
+  // Retrieve the previously created document elements
+  let runButton = document.getElementById(`qwebr-button-run-${qwebrCounter}`);
+  let resetButton = document.getElementById(`qwebr-button-reset-${qwebrCounter}`);
+  let copyButton = document.getElementById(`qwebr-button-copy-${qwebrCounter}`);
+  let editorDiv = document.getElementById(`qwebr-editor-${qwebrCounter}`);
+
+  // Load the Monaco Editor and create an instance
+  let editor;
+  require(['vs/editor/editor.main'], function () {
+    editor = monaco.editor.create(editorDiv, {
+      value: initialCode,
+      language: 'r',
+      theme: 'vs-light',
+      automaticLayout: true,           // Works wonderfully with RevealJS
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
+      fontSize: qwebrScaledFontSize(editorDiv, qwebrOptions),         
+      renderLineHighlight: "none",      // Disable current line highlighting
+      hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+      readOnly: qwebrOptions['read-only'] ?? false,
+      quickSuggestions: qwebrOptions['editor-quick-suggestions'] ?? false,
+      wordWrap: (qwebrOptions['editor-word-wrap'] == 'true' ? "on" : "off")
+    });
+
+    // Store the official counter ID to be used in keyboard shortcuts
+    editor.__qwebrCounter = qwebrCounter;
+
+    // Store the official div container ID
+    editor.__qwebrEditorId = `qwebr-editor-${qwebrCounter}`;
+
+    // Store the initial code value and options
+    editor.__qwebrinitialCode = initialCode;
+    editor.__qwebrOptions = qwebrOptions;
+
+    // Set at the model level the preferred end of line (EOL) character to LF.
+    // This prevent `\r\n` from being given to the webR engine if the user is on Windows.
+    // See details in: https://github.com/coatless/quarto-webr/issues/94
+    // Associated error text: 
+    // Error: <text>:1:7 unexpected input
+
+    // Retrieve the underlying model
+    const model = editor.getModel();
+    // Set EOL for the model
+    model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    
+    // Dynamically modify the height of the editor window if new lines are added.
+    let ignoreEvent = false;
+    const updateHeight = () => {
+      // Increment editor height by 2 to prevent vertical scroll bar from appearing
+      const contentHeight = editor.getContentHeight() + 2;
+
+      // Retrieve editor-max-height option
+      const maxEditorHeight = qwebrOptions['editor-max-height'];
+
+      // If editor-max-height is missing, allow infinite growth. Otherwise, threshold.
+      const editorHeight = !maxEditorHeight ?  contentHeight : Math.min(contentHeight, maxEditorHeight);
+
+      // We're avoiding a width change
+      //editorDiv.style.width = `${width}px`;
+      editorDiv.style.height = `${editorHeight}px`;
+      try {
+        ignoreEvent = true;
+
+        // The key to resizing is this call
+        editor.layout();
+      } finally {
+        ignoreEvent = false;
+      }
+    };
+
+    // Function to generate decorations to highlight lines
+    // in the editor based on input string.
+    function decoratorHighlightLines(codeLineNumbers) {
+      // Store the lines to be lighlight
+      let linesToHighlight = [];
+      
+      // Parse the codeLineNumbers string to get the line numbers to highlight
+      // First, split the string by commas
+      codeLineNumbers.split(',').forEach(part => {
+        // Check if we have a range of lines
+        if (part.includes('-')) {
+            // Handle range of lines (e.g., "6-8")
+            const [start, end] = part.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                linesToHighlight.push(i);
+            }
+        } else {
+            // Handle single line (e.g., "7")
+            linesToHighlight.push(Number(part));
+        }
+      });
+  
+      // Create monaco decorations for the lines to highlight
+      const decorations = linesToHighlight.map(lineNumber => ({
+          range: new monaco.Range(lineNumber, 1, lineNumber, 1),
+          options: {
+              isWholeLine: true,
+              className: 'qwebr-editor-highlight-line'
+          }
+      }));
+  
+      // Return decorations to be applied to the editor
+      return decorations;
+    }
+
+    // Ensure that the editor-code-line-numbers option is set and valid
+    // then apply styling
+    if (qwebrOptions['editor-code-line-numbers']) {
+      // Remove all whitespace from the string
+      const codeLineNumbers = qwebrOptions['editor-code-line-numbers'].replace(/\s/g,'');
+      // Check if the string is valid for line numbers, e.g., "1,3-5,7"
+      if (isValidCodeLineNumbers(codeLineNumbers)) {
+        // Apply the decorations to the editor
+        editor.createDecorationsCollection(decoratorHighlightLines(codeLineNumbers));
+      } else {
+        // Warn the user that the input is invalid
+        console.warn(`Invalid "editor-code-line-numbers" value in code cell ${qwebrOptions['label']}: ${codeLineNumbers}`);
+      }
+    }
+
+    // Helper function to check if selected text is empty
+    function isEmptyCodeText(selectedCodeText) {
+      return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+    }
+
+    // Registry of keyboard shortcuts that should be re-added to each editor window
+    // when focus changes.
+    const addWebRKeyboardShortCutCommands = () => {
+      // Add a keydown event listener for Shift+Enter to run all code in cell
+      editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+
+        // Retrieve all text inside the editor
+        qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+      });
+
+      // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+
+        // Get the selected text from the editor
+        const selectedText = editor.getModel().getValueInRange(editor.getSelection());
+        // Check if no code is selected
+        if (isEmptyCodeText(selectedText)) {
+          // Obtain the current cursor position
+          let currentPosition = editor.getPosition();
+          // Retrieve the current line content
+          let currentLine = editor.getModel().getLineContent(currentPosition.lineNumber);
+
+          // Propose a new position to move the cursor to
+          let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+
+          // Check if the new position is beyond the last line of the editor
+          if (newPosition.lineNumber > editor.getModel().getLineCount()) {
+            // Add a new line at the end of the editor
+            editor.executeEdits("addNewLine", [{
+            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+            text: "\n", 
+            forceMoveMarkers: true,
+            }]);
+          }
+          
+          // Run the entire line of code.
+          qwebrExecuteCode(currentLine, editor.__qwebrCounter, editor.__qwebrOptions);
+
+          // Move cursor to new position
+          editor.setPosition(newPosition);
+        } else {
+          // Code to run when Ctrl+Enter is pressed with selected code
+          qwebrExecuteCode(selectedText, editor.__qwebrCounter, editor.__qwebrOptions);
+        }
+      });
+    }
+
+    // Register an on focus event handler for when a code cell is selected to update
+    // what keyboard shortcut commands should work.
+    // This is a workaround to fix a regression that happened with multiple
+    // editor windows since Monaco 0.32.0 
+    // https://github.com/microsoft/monaco-editor/issues/2947
+    editor.onDidFocusEditorText(addWebRKeyboardShortCutCommands);
+
+    // Register an on change event for when new code is added to the editor window
+    editor.onDidContentSizeChange(updateHeight);
+
+    // Manually re-update height to account for the content we inserted into the call
+    updateHeight();
+
+    // Store the editor instance in the global dictionary
+    qwebrEditorInstances[editor.__qwebrCounter] = editor;
+
+  });
+
+  // Add a click event listener to the run button
+  runButton.onclick = function () {
+    qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+  };
+
+  // Add a click event listener to the reset button
+  copyButton.onclick = function () {
+    // Retrieve current code data
+    const data = editor.getValue();
+    
+    // Write code data onto the clipboard.
+    navigator.clipboard.writeText(data || "");
+  };
+  
+  // Add a click event listener to the copy button
+  resetButton.onclick = function () {
+    editor.setValue(editor.__qwebrinitialCode);
+  };
+  
+}
+</script>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Kategoriske værdier</h1>
-  <p class="subtitle">Andele, RR og OR</p>
+  <h1 class="title">Kategoriske udfald</h1>
+  <p class="subtitle">Herunder logistisk regression</p>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section class="slide level2">
+<section id="kategoriske-udfald" class="slide level2">
+<h2>Kategoriske udfald</h2>
+<p>Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.</p>
+<p>Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.</p>
+<p>Der er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.</p>
+<p>Men der kan være - socialklasse eg.</p>
+<p>Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?</p>
+<div class="fragment">
+<p>Vi tæller.</p>
+</div>
+</section>
+<section id="kategoriske-udfald-1" class="slide level2">
+<h2>Kategoriske udfald</h2>
+<p>Hvor mange er der af hver?</p>
+<p>Og hvor stor en andel udgør de så af de samlede hele.</p>
+<p>Er der forskel på de andele grupper imellem?</p>
+<p>Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?</p>
+<p>Og hvor sikre er vi på vores estimater?</p>
+</section>
+<section id="kategoriske-udfald-2" class="slide level2">
+<h2>Kategoriske udfald</h2>
+<p>Så vi skal kigge på:</p>
+<ul>
+<li>Proportioner</li>
+<li>Relativ risiko</li>
+<li>Odds ratio</li>
+<li>Chi i anden</li>
+</ul>
+<p>Og lidt senere den logistisk regression</p>
+</section>
+<section id="en-opgave" class="slide level2">
+<h2>En opgave</h2>
+<div class="columns">
+<div class="column">
+<div class="smaller">
+<p>Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.<br>
+I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.<br>
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.</p>
+<p>Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?</p>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+<aside class="notes">
+<p>Hvor mange positive er der? Hvor mange er der ialt? Det er estimatet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hvor-sikre-er-vi-på-det-tal" class="slide level2">
+<h2>Hvor sikre er vi på det tal?</h2>
+<p>Opgaven fortsætter:</p>
+<p>Angiv også et 95% konfidensinterval på det estimat.</p>
+<p>Estimatet er en andel. Også kaldet en proportion</p>
+<p>Metoden har vi set før.</p>
+<div class="fragment">
+<p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
+</div>
+<div class="fragment">
+<p>Så - hvordan beregner vi en standardfejl på estimatet af en proportion?</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
+</div>
+</section>
+<section id="hvor-sikker-var-vi" class="slide level2">
+<h2>Hvor sikker var vi?</h2>
+<div class="columns">
+<div class="column">
+<div class="smaller">
+<p>Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?</p>
+<p>Proportionen beregnede vi til 0.2015504</p>
+<p>Standardfejlen er givet ved:</p>
+<p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
+<p>Der var 258 observationer i stikprøven</p>
+<p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="videre-med-samme-opgave" class="slide level2">
+<h2>Videre med samme opgave</h2>
+<div class="smaller">
+<p>Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.</p>
+</div>
+<div class="evensmaller">
+<p>Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.</p>
+</div>
+<p>Hvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?</p>
+<div class="smaller">
+<div class="fragment">
+<p>At: I virkeligheden er forskellen på de to prævalenser 0</p>
+</div>
+<div class="fragment">
+<p>Den ene prævalens divideret med den anden er 1 (for så er de ens)</p>
+</div>
+<div class="fragment">
+<p>I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.</p>
+</div>
+<div class="fragment">
+<p>Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?</p>
+</div>
+<div class="fragment">
+<p>Vi tager dem en for en</p>
+</div>
+</div>
+</section>
+<section id="forskel-på-prævalenser" class="slide level2">
+<h2>Forskel på prævalenser</h2>
+<div class="smaller">
+<p>Er forskellen i virkeligheden 0?</p>
+<div class="fragment">
+<p>Eller - vi opstiller en NULL-hypotese, <span class="math inline">\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\)</span></p>
+<p>Den alternative hypotese er så, at der er forskel på prævalensen.</p>
+</div>
+<div class="fragment">
+<p>Samme metode som før:</p>
+<p><span class="math inline">\(estimat_{diff} \pm 1.96*SE_{diff}\)</span></p>
+<p>Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen</p>
+</div>
+<div class="fragment">
+<p>Så… Hvordan beregner vi <span class="math inline">\(SE_{diff}\)</span>?</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></p>
+</div>
+<div class="fragment">
+<p>Og standardfejl på de enkelte proportioner var: <span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></p>
+</div>
+</div>
+</section>
+<section id="så-kan-vi-regne" class="slide level2">
+<h2>Så kan vi regne</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Prævalens af TB blandt de 97 der delte sprøjter: 24.7%</li>
+<li>Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%</li>
+<li><span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></li>
+<li><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></li>
+</ul>
+</div><div class="column">
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="kritisk-værdi" class="slide level2">
+<h2>Kritisk værdi</h2>
+<div class="smaller">
+<p>Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.</p>
+<p><span class="math inline">\(|\frac{\text{estimat}}{SE}| &gt; \text{kritisk værdi}\)</span></p>
+<p>Når vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.</p>
+<p>Venstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.</p>
+<p>Så vi kan ofte springe konfidensintervallet over, konstatere at vi har en <em>test-værdi</em> <span class="math inline">\(|\frac{\text{estimat}}{SE}|\)</span> på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den).</p>
+</div>
+</section>
+<section id="forholdet-mellem-de-to-prævalenser" class="slide level2">
+<h2>Forholdet mellem de to prævalenser?</h2>
+<p>Den hypotese vi så tester er:</p>
+<p><span class="math inline">\(H_0: \frac{p_{deler}}{p_{deler ikke}} = 1\)</span></p>
+<p>Er de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.</p>
+<p>Vi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.</p>
+<p>Metoden er den samme som før. Estimatet +/- 1.96 SE.</p>
+<p>Sådan da…</p>
+</section>
+<section id="komplikationer" class="slide level2">
+<h2>Komplikationer</h2>
+<p>Hvordan beregner vi SE?</p>
+<p>Det er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).</p>
+<p>Vi har ikke en let formel for standardfejlen på en riskratio.</p>
+<p>Det vi har er en formel for standardfejlen af logaritmen af RR.</p>
+<p>Og derfor:</p>
+<p><span class="math inline">\(\log{RR} \pm 1.96 \cdot SE_{\log{RR}}\)</span></p>
+</section>
+<section id="se-for-logrr" class="slide level2">
+<h2>SE for log(RR)</h2>
+<div class="smaller">
+<p>For det generelle forhold:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>udfald 1</th>
+<th>udfald 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eksponeret</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>ikke eksponeret</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>Hvor risikoen for udfald 1 hvis man er eksponeret er: <span class="math inline">\(\frac{a}{a+b}\)</span>, og hvis man ikke er eksponeret: <span class="math inline">\(\frac{c}{c+d}\)</span></p>
+<p>Gælder at:</p>
+<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+</div>
+</section>
+<section id="og-så-er-vi-ca.-klar-til-at-regne" class="slide level2">
+<h2>Og så er vi ca. klar til at regne</h2>
+<div class="columns">
+<div class="column">
+<div class="smaller">
+<div class="cell">
+<div class="cell-output-display">
+<div id="erdlpyhqqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#erdlpyhqqy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#erdlpyhqqy thead, #erdlpyhqqy tbody, #erdlpyhqqy tfoot, #erdlpyhqqy tr, #erdlpyhqqy td, #erdlpyhqqy th {
+  border-style: none;
+}
+
+#erdlpyhqqy p {
+  margin: 0;
+  padding: 0;
+}
+
+#erdlpyhqqy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#erdlpyhqqy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#erdlpyhqqy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#erdlpyhqqy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#erdlpyhqqy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#erdlpyhqqy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#erdlpyhqqy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#erdlpyhqqy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#erdlpyhqqy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#erdlpyhqqy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#erdlpyhqqy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#erdlpyhqqy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#erdlpyhqqy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#erdlpyhqqy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#erdlpyhqqy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdlpyhqqy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#erdlpyhqqy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#erdlpyhqqy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#erdlpyhqqy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdlpyhqqy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#erdlpyhqqy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdlpyhqqy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#erdlpyhqqy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdlpyhqqy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#erdlpyhqqy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdlpyhqqy .gt_left {
+  text-align: left;
+}
+
+#erdlpyhqqy .gt_center {
+  text-align: center;
+}
+
+#erdlpyhqqy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#erdlpyhqqy .gt_font_normal {
+  font-weight: normal;
+}
+
+#erdlpyhqqy .gt_font_bold {
+  font-weight: bold;
+}
+
+#erdlpyhqqy .gt_font_italic {
+  font-style: italic;
+}
+
+#erdlpyhqqy .gt_super {
+  font-size: 65%;
+}
+
+#erdlpyhqqy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#erdlpyhqqy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#erdlpyhqqy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#erdlpyhqqy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#erdlpyhqqy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#erdlpyhqqy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#erdlpyhqqy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#erdlpyhqqy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#erdlpyhqqy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
+<th id="deler" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler</th>
+<th id="deler-ikke" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler ikke</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="TB">TB-positiv</td>
+<td class="gt_row gt_right" headers="deler">24</td>
+<td class="gt_row gt_right" headers="deler ikke">28</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="TB">TB-negativ</td>
+<td class="gt_row gt_right" headers="deler">73</td>
+<td class="gt_row gt_right" headers="deler ikke">133</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="smaller">
+<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+</div>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="hvad-så-vi" class="slide level2">
+<h2>Hvad så vi?</h2>
+<div class="smaller">
+<p>RR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.</p>
+<p>Men. KI for RR var [0.877; 2.307]</p>
+<p>Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.</p>
+<p>Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).</p>
+<p>Hvorfor? Fordi log(1) = 0.</p>
+<p>Vi kunne også få teststørrelsen ved <span class="math inline">\(\frac{\log(RR)}{SE(log(RR))}\)</span>. Den var 1.429. Mindre end den kritiske værdi.</p>
+</div>
+</section>
+<section id="odds---hvad-er-det" class="slide level2">
+<h2>Odds - hvad er det?</h2>
+<p>Blandt de 97 narkomaner der delte sprøjter var 24 TB+.</p>
+<p>Det gav en risiko for at være TB+ på 24/97.</p>
+<p>Eller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…</p>
+<p>Det kan vi udtrykke anderledes - ved odds.</p>
+<p>Det er antallet af positive udfald divideret med antallet af negative udfald.</p>
+<p>Eller: 24/73</p>
+<p>Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.</p>
+</section>
+<section id="odds---fordelene" class="slide level2">
+<h2>Odds - fordelene</h2>
+<p>Hvis sandsynligheden for et positivt udfald er 10%</p>
+<div class="fragment">
+<p>Er der, ved 10 observationer 1 positivt og 9 negative udfald.</p>
+</div>
+<div class="fragment">
+<p>Som sandsynligheder: 0.1 og 0.9 hhv.</p>
+</div>
+<div class="fragment">
+<p>Som odds: 1/9 og 9/1 hhv.</p>
+<p>Det er intuitivt hinandens modsætninger.</p>
+<p>Og:</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.197225</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">log</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.197225</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Hvor <em>er</em> det bare pænt og symmetrisk!</p>
+</div>
+</section>
+<section id="hvad-tester-vi-så-med-odds" class="slide level2">
+<h2>Hvad tester vi så med odds?</h2>
+<p>(Næsten) det samme som med risiko.</p>
+<p>Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?</p>
+<p>Eller:</p>
+<p>Kan vi afvise at:</p>
+<p><span class="math inline">\(\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1\)</span></p>
+<div class="evensmaller">
+<p>Hov! Det var Odds-Ratio, OR, der dukkede op der!</p>
+</div>
+<p>Samme teknik som før:</p>
+<p><span class="math inline">\(\text{estimat} \pm 1.96\cdot\text{SE}\)</span></p>
+<p>Hvad er SE?</p>
+</section>
+<section id="lignende-problem-som-med-se-for-rr" class="slide level2">
+<h2>Lignende problem som med SE for RR</h2>
+<div class="smaller">
+<p>Vi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))</p>
+<p>For det generelle forhold:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>udfald 1</th>
+<th>udfald 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eksponeret</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>ikke eksponeret</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Får vi: <span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
+</div>
+<div class="fragment">
+<p>Sammenlign med <span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+<p>Og se hvorfor jeg mener at matematikken bliver enklere med odds…</p>
+</div>
+</div>
+</section>
+<section id="så-er-vi-klar-til-at-regne" class="slide level2">
+<h2>Så er vi klar til at regne</h2>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="ehcpjiwvao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ehcpjiwvao table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ehcpjiwvao thead, #ehcpjiwvao tbody, #ehcpjiwvao tfoot, #ehcpjiwvao tr, #ehcpjiwvao td, #ehcpjiwvao th {
+  border-style: none;
+}
+
+#ehcpjiwvao p {
+  margin: 0;
+  padding: 0;
+}
+
+#ehcpjiwvao .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ehcpjiwvao .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ehcpjiwvao .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ehcpjiwvao .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ehcpjiwvao .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ehcpjiwvao .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ehcpjiwvao .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ehcpjiwvao .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ehcpjiwvao .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ehcpjiwvao .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ehcpjiwvao .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ehcpjiwvao .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ehcpjiwvao .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ehcpjiwvao .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ehcpjiwvao .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ehcpjiwvao .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ehcpjiwvao .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ehcpjiwvao .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ehcpjiwvao .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ehcpjiwvao .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ehcpjiwvao .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ehcpjiwvao .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ehcpjiwvao .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ehcpjiwvao .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ehcpjiwvao .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ehcpjiwvao .gt_left {
+  text-align: left;
+}
+
+#ehcpjiwvao .gt_center {
+  text-align: center;
+}
+
+#ehcpjiwvao .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ehcpjiwvao .gt_font_normal {
+  font-weight: normal;
+}
+
+#ehcpjiwvao .gt_font_bold {
+  font-weight: bold;
+}
+
+#ehcpjiwvao .gt_font_italic {
+  font-style: italic;
+}
+
+#ehcpjiwvao .gt_super {
+  font-size: 65%;
+}
+
+#ehcpjiwvao .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ehcpjiwvao .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ehcpjiwvao .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ehcpjiwvao .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ehcpjiwvao .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ehcpjiwvao .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ehcpjiwvao .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ehcpjiwvao .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ehcpjiwvao div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
+<th id="deler" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler</th>
+<th id="deler-ikke" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler ikke</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="TB">TB-positiv</td>
+<td class="gt_row gt_right" headers="deler">24</td>
+<td class="gt_row gt_right" headers="deler ikke">28</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="TB">TB-negativ</td>
+<td class="gt_row gt_right" headers="deler">73</td>
+<td class="gt_row gt_right" headers="deler ikke">133</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="smaller">
+<p><span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
+<p><span class="math inline">\(\log{OR} \pm 1.96 \cdot SE(\log{OR})\)</span></p>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="hvad-så-vi-1" class="slide level2">
+<h2>Hvad så vi</h2>
+<div class="smaller">
+<p>OR var 1.56</p>
+<p>Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.</p>
+<p>Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]</p>
+<p>Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.</p>
+<p>Vi kunne også finde testværdien: <span class="math inline">\(\frac{\log{OR}}{SE(\log{OR})} = 1.420\)</span>. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise <span class="math inline">\(H_0\)</span>.</p>
+<p>95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise <span class="math inline">\(H_0\)</span></p>
+<p>Vær skarpe her. Odds er noget andet end risiko.</p>
+</div>
+</section>
+<section id="fra-sandsynlighed-til-odds" class="slide level2">
+<h2>Fra sandsynlighed til odds</h2>
+<div class="evensmaller">
+<p>Hvordan beregner vi odds hvis vi kender sandsynligheden?</p>
+<p><span class="math inline">\(\text{odds} = \frac{p}{1-p}\)</span></p>
+<p>Hvordan beregner vi sandsynligheden hvis vi kender odds:</p>
+<p><span class="math inline">\(p = \frac{\text{odds}}{1 + \text{odds}}\)</span></p>
+<p>En særlig funktion vi kommer til at møde igen:</p>
+<p><span class="math inline">\(\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)\)</span></p>
+<p>logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.</p>
+<p>Den omvendte kan også være nyttig. Hvis x = logit(p):</p>
+<p><span class="math inline">\(p = \frac{e^x}{1 + e^x}\)</span></p>
+<p>Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.</p>
+</div>
+</section>
+<section id="chi2-tilgangen" class="slide level2">
+<h2><span class="math inline">\(\chi^2\)</span> tilgangen</h2>
+<div class="smaller">
+<p>Mere generel - kan håndtere mere end et udfald.</p>
+<p>Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.</p>
+<p>Tester forskellen på den fordeling vi ser - og den vi ville forvente</p>
+<p>Hvis vi kun kender totalerne</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>TB+</th>
+<th>TB-</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Deler sprøjter</td>
+<td>?</td>
+<td>?</td>
+<td>97</td>
+</tr>
+<tr class="even">
+<td>Deler ikke</td>
+<td>?</td>
+<td>?</td>
+<td>161</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>52</td>
+<td>206</td>
+<td>258</td>
+</tr>
+</tbody>
+</table>
+<p>Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter</p>
+<p>Hvor mange forventer vi så har TB blandt de der deler sprøjter?</p>
+</div>
+</section>
+<section id="regne-regne" class="slide level2">
+<h2>Regne-regne</h2>
+<p>52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.</p>
+<div class="fragment">
+<p>Så må der være <span class="math inline">\(\frac{52}{258}\cdot97 \approx 20\)</span> der tester positiv.</p>
+</div>
+<div class="fragment">
+<p>Det er hvad vi forventer. Men vi ser at der er 24.</p>
+</div>
+<div class="fragment">
+<p>Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se <span class="math inline">\(\frac{52}{258}\cdot161 \approx 32\)</span> der tester positiv.</p>
+</div>
+<div class="fragment">
+<p>Det er hvad vi forventer. Men vi ser at der kun er 28.</p>
+<p>Vi laver de samme beregninger på de to andre celler.</p>
+</div>
+</section>
+<section id="regne-regne-1" class="slide level2">
+<h2>Regne-regne</h2>
+<div class="smaller">
+<p><span class="math inline">\(\chi^2\)</span> testens <span class="math inline">\(H_0\)</span> er, at der ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+<p>Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+<p>Styrken er at den kan håndtere flere udfald end to.</p>
+<p>Svagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.</p>
+<p>Og så forudsætter <span class="math inline">\(\chi^2\)</span> testen at der er mindst 5 <em>forventede</em> observationer i hver “celle”.</p>
+<p>Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.</p>
+</div>
+</section>
+<section id="hvordan-gør-vi" class="slide level2">
+<h2>Hvordan gør vi?</h2>
+<p>En smule bøvlet - for vi skal have data ind i en matrix.</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb5-2"><a></a>  <span class="fu">c</span>(<span class="dv">24</span>, <span class="dv">73</span>,</span>
+<span id="cb5-3"><a></a>    <span class="dv">28</span>, <span class="dv">133</span>),</span>
+<span id="cb5-4"><a></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb5-5"><a></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-6"><a></a>)</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a><span class="fu">dimnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb5-9"><a></a>  <span class="at">Exposure =</span> <span class="fu">c</span>(<span class="st">"Deler"</span>, <span class="st">"Deler_ikke"</span>),</span>
+<span id="cb5-10"><a></a>  <span class="at">TB =</span> <span class="fu">c</span>(<span class="st">"Ja"</span>, <span class="st">"Nej"</span>)</span>
+<span id="cb5-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column">
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div></div>
+</section>
+<section id="sammenfattende" class="slide level2">
+<h2>Sammenfattende</h2>
+<p>Det er ca. altid:</p>
+<p>Estimat +/- 1.96*standardfejlen</p>
+<p>Undertiden er estimatet logaritmen til det vi er interesseret i. Så er det også standardfejlen på logaritmen til estimatet.</p>
+<p>Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet interval - så er det en anden kritisk værdi. Hint: qnorm.</p>
+<p>Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.</p>
+</section>
+<section id="flere-øvelser" class="slide level2">
+<h2>Flere øvelser</h2>
 
 
 </section>
@@ -598,6 +3926,122 @@
         }
       });
       </script>
+    <script type="module">
+    // Handle cell initialization initialization
+    qwebrCellDetails.map(
+      (entry) => {
+        // Handle the creation of the element
+        qwebrCreateHTMLElement(entry);
+        // In the event of interactive, initialize the monaco editor
+        if (entry.options.context == EvalTypes.Interactive) {
+          qwebrCreateMonacoEditorInstance(entry);
+        }
+      }
+    );
+
+    // Identify non-interactive cells (in order)
+    const filteredEntries = qwebrCellDetails.filter(entry => {
+      const contextOption = entry.options && entry.options.context;
+      return ['output', 'setup'].includes(contextOption) || (contextOption == "interactive" && entry.options && entry.options.autorun === 'true');
+    });
+
+    // Condition non-interactive cells to only be run after webR finishes its initialization.
+    qwebrInstance.then(
+      async () => {
+        const nHiddenCells = filteredEntries.length;
+        var currentHiddenCell = 0;
+
+
+        // Modify button state
+        qwebrSetInteractiveButtonState(`🟡 Running hidden code cells ...`, false);
+
+        // Begin processing non-interactive sections
+        // Due to the iteration policy, we must use a for() loop.
+        // Otherwise, we would need to switch to using reduce with an empty
+        // starting promise
+        for (const entry of filteredEntries) {
+
+          // Determine cell being examined
+          currentHiddenCell = currentHiddenCell + 1;
+          const formattedMessage = `Evaluating hidden cell ${currentHiddenCell} out of ${nHiddenCells}`;
+
+          // Update the document status header
+          if (qwebrShowStartupMessage) {
+            qwebrUpdateStatusHeader(formattedMessage);
+          }
+
+          // Display the update in non-active areas
+          qwebrUpdateStatusMessage(formattedMessage);
+
+          // Extract details on the active cell
+          const evalType = entry.options.context;
+          const cellCode = entry.code;
+          const qwebrCounter = entry.id;
+
+          if (['output', 'setup'].includes(evalType)) {
+            // Disable further global status updates
+            const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+            activeContainer.classList.remove('qwebr-cell-needs-evaluation');
+            activeContainer.classList.add('qwebr-cell-evaluated');
+
+            // Update status on the code cell
+            const activeStatus = document.getElementById(`qwebr-status-text-${qwebrCounter}`);
+            activeStatus.innerText = " Evaluating hidden code cell...";
+            activeStatus.classList.remove('qwebr-cell-needs-evaluation');
+            activeStatus.classList.add('qwebr-cell-evaluated');
+          }
+
+          switch (evalType) {
+            case 'interactive':
+              // TODO: Make this more standardized.
+              // At the moment, we're overriding the interactive status update by pretending its
+              // output-like. 
+              const tempOptions = entry.options;
+              tempOptions["context"] = "output"
+              // Run the code in a non-interactive state that is geared to displaying output
+              await qwebrExecuteCode(`${cellCode}`, qwebrCounter, tempOptions);
+              break;
+            case 'output':
+              // Run the code in a non-interactive state that is geared to displaying output
+              await qwebrExecuteCode(`${cellCode}`, qwebrCounter, entry.options);
+              break;
+            case 'setup':
+              const activeDiv = document.getElementById(`qwebr-noninteractive-setup-area-${qwebrCounter}`);
+
+              // Store code in history
+              qwebrLogCodeToHistory(cellCode, entry.options);
+
+              // Run the code in a non-interactive state with all output thrown away
+              await mainWebR.evalRVoid(`${cellCode}`);
+              break;
+            default: 
+              break; 
+          }
+
+          if (['output', 'setup'].includes(evalType)) {
+            // Disable further global status updates
+            const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+            // Disable visibility
+            activeContainer.style.visibility = 'hidden';
+            activeContainer.style.display = 'none';
+          }
+        }
+      }
+    ).then(
+      () => {
+        // Release document status as ready
+
+        if (qwebrShowStartupMessage) {
+          qwebrStartupMessage.innerText = "🟢 Ready!"
+        }
+      
+        qwebrSetInteractiveButtonState(
+          `<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>`, 
+          true
+        );  
+      }
+    );
+    </script>
     
 
 </body></html>

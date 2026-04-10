@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>PUFF SEMS forberedelse – Kategoriske udfald</title>
+  <title>PUFF SEMS forberedelse – Logistisk regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -487,7 +487,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2030,1440 +2030,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Kategoriske udfald</h1>
+  <h1 class="title">Logistisk regression</h1>
   <p class="subtitle">Herunder logistisk regression</p>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="kategoriske-udfald" class="slide level2">
-<h2>Kategoriske udfald</h2>
-<p>Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.</p>
-<p>Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.</p>
-<p>Der er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.</p>
-<p>Men der kan være - socialklasse eg.</p>
-<p>Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?</p>
-<div class="fragment">
-<p>Vi tæller.</p>
-</div>
-</section>
-<section id="kategoriske-udfald-1" class="slide level2">
-<h2>Kategoriske udfald</h2>
-<p>Hvor mange er der af hver?</p>
-<p>Og hvor stor en andel udgør de så af de samlede hele.</p>
-<p>Er der forskel på de andele grupper imellem?</p>
-<p>Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?</p>
-<p>Og hvor sikre er vi på vores estimater?</p>
-</section>
-<section id="kategoriske-udfald-2" class="slide level2">
-<h2>Kategoriske udfald</h2>
-<p>Så vi skal kigge på:</p>
-<ul>
-<li>Proportioner</li>
-<li>Relativ risiko</li>
-<li>Odds ratio</li>
-<li>Chi i anden</li>
-</ul>
-<p>Og lidt senere den logistisk regression</p>
-</section>
-<section id="en-opgave" class="slide level2">
-<h2>En opgave</h2>
-<div class="columns">
-<div class="column">
-<div class="smaller">
-<p>Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.<br>
-I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.<br>
-I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.</p>
-<p>Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?</p>
-</div>
-</div><div class="column">
-<div id="qwebr-insertion-location-1"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-<aside class="notes">
-<p>Hvor mange positive er der? Hvor mange er der ialt? Det er estimatet.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="hvor-sikre-er-vi-på-det-tal" class="slide level2">
-<h2>Hvor sikre er vi på det tal?</h2>
-<p>Opgaven fortsætter:</p>
-<p>Angiv også et 95% konfidensinterval på det estimat.</p>
-<p>Estimatet er en andel. Også kaldet en proportion</p>
-<p>Metoden har vi set før.</p>
-<div class="fragment">
-<p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
-</div>
-<div class="fragment">
-<p>Så - hvordan beregner vi en standardfejl på estimatet af en proportion?</p>
-</div>
-<div class="fragment">
-<p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
-</div>
-</section>
-<section id="hvor-sikker-var-vi" class="slide level2">
-<h2>Hvor sikker var vi?</h2>
-<div class="columns">
-<div class="column">
-<div class="smaller">
-<p>Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?</p>
-<p>Proportionen beregnede vi til 0.2015504</p>
-<p>Standardfejlen er givet ved:</p>
-<p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
-<p>Der var 258 observationer i stikprøven</p>
-<p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
-</div>
-</div><div class="column">
-<div id="qwebr-insertion-location-2"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="videre-med-samme-opgave" class="slide level2">
-<h2>Videre med samme opgave</h2>
-<div class="smaller">
-<p>Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.</p>
-</div>
-<div class="evensmaller">
-<p>Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.</p>
-</div>
-<p>Hvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?</p>
-<div class="smaller">
-<div class="fragment">
-<p>At: I virkeligheden er forskellen på de to prævalenser 0</p>
-</div>
-<div class="fragment">
-<p>Den ene prævalens divideret med den anden er 1 (for så er de ens)</p>
-</div>
-<div class="fragment">
-<p>I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.</p>
-</div>
-<div class="fragment">
-<p>Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?</p>
-</div>
-<div class="fragment">
-<p>Vi tager dem en for en</p>
-</div>
-</div>
-</section>
-<section id="forskel-på-prævalenser" class="slide level2">
-<h2>Forskel på prævalenser</h2>
-<div class="smaller">
-<p>Er forskellen i virkeligheden 0?</p>
-<div class="fragment">
-<p>Eller - vi opstiller en NULL-hypotese, <span class="math inline">\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\)</span></p>
-<p>Den alternative hypotese er så, at der er forskel på prævalensen.</p>
-</div>
-<div class="fragment">
-<p>Samme metode som før:</p>
-<p><span class="math inline">\(estimat_{diff} \pm 1.96*SE_{diff}\)</span></p>
-<p>Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen</p>
-</div>
-<div class="fragment">
-<p>Så… Hvordan beregner vi <span class="math inline">\(SE_{diff}\)</span>?</p>
-</div>
-<div class="fragment">
-<p><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></p>
-</div>
-<div class="fragment">
-<p>Og standardfejl på de enkelte proportioner var: <span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></p>
-</div>
-</div>
-</section>
-<section id="så-kan-vi-regne" class="slide level2">
-<h2>Så kan vi regne</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li>Prævalens af TB blandt de 97 der delte sprøjter: 24.7%</li>
-<li>Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%</li>
-<li><span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></li>
-<li><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></li>
-</ul>
-</div><div class="column">
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="kritisk-værdi" class="slide level2">
-<h2>Kritisk værdi</h2>
-<div class="smaller">
-<p>Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.</p>
-<p><span class="math inline">\(|\frac{\text{estimat}}{SE}| &gt; \text{kritisk værdi}\)</span></p>
-<p>Når vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.</p>
-<p>Venstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.</p>
-<p>Så vi kan ofte springe konfidensintervallet over, konstatere at vi har en <em>test-værdi</em> <span class="math inline">\(|\frac{\text{estimat}}{SE}|\)</span> på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den).</p>
-</div>
-</section>
-<section id="forholdet-mellem-de-to-prævalenser" class="slide level2">
-<h2>Forholdet mellem de to prævalenser?</h2>
-<p>Den hypotese vi så tester er:</p>
-<p><span class="math inline">\(H_0: \frac{p_{deler}}{p_{deler ikke}} = 1\)</span></p>
-<p>Er de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.</p>
-<p>Vi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.</p>
-<p>Metoden er den samme som før. Estimatet +/- 1.96 SE.</p>
-<p>Sådan da…</p>
-</section>
-<section id="komplikationer" class="slide level2">
-<h2>Komplikationer</h2>
-<p>Hvordan beregner vi SE?</p>
-<p>Det er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).</p>
-<p>Vi har ikke en let formel for standardfejlen på en riskratio.</p>
-<p>Det vi har er en formel for standardfejlen af logaritmen af RR.</p>
-<p>Og derfor:</p>
-<p><span class="math inline">\(\log{RR} \pm 1.96 \cdot SE_{\log{RR}}\)</span></p>
-</section>
-<section id="se-for-logrr" class="slide level2">
-<h2>SE for log(RR)</h2>
-<div class="smaller">
-<p>For det generelle forhold:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>udfald 1</th>
-<th>udfald 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>eksponeret</td>
-<td>a</td>
-<td>b</td>
-</tr>
-<tr class="even">
-<td>ikke eksponeret</td>
-<td>c</td>
-<td>d</td>
-</tr>
-</tbody>
-</table>
-<p>Hvor risikoen for udfald 1 hvis man er eksponeret er: <span class="math inline">\(\frac{a}{a+b}\)</span>, og hvis man ikke er eksponeret: <span class="math inline">\(\frac{c}{c+d}\)</span></p>
-<p>Gælder at:</p>
-<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
-</div>
-</section>
-<section id="og-så-er-vi-ca.-klar-til-at-regne" class="slide level2">
-<h2>Og så er vi ca. klar til at regne</h2>
-<div class="columns">
-<div class="column">
-<div class="smaller">
-<div class="cell">
-<div class="cell-output-display">
-<div id="jirnhwyngc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jirnhwyngc table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#jirnhwyngc thead, #jirnhwyngc tbody, #jirnhwyngc tfoot, #jirnhwyngc tr, #jirnhwyngc td, #jirnhwyngc th {
-  border-style: none;
-}
-
-#jirnhwyngc p {
-  margin: 0;
-  padding: 0;
-}
-
-#jirnhwyngc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#jirnhwyngc .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#jirnhwyngc .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#jirnhwyngc .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#jirnhwyngc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#jirnhwyngc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#jirnhwyngc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#jirnhwyngc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#jirnhwyngc .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#jirnhwyngc .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#jirnhwyngc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#jirnhwyngc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#jirnhwyngc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#jirnhwyngc .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#jirnhwyngc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jirnhwyngc .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#jirnhwyngc .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#jirnhwyngc .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#jirnhwyngc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jirnhwyngc .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#jirnhwyngc .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jirnhwyngc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#jirnhwyngc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jirnhwyngc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#jirnhwyngc .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jirnhwyngc .gt_left {
-  text-align: left;
-}
-
-#jirnhwyngc .gt_center {
-  text-align: center;
-}
-
-#jirnhwyngc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#jirnhwyngc .gt_font_normal {
-  font-weight: normal;
-}
-
-#jirnhwyngc .gt_font_bold {
-  font-weight: bold;
-}
-
-#jirnhwyngc .gt_font_italic {
-  font-style: italic;
-}
-
-#jirnhwyngc .gt_super {
-  font-size: 65%;
-}
-
-#jirnhwyngc .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#jirnhwyngc .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#jirnhwyngc .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#jirnhwyngc .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#jirnhwyngc .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#jirnhwyngc .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#jirnhwyngc .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#jirnhwyngc .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#jirnhwyngc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
-<th id="deler" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler</th>
-<th id="deler-ikke" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler ikke</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="TB">TB-positiv</td>
-<td class="gt_row gt_right" headers="deler">24</td>
-<td class="gt_row gt_right" headers="deler ikke">28</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="TB">TB-negativ</td>
-<td class="gt_row gt_right" headers="deler">73</td>
-<td class="gt_row gt_right" headers="deler ikke">133</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="smaller">
-<p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
-</div>
-</div>
-</div><div class="column">
-<div id="qwebr-insertion-location-4"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="hvad-så-vi" class="slide level2">
-<h2>Hvad så vi?</h2>
-<div class="smaller">
-<p>RR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.</p>
-<p>Men. KI for RR var [0.877; 2.307]</p>
-<p>Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.</p>
-<p>Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).</p>
-<p>Hvorfor? Fordi log(1) = 0.</p>
-<p>Vi kunne også få teststørrelsen ved <span class="math inline">\(\frac{\log(RR)}{SE(log(RR))}\)</span>. Den var 1.429. Mindre end den kritiske værdi.</p>
-</div>
-</section>
-<section id="odds---hvad-er-det" class="slide level2">
-<h2>Odds - hvad er det?</h2>
-<p>Blandt de 97 narkomaner der delte sprøjter var 24 TB+.</p>
-<p>Det gav en risiko for at være TB+ på 24/97.</p>
-<p>Eller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…</p>
-<p>Det kan vi udtrykke anderledes - ved odds.</p>
-<p>Det er antallet af positive udfald divideret med antallet af negative udfald.</p>
-<p>Eller: 24/73</p>
-<p>Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.</p>
-</section>
-<section id="odds---fordelene" class="slide level2">
-<h2>Odds - fordelene</h2>
-<p>Hvis sandsynligheden for et positivt udfald er 10%</p>
-<div class="fragment">
-<p>Er der, ved 10 observationer 1 positivt og 9 negative udfald.</p>
-</div>
-<div class="fragment">
-<p>Som sandsynligheder: 0.1 og 0.9 hhv.</p>
-</div>
-<div class="fragment">
-<p>Som odds: 1/9 og 9/1 hhv.</p>
-<p>Det er intuitivt hinandens modsætninger.</p>
-<p>Og:</p>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.197225</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">log</span>(<span class="dv">9</span><span class="sc">/</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.197225</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>Hvor <em>er</em> det bare pænt og symmetrisk!</p>
-</div>
-</section>
-<section id="hvad-tester-vi-så-med-odds" class="slide level2">
-<h2>Hvad tester vi så med odds?</h2>
-<p>(Næsten) det samme som med risiko.</p>
-<p>Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?</p>
-<p>Eller:</p>
-<p>Kan vi afvise at:</p>
-<p><span class="math inline">\(\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1\)</span></p>
-<div class="evensmaller">
-<p>Hov! Det var Odds-Ratio, OR, der dukkede op der!</p>
-</div>
-<p>Samme teknik som før:</p>
-<p><span class="math inline">\(\text{estimat} \pm 1.96\cdot\text{SE}\)</span></p>
-<p>Hvad er SE?</p>
-</section>
-<section id="lignende-problem-som-med-se-for-rr" class="slide level2">
-<h2>Lignende problem som med SE for RR</h2>
-<div class="smaller">
-<p>Vi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))</p>
-<p>For det generelle forhold:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>udfald 1</th>
-<th>udfald 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>eksponeret</td>
-<td>a</td>
-<td>b</td>
-</tr>
-<tr class="even">
-<td>ikke eksponeret</td>
-<td>c</td>
-<td>d</td>
-</tr>
-</tbody>
-</table>
-<div class="fragment">
-<p>Får vi: <span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
-</div>
-<div class="fragment">
-<p>Sammenlign med <span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
-<p>Og se hvorfor jeg mener at matematikken bliver enklere med odds…</p>
-</div>
-</div>
-</section>
-<section id="så-er-vi-klar-til-at-regne" class="slide level2">
-<h2>Så er vi klar til at regne</h2>
-<div class="columns">
-<div class="column">
-<div class="cell">
-<div class="cell-output-display">
-<div id="tqbywvhvhy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tqbywvhvhy table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#tqbywvhvhy thead, #tqbywvhvhy tbody, #tqbywvhvhy tfoot, #tqbywvhvhy tr, #tqbywvhvhy td, #tqbywvhvhy th {
-  border-style: none;
-}
-
-#tqbywvhvhy p {
-  margin: 0;
-  padding: 0;
-}
-
-#tqbywvhvhy .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#tqbywvhvhy .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#tqbywvhvhy .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#tqbywvhvhy .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#tqbywvhvhy .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#tqbywvhvhy .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#tqbywvhvhy .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#tqbywvhvhy .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#tqbywvhvhy .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#tqbywvhvhy .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#tqbywvhvhy .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#tqbywvhvhy .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#tqbywvhvhy .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#tqbywvhvhy .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#tqbywvhvhy .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tqbywvhvhy .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#tqbywvhvhy .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#tqbywvhvhy .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#tqbywvhvhy .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tqbywvhvhy .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#tqbywvhvhy .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tqbywvhvhy .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#tqbywvhvhy .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tqbywvhvhy .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#tqbywvhvhy .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tqbywvhvhy .gt_left {
-  text-align: left;
-}
-
-#tqbywvhvhy .gt_center {
-  text-align: center;
-}
-
-#tqbywvhvhy .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#tqbywvhvhy .gt_font_normal {
-  font-weight: normal;
-}
-
-#tqbywvhvhy .gt_font_bold {
-  font-weight: bold;
-}
-
-#tqbywvhvhy .gt_font_italic {
-  font-style: italic;
-}
-
-#tqbywvhvhy .gt_super {
-  font-size: 65%;
-}
-
-#tqbywvhvhy .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#tqbywvhvhy .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#tqbywvhvhy .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#tqbywvhvhy .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#tqbywvhvhy .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#tqbywvhvhy .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#tqbywvhvhy .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#tqbywvhvhy .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#tqbywvhvhy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
-<th id="deler" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler</th>
-<th id="deler-ikke" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">deler ikke</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="TB">TB-positiv</td>
-<td class="gt_row gt_right" headers="deler">24</td>
-<td class="gt_row gt_right" headers="deler ikke">28</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="TB">TB-negativ</td>
-<td class="gt_row gt_right" headers="deler">73</td>
-<td class="gt_row gt_right" headers="deler ikke">133</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="smaller">
-<p><span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
-<p><span class="math inline">\(\log{OR} \pm 1.96 \cdot SE(\log{OR})\)</span></p>
-</div>
-</div><div class="column">
-<div id="qwebr-insertion-location-5"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="hvad-så-vi-1" class="slide level2">
-<h2>Hvad så vi</h2>
-<div class="smaller">
-<p>OR var 1.56</p>
-<p>Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.</p>
-<p>Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]</p>
-<p>Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.</p>
-<p>Vi kunne også finde testværdien: <span class="math inline">\(\frac{\log{OR}}{SE(\log{OR})} = 1.420\)</span>. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise <span class="math inline">\(H_0\)</span>.</p>
-<p>95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise <span class="math inline">\(H_0\)</span></p>
-<p>Vær skarpe her. Odds er noget andet end risiko.</p>
-</div>
-</section>
-<section id="fra-sandsynlighed-til-odds" class="slide level2">
-<h2>Fra sandsynlighed til odds</h2>
-<div class="evensmaller">
-<p>Hvordan beregner vi odds hvis vi kender sandsynligheden?</p>
-<p><span class="math inline">\(\text{odds} = \frac{p}{1-p}\)</span></p>
-<p>Hvordan beregner vi sandsynligheden hvis vi kender odds:</p>
-<p><span class="math inline">\(p = \frac{\text{odds}}{1 + \text{odds}}\)</span></p>
-<p>En særlig funktion vi kommer til at møde igen:</p>
-<p><span class="math inline">\(\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)\)</span></p>
-<p>logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.</p>
-<p>Den omvendte kan også være nyttig. Hvis x = logit(p):</p>
-<p><span class="math inline">\(p = \frac{e^x}{1 + e^x}\)</span></p>
-<p>Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.</p>
-</div>
-</section>
-<section id="chi2-tilgangen" class="slide level2">
-<h2><span class="math inline">\(\chi^2\)</span> tilgangen</h2>
-<div class="smaller">
-<p>Mere generel - kan håndtere mere end et udfald.</p>
-<p>Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.</p>
-<p>Tester forskellen på den fordeling vi ser - og den vi ville forvente</p>
-<p>Hvis vi kun kender totalerne</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>TB+</th>
-<th>TB-</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Deler sprøjter</td>
-<td>?</td>
-<td>?</td>
-<td>97</td>
-</tr>
-<tr class="even">
-<td>Deler ikke</td>
-<td>?</td>
-<td>?</td>
-<td>161</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td>52</td>
-<td>206</td>
-<td>258</td>
-</tr>
-</tbody>
-</table>
-<p>Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter</p>
-<p>Hvor mange forventer vi så har TB blandt de der deler sprøjter?</p>
-</div>
-</section>
-<section id="regne-regne" class="slide level2">
-<h2>Regne-regne</h2>
-<p>52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.</p>
-<div class="fragment">
-<p>Så må der være <span class="math inline">\(\frac{52}{258}\cdot97 \approx 20\)</span> der tester positiv.</p>
-</div>
-<div class="fragment">
-<p>Det er hvad vi forventer. Men vi ser at der er 24.</p>
-</div>
-<div class="fragment">
-<p>Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se <span class="math inline">\(\frac{52}{258}\cdot161 \approx 32\)</span> der tester positiv.</p>
-</div>
-<div class="fragment">
-<p>Det er hvad vi forventer. Men vi ser at der kun er 28.</p>
-<p>Vi laver de samme beregninger på de to andre celler.</p>
-</div>
-</section>
-<section id="regne-regne-1" class="slide level2">
-<h2>Regne-regne</h2>
-<div class="smaller">
-<p><span class="math inline">\(\chi^2\)</span> testens <span class="math inline">\(H_0\)</span> er, at der ikke er forskel på fordelingen af TB-status i de to grupper.</p>
-<p>Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.</p>
-<p>Styrken er at den kan håndtere flere udfald end to.</p>
-<p>Svagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.</p>
-<p>Og så forudsætter <span class="math inline">\(\chi^2\)</span> testen at der er mindst 5 <em>forventede</em> observationer i hver “celle”.</p>
-<p>Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.</p>
-</div>
-</section>
-<section id="hvordan-gør-vi" class="slide level2">
-<h2>Hvordan gør vi?</h2>
-<p>En smule bøvlet - for vi skal have data ind i en matrix.</p>
-<div class="columns">
-<div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb5-2"><a></a>  <span class="fu">c</span>(<span class="dv">24</span>, <span class="dv">73</span>,</span>
-<span id="cb5-3"><a></a>    <span class="dv">28</span>, <span class="dv">133</span>),</span>
-<span id="cb5-4"><a></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb5-5"><a></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
-<span id="cb5-6"><a></a>)</span>
-<span id="cb5-7"><a></a></span>
-<span id="cb5-8"><a></a><span class="fu">dimnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb5-9"><a></a>  <span class="at">Exposure =</span> <span class="fu">c</span>(<span class="st">"Deler"</span>, <span class="st">"Deler_ikke"</span>),</span>
-<span id="cb5-10"><a></a>  <span class="at">TB =</span> <span class="fu">c</span>(<span class="st">"Ja"</span>, <span class="st">"Nej"</span>)</span>
-<span id="cb5-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><div class="column">
-<div id="qwebr-insertion-location-6"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div></div>
-</section>
-<section id="sammenfattende" class="slide level2">
-<h2>Sammenfattende</h2>
-<p>Det er ca. altid:</p>
-<p>Estimat +/- 1.96*standardfejlen</p>
-<p>Undertiden er estimatet logaritmen til det vi er interesseret i. Så er det også standardfejlen på logaritmen til estimatet.</p>
-<p>Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet interval - så er det en anden kritisk værdi. Hint: qnorm.</p>
-<p>Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.</p>
-</section>
-<section id="flere-øvelser" class="slide level2">
-<h2>Flere øvelser</h2>
 </section>
 <section id="logistisk-regression" class="slide level2">
 <h2>Logistisk regression</h2>
@@ -3501,7 +2073,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <strong>weight</strong>: Fødselsvægt i gram</p>
 <p>Kan vi derfor modellere den primære outcome variabel “death” som funktion af rygning, feberepisoder og moderens alder ved:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">glm</span>(<span class="fu">factor</span>(death) <span class="sc">~</span> <span class="fu">I</span>((mage<span class="dv">-25</span>)<span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span> episodes <span class="sc">+</span> <span class="fu">factor</span>(smoke), <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">glm</span>(<span class="fu">factor</span>(death) <span class="sc">~</span> <span class="fu">I</span>((mage<span class="dv">-25</span>)<span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span> episodes <span class="sc">+</span> <span class="fu">factor</span>(smoke), <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -3509,7 +2081,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <h2>Hvad betyder de enkelte dele?</h2>
 <div class="evensmaller">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">glm</span>(<span class="fu">factor</span>(death) <span class="sc">~</span> <span class="fu">I</span>((mage<span class="dv">-25</span>)<span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span> episodes <span class="sc">+</span> <span class="fu">factor</span>(smoke), <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">glm</span>(<span class="fu">factor</span>(death) <span class="sc">~</span> <span class="fu">I</span>((mage<span class="dv">-25</span>)<span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span> episodes <span class="sc">+</span> <span class="fu">factor</span>(smoke), <span class="at">data =</span> dataset, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?</p>
 <div class="fragment">
@@ -3542,24 +2114,24 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <div class="tiny">
 <div class="cell">
 <div class="cell-output-display">
-<div id="bvyfvznugu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nrzyuzafnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bvyfvznugu table {
+#nrzyuzafnl table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bvyfvznugu thead, #bvyfvznugu tbody, #bvyfvznugu tfoot, #bvyfvznugu tr, #bvyfvznugu td, #bvyfvznugu th {
+#nrzyuzafnl thead, #nrzyuzafnl tbody, #nrzyuzafnl tfoot, #nrzyuzafnl tr, #nrzyuzafnl td, #nrzyuzafnl th {
   border-style: none;
 }
 
-#bvyfvznugu p {
+#nrzyuzafnl p {
   margin: 0;
   padding: 0;
 }
 
-#bvyfvznugu .gt_table {
+#nrzyuzafnl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3585,12 +2157,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-left-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_caption {
+#nrzyuzafnl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bvyfvznugu .gt_title {
+#nrzyuzafnl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3602,7 +2174,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-width: 0;
 }
 
-#bvyfvznugu .gt_subtitle {
+#nrzyuzafnl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3614,7 +2186,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-width: 0;
 }
 
-#bvyfvznugu .gt_heading {
+#nrzyuzafnl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3626,13 +2198,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_bottom_border {
+#nrzyuzafnl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_col_headings {
+#nrzyuzafnl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3647,7 +2219,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_col_heading {
+#nrzyuzafnl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3667,7 +2239,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#bvyfvznugu .gt_column_spanner_outer {
+#nrzyuzafnl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3679,15 +2251,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 4px;
 }
 
-#bvyfvznugu .gt_column_spanner_outer:first-child {
+#nrzyuzafnl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bvyfvznugu .gt_column_spanner_outer:last-child {
+#nrzyuzafnl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bvyfvznugu .gt_column_spanner {
+#nrzyuzafnl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3699,11 +2271,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   width: 100%;
 }
 
-#bvyfvznugu .gt_spanner_row {
+#nrzyuzafnl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bvyfvznugu .gt_group_heading {
+#nrzyuzafnl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3729,7 +2301,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   text-align: left;
 }
 
-#bvyfvznugu .gt_empty_group_heading {
+#nrzyuzafnl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3744,15 +2316,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: middle;
 }
 
-#bvyfvznugu .gt_from_md > :first-child {
+#nrzyuzafnl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bvyfvznugu .gt_from_md > :last-child {
+#nrzyuzafnl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bvyfvznugu .gt_row {
+#nrzyuzafnl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3771,7 +2343,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#bvyfvznugu .gt_stub {
+#nrzyuzafnl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3784,7 +2356,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bvyfvznugu .gt_stub_row_group {
+#nrzyuzafnl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3798,15 +2370,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: top;
 }
 
-#bvyfvznugu .gt_row_group_first td {
+#nrzyuzafnl .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#bvyfvznugu .gt_row_group_first th {
+#nrzyuzafnl .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#bvyfvznugu .gt_summary_row {
+#nrzyuzafnl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3816,16 +2388,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bvyfvznugu .gt_first_summary_row {
+#nrzyuzafnl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_first_summary_row.thick {
+#nrzyuzafnl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bvyfvznugu .gt_last_summary_row {
+#nrzyuzafnl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3835,7 +2407,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_grand_summary_row {
+#nrzyuzafnl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3845,7 +2417,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bvyfvznugu .gt_first_grand_summary_row {
+#nrzyuzafnl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3855,7 +2427,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_last_grand_summary_row_top {
+#nrzyuzafnl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3865,11 +2437,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_striped {
+#nrzyuzafnl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bvyfvznugu .gt_table_body {
+#nrzyuzafnl .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3878,7 +2450,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_footnotes {
+#nrzyuzafnl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3892,7 +2464,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_footnote {
+#nrzyuzafnl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3901,7 +2473,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bvyfvznugu .gt_sourcenotes {
+#nrzyuzafnl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3915,7 +2487,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bvyfvznugu .gt_sourcenote {
+#nrzyuzafnl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3923,72 +2495,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bvyfvznugu .gt_left {
+#nrzyuzafnl .gt_left {
   text-align: left;
 }
 
-#bvyfvznugu .gt_center {
+#nrzyuzafnl .gt_center {
   text-align: center;
 }
 
-#bvyfvznugu .gt_right {
+#nrzyuzafnl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bvyfvznugu .gt_font_normal {
+#nrzyuzafnl .gt_font_normal {
   font-weight: normal;
 }
 
-#bvyfvznugu .gt_font_bold {
+#nrzyuzafnl .gt_font_bold {
   font-weight: bold;
 }
 
-#bvyfvznugu .gt_font_italic {
+#nrzyuzafnl .gt_font_italic {
   font-style: italic;
 }
 
-#bvyfvznugu .gt_super {
+#nrzyuzafnl .gt_super {
   font-size: 65%;
 }
 
-#bvyfvznugu .gt_footnote_marks {
+#nrzyuzafnl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bvyfvznugu .gt_asterisk {
+#nrzyuzafnl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bvyfvznugu .gt_indent_1 {
+#nrzyuzafnl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bvyfvznugu .gt_indent_2 {
+#nrzyuzafnl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bvyfvznugu .gt_indent_3 {
+#nrzyuzafnl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bvyfvznugu .gt_indent_4 {
+#nrzyuzafnl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bvyfvznugu .gt_indent_5 {
+#nrzyuzafnl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bvyfvznugu .katex-display {
+#nrzyuzafnl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bvyfvznugu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nrzyuzafnl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4052,7 +2624,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <p>p=2⋅P(Z≥∣z∣). Eller: 2*(1 - pnorm(abs(z)))</p>
 </div>
 </div><div class="column">
-<div id="qwebr-insertion-location-7"></div>
+<div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -4061,24 +2633,24 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <div class="tiny">
 <div class="cell">
 <div class="cell-output-display">
-<div id="bcaezjeldl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gkhpfgnrly" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bcaezjeldl table {
+#gkhpfgnrly table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bcaezjeldl thead, #bcaezjeldl tbody, #bcaezjeldl tfoot, #bcaezjeldl tr, #bcaezjeldl td, #bcaezjeldl th {
+#gkhpfgnrly thead, #gkhpfgnrly tbody, #gkhpfgnrly tfoot, #gkhpfgnrly tr, #gkhpfgnrly td, #gkhpfgnrly th {
   border-style: none;
 }
 
-#bcaezjeldl p {
+#gkhpfgnrly p {
   margin: 0;
   padding: 0;
 }
 
-#bcaezjeldl .gt_table {
+#gkhpfgnrly .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4104,12 +2676,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-left-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_caption {
+#gkhpfgnrly .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bcaezjeldl .gt_title {
+#gkhpfgnrly .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4121,7 +2693,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-width: 0;
 }
 
-#bcaezjeldl .gt_subtitle {
+#gkhpfgnrly .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4133,7 +2705,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-width: 0;
 }
 
-#bcaezjeldl .gt_heading {
+#gkhpfgnrly .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4145,13 +2717,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_bottom_border {
+#gkhpfgnrly .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_col_headings {
+#gkhpfgnrly .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4166,7 +2738,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_col_heading {
+#gkhpfgnrly .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4186,7 +2758,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#bcaezjeldl .gt_column_spanner_outer {
+#gkhpfgnrly .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4198,15 +2770,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 4px;
 }
 
-#bcaezjeldl .gt_column_spanner_outer:first-child {
+#gkhpfgnrly .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bcaezjeldl .gt_column_spanner_outer:last-child {
+#gkhpfgnrly .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bcaezjeldl .gt_column_spanner {
+#gkhpfgnrly .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4218,11 +2790,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   width: 100%;
 }
 
-#bcaezjeldl .gt_spanner_row {
+#gkhpfgnrly .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bcaezjeldl .gt_group_heading {
+#gkhpfgnrly .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4248,7 +2820,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   text-align: left;
 }
 
-#bcaezjeldl .gt_empty_group_heading {
+#gkhpfgnrly .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4263,15 +2835,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: middle;
 }
 
-#bcaezjeldl .gt_from_md > :first-child {
+#gkhpfgnrly .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bcaezjeldl .gt_from_md > :last-child {
+#gkhpfgnrly .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bcaezjeldl .gt_row {
+#gkhpfgnrly .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4290,7 +2862,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#bcaezjeldl .gt_stub {
+#gkhpfgnrly .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4303,7 +2875,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bcaezjeldl .gt_stub_row_group {
+#gkhpfgnrly .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4317,15 +2889,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: top;
 }
 
-#bcaezjeldl .gt_row_group_first td {
+#gkhpfgnrly .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#bcaezjeldl .gt_row_group_first th {
+#gkhpfgnrly .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#bcaezjeldl .gt_summary_row {
+#gkhpfgnrly .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4335,16 +2907,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bcaezjeldl .gt_first_summary_row {
+#gkhpfgnrly .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_first_summary_row.thick {
+#gkhpfgnrly .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bcaezjeldl .gt_last_summary_row {
+#gkhpfgnrly .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4354,7 +2926,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_grand_summary_row {
+#gkhpfgnrly .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4364,7 +2936,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bcaezjeldl .gt_first_grand_summary_row {
+#gkhpfgnrly .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4374,7 +2946,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_last_grand_summary_row_top {
+#gkhpfgnrly .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4384,11 +2956,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_striped {
+#gkhpfgnrly .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bcaezjeldl .gt_table_body {
+#gkhpfgnrly .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4397,7 +2969,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_footnotes {
+#gkhpfgnrly .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4411,7 +2983,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_footnote {
+#gkhpfgnrly .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4420,7 +2992,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bcaezjeldl .gt_sourcenotes {
+#gkhpfgnrly .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4434,7 +3006,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#bcaezjeldl .gt_sourcenote {
+#gkhpfgnrly .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4442,72 +3014,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#bcaezjeldl .gt_left {
+#gkhpfgnrly .gt_left {
   text-align: left;
 }
 
-#bcaezjeldl .gt_center {
+#gkhpfgnrly .gt_center {
   text-align: center;
 }
 
-#bcaezjeldl .gt_right {
+#gkhpfgnrly .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bcaezjeldl .gt_font_normal {
+#gkhpfgnrly .gt_font_normal {
   font-weight: normal;
 }
 
-#bcaezjeldl .gt_font_bold {
+#gkhpfgnrly .gt_font_bold {
   font-weight: bold;
 }
 
-#bcaezjeldl .gt_font_italic {
+#gkhpfgnrly .gt_font_italic {
   font-style: italic;
 }
 
-#bcaezjeldl .gt_super {
+#gkhpfgnrly .gt_super {
   font-size: 65%;
 }
 
-#bcaezjeldl .gt_footnote_marks {
+#gkhpfgnrly .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bcaezjeldl .gt_asterisk {
+#gkhpfgnrly .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bcaezjeldl .gt_indent_1 {
+#gkhpfgnrly .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bcaezjeldl .gt_indent_2 {
+#gkhpfgnrly .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bcaezjeldl .gt_indent_3 {
+#gkhpfgnrly .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bcaezjeldl .gt_indent_4 {
+#gkhpfgnrly .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bcaezjeldl .gt_indent_5 {
+#gkhpfgnrly .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bcaezjeldl .katex-display {
+#gkhpfgnrly .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bcaezjeldl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gkhpfgnrly div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4615,7 +3187,7 @@ Så hvordan finder vi oddsratio?</p>
 </div>
 </div>
 </div><div class="column">
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
@@ -4631,24 +3203,24 @@ Så hvordan finder vi oddsratio?</p>
 <p>Så vi skal bruge estimaterne:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="engvnpausk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="izeiufnpxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#engvnpausk table {
+#izeiufnpxq table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#engvnpausk thead, #engvnpausk tbody, #engvnpausk tfoot, #engvnpausk tr, #engvnpausk td, #engvnpausk th {
+#izeiufnpxq thead, #izeiufnpxq tbody, #izeiufnpxq tfoot, #izeiufnpxq tr, #izeiufnpxq td, #izeiufnpxq th {
   border-style: none;
 }
 
-#engvnpausk p {
+#izeiufnpxq p {
   margin: 0;
   padding: 0;
 }
 
-#engvnpausk .gt_table {
+#izeiufnpxq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4674,12 +3246,12 @@ Så hvordan finder vi oddsratio?</p>
   border-left-color: #D3D3D3;
 }
 
-#engvnpausk .gt_caption {
+#izeiufnpxq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#engvnpausk .gt_title {
+#izeiufnpxq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4691,7 +3263,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-width: 0;
 }
 
-#engvnpausk .gt_subtitle {
+#izeiufnpxq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4703,7 +3275,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-width: 0;
 }
 
-#engvnpausk .gt_heading {
+#izeiufnpxq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4715,13 +3287,13 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#engvnpausk .gt_bottom_border {
+#izeiufnpxq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#engvnpausk .gt_col_headings {
+#izeiufnpxq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4736,7 +3308,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#engvnpausk .gt_col_heading {
+#izeiufnpxq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4756,7 +3328,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#engvnpausk .gt_column_spanner_outer {
+#izeiufnpxq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4768,15 +3340,15 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 4px;
 }
 
-#engvnpausk .gt_column_spanner_outer:first-child {
+#izeiufnpxq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#engvnpausk .gt_column_spanner_outer:last-child {
+#izeiufnpxq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#engvnpausk .gt_column_spanner {
+#izeiufnpxq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4788,11 +3360,11 @@ Så hvordan finder vi oddsratio?</p>
   width: 100%;
 }
 
-#engvnpausk .gt_spanner_row {
+#izeiufnpxq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#engvnpausk .gt_group_heading {
+#izeiufnpxq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4818,7 +3390,7 @@ Så hvordan finder vi oddsratio?</p>
   text-align: left;
 }
 
-#engvnpausk .gt_empty_group_heading {
+#izeiufnpxq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4833,15 +3405,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: middle;
 }
 
-#engvnpausk .gt_from_md > :first-child {
+#izeiufnpxq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#engvnpausk .gt_from_md > :last-child {
+#izeiufnpxq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#engvnpausk .gt_row {
+#izeiufnpxq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4860,7 +3432,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#engvnpausk .gt_stub {
+#izeiufnpxq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4873,7 +3445,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#engvnpausk .gt_stub_row_group {
+#izeiufnpxq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4887,15 +3459,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: top;
 }
 
-#engvnpausk .gt_row_group_first td {
+#izeiufnpxq .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#engvnpausk .gt_row_group_first th {
+#izeiufnpxq .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#engvnpausk .gt_summary_row {
+#izeiufnpxq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4905,16 +3477,16 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#engvnpausk .gt_first_summary_row {
+#izeiufnpxq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#engvnpausk .gt_first_summary_row.thick {
+#izeiufnpxq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#engvnpausk .gt_last_summary_row {
+#izeiufnpxq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4924,7 +3496,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#engvnpausk .gt_grand_summary_row {
+#izeiufnpxq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4934,7 +3506,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#engvnpausk .gt_first_grand_summary_row {
+#izeiufnpxq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4944,7 +3516,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-color: #D3D3D3;
 }
 
-#engvnpausk .gt_last_grand_summary_row_top {
+#izeiufnpxq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4954,11 +3526,11 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#engvnpausk .gt_striped {
+#izeiufnpxq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#engvnpausk .gt_table_body {
+#izeiufnpxq .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4967,7 +3539,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#engvnpausk .gt_footnotes {
+#izeiufnpxq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4981,7 +3553,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#engvnpausk .gt_footnote {
+#izeiufnpxq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4990,7 +3562,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#engvnpausk .gt_sourcenotes {
+#izeiufnpxq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5004,7 +3576,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#engvnpausk .gt_sourcenote {
+#izeiufnpxq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5012,72 +3584,72 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#engvnpausk .gt_left {
+#izeiufnpxq .gt_left {
   text-align: left;
 }
 
-#engvnpausk .gt_center {
+#izeiufnpxq .gt_center {
   text-align: center;
 }
 
-#engvnpausk .gt_right {
+#izeiufnpxq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#engvnpausk .gt_font_normal {
+#izeiufnpxq .gt_font_normal {
   font-weight: normal;
 }
 
-#engvnpausk .gt_font_bold {
+#izeiufnpxq .gt_font_bold {
   font-weight: bold;
 }
 
-#engvnpausk .gt_font_italic {
+#izeiufnpxq .gt_font_italic {
   font-style: italic;
 }
 
-#engvnpausk .gt_super {
+#izeiufnpxq .gt_super {
   font-size: 65%;
 }
 
-#engvnpausk .gt_footnote_marks {
+#izeiufnpxq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#engvnpausk .gt_asterisk {
+#izeiufnpxq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#engvnpausk .gt_indent_1 {
+#izeiufnpxq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#engvnpausk .gt_indent_2 {
+#izeiufnpxq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#engvnpausk .gt_indent_3 {
+#izeiufnpxq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#engvnpausk .gt_indent_4 {
+#izeiufnpxq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#engvnpausk .gt_indent_5 {
+#izeiufnpxq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#engvnpausk .katex-display {
+#izeiufnpxq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#engvnpausk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#izeiufnpxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5163,24 +3735,24 @@ Så hvordan finder vi oddsratio?</p>
 <p>Vi havde tidligere</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hljbzppope" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fsatkvmsvw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#hljbzppope table {
+#fsatkvmsvw table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hljbzppope thead, #hljbzppope tbody, #hljbzppope tfoot, #hljbzppope tr, #hljbzppope td, #hljbzppope th {
+#fsatkvmsvw thead, #fsatkvmsvw tbody, #fsatkvmsvw tfoot, #fsatkvmsvw tr, #fsatkvmsvw td, #fsatkvmsvw th {
   border-style: none;
 }
 
-#hljbzppope p {
+#fsatkvmsvw p {
   margin: 0;
   padding: 0;
 }
 
-#hljbzppope .gt_table {
+#fsatkvmsvw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5206,12 +3778,12 @@ Så hvordan finder vi oddsratio?</p>
   border-left-color: #D3D3D3;
 }
 
-#hljbzppope .gt_caption {
+#fsatkvmsvw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hljbzppope .gt_title {
+#fsatkvmsvw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5223,7 +3795,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-width: 0;
 }
 
-#hljbzppope .gt_subtitle {
+#fsatkvmsvw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5235,7 +3807,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-width: 0;
 }
 
-#hljbzppope .gt_heading {
+#fsatkvmsvw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5247,13 +3819,13 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#hljbzppope .gt_bottom_border {
+#fsatkvmsvw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#hljbzppope .gt_col_headings {
+#fsatkvmsvw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5268,7 +3840,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#hljbzppope .gt_col_heading {
+#fsatkvmsvw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5288,7 +3860,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#hljbzppope .gt_column_spanner_outer {
+#fsatkvmsvw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5300,15 +3872,15 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 4px;
 }
 
-#hljbzppope .gt_column_spanner_outer:first-child {
+#fsatkvmsvw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hljbzppope .gt_column_spanner_outer:last-child {
+#fsatkvmsvw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hljbzppope .gt_column_spanner {
+#fsatkvmsvw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -5320,11 +3892,11 @@ Så hvordan finder vi oddsratio?</p>
   width: 100%;
 }
 
-#hljbzppope .gt_spanner_row {
+#fsatkvmsvw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hljbzppope .gt_group_heading {
+#fsatkvmsvw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5350,7 +3922,7 @@ Så hvordan finder vi oddsratio?</p>
   text-align: left;
 }
 
-#hljbzppope .gt_empty_group_heading {
+#fsatkvmsvw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5365,15 +3937,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: middle;
 }
 
-#hljbzppope .gt_from_md > :first-child {
+#fsatkvmsvw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hljbzppope .gt_from_md > :last-child {
+#fsatkvmsvw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hljbzppope .gt_row {
+#fsatkvmsvw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5392,7 +3964,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#hljbzppope .gt_stub {
+#fsatkvmsvw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5405,7 +3977,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#hljbzppope .gt_stub_row_group {
+#fsatkvmsvw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5419,15 +3991,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: top;
 }
 
-#hljbzppope .gt_row_group_first td {
+#fsatkvmsvw .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#hljbzppope .gt_row_group_first th {
+#fsatkvmsvw .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#hljbzppope .gt_summary_row {
+#fsatkvmsvw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5437,16 +4009,16 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#hljbzppope .gt_first_summary_row {
+#fsatkvmsvw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hljbzppope .gt_first_summary_row.thick {
+#fsatkvmsvw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hljbzppope .gt_last_summary_row {
+#fsatkvmsvw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5456,7 +4028,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hljbzppope .gt_grand_summary_row {
+#fsatkvmsvw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5466,7 +4038,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#hljbzppope .gt_first_grand_summary_row {
+#fsatkvmsvw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5476,7 +4048,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-color: #D3D3D3;
 }
 
-#hljbzppope .gt_last_grand_summary_row_top {
+#fsatkvmsvw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5486,11 +4058,11 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hljbzppope .gt_striped {
+#fsatkvmsvw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hljbzppope .gt_table_body {
+#fsatkvmsvw .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5499,7 +4071,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hljbzppope .gt_footnotes {
+#fsatkvmsvw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5513,7 +4085,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#hljbzppope .gt_footnote {
+#fsatkvmsvw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5522,7 +4094,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#hljbzppope .gt_sourcenotes {
+#fsatkvmsvw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5536,7 +4108,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#hljbzppope .gt_sourcenote {
+#fsatkvmsvw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5544,72 +4116,72 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#hljbzppope .gt_left {
+#fsatkvmsvw .gt_left {
   text-align: left;
 }
 
-#hljbzppope .gt_center {
+#fsatkvmsvw .gt_center {
   text-align: center;
 }
 
-#hljbzppope .gt_right {
+#fsatkvmsvw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hljbzppope .gt_font_normal {
+#fsatkvmsvw .gt_font_normal {
   font-weight: normal;
 }
 
-#hljbzppope .gt_font_bold {
+#fsatkvmsvw .gt_font_bold {
   font-weight: bold;
 }
 
-#hljbzppope .gt_font_italic {
+#fsatkvmsvw .gt_font_italic {
   font-style: italic;
 }
 
-#hljbzppope .gt_super {
+#fsatkvmsvw .gt_super {
   font-size: 65%;
 }
 
-#hljbzppope .gt_footnote_marks {
+#fsatkvmsvw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hljbzppope .gt_asterisk {
+#fsatkvmsvw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hljbzppope .gt_indent_1 {
+#fsatkvmsvw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hljbzppope .gt_indent_2 {
+#fsatkvmsvw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hljbzppope .gt_indent_3 {
+#fsatkvmsvw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hljbzppope .gt_indent_4 {
+#fsatkvmsvw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hljbzppope .gt_indent_5 {
+#fsatkvmsvw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hljbzppope .katex-display {
+#fsatkvmsvw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hljbzppope div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fsatkvmsvw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5671,24 +4243,24 @@ Så hvordan finder vi oddsratio?</p>
 <p>Vi får oplyst at den korrekte analyse gav dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mloynvdnyq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nfzkjffmlz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mloynvdnyq table {
+#nfzkjffmlz table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mloynvdnyq thead, #mloynvdnyq tbody, #mloynvdnyq tfoot, #mloynvdnyq tr, #mloynvdnyq td, #mloynvdnyq th {
+#nfzkjffmlz thead, #nfzkjffmlz tbody, #nfzkjffmlz tfoot, #nfzkjffmlz tr, #nfzkjffmlz td, #nfzkjffmlz th {
   border-style: none;
 }
 
-#mloynvdnyq p {
+#nfzkjffmlz p {
   margin: 0;
   padding: 0;
 }
 
-#mloynvdnyq .gt_table {
+#nfzkjffmlz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5714,12 +4286,12 @@ Så hvordan finder vi oddsratio?</p>
   border-left-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_caption {
+#nfzkjffmlz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mloynvdnyq .gt_title {
+#nfzkjffmlz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5731,7 +4303,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-width: 0;
 }
 
-#mloynvdnyq .gt_subtitle {
+#nfzkjffmlz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5743,7 +4315,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-width: 0;
 }
 
-#mloynvdnyq .gt_heading {
+#nfzkjffmlz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5755,13 +4327,13 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_bottom_border {
+#nfzkjffmlz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_col_headings {
+#nfzkjffmlz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5776,7 +4348,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_col_heading {
+#nfzkjffmlz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5796,7 +4368,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#mloynvdnyq .gt_column_spanner_outer {
+#nfzkjffmlz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5808,15 +4380,15 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 4px;
 }
 
-#mloynvdnyq .gt_column_spanner_outer:first-child {
+#nfzkjffmlz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mloynvdnyq .gt_column_spanner_outer:last-child {
+#nfzkjffmlz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mloynvdnyq .gt_column_spanner {
+#nfzkjffmlz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -5828,11 +4400,11 @@ Så hvordan finder vi oddsratio?</p>
   width: 100%;
 }
 
-#mloynvdnyq .gt_spanner_row {
+#nfzkjffmlz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mloynvdnyq .gt_group_heading {
+#nfzkjffmlz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5858,7 +4430,7 @@ Så hvordan finder vi oddsratio?</p>
   text-align: left;
 }
 
-#mloynvdnyq .gt_empty_group_heading {
+#nfzkjffmlz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5873,15 +4445,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: middle;
 }
 
-#mloynvdnyq .gt_from_md > :first-child {
+#nfzkjffmlz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mloynvdnyq .gt_from_md > :last-child {
+#nfzkjffmlz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mloynvdnyq .gt_row {
+#nfzkjffmlz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5900,7 +4472,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#mloynvdnyq .gt_stub {
+#nfzkjffmlz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5913,7 +4485,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#mloynvdnyq .gt_stub_row_group {
+#nfzkjffmlz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5927,15 +4499,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: top;
 }
 
-#mloynvdnyq .gt_row_group_first td {
+#nfzkjffmlz .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#mloynvdnyq .gt_row_group_first th {
+#nfzkjffmlz .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#mloynvdnyq .gt_summary_row {
+#nfzkjffmlz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5945,16 +4517,16 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#mloynvdnyq .gt_first_summary_row {
+#nfzkjffmlz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_first_summary_row.thick {
+#nfzkjffmlz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mloynvdnyq .gt_last_summary_row {
+#nfzkjffmlz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5964,7 +4536,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_grand_summary_row {
+#nfzkjffmlz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5974,7 +4546,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#mloynvdnyq .gt_first_grand_summary_row {
+#nfzkjffmlz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5984,7 +4556,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_last_grand_summary_row_top {
+#nfzkjffmlz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5994,11 +4566,11 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_striped {
+#nfzkjffmlz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mloynvdnyq .gt_table_body {
+#nfzkjffmlz .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -6007,7 +4579,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_footnotes {
+#nfzkjffmlz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6021,7 +4593,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_footnote {
+#nfzkjffmlz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6030,7 +4602,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#mloynvdnyq .gt_sourcenotes {
+#nfzkjffmlz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6044,7 +4616,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#mloynvdnyq .gt_sourcenote {
+#nfzkjffmlz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6052,72 +4624,72 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#mloynvdnyq .gt_left {
+#nfzkjffmlz .gt_left {
   text-align: left;
 }
 
-#mloynvdnyq .gt_center {
+#nfzkjffmlz .gt_center {
   text-align: center;
 }
 
-#mloynvdnyq .gt_right {
+#nfzkjffmlz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mloynvdnyq .gt_font_normal {
+#nfzkjffmlz .gt_font_normal {
   font-weight: normal;
 }
 
-#mloynvdnyq .gt_font_bold {
+#nfzkjffmlz .gt_font_bold {
   font-weight: bold;
 }
 
-#mloynvdnyq .gt_font_italic {
+#nfzkjffmlz .gt_font_italic {
   font-style: italic;
 }
 
-#mloynvdnyq .gt_super {
+#nfzkjffmlz .gt_super {
   font-size: 65%;
 }
 
-#mloynvdnyq .gt_footnote_marks {
+#nfzkjffmlz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mloynvdnyq .gt_asterisk {
+#nfzkjffmlz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mloynvdnyq .gt_indent_1 {
+#nfzkjffmlz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mloynvdnyq .gt_indent_2 {
+#nfzkjffmlz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mloynvdnyq .gt_indent_3 {
+#nfzkjffmlz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mloynvdnyq .gt_indent_4 {
+#nfzkjffmlz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mloynvdnyq .gt_indent_5 {
+#nfzkjffmlz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mloynvdnyq .katex-display {
+#nfzkjffmlz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mloynvdnyq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nfzkjffmlz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6281,24 +4853,24 @@ Surv3y Never smoker Smoker or former smoker
 <p>Nu udfører vi en analyse, ogfår følgende output:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ylrzjyzesy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kjsolncoyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ylrzjyzesy table {
+#kjsolncoyk table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ylrzjyzesy thead, #ylrzjyzesy tbody, #ylrzjyzesy tfoot, #ylrzjyzesy tr, #ylrzjyzesy td, #ylrzjyzesy th {
+#kjsolncoyk thead, #kjsolncoyk tbody, #kjsolncoyk tfoot, #kjsolncoyk tr, #kjsolncoyk td, #kjsolncoyk th {
   border-style: none;
 }
 
-#ylrzjyzesy p {
+#kjsolncoyk p {
   margin: 0;
   padding: 0;
 }
 
-#ylrzjyzesy .gt_table {
+#kjsolncoyk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6324,12 +4896,12 @@ Surv3y Never smoker Smoker or former smoker
   border-left-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_caption {
+#kjsolncoyk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ylrzjyzesy .gt_title {
+#kjsolncoyk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6341,7 +4913,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-width: 0;
 }
 
-#ylrzjyzesy .gt_subtitle {
+#kjsolncoyk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6353,7 +4925,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-width: 0;
 }
 
-#ylrzjyzesy .gt_heading {
+#kjsolncoyk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -6365,13 +4937,13 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_bottom_border {
+#kjsolncoyk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_col_headings {
+#kjsolncoyk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -6386,7 +4958,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_col_heading {
+#kjsolncoyk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6406,7 +4978,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#ylrzjyzesy .gt_column_spanner_outer {
+#kjsolncoyk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6418,15 +4990,15 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 4px;
 }
 
-#ylrzjyzesy .gt_column_spanner_outer:first-child {
+#kjsolncoyk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ylrzjyzesy .gt_column_spanner_outer:last-child {
+#kjsolncoyk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ylrzjyzesy .gt_column_spanner {
+#kjsolncoyk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -6438,11 +5010,11 @@ Surv3y Never smoker Smoker or former smoker
   width: 100%;
 }
 
-#ylrzjyzesy .gt_spanner_row {
+#kjsolncoyk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ylrzjyzesy .gt_group_heading {
+#kjsolncoyk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6468,7 +5040,7 @@ Surv3y Never smoker Smoker or former smoker
   text-align: left;
 }
 
-#ylrzjyzesy .gt_empty_group_heading {
+#kjsolncoyk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6483,15 +5055,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: middle;
 }
 
-#ylrzjyzesy .gt_from_md > :first-child {
+#kjsolncoyk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ylrzjyzesy .gt_from_md > :last-child {
+#kjsolncoyk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ylrzjyzesy .gt_row {
+#kjsolncoyk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6510,7 +5082,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#ylrzjyzesy .gt_stub {
+#kjsolncoyk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6523,7 +5095,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ylrzjyzesy .gt_stub_row_group {
+#kjsolncoyk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6537,15 +5109,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: top;
 }
 
-#ylrzjyzesy .gt_row_group_first td {
+#kjsolncoyk .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#ylrzjyzesy .gt_row_group_first th {
+#kjsolncoyk .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#ylrzjyzesy .gt_summary_row {
+#kjsolncoyk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6555,16 +5127,16 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ylrzjyzesy .gt_first_summary_row {
+#kjsolncoyk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_first_summary_row.thick {
+#kjsolncoyk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ylrzjyzesy .gt_last_summary_row {
+#kjsolncoyk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6574,7 +5146,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_grand_summary_row {
+#kjsolncoyk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6584,7 +5156,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ylrzjyzesy .gt_first_grand_summary_row {
+#kjsolncoyk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6594,7 +5166,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_last_grand_summary_row_top {
+#kjsolncoyk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6604,11 +5176,11 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_striped {
+#kjsolncoyk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ylrzjyzesy .gt_table_body {
+#kjsolncoyk .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -6617,7 +5189,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_footnotes {
+#kjsolncoyk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6631,7 +5203,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_footnote {
+#kjsolncoyk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6640,7 +5212,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ylrzjyzesy .gt_sourcenotes {
+#kjsolncoyk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6654,7 +5226,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#ylrzjyzesy .gt_sourcenote {
+#kjsolncoyk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6662,72 +5234,72 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#ylrzjyzesy .gt_left {
+#kjsolncoyk .gt_left {
   text-align: left;
 }
 
-#ylrzjyzesy .gt_center {
+#kjsolncoyk .gt_center {
   text-align: center;
 }
 
-#ylrzjyzesy .gt_right {
+#kjsolncoyk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ylrzjyzesy .gt_font_normal {
+#kjsolncoyk .gt_font_normal {
   font-weight: normal;
 }
 
-#ylrzjyzesy .gt_font_bold {
+#kjsolncoyk .gt_font_bold {
   font-weight: bold;
 }
 
-#ylrzjyzesy .gt_font_italic {
+#kjsolncoyk .gt_font_italic {
   font-style: italic;
 }
 
-#ylrzjyzesy .gt_super {
+#kjsolncoyk .gt_super {
   font-size: 65%;
 }
 
-#ylrzjyzesy .gt_footnote_marks {
+#kjsolncoyk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ylrzjyzesy .gt_asterisk {
+#kjsolncoyk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ylrzjyzesy .gt_indent_1 {
+#kjsolncoyk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ylrzjyzesy .gt_indent_2 {
+#kjsolncoyk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ylrzjyzesy .gt_indent_3 {
+#kjsolncoyk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ylrzjyzesy .gt_indent_4 {
+#kjsolncoyk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ylrzjyzesy .gt_indent_5 {
+#kjsolncoyk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ylrzjyzesy .katex-display {
+#kjsolncoyk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ylrzjyzesy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kjsolncoyk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
