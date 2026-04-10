@@ -2031,7 +2031,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Kategoriske udfald</h1>
-  <p class="subtitle">Herunder logistisk regression</p>
+  <p class="subtitle">Andele, RR og OR</p>
 
 <div class="quarto-title-authors">
 </div>
@@ -2040,32 +2040,46 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="kategoriske-udfald" class="slide level2">
 <h2>Kategoriske udfald</h2>
 <p>Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.</p>
-<p>Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.</p>
-<p>Der er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.</p>
-<p>Men der kan være - socialklasse eg.</p>
-<p>Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?</p>
 <div class="fragment">
-<p>Vi tæller.</p>
+<p>Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.</p>
+</div>
+<div class="fragment">
+<p>Der er ikke nødvendigvis en orden: Det er ikke bedre at være mand end at være kvinde.</p>
+</div>
+<div class="fragment">
+<p>Men der kan være - socialklasse eg.</p>
+</div>
+<div class="fragment">
+<p>Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?</p>
+</div>
+<div class="fragment">
+<p>Vi tæller</p>
 </div>
 </section>
 <section id="kategoriske-udfald-1" class="slide level2">
 <h2>Kategoriske udfald</h2>
-<p>Hvor mange er der af hver?</p>
-<p>Og hvor stor en andel udgør de så af de samlede hele.</p>
-<p>Er der forskel på de andele grupper imellem?</p>
-<p>Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?</p>
-<p>Og hvor sikre er vi på vores estimater?</p>
+<p>Når vi tæller får vi at vide hvor mange der er af hver.</p>
+<div class="fragment">
+<p>Vi kan beregne hvor stor en andel de forskellige kategorier udgør af det samlede hele.</p>
+</div>
+<div class="fragment">
+<p>Vi vil blive spurgt:</p>
+<ul>
+<li>Er der forskel på de andele grupperne imellem?</li>
+<li>Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?</li>
+<li>Og hvor sikre er vi på vores estimater?</li>
+</ul>
+</div>
 </section>
 <section id="kategoriske-udfald-2" class="slide level2">
 <h2>Kategoriske udfald</h2>
 <p>Så vi skal kigge på:</p>
 <ul>
-<li>Proportioner</li>
+<li>Proportioner - også kendt som andele</li>
 <li>Relativ risiko</li>
 <li>Odds ratio</li>
 <li>Chi i anden</li>
 </ul>
-<p>Og lidt senere den logistisk regression</p>
 </section>
 <section id="en-opgave" class="slide level2">
 <h2>En opgave</h2>
@@ -2099,16 +2113,28 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <h2>Hvor sikre er vi på det tal?</h2>
 <p>Opgaven fortsætter:</p>
 <p>Angiv også et 95% konfidensinterval på det estimat.</p>
-<p>Estimatet er en andel. Også kaldet en proportion</p>
+<div class="fragment">
+<p>Estimatet er en andel. Også kaldet en proportion. Eller <em>p</em>.</p>
+</div>
+<div class="fragment">
 <p>Metoden har vi set før.</p>
+</div>
 <div class="fragment">
 <p><span class="math inline">\(estimat \pm 1.96 \cdot SE\)</span></p>
+</div>
+<div class="fragment">
+<p>Det ligner næsten et mønster…</p>
 </div>
 <div class="fragment">
 <p>Så - hvordan beregner vi en standardfejl på estimatet af en proportion?</p>
 </div>
 <div class="fragment">
 <p><span class="math inline">\(SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}\)</span></p>
+</div>
+<div class="fragment">
+<div class="tiny">
+<p>Man kan godt udlede hvorfor <span class="math inline">\(SE_{prop}\)</span> har det udseende. Det bliver vi ikke spurgt om, så det springer vi over.</p>
+</div>
 </div>
 </section>
 <section id="hvor-sikker-var-vi" class="slide level2">
@@ -2132,26 +2158,29 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <h2>Videre med samme opgave</h2>
 <div class="smaller">
 <p>Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.</p>
-</div>
-<div class="evensmaller">
-<p>Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.</p>
-</div>
 <p>Hvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?</p>
+</div>
 <div class="smaller">
 <div class="fragment">
-<p>At: I virkeligheden er forskellen på de to prævalenser 0</p>
+<p>Det kan vi gøre på fire måder:</p>
+</div>
+<div class="fragment">
+<p>Forskellen på de to prævalenser er 0</p>
 </div>
 <div class="fragment">
 <p>Den ene prævalens divideret med den anden er 1 (for så er de ens)</p>
 </div>
 <div class="fragment">
-<p>I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.</p>
+<p>I stedet for prævalenser kan vi beregne odds. Og se om odds er ens. Det kræver at vi lige finder ud af hvad “odds” egentlig er…</p>
 </div>
 <div class="fragment">
 <p>Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?</p>
 </div>
 <div class="fragment">
 <p>Vi tager dem en for en</p>
+<div class="tiny">
+<p>Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.</p>
+</div>
 </div>
 </div>
 </section>
@@ -2165,14 +2194,18 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 </div>
 <div class="fragment">
 <p>Samme metode som før:</p>
-<p><span class="math inline">\(estimat_{diff} \pm 1.96*SE_{diff}\)</span></p>
-<p>Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen</p>
+<p><span class="math inline">\(\text{estimat}_{diff} \pm 1.96*SE_{diff}\)</span></p>
+<p>Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen.</p>
+<div class="tiny">
+<p>1.96 fordi vi implicit har valgt <span class="math inline">\(\alpha = 0.05\)</span> og der er tale om to samples der ikke er parrede. Vi kan også sammenligne med testværdien.</p>
+</div>
 </div>
 <div class="fragment">
 <p>Så… Hvordan beregner vi <span class="math inline">\(SE_{diff}\)</span>?</p>
 </div>
 <div class="fragment">
-<p><span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></p>
+<p>Helt som før<br>
+<span class="math inline">\(SE_{diff} = \sqrt{SE_1^2 + SE_2^2}\)</span></p>
 </div>
 <div class="fragment">
 <p>Og standardfejl på de enkelte proportioner var: <span class="math inline">\(SE = \sqrt{\frac{p(1-p)}{n}}\)</span></p>
@@ -2194,33 +2227,46 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
-<section id="kritisk-værdi" class="slide level2">
-<h2>Kritisk værdi</h2>
-<div class="smaller">
-<p>Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.</p>
-<p><span class="math inline">\(|\frac{\text{estimat}}{SE}| &gt; \text{kritisk værdi}\)</span></p>
-<p>Når vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.</p>
-<p>Venstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.</p>
-<p>Så vi kan ofte springe konfidensintervallet over, konstatere at vi har en <em>test-værdi</em> <span class="math inline">\(|\frac{\text{estimat}}{SE}|\)</span> på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den).</p>
-</div>
-</section>
 <section id="forholdet-mellem-de-to-prævalenser" class="slide level2">
 <h2>Forholdet mellem de to prævalenser?</h2>
+<p>At de måske er ens kan vi også udtrykke ved at den ene divideret med den anden giver 1.</p>
+<div class="fragment">
 <p>Den hypotese vi så tester er:</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(H_0: \frac{p_{deler}}{p_{deler ikke}} = 1\)</span></p>
-<p>Er de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.</p>
-<p>Vi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.</p>
-<p>Metoden er den samme som før. Estimatet +/- 1.96 SE.</p>
-<p>Sådan da…</p>
+<p>Så hvad kan vi, hvis estimatet er tilstrækkeligt forskelligt fra 1?</p>
+</div>
+<div class="fragment">
+<p>Afvise <span class="math inline">\(H_0\)</span>.</p>
+</div>
+<div class="fragment">
+<p>Metoden er den samme som før. <span class="math inline">\(\text{Estimatet} \pm 1.96\cdot\text{SE}\)</span><br>
+Eller beregne en test-værdi og sammemligne med den kritiske værdi.</p>
+<div class="tiny">
+<p>Prævalensen for TB kan vi også kalde risikoen for at have TB. Det kunne vi også kalde for en risiko. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR.</p>
+</div>
+</div>
 </section>
 <section id="komplikationer" class="slide level2">
 <h2>Komplikationer</h2>
-<p>Hvordan beregner vi SE?</p>
-<p>Det er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).</p>
-<p>Vi har ikke en let formel for standardfejlen på en riskratio.</p>
-<p>Det vi har er en formel for standardfejlen af logaritmen af RR.</p>
-<p>Og derfor:</p>
+<p>Så skal vi “bare” beregne SE.</p>
+<div class="fragment">
+<p>Det er lidt bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).</p>
+</div>
+<div class="fragment">
+<p>Vi har nemlig ikke en let formel for standardfejlen på en riskratio.</p>
+</div>
+<div class="fragment">
+<p>Det vi har er en formel for standardfejlen af <em>logaritmen</em> af RR.</p>
+</div>
+<div class="fragment">
+<p>Og derfor skal vi se på:</p>
 <p><span class="math inline">\(\log{RR} \pm 1.96 \cdot SE_{\log{RR}}\)</span></p>
+</div>
+<div class="fragment">
+<p>Hvordan gør vi så det?</p>
+</div>
 </section>
 <section id="se-for-logrr" class="slide level2">
 <h2>SE for log(RR)</h2>
@@ -2247,9 +2293,20 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 </tr>
 </tbody>
 </table>
-<p>Hvor risikoen for udfald 1 hvis man er eksponeret er: <span class="math inline">\(\frac{a}{a+b}\)</span>, og hvis man ikke er eksponeret: <span class="math inline">\(\frac{c}{c+d}\)</span></p>
-<p>Gælder at:</p>
+<div class="fragment">
+<p>Hvad er risikoen for udfald 1 hvis man er eksponeret?</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\frac{a}{a+b}\)</span></p>
+</div>
+<div class="fragment">
+<p>og hvis man ikke er eksponeret:<br>
+<span class="math inline">\(\frac{c}{c+d}\)</span></p>
+</div>
+<div class="fragment">
+<p>Så gælder det at:</p>
 <p><span class="math inline">\(SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}\)</span></p>
+</div>
 </div>
 </section>
 <section id="og-så-er-vi-ca.-klar-til-at-regne" class="slide level2">
@@ -2257,25 +2314,28 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <div class="columns">
 <div class="column">
 <div class="smaller">
+<p>Prævalensen af TB blandt de 97 der delte sprøjter var 24.7%.<br>
+Prævalensen af TB blandt de 161 der ikke delte sprøjter var 17.4%</p>
+<p>Bonus: Hvordan finder vi - fra det - nedenstående tal?</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="erdlpyhqqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#erdlpyhqqy table {
+<div id="pooylffgvd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pooylffgvd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#erdlpyhqqy thead, #erdlpyhqqy tbody, #erdlpyhqqy tfoot, #erdlpyhqqy tr, #erdlpyhqqy td, #erdlpyhqqy th {
+#pooylffgvd thead, #pooylffgvd tbody, #pooylffgvd tfoot, #pooylffgvd tr, #pooylffgvd td, #pooylffgvd th {
   border-style: none;
 }
 
-#erdlpyhqqy p {
+#pooylffgvd p {
   margin: 0;
   padding: 0;
 }
 
-#erdlpyhqqy .gt_table {
+#pooylffgvd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2301,12 +2361,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-left-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_caption {
+#pooylffgvd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#erdlpyhqqy .gt_title {
+#pooylffgvd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2318,7 +2378,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-width: 0;
 }
 
-#erdlpyhqqy .gt_subtitle {
+#pooylffgvd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2330,7 +2390,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-width: 0;
 }
 
-#erdlpyhqqy .gt_heading {
+#pooylffgvd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2342,13 +2402,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_bottom_border {
+#pooylffgvd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_col_headings {
+#pooylffgvd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2363,7 +2423,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_col_heading {
+#pooylffgvd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2383,7 +2443,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#erdlpyhqqy .gt_column_spanner_outer {
+#pooylffgvd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2395,15 +2455,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 4px;
 }
 
-#erdlpyhqqy .gt_column_spanner_outer:first-child {
+#pooylffgvd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#erdlpyhqqy .gt_column_spanner_outer:last-child {
+#pooylffgvd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#erdlpyhqqy .gt_column_spanner {
+#pooylffgvd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2415,11 +2475,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   width: 100%;
 }
 
-#erdlpyhqqy .gt_spanner_row {
+#pooylffgvd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#erdlpyhqqy .gt_group_heading {
+#pooylffgvd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2445,7 +2505,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   text-align: left;
 }
 
-#erdlpyhqqy .gt_empty_group_heading {
+#pooylffgvd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2460,15 +2520,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: middle;
 }
 
-#erdlpyhqqy .gt_from_md > :first-child {
+#pooylffgvd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#erdlpyhqqy .gt_from_md > :last-child {
+#pooylffgvd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#erdlpyhqqy .gt_row {
+#pooylffgvd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2487,7 +2547,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#erdlpyhqqy .gt_stub {
+#pooylffgvd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2500,7 +2560,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#erdlpyhqqy .gt_stub_row_group {
+#pooylffgvd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2514,15 +2574,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: top;
 }
 
-#erdlpyhqqy .gt_row_group_first td {
+#pooylffgvd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#erdlpyhqqy .gt_row_group_first th {
+#pooylffgvd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#erdlpyhqqy .gt_summary_row {
+#pooylffgvd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2532,16 +2592,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#erdlpyhqqy .gt_first_summary_row {
+#pooylffgvd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_first_summary_row.thick {
+#pooylffgvd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#erdlpyhqqy .gt_last_summary_row {
+#pooylffgvd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2551,7 +2611,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_grand_summary_row {
+#pooylffgvd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2561,7 +2621,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#erdlpyhqqy .gt_first_grand_summary_row {
+#pooylffgvd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2571,7 +2631,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_last_grand_summary_row_top {
+#pooylffgvd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2581,11 +2641,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_striped {
+#pooylffgvd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#erdlpyhqqy .gt_table_body {
+#pooylffgvd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2594,7 +2654,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_footnotes {
+#pooylffgvd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2608,7 +2668,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_footnote {
+#pooylffgvd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2617,7 +2677,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#erdlpyhqqy .gt_sourcenotes {
+#pooylffgvd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2631,7 +2691,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#erdlpyhqqy .gt_sourcenote {
+#pooylffgvd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2639,72 +2699,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#erdlpyhqqy .gt_left {
+#pooylffgvd .gt_left {
   text-align: left;
 }
 
-#erdlpyhqqy .gt_center {
+#pooylffgvd .gt_center {
   text-align: center;
 }
 
-#erdlpyhqqy .gt_right {
+#pooylffgvd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#erdlpyhqqy .gt_font_normal {
+#pooylffgvd .gt_font_normal {
   font-weight: normal;
 }
 
-#erdlpyhqqy .gt_font_bold {
+#pooylffgvd .gt_font_bold {
   font-weight: bold;
 }
 
-#erdlpyhqqy .gt_font_italic {
+#pooylffgvd .gt_font_italic {
   font-style: italic;
 }
 
-#erdlpyhqqy .gt_super {
+#pooylffgvd .gt_super {
   font-size: 65%;
 }
 
-#erdlpyhqqy .gt_footnote_marks {
+#pooylffgvd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#erdlpyhqqy .gt_asterisk {
+#pooylffgvd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#erdlpyhqqy .gt_indent_1 {
+#pooylffgvd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#erdlpyhqqy .gt_indent_2 {
+#pooylffgvd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#erdlpyhqqy .gt_indent_3 {
+#pooylffgvd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#erdlpyhqqy .gt_indent_4 {
+#pooylffgvd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#erdlpyhqqy .gt_indent_5 {
+#pooylffgvd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#erdlpyhqqy .katex-display {
+#pooylffgvd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#erdlpyhqqy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pooylffgvd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2746,23 +2806,46 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <section id="hvad-så-vi" class="slide level2">
 <h2>Hvad så vi?</h2>
 <div class="smaller">
-<p>RR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.</p>
+<p>RR var 1.42268.<br>
+Hvordan vil vi fortolke det?</p>
+<div class="fragment">
+<p>Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter, end hvis man ikke gør.</p>
+</div>
+<div class="fragment">
 <p>Men. KI for RR var [0.877; 2.307]</p>
+</div>
+<div class="fragment">
 <p>Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.</p>
+</div>
+<div class="fragment">
 <p>Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).</p>
+</div>
+<div class="fragment">
 <p>Hvorfor? Fordi log(1) = 0.</p>
-<p>Vi kunne også få teststørrelsen ved <span class="math inline">\(\frac{\log(RR)}{SE(log(RR))}\)</span>. Den var 1.429. Mindre end den kritiske værdi.</p>
+</div>
+<div class="fragment">
+<p>Vi kunne også få teststørrelsen ved <span class="math inline">\(\frac{\log(RR)}{SE(log(RR))}\)</span>. Den var 1.429.<br>
+Mindre end den kritiske værdi.</p>
+</div>
 </div>
 </section>
 <section id="odds---hvad-er-det" class="slide level2">
 <h2>Odds - hvad er det?</h2>
 <p>Blandt de 97 narkomaner der delte sprøjter var 24 TB+.</p>
+<div class="fragment">
 <p>Det gav en risiko for at være TB+ på 24/97.</p>
 <p>Eller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…</p>
+</div>
+<div class="fragment">
 <p>Det kan vi udtrykke anderledes - ved odds.</p>
+</div>
+<div class="fragment">
 <p>Det er antallet af positive udfald divideret med antallet af negative udfald.</p>
 <p>Eller: 24/73</p>
+</div>
+<div class="fragment">
 <p>Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.</p>
+</div>
 </section>
 <section id="odds---fordelene" class="slide level2">
 <h2>Odds - fordelene</h2>
@@ -2798,22 +2881,31 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 </section>
 <section id="hvad-tester-vi-så-med-odds" class="slide level2">
 <h2>Hvad tester vi så med odds?</h2>
-<p>(Næsten) det samme som med risiko.</p>
+<p>(Næsten) det samme som med Risk Ratio. Nu blot Odds Ratio.</p>
+<div class="fragment">
 <p>Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?</p>
 <p>Eller:</p>
-<p>Kan vi afvise at:</p>
-<p><span class="math inline">\(\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1\)</span></p>
-<div class="evensmaller">
-<p>Hov! Det var Odds-Ratio, OR, der dukkede op der!</p>
 </div>
-<p>Samme teknik som før:</p>
-<p><span class="math inline">\(\text{estimat} \pm 1.96\cdot\text{SE}\)</span></p>
-<p>Hvad er SE?</p>
+<div class="fragment">
+<p>Kan vi afvise <span class="math inline">\(H_0\)</span>:<br>
+<span class="math inline">\(\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1\)</span></p>
+</div>
+<div class="fragment">
+<p>Kan I gætte hvordan vi beregner et 95% KI på det?</p>
+</div>
+<div class="fragment">
+<p>Fuldstændig som før:<br>
+<span class="math inline">\(\text{estimat} \pm 1.96\cdot\text{SE}\)</span></p>
+</div>
 </section>
 <section id="lignende-problem-som-med-se-for-rr" class="slide level2">
 <h2>Lignende problem som med SE for RR</h2>
 <div class="smaller">
-<p>Vi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))</p>
+<p>Problemet med at beregne SE for OR er nøjagtig det samme som for RR.</p>
+<div class="fragment">
+<p>Løsningen er ca. den samme. Vi har en pæn formel for SE(log(OR))</p>
+</div>
+<div class="fragment">
 <p>For det generelle forhold:</p>
 <table class="caption-top">
 <thead>
@@ -2836,6 +2928,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 </tr>
 </tbody>
 </table>
+</div>
 <div class="fragment">
 <p>Får vi: <span class="math inline">\(SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}\)</span></p>
 </div>
@@ -2851,23 +2944,23 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ehcpjiwvao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ehcpjiwvao table {
+<div id="xepetcicbu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xepetcicbu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ehcpjiwvao thead, #ehcpjiwvao tbody, #ehcpjiwvao tfoot, #ehcpjiwvao tr, #ehcpjiwvao td, #ehcpjiwvao th {
+#xepetcicbu thead, #xepetcicbu tbody, #xepetcicbu tfoot, #xepetcicbu tr, #xepetcicbu td, #xepetcicbu th {
   border-style: none;
 }
 
-#ehcpjiwvao p {
+#xepetcicbu p {
   margin: 0;
   padding: 0;
 }
 
-#ehcpjiwvao .gt_table {
+#xepetcicbu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2893,12 +2986,12 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-left-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_caption {
+#xepetcicbu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ehcpjiwvao .gt_title {
+#xepetcicbu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2910,7 +3003,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-width: 0;
 }
 
-#ehcpjiwvao .gt_subtitle {
+#xepetcicbu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2922,7 +3015,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-width: 0;
 }
 
-#ehcpjiwvao .gt_heading {
+#xepetcicbu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2934,13 +3027,13 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_bottom_border {
+#xepetcicbu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_col_headings {
+#xepetcicbu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2955,7 +3048,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_col_heading {
+#xepetcicbu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2975,7 +3068,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#ehcpjiwvao .gt_column_spanner_outer {
+#xepetcicbu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2987,15 +3080,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 4px;
 }
 
-#ehcpjiwvao .gt_column_spanner_outer:first-child {
+#xepetcicbu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ehcpjiwvao .gt_column_spanner_outer:last-child {
+#xepetcicbu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ehcpjiwvao .gt_column_spanner {
+#xepetcicbu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3007,11 +3100,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   width: 100%;
 }
 
-#ehcpjiwvao .gt_spanner_row {
+#xepetcicbu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ehcpjiwvao .gt_group_heading {
+#xepetcicbu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3037,7 +3130,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   text-align: left;
 }
 
-#ehcpjiwvao .gt_empty_group_heading {
+#xepetcicbu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3052,15 +3145,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: middle;
 }
 
-#ehcpjiwvao .gt_from_md > :first-child {
+#xepetcicbu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ehcpjiwvao .gt_from_md > :last-child {
+#xepetcicbu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ehcpjiwvao .gt_row {
+#xepetcicbu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3079,7 +3172,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   overflow-x: hidden;
 }
 
-#ehcpjiwvao .gt_stub {
+#xepetcicbu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3092,7 +3185,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#ehcpjiwvao .gt_stub_row_group {
+#xepetcicbu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3106,15 +3199,15 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   vertical-align: top;
 }
 
-#ehcpjiwvao .gt_row_group_first td {
+#xepetcicbu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ehcpjiwvao .gt_row_group_first th {
+#xepetcicbu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ehcpjiwvao .gt_summary_row {
+#xepetcicbu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3124,16 +3217,16 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#ehcpjiwvao .gt_first_summary_row {
+#xepetcicbu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_first_summary_row.thick {
+#xepetcicbu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ehcpjiwvao .gt_last_summary_row {
+#xepetcicbu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3143,7 +3236,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_grand_summary_row {
+#xepetcicbu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3153,7 +3246,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#ehcpjiwvao .gt_first_grand_summary_row {
+#xepetcicbu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3163,7 +3256,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-top-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_last_grand_summary_row_top {
+#xepetcicbu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3173,11 +3266,11 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_striped {
+#xepetcicbu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ehcpjiwvao .gt_table_body {
+#xepetcicbu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3186,7 +3279,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-bottom-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_footnotes {
+#xepetcicbu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3200,7 +3293,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_footnote {
+#xepetcicbu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3209,7 +3302,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#ehcpjiwvao .gt_sourcenotes {
+#xepetcicbu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3223,7 +3316,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   border-right-color: #D3D3D3;
 }
 
-#ehcpjiwvao .gt_sourcenote {
+#xepetcicbu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3231,72 +3324,72 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
   padding-right: 5px;
 }
 
-#ehcpjiwvao .gt_left {
+#xepetcicbu .gt_left {
   text-align: left;
 }
 
-#ehcpjiwvao .gt_center {
+#xepetcicbu .gt_center {
   text-align: center;
 }
 
-#ehcpjiwvao .gt_right {
+#xepetcicbu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ehcpjiwvao .gt_font_normal {
+#xepetcicbu .gt_font_normal {
   font-weight: normal;
 }
 
-#ehcpjiwvao .gt_font_bold {
+#xepetcicbu .gt_font_bold {
   font-weight: bold;
 }
 
-#ehcpjiwvao .gt_font_italic {
+#xepetcicbu .gt_font_italic {
   font-style: italic;
 }
 
-#ehcpjiwvao .gt_super {
+#xepetcicbu .gt_super {
   font-size: 65%;
 }
 
-#ehcpjiwvao .gt_footnote_marks {
+#xepetcicbu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ehcpjiwvao .gt_asterisk {
+#xepetcicbu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ehcpjiwvao .gt_indent_1 {
+#xepetcicbu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ehcpjiwvao .gt_indent_2 {
+#xepetcicbu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ehcpjiwvao .gt_indent_3 {
+#xepetcicbu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ehcpjiwvao .gt_indent_4 {
+#xepetcicbu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ehcpjiwvao .gt_indent_5 {
+#xepetcicbu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ehcpjiwvao .katex-display {
+#xepetcicbu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ehcpjiwvao div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xepetcicbu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3340,34 +3433,61 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <div class="smaller">
 <p>OR var 1.56</p>
 <p>Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.</p>
+<div class="fragment">
 <p>Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]</p>
+</div>
+<div class="fragment">
 <p>Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.</p>
+</div>
+<div class="fragment">
 <p>Vi kunne også finde testværdien: <span class="math inline">\(\frac{\log{OR}}{SE(\log{OR})} = 1.420\)</span>. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise <span class="math inline">\(H_0\)</span>.</p>
+</div>
+<div class="fragment">
 <p>95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise <span class="math inline">\(H_0\)</span></p>
-<p>Vær skarpe her. Odds er noget andet end risiko.</p>
+</div>
+<div class="fragment">
+<p>Vær skarpe her. Odds er noget andet end risiko. Så husk <em>altid</em> at skrive odds i stedet for risiko.</p>
+</div>
 </div>
 </section>
 <section id="fra-sandsynlighed-til-odds" class="slide level2">
 <h2>Fra sandsynlighed til odds</h2>
 <div class="evensmaller">
 <p>Hvordan beregner vi odds hvis vi kender sandsynligheden?</p>
+<div class="fragment">
 <p><span class="math inline">\(\text{odds} = \frac{p}{1-p}\)</span></p>
-<p>Hvordan beregner vi sandsynligheden hvis vi kender odds:</p>
+</div>
+<div class="fragment">
+<p>Hvordan beregner vi sandsynligheden hvis vi kender odds?</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(p = \frac{\text{odds}}{1 + \text{odds}}\)</span></p>
+</div>
+<div class="fragment">
 <p>En særlig funktion vi kommer til at møde igen:</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)\)</span></p>
 <p>logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.</p>
+</div>
+<div class="fragment">
 <p>Den omvendte kan også være nyttig. Hvis x = logit(p):</p>
 <p><span class="math inline">\(p = \frac{e^x}{1 + e^x}\)</span></p>
 <p>Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.</p>
+</div>
 </div>
 </section>
 <section id="chi2-tilgangen" class="slide level2">
 <h2><span class="math inline">\(\chi^2\)</span> tilgangen</h2>
 <div class="smaller">
 <p>Mere generel - kan håndtere mere end et udfald.</p>
+<div class="fragment">
 <p>Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.</p>
+</div>
+<div class="fragment">
 <p>Tester forskellen på den fordeling vi ser - og den vi ville forvente</p>
+</div>
+<div class="fragment">
 <p>Hvis vi kun kender totalerne</p>
 <table class="caption-top">
 <thead>
@@ -3402,6 +3522,7 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <p>Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter</p>
 <p>Hvor mange forventer vi så har TB blandt de der deler sprøjter?</p>
 </div>
+</div>
 </section>
 <section id="regne-regne" class="slide level2">
 <h2>Regne-regne</h2>
@@ -3424,11 +3545,24 @@ I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive f
 <h2>Regne-regne</h2>
 <div class="smaller">
 <p><span class="math inline">\(\chi^2\)</span> testens <span class="math inline">\(H_0\)</span> er, at der ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+<div class="fragment">
 <p>Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.</p>
+</div>
+<div class="fragment">
 <p>Styrken er at den kan håndtere flere udfald end to.</p>
+</div>
+<div class="fragment">
 <p>Svagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.</p>
+</div>
+<div class="fragment">
 <p>Og så forudsætter <span class="math inline">\(\chi^2\)</span> testen at der er mindst 5 <em>forventede</em> observationer i hver “celle”.</p>
+</div>
+<div class="fragment">
 <p>Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.</p>
+</div>
+<div class="fragment">
+<p>Funktionen hedder <code>chisq.test()</code>. Med argumentet <code>correct = FALSE</code> hvis vi vil slå den fra.</p>
+</div>
 </div>
 </section>
 <section id="hvordan-gør-vi" class="slide level2">

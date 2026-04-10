@@ -2319,22 +2319,27 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Pr(&gt;|t|) er p-værdien: Risikoen for at vi afviser <span class="math inline">\(H_0\)</span>, selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).</p>
 <p>Typisk: Større eller mindre end 0.05.</p>
+<p>Tæt sammenhæng mellem t-value og p-value!</p>
 </div>
 </section>
 <section id="populær-ting-i-eksamensopgaver" class="slide level2">
 <h2>Populær ting i eksamensopgaver</h2>
 <div class="evensmaller">
 <p>De der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.</p>
+<div class="fragment">
 <p>Husk: <span class="math inline">\(\text{t value} = \frac{\text{Estimate}}{\text{Std. Error}}\)</span></p>
+</div>
+<div class="fragment">
 <p>p-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:<br>
 <span class="math inline">\(\frac{\text{Estimate}}{\text{Std. Error}}\)</span>,<br>
 og ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)</p>
 </div>
+</div>
 <div class="fragment">
-<div class="evensmaller">
+<div class="tiny">
 <p>Vi kan faktisk godt beregne p-værdien. Den er givet ved: <code>2*(1-pt(abs(</code>t value<code>), df))</code></p>
 <p><code>pt</code> er <code>pnorm()</code> blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.</p>
-<p>Men det behøver vi ikke - test-værdien er rigelig.</p>
+<p>Men det behøver vi ikke - test-værdien er rigeligt.</p>
 </div>
 </div>
 </section>
@@ -2456,27 +2461,45 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Hov! To forklarende variable!!</h2>
 <div class="evensmaller">
 <p>Når vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression.</p>
-<p>. . .</p>
+<div class="fragment">
 <p>Jeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.</p>
-<p>. . .</p>
+</div>
+<div class="fragment">
 <p>Hvad var det?</p>
+</div>
+<div class="fragment">
 <p>Ja, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:</p>
 <p><code>lm(y~x, data = data)</code></p>
+</div>
+<div class="fragment">
 <p>Nu skal vi have en der er mere kompleks:</p>
 <p><code>lm(y~x+z, data = data)</code></p>
+</div>
+<div class="fragment">
 <p>Den kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:</p>
 <p><span class="math inline">\(\hat{y} = ax + bz + c\)</span></p>
+</div>
+<div class="fragment">
 <p>Eller mere generelt:</p>
 <p><span class="math inline">\(\hat{y} = \beta_0 + \beta_1x + \beta_2z\)</span></p>
+</div>
 </div>
 </section>
 <section id="mer-hov" class="slide level2">
 <h2>Mer hov!</h2>
-<p>Mors rygning under graviditeten:</p>
+<p>Mors rygning under graviditeten</p>
+<div class="fragment">
 <p>smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)</p>
+</div>
+<div class="fragment">
 <p>Det er jo ikke kontinuært. Hvordan så?</p>
+</div>
+<div class="fragment">
 <p><code>lm</code> klarer det fint. Vi skal blot huske at fortælle funktionen at <code>smoke</code> er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen <code>factor()</code></p>
+</div>
+<div class="fragment">
 <p>Men så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)</p>
+</div>
 </section>
 <section id="kategoriske-variable" class="slide level2">
 <h2>Kategoriske variable</h2>

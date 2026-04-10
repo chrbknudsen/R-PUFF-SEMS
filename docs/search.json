@@ -718,14 +718,14 @@
     "href": "slides/linreg.html#koefficienter---p-value",
     "title": "Lineær regression",
     "section": "Koefficienter - p-value",
-    "text": "Koefficienter - p-value\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nPr(&gt;|t|) er p-værdien: Risikoen for at vi afviser \\(H_0\\), selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).\nTypisk: Større eller mindre end 0.05."
+    "text": "Koefficienter - p-value\n\n\n\n\nCall:\nlm(formula = y ~ x, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.116 -11.157  -1.313  10.985  43.723 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   44.153      5.442   8.113 1.49e-10 ***\nx             42.764      0.913  46.840  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 18.81 on 48 degrees of freedom\nMultiple R-squared:  0.9786,    Adjusted R-squared:  0.9781 \nF-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16\n\n\nPr(&gt;|t|) er p-værdien: Risikoen for at vi afviser \\(H_0\\), selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).\nTypisk: Større eller mindre end 0.05.\nTæt sammenhæng mellem t-value og p-value!"
   },
   {
     "objectID": "slides/linreg.html#populær-ting-i-eksamensopgaver",
     "href": "slides/linreg.html#populær-ting-i-eksamensopgaver",
     "title": "Lineær regression",
     "section": "Populær ting i eksamensopgaver",
-    "text": "Populær ting i eksamensopgaver\n\nDe der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.\nHusk: \\(\\text{t value} = \\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\np-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:\n\\(\\frac{\\text{Estimate}}{\\text{Std. Error}}\\),\nog ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)\n\n\n\nVi kan faktisk godt beregne p-værdien. Den er givet ved: 2*(1-pt(abs(t value), df))\npt er pnorm() blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.\nMen det behøver vi ikke - test-værdien er rigelig."
+    "text": "Populær ting i eksamensopgaver\n\nDe der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.\n\nHusk: \\(\\text{t value} = \\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\n\n\np-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:\n\\(\\frac{\\text{Estimate}}{\\text{Std. Error}}\\),\nog ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)\n\n\n\n\nVi kan faktisk godt beregne p-værdien. Den er givet ved: 2*(1-pt(abs(t value), df))\npt er pnorm() blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.\nMen det behøver vi ikke - test-værdien er rigeligt."
   },
   {
     "objectID": "slides/linreg.html#resten",
@@ -774,14 +774,14 @@
     "href": "slides/linreg.html#hov-to-forklarende-variable",
     "title": "Lineær regression",
     "section": "Hov! To forklarende variable!!",
-    "text": "Hov! To forklarende variable!!\n\nNår vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression.\n. . .\nJeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.\n. . .\nHvad var det?\nJa, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:\nlm(y~x, data = data)\nNu skal vi have en der er mere kompleks:\nlm(y~x+z, data = data)\nDen kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:\n\\(\\hat{y} = ax + bz + c\\)\nEller mere generelt:\n\\(\\hat{y} = \\beta_0 + \\beta_1x + \\beta_2z\\)"
+    "text": "Hov! To forklarende variable!!\n\nNår vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression.\n\nJeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.\n\n\nHvad var det?\n\n\nJa, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:\nlm(y~x, data = data)\n\n\nNu skal vi have en der er mere kompleks:\nlm(y~x+z, data = data)\n\n\nDen kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:\n\\(\\hat{y} = ax + bz + c\\)\n\n\nEller mere generelt:\n\\(\\hat{y} = \\beta_0 + \\beta_1x + \\beta_2z\\)"
   },
   {
     "objectID": "slides/linreg.html#mer-hov",
     "href": "slides/linreg.html#mer-hov",
     "title": "Lineær regression",
     "section": "Mer hov!",
-    "text": "Mer hov!\nMors rygning under graviditeten:\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nDet er jo ikke kontinuært. Hvordan så?\nlm klarer det fint. Vi skal blot huske at fortælle funktionen at smoke er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen factor()\nMen så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)"
+    "text": "Mer hov!\nMors rygning under graviditeten\n\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\n\n\nDet er jo ikke kontinuært. Hvordan så?\n\n\nlm klarer det fint. Vi skal blot huske at fortælle funktionen at smoke er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen factor()\n\n\nMen så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)"
   },
   {
     "objectID": "slides/linreg.html#kategoriske-variable",
@@ -2160,21 +2160,21 @@
     "href": "slides/kategoriske.html#kategoriske-udfald",
     "title": "Kategoriske udfald",
     "section": "Kategoriske udfald",
-    "text": "Kategoriske udfald\nKategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.\nKøn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.\nDer er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.\nMen der kan være - socialklasse eg.\nDer kan vi ikke beregne gennemsnit. Så hvad gør vi så?\n\nVi tæller."
+    "text": "Kategoriske udfald\nKategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.\n\nKøn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.\n\n\nDer er ikke nødvendigvis en orden: Det er ikke bedre at være mand end at være kvinde.\n\n\nMen der kan være - socialklasse eg.\n\n\nDer kan vi ikke beregne gennemsnit. Så hvad gør vi så?\n\n\nVi tæller"
   },
   {
     "objectID": "slides/kategoriske.html#kategoriske-udfald-1",
     "href": "slides/kategoriske.html#kategoriske-udfald-1",
     "title": "Kategoriske udfald",
     "section": "Kategoriske udfald",
-    "text": "Kategoriske udfald\nHvor mange er der af hver?\nOg hvor stor en andel udgør de så af de samlede hele.\nEr der forskel på de andele grupper imellem?\nKan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?\nOg hvor sikre er vi på vores estimater?"
+    "text": "Kategoriske udfald\nNår vi tæller får vi at vide hvor mange der er af hver.\n\nVi kan beregne hvor stor en andel de forskellige kategorier udgør af det samlede hele.\n\n\nVi vil blive spurgt:\n\nEr der forskel på de andele grupperne imellem?\nKan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?\nOg hvor sikre er vi på vores estimater?"
   },
   {
     "objectID": "slides/kategoriske.html#kategoriske-udfald-2",
     "href": "slides/kategoriske.html#kategoriske-udfald-2",
     "title": "Kategoriske udfald",
     "section": "Kategoriske udfald",
-    "text": "Kategoriske udfald\nSå vi skal kigge på:\n\nProportioner\nRelativ risiko\nOdds ratio\nChi i anden\n\nOg lidt senere den logistisk regression"
+    "text": "Kategoriske udfald\nSå vi skal kigge på:\n\nProportioner - også kendt som andele\nRelativ risiko\nOdds ratio\nChi i anden"
   },
   {
     "objectID": "slides/kategoriske.html#en-opgave",
@@ -2188,7 +2188,7 @@
     "href": "slides/kategoriske.html#hvor-sikre-er-vi-på-det-tal",
     "title": "Kategoriske udfald",
     "section": "Hvor sikre er vi på det tal?",
-    "text": "Hvor sikre er vi på det tal?\nOpgaven fortsætter:\nAngiv også et 95% konfidensinterval på det estimat.\nEstimatet er en andel. Også kaldet en proportion\nMetoden har vi set før.\n\n\\(estimat \\pm 1.96 \\cdot SE\\)\n\n\nSå - hvordan beregner vi en standardfejl på estimatet af en proportion?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)"
+    "text": "Hvor sikre er vi på det tal?\nOpgaven fortsætter:\nAngiv også et 95% konfidensinterval på det estimat.\n\nEstimatet er en andel. Også kaldet en proportion. Eller p.\n\n\nMetoden har vi set før.\n\n\n\\(estimat \\pm 1.96 \\cdot SE\\)\n\n\nDet ligner næsten et mønster…\n\n\nSå - hvordan beregner vi en standardfejl på estimatet af en proportion?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p\\cdot(1-p)}{n}}\\)\n\n\n\nMan kan godt udlede hvorfor \\(SE_{prop}\\) har det udseende. Det bliver vi ikke spurgt om, så det springer vi over."
   },
   {
     "objectID": "slides/kategoriske.html#hvor-sikker-var-vi",
@@ -2202,14 +2202,14 @@
     "href": "slides/kategoriske.html#videre-med-samme-opgave",
     "title": "Kategoriske udfald",
     "section": "Videre med samme opgave",
-    "text": "Videre med samme opgave\n\nUndersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.\n\n\nHvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.\n\nHvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?\n\n\nAt: I virkeligheden er forskellen på de to prævalenser 0\n\n\nDen ene prævalens divideret med den anden er 1 (for så er de ens)\n\n\nI stedet for prævalenser kan vi beregne odds. Og se om odds er ens.\n\n\nKan vi undersøge om fordelingen af TB er forskellig i de to grupper?\n\n\nVi tager dem en for en"
+    "text": "Videre med samme opgave\n\nUndersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om man deler sprøjte eller ej. Argumenter ud fra relevant KI.\nHvordan gør vi det? Eller: Hvad vil det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?\n\n\n\nDet kan vi gøre på fire måder:\n\n\nForskellen på de to prævalenser er 0\n\n\nDen ene prævalens divideret med den anden er 1 (for så er de ens)\n\n\nI stedet for prævalenser kan vi beregne odds. Og se om odds er ens. Det kræver at vi lige finder ud af hvad “odds” egentlig er…\n\n\nKan vi undersøge om fordelingen af TB er forskellig i de to grupper?\n\n\nVi tager dem en for en\n\nHvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper."
   },
   {
     "objectID": "slides/kategoriske.html#forskel-på-prævalenser",
     "href": "slides/kategoriske.html#forskel-på-prævalenser",
     "title": "Kategoriske udfald",
     "section": "Forskel på prævalenser",
-    "text": "Forskel på prævalenser\n\nEr forskellen i virkeligheden 0?\n\nEller - vi opstiller en NULL-hypotese, \\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\\)\nDen alternative hypotese er så, at der er forskel på prævalensen.\n\n\nSamme metode som før:\n\\(estimat_{diff} \\pm 1.96*SE_{diff}\\)\nEr 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen\n\n\nSå… Hvordan beregner vi \\(SE_{diff}\\)?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\nOg standardfejl på de enkelte proportioner var: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)"
+    "text": "Forskel på prævalenser\n\nEr forskellen i virkeligheden 0?\n\nEller - vi opstiller en NULL-hypotese, \\(H_0: p_{TB:deler} - p_{TB:delerikke} = 0\\)\nDen alternative hypotese er så, at der er forskel på prævalensen.\n\n\nSamme metode som før:\n\\(\\text{estimat}_{diff} \\pm 1.96*SE_{diff}\\)\nEr 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen.\n\n1.96 fordi vi implicit har valgt \\(\\alpha = 0.05\\) og der er tale om to samples der ikke er parrede. Vi kan også sammenligne med testværdien.\n\n\n\nSå… Hvordan beregner vi \\(SE_{diff}\\)?\n\n\nHelt som før\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\nOg standardfejl på de enkelte proportioner var: \\(SE = \\sqrt{\\frac{p(1-p)}{n}}\\)"
   },
   {
     "objectID": "slides/kategoriske.html#så-kan-vi-regne",
@@ -2230,42 +2230,42 @@
     "href": "slides/kategoriske.html#forholdet-mellem-de-to-prævalenser",
     "title": "Kategoriske udfald",
     "section": "Forholdet mellem de to prævalenser?",
-    "text": "Forholdet mellem de to prævalenser?\nDen hypotese vi så tester er:\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nEr de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.\nVi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.\nMetoden er den samme som før. Estimatet +/- 1.96 SE.\nSådan da…"
+    "text": "Forholdet mellem de to prævalenser?\nAt de måske er ens kan vi også udtrykke ved at den ene divideret med den anden giver 1.\n\nDen hypotese vi så tester er:\n\n\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nSå hvad kan vi, hvis estimatet er tilstrækkeligt forskelligt fra 1?\n\n\nAfvise \\(H_0\\).\n\n\nMetoden er den samme som før. \\(\\text{Estimatet} \\pm 1.96\\cdot\\text{SE}\\)\nEller beregne en test-værdi og sammemligne med den kritiske værdi.\n\nPrævalensen for TB kan vi også kalde risikoen for at have TB. Det kunne vi også kalde for en risiko. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR."
   },
   {
     "objectID": "slides/kategoriske.html#komplikationer",
     "href": "slides/kategoriske.html#komplikationer",
     "title": "Kategoriske udfald",
     "section": "Komplikationer",
-    "text": "Komplikationer\nHvordan beregner vi SE?\nDet er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).\nVi har ikke en let formel for standardfejlen på en riskratio.\nDet vi har er en formel for standardfejlen af logaritmen af RR.\nOg derfor:\n\\(\\log{RR} \\pm 1.96 \\cdot SE_{\\log{RR}}\\)"
+    "text": "Komplikationer\nSå skal vi “bare” beregne SE.\n\nDet er lidt bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).\n\n\nVi har nemlig ikke en let formel for standardfejlen på en riskratio.\n\n\nDet vi har er en formel for standardfejlen af logaritmen af RR.\n\n\nOg derfor skal vi se på:\n\\(\\log{RR} \\pm 1.96 \\cdot SE_{\\log{RR}}\\)\n\n\nHvordan gør vi så det?"
   },
   {
     "objectID": "slides/kategoriske.html#se-for-logrr",
     "href": "slides/kategoriske.html#se-for-logrr",
     "title": "Kategoriske udfald",
     "section": "SE for log(RR)",
-    "text": "SE for log(RR)\n\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\nHvor risikoen for udfald 1 hvis man er eksponeret er: \\(\\frac{a}{a+b}\\), og hvis man ikke er eksponeret: \\(\\frac{c}{c+d}\\)\nGælder at:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)"
+    "text": "SE for log(RR)\n\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\n\nHvad er risikoen for udfald 1 hvis man er eksponeret?\n\n\n\\(\\frac{a}{a+b}\\)\n\n\nog hvis man ikke er eksponeret:\n\\(\\frac{c}{c+d}\\)\n\n\nSå gælder det at:\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)"
   },
   {
     "objectID": "slides/kategoriske.html#og-så-er-vi-ca.-klar-til-at-regne",
     "href": "slides/kategoriske.html#og-så-er-vi-ca.-klar-til-at-regne",
     "title": "Kategoriske udfald",
     "section": "Og så er vi ca. klar til at regne",
-    "text": "Og så er vi ca. klar til at regne\n\n\n\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Og så er vi ca. klar til at regne\n\n\n\nPrævalensen af TB blandt de 97 der delte sprøjter var 24.7%.\nPrævalensen af TB blandt de 161 der ikke delte sprøjter var 17.4%\nBonus: Hvordan finder vi - fra det - nedenstående tal?\n\n\n\n\n\n\n\n\nTB\ndeler\ndeler ikke\n\n\n\n\nTB-positiv\n24\n28\n\n\nTB-negativ\n73\n133\n\n\n\n\n\n\n\n\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/kategoriske.html#hvad-så-vi",
     "href": "slides/kategoriske.html#hvad-så-vi",
     "title": "Kategoriske udfald",
     "section": "Hvad så vi?",
-    "text": "Hvad så vi?\n\nRR var 1.42268. Det vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter.\nMen. KI for RR var [0.877; 2.307]\nDet indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.\nVi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).\nHvorfor? Fordi log(1) = 0.\nVi kunne også få teststørrelsen ved \\(\\frac{\\log(RR)}{SE(log(RR))}\\). Den var 1.429. Mindre end den kritiske værdi."
+    "text": "Hvad så vi?\n\nRR var 1.42268.\nHvordan vil vi fortolke det?\n\nDet vil vi formulere som at “risikoen er 42% højere” for at være TB+ hvis man deler sprøjter, end hvis man ikke gør.\n\n\nMen. KI for RR var [0.877; 2.307]\n\n\nDet indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.\n\n\nVi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).\n\n\nHvorfor? Fordi log(1) = 0.\n\n\nVi kunne også få teststørrelsen ved \\(\\frac{\\log(RR)}{SE(log(RR))}\\). Den var 1.429.\nMindre end den kritiske værdi."
   },
   {
     "objectID": "slides/kategoriske.html#odds---hvad-er-det",
     "href": "slides/kategoriske.html#odds---hvad-er-det",
     "title": "Kategoriske udfald",
     "section": "Odds - hvad er det?",
-    "text": "Odds - hvad er det?\nBlandt de 97 narkomaner der delte sprøjter var 24 TB+.\nDet gav en risiko for at være TB+ på 24/97.\nEller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…\nDet kan vi udtrykke anderledes - ved odds.\nDet er antallet af positive udfald divideret med antallet af negative udfald.\nEller: 24/73\nHvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds."
+    "text": "Odds - hvad er det?\nBlandt de 97 narkomaner der delte sprøjter var 24 TB+.\n\nDet gav en risiko for at være TB+ på 24/97.\nEller sandsynlighed. Eller prævalens af TB+ blandt… eller risiko for at være TB+ hvis…\n\n\nDet kan vi udtrykke anderledes - ved odds.\n\n\nDet er antallet af positive udfald divideret med antallet af negative udfald.\nEller: 24/73\n\n\nHvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds."
   },
   {
     "objectID": "slides/kategoriske.html#odds---fordelene",
@@ -2279,14 +2279,14 @@
     "href": "slides/kategoriske.html#hvad-tester-vi-så-med-odds",
     "title": "Kategoriske udfald",
     "section": "Hvad tester vi så med odds?",
-    "text": "Hvad tester vi så med odds?\n(Næsten) det samme som med risiko.\nEr odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?\nEller:\nKan vi afvise at:\n\\(\\frac{\\text{odds}_{\\text{TB+:deler}}}{\\text{odds}_\\text{TB+:deler ikke}} = 1\\)\n\nHov! Det var Odds-Ratio, OR, der dukkede op der!\n\nSamme teknik som før:\n\\(\\text{estimat} \\pm 1.96\\cdot\\text{SE}\\)\nHvad er SE?"
+    "text": "Hvad tester vi så med odds?\n(Næsten) det samme som med Risk Ratio. Nu blot Odds Ratio.\n\nEr odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?\nEller:\n\n\nKan vi afvise \\(H_0\\):\n\\(\\frac{\\text{odds}_{\\text{TB+:deler}}}{\\text{odds}_\\text{TB+:deler ikke}} = 1\\)\n\n\nKan I gætte hvordan vi beregner et 95% KI på det?\n\n\nFuldstændig som før:\n\\(\\text{estimat} \\pm 1.96\\cdot\\text{SE}\\)"
   },
   {
     "objectID": "slides/kategoriske.html#lignende-problem-som-med-se-for-rr",
     "href": "slides/kategoriske.html#lignende-problem-som-med-se-for-rr",
     "title": "Kategoriske udfald",
     "section": "Lignende problem som med SE for RR",
-    "text": "Lignende problem som med SE for RR\n\nVi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\n\nFår vi: \\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\n\nSammenlign med \\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nOg se hvorfor jeg mener at matematikken bliver enklere med odds…"
+    "text": "Lignende problem som med SE for RR\n\nProblemet med at beregne SE for OR er nøjagtig det samme som for RR.\n\nLøsningen er ca. den samme. Vi har en pæn formel for SE(log(OR))\n\n\nFor det generelle forhold:\n\n\n\n\nudfald 1\nudfald 2\n\n\n\n\neksponeret\na\nb\n\n\nikke eksponeret\nc\nd\n\n\n\n\n\nFår vi: \\(SE(log(OR)) = \\sqrt{\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}}\\)\n\n\nSammenlign med \\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nOg se hvorfor jeg mener at matematikken bliver enklere med odds…"
   },
   {
     "objectID": "slides/kategoriske.html#så-er-vi-klar-til-at-regne",
@@ -2300,21 +2300,21 @@
     "href": "slides/kategoriske.html#hvad-så-vi-1",
     "title": "Kategoriske udfald",
     "section": "Hvad så vi",
-    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\nVær skarpe her. Odds er noget andet end risiko."
+    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\n\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\n\n\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\n\n\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n\n\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\n\n\nVær skarpe her. Odds er noget andet end risiko. Så husk altid at skrive odds i stedet for risiko."
   },
   {
     "objectID": "slides/kategoriske.html#fra-sandsynlighed-til-odds",
     "href": "slides/kategoriske.html#fra-sandsynlighed-til-odds",
     "title": "Kategoriske udfald",
     "section": "Fra sandsynlighed til odds",
-    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\\(\\text{odds} = \\frac{p}{1-p}\\)\nHvordan beregner vi sandsynligheden hvis vi kender odds:\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nEn særlig funktion vi kommer til at møde igen:\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen."
+    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\n\\(\\text{odds} = \\frac{p}{1-p}\\)\n\n\nHvordan beregner vi sandsynligheden hvis vi kender odds?\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nEn særlig funktion vi kommer til at møde igen:\n\n\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\n\n\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen."
   },
   {
     "objectID": "slides/kategoriske.html#chi2-tilgangen",
     "href": "slides/kategoriske.html#chi2-tilgangen",
     "title": "Kategoriske udfald",
     "section": "\\(\\chi^2\\) tilgangen",
-    "text": "\\(\\chi^2\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\nSjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.\nTester forskellen på den fordeling vi ser - og den vi ville forvente\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
+    "text": "\\(\\chi^2\\) tilgangen\n\nMere generel - kan håndtere mere end et udfald.\n\nSjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.\n\n\nTester forskellen på den fordeling vi ser - og den vi ville forvente\n\n\nHvis vi kun kender totalerne\n\n\n\n\nTB+\nTB-\nTotal\n\n\n\n\nDeler sprøjter\n?\n?\n97\n\n\nDeler ikke\n?\n?\n161\n\n\nTotal\n52\n206\n258\n\n\n\nOg fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter\nHvor mange forventer vi så har TB blandt de der deler sprøjter?"
   },
   {
     "objectID": "slides/kategoriske.html#regne-regne",
@@ -2328,7 +2328,7 @@
     "href": "slides/kategoriske.html#regne-regne-1",
     "title": "Kategoriske udfald",
     "section": "Regne-regne",
-    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\nStyrken er at den kan håndtere flere udfald end to.\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra."
+    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\n\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\n\n\nStyrken er at den kan håndtere flere udfald end to.\n\n\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\n\n\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\n\n\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.\n\n\nFunktionen hedder chisq.test(). Med argumentet correct = FALSE hvis vi vil slå den fra."
   },
   {
     "objectID": "slides/kategoriske.html#hvordan-gør-vi",
