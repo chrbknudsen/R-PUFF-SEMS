@@ -11,23 +11,32 @@ filters:
 
 ## Logistisk regression
 :::: smaller
-Vi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.
+Vi så den lineære regression.
 
+:::: {.fragment}
+ Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.
+::::
+:::: {.fragment}
 Den logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.
-
+::::
+:::: {.fragment}
 I den lineære regression fittede vi
-
+::::
+:::: {.fragment}
 $y = \beta_0  + \beta_1x$
 
 Den forventede værdi af y, givet x.
-
+::::
+:::: {.fragment}
 i den logistiske regression er det:
 
 $log(\frac{p}{1-p}) = \beta_0 + \beta_1x$
-
+::::
+:::: {.fragment}
 Også kaldet logit-funktionen.
 
-Så - givet x, får vi log-odds for et bestemt udfald.
+Så - den forventede log-odds for et bestemt udfald, givet x.
+::::
 
 ::::
 
@@ -35,22 +44,29 @@ Så - givet x, får vi log-odds for et bestemt udfald.
 
 
 ## Hvordan laves en logistisk regression?
-:::: smaller
-Den logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
+:::: {.smaller}
+Den logistiske regression ligner ret meget den lineære.  
+Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
 
-Det er dog ikke "OLS" vi bruger til at regne inde bag ved, men "Maximum Likelihood" i stedet. Det bekymrer vi os ikke om her.
+:::: {.fragment}
+Inde bagved er det dog ikke OLS vi bruger, men en "Maximum Likelihood" funktion. Det behøver vi ikke bekymre os om, det klarer R.
+::::
+:::: {.fragment}
+
 
 Det er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere. 
-
-Det betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.
-
+::::
+:::: {.fragment}
+Det betyder også at vi i R kan betragte en logistisk regression som en mere _generel_ udgave af den almindelige (multiple) lineære regression.
+::::
+:::: {.fragment}
 Funktionen er derfor `glm()` i stedet or `lm()`.
-
+::::
 ::::
 
 ## Hvordan ser det ud i praksis?
 :::: evensmaller 
-Har vi et datasæt med følgende variable:
+Har vi et datasæt med følgende variable (det virker bekendt):
 
 **episodes**: Antal episoder med feber under graviditeten (før interview)  
 **death**: Fosterdød (ja = 1, nej = 0)  
@@ -78,10 +94,10 @@ glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, 
 Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?
 
 :::: {.fragment}
-Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse
+Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men dog ikke med middelværdi og standardafvigelse
 ::::
 :::: {.fragment}
-Indpakket i "I()" som specificerer at `glm` skal behandle `(mage-25)/10` som en variabel. Uden, ville `glm` behandle `25` som en variabel.
+Indpakket i "I()" som specificerer at `glm` skal behandle `(mage-25)/10` som en variabel. Uden, ville `glm` forsøge at behandle `25` som en variabel.
 ::::
 :::: {.fragment}
 episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.
@@ -90,7 +106,7 @@ episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feber
 smoke er den kategoriske variabel der beskriver rygevaner.
 ::::
 :::: {.fragment}
-Men smoke er gemt som tal, så den er pakket ind i `factor()` for at behandle den som en kategorisk variabel. 
+Men smoke er gemt som tal, så den er pakket ind i `factor()` for at behandle den som en kategorisk variabel. Helt som vi gjorde tidligere i den lineære regression.
 :::: 
 
 :::: {.fragment}
@@ -302,94 +318,8 @@ Vi exponentierer!
 ::::
 
 
-## Prædiktion
-:::: evensmaller
-Hvad er odds for forsterdød for en 37 årig mor, der har røget >11 cigaretter/dag, og har haft 3 feberepisoder?
-
-Hvordan gør vi det?
-
-:::: {.fragment}
-
-Vi indsætter i modellen. 
-::::
-
-::::{.fragment}
-Så vi skal bruge estimaterne:
-
-```{r}
-library(tidyverse)
-library(gt)
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
-"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
-"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
-"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
-"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
-"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `z value` = "z value",
-    `Pr(>|z|)` = "Pr(>|z|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-      font = list(google_font("Courier Prime"), default_fonts()))
-```
-
-::::
 
 
-
-:::: {.fragment}
-:::: {.reallysmall}
-$\text{logodds} = -5.0526 + 0.7423\frac{\text{mage} - 25}{10} - 0.0752\cdot\text{episodes} + 0.2063\cdot\text{smoke:2} + 0.4364\cdot\text{smoke:3}$
-::::
-::::
-:::: {.fragment}
-mage = 37, episodes = 3, smoke:2 = 0, smoke:3 = 1
-::::
-:::: {.fragment}
-logodds = -3.95104
-::::
-:::: {.fragment}
-odds = exp(-3.95104) = 0.01923469.
-::::
-::::
-
-
-## Hvad skal vi kunne?
-
-Vi skal kunne genkende en logistisk regression
-vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder.
-Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet
-for et givet sæt af observationer.
 
 
 ## teoridelen er done. Nu er det opgaver!

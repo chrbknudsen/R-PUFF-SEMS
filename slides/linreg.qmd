@@ -784,7 +784,67 @@ Estimatet på alkoholindtagets påvirkning af fødselsvægten indikerer at den, 
 ::::
 ::::
 
+## Prædiktion
 
+Hvad forventer vi fødselsvægten vil være, hvis mor har røget 20 cigaretter om dagen og drukket 16 genstande alkohol om ugen under graviditeten?
+
+. . .
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "3613.623", "7.108", "508.372", "<2e-16***",
+"factor(smoke)2", "-127.377", "15.757", "", "",
+"factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
+"alco", "1.045", "6.075", "0.172", "0.863"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+. . .
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
 
 ## Opgave
 

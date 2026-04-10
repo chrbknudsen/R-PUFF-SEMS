@@ -501,28 +501,28 @@
     "href": "slides/logistisk.html#logistisk-regression",
     "title": "Logistisk regression",
     "section": "Logistisk regression",
-    "text": "Logistisk regression\n\nVi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.\nDen logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.\nI den lineære regression fittede vi\n\\(y = \\beta_0  + \\beta_1x\\)\nDen forventede værdi af y, givet x.\ni den logistiske regression er det:\n\\(log(\\frac{p}{1-p}) = \\beta_0 + \\beta_1x\\)\nOgså kaldet logit-funktionen.\nSå - givet x, får vi log-odds for et bestemt udfald."
+    "text": "Logistisk regression\n\nVi så den lineære regression.\n\nDen forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.\n\n\nDen logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.\n\n\nI den lineære regression fittede vi\n\n\n\\(y = \\beta_0  + \\beta_1x\\)\nDen forventede værdi af y, givet x.\n\n\ni den logistiske regression er det:\n\\(log(\\frac{p}{1-p}) = \\beta_0 + \\beta_1x\\)\n\n\nOgså kaldet logit-funktionen.\nSå - den forventede log-odds for et bestemt udfald, givet x."
   },
   {
     "objectID": "slides/logistisk.html#hvordan-laves-en-logistisk-regression",
     "href": "slides/logistisk.html#hvordan-laves-en-logistisk-regression",
     "title": "Logistisk regression",
     "section": "Hvordan laves en logistisk regression?",
-    "text": "Hvordan laves en logistisk regression?\n\nDen logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.\nDet er dog ikke “OLS” vi bruger til at regne inde bag ved, men “Maximum Likelihood” i stedet. Det bekymrer vi os ikke om her.\nDet er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere.\nDet betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.\nFunktionen er derfor glm() i stedet or lm()."
+    "text": "Hvordan laves en logistisk regression?\n\nDen logistiske regression ligner ret meget den lineære.\nDen beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.\n\nInde bagved er det dog ikke OLS vi bruger, men en “Maximum Likelihood” funktion. Det behøver vi ikke bekymre os om, det klarer R.\n\n\nDet er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere.\n\n\nDet betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.\n\n\nFunktionen er derfor glm() i stedet or lm()."
   },
   {
     "objectID": "slides/logistisk.html#hvordan-ser-det-ud-i-praksis",
     "href": "slides/logistisk.html#hvordan-ser-det-ud-i-praksis",
     "title": "Logistisk regression",
     "section": "Hvordan ser det ud i praksis?",
-    "text": "Hvordan ser det ud i praksis?\n\nHar vi et datasæt med følgende variable:\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\nKan vi derfor modellere den primære outcome variabel “death” som funktion af rygning, feberepisoder og moderens alder ved:\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")"
+    "text": "Hvordan ser det ud i praksis?\n\nHar vi et datasæt med følgende variable (det virker bekendt):\nepisodes: Antal episoder med feber under graviditeten (før interview)\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Moderens alder ved interview\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)\nalco: Antal genstande pr uge under graviditet\nweight: Fødselsvægt i gram\nKan vi derfor modellere den primære outcome variabel “death” som funktion af rygning, feberepisoder og moderens alder ved:\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")"
   },
   {
     "objectID": "slides/logistisk.html#hvad-betyder-de-enkelte-dele",
     "href": "slides/logistisk.html#hvad-betyder-de-enkelte-dele",
     "title": "Logistisk regression",
     "section": "Hvad betyder de enkelte dele?",
-    "text": "Hvad betyder de enkelte dele?\n\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")\n\nHvad får vi ved at trække 25 fra, og dividere mors alder med 10?\n\nMors alder målt i enheden “10 år”, med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse\n\n\nIndpakket i “I()” som specificerer at glm skal behandle (mage-25)/10 som en variabel. Uden, ville glm behandle 25 som en variabel.\n\n\nepisodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.\n\n\nsmoke er den kategoriske variabel der beskriver rygevaner.\n\n\nMen smoke er gemt som tal, så den er pakket ind i factor() for at behandle den som en kategorisk variabel.\n\n\nVi skal specificere hvad datasættet hedder\n\n\nOg fordi glm er en generel funktion, der kan modellere mange forskellige ting, skal vi specificere at det er en logistisk regression. Med family = \"binomial\""
+    "text": "Hvad betyder de enkelte dele?\n\n\nglm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = \"binomial\")\n\nHvad får vi ved at trække 25 fra, og dividere mors alder med 10?\n\nMors alder målt i enheden “10 år”, med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men dog ikke med middelværdi og standardafvigelse\n\n\nIndpakket i “I()” som specificerer at glm skal behandle (mage-25)/10 som en variabel. Uden, ville glm forsøge at behandle 25 som en variabel.\n\n\nepisodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.\n\n\nsmoke er den kategoriske variabel der beskriver rygevaner.\n\n\nMen smoke er gemt som tal, så den er pakket ind i factor() for at behandle den som en kategorisk variabel. Helt som vi gjorde tidligere i den lineære regression.\n\n\nVi skal specificere hvad datasættet hedder\n\n\nOg fordi glm er en generel funktion, der kan modellere mange forskellige ting, skal vi specificere at det er en logistisk regression. Med family = \"binomial\""
   },
   {
     "objectID": "slides/logistisk.html#hvordan-ser-resultatet-ud",
@@ -1306,21 +1306,21 @@
     "href": "slides/power.html#hvad-betød-det",
     "title": "Powerberegninger",
     "section": "Hvad betød det?",
-    "text": "Hvad betød det?\nBl.a. at den forskel i middelværdier vi så, ikke var stor nok til at vi kunne konkludere at den faktisk eksisterer.\np-værdien giver os risikoen er for at vi afviser \\(H_0\\). Selvom \\(H_0\\) er sand.\nEller: Hvis \\(H_0\\) er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!\nGrænsen sættes normalt til 0.05: Vi accepterer en risiko for at få en falsk positiv på 5%. Den kalder vi også \\(\\alpha\\)."
+    "text": "Hvad betød det?\nKan vi ikke afvise \\(H_0\\) betyder det blandt andet at forskellen på middelværdierne ikke er så stor at vi kan konkludere at der faktisk er forskel.\n\nMen det kunne være at der var en forskel alligevel.\n\n\n\\(\\alpha\\) giver os den kritiske værdi. Den sammenligner vi med testværdien.\n\n\nVi har også set p-værdier. Det er risikoen for at vi afviser \\(H_0\\). Selvom \\(H_0\\) er sand.\n\n\nVi spørger grundlæggende om p-værdien er mindre end \\(\\alpha\\). Er den det er vi normalt glade."
   },
   {
     "objectID": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "href": "slides/power.html#eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl",
     "title": "Powerberegninger",
     "section": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl",
-    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\n\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\n\n\nVi kan også begå fejl på en anden måde.\n\n\nVi kan fx konkludere at der ikke er forskel. Selvom der i virkeligheden er forskel!\n\n\nDet er en type 2 fejl. En falsk negativ.\n\n\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\n\n\nDen kalder vi \\(\\beta\\)"
+    "text": "Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl\n\nOg eksistensen af \\(\\alpha\\) indikerer eksistensen af \\(\\beta\\).\n\n\nVi kan også begå fejl på en anden måde.\n\n\nDet gør vi, hvis test- eller p-værdien fortæller os at vi ikke kan forkaste \\(H_0\\)\n\n\nSå konkluderer vi at der ikke er forskel. Selvom der i virkeligheden er forskel!\n\n\nDet er en type 2 fejl. En falsk negativ.\n\n\nRisikoen for at begå en type 2 fejl kan vi også sætte tal på.\n\n\nDen kalder vi \\(\\beta\\)"
   },
   {
     "objectID": "slides/power.html#det-omvendte-af-beta",
     "href": "slides/power.html#det-omvendte-af-beta",
     "title": "Powerberegninger",
     "section": "Det omvendte af \\(\\beta\\)",
-    "text": "Det omvendte af \\(\\beta\\)\n\nKalder vi power. Det er den “styrke” vores test har.\n\n\nEller\n\n\n\nSandsynligheden for at testen finder forskellen, når forskellen faktisk findes!\nPower er sandsynligheden for ikke at begå en type 2 fejl.\n\n\n\nHvis \\(\\beta\\) er risikoen for at vores test ikke finder forskellen, selvom den findes.\n\n\nSå er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.\n\n\n\\(power = 1 - \\beta\\)"
+    "text": "Det omvendte af \\(\\beta\\)\n\nRisikoen for at begå en type 2 fejl er en svaghed.\n\nDet omvendte kalder vi power. Det er den “styrke” vores test har.\n\n\nEller\n\n\n\nSandsynligheden for at testen finder forskellen, når forskellen faktisk findes!\nPower er sandsynligheden for ikke at begå en type 2 fejl.\n\n\n\nHvis \\(\\beta\\) er risikoen for at vores test ikke finder forskellen, selvom den findes.\n\n\nSå er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.\n\n\n\\(power = 1 - \\beta\\)"
   },
   {
     "objectID": "slides/power.html#hvad-afhænger-de-her-ting-af",
@@ -1341,7 +1341,7 @@
     "href": "slides/power.html#og-hvad-spørges-der-til-til-eksamen",
     "title": "Powerberegninger",
     "section": "Og hvad spørges der til til eksamen?",
-    "text": "Og hvad spørges der til til eksamen?\nHer er fire værdier. Find den femte.\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?\nDet er dog ikke et specielt hyppigt forekommende eksamensspørgsmål."
+    "text": "Og hvad spørges der til til eksamen?\nHer er fire værdier. Find den femte.\n\nEksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?\n\n\nDet er dog ikke et specielt hyppigt forekommende eksamensspørgsmål."
   },
   {
     "objectID": "slides/power.html#det-har-r-funktioner-til.",
@@ -1362,7 +1362,7 @@
     "href": "slides/power.html#i-stedet",
     "title": "Powerberegninger",
     "section": "I stedet",
-    "text": "I stedet\n💥Powerrelationen!💪\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nDet gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.\nTænk over hvordan vi beregnede en testværdi. Hvor langt fra 0 ligger det vi observerede, målt i standardafvigelser (eller standardfejl)? Det er samme metode!"
+    "text": "I stedet\n💥Powerrelationen!💪\n\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nDet gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.\nHusk hvordan vi så på testværdierne. Var de langt nok væk fra 0 målt i standardfejl? Det er samme metode.\nVi skal blot lidt længere væk, fordi vi ikke bare lige akkurat skal forkaste \\(H_0\\). Vi skal være ekstra sikre - og hvor meget styres af den ønskede power.\n\nAltid er med et par forbehold. Der antages normalitet. Det er mere kompliceret ved små stikprøver. Og ikke-lineære modeller. Og når standardfejlen afhænger af det vi prøver at estimere (her er der ingen simpel formel, og man simulerer i stedet)"
   },
   {
     "objectID": "slides/power.html#de-sære-tegn",
@@ -2350,5 +2350,19 @@
     "title": "Kategoriske udfald",
     "section": "Flere øvelser",
     "text": "Flere øvelser"
+  },
+  {
+    "objectID": "slides/linreg.html#prædiktion",
+    "href": "slides/linreg.html#prædiktion",
+    "title": "Lineær regression",
+    "section": "Prædiktion",
+    "text": "Prædiktion\nHvad forventer vi fødselsvægten vil være, hvis mor har røget 20 cigaretter om dagen og drukket 16 genstande alkohol om ugen under graviditeten?\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/power.html#det-kan-gå-galt-på-to-måder",
+    "href": "slides/power.html#det-kan-gå-galt-på-to-måder",
+    "title": "Powerberegninger",
+    "section": "Det kan gå galt på to måder:",
+    "text": "Det kan gå galt på to måder:\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat.\n\nVi kan forkaste \\(H_0\\)\n\n\nMen det er en fejl!\nDer er ikke en effekt.\nData understøtter ikke den alternative hypotese\n\n\nDet er en falsk positiv\n\n\nVi forkastede \\(H_0\\) ved en fejl\n\n\nPå et \\(\\alpha = 0.05\\) niveau\n\n\nSom er risikoen for at vi ser en falsk positiv.\n\n\nDet er ikke så godt…"
   }
 ]

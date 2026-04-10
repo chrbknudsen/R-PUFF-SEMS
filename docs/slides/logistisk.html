@@ -2031,7 +2031,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Logistisk regression</h1>
-  <p class="subtitle">Herunder logistisk regression</p>
 
 <div class="quarto-title-authors">
 </div>
@@ -2040,31 +2039,53 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="logistisk-regression" class="slide level2">
 <h2>Logistisk regression</h2>
 <div class="smaller">
-<p>Vi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.</p>
+<p>Vi så den lineære regression.</p>
+<div class="fragment">
+<p>Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.</p>
+</div>
+<div class="fragment">
 <p>Den logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.</p>
+</div>
+<div class="fragment">
 <p>I den lineære regression fittede vi</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(y = \beta_0  + \beta_1x\)</span></p>
 <p>Den forventede værdi af y, givet x.</p>
+</div>
+<div class="fragment">
 <p>i den logistiske regression er det:</p>
 <p><span class="math inline">\(log(\frac{p}{1-p}) = \beta_0 + \beta_1x\)</span></p>
+</div>
+<div class="fragment">
 <p>Også kaldet logit-funktionen.</p>
-<p>Så - givet x, får vi log-odds for et bestemt udfald.</p>
+<p>Så - den forventede log-odds for et bestemt udfald, givet x.</p>
+</div>
 </div>
 </section>
 <section id="hvordan-laves-en-logistisk-regression" class="slide level2">
 <h2>Hvordan laves en logistisk regression?</h2>
 <div class="smaller">
-<p>Den logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.</p>
-<p>Det er dog ikke “OLS” vi bruger til at regne inde bag ved, men “Maximum Likelihood” i stedet. Det bekymrer vi os ikke om her.</p>
+<p>Den logistiske regression ligner ret meget den lineære.<br>
+Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.</p>
+<div class="fragment">
+<p>Inde bagved er det dog ikke OLS vi bruger, men en “Maximum Likelihood” funktion. Det behøver vi ikke bekymre os om, det klarer R.</p>
+</div>
+<div class="fragment">
 <p>Det er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere.</p>
-<p>Det betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.</p>
+</div>
+<div class="fragment">
+<p>Det betyder også at vi i R kan betragte en logistisk regression som en mere <em>generel</em> udgave af den almindelige (multiple) lineære regression.</p>
+</div>
+<div class="fragment">
 <p>Funktionen er derfor <code>glm()</code> i stedet or <code>lm()</code>.</p>
+</div>
 </div>
 </section>
 <section id="hvordan-ser-det-ud-i-praksis" class="slide level2">
 <h2>Hvordan ser det ud i praksis?</h2>
 <div class="evensmaller">
-<p>Har vi et datasæt med følgende variable:</p>
+<p>Har vi et datasæt med følgende variable (det virker bekendt):</p>
 <p><strong>episodes</strong>: Antal episoder med feber under graviditeten (før interview)<br>
 <strong>death</strong>: Fosterdød (ja = 1, nej = 0)<br>
 <strong>mage</strong>: Moderens alder ved interview<br>
@@ -2085,10 +2106,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?</p>
 <div class="fragment">
-<p>Mors alder målt i enheden “10 år”, med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse</p>
+<p>Mors alder målt i enheden “10 år”, med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men dog ikke med middelværdi og standardafvigelse</p>
 </div>
 <div class="fragment">
-<p>Indpakket i “I()” som specificerer at <code>glm</code> skal behandle <code>(mage-25)/10</code> som en variabel. Uden, ville <code>glm</code> behandle <code>25</code> som en variabel.</p>
+<p>Indpakket i “I()” som specificerer at <code>glm</code> skal behandle <code>(mage-25)/10</code> som en variabel. Uden, ville <code>glm</code> forsøge at behandle <code>25</code> som en variabel.</p>
 </div>
 <div class="fragment">
 <p>episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.</p>
@@ -2097,7 +2118,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>smoke er den kategoriske variabel der beskriver rygevaner.</p>
 </div>
 <div class="fragment">
-<p>Men smoke er gemt som tal, så den er pakket ind i <code>factor()</code> for at behandle den som en kategorisk variabel.</p>
+<p>Men smoke er gemt som tal, så den er pakket ind i <code>factor()</code> for at behandle den som en kategorisk variabel. Helt som vi gjorde tidligere i den lineære regression.</p>
 </div>
 <div class="fragment">
 <p>Vi skal specificere hvad datasættet hedder</p>
@@ -2114,24 +2135,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="tiny">
 <div class="cell">
 <div class="cell-output-display">
-<div id="nrzyuzafnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ufrsouytom" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nrzyuzafnl table {
+#ufrsouytom table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nrzyuzafnl thead, #nrzyuzafnl tbody, #nrzyuzafnl tfoot, #nrzyuzafnl tr, #nrzyuzafnl td, #nrzyuzafnl th {
+#ufrsouytom thead, #ufrsouytom tbody, #ufrsouytom tfoot, #ufrsouytom tr, #ufrsouytom td, #ufrsouytom th {
   border-style: none;
 }
 
-#nrzyuzafnl p {
+#ufrsouytom p {
   margin: 0;
   padding: 0;
 }
 
-#nrzyuzafnl .gt_table {
+#ufrsouytom .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2157,12 +2178,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_caption {
+#ufrsouytom .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nrzyuzafnl .gt_title {
+#ufrsouytom .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2174,7 +2195,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#nrzyuzafnl .gt_subtitle {
+#ufrsouytom .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2186,7 +2207,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#nrzyuzafnl .gt_heading {
+#ufrsouytom .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2198,13 +2219,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_bottom_border {
+#ufrsouytom .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_col_headings {
+#ufrsouytom .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2219,7 +2240,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_col_heading {
+#ufrsouytom .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2239,7 +2260,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#nrzyuzafnl .gt_column_spanner_outer {
+#ufrsouytom .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2251,15 +2272,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#nrzyuzafnl .gt_column_spanner_outer:first-child {
+#ufrsouytom .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nrzyuzafnl .gt_column_spanner_outer:last-child {
+#ufrsouytom .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nrzyuzafnl .gt_column_spanner {
+#ufrsouytom .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2271,11 +2292,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#nrzyuzafnl .gt_spanner_row {
+#ufrsouytom .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nrzyuzafnl .gt_group_heading {
+#ufrsouytom .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2301,7 +2322,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#nrzyuzafnl .gt_empty_group_heading {
+#ufrsouytom .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2316,15 +2337,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#nrzyuzafnl .gt_from_md > :first-child {
+#ufrsouytom .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nrzyuzafnl .gt_from_md > :last-child {
+#ufrsouytom .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nrzyuzafnl .gt_row {
+#ufrsouytom .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2343,7 +2364,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#nrzyuzafnl .gt_stub {
+#ufrsouytom .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2356,7 +2377,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#nrzyuzafnl .gt_stub_row_group {
+#ufrsouytom .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2370,15 +2391,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#nrzyuzafnl .gt_row_group_first td {
+#ufrsouytom .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#nrzyuzafnl .gt_row_group_first th {
+#ufrsouytom .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#nrzyuzafnl .gt_summary_row {
+#ufrsouytom .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2388,16 +2409,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#nrzyuzafnl .gt_first_summary_row {
+#ufrsouytom .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_first_summary_row.thick {
+#ufrsouytom .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nrzyuzafnl .gt_last_summary_row {
+#ufrsouytom .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2407,7 +2428,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_grand_summary_row {
+#ufrsouytom .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2417,7 +2438,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#nrzyuzafnl .gt_first_grand_summary_row {
+#ufrsouytom .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2427,7 +2448,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_last_grand_summary_row_top {
+#ufrsouytom .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2437,11 +2458,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_striped {
+#ufrsouytom .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nrzyuzafnl .gt_table_body {
+#ufrsouytom .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2450,7 +2471,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_footnotes {
+#ufrsouytom .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2464,7 +2485,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_footnote {
+#ufrsouytom .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2473,7 +2494,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#nrzyuzafnl .gt_sourcenotes {
+#ufrsouytom .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2487,7 +2508,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#nrzyuzafnl .gt_sourcenote {
+#ufrsouytom .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2495,72 +2516,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#nrzyuzafnl .gt_left {
+#ufrsouytom .gt_left {
   text-align: left;
 }
 
-#nrzyuzafnl .gt_center {
+#ufrsouytom .gt_center {
   text-align: center;
 }
 
-#nrzyuzafnl .gt_right {
+#ufrsouytom .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nrzyuzafnl .gt_font_normal {
+#ufrsouytom .gt_font_normal {
   font-weight: normal;
 }
 
-#nrzyuzafnl .gt_font_bold {
+#ufrsouytom .gt_font_bold {
   font-weight: bold;
 }
 
-#nrzyuzafnl .gt_font_italic {
+#ufrsouytom .gt_font_italic {
   font-style: italic;
 }
 
-#nrzyuzafnl .gt_super {
+#ufrsouytom .gt_super {
   font-size: 65%;
 }
 
-#nrzyuzafnl .gt_footnote_marks {
+#ufrsouytom .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nrzyuzafnl .gt_asterisk {
+#ufrsouytom .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nrzyuzafnl .gt_indent_1 {
+#ufrsouytom .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nrzyuzafnl .gt_indent_2 {
+#ufrsouytom .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nrzyuzafnl .gt_indent_3 {
+#ufrsouytom .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nrzyuzafnl .gt_indent_4 {
+#ufrsouytom .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nrzyuzafnl .gt_indent_5 {
+#ufrsouytom .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nrzyuzafnl .katex-display {
+#ufrsouytom .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nrzyuzafnl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ufrsouytom div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2633,24 +2654,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="tiny">
 <div class="cell">
 <div class="cell-output-display">
-<div id="gkhpfgnrly" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="szbksejhrk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gkhpfgnrly table {
+#szbksejhrk table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gkhpfgnrly thead, #gkhpfgnrly tbody, #gkhpfgnrly tfoot, #gkhpfgnrly tr, #gkhpfgnrly td, #gkhpfgnrly th {
+#szbksejhrk thead, #szbksejhrk tbody, #szbksejhrk tfoot, #szbksejhrk tr, #szbksejhrk td, #szbksejhrk th {
   border-style: none;
 }
 
-#gkhpfgnrly p {
+#szbksejhrk p {
   margin: 0;
   padding: 0;
 }
 
-#gkhpfgnrly .gt_table {
+#szbksejhrk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2676,12 +2697,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-left-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_caption {
+#szbksejhrk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gkhpfgnrly .gt_title {
+#szbksejhrk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2693,7 +2714,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-width: 0;
 }
 
-#gkhpfgnrly .gt_subtitle {
+#szbksejhrk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2705,7 +2726,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-width: 0;
 }
 
-#gkhpfgnrly .gt_heading {
+#szbksejhrk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2717,13 +2738,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_bottom_border {
+#szbksejhrk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_col_headings {
+#szbksejhrk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2738,7 +2759,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_col_heading {
+#szbksejhrk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2758,7 +2779,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#gkhpfgnrly .gt_column_spanner_outer {
+#szbksejhrk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2770,15 +2791,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 4px;
 }
 
-#gkhpfgnrly .gt_column_spanner_outer:first-child {
+#szbksejhrk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gkhpfgnrly .gt_column_spanner_outer:last-child {
+#szbksejhrk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gkhpfgnrly .gt_column_spanner {
+#szbksejhrk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2790,11 +2811,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   width: 100%;
 }
 
-#gkhpfgnrly .gt_spanner_row {
+#szbksejhrk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gkhpfgnrly .gt_group_heading {
+#szbksejhrk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2820,7 +2841,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   text-align: left;
 }
 
-#gkhpfgnrly .gt_empty_group_heading {
+#szbksejhrk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2835,15 +2856,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: middle;
 }
 
-#gkhpfgnrly .gt_from_md > :first-child {
+#szbksejhrk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gkhpfgnrly .gt_from_md > :last-child {
+#szbksejhrk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gkhpfgnrly .gt_row {
+#szbksejhrk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2862,7 +2883,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   overflow-x: hidden;
 }
 
-#gkhpfgnrly .gt_stub {
+#szbksejhrk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2875,7 +2896,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#gkhpfgnrly .gt_stub_row_group {
+#szbksejhrk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2889,15 +2910,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   vertical-align: top;
 }
 
-#gkhpfgnrly .gt_row_group_first td {
+#szbksejhrk .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#gkhpfgnrly .gt_row_group_first th {
+#szbksejhrk .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#gkhpfgnrly .gt_summary_row {
+#szbksejhrk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2907,16 +2928,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#gkhpfgnrly .gt_first_summary_row {
+#szbksejhrk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_first_summary_row.thick {
+#szbksejhrk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gkhpfgnrly .gt_last_summary_row {
+#szbksejhrk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2926,7 +2947,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_grand_summary_row {
+#szbksejhrk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2936,7 +2957,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#gkhpfgnrly .gt_first_grand_summary_row {
+#szbksejhrk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2946,7 +2967,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-top-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_last_grand_summary_row_top {
+#szbksejhrk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2956,11 +2977,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_striped {
+#szbksejhrk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gkhpfgnrly .gt_table_body {
+#szbksejhrk .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2969,7 +2990,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-bottom-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_footnotes {
+#szbksejhrk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2983,7 +3004,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_footnote {
+#szbksejhrk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2992,7 +3013,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#gkhpfgnrly .gt_sourcenotes {
+#szbksejhrk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3006,7 +3027,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   border-right-color: #D3D3D3;
 }
 
-#gkhpfgnrly .gt_sourcenote {
+#szbksejhrk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3014,72 +3035,72 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   padding-right: 5px;
 }
 
-#gkhpfgnrly .gt_left {
+#szbksejhrk .gt_left {
   text-align: left;
 }
 
-#gkhpfgnrly .gt_center {
+#szbksejhrk .gt_center {
   text-align: center;
 }
 
-#gkhpfgnrly .gt_right {
+#szbksejhrk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gkhpfgnrly .gt_font_normal {
+#szbksejhrk .gt_font_normal {
   font-weight: normal;
 }
 
-#gkhpfgnrly .gt_font_bold {
+#szbksejhrk .gt_font_bold {
   font-weight: bold;
 }
 
-#gkhpfgnrly .gt_font_italic {
+#szbksejhrk .gt_font_italic {
   font-style: italic;
 }
 
-#gkhpfgnrly .gt_super {
+#szbksejhrk .gt_super {
   font-size: 65%;
 }
 
-#gkhpfgnrly .gt_footnote_marks {
+#szbksejhrk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gkhpfgnrly .gt_asterisk {
+#szbksejhrk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gkhpfgnrly .gt_indent_1 {
+#szbksejhrk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gkhpfgnrly .gt_indent_2 {
+#szbksejhrk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gkhpfgnrly .gt_indent_3 {
+#szbksejhrk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gkhpfgnrly .gt_indent_4 {
+#szbksejhrk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gkhpfgnrly .gt_indent_5 {
+#szbksejhrk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gkhpfgnrly .katex-display {
+#szbksejhrk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gkhpfgnrly div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#szbksejhrk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3191,542 +3212,6 @@ Så hvordan finder vi oddsratio?</p>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
 </section>
-<section id="prædiktion" class="slide level2">
-<h2>Prædiktion</h2>
-<div class="evensmaller">
-<p>Hvad er odds for forsterdød for en 37 årig mor, der har røget &gt;11 cigaretter/dag, og har haft 3 feberepisoder?</p>
-<p>Hvordan gør vi det?</p>
-<div class="fragment">
-<p>Vi indsætter i modellen.</p>
-</div>
-<div class="fragment">
-<p>Så vi skal bruge estimaterne:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="izeiufnpxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#izeiufnpxq table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#izeiufnpxq thead, #izeiufnpxq tbody, #izeiufnpxq tfoot, #izeiufnpxq tr, #izeiufnpxq td, #izeiufnpxq th {
-  border-style: none;
-}
-
-#izeiufnpxq p {
-  margin: 0;
-  padding: 0;
-}
-
-#izeiufnpxq .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#izeiufnpxq .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#izeiufnpxq .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#izeiufnpxq .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#izeiufnpxq .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#izeiufnpxq .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#izeiufnpxq .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#izeiufnpxq .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#izeiufnpxq .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#izeiufnpxq .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#izeiufnpxq .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#izeiufnpxq .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#izeiufnpxq .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#izeiufnpxq .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#izeiufnpxq .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#izeiufnpxq .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#izeiufnpxq .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#izeiufnpxq .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#izeiufnpxq .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#izeiufnpxq .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#izeiufnpxq .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#izeiufnpxq .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#izeiufnpxq .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#izeiufnpxq .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#izeiufnpxq .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#izeiufnpxq .gt_left {
-  text-align: left;
-}
-
-#izeiufnpxq .gt_center {
-  text-align: center;
-}
-
-#izeiufnpxq .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#izeiufnpxq .gt_font_normal {
-  font-weight: normal;
-}
-
-#izeiufnpxq .gt_font_bold {
-  font-weight: bold;
-}
-
-#izeiufnpxq .gt_font_italic {
-  font-style: italic;
-}
-
-#izeiufnpxq .gt_super {
-  font-size: 65%;
-}
-
-#izeiufnpxq .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#izeiufnpxq .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#izeiufnpxq .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#izeiufnpxq .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#izeiufnpxq .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#izeiufnpxq .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#izeiufnpxq .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#izeiufnpxq .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#izeiufnpxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
-<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-5.0526</td>
-<td class="gt_row gt_left" headers="Std. Error">0.1758</td>
-<td class="gt_row gt_left" headers="z value">-28.725</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">&lt;2e-16***</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">I((mage-25)/10)</td>
-<td class="gt_row gt_left" headers="Estimate">0.7423</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2149</td>
-<td class="gt_row gt_left" headers="z value">3.454</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.0005***</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">episodes</td>
-<td class="gt_row gt_left" headers="Estimate">-0.0752</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2048</td>
-<td class="gt_row gt_left" headers="z value">-0.368</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.713</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(smoke)2</td>
-<td class="gt_row gt_left" headers="Estimate">0.2063</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2569</td>
-<td class="gt_row gt_left" headers="z value">0.803</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.421</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(smoke)3</td>
-<td class="gt_row gt_left" headers="Estimate">0.4364</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2569</td>
-<td class="gt_row gt_left" headers="z value">1.699</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.089</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="reallysmall">
-<p><span class="math inline">\(\text{logodds} = -5.0526 + 0.7423\frac{\text{mage} - 25}{10} - 0.0752\cdot\text{episodes} + 0.2063\cdot\text{smoke:2} + 0.4364\cdot\text{smoke:3}\)</span></p>
-</div>
-</div>
-<div class="fragment">
-<p>mage = 37, episodes = 3, smoke:2 = 0, smoke:3 = 1</p>
-</div>
-<div class="fragment">
-<p>logodds = -3.95104</p>
-</div>
-<div class="fragment">
-<p>odds = exp(-3.95104) = 0.01923469.</p>
-</div>
-</div>
-</section>
-<section id="hvad-skal-vi-kunne" class="slide level2">
-<h2>Hvad skal vi kunne?</h2>
-<p>Vi skal kunne genkende en logistisk regression vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder. Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet for et givet sæt af observationer.</p>
-</section>
 <section id="teoridelen-er-done.-nu-er-det-opgaver" class="slide level2">
 <h2>teoridelen er done. Nu er det opgaver!</h2>
 </section>
@@ -3735,24 +3220,24 @@ Så hvordan finder vi oddsratio?</p>
 <p>Vi havde tidligere</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fsatkvmsvw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mizpyrgalv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fsatkvmsvw table {
+#mizpyrgalv table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fsatkvmsvw thead, #fsatkvmsvw tbody, #fsatkvmsvw tfoot, #fsatkvmsvw tr, #fsatkvmsvw td, #fsatkvmsvw th {
+#mizpyrgalv thead, #mizpyrgalv tbody, #mizpyrgalv tfoot, #mizpyrgalv tr, #mizpyrgalv td, #mizpyrgalv th {
   border-style: none;
 }
 
-#fsatkvmsvw p {
+#mizpyrgalv p {
   margin: 0;
   padding: 0;
 }
 
-#fsatkvmsvw .gt_table {
+#mizpyrgalv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3778,12 +3263,12 @@ Så hvordan finder vi oddsratio?</p>
   border-left-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_caption {
+#mizpyrgalv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fsatkvmsvw .gt_title {
+#mizpyrgalv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3795,7 +3280,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-width: 0;
 }
 
-#fsatkvmsvw .gt_subtitle {
+#mizpyrgalv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3807,7 +3292,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-width: 0;
 }
 
-#fsatkvmsvw .gt_heading {
+#mizpyrgalv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3819,13 +3304,13 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_bottom_border {
+#mizpyrgalv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_col_headings {
+#mizpyrgalv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3840,7 +3325,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_col_heading {
+#mizpyrgalv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3860,7 +3345,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#fsatkvmsvw .gt_column_spanner_outer {
+#mizpyrgalv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3872,15 +3357,15 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 4px;
 }
 
-#fsatkvmsvw .gt_column_spanner_outer:first-child {
+#mizpyrgalv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fsatkvmsvw .gt_column_spanner_outer:last-child {
+#mizpyrgalv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fsatkvmsvw .gt_column_spanner {
+#mizpyrgalv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3892,11 +3377,11 @@ Så hvordan finder vi oddsratio?</p>
   width: 100%;
 }
 
-#fsatkvmsvw .gt_spanner_row {
+#mizpyrgalv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fsatkvmsvw .gt_group_heading {
+#mizpyrgalv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3922,7 +3407,7 @@ Så hvordan finder vi oddsratio?</p>
   text-align: left;
 }
 
-#fsatkvmsvw .gt_empty_group_heading {
+#mizpyrgalv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3937,15 +3422,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: middle;
 }
 
-#fsatkvmsvw .gt_from_md > :first-child {
+#mizpyrgalv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fsatkvmsvw .gt_from_md > :last-child {
+#mizpyrgalv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fsatkvmsvw .gt_row {
+#mizpyrgalv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3964,7 +3449,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#fsatkvmsvw .gt_stub {
+#mizpyrgalv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3977,7 +3462,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#fsatkvmsvw .gt_stub_row_group {
+#mizpyrgalv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3991,15 +3476,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: top;
 }
 
-#fsatkvmsvw .gt_row_group_first td {
+#mizpyrgalv .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#fsatkvmsvw .gt_row_group_first th {
+#mizpyrgalv .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#fsatkvmsvw .gt_summary_row {
+#mizpyrgalv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4009,16 +3494,16 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#fsatkvmsvw .gt_first_summary_row {
+#mizpyrgalv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_first_summary_row.thick {
+#mizpyrgalv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fsatkvmsvw .gt_last_summary_row {
+#mizpyrgalv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4028,7 +3513,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_grand_summary_row {
+#mizpyrgalv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4038,7 +3523,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#fsatkvmsvw .gt_first_grand_summary_row {
+#mizpyrgalv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4048,7 +3533,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_last_grand_summary_row_top {
+#mizpyrgalv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4058,11 +3543,11 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_striped {
+#mizpyrgalv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fsatkvmsvw .gt_table_body {
+#mizpyrgalv .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4071,7 +3556,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_footnotes {
+#mizpyrgalv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4085,7 +3570,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_footnote {
+#mizpyrgalv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4094,7 +3579,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#fsatkvmsvw .gt_sourcenotes {
+#mizpyrgalv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4108,7 +3593,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#fsatkvmsvw .gt_sourcenote {
+#mizpyrgalv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4116,72 +3601,72 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#fsatkvmsvw .gt_left {
+#mizpyrgalv .gt_left {
   text-align: left;
 }
 
-#fsatkvmsvw .gt_center {
+#mizpyrgalv .gt_center {
   text-align: center;
 }
 
-#fsatkvmsvw .gt_right {
+#mizpyrgalv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fsatkvmsvw .gt_font_normal {
+#mizpyrgalv .gt_font_normal {
   font-weight: normal;
 }
 
-#fsatkvmsvw .gt_font_bold {
+#mizpyrgalv .gt_font_bold {
   font-weight: bold;
 }
 
-#fsatkvmsvw .gt_font_italic {
+#mizpyrgalv .gt_font_italic {
   font-style: italic;
 }
 
-#fsatkvmsvw .gt_super {
+#mizpyrgalv .gt_super {
   font-size: 65%;
 }
 
-#fsatkvmsvw .gt_footnote_marks {
+#mizpyrgalv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fsatkvmsvw .gt_asterisk {
+#mizpyrgalv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fsatkvmsvw .gt_indent_1 {
+#mizpyrgalv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fsatkvmsvw .gt_indent_2 {
+#mizpyrgalv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fsatkvmsvw .gt_indent_3 {
+#mizpyrgalv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fsatkvmsvw .gt_indent_4 {
+#mizpyrgalv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fsatkvmsvw .gt_indent_5 {
+#mizpyrgalv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fsatkvmsvw .katex-display {
+#mizpyrgalv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fsatkvmsvw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mizpyrgalv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4243,24 +3728,24 @@ Så hvordan finder vi oddsratio?</p>
 <p>Vi får oplyst at den korrekte analyse gav dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nfzkjffmlz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bfpzaocmhr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nfzkjffmlz table {
+#bfpzaocmhr table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nfzkjffmlz thead, #nfzkjffmlz tbody, #nfzkjffmlz tfoot, #nfzkjffmlz tr, #nfzkjffmlz td, #nfzkjffmlz th {
+#bfpzaocmhr thead, #bfpzaocmhr tbody, #bfpzaocmhr tfoot, #bfpzaocmhr tr, #bfpzaocmhr td, #bfpzaocmhr th {
   border-style: none;
 }
 
-#nfzkjffmlz p {
+#bfpzaocmhr p {
   margin: 0;
   padding: 0;
 }
 
-#nfzkjffmlz .gt_table {
+#bfpzaocmhr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4286,12 +3771,12 @@ Så hvordan finder vi oddsratio?</p>
   border-left-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_caption {
+#bfpzaocmhr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nfzkjffmlz .gt_title {
+#bfpzaocmhr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4303,7 +3788,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-width: 0;
 }
 
-#nfzkjffmlz .gt_subtitle {
+#bfpzaocmhr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4315,7 +3800,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-width: 0;
 }
 
-#nfzkjffmlz .gt_heading {
+#bfpzaocmhr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4327,13 +3812,13 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_bottom_border {
+#bfpzaocmhr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_col_headings {
+#bfpzaocmhr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4348,7 +3833,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_col_heading {
+#bfpzaocmhr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4368,7 +3853,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#nfzkjffmlz .gt_column_spanner_outer {
+#bfpzaocmhr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4380,15 +3865,15 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 4px;
 }
 
-#nfzkjffmlz .gt_column_spanner_outer:first-child {
+#bfpzaocmhr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nfzkjffmlz .gt_column_spanner_outer:last-child {
+#bfpzaocmhr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nfzkjffmlz .gt_column_spanner {
+#bfpzaocmhr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4400,11 +3885,11 @@ Så hvordan finder vi oddsratio?</p>
   width: 100%;
 }
 
-#nfzkjffmlz .gt_spanner_row {
+#bfpzaocmhr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nfzkjffmlz .gt_group_heading {
+#bfpzaocmhr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4430,7 +3915,7 @@ Så hvordan finder vi oddsratio?</p>
   text-align: left;
 }
 
-#nfzkjffmlz .gt_empty_group_heading {
+#bfpzaocmhr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4445,15 +3930,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: middle;
 }
 
-#nfzkjffmlz .gt_from_md > :first-child {
+#bfpzaocmhr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nfzkjffmlz .gt_from_md > :last-child {
+#bfpzaocmhr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nfzkjffmlz .gt_row {
+#bfpzaocmhr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4472,7 +3957,7 @@ Så hvordan finder vi oddsratio?</p>
   overflow-x: hidden;
 }
 
-#nfzkjffmlz .gt_stub {
+#bfpzaocmhr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4485,7 +3970,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#nfzkjffmlz .gt_stub_row_group {
+#bfpzaocmhr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4499,15 +3984,15 @@ Så hvordan finder vi oddsratio?</p>
   vertical-align: top;
 }
 
-#nfzkjffmlz .gt_row_group_first td {
+#bfpzaocmhr .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#nfzkjffmlz .gt_row_group_first th {
+#bfpzaocmhr .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#nfzkjffmlz .gt_summary_row {
+#bfpzaocmhr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4517,16 +4002,16 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#nfzkjffmlz .gt_first_summary_row {
+#bfpzaocmhr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_first_summary_row.thick {
+#bfpzaocmhr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nfzkjffmlz .gt_last_summary_row {
+#bfpzaocmhr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4536,7 +4021,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_grand_summary_row {
+#bfpzaocmhr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4546,7 +4031,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#nfzkjffmlz .gt_first_grand_summary_row {
+#bfpzaocmhr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4556,7 +4041,7 @@ Så hvordan finder vi oddsratio?</p>
   border-top-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_last_grand_summary_row_top {
+#bfpzaocmhr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4566,11 +4051,11 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_striped {
+#bfpzaocmhr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nfzkjffmlz .gt_table_body {
+#bfpzaocmhr .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4579,7 +4064,7 @@ Så hvordan finder vi oddsratio?</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_footnotes {
+#bfpzaocmhr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4593,7 +4078,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_footnote {
+#bfpzaocmhr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4602,7 +4087,7 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#nfzkjffmlz .gt_sourcenotes {
+#bfpzaocmhr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4616,7 +4101,7 @@ Så hvordan finder vi oddsratio?</p>
   border-right-color: #D3D3D3;
 }
 
-#nfzkjffmlz .gt_sourcenote {
+#bfpzaocmhr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4624,72 +4109,72 @@ Så hvordan finder vi oddsratio?</p>
   padding-right: 5px;
 }
 
-#nfzkjffmlz .gt_left {
+#bfpzaocmhr .gt_left {
   text-align: left;
 }
 
-#nfzkjffmlz .gt_center {
+#bfpzaocmhr .gt_center {
   text-align: center;
 }
 
-#nfzkjffmlz .gt_right {
+#bfpzaocmhr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nfzkjffmlz .gt_font_normal {
+#bfpzaocmhr .gt_font_normal {
   font-weight: normal;
 }
 
-#nfzkjffmlz .gt_font_bold {
+#bfpzaocmhr .gt_font_bold {
   font-weight: bold;
 }
 
-#nfzkjffmlz .gt_font_italic {
+#bfpzaocmhr .gt_font_italic {
   font-style: italic;
 }
 
-#nfzkjffmlz .gt_super {
+#bfpzaocmhr .gt_super {
   font-size: 65%;
 }
 
-#nfzkjffmlz .gt_footnote_marks {
+#bfpzaocmhr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nfzkjffmlz .gt_asterisk {
+#bfpzaocmhr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nfzkjffmlz .gt_indent_1 {
+#bfpzaocmhr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nfzkjffmlz .gt_indent_2 {
+#bfpzaocmhr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nfzkjffmlz .gt_indent_3 {
+#bfpzaocmhr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nfzkjffmlz .gt_indent_4 {
+#bfpzaocmhr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nfzkjffmlz .gt_indent_5 {
+#bfpzaocmhr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nfzkjffmlz .katex-display {
+#bfpzaocmhr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nfzkjffmlz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bfpzaocmhr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4853,24 +4338,24 @@ Surv3y Never smoker Smoker or former smoker
 <p>Nu udfører vi en analyse, ogfår følgende output:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kjsolncoyk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hrgkroczco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kjsolncoyk table {
+#hrgkroczco table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kjsolncoyk thead, #kjsolncoyk tbody, #kjsolncoyk tfoot, #kjsolncoyk tr, #kjsolncoyk td, #kjsolncoyk th {
+#hrgkroczco thead, #hrgkroczco tbody, #hrgkroczco tfoot, #hrgkroczco tr, #hrgkroczco td, #hrgkroczco th {
   border-style: none;
 }
 
-#kjsolncoyk p {
+#hrgkroczco p {
   margin: 0;
   padding: 0;
 }
 
-#kjsolncoyk .gt_table {
+#hrgkroczco .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4896,12 +4381,12 @@ Surv3y Never smoker Smoker or former smoker
   border-left-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_caption {
+#hrgkroczco .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kjsolncoyk .gt_title {
+#hrgkroczco .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4913,7 +4398,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-width: 0;
 }
 
-#kjsolncoyk .gt_subtitle {
+#hrgkroczco .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4925,7 +4410,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-width: 0;
 }
 
-#kjsolncoyk .gt_heading {
+#hrgkroczco .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4937,13 +4422,13 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_bottom_border {
+#hrgkroczco .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_col_headings {
+#hrgkroczco .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4958,7 +4443,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_col_heading {
+#hrgkroczco .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4978,7 +4463,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#kjsolncoyk .gt_column_spanner_outer {
+#hrgkroczco .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4990,15 +4475,15 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 4px;
 }
 
-#kjsolncoyk .gt_column_spanner_outer:first-child {
+#hrgkroczco .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjsolncoyk .gt_column_spanner_outer:last-child {
+#hrgkroczco .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjsolncoyk .gt_column_spanner {
+#hrgkroczco .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -5010,11 +4495,11 @@ Surv3y Never smoker Smoker or former smoker
   width: 100%;
 }
 
-#kjsolncoyk .gt_spanner_row {
+#hrgkroczco .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kjsolncoyk .gt_group_heading {
+#hrgkroczco .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5040,7 +4525,7 @@ Surv3y Never smoker Smoker or former smoker
   text-align: left;
 }
 
-#kjsolncoyk .gt_empty_group_heading {
+#hrgkroczco .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5055,15 +4540,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: middle;
 }
 
-#kjsolncoyk .gt_from_md > :first-child {
+#hrgkroczco .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjsolncoyk .gt_from_md > :last-child {
+#hrgkroczco .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjsolncoyk .gt_row {
+#hrgkroczco .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5082,7 +4567,7 @@ Surv3y Never smoker Smoker or former smoker
   overflow-x: hidden;
 }
 
-#kjsolncoyk .gt_stub {
+#hrgkroczco .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5095,7 +4580,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#kjsolncoyk .gt_stub_row_group {
+#hrgkroczco .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5109,15 +4594,15 @@ Surv3y Never smoker Smoker or former smoker
   vertical-align: top;
 }
 
-#kjsolncoyk .gt_row_group_first td {
+#hrgkroczco .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#kjsolncoyk .gt_row_group_first th {
+#hrgkroczco .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#kjsolncoyk .gt_summary_row {
+#hrgkroczco .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5127,16 +4612,16 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#kjsolncoyk .gt_first_summary_row {
+#hrgkroczco .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_first_summary_row.thick {
+#hrgkroczco .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjsolncoyk .gt_last_summary_row {
+#hrgkroczco .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5146,7 +4631,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_grand_summary_row {
+#hrgkroczco .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5156,7 +4641,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#kjsolncoyk .gt_first_grand_summary_row {
+#hrgkroczco .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5166,7 +4651,7 @@ Surv3y Never smoker Smoker or former smoker
   border-top-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_last_grand_summary_row_top {
+#hrgkroczco .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5176,11 +4661,11 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_striped {
+#hrgkroczco .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjsolncoyk .gt_table_body {
+#hrgkroczco .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -5189,7 +4674,7 @@ Surv3y Never smoker Smoker or former smoker
   border-bottom-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_footnotes {
+#hrgkroczco .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5203,7 +4688,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_footnote {
+#hrgkroczco .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5212,7 +4697,7 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#kjsolncoyk .gt_sourcenotes {
+#hrgkroczco .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5226,7 +4711,7 @@ Surv3y Never smoker Smoker or former smoker
   border-right-color: #D3D3D3;
 }
 
-#kjsolncoyk .gt_sourcenote {
+#hrgkroczco .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5234,72 +4719,72 @@ Surv3y Never smoker Smoker or former smoker
   padding-right: 5px;
 }
 
-#kjsolncoyk .gt_left {
+#hrgkroczco .gt_left {
   text-align: left;
 }
 
-#kjsolncoyk .gt_center {
+#hrgkroczco .gt_center {
   text-align: center;
 }
 
-#kjsolncoyk .gt_right {
+#hrgkroczco .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjsolncoyk .gt_font_normal {
+#hrgkroczco .gt_font_normal {
   font-weight: normal;
 }
 
-#kjsolncoyk .gt_font_bold {
+#hrgkroczco .gt_font_bold {
   font-weight: bold;
 }
 
-#kjsolncoyk .gt_font_italic {
+#hrgkroczco .gt_font_italic {
   font-style: italic;
 }
 
-#kjsolncoyk .gt_super {
+#hrgkroczco .gt_super {
   font-size: 65%;
 }
 
-#kjsolncoyk .gt_footnote_marks {
+#hrgkroczco .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kjsolncoyk .gt_asterisk {
+#hrgkroczco .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjsolncoyk .gt_indent_1 {
+#hrgkroczco .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kjsolncoyk .gt_indent_2 {
+#hrgkroczco .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kjsolncoyk .gt_indent_3 {
+#hrgkroczco .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kjsolncoyk .gt_indent_4 {
+#hrgkroczco .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kjsolncoyk .gt_indent_5 {
+#hrgkroczco .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kjsolncoyk .katex-display {
+#hrgkroczco .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kjsolncoyk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hrgkroczco div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

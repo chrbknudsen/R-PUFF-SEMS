@@ -36,18 +36,59 @@ Ligger 0 i intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligg
 
 ## Hvad betød det?
 
-Bl.a. at den forskel i middelværdier vi så, ikke var stor nok til at vi kunne konkludere
-at den faktisk eksisterer.
+Kan vi ikke afvise $H_0$ betyder det blandt andet at forskellen på middelværdierne ikke er så stor at vi kan konkludere at der faktisk er forskel.
 
-p-værdien giver os risikoen er for at vi afviser $H_0$. _Selvom_ $H_0$ er sand.
+. . .
 
-Eller: Hvis $H_0$ er sand, så er p-værdien sandsynligheden for at 
-få en forskel på de to middelværdier der er så stor som vi ser.
+Men det kunne være at der var en forskel alligevel.
 
-Type 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!
+. . .
 
-Grænsen sættes normalt til 0.05: Vi accepterer en 
-risiko for at få en falsk positiv på 5%. Den kalder vi også $\alpha$.
+$\alpha$ giver os den kritiske værdi. Den sammenligner vi med testværdien.
+
+. . .
+
+Vi har også set p-værdier. Det er risikoen for at vi afviser $H_0$. _Selvom_ $H_0$ er sand.
+
+. . .
+
+Vi spørger grundlæggende om p-værdien er mindre end $\alpha$. Er den det er vi normalt glade.
+
+
+
+## Det kan gå galt på to måder:
+
+Type 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. 
+
+. . .
+
+Vi kan forkaste $H_0$
+
+. . .
+
+Men det er en fejl!  
+Der er _ikke_ en effekt.  
+Data understøtter _ikke_ den alternative hypotese
+
+. . . 
+
+Det er en falsk positiv
+
+. . .
+
+Vi forkastede $H_0$ ved en fejl
+
+. . . 
+
+På et $\alpha = 0.05$ niveau
+
+. . .
+
+Som er risikoen for at vi ser en falsk positiv.
+
+. . .
+
+Det er ikke så godt...
 
 ## Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl
 
@@ -61,7 +102,11 @@ Vi kan også begå fejl på en anden måde.
 
 . . . 
 
-Vi kan fx konkludere at der ikke er forskel. _Selvom der i virkeligheden er forskel!_ 
+Det gør vi, hvis test- eller p-værdien fortæller os at vi ikke kan forkaste $H_0$
+
+. . .
+
+Så konkluderer vi at der ikke er forskel. _Selvom der i virkeligheden er forskel!_ 
 
 . . . 
 
@@ -77,32 +122,43 @@ Den kalder vi $\beta$
  
 
 ## Det omvendte af $\beta$
+:::: {.smaller}
+Risikoen for at begå en type 2 fejl er en svaghed.
 
-. . . 
+:::: {.fragment}
 
-Kalder vi power. Det er den "styrke" vores test har. 
-
-. . . 
+Det omvendte kalder vi power. Det er den "styrke" vores test har. 
+::::
+:::: {.fragment}
 
 Eller 
 
-. . . 
+::::
+:::: {.fragment}
 
 - Sandsynligheden for at testen finder forskellen,
 når forskellen faktisk findes!
-- Power er sandsynligheden for ikke at begå en type 2 fejl.
+- Power er sandsynligheden for _ikke_ at begå en type 2 fejl.
 
-. . . 
+::::
+:::: {.fragment}
+
 
 Hvis $\beta$ er risikoen for at vores test ikke finder forskellen, selvom den findes.
 
-. . . 
+::::
+:::: {.fragment}
+
 
 Så er power sandsynligheden for at vores test finder forskellen. Når altså den faktisk er der.
 
-. . . 
+::::
+:::: {.fragment}
+
 
 $power = 1 - \beta$
+::::
+::::
 
 ## Hvad afhænger de her ting af?
 
@@ -147,7 +203,11 @@ Hvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femt
 
 Her er fire værdier. Find den femte.
 
+. . .
+
 Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?
+
+. . .
 
 Det er dog ikke et specielt hyppigt forekommende eksamensspørgsmål.
 
@@ -175,6 +235,8 @@ Eksamen tester om I har forstået nok til at I kan gøre det i hånden.
 
 💥Powerrelationen!💪
 
+:::: smaller
+
 $$\frac{\text{effekt}}{\text{standardfejl}}
 = z_{1-α/2}+z_{1-β}
 $$
@@ -184,9 +246,16 @@ $z_{1-α/2}+z_{1-β}$
 
 Det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen. 
 
-Tænk over hvordan vi beregnede en testværdi. Hvor langt fra 0
-ligger det vi observerede, målt i standardafvigelser (eller standardfejl)? Det er samme metode!
+Husk hvordan vi så på testværdierne. Var de langt nok væk fra 0 målt i standardfejl? Det er samme metode.
 
+Vi skal blot lidt længere væk, fordi vi ikke bare lige akkurat skal forkaste $H_0$. Vi skal være ekstra sikre - og hvor meget styres af den ønskede power.
+
+
+:::: tiny
+"Altid" er med et par forbehold. Der antages normalitet. Det er mere kompliceret ved små stikprøver. Og ikke-lineære modeller. Og når standardfejlen afhænger af det vi prøver at estimere (her _er_ der ingen simpel formel, og man simulerer i stedet)
+::::
+
+::::
 ## De sære tegn
 
 Lad os lige repetere:

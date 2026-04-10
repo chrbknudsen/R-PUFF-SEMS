@@ -2054,11 +2054,46 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="hvad-betød-det" class="slide level2">
 <h2>Hvad betød det?</h2>
-<p>Bl.a. at den forskel i middelværdier vi så, ikke var stor nok til at vi kunne konkludere at den faktisk eksisterer.</p>
-<p>p-værdien giver os risikoen er for at vi afviser <span class="math inline">\(H_0\)</span>. <em>Selvom</em> <span class="math inline">\(H_0\)</span> er sand.</p>
-<p>Eller: Hvis <span class="math inline">\(H_0\)</span> er sand, så er p-værdien sandsynligheden for at få en forskel på de to middelværdier der er så stor som vi ser.</p>
-<p>Type 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat. Men det er der ikke!</p>
-<p>Grænsen sættes normalt til 0.05: Vi accepterer en risiko for at få en falsk positiv på 5%. Den kalder vi også <span class="math inline">\(\alpha\)</span>.</p>
+<p>Kan vi ikke afvise <span class="math inline">\(H_0\)</span> betyder det blandt andet at forskellen på middelværdierne ikke er så stor at vi kan konkludere at der faktisk er forskel.</p>
+<div class="fragment">
+<p>Men det kunne være at der var en forskel alligevel.</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\alpha\)</span> giver os den kritiske værdi. Den sammenligner vi med testværdien.</p>
+</div>
+<div class="fragment">
+<p>Vi har også set p-værdier. Det er risikoen for at vi afviser <span class="math inline">\(H_0\)</span>. <em>Selvom</em> <span class="math inline">\(H_0\)</span> er sand.</p>
+</div>
+<div class="fragment">
+<p>Vi spørger grundlæggende om p-værdien er mindre end <span class="math inline">\(\alpha\)</span>. Er den det er vi normalt glade.</p>
+</div>
+</section>
+<section id="det-kan-gå-galt-på-to-måder" class="slide level2">
+<h2>Det kan gå galt på to måder:</h2>
+<p>Type 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat.</p>
+<div class="fragment">
+<p>Vi kan forkaste <span class="math inline">\(H_0\)</span></p>
+</div>
+<div class="fragment">
+<p>Men det er en fejl!<br>
+Der er <em>ikke</em> en effekt.<br>
+Data understøtter <em>ikke</em> den alternative hypotese</p>
+</div>
+<div class="fragment">
+<p>Det er en falsk positiv</p>
+</div>
+<div class="fragment">
+<p>Vi forkastede <span class="math inline">\(H_0\)</span> ved en fejl</p>
+</div>
+<div class="fragment">
+<p>På et <span class="math inline">\(\alpha = 0.05\)</span> niveau</p>
+</div>
+<div class="fragment">
+<p>Som er risikoen for at vi ser en falsk positiv.</p>
+</div>
+<div class="fragment">
+<p>Det er ikke så godt…</p>
+</div>
 </section>
 <section id="eksistensen-af-type-1-fejl-indikerer-eksistensen-af-type-2-fejl" class="slide level2">
 <h2>Eksistensen af type 1 fejl indikerer eksistensen af type 2 fejl</h2>
@@ -2069,7 +2104,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Vi kan også begå fejl på en anden måde.</p>
 </div>
 <div class="fragment">
-<p>Vi kan fx konkludere at der ikke er forskel. <em>Selvom der i virkeligheden er forskel!</em></p>
+<p>Det gør vi, hvis test- eller p-værdien fortæller os at vi ikke kan forkaste <span class="math inline">\(H_0\)</span></p>
+</div>
+<div class="fragment">
+<p>Så konkluderer vi at der ikke er forskel. <em>Selvom der i virkeligheden er forskel!</em></p>
 </div>
 <div class="fragment">
 <p>Det er en type 2 fejl. En falsk negativ.</p>
@@ -2083,8 +2121,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="det-omvendte-af-beta" class="slide level2">
 <h2>Det omvendte af <span class="math inline">\(\beta\)</span></h2>
+<div class="smaller">
+<p>Risikoen for at begå en type 2 fejl er en svaghed.</p>
 <div class="fragment">
-<p>Kalder vi power. Det er den “styrke” vores test har.</p>
+<p>Det omvendte kalder vi power. Det er den “styrke” vores test har.</p>
 </div>
 <div class="fragment">
 <p>Eller</p>
@@ -2092,7 +2132,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="fragment">
 <ul>
 <li>Sandsynligheden for at testen finder forskellen, når forskellen faktisk findes!</li>
-<li>Power er sandsynligheden for ikke at begå en type 2 fejl.</li>
+<li>Power er sandsynligheden for <em>ikke</em> at begå en type 2 fejl.</li>
 </ul>
 </div>
 <div class="fragment">
@@ -2103,6 +2143,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <div class="fragment">
 <p><span class="math inline">\(power = 1 - \beta\)</span></p>
+</div>
 </div>
 </section>
 <section id="hvad-afhænger-de-her-ting-af" class="slide level2">
@@ -2136,8 +2177,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="og-hvad-spørges-der-til-til-eksamen" class="slide level2">
 <h2>Og hvad spørges der til til eksamen?</h2>
 <p>Her er fire værdier. Find den femte.</p>
+<div class="fragment">
 <p>Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?</p>
+</div>
+<div class="fragment">
 <p>Det er dog ikke et specielt hyppigt forekommende eksamensspørgsmål.</p>
+</div>
 </section>
 <section id="det-har-r-funktioner-til." class="slide level2">
 <h2>Det har R funktioner til.</h2>
@@ -2158,12 +2203,18 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="i-stedet" class="slide level2">
 <h2>I stedet</h2>
 <p>💥Powerrelationen!💪</p>
+<div class="smaller">
 <p><span class="math display">\[\frac{\text{effekt}}{\text{standardfejl}}
 = z_{1-α/2}+z_{1-β}
 \]</span></p>
 <p>Den effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med <span class="math inline">\(z_{1-α/2}+z_{1-β}\)</span></p>
 <p>Det gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.</p>
-<p>Tænk over hvordan vi beregnede en testværdi. Hvor langt fra 0 ligger det vi observerede, målt i standardafvigelser (eller standardfejl)? Det er samme metode!</p>
+<p>Husk hvordan vi så på testværdierne. Var de langt nok væk fra 0 målt i standardfejl? Det er samme metode.</p>
+<p>Vi skal blot lidt længere væk, fordi vi ikke bare lige akkurat skal forkaste <span class="math inline">\(H_0\)</span>. Vi skal være ekstra sikre - og hvor meget styres af den ønskede power.</p>
+<div class="tiny">
+<p>Altid er med et par forbehold. Der antages normalitet. Det er mere kompliceret ved små stikprøver. Og ikke-lineære modeller. Og når standardfejlen afhænger af det vi prøver at estimere (her <em>er</em> der ingen simpel formel, og man simulerer i stedet)</p>
+</div>
+</div>
 </section>
 <section id="de-sære-tegn" class="slide level2">
 <h2>De sære tegn</h2>
