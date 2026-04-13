@@ -230,6 +230,11 @@ For eksamen tester ikke om I kan putte tal ind i en funktion.
 
 Eksamen tester om I har forstået nok til at I kan gøre det i hånden.
 
+I har muligvis fået udleveret et notat om beregning af stikprøvestørrelser.  
+Det har jeg i hvert fald set at tidligere årgange har fået.  
+Sådan et notat har jeg ikke kunne finde.  
+Har I sådan et - så skal I bruge det!  
+Hvis I ikke har, så er der et bud på hvordan her.
 
 ## I stedet
 

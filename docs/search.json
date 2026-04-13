@@ -1355,14 +1355,14 @@
     "href": "slides/power.html#men-dem-bruger-vi-ikke",
     "title": "Powerberegninger",
     "section": "Men dem bruger vi ikke…",
-    "text": "Men dem bruger vi ikke…\nFor eksamen tester ikke om I kan putte tal ind i en funktion.\nEksamen tester om I har forstået nok til at I kan gøre det i hånden."
+    "text": "Men dem bruger vi ikke…\nFor eksamen tester ikke om I kan putte tal ind i en funktion.\nEksamen tester om I har forstået nok til at I kan gøre det i hånden.\nI har muligvis fået udleveret et notat om beregning af stikprøvestørrelser.\nDet har jeg i hvert fald set at tidligere årgange har fået.\nSådan et notat har jeg ikke kunne finde.\nHar I sådan et - så skal I bruge det!\nHvis I ikke har, så er der et bud på hvordan her."
   },
   {
     "objectID": "slides/power.html#i-stedet",
     "href": "slides/power.html#i-stedet",
     "title": "Powerberegninger",
     "section": "I stedet",
-    "text": "I stedet\n💥Powerrelationen!💪\n\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nDet gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.\nHusk hvordan vi så på testværdierne. Var de langt nok væk fra 0 målt i standardfejl? Det er samme metode.\nVi skal blot lidt længere væk, fordi vi ikke bare lige akkurat skal forkaste \\(H_0\\). Vi skal være ekstra sikre - og hvor meget styres af den ønskede power.\n\nAltid er med et par forbehold. Der antages normalitet. Det er mere kompliceret ved små stikprøver. Og ikke-lineære modeller. Og når standardfejlen afhænger af det vi prøver at estimere (her er der ingen simpel formel, og man simulerer i stedet)"
+    "text": "I stedet\n💥Powerrelationen!💪\n\n\\[\\frac{\\text{effekt}}{\\text{standardfejl}}\n= z_{1-α/2}+z_{1-β}\n\\]\nDen effekt vi ønsker at kunne se - divideret med standardfejlen, skal være lig med \\(z_{1-α/2}+z_{1-β}\\)\nDet gælder altid. Forskellen fra test til test bestemmer hvordan vi beregner standardfejlen.\nHusk hvordan vi så på testværdierne. Var de langt nok væk fra 0 målt i standardfejl? Det er samme metode.\nVi skal blot lidt længere væk, fordi vi ikke bare lige akkurat skal forkaste \\(H_0\\). Vi skal være ekstra sikre - og hvor meget styres af den ønskede power.\n\n“Altid” er med et par forbehold. Der antages normalitet. Det er mere kompliceret ved små stikprøver. Og ikke-lineære modeller. Og når standardfejlen afhænger af det vi prøver at estimere (her er der ingen simpel formel, og man simulerer i stedet)"
   },
   {
     "objectID": "slides/power.html#de-sære-tegn",
