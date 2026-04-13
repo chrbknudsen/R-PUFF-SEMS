@@ -9,7 +9,7 @@ execute:
   message: false
 ---
 
-[pdf](downloads/kritiske_vaerdier.pdf){target="_blank"}
+[pdf](../downloads/kritiske_vaerdier.pdf){target="_blank"}
 
 ```{r}
 library(ggplot2)
