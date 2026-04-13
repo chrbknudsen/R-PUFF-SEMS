@@ -988,61 +988,79 @@ Og det kan vi med en sikkerhed på $\alpha = 0.05$
 
 
 
-## Endnu en opgave
-
-En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling.
-Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som "diff".
+## Ændring i blodtryk
+:::: smaller
+En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter).  
+Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling.  
+Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som "diff".  
 For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9
 
 For interventionsgruppen er de tilsvarende tal -19.6 og 17.4
 
 Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.
 
-Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? 
+Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant?  
 Kunne det tænkes at den sande middelværdi er 0?
 
-Det kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:
+::::
 
-```{r}
-SE <- 17.4/sqrt(323)
-SE
+## Ændring i blodtryk - intervention
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.fragment}
+Hvad er konfidensintervallet på forskellen?
+::::
+:::: {.fragment}
+For interventionsgruppen:  
+Fald: -19.6  
+Spredning: 17.4
+::::
+
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
-
-Konfidensintervallet finder vi ved:
-
-$$X +/- 1.96*SE$$
+::::
+::::
 
 
-```{r}
--19.6 + c(1,-1)*1.96*SE
+##  Ændring i blodtryk - kontrol
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.fragment}
+Hvad er konfidensintervallet på forskellen?  
+Samme beregninger - nu 
+::::
+:::: {.fragment}
+For kontrolgruppen:  
+Fald: -16.6  
+Spredning: 19.9
+::::
+
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
-
-Hvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval.
-Så det systoliske blodtryk falder signifikant i interventionsgruppen.
-
-Er der et signifikant fald i kontrolgruppen?
-
-Samme beregninger:
-
-```{r}
-SE <- 19.9/sqrt(318)
-SE
-```
-
-Og konfidensintervallet:
-
-```{r}
--16.6 + c(1,-1)*1.96*SE
-```
-
-Her er 0 heller ikke indeholdt i intervallet - faldet er signifikant.
-
-Er faldet i blodtryk signifikant forskelligt?
-
-De to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige. 
-
-Så - forskel?
-
+::::
+::::
 
 
 
