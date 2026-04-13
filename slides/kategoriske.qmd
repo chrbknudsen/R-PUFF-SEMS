@@ -1,6 +1,5 @@
 ---
-title: "Kategoriske værdier"
-subtitle: "Andele, RR og OR"
+title: "Kategoriske udfald"
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -9,3 +8,751 @@ engine: knitr
 filters:
   - webr
 ---
+
+## Kategoriske udfald
+
+Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.
+
+. . .
+
+Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.
+
+. . .
+
+Der er ikke nødvendigvis en orden: Det er ikke bedre at være mand end at være kvinde.
+
+. . .
+
+Men der kan være - socialklasse eg.
+
+. . .
+
+Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?
+
+. . . 
+
+Vi tæller
+
+## Kategoriske udfald
+
+Når vi tæller får vi at vide hvor mange der er af hver.
+
+. . . 
+
+Vi kan beregne hvor stor en andel de forskellige kategorier udgør af det samlede hele.
+
+. . . 
+
+Vi vil blive spurgt: 
+
+- Er der forskel på de andele grupperne imellem?
+- Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?
+- Og hvor sikre er vi på vores estimater?
+
+## Kategoriske udfald
+
+Så vi skal kigge på:
+
+- Proportioner - også kendt som andele
+- Relativ risiko
+- Odds ratio
+- Chi i anden
+
+
+## En opgave
+:::: {.columns}
+:::: {.column}
+:::: smaller
+Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig 
+af om der deles sprøjter med andre narkomaner.  
+I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.  
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.
+
+Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+:::: notes
+Hvor mange positive er der? Hvor mange er der ialt? Det er estimatet.
+::::
+
+## Hvor sikre er vi på det tal?
+
+Opgaven fortsætter: 
+
+Angiv også et 95% konfidensinterval på det estimat.
+
+. . . 
+
+Estimatet er en andel. Også kaldet en proportion. Eller _p_.
+
+. . .
+
+Metoden har vi set før.
+
+. . . 
+
+$estimat \pm 1.96 \cdot SE$ 
+
+. . . 
+
+Det ligner næsten et mønster...
+
+. . .
+
+Så - hvordan beregner vi en standardfejl på estimatet af en proportion?
+
+. . . 
+
+$SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
+
+. . .
+
+:::: tiny
+Man kan godt udlede hvorfor $SE_{prop}$ har det udseende. Det bliver vi ikke spurgt om, så det springer vi over.
+::::
+
+## Hvor sikker var vi?
+
+:::: {.columns}
+:::: {.column}
+
+:::: smaller
+Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?
+
+Proportionen beregnede vi til 0.2015504
+
+Standardfejlen er givet ved:
+
+$SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
+
+Der var 258 observationer i stikprøven
+
+$estimat \pm 1.96 \cdot SE$ 
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Videre med samme opgave
+:::: smaller
+Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om 
+man deler sprøjte eller ej. Argumenter ud fra relevant KI.
+
+Hvordan gør vi det? Eller: Hvad vil  det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?
+:::: 
+
+:::: smaller
+
+:::: {.fragment}
+Det kan vi gøre på fire måder:
+:::: 
+
+:::: {.fragment}
+Forskellen på de to prævalenser er 0
+:::: 
+
+:::: {.fragment}
+Den ene prævalens divideret med den anden er 1 (for så er de ens)
+::::
+
+:::: {.fragment}
+I stedet for prævalenser kan vi beregne odds. Og se om odds er ens. Det kræver at vi lige finder ud af hvad "odds" egentlig er...
+::::
+
+:::: {.fragment}
+Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?
+::::
+
+:::: {.fragment}
+Vi tager dem en for en
+
+:::: tiny
+Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.
+::::
+
+::::
+
+::::
+
+
+
+## Forskel på prævalenser
+
+:::: smaller
+Er forskellen i virkeligheden 0?
+
+:::: {.fragment}
+Eller - vi opstiller en NULL-hypotese, $H_0: p_{TB:deler} - p_{TB:delerikke} = 0$
+
+Den alternative hypotese er så, at der er forskel på prævalensen.
+
+::::
+
+:::: {.fragment}
+Samme metode som før: 
+
+$\text{estimat}_{diff} \pm 1.96*SE_{diff}$
+
+Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen. 
+
+:::: {.tiny}
+1.96 fordi vi implicit har valgt  $\alpha = 0.05$ og der er tale om to samples der ikke er parrede. Vi kan også sammenligne med testværdien.
+::::
+::::
+
+
+:::: {.fragment}
+Så... Hvordan beregner vi $SE_{diff}$?
+::::
+:::: {.fragment}
+Helt som før  
+$SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
+::::
+:::: {.fragment}
+Og standardfejl på de enkelte proportioner var: $SE = \sqrt{\frac{p(1-p)}{n}}$
+::::
+::::
+
+## Så kan vi regne
+
+
+:::: {.columns}
+:::: {.column}
+- Prævalens af TB blandt de 97 der delte sprøjter: 24.7%
+- Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%
+- $SE = \sqrt{\frac{p(1-p)}{n}}$
+- $SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Forholdet mellem de to prævalenser?
+
+At de måske er ens kan vi også udtrykke ved at den ene divideret med den anden giver 1.
+
+. . .
+
+Den hypotese vi så tester er:
+
+. . .
+
+$H_0: \frac{p_{deler}}{p_{deler ikke}} = 1$
+
+Så hvad kan vi, hvis estimatet er tilstrækkeligt forskelligt fra 1?
+
+. . .
+
+Afvise $H_0$.
+
+. . .
+
+Metoden er den samme som før. $\text{Estimatet} \pm 1.96\cdot\text{SE}$  
+Eller beregne en test-værdi og sammemligne med den kritiske værdi.
+
+:::: {.tiny}
+Prævalensen for TB kan vi også kalde risikoen for at have TB. Det kunne vi også kalde for en risiko. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR.
+::::
+
+. . .
+
+
+
+## Komplikationer
+
+Så skal vi "bare" beregne SE.
+
+. . .
+
+Det er lidt bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).
+
+. . .
+
+Vi har nemlig ikke en let formel for standardfejlen på en riskratio.
+
+. . .
+
+Det vi har er en formel for standardfejlen af _logaritmen_ af RR.
+
+. . .
+
+Og derfor skal vi se på:
+
+$\log{RR} \pm 1.96 \cdot SE_{\log{RR}}$
+
+. . .
+
+Hvordan gør vi så det?
+
+## SE for log(RR)
+:::: smaller
+For det generelle forhold:
+
+|                | udfald 1 | udfald 2 |
+|----------------|-----|-----|
+| eksponeret     | a   | b    |
+| ikke eksponeret     | c  | d | 
+
+:::: {.fragment}
+
+Hvad er risikoen for udfald 1 hvis man er eksponeret?
+
+::::
+
+:::: {.fragment}
+ $\frac{a}{a+b}$
+::::
+
+:::: {.fragment}
+og hvis man ikke er eksponeret:  
+$\frac{c}{c+d}$
+::::
+
+:::: {.fragment}
+Så gælder det at:
+
+$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+::::
+
+::::
+
+## Og så er vi ca. klar til at regne
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+Prævalensen af TB blandt de 97 der delte sprøjter var 24.7%.  
+Prævalensen af TB blandt de 161 der ikke delte sprøjter var 17.4%
+
+Bonus: Hvordan finder vi - fra det - nedenstående tal?
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~TB, ~`deler`, ~`deler ikke`,
+"TB-positiv", 24, 28,
+"TB-negativ", 73, 133 ) |> gt()
+```
+
+:::: {.smaller}
+
+$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+
+::::
+
+
+
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+## Hvad så vi?
+
+:::: smaller
+
+RR var 1.42268.  
+Hvordan vil vi fortolke det?
+
+:::: {.fragment}
+Det vil vi formulere som at "risikoen er 42% højere" for at være TB+ hvis man deler sprøjter, end hvis man ikke gør.
+::::
+
+:::: {.fragment}
+Men. KI for RR var [0.877; 2.307]
+::::
+
+:::: {.fragment}
+Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.
+::::
+:::: {.fragment}
+Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).
+::::
+:::: {.fragment}
+Hvorfor? Fordi log(1) = 0.
+::::
+:::: {.fragment}
+Vi kunne også få teststørrelsen ved $\frac{\log(RR)}{SE(log(RR))}$. Den var 1.429.  
+Mindre end den kritiske værdi.
+::::
+::::
+
+## Odds - hvad er det?
+
+Blandt de 97 narkomaner der delte sprøjter var 24 TB+.
+
+. . . 
+
+Det gav en risiko for at være TB+ på 24/97.
+
+Eller sandsynlighed. Eller prævalens af TB+ blandt... eller risiko for at være TB+ hvis...
+
+. . .
+
+Det kan vi udtrykke anderledes - ved odds.
+
+. . .
+
+Det er antallet af positive udfald divideret med antallet af negative udfald.
+
+Eller: 24/73
+
+. . .
+
+Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.
+
+## Odds - fordelene
+
+Hvis sandsynligheden for et positivt udfald er 10%
+
+. . . 
+
+Er der, ved 10 observationer 1 positivt og 9 negative udfald.
+
+. . . 
+
+Som sandsynligheder: 0.1 og 0.9 hhv.
+
+. . . 
+
+Som odds: 1/9 og 9/1 hhv.
+
+Det er intuitivt hinandens modsætninger.
+
+Og:
+
+. . . 
+
+```{r echo  = TRUE}
+log(1/9)
+```
+
+```{r echo = TRUE}
+log(9/1)
+```
+
+. . . 
+
+Hvor _er_ det bare pænt og symmetrisk! 
+
+
+## Hvad tester vi så med odds?
+
+(Næsten) det samme som med Risk Ratio. Nu blot Odds Ratio.
+
+. . .
+
+Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?
+
+Eller:  
+
+. . .
+
+Kan vi afvise $H_0$:  
+$\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1$
+
+. . .
+
+Kan I gætte hvordan vi beregner et 95% KI på det?
+
+. . .
+
+Fuldstændig som før:  
+$\text{estimat} \pm 1.96\cdot\text{SE}$
+
+
+## Lignende problem som med SE for RR
+:::: smaller
+Problemet med at beregne SE for OR er nøjagtig det samme som for RR. 
+
+:::: {.fragment}
+
+Løsningen er ca. den samme. Vi har en pæn formel for SE(log(OR))
+::::
+:::: {.fragment}
+For det generelle forhold:
+
+|                | udfald 1 | udfald 2 |
+|----------------|-----|-----|
+| eksponeret | a  | b  |
+| ikke eksponeret     | c  | d | 
+::::
+
+:::: {.fragment}
+
+Får vi: 
+$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
+
+::::
+
+:::: {.fragment}
+Sammenlign med $SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+
+Og se hvorfor jeg mener at matematikken bliver enklere med odds...
+::::
+
+::::
+
+
+## Så er vi klar til at regne
+
+:::: {.columns}
+:::: {.column}
+
+```{r}
+library(tidyverse)
+library(gt)
+tribble(~TB, ~`deler`, ~`deler ikke`,
+"TB-positiv", 24, 28,
+"TB-negativ", 73, 133 ) |> gt()
+```
+
+:::: {.smaller}
+
+$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
+
+$\log{OR} \pm 1.96 \cdot SE(\log{OR})$
+
+::::
+
+::::
+
+
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+## Hvad så vi
+:::: smaller
+OR var 1.56
+
+Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.
+
+:::: {.fragment}
+Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]
+::::
+:::: {.fragment}
+Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.
+::::
+:::: {.fragment}
+Vi kunne også finde testværdien: $\frac{\log{OR}}{SE(\log{OR})} = 1.420$. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise $H_0$.
+::::
+:::: {.fragment}
+95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise $H_0$
+::::
+:::: {.fragment}
+Vær skarpe her. Odds er noget andet end risiko. Så husk _altid_ at skrive odds i stedet for risiko.
+::::
+::::
+
+## Fra sandsynlighed til odds
+:::: evensmaller
+Hvordan beregner vi odds hvis vi kender sandsynligheden?
+
+:::: {.fragment}
+$\text{odds} = \frac{p}{1-p}$
+::::
+:::: {.fragment}
+Hvordan beregner vi sandsynligheden hvis vi kender odds?
+::::
+:::: {.fragment}
+$p = \frac{\text{odds}}{1 + \text{odds}}$
+::::
+:::: {.fragment}
+En særlig funktion vi kommer til at møde igen:
+::::
+:::: {.fragment}
+$\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)$
+
+logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.
+::::
+:::: {.fragment}
+Den omvendte kan også være nyttig. Hvis x = logit(p): 
+
+$p = \frac{e^x}{1 + e^x}$
+
+Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.
+::::
+::::
+
+## $\chi^2$ tilgangen
+:::: smaller
+Mere generel - kan håndtere mere end et udfald. 
+
+:::: {.fragment}
+Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.
+::::
+:::: {.fragment}
+Tester forskellen på den fordeling vi ser - og den vi ville forvente
+::::
+:::: {.fragment}
+Hvis vi kun kender totalerne 
+
+|                | TB+ | TB- | Total |
+|----------------|-----|-----|-------|
+| Deler sprøjter | ?  | ?  | 97    |
+| Deler ikke     | ?  | ? | 161   |
+| **Total**      | 52  | 206 | 258   |
+
+
+Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter
+
+Hvor mange forventer vi så har TB blandt de der deler sprøjter?
+::::
+::::
+
+## Regne-regne
+
+52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB. 
+
+. . . 
+
+Så må der være $\frac{52}{258}\cdot97 \approx 20$ der tester positiv.
+
+. . . 
+
+Det er hvad vi forventer. Men vi ser at der er 24. 
+
+. . . 
+
+Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se $\frac{52}{258}\cdot161 \approx 32$ der tester positiv.
+
+. . . 
+
+Det er hvad vi forventer. Men vi ser at der kun er 28. 
+
+Vi laver de samme beregninger på de to andre celler.
+
+## Regne-regne
+
+:::: smaller
+$\chi^2$ testens $H_0$ er, at der ikke er forskel på fordelingen af TB-status i de to grupper.
+
+:::: {.fragment}
+Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi 
+forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.
+::::
+:::: {.fragment}
+Styrken er at den kan håndtere flere udfald end to. 
+::::
+:::: {.fragment}
+Svagheden er at 
+den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.
+::::
+:::: {.fragment}
+Og så forudsætter $\chi^2$ testen at der er mindst 5 _forventede_ observationer i hver "celle".
+::::
+:::: {.fragment}
+Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at 
+vi bør slå korrektionen fra.
+::::
+:::: {.fragment}
+Funktionen hedder `chisq.test()`. Med argumentet `correct = FALSE` hvis vi vil slå den fra.
+::::
+::::
+
+## Hvordan gør vi?
+
+En smule bøvlet - for vi skal have data ind i en matrix.
+
+
+:::: {.columns}
+:::: {.column}
+```{r echo = TRUE, eval = FALSE}
+tab <- matrix(
+  c(24, 73,
+    28, 133),
+  nrow = 2,
+  byrow = TRUE
+)
+
+dimnames(tab) <- list(
+  Exposure = c("Deler", "Deler_ikke"),
+  TB = c("Ja", "Nej")
+)
+```
+
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+
+
+
+## Sammenfattende
+
+Det er ca. altid:
+
+Estimat +/- 1.96*standardfejlen
+
+Undertiden er estimatet logaritmen til det vi er interesseret i. Så er det også standardfejlen på logaritmen til estimatet.
+
+Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet interval - så er det en anden kritisk værdi. Hint: qnorm. 
+
+Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.
+
+
+## Flere øvelser

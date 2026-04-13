@@ -487,7 +487,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"code":"","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"0.5","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","layout":"horizontal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
   </script>
   <script type="module">
@@ -2319,22 +2319,27 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Pr(&gt;|t|) er p-værdien: Risikoen for at vi afviser <span class="math inline">\(H_0\)</span>, selvom den faktisk er sand. Altså at vi afviser at estimatet i virkeligheden er 0 - og accepterer den alternative hypotese, at estimatet ikke er 0 (og at x derfor faktisk påvirker y).</p>
 <p>Typisk: Større eller mindre end 0.05.</p>
+<p>Tæt sammenhæng mellem t-value og p-value!</p>
 </div>
 </section>
 <section id="populær-ting-i-eksamensopgaver" class="slide level2">
 <h2>Populær ting i eksamensopgaver</h2>
 <div class="evensmaller">
 <p>De der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.</p>
+<div class="fragment">
 <p>Husk: <span class="math inline">\(\text{t value} = \frac{\text{Estimate}}{\text{Std. Error}}\)</span></p>
+</div>
+<div class="fragment">
 <p>p-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:<br>
 <span class="math inline">\(\frac{\text{Estimate}}{\text{Std. Error}}\)</span>,<br>
 og ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)</p>
 </div>
+</div>
 <div class="fragment">
-<div class="evensmaller">
+<div class="tiny">
 <p>Vi kan faktisk godt beregne p-værdien. Den er givet ved: <code>2*(1-pt(abs(</code>t value<code>), df))</code></p>
 <p><code>pt</code> er <code>pnorm()</code> blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.</p>
-<p>Men det behøver vi ikke - test-værdien er rigelig.</p>
+<p>Men det behøver vi ikke - test-værdien er rigeligt.</p>
 </div>
 </div>
 </section>
@@ -2456,27 +2461,45 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Hov! To forklarende variable!!</h2>
 <div class="evensmaller">
 <p>Når vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression.</p>
-<p>. . .</p>
+<div class="fragment">
 <p>Jeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.</p>
-<p>. . .</p>
+</div>
+<div class="fragment">
 <p>Hvad var det?</p>
+</div>
+<div class="fragment">
 <p>Ja, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:</p>
 <p><code>lm(y~x, data = data)</code></p>
+</div>
+<div class="fragment">
 <p>Nu skal vi have en der er mere kompleks:</p>
 <p><code>lm(y~x+z, data = data)</code></p>
+</div>
+<div class="fragment">
 <p>Den kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:</p>
 <p><span class="math inline">\(\hat{y} = ax + bz + c\)</span></p>
+</div>
+<div class="fragment">
 <p>Eller mere generelt:</p>
 <p><span class="math inline">\(\hat{y} = \beta_0 + \beta_1x + \beta_2z\)</span></p>
+</div>
 </div>
 </section>
 <section id="mer-hov" class="slide level2">
 <h2>Mer hov!</h2>
-<p>Mors rygning under graviditeten:</p>
+<p>Mors rygning under graviditeten</p>
+<div class="fragment">
 <p>smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)</p>
+</div>
+<div class="fragment">
 <p>Det er jo ikke kontinuært. Hvordan så?</p>
+</div>
+<div class="fragment">
 <p><code>lm</code> klarer det fint. Vi skal blot huske at fortælle funktionen at <code>smoke</code> er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen <code>factor()</code></p>
+</div>
+<div class="fragment">
 <p>Men så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)</p>
+</div>
 </section>
 <section id="kategoriske-variable" class="slide level2">
 <h2>Kategoriske variable</h2>
@@ -3566,43 +3589,10 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="opgave" class="slide level2">
-<h2>Opgave</h2>
-<p>Vi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.</p>
-<p>Der er varibler: KØN (1=kvinde, 0= mand) FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten BLODTRYK: Systolisk blodtryk (i mmHg)</p>
-<p>De første 6 observationer, og nogle deskriptive størrelser:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-    KØN FEDME BLODTRYK
-  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-1     0  1.31      130
-2     0  1.31      148
-3     0  1.19      146
-4     0  1.11      122
-5     0  1.34      140
-6     0  1.17      146</code></pre>
-</div>
-</div>
-<p><code>mean(BLODTRYK[KØN==0])</code> 127.9545 <code>mean(BLODTRYK[KØN==1])</code> 126.3103 <code>SD(BLODTRYK[KØN==0])</code> 16.59077 <code>mean(BLODTRYK[KØN==1])</code> 19.41893</p>
-<ol type="a">
-<li>Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?</li>
-</ol>
-<p>Der er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte. Det betyder at vi kan beregne referenceintervallet for kvinder ved:</p>
-<p><span class="math inline">\(\mu \pm 1.96\sigma\)</span></p>
-<p>eller 126.3103 + c(-1,1)<em>1.96</em>19.41893</p>
-<ol start="2" type="a">
-<li>undersøg om blodtrykket er ens for de to køn ved en t-test.</li>
-</ol>
-<p>Det vi tester er om forskellen i blodtryk er 0. Forskellen i middelværdi er 127.9545-126. = 1.6442</p>
-<p>Vi kan ikke antage at standardafvigelsen er ens i de to grupper. Det kan vi se at den ikke er. Og vi skal under alle omstændigheder bruge SEM. Så vi beregner SEM for de to grupper:</p>
-<p>SEM_0 = 16.59077/sqrt(44) SEM_1 = 19.41893/sqrt(58)</p>
-<p>Den poolede SE er så: sqrt(2.501153^2 + 2.54983^2) = 3.57175</p>
-<p>Så kan vi beregne et konfidensinterval for forskellen: 1.6442 + c(-1,1)<em>1.96</em>3.57175 = -5.35643 ; 8.64483</p>
-<p>O er indeholdt, og vi kan konkludere på et 95% KI at der ikke er forskel på det systoliske blodtryk de to grupper imellem.</p>
-<ol start="3" type="a">
-<li>der bliver lavet en analyse, der giver dette output:</li>
-</ol>
+<section id="prædiktion" class="slide level2">
+<h2>Prædiktion</h2>
+<p>Hvad forventer vi fødselsvægten vil være, hvis mor har røget 20 cigaretter om dagen og drukket 16 genstande alkohol om ugen under graviditeten?</p>
+<div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
 <div id="kdlnsygvzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4058,6 +4048,547 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 <table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
+<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">3613.623</td>
+<td class="gt_row gt_left" headers="Std. Error">7.108</td>
+<td class="gt_row gt_left" headers="t value">508.372</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">factor(smoke)2</td>
+<td class="gt_row gt_left" headers="Estimate">-127.377</td>
+<td class="gt_row gt_left" headers="Std. Error">15.757</td>
+<td class="gt_row gt_left" headers="t value"></td>
+<td class="gt_row gt_left" headers="Pr(>|t|)"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">factor(smoke)3</td>
+<td class="gt_row gt_left" headers="Estimate">-194.897</td>
+<td class="gt_row gt_left" headers="Std. Error">17.519</td>
+<td class="gt_row gt_left" headers="t value">-11.125</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">alco</td>
+<td class="gt_row gt_left" headers="Estimate">1.045</td>
+<td class="gt_row gt_left" headers="Std. Error">6.075</td>
+<td class="gt_row gt_left" headers="t value">0.172</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.863</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</section>
+<section id="opgave" class="slide level2">
+<h2>Opgave</h2>
+<p>Vi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.</p>
+<p>Der er varibler: KØN (1=kvinde, 0= mand) FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten BLODTRYK: Systolisk blodtryk (i mmHg)</p>
+<p>De første 6 observationer, og nogle deskriptive størrelser:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+    KØN FEDME BLODTRYK
+  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1     0  1.31      130
+2     0  1.31      148
+3     0  1.19      146
+4     0  1.11      122
+5     0  1.34      140
+6     0  1.17      146</code></pre>
+</div>
+</div>
+<p><code>mean(BLODTRYK[KØN==0])</code> 127.9545 <code>mean(BLODTRYK[KØN==1])</code> 126.3103 <code>SD(BLODTRYK[KØN==0])</code> 16.59077 <code>mean(BLODTRYK[KØN==1])</code> 19.41893</p>
+<ol type="a">
+<li>Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?</li>
+</ol>
+<p>Der er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte. Det betyder at vi kan beregne referenceintervallet for kvinder ved:</p>
+<p><span class="math inline">\(\mu \pm 1.96\sigma\)</span></p>
+<p>eller 126.3103 + c(-1,1)<em>1.96</em>19.41893</p>
+<ol start="2" type="a">
+<li>undersøg om blodtrykket er ens for de to køn ved en t-test.</li>
+</ol>
+<p>Det vi tester er om forskellen i blodtryk er 0. Forskellen i middelværdi er 127.9545-126. = 1.6442</p>
+<p>Vi kan ikke antage at standardafvigelsen er ens i de to grupper. Det kan vi se at den ikke er. Og vi skal under alle omstændigheder bruge SEM. Så vi beregner SEM for de to grupper:</p>
+<p>SEM_0 = 16.59077/sqrt(44) SEM_1 = 19.41893/sqrt(58)</p>
+<p>Den poolede SE er så: sqrt(2.501153^2 + 2.54983^2) = 3.57175</p>
+<p>Så kan vi beregne et konfidensinterval for forskellen: 1.6442 + c(-1,1)<em>1.96</em>3.57175 = -5.35643 ; 8.64483</p>
+<p>O er indeholdt, og vi kan konkludere på et 95% KI at der ikke er forskel på det systoliske blodtryk de to grupper imellem.</p>
+<ol start="3" type="a">
+<li>der bliver lavet en analyse, der giver dette output:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="gbpmsxtogd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#gbpmsxtogd table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gbpmsxtogd thead, #gbpmsxtogd tbody, #gbpmsxtogd tfoot, #gbpmsxtogd tr, #gbpmsxtogd td, #gbpmsxtogd th {
+  border-style: none;
+}
+
+#gbpmsxtogd p {
+  margin: 0;
+  padding: 0;
+}
+
+#gbpmsxtogd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gbpmsxtogd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gbpmsxtogd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gbpmsxtogd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gbpmsxtogd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gbpmsxtogd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gbpmsxtogd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gbpmsxtogd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gbpmsxtogd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gbpmsxtogd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gbpmsxtogd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gbpmsxtogd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gbpmsxtogd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gbpmsxtogd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gbpmsxtogd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gbpmsxtogd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gbpmsxtogd .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#gbpmsxtogd .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#gbpmsxtogd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gbpmsxtogd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gbpmsxtogd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gbpmsxtogd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gbpmsxtogd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gbpmsxtogd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gbpmsxtogd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gbpmsxtogd .gt_left {
+  text-align: left;
+}
+
+#gbpmsxtogd .gt_center {
+  text-align: center;
+}
+
+#gbpmsxtogd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gbpmsxtogd .gt_font_normal {
+  font-weight: normal;
+}
+
+#gbpmsxtogd .gt_font_bold {
+  font-weight: bold;
+}
+
+#gbpmsxtogd .gt_font_italic {
+  font-style: italic;
+}
+
+#gbpmsxtogd .gt_super {
+  font-size: 65%;
+}
+
+#gbpmsxtogd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gbpmsxtogd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gbpmsxtogd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gbpmsxtogd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gbpmsxtogd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gbpmsxtogd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gbpmsxtogd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gbpmsxtogd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gbpmsxtogd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
 <tr class="gt_heading header">
 <th colspan="5" class="gt_heading gt_title gt_font_normal"><strong>Call:</strong></th>
 </tr>
@@ -4102,24 +4633,24 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="thcdtlvqjt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lvqjtkywhn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#thcdtlvqjt table {
+#lvqjtkywhn table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#thcdtlvqjt thead, #thcdtlvqjt tbody, #thcdtlvqjt tfoot, #thcdtlvqjt tr, #thcdtlvqjt td, #thcdtlvqjt th {
+#lvqjtkywhn thead, #lvqjtkywhn tbody, #lvqjtkywhn tfoot, #lvqjtkywhn tr, #lvqjtkywhn td, #lvqjtkywhn th {
   border-style: none;
 }
 
-#thcdtlvqjt p {
+#lvqjtkywhn p {
   margin: 0;
   padding: 0;
 }
 
-#thcdtlvqjt .gt_table {
+#lvqjtkywhn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4145,12 +4676,12 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_caption {
+#lvqjtkywhn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#thcdtlvqjt .gt_title {
+#lvqjtkywhn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4162,7 +4693,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#thcdtlvqjt .gt_subtitle {
+#lvqjtkywhn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4174,7 +4705,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#thcdtlvqjt .gt_heading {
+#lvqjtkywhn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4186,13 +4717,13 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_bottom_border {
+#lvqjtkywhn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_col_headings {
+#lvqjtkywhn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4207,7 +4738,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_col_heading {
+#lvqjtkywhn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4227,7 +4758,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#thcdtlvqjt .gt_column_spanner_outer {
+#lvqjtkywhn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4239,15 +4770,15 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#thcdtlvqjt .gt_column_spanner_outer:first-child {
+#lvqjtkywhn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#thcdtlvqjt .gt_column_spanner_outer:last-child {
+#lvqjtkywhn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#thcdtlvqjt .gt_column_spanner {
+#lvqjtkywhn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4259,11 +4790,11 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#thcdtlvqjt .gt_spanner_row {
+#lvqjtkywhn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#thcdtlvqjt .gt_group_heading {
+#lvqjtkywhn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4289,7 +4820,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#thcdtlvqjt .gt_empty_group_heading {
+#lvqjtkywhn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4304,15 +4835,15 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#thcdtlvqjt .gt_from_md > :first-child {
+#lvqjtkywhn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#thcdtlvqjt .gt_from_md > :last-child {
+#lvqjtkywhn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#thcdtlvqjt .gt_row {
+#lvqjtkywhn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4331,7 +4862,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#thcdtlvqjt .gt_stub {
+#lvqjtkywhn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4344,7 +4875,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#thcdtlvqjt .gt_stub_row_group {
+#lvqjtkywhn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4358,15 +4889,15 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#thcdtlvqjt .gt_row_group_first td {
+#lvqjtkywhn .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#thcdtlvqjt .gt_row_group_first th {
+#lvqjtkywhn .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#thcdtlvqjt .gt_summary_row {
+#lvqjtkywhn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4376,16 +4907,16 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#thcdtlvqjt .gt_first_summary_row {
+#lvqjtkywhn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_first_summary_row.thick {
+#lvqjtkywhn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#thcdtlvqjt .gt_last_summary_row {
+#lvqjtkywhn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4395,7 +4926,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_grand_summary_row {
+#lvqjtkywhn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4405,7 +4936,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#thcdtlvqjt .gt_first_grand_summary_row {
+#lvqjtkywhn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4415,7 +4946,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_last_grand_summary_row_top {
+#lvqjtkywhn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4425,11 +4956,11 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_striped {
+#lvqjtkywhn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#thcdtlvqjt .gt_table_body {
+#lvqjtkywhn .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4438,7 +4969,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_footnotes {
+#lvqjtkywhn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4452,7 +4983,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_footnote {
+#lvqjtkywhn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4461,7 +4992,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#thcdtlvqjt .gt_sourcenotes {
+#lvqjtkywhn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4475,7 +5006,7 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#thcdtlvqjt .gt_sourcenote {
+#lvqjtkywhn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4483,72 +5014,72 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#thcdtlvqjt .gt_left {
+#lvqjtkywhn .gt_left {
   text-align: left;
 }
 
-#thcdtlvqjt .gt_center {
+#lvqjtkywhn .gt_center {
   text-align: center;
 }
 
-#thcdtlvqjt .gt_right {
+#lvqjtkywhn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#thcdtlvqjt .gt_font_normal {
+#lvqjtkywhn .gt_font_normal {
   font-weight: normal;
 }
 
-#thcdtlvqjt .gt_font_bold {
+#lvqjtkywhn .gt_font_bold {
   font-weight: bold;
 }
 
-#thcdtlvqjt .gt_font_italic {
+#lvqjtkywhn .gt_font_italic {
   font-style: italic;
 }
 
-#thcdtlvqjt .gt_super {
+#lvqjtkywhn .gt_super {
   font-size: 65%;
 }
 
-#thcdtlvqjt .gt_footnote_marks {
+#lvqjtkywhn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#thcdtlvqjt .gt_asterisk {
+#lvqjtkywhn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#thcdtlvqjt .gt_indent_1 {
+#lvqjtkywhn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#thcdtlvqjt .gt_indent_2 {
+#lvqjtkywhn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#thcdtlvqjt .gt_indent_3 {
+#lvqjtkywhn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#thcdtlvqjt .gt_indent_4 {
+#lvqjtkywhn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#thcdtlvqjt .gt_indent_5 {
+#lvqjtkywhn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#thcdtlvqjt .katex-display {
+#lvqjtkywhn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#thcdtlvqjt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lvqjtkywhn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

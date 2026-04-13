@@ -393,6 +393,7 @@ Pr(>|t|) er p-værdien: Risikoen for at vi afviser $H_0$, selvom den faktisk er 
 
 Typisk: Større eller mindre end 0.05. 
 
+Tæt sammenhæng mellem t-value og p-value! 
 ::::
 
 
@@ -402,23 +403,24 @@ Typisk: Større eller mindre end 0.05.
 
 De der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.
 
+:::: {.fragment}
 Husk: $\text{t value} = \frac{\text{Estimate}}{\text{Std. Error}}$
-
-
+::::
+:::: {.fragment}
 p-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:  
 $\frac{\text{Estimate}}{\text{Std. Error}}$,  
 og ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)
-
+::::
 ::::
 
 . . . 
 
-:::: evensmaller
+:::: tiny
 Vi kan faktisk godt beregne p-værdien. Den er givet ved: `2*(1-pt(abs(`t value`), df))`
 
 `pt` er `pnorm()` blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.
 
-Men det behøver vi ikke - test-værdien er rigelig.
+Men det behøver vi ikke - test-værdien er rigeligt.
 
 ::::
 
@@ -447,7 +449,7 @@ Vi får som regel lov at antage normalitet, og derfor:
 $\text{estimate} \pm 1.96\cdot \text{Std. Error}$
 
 . . . 
-
+ 
 Skal vi være helt korrekte, skal vi beregne den kritiske værdi ud fra t-fordelingen, og kende antallet af frihedsgrader.
 
 Så ville det blive:
@@ -521,45 +523,54 @@ Så der er to forklarende variable
 
 Når vi har mere end en forklarende variabel - kalder vi det for multipel lineær regression. 
 
-. . . 
+:::: {.fragment}
 
 Jeg har bemærket at modelbesvarelser kalder det hele for multipel lineær regression. Det kræver sådan set at der er mere end en forklarende variabel. Her har vi to, så det er faktisk multipelt.
-
-. . . 
+::::
+:::: {.fragment}
 
 Hvad var det?
-
+::::
+:::: {.fragment}
 Ja, det er når der er mere end en forklarende variabel. Indtil videre har vi set på:
 
 `lm(y~x, data = data)`
-
+::::
+:::: {.fragment}
 Nu skal vi have en der er mere kompleks:
 
 `lm(y~x+z, data = data)`
-
+::::
+:::: {.fragment}
 Den kan vi ikke tegne eller plotte. Men ellers fungerer det fuldstændigt som før, vi får blot flere estimater, for nu er modellen jo:
 
 $\hat{y} = ax + bz + c$
-
+::::
+:::: {.fragment}
 Eller mere generelt:
 
 $\hat{y} = \beta_0 + \beta_1x + \beta_2z$
-
+::::
 
 ::::
 
 
 ## Mer hov!
 
-Mors rygning under graviditeten:
+Mors rygning under graviditeten
 
+:::: {.fragment}
 smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3 = 11+ cigaretter/dag)  
-
+::::
+:::: {.fragment}
 Det er jo ikke kontinuært. Hvordan så?
-
+::::
+:::: {.fragment}
 `lm` klarer det fint. Vi skal blot huske at fortælle funktionen at `smoke` er en kategorisk variabel. Det gør vi ved at pakke variablen ind i funktionen `factor()`
-
+::::
+:::: {.fragment}
 Men så bliver det heller ikke mere kompliceret (i de eksamensopgaver jeg har set)
+::::
 
 ## Kategoriske variable
 
@@ -773,7 +784,67 @@ Estimatet på alkoholindtagets påvirkning af fødselsvægten indikerer at den, 
 ::::
 ::::
 
+## Prædiktion
 
+Hvad forventer vi fødselsvægten vil være, hvis mor har røget 20 cigaretter om dagen og drukket 16 genstande alkohol om ugen under graviditeten?
+
+. . .
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "3613.623", "7.108", "508.372", "<2e-16***",
+"factor(smoke)2", "-127.377", "15.757", "", "",
+"factor(smoke)3", "-194.897", "17.519", "-11.125", "<2e-16***",
+"alco", "1.045", "6.075", "0.172", "0.863"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+      font = list(google_font("Courier Prime"), default_fonts()))
+```
+
+. . .
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
 
 ## Opgave
 

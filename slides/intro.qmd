@@ -15,26 +15,22 @@ filters:
 :::: {.fragment}
 Eksamensrelevant. 
 ::::
-
 :::: {.fragment}
 SEMS eksamenssæt har tre dele
 ::::
-
-
 ::: {.incremental}
 - Statistik
 - Epidemiologi
 - Medicinsk sociologi
 :::
-
 :::: {.fragment}
 Vi holder os til statistik...
 ::::
 
 
 ::: {.incremental}
-- Holde os meget tæt på typeopgaverne til SEMS-eksamen
-- Holde teorien på niveau af det der skal bruges i dem
+- _Meget_ tæt på typeopgaverne til SEMS-eksamen
+- Teori på niveau af det der skal bruges i dem
 - Måske en smule mere - for at binde tingene sammen
 :::
 
@@ -47,24 +43,20 @@ Så... Mere eksamensforberedelse end statistikkursus
 
 Der er typisk to opgaver - med delspørgsmål
 
-Beregning af konfidensintervaller og signifikans
-lineær regression og tolkning samt prediktion
-logistisk regression og tolkning
-powerberegninger
-Normalfordelingseksersits
-Sandsynligheder for kategoriske variable
-relativ risiko
-odds ratio 
-Og konfidensintervaller for dem. samt prediktion
-parret t-test
-beregning af SEM og konfidensintervaller for middelværdier
-Chi-i-anden test
-vurdering af konfidensinterval baseret på antal observationer.
+- Beregning af konfidensintervaller og signifikans (SEMS og KI for middelværdier)
+- Lineær regression, tolkning og prediktion
+- Logistisk regression, tolkning og prediktion
+- Powerberegninger
+- Normalfordelingseksersits
+- Sandsynligheder for kategoriske variable. RR, OR, konfidensintervaller og signifkans
+- Hypotesetest - primært parret t-test
+- Chi-i-anden test
+- Vurdering af konfidensinterval baseret på antal observationer. 
 
 ## Vi kører slides
 
-Fordi der er mere forklaring end kode.
+Fordi 
 
-Og fordi vi kan køre kode inde i slides, men ikke slides inde i kode
-
-|> i stedet for %>%
+- Der er mere forklaring end kode
+- Vi kan køre kode inde i slides, men ikke slides inde i kode
+- I ikke skal skrive ret megen kode til eksamen

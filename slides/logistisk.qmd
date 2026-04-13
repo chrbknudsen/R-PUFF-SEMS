@@ -1,6 +1,5 @@
 ---
-title: "Kategoriske udfald"
-subtitle: "Herunder logistisk regression"
+title: "Logistisk regression"
 format: 
   revealjs:
     logo: "kubdatalab.png"
@@ -10,657 +9,34 @@ filters:
   - webr
 ---
 
-## Kategoriske udfald
-
-Kategoriske variable er variable hvor observationerne kan falde i en af flere (mindst to) kategorier.
-
-Køn, rask/syg, død/levende, hvilken region har man folkeregisteradresse i.
-
-Der er ikke nødvendigvis en orden. Det er ikke bedre at være mand end at være kvinde.
-
-Men der kan være - socialklasse eg.
-
-Der kan vi ikke beregne gennemsnit. Så hvad gør vi så?
-
-. . . 
-
-Vi tæller.
-
-## Kategoriske udfald
-
-Hvor mange er der af hver?
-
-Og hvor stor en andel udgør de så af de samlede hele.
-
-Er der forskel på de andele grupper imellem?
-
-Kan vi sige noget om hvad sandsynligheden for at være i den ene gruppe kontra den anden?
-
-Og hvor sikre er vi på vores estimater?
-
-## Kategoriske udfald
-
-Så vi skal kigge på:
-
-- Proportioner
-- Relativ risiko
-- Odds ratio
-- Chi i anden
-
-Og lidt senere den logistisk regression
-
-
-
-## En opgave
-:::: {.columns}
-:::: {.column}
-:::: smaller
-Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig 
-af om der deles sprøjter med andre narkomaner.  
-I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.  
-I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.
-
-Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?
-
-::::
-
-::::
-:::: {.column}
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-
-::::
-::::
-
-:::: notes
-Hvor mange positive er der? Hvor mange er der ialt? Det er estimatet.
-::::
-
-## Hvor sikre er vi på det tal?
-
-Opgaven fortsætter: 
-
-Angiv også et 95% konfidensinterval på det estimat.
-
-Estimatet er en andel. Også kaldet en proportion
-
-Metoden har vi set før.
-
-. . . 
-
-$estimat \pm 1.96 \cdot SE$ 
-
-. . . 
-
-Så - hvordan beregner vi en standardfejl på estimatet af en proportion?
-
-. . . 
-
-$SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
-
-## Hvor sikker var vi?
-
-:::: {.columns}
-:::: {.column}
-
-:::: smaller
-Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?
-
-Proportionen beregnede vi til 0.2015504
-
-Standardfejlen er givet ved:
-
-$SE_{prop} = \sqrt{\frac{p\cdot(1-p)}{n}}$
-
-Der var 258 observationer i stikprøven
-
-$estimat \pm 1.96 \cdot SE$ 
-
-::::
-
-::::
-:::: {.column}
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-::::
-::::
-
-## Videre med samme opgave
-:::: smaller
-Undersøg hypotesen om at risikoen for at få TB for stiknarkomaner ikke afhænger af om 
-man deler sprøjte eller ej. Argumenter ud fra relevant KI.
-:::: 
-
-:::: evensmaller
-Hvis I har fået fat i modelbesvarelsen for denne opgave - bemærk at der er en regnefejl, fordi nogen har byttet om på n for de to grupper.
-::::
-
-Hvordan gør vi det? Eller: Hvad vil  det egentlig sige at risikoen for TB er uafhængig af om der deles sprøjter?
-
-:::: smaller
-
-:::: {.fragment}
-At: I virkeligheden er forskellen på de to prævalenser 0
-:::: 
-
-:::: {.fragment}
-Den ene prævalens divideret med den anden er 1 (for så er de ens)
-::::
-
-:::: {.fragment}
-I stedet for prævalenser kan vi beregne odds. Og se om odds er ens.
-::::
-
-:::: {.fragment}
-Kan vi undersøge om fordelingen af TB er forskellig i de to grupper?
-::::
-
-:::: {.fragment}
-Vi tager dem en for en
-::::
-
-::::
-
-
-
-## Forskel på prævalenser
-
-:::: smaller
-Er forskellen i virkeligheden 0?
-
-:::: {.fragment}
-Eller - vi opstiller en NULL-hypotese, $H_0: p_{TB:deler} - p_{TB:delerikke} = 0$
-
-Den alternative hypotese er så, at der er forskel på prævalensen.
-::::
-
-:::: {.fragment}
-Samme metode som før: 
-
-$estimat_{diff} \pm 1.96*SE_{diff}$
-
-Er 0 indeholdt i det 95% KI, kan vi ikke afvise NULL-hypotesen
-::::
-
-:::: {.fragment}
-Så... Hvordan beregner vi $SE_{diff}$?
-::::
-:::: {.fragment}
-
-$SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
-::::
-:::: {.fragment}
-Og standardfejl på de enkelte proportioner var: $SE = \sqrt{\frac{p(1-p)}{n}}$
-::::
-::::
-
-## Så kan vi regne
-
-
-:::: {.columns}
-:::: {.column}
-- Prævalens af TB blandt de 97 der delte sprøjter: 24.7%
-- Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%
-- $SE = \sqrt{\frac{p(1-p)}{n}}$
-- $SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
-
-::::
-:::: {.column}
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-::::
-::::
-
-## Kritisk værdi
-:::: smaller
-
-Har man et estimat. Og en standardfejl. Så kan man springe konfidensintervallet over.
-
-$|\frac{\text{estimat}}{SE}| > \text{kritisk værdi}$
-
-Når vi spørger om værdien i virkeligheden kan være 0, og kriteriet er 5% signifikans (eller 95%). Så er den kritiske værdi 1.96.
-
-Venstresiden fortæller hvor mange standardfejl estimatet ligger fra 0. Og så er spørgsmålet om det er langt nok væk.
-
-Så vi kan ofte springe konfidensintervallet over, konstatere at vi har en _test-værdi_ $|\frac{\text{estimat}}{SE}|$ på hvad den nu er, og at det er større end (eller mindre end) den kritiske værdi, og vi derfor kan afvise NULL-hypotesen (eller at vi ikke kan afvise den).
-
-::::
-
-## Forholdet mellem de to prævalenser?
-
-Den hypotese vi så tester er:
-
-$H_0: \frac{p_{deler}}{p_{deler ikke}} = 1$
-
-Er de (tilstrækkeligt) forskellige - kan vi konkludere at der er forskel i risikoen.
-
-Vi kalder også prævalenserne for proportioner. Og i jeres branche: Risk, og derfor Riskratio, eller RR.
-
-Metoden er den samme som før. Estimatet +/- 1.96 SE.
-
-Sådan da...
-
-## Komplikationer
-
-Hvordan beregner vi SE?
-
-Det er bøvlet - og derfor var metoden med KI på differencen den første vi så på (og den foretrukne).
-
-Vi har ikke en let formel for standardfejlen på en riskratio.
-
-Det vi har er en formel for standardfejlen af logaritmen af RR.
-
-Og derfor: 
-
-$\log{RR} \pm 1.96 \cdot SE_{\log{RR}}$
-
-## SE for log(RR)
-:::: smaller
-For det generelle forhold:
-
-|                | udfald 1 | udfald 2 |
-|----------------|-----|-----|
-| eksponeret     | a   | b    |
-| ikke eksponeret     | c  | d | 
-
-Hvor risikoen for udfald 1 hvis man er eksponeret er: $\frac{a}{a+b}$, og hvis man ikke er eksponeret: $\frac{c}{c+d}$
-
-
-Gælder at:
-
-
-$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
-
-
-::::
-
-## Og så er vi ca. klar til at regne
-
-:::: {.columns}
-:::: {.column}
-
-:::: {.smaller}
-
-```{r}
-library(tidyverse)
-library(gt)
-tribble(~TB, ~`deler`, ~`deler ikke`,
-"TB-positiv", 24, 28,
-"TB-negativ", 73, 133 ) |> gt()
-```
-
-:::: {.smaller}
-
-$SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
-
-::::
-
-
-
-::::
-
-::::
-:::: {.column}
-
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-
-::::
-::::
-
-
-## Hvad så vi?
-
-:::: smaller
-
-RR var 1.42268. Det vil vi formulere som at "risikoen er 42% højere" for at være TB+ hvis man deler sprøjter.
-
-Men. KI for RR var [0.877; 2.307]
-
-Det indeholder 1. Og derfor er der ikke statistisk signifikant forskel på risikoen for at teste positiv for TB hvis man deler sprøjter.
-
-Vi kunne også se på KI for log(RR), der var [-0.131; 0.836]. Det indeholder 0. Også derfor er der ikke (statistisk signifikant forskel).
-
-Hvorfor? Fordi log(1) = 0.
-
-Vi kunne også få teststørrelsen ved $\frac{\log(RR)}{SE(log(RR))}$. Den var 1.429. Mindre end den kritiske værdi.
-::::
-
-## Odds - hvad er det?
-
-
-Blandt de 97 narkomaner der delte sprøjter var 24 TB+.
-
-Det gav en risiko for at være TB+ på 24/97.
-
-Eller sandsynlighed. Eller prævalens af TB+ blandt... eller risiko for at være TB+ hvis...
-
-Det kan vi udtrykke anderledes - ved odds.
-
-Det er antallet af positive udfald divideret med antallet af negative udfald.
-
-Eller: 24/73
-
-Hvorfor? Matematikken bliver en del mere medgørlig hvis vi regner i odds.
-
-## Odds - fordelene
-
-Hvis sandsynligheden for et positivt udfald er 10%
-
-. . . 
-
-Er der, ved 10 observationer 1 positivt og 9 negative udfald.
-
-. . . 
-
-Som sandsynligheder: 0.1 og 0.9 hhv.
-
-. . . 
-
-Som odds: 1/9 og 9/1 hhv.
-
-Det er intuitivt hinandens modsætninger.
-
-Og:
-
-. . . 
-
-```{r echo  = TRUE}
-log(1/9)
-```
-
-```{r echo = TRUE}
-log(9/1)
-```
-
-. . . 
-
-Hvor _er_ det bare pænt og symmetrisk! 
-
-
-## Hvad tester vi så med odds?
-
-
-(Næsten) det samme som med risiko.
-
-Er odds for at være TB+ når man deler sprøjter den samme som odds for at være TB+ når man ikke deler sprøjter?
-
-Eller:
-
-Kan vi afvise at:
-
-$\frac{\text{odds}_{\text{TB+:deler}}}{\text{odds}_\text{TB+:deler ikke}} = 1$
-
-::::evensmaller
-Hov! Det var Odds-Ratio, OR, der dukkede op der!
-::::
-
-Samme teknik som før:
-
-$\text{estimat} \pm 1.96\cdot\text{SE}$
-
-Hvad er SE?
-
-## Lignende problem som med SE for RR
-:::: smaller
-Vi har ikke en pæn formel for SE(OR). Men vi har en for SE(log(OR))
-
-For det generelle forhold:
-
-|                | udfald 1 | udfald 2 |
-|----------------|-----|-----|
-| eksponeret | a  | b  |
-| ikke eksponeret     | c  | d | 
-
-:::: {.fragment}
-
-Får vi: 
-$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
-
-::::
-
-:::: {.fragment}
-Sammenlign med $SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
-
-Og se hvorfor jeg mener at matematikken bliver enklere med odds...
-::::
-
-::::
-
-
-## Så er vi klar til at regne
-
-:::: {.columns}
-:::: {.column}
-
-```{r}
-library(tidyverse)
-library(gt)
-tribble(~TB, ~`deler`, ~`deler ikke`,
-"TB-positiv", 24, 28,
-"TB-negativ", 73, 133 ) |> gt()
-```
-
-:::: {.smaller}
-
-$SE(log(OR)) = \sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
-
-$\log{OR} \pm 1.96 \cdot SE(\log{OR})$
-
-::::
-
-::::
-
-
-:::: {.column}
-
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-
-::::
-::::
-
-
-## Hvad så vi
-:::: smaller
-OR var 1.56
-
-Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.
-
-Men 95% konfidensintervallet på log-OR var [-0.170; 1.061]
-
-Og da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.
-
-Vi kunne også finde testværdien: $\frac{\log{OR}}{SE(\log{OR})} = 1.420$. Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise $H_0$.
-
-95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise $H_0$
-
-Vær skarpe her. Odds er noget andet end risiko.
-
-::::
-
-## Fra sandsynlighed til odds
-:::: evensmaller
-Hvordan beregner vi odds hvis vi kender sandsynligheden?
-
-$\text{odds} = \frac{p}{1-p}$
-
-Hvordan beregner vi sandsynligheden hvis vi kender odds:
-
-$p = \frac{\text{odds}}{1 + \text{odds}}$
-
-En særlig funktion vi kommer til at møde igen:
-
-$\text{logit}(p) = \log\left(\frac{p}{1 - p}\right)$
-
-logit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.
-
-Den omvendte kan også være nyttig. Hvis x = logit(p): 
-
-$p = \frac{e^x}{1 + e^x}$
-
-Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.
-
-::::
-
-## $\chi^2$ tilgangen
-:::: smaller
-Mere generel - kan håndtere mere end et udfald. 
-
-Sjælden til eksamen - kræver tasteri, og det er ikke hvad I bliver testet i.
-
-Tester forskellen på den fordeling vi ser - og den vi ville forvente
-
-Hvis vi kun kender totalerne 
-
-|                | TB+ | TB- | Total |
-|----------------|-----|-----|-------|
-| Deler sprøjter | ?  | ?  | 97    |
-| Deler ikke     | ?  | ? | 161   |
-| **Total**      | 52  | 206 | 258   |
-
-
-Og fordelingen af TB+ og TB- er den samme blandt de der deler sprøjter, som de der ikke deler sprøjter
-
-Hvor mange forventer vi så har TB blandt de der deler sprøjter?
-
-::::
-
-## Regne-regne
-
-52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB. 
-
-. . . 
-
-Så må der være $\frac{52}{258}\cdot97 \approx 20$ der tester positiv.
-
-. . . 
-
-Det er hvad vi forventer. Men vi ser at der er 24. 
-
-. . . 
-
-Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se $\frac{52}{258}\cdot161 \approx 32$ der tester positiv.
-
-. . . 
-
-Det er hvad vi forventer. Men vi ser at der kun er 28. 
-
-Vi laver de samme beregninger på de to andre celler.
-
-## Regne-regne
-
-:::: smaller
-$\chi^2$ testens $H_0$ er, at der ikke er forskel på fordelingen af TB-status i de to grupper.
-
-Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi 
-forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.
-
-Styrken er at den kan håndtere flere udfald end to. 
-
-Svagheden er at 
-den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.
-
-Og så forudsætter $\chi^2$ testen at der er mindst 5 _forventede_ observationer i hver "celle".
-
-Det kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at 
-vi bør slå korrektionen fra.
-::::
-
-## Hvordan gør vi?
-
-En smule bøvlet - for vi skal have data ind i en matrix.
-
-
-:::: {.columns}
-:::: {.column}
-```{r echo = TRUE, eval = FALSE}
-tab <- matrix(
-  c(24, 73,
-    28, 133),
-  nrow = 2,
-  byrow = TRUE
-)
-
-dimnames(tab) <- list(
-  Exposure = c("Deler", "Deler_ikke"),
-  TB = c("Ja", "Nej")
-)
-```
-
-
-
-::::
-:::: {.column}
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-
-```
-::::
-::::
-
-
-
-
-
-
-## Sammenfattende
-
-Det er ca. altid:
-
-Estimat +/- 1.96*standardfejlen
-
-Undertiden er estimatet logaritmen til det vi er interesseret i. Så er det også standardfejlen på logaritmen til estimatet.
-
-Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet interval - så er det en anden kritisk værdi. Hint: qnorm. 
-
-Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.
-
-
-## Flere øvelser
-
-
 ## Logistisk regression
 :::: smaller
-Vi så den lineære regression. Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.
+Vi så den lineære regression.
 
+:::: {.fragment}
+ Den forklarede hvordan en numerisk, kontinuær variabel afhang af andre variable.
+::::
+:::: {.fragment}
 Den logistiske regression forklarer hvordan en kategorisk variabel afhænger af andre variable.
-
+::::
+:::: {.fragment}
 I den lineære regression fittede vi
-
+::::
+:::: {.fragment}
 $y = \beta_0  + \beta_1x$
 
 Den forventede værdi af y, givet x.
-
+::::
+:::: {.fragment}
 i den logistiske regression er det:
 
 $log(\frac{p}{1-p}) = \beta_0 + \beta_1x$
-
+::::
+:::: {.fragment}
 Også kaldet logit-funktionen.
 
-Så - givet x, får vi log-odds for et bestemt udfald.
+Så - den forventede log-odds for et bestemt udfald, givet x.
+::::
 
 ::::
 
@@ -668,22 +44,29 @@ Så - givet x, får vi log-odds for et bestemt udfald.
 
 
 ## Hvordan laves en logistisk regression?
-:::: smaller
-Den logistiske regression lignede ret meget den lineære. Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
+:::: {.smaller}
+Den logistiske regression ligner ret meget den lineære.  
+Den beskidte hemmelighed er, at den faktisk er lineær - hvis vi regner på log-odds.
 
-Det er dog ikke "OLS" vi bruger til at regne inde bag ved, men "Maximum Likelihood" i stedet. Det bekymrer vi os ikke om her.
+:::: {.fragment}
+Inde bagved er det dog ikke OLS vi bruger, men en "Maximum Likelihood" funktion. Det behøver vi ikke bekymre os om, det klarer R.
+::::
+:::: {.fragment}
+
 
 Det er endnu et eksempel på at vi i en del sammenhænge arbejder med log-odds fordi det gør matematikken enklere. 
-
-Det betyder også at vi i R kan betragte en logistisk regression som en mere generel udgave af den almindelige (multiple) lineære regression.
-
+::::
+:::: {.fragment}
+Det betyder også at vi i R kan betragte en logistisk regression som en mere _generel_ udgave af den almindelige (multiple) lineære regression.
+::::
+:::: {.fragment}
 Funktionen er derfor `glm()` i stedet or `lm()`.
-
+::::
 ::::
 
 ## Hvordan ser det ud i praksis?
 :::: evensmaller 
-Har vi et datasæt med følgende variable:
+Har vi et datasæt med følgende variable (det virker bekendt):
 
 **episodes**: Antal episoder med feber under graviditeten (før interview)  
 **death**: Fosterdød (ja = 1, nej = 0)  
@@ -711,10 +94,10 @@ glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, 
 Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?
 
 :::: {.fragment}
-Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men nok ikke med middelværdi og standardafvigelse
+Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men dog ikke med middelværdi og standardafvigelse
 ::::
 :::: {.fragment}
-Indpakket i "I()" som specificerer at `glm` skal behandle `(mage-25)/10` som en variabel. Uden, ville `glm` behandle `25` som en variabel.
+Indpakket i "I()" som specificerer at `glm` skal behandle `(mage-25)/10` som en variabel. Uden, ville `glm` forsøge at behandle `25` som en variabel.
 ::::
 :::: {.fragment}
 episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feberepisoder, ikke 1.5 så helt kontinuært er den ikke. Men vi behandler den som kontinuært.
@@ -723,7 +106,7 @@ episodes er en kontinuærte variabel. Sådan da, for man har nok 1 eller 2 feber
 smoke er den kategoriske variabel der beskriver rygevaner.
 ::::
 :::: {.fragment}
-Men smoke er gemt som tal, så den er pakket ind i `factor()` for at behandle den som en kategorisk variabel. 
+Men smoke er gemt som tal, så den er pakket ind i `factor()` for at behandle den som en kategorisk variabel. Helt som vi gjorde tidligere i den lineære regression.
 :::: 
 
 :::: {.fragment}
@@ -935,94 +318,8 @@ Vi exponentierer!
 ::::
 
 
-## Prædiktion
-:::: evensmaller
-Hvad er odds for forsterdød for en 37 årig mor, der har røget >11 cigaretter/dag, og har haft 3 feberepisoder?
-
-Hvordan gør vi det?
-
-:::: {.fragment}
-
-Vi indsætter i modellen. 
-::::
-
-::::{.fragment}
-Så vi skal bruge estimaterne:
-
-```{r}
-library(tidyverse)
-library(gt)
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
-"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
-"I((mage-25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
-"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
-"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
-"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `z value` = "z value",
-    `Pr(>|z|)` = "Pr(>|z|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-      font = list(google_font("Courier Prime"), default_fonts()))
-```
-
-::::
 
 
-
-:::: {.fragment}
-:::: {.reallysmall}
-$\text{logodds} = -5.0526 + 0.7423\frac{\text{mage} - 25}{10} - 0.0752\cdot\text{episodes} + 0.2063\cdot\text{smoke:2} + 0.4364\cdot\text{smoke:3}$
-::::
-::::
-:::: {.fragment}
-mage = 37, episodes = 3, smoke:2 = 0, smoke:3 = 1
-::::
-:::: {.fragment}
-logodds = -3.95104
-::::
-:::: {.fragment}
-odds = exp(-3.95104) = 0.01923469.
-::::
-::::
-
-
-## Hvad skal vi kunne?
-
-Vi skal kunne genkende en logistisk regression
-vi skal kunne pege på alle dele af outputtet og forklare hvad det er, og hvad tallet betyder.
-Vi skal kunne tage outputtet af modellen/regressionen - og beregne den forudsagte værdi af estimatet
-for et givet sæt af observationer.
 
 
 ## teoridelen er done. Nu er det opgaver!
