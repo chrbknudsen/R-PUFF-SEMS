@@ -1663,7 +1663,7 @@
     "href": "slides/SEM.html#hoppeeksamensopgave",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hoppeeksamensopgave",
-    "text": "Hoppeeksamensopgave\nman har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen gender: Køn, 1 dreng, 2 pige age: barnets alder height: barnets højde i cm cohR: Længde af hop på højre ben (cm) cohL: Længde af hop på venstre ben (cm) diff: forskel på chohR og cohL\nVi får også oplyst de første fire observatiner:\n\n\n# A tibble: 4 × 7\n   idnr gender   age height  cohR  cohL  diff\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1      1    10  148.2 185.9 207.3 -21.4\n2     2      2     9  136.2 257.4 223    34.4\n3     3      1     9  139.4 203.5 250.3 -46.8\n4     4      2     9  137.6 347   388.4 -41.4\n\n\nOg noget summarisk data: &gt;mean(cohR) 270.441 &gt;mean(cohL) 265.3871 &gt;mean(diff) 5.053815 &gt;sd(cohR) 74.69524 &gt;sd(cohL) 79.73807 &gt;sd(diff) 37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?\nDet er en parret t-test hvor vi ser på differencen. Vi skal bruge SEM.\nSEM = 37.87201/sqrt(249) = 2.400041\nmiddel/sem = 5.053815/2.400041 = 2.10572 Det udtrykker hvor mange s.e. den observerede differens ligger fra 0. Det er mere end 1.96, så forskellen er signifikant.\nVi finder p-værdien ved 2*pt(-abs(2.10572), df = 248)\n\ngennemsnit og spredning for diff for pigerne beregnes til 12.51 og 36.15\n\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\ndiff for Berit er 250-200 = 50.\nNormalområdet er 12.51 + c(-1,1)1.9636.15 = -58.344 83.364 Berits måling ligger inden for normalområdet.\n\n\n\nNu udføres følgende annalyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen “Estimate” og beregn de tilhørende 95% konfidensintervaller\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel. vi har køn som kategorisk variabel, og 2 er pigerne. Der er en signifikant kønsforskel.\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori) Den er ikke signifikant - da p er over 0.05.\net95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
+    "text": "Hoppeeksamensopgave\n\n\n\nMan har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen\ngender: Køn, 1 dreng, 2 pige\nage: barnets alder\nheight: barnets højde i cm\ncohR: Længde af hop på højre ben (cm)\ncohL: Længde af hop på venstre ben (cm)\ndiff: forskel på cohR og cohL\nVi får også oplyst de første fire observationer:\n\n\n# A tibble: 4 × 7\n   idnr gender   age height  cohR  cohL  diff\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1      1    10  148.2 185.9 207.3 -21.4\n2     2      2     9  136.2 257.4 223    34.4\n3     3      1     9  139.4 203.5 250.3 -46.8\n4     4      2     9  137.6 347   388.4 -41.4\n\n\n\nOg noget summarisk data:\n&gt;mean(cohR)\n270.441\n&gt;mean(cohL)\n265.3871\n&gt;mean(diff)\n5.053815\n&gt;sd(cohR)\n74.69524\n&gt;sd(cohL)\n79.73807\n&gt;sd(diff)\n37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?"
   },
   {
     "objectID": "slides/noter.html#gad-vide-hvor-det-her-kommer-fra",
@@ -2434,5 +2434,61 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Resten af opgaven",
     "text": "Resten af opgaven\n\n\nHvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem \\(\\mu-0.2\\) og \\(\\mu+0.2\\)\n\n95% intervallet er:\n\\(\\mu \\pm 1.96\\text{SEM}\\)\n\n\nSå \\(1.96\\text{SEM} = 0.2\\)\n\n\n\\(1.96\\frac{\\sigma}{\\sqrt{n}} = 0.2\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#hoppe2",
+    "href": "slides/SEM.html#hoppe2",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hoppe2",
+    "text": "Hoppe2\n\n\n\nEn elle to grupper?\n\n\nParret eller u-parret?\n\n\nEn gruppe - parret t-test. Det er differencen vi kigger på.\n\n\nSå vi skal have fat i SEM.\n\nmean(diff)\n5.053815\nsd(diff)\n37.87201\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#hoppe-3",
+    "href": "slides/SEM.html#hoppe-3",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hoppe 3",
+    "text": "Hoppe 3\n\n\n\nGennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\n\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\n\n\nHvad er normalområdet?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#hoppe-4",
+    "href": "slides/SEM.html#hoppe-4",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hoppe 4",
+    "text": "Hoppe 4\nNu udføres følgende analyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen “Estimate” og beregn de tilhørende 95% konfidensintervaller"
+  },
+  {
+    "objectID": "slides/SEM.html#hoppe-5",
+    "href": "slides/SEM.html#hoppe-5",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hoppe 5",
+    "text": "Hoppe 5\n\nHvilken analyse?\n\n\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.\n\n\nHvad er referenceværdien for køn?\n\n\nDet er drengene.\n\n\nEr kønsforskellen signifikant?\n\n\nJa, p-værdien er 0.00065, der er en signifikant kønsforskel\n\n\nHvor stor er den?\n\n\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori)\nDen er ikke signifikant - da p er over 0.05.\n\net 95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
+  },
+  {
+    "objectID": "slides/linreg.html#hoppe-4",
+    "href": "slides/linreg.html#hoppe-4",
+    "title": "Lineær regression",
+    "section": "Hoppe 4",
+    "text": "Hoppe 4\nNu udføres følgende analyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen “Estimate” og beregn de tilhørende 95% konfidensintervaller"
+  },
+  {
+    "objectID": "slides/linreg.html#hoppeopgaven.",
+    "href": "slides/linreg.html#hoppeopgaven.",
+    "title": "Lineær regression",
+    "section": "Hoppeopgaven.",
+    "text": "Hoppeopgaven.\nRecap: 249 børn, dregne og piger har fået målt hvor langt de kan hoppe på højre og venstre. Forskellen er målt som “diff”. gender er kodet som 1: dreng, 2: pige\n\nHvilken analyse?\n\n\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.\n\n\nHvad er referenceværdien for køn?\n\n\nDet er drengene.\n\n\nEr kønsforskellen signifikant?\n\n\nJa, p-værdien er 0.00065, der er en signifikant kønsforskel\n\n\nHvor stor er den?\n\n\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori)\nDen er ikke signifikant - da p er over 0.05.\n\net 95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
+  },
+  {
+    "objectID": "slides/SEM.html#hop-videre",
+    "href": "slides/SEM.html#hop-videre",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hop videre",
+    "text": "Hop videre\n\n\n\nEn elle to grupper?\n\n\nParret eller u-parret?\n\n\nEn gruppe - parret t-test. Det er differencen vi kigger på.\n\n\nSå vi skal have fat i SEM.\n\nmean(diff)\n5.053815\nsd(diff)\n37.87201\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#sidste-hop---for-denne-gang",
+    "href": "slides/SEM.html#sidste-hop---for-denne-gang",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Sidste Hop - for denne gang",
+    "text": "Sidste Hop - for denne gang\n\n\n\nGennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\n\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\n\n\nHvad er normalområdet?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]

@@ -1314,19 +1314,21 @@ $1.96\frac{\sigma}{\sqrt{n}} = 0.2$
 
 
 ## Hoppeeksamensopgave
+:::: evensmaller
 
-man har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:
+:::: {.columns}
+:::: {.column}
+Man har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:
 
-idnr: løbenummer for personen
-gender: Køn, 1 dreng, 2 pige
-age: barnets alder
-height: barnets højde i cm
-cohR: Længde af hop på højre ben (cm)
-cohL: Længde af hop på venstre ben (cm)
-diff: forskel på chohR og cohL
+idnr: løbenummer for personen  
+gender: Køn, 1 dreng, 2 pige  
+age: barnets alder  
+height: barnets højde i cm  
+cohR: Længde af hop på højre ben (cm)  
+cohL: Længde af hop på venstre ben (cm)  
+diff: forskel på cohR og cohL  
 
-Vi får også oplyst de første fire observatiner:
-
+Vi får også oplyst de første fire observationer:
 
 ```{r}
 tribble(~idnr, ~gender, ~age, ~height, ~cohR, ~cohL, ~diff,
@@ -1335,115 +1337,99 @@ tribble(~idnr, ~gender, ~age, ~height, ~cohR, ~cohL, ~diff,
 3,1,9,139.4,203.5,250.3,-46.8,
 4,2,9,137.6,347.0,388.4,-41.4)
 ```
-Og noget summarisk data:
->mean(cohR)
-270.441
->mean(cohL)
-265.3871
->mean(diff)
-5.053815
->sd(cohR)
-74.69524
->sd(cohL)
-79.73807
->sd(diff)
-37.87201
+
+::::
+:::: {.column}
+Og noget summarisk data:  
+>mean(cohR)  
+270.441  
+>mean(cohL)  
+265.3871  
+>mean(diff)  
+5.053815  
+>sd(cohR)  
+74.69524  
+>sd(cohL)  
+79.73807  
+>sd(diff)  
+37.87201  
 
 Er der overordnet forskel på hoppelængde på højre og venstre ben?
+::::
+::::
 
-Det er en parret t-test hvor vi ser på differencen. Vi skal bruge SEM.
+::::
 
-SEM = 37.87201/sqrt(249) = 2.400041
 
-middel/sem = 5.053815/2.400041 =  2.10572
-Det udtrykker hvor mange s.e. den observerede differens ligger fra 0. Det er mere end 1.96, så forskellen er signifikant.
+## Hop videre
 
-Vi finder p-værdien ved
-2*pt(-abs(2.10572), df = 248)
 
-b) 
-gennemsnit og spredning for diff for pigerne beregnes til 12.51 og 36.15
+:::: {.columns}
+:::: {.column}
+:::: {.fragment}
+En elle to grupper? 
+::::
+:::: {.fragment}
+Parret eller u-parret?
+::::
+:::: {.fragment}
+
+En gruppe - parret t-test. Det er differencen vi kigger på.
+::::
+:::: {.fragment}
+
+Så vi skal have fat i SEM.
+
+>mean(diff)  
+5.053815  
+>sd(diff)  
+37.87201  
+::::
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Sidste Hop - for denne gang
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Gennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15 
 
 Når Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget
 galt med hendes venstre ben?
 
+:::: {.fragment}
 Eller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?
-
-diff for Berit er 250-200 = 50.
-
-Normalområdet er 12.51 + c(-1,1)*1.96*36.15 = -58.344  83.364
-Berits måling ligger inden for normalområdet.
-
-c)
-
-Nu udføres følgende annalyse:
-summary(lm(diff~factor(gender)))
-og vi får dette resultat:
+::::
 
 
+:::: {.fragment}
+Hvad er normalområdet?
+::::
 
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
+::::
 
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
-"(Intercept)", "-3.775", "3.471", "-1.087", "0.27795",
-"factor(gender)2", "16.283", "4.714", "3.454", "0.00065***"
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
 
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `t value` = "t value",
-    `Pr(>|t|)` = "Pr(>|t|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-     font = list(google_font("Courier Prime"), default_fonts())) 
 ```
+::::
+::::
 
-Hvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen "Estimate" og beregn de tilhørende
-95% konfidensintervaller
 
-Multipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.
-vi har køn som kategorisk variabel, og 2 er pigerne. Der er en signifikant kønsforskel. 
-
-Estimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er "baseline" eller reference kategori)
-Den er ikke signifikant - da p er over 0.05.
-
-et95% KI kan beregnes til: -3.775 + c(-1,1)*1.96*3.471 = -10.57816   3.02816
-Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden
-er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.
-
-Estimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0).
-Den har et 95% ki på: 16.283+c(-1,1)*1.96*4.714 =  7.04356 25.52244
-
-der er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508.
-Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit).
 
