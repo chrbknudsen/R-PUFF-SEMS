@@ -9,7 +9,7 @@ output:
 ---
 
 :::: tiny
-[pdf](downloads/intro.pdf)
+[pdf](../downloads/intro.pdf)
 ::::
 
 # Formål

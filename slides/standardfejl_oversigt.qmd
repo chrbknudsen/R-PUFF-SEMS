@@ -5,7 +5,7 @@ format:
     toc: false
 ---
 
-[pdf](downloads/standardfejl_oversigt.pdf){target="_blank"}
+[pdf](../downloads/standardfejl_oversigt.pdf){target="_blank"}
 
 # Standardfejl — hvad er det?
 
