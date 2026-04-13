@@ -1064,39 +1064,30 @@ Spredning: 19.9
 
 
 
-## maj 2025 opgave 2 a
-
-Vi får oplyst at et 95% konfidensinterval for en fødselsvægt er 3561.5 gram til 3583.4 gram. 
-Vi får også at vide at beregningen er baseret på 11279 kvinder.
-
-Vi bliver nu spurgt hvor mange gange bredere konfidensintervallet ville blive hvis vi kun havde haft 
-data fra 200 kvinder.
-
-Den nedre grænse for konfidensintervallet findes ved at trække 1.96 gange SEM fra middelværdien.
-Den øvre grænse finder vi ved at lægge 1.96 gange SEM til middelværdien.
-
-Med andre ord afhænger bredden af standardfejlen, SEM. 
-
-SEM finder vi ved at dividere standardafvigelsen med kvadratroden af antallet af observationer.
-
-Så i konfidensintervallet har vi divideret standardafvigelsen med sqrt(11279)
-
-Nu har vi en stikprøvestørrelse på 200. Så finder vi bredden af konfidensintervallet ved at dividere 
-standardafvigelsen med sqrt(200)
-
-Eller - bredden af det første konfidensinterval er 2*1.96*sd/sqrt(11279)
-
-bredden af det andet konfidensinterval er 2*1.96*sd/sqrt(200)
-
-Den ene divideret med den anden:
-
-bredde200 / bredde11270 = sqrt(11270)/sqrt(200) = 7.5
+## Bredde af konfidensinterval
 
 
+:::: {.columns}
+:::: {.column}
+Vi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4].  
+Beregnet baseret på 11279 kvinder.  
 
-ca 7½ gange bredere.
+Hvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?
 
+:::: {.fragment}
+Hint: $\text{SEM} = \frac{sd}{\sqrt{n}}$
+::::
 
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
 
 
 ## En anden eksamensopgave - forskel på middelværdier

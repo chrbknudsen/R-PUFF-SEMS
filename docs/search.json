@@ -2392,5 +2392,12 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Ændring i blodtryk - kontrol",
     "text": "Ændring i blodtryk - kontrol\n\n\n\nHvad er konfidensintervallet på forskellen?\nSamme beregninger - nu\n\n\nFor kontrolgruppen:\nFald: -16.6\nSpredning: 19.9\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#bredde-af-konfidensinterval",
+    "href": "slides/SEM.html#bredde-af-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Bredde af konfidensinterval",
+    "text": "Bredde af konfidensinterval\n\n\nVi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4].\nBeregnet baseret på 11279 kvinder.\nHvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?\n\nHint: \\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
