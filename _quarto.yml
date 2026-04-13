@@ -10,3 +10,5 @@ website:
         href: slides/powerberegninger_notat.html
       - text: "Standardfejl oversigt"
         href: slides/standardfejl_oversigt.html
+      - text: "Kritiske værdier"
+        href: slides/kritiske_vaerdier.html
