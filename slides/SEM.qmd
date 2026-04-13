@@ -1090,91 +1090,141 @@ Hint: $\text{SEM} = \frac{sd}{\sqrt{n}}$
 ::::
 
 
-## En anden eksamensopgave - forskel på middelværdier
+## Blodtrykssænkende
+
+:::: smaller
 
 Vi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo. 
 
 Vi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:
 
 ```{r}
+options(pillar.sigfig = 10)
 tribble(~Gruppe, ~n, ~gennemsnit, ~spredning,
 "Behandling", 82, 152.5, 18.4,
-"Placebo", 90, 156.5, 19.1)
-```
-må
-
-Vi har to samples. Så vi bruger two-sample t-test.
-Vi er ude efter at se om forskellen mellem de to grupper 152.5-156.5 er signifikant forskellig fra 0.
-
-
-$H_0: \mu_1 - \mu_2 = 0$
-
-Vi har to grupper - så vi skal have beregnet den samlede standardfejl:
-
-
-```{r}
-sqrt((18.4/sqrt(82))^2 + (19.1/sqrt(90))^2)
+"Placebo", 90, 156.5, 19.1) 
 ```
 
-et 95% konfidensinterval for forskellen er derfor:
+Er der en signifikant forskel?
 
-4 +/- 1.96*s.e
+:::: {.fragment}
+Hvad prøver vi at estimere?
+::::
+:::: {.fragment}
+Hvor mange grupper er der?
+::::
 
-Da det interval indeholder 0, er der ikke signifikant effekt - det beregnede 95% konfidensinterval for forskellen indeholder med 95% sandsynlighed 0.
-
-testværdien:
-
-## videre - ønsket størrelse af konfidensinterval 
-
-Lidt kringlet eksamensspørgsmål
-
-Hvis antallet af forsøgspersoner der skal have behandlingen kaldes n_1 og antallet af personer i kontrollen (placebo) kaldes n_0.
-og vi vil have at der er dobbelt så mange i kontrolgruppen som i forsøgsgruppen (n_0 = 2*n_1). hvor mange personer skal vi så have ialt,
-hvis det 95% konfidensinterval vi beregnede lige før får længden 8. Givet at spredningerne er uændrede.
-
-Puha.
-
-Svaret vil være n0 + n1. Eller, 3*n1 fordi n0 er lig 2n1
-
-Konfidensintervallet skal have en længde på 8.
-
-Så 1.96*s.e. hvor s.e. er den poolede standardfejl skal være 4. s.e. skal derfor være 4/1.96. Fordi den skal være 4 på hver side.
+:::: {.fragment}
+Forskel i middelværdier for to, ikke-parrede grupper.
+::::
 
 
-s.e. er givet ved 
 
-sqrt((18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2) = s.e.
+::::
 
-(18.4/sqrt(n1))^2 + (19.1/sqrt(n0))^2 = s.e.^2
+## Blodtrykssænkende
 
-18.4^2/n1 + 19.1^2/n0 = s.e.^2
-
-18.4^2 / n1 + 19.1^2/2n1 = s.e^2
-
-18.4^2 / n1 + 2*19.1^2 / n1 = se^2
-
-18.4^2 + 2*19.1^2  = se^2 * n1
-
-1068.18/((4/1.96)^2)
-
-Her roder jeg ret meget rundt i udlednignen. 4=1.94*se_poolet. svaret er n1 = 125 og n er derfro 375
-
-## endnu en eksamensopgave
 
 :::: {.columns}
 :::: {.column}
+To samples, uparret.  
+Så vi skal se om forskellen på de to middelværdier er signifikant forskellig fra 0.  
 
-Vi har en population - fordelingen af hæmoglobin i populationen er normalfordelt.
-middelværdi $\mu$ = 13.3 g/100 ml. Spredning $\sigma$ = 1.12 g/100 ml.
+:::: {.fragment}
+$H_0: \mu_1 - \mu_2 = 0$
+::::
+:::: {.fragment}
+Samlet SE:  
+$SE_{diff} = \sqrt{\frac{s_1}{n_1} + \frac{s_2}{n_2}}$
+::::
 
-Vi udtager stikprøver af størrelsen n. For hver af de stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte
-med middelværdi mu (hvis vi udtager uendeligt mange stikprøver)
+:::: {.fragment}
+```{r}
+options(pillar.sigfig = 10)
+tribble(~Gruppe, ~n, ~gennemsnit, ~spredning,
+"Behandling", 82, 152.5, 18.4,
+"Placebo", 90, 156.5, 19.1) 
+```
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Videre - ønsket størrelse af konfidensinterval 
+
+Lidt kringlet eksamensspørgsmål
+
+Hvis antallet af forsøgspersoner der skal have behandlingen kaldes $n_1$ og antallet af personer i kontrollen (placebo) kaldes $n_0$.
+og vi vil have at der er dobbelt så mange i kontrolgruppen som i forsøgsgruppen ($n_0 = 2*n_1$). hvor mange personer skal vi så have ialt,
+hvis det 95% konfidensinterval vi beregnede lige før får længden 8 i stedet. Givet at spredningerne er uændrede.
+
+Puha.
+
+## Bredde af KI
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Udtrykt ved $n_0$ og $n_1$, hvad er så svaret?
+
+$n_0 + n_1 = 3n_1$ fordi $n_0 = 2n_1$
+
+Hvis et konfidensinterval er givet ved:
+
+$\text{estimat} \pm1.96\text{SE}$
+
+Hvad skal så være lig 8?
+
+$2\cdot1.96\text{SE} = 8$
+
+Hvordan beregner vi SE?
+
+$SE_{diff} = \sqrt{\frac{s_0}{n_0} + \frac{s_1}{n_1}}$
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+:::: tiny
+Svar: $n_1 = 125$ - fordi det er let at rode rundt i tallene.
+::::
+::::
+::::
+
+## Endnu en eksamensopgave
+
+:::: {.columns}
+:::: {.column}
+:::: evensmaller
+Antag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med $\mu$ = 13.3 g/100 ml. Spredning $\sigma$ = 1.12 g/100 ml.
+
+Vi udtager stikprøver af størrelsen n. For hver stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte
+med middelværdi $\mu$ (hvis vi udtager uendeligt mange stikprøver)
 
 Hvad er spredningen i fordelingen af stikprøvegennemsnittene?
 
-. . . 
-
-Det er SEM. Den beregner vi ved $\frac{\sigma}{sqrt{n}}/$
+ 
+:::: {.fragment}
+Det er SEM. Den beregner vi ved $\frac{\sigma}{\sqrt{n}}$
+::::
+:::: 
 ::::
 :::: {.column}
 
@@ -1187,7 +1237,7 @@ Det er SEM. Den beregner vi ved $\frac{\sigma}{sqrt{n}}/$
 ::::
 ::::
 
-## del b
+## Endnu en eksamensopgave
 
 :::: {.columns}
 :::: {.column}
@@ -1195,29 +1245,28 @@ Det er SEM. Den beregner vi ved $\frac{\sigma}{sqrt{n}}/$
 
 Hvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?
 
-. . . 
+:::: {.fragment}
 
 P(13.0 < X < 13.6)
 
-. . . 
+::::
 
+
+:::: {.fragment}
 P(X < 13.6) - P(X< 13.0)
+::::
 
-. . . 
+:::: {.fragment}
+Standardiser.
+$\mu = 13.3$  
+$\sigma =  1.12$  
+SEM = $\frac{\sigma}{\sqrt{n}}$, $\mu = 13.3$
+::::
 
-standardiser. SEM = $\frac{\sigma}{\sqrt{n}}$, $\mu = 13.3$
+:::: {.fragment}
+pnorm eller qnorm?
+::::
 
-. . . 
-
-```{r}
-1.12/sqrt(15)
-```
-
-. . . 
-
-$P(Z < \frac{13.6 - 13.3}{0.2891828}) - P(Z < \frac{13.0 - 13.3}{0.2891828})$
-
-. . . 
 ::::
 :::: {.column}
 ```{webr-r}
@@ -1230,7 +1279,7 @@ $P(Z < \frac{13.6 - 13.3}{0.2891828}) - P(Z < \frac{13.0 - 13.3}{0.2891828})$
 ::::
 
 
-## del c
+## Resten af opgaven
 
 :::: {.columns}
 :::: {.column}
@@ -1238,23 +1287,19 @@ $P(Z < \frac{13.6 - 13.3}{0.2891828}) - P(Z < \frac{13.0 - 13.3}{0.2891828})$
 
 Hvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem $\mu-0.2$ og $\mu+0.2$
 
-. . .
+:::: {.fragment}
 95% intervallet er:
 
-$\mu \pm 1.96SEM$
+$\mu \pm 1.96\text{SEM}$
+::::
 
-. . .
+:::: {.fragment}
+Så $1.96\text{SEM} = 0.2$
+::::
 
-Så $1.96SEM = 0.2$
-
-. . .
-
-
+:::: {.fragment}
 $1.96\frac{\sigma}{\sqrt{n}} = 0.2$
-
-. . .
-
-Indsæt $\sigma$ og n og løs for n
+::::
  
 ::::
 :::: {.column}
@@ -1269,19 +1314,21 @@ Indsæt $\sigma$ og n og løs for n
 
 
 ## Hoppeeksamensopgave
+:::: evensmaller
 
-man har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:
+:::: {.columns}
+:::: {.column}
+Man har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:
 
-idnr: løbenummer for personen
-gender: Køn, 1 dreng, 2 pige
-age: barnets alder
-height: barnets højde i cm
-cohR: Længde af hop på højre ben (cm)
-cohL: Længde af hop på venstre ben (cm)
-diff: forskel på chohR og cohL
+idnr: løbenummer for personen  
+gender: Køn, 1 dreng, 2 pige  
+age: barnets alder  
+height: barnets højde i cm  
+cohR: Længde af hop på højre ben (cm)  
+cohL: Længde af hop på venstre ben (cm)  
+diff: forskel på cohR og cohL  
 
-Vi får også oplyst de første fire observatiner:
-
+Vi får også oplyst de første fire observationer:
 
 ```{r}
 tribble(~idnr, ~gender, ~age, ~height, ~cohR, ~cohL, ~diff,
@@ -1290,115 +1337,99 @@ tribble(~idnr, ~gender, ~age, ~height, ~cohR, ~cohL, ~diff,
 3,1,9,139.4,203.5,250.3,-46.8,
 4,2,9,137.6,347.0,388.4,-41.4)
 ```
-Og noget summarisk data:
->mean(cohR)
-270.441
->mean(cohL)
-265.3871
->mean(diff)
-5.053815
->sd(cohR)
-74.69524
->sd(cohL)
-79.73807
->sd(diff)
-37.87201
+
+::::
+:::: {.column}
+Og noget summarisk data:  
+>mean(cohR)  
+270.441  
+>mean(cohL)  
+265.3871  
+>mean(diff)  
+5.053815  
+>sd(cohR)  
+74.69524  
+>sd(cohL)  
+79.73807  
+>sd(diff)  
+37.87201  
 
 Er der overordnet forskel på hoppelængde på højre og venstre ben?
+::::
+::::
 
-Det er en parret t-test hvor vi ser på differencen. Vi skal bruge SEM.
+::::
 
-SEM = 37.87201/sqrt(249) = 2.400041
 
-middel/sem = 5.053815/2.400041 =  2.10572
-Det udtrykker hvor mange s.e. den observerede differens ligger fra 0. Det er mere end 1.96, så forskellen er signifikant.
+## Hop videre
 
-Vi finder p-værdien ved
-2*pt(-abs(2.10572), df = 248)
 
-b) 
-gennemsnit og spredning for diff for pigerne beregnes til 12.51 og 36.15
+:::: {.columns}
+:::: {.column}
+:::: {.fragment}
+En elle to grupper? 
+::::
+:::: {.fragment}
+Parret eller u-parret?
+::::
+:::: {.fragment}
+
+En gruppe - parret t-test. Det er differencen vi kigger på.
+::::
+:::: {.fragment}
+
+Så vi skal have fat i SEM.
+
+>mean(diff)  
+5.053815  
+>sd(diff)  
+37.87201  
+::::
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Sidste Hop - for denne gang
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Gennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15 
 
 Når Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget
 galt med hendes venstre ben?
 
+:::: {.fragment}
 Eller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?
-
-diff for Berit er 250-200 = 50.
-
-Normalområdet er 12.51 + c(-1,1)*1.96*36.15 = -58.344  83.364
-Berits måling ligger inden for normalområdet.
-
-c)
-
-Nu udføres følgende annalyse:
-summary(lm(diff~factor(gender)))
-og vi får dette resultat:
+::::
 
 
+:::: {.fragment}
+Hvad er normalområdet?
+::::
 
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
+::::
 
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
-"(Intercept)", "-3.775", "3.471", "-1.087", "0.27795",
-"factor(gender)2", "16.283", "4.714", "3.454", "0.00065***"
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
 
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `t value` = "t value",
-    `Pr(>|t|)` = "Pr(>|t|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-     font = list(google_font("Courier Prime"), default_fonts())) 
 ```
+::::
+::::
 
-Hvilken analyse har vi gennemført? Hvad kan vi konkludere? Fortolk de to værdier i søjlen "Estimate" og beregn de tilhørende
-95% konfidensintervaller
 
-Multipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.
-vi har køn som kategorisk variabel, og 2 er pigerne. Der er en signifikant kønsforskel. 
-
-Estimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er "baseline" eller reference kategori)
-Den er ikke signifikant - da p er over 0.05.
-
-et95% KI kan beregnes til: -3.775 + c(-1,1)*1.96*3.471 = -10.57816   3.02816
-Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden
-er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.
-
-Estimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0).
-Den har et 95% ki på: 16.283+c(-1,1)*1.96*4.714 =  7.04356 25.52244
-
-der er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508.
-Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit).
 
