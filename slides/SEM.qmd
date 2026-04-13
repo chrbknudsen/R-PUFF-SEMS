@@ -1279,7 +1279,7 @@ pnorm eller qnorm?
 ::::
 
 
-## del c
+## Resten af opgaven
 
 :::: {.columns}
 :::: {.column}
@@ -1287,23 +1287,19 @@ pnorm eller qnorm?
 
 Hvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem $\mu-0.2$ og $\mu+0.2$
 
-. . .
+:::: {.fragment}
 95% intervallet er:
 
-$\mu \pm 1.96SEM$
+$\mu \pm 1.96\text{SEM}$
+::::
 
-. . .
+:::: {.fragment}
+Så $1.96\text{SEM} = 0.2$
+::::
 
-Så $1.96SEM = 0.2$
-
-. . .
-
-
+:::: {.fragment}
 $1.96\frac{\sigma}{\sqrt{n}} = 0.2$
-
-. . .
-
-Indsæt $\sigma$ og n og løs for n
+::::
  
 ::::
 :::: {.column}
