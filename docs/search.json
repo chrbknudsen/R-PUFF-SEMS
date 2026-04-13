@@ -2364,5 +2364,40 @@
     "title": "Powerberegninger",
     "section": "Det kan gå galt på to måder:",
     "text": "Det kan gå galt på to måder:\nType 1 fejl: Der ser ud til at være en effekt. Eller et positivt resultat.\n\nVi kan forkaste \\(H_0\\)\n\n\nMen det er en fejl!\nDer er ikke en effekt.\nData understøtter ikke den alternative hypotese\n\n\nDet er en falsk positiv\n\n\nVi forkastede \\(H_0\\) ved en fejl\n\n\nPå et \\(\\alpha = 0.05\\) niveau\n\n\nSom er risikoen for at vi ser en falsk positiv.\n\n\nDet er ikke så godt…"
+  },
+  {
+    "objectID": "slides/SEM.html#ændring-i-blodtryk",
+    "href": "slides/SEM.html#ændring-i-blodtryk",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk",
+    "text": "Ændring i blodtryk\n\nEn gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter).\nDer måles blodtryk før behandling (baseline), og efter 12 måneders behandling.\nForskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”.\nFor kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant?\nKunne det tænkes at den sande middelværdi er 0?"
+  },
+  {
+    "objectID": "slides/SEM.html#ændring-i-blodtryk-1",
+    "href": "slides/SEM.html#ændring-i-blodtryk-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk",
+    "text": "Ændring i blodtryk\nDet kræver at vi ved hvor sikker den middelværdi er. Og til det skal vi bruge SEM:\n\n\n[1] 0.9681619\n\n\nKonfidensintervallet finder vi ved:\n\\[X +/- 1.96*SE\\]\n\n\n[1] -17.7024 -21.4976\n\n\nHvis der ikke var sket et reelt, signifikant fald, ville 0 være indeholdt i det interval. Så det systoliske blodtryk falder signifikant i interventionsgruppen.\nEr der et signifikant fald i kontrolgruppen?\nSamme beregninger:\n\n\n[1] 1.115937\n\n\nOg konfidensintervallet:\n\n\n[1] -14.41276 -18.78724\n\n\nHer er 0 heller ikke indeholdt i intervallet - faldet er signifikant.\nEr faldet i blodtryk signifikant forskelligt?\nDe to konfidensintervaller overlapper. Men det er kun hvis et af dem indeholder centeret for det andet konfidensinterval at vi kan bruge konfidensintervaller til at afgøre om de er signifikant forskellige.\nSå - forskel?"
+  },
+  {
+    "objectID": "slides/SEM.html#ændring-i-blodtryk---intervention",
+    "href": "slides/SEM.html#ændring-i-blodtryk---intervention",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk - intervention",
+    "text": "Ændring i blodtryk - intervention\n\n\n\nHvad er konfidensintervallet på forskellen?\n\n\nFor interventionsgruppen:\nFald: -19.6\nSpredning: 17.4\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#ændring-i-blodtryk---kontrol",
+    "href": "slides/SEM.html#ændring-i-blodtryk---kontrol",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk - kontrol",
+    "text": "Ændring i blodtryk - kontrol\n\n\n\nHvad er konfidensintervallet på forskellen?\nSamme beregninger - nu\n\n\nFor kontrolgruppen:\nFald: -16.6\nSpredning: 19.9\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/SEM.html#bredde-af-konfidensinterval",
+    "href": "slides/SEM.html#bredde-af-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Bredde af konfidensinterval",
+    "text": "Bredde af konfidensinterval\n\n\nVi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4].\nBeregnet baseret på 11279 kvinder.\nHvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?\n\nHint: \\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
