@@ -564,7 +564,7 @@
     "href": "slides/logistisk.html#teoridelen-er-done.-nu-er-det-opgaver",
     "title": "Logistisk regression",
     "section": "teoridelen er done. Nu er det opgaver!",
-    "text": "teoridelen er done. Nu er det opgaver!"
+    "text": "teoridelen er done. Nu er det opgaver!\nhm."
   },
   {
     "objectID": "slides/logistisk.html#opgave-fra-opgave-maj-2025-1-b",
@@ -578,7 +578,7 @@
     "href": "slides/logistisk.html#eksamensopgave",
     "title": "Logistisk regression",
     "section": "Eksamensopgave",
-    "text": "Eksamensopgave\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har været nødt til at bruge ældre donorer, der også kan have været rygere. Derer observationer fra 426 patienter og vi har følgende variable: Surv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0. SMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker” don_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\nvi får følgende output:\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder.\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\np_NS = 68/(153+68) = 0.308 p_SM = 88/(117+88) = 0.429\nDen relative risiko er så: 0.429/0.308 = 1.392857\ndvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med hvis donor ikke har været ryger.\nEr det signifikant?\nVi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722\nHvad er standardfejlen? 1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal observationer i gruppen. kvadratroden af det hele sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991\ngiver os standardfejlen på logaritmen til risikoratio.\nSå er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se\nEller: 0.34 + c(-1,1)1.960.1290991 = 0.08696576 0.59303424\nog derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470\n1 er ikke indeholdt, og der er en signifikant sammenhæng.\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+    "text": "Eksamensopgave\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
   },
   {
     "objectID": "index.html",
@@ -725,7 +725,7 @@
     "href": "slides/linreg.html#populær-ting-i-eksamensopgaver",
     "title": "Lineær regression",
     "section": "Populær ting i eksamensopgaver",
-    "text": "Populær ting i eksamensopgaver\n\nDe der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.\n\nHusk: \\(\\text{t value} = \\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\n\n\np-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:\n\\(\\frac{\\text{Estimate}}{\\text{Std. Error}}\\),\nog ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)\n\n\n\n\nVi kan faktisk godt beregne p-værdien. Den er givet ved: 2*(1-pt(abs(t value), df))\npt er pnorm() blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.\nMen det behøver vi ikke - test-værdien er rigeligt."
+    "text": "Populær ting i eksamensopgaver\n\nDe der formulerer eksamensopgaver synes det er supersjovt at redigere en værdi ud af outputtet af en model og stille et spørgsmål der kræver at I har netop den værdi.\n\nHusk: \\(\\text{t value} = \\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\n\n\np-værdien kan vi ikke beregne direkte. Mangler den i opgaven, bruger vi testværdien:\n\\(\\frac{\\text{Estimate}}{\\text{Std. Error}}\\)\nog ser om den er større eller mindre end 1.96 (hvis vi tester på et 5% niveau)\n\n\n\n\nVi kan faktisk godt beregne p-værdien. Den er givet ved: 2*(1-pt(abs(t value), df))\npt er pnorm() blot for t-fordelingen i stedet for normalfordelingen, og df er antallet af frihedsgrader i modellen.\nMen det behøver vi ikke - test-værdien er rigeligt."
   },
   {
     "objectID": "slides/linreg.html#resten",
@@ -802,7 +802,7 @@
     "href": "slides/linreg.html#næste-delspørgsmål",
     "title": "Lineær regression",
     "section": "Næste delspørgsmål",
-    "text": "Næste delspørgsmål\nVi får oplyst at dette er resultatet af den korrekte analyse.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nEr det signifikant?\n\n\nTestværdien er &gt;1.96 og Estimate for factor(smoke)2 er derfor signifikant på et \\(\\alpha = 0.05\\) niveau."
+    "text": "Næste delspørgsmål\nVi får oplyst at dette er resultatet af den korrekte analyse.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n3613.623\n7.108\n508.372\n&lt;2e-16***\n\n\nfactor(smoke)2\n-127.377\n15.757\n\n\n\n\nfactor(smoke)3\n-194.897\n17.519\n-11.125\n&lt;2e-16***\n\n\nalco\n1.045\n6.075\n0.172\n0.863\n\n\n\n\n\n\n\nHvad mangler - og hvad skulle der stå?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nEr det signifikant?\n\n\nTestværdiens absolutte værdi er &gt;1.96 og Estimate for factor(smoke)2 er derfor signifikant på et \\(\\alpha = 0.05\\) niveau."
   },
   {
     "objectID": "slides/linreg.html#hvordan-tolker-vi-ellers-tallene",
@@ -830,7 +830,7 @@
     "href": "slides/linreg.html#opgave",
     "title": "Lineær regression",
     "section": "Opgave",
-    "text": "Opgave\nVi skal se på sammenhæng mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.\nDer er varibler: KØN (1=kvinde, 0= mand) FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten BLODTRYK: Systolisk blodtryk (i mmHg)\nDe første 6 observationer, og nogle deskriptive størrelser:\n\n\n# A tibble: 6 × 3\n    KØN FEDME BLODTRYK\n  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1     0  1.31      130\n2     0  1.31      148\n3     0  1.19      146\n4     0  1.11      122\n5     0  1.34      140\n6     0  1.17      146\n\n\nmean(BLODTRYK[KØN==0]) 127.9545 mean(BLODTRYK[KØN==1]) 126.3103 SD(BLODTRYK[KØN==0]) 16.59077 mean(BLODTRYK[KØN==1]) 19.41893\n\nBeregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?\n\nDer er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte. Det betyder at vi kan beregne referenceintervallet for kvinder ved:\n\\(\\mu \\pm 1.96\\sigma\\)\neller 126.3103 + c(-1,1)1.9619.41893\n\nundersøg om blodtrykket er ens for de to køn ved en t-test.\n\nDet vi tester er om forskellen i blodtryk er 0. Forskellen i middelværdi er 127.9545-126. = 1.6442\nVi kan ikke antage at standardafvigelsen er ens i de to grupper. Det kan vi se at den ikke er. Og vi skal under alle omstændigheder bruge SEM. Så vi beregner SEM for de to grupper:\nSEM_0 = 16.59077/sqrt(44) SEM_1 = 19.41893/sqrt(58)\nDen poolede SE er så: sqrt(2.501153^2 + 2.54983^2) = 3.57175\nSå kan vi beregne et konfidensinterval for forskellen: 1.6442 + c(-1,1)1.963.57175 = -5.35643 ; 8.64483\nO er indeholdt, og vi kan konkludere på et 95% KI at der ikke er forskel på det systoliske blodtryk de to grupper imellem.\n\nder bliver lavet en analyse, der giver dette output:\n\n\n\n\n\n\n\n\n\nCall:\n\n\nlm(formula = BLODTRYK ~ FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n96.818\n8.920\n10.86\n&lt;2e-16***\n\n\nFEDME\n23.001\n6.667\n3.45\n0.000822***\n\n\n\n\n\n\n\n\nHvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi estimaterne\n\nLineær regression med BLODTRYK som responsvariabel, og FEDME som den uafhængige variabel. Vi estimerer at hvis FEDME graden stiger med 1, vil blodtrykket stige med ca. 23. Dette estimat er statistisk signifant på 95% niveua. interceptet svarer til blodtrykket ved en fedmegrad på 0, og kan derfor ikke fortolkes.\n\nSå laver vi en anden analyse, hvor vi inddrager KØN.\n\n\n\n\n\n\n\n\n\nCall:\n\n\nlm(formula = BLODTRYK ~ factor(KØN) + FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n93.287\n8.937\n10.438\n&lt;2e-16***\n\n\nfactor(KØN)1\n-7.730\n3.715\n\n\n\n\nFEDME\n\n7.172\n4.049\n\n\n\n\n\n\n\n\nFortolk estimater - beregn selv det manglende estimat for FEDME, og konkluder.\nVi mangler et estimat på koefficienten på fedme. Men vi husker at t-værdien findes ved at dividere estimatet med standard fejlen. Så den finder vi ved at gange standardfejlen med t værdien: 7.172*4.049 = 29.03\nVi mangler også en t-værdi for KØN. Den finder vi også let: -7.730/3.715= -2.080754\nTommelfingerreglen er at hvis t-værdien er større end 1.96, er estimatet statistiks signifikant ppå et 5% niveau.\nDet fortæller os, at n stigning på 1 i fedmegrad, i gennemsnit, og alt andet holdt lige, vil svare til en stigning på 29 i blodtrykket, hvor der er justeret for KØN.\nJusteret for FEDME, ser vi at kvinder i gennemsnit har et statistisk signifikant lavere blodtryk (ca. 7.7 mmHg lavere)\n\nsammenlign resultaterne i b) og d) og kommenter på en eventuel forskel i betydningen af køn for blodtrykket Analyserne i b og d førte til forskellige konklusioner vedr effekten af køn for blodtryk. b justerer ikke for fedme, og konkluderer at der ikke er forskel. Mens d) der justerer for fedme ser en forskel på kønnene. Hvad kan det skyldes? Mon ikke det er fordi kvinder har en højere fedmegrad end mænd, og at det maskerer effekten af køn i den ujusterede analyse."
+    "text": "Opgave\n\n\n\nVi skal se på sammenhængen mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.\nDer er variabler: KØN (1=kvinde, 0= mand)\nFEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten\nBLODTRYK: Systolisk blodtryk (i mmHg)\n\nDe første 6 observationer, og nogle deskriptive størrelser:\n\n\n# A tibble: 6 × 3\n    KØN FEDME BLODTRYK\n  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1     0  1.31      130\n2     0  1.31      148\n3     0  1.19      146\n4     0  1.11      122\n5     0  1.34      140\n6     0  1.17      146\n\n\nmean(BLODTRYK[KØN==0]) 127.9545 mean(BLODTRYK[KØN==1]) 126.3103 SD(BLODTRYK[KØN==0]) 16.59077 mean(BLODTRYK[KØN==1]) 19.41893\n\n\n\nBeregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?\n\nDer er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte. Det betyder at vi kan beregne referenceintervallet for kvinder ved:\n\\(\\mu \\pm 1.96\\sigma\\)\neller 126.3103 + c(-1,1)1.9619.41893\n\nundersøg om blodtrykket er ens for de to køn ved en t-test.\n\nDet vi tester er om forskellen i blodtryk er 0. Forskellen i middelværdi er 127.9545-126. = 1.6442\nVi kan ikke antage at standardafvigelsen er ens i de to grupper. Det kan vi se at den ikke er. Og vi skal under alle omstændigheder bruge SEM. Så vi beregner SEM for de to grupper:\nSEM_0 = 16.59077/sqrt(44) SEM_1 = 19.41893/sqrt(58)\nDen poolede SE er så: sqrt(2.501153^2 + 2.54983^2) = 3.57175\nSå kan vi beregne et konfidensinterval for forskellen: 1.6442 + c(-1,1)1.963.57175 = -5.35643 ; 8.64483\nO er indeholdt, og vi kan konkludere på et 95% KI at der ikke er forskel på det systoliske blodtryk de to grupper imellem.\n\nder bliver lavet en analyse, der giver dette output:\n\n\n\n\n\n\n\n\n\nCall:\n\n\nlm(formula = BLODTRYK ~ FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n96.818\n8.920\n10.86\n&lt;2e-16***\n\n\nFEDME\n23.001\n6.667\n3.45\n0.000822***\n\n\n\n\n\n\n\n\nHvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi estimaterne\n\nLineær regression med BLODTRYK som responsvariabel, og FEDME som den uafhængige variabel. Vi estimerer at hvis FEDME graden stiger med 1, vil blodtrykket stige med ca. 23. Dette estimat er statistisk signifant på 95% niveua. interceptet svarer til blodtrykket ved en fedmegrad på 0, og kan derfor ikke fortolkes.\n\nSå laver vi en anden analyse, hvor vi inddrager KØN.\n\n\n\n\n\n\n\n\n\nCall:\n\n\nlm(formula = BLODTRYK ~ factor(KØN) + FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n93.287\n8.937\n10.438\n&lt;2e-16***\n\n\nfactor(KØN)1\n-7.730\n3.715\n\n\n\n\nFEDME\n\n7.172\n4.049\n\n\n\n\n\n\n\n\nFortolk estimater - beregn selv det manglende estimat for FEDME, og konkluder.\nVi mangler et estimat på koefficienten på fedme. Men vi husker at t-værdien findes ved at dividere estimatet med standard fejlen. Så den finder vi ved at gange standardfejlen med t værdien: 7.172*4.049 = 29.03\nVi mangler også en t-værdi for KØN. Den finder vi også let: -7.730/3.715= -2.080754\nTommelfingerreglen er at hvis t-værdien er større end 1.96, er estimatet statistiks signifikant ppå et 5% niveau.\nDet fortæller os, at n stigning på 1 i fedmegrad, i gennemsnit, og alt andet holdt lige, vil svare til en stigning på 29 i blodtrykket, hvor der er justeret for KØN.\nJusteret for FEDME, ser vi at kvinder i gennemsnit har et statistisk signifikant lavere blodtryk (ca. 7.7 mmHg lavere)\n\nsammenlign resultaterne i b) og d) og kommenter på en eventuel forskel i betydningen af køn for blodtrykket Analyserne i b og d førte til forskellige konklusioner vedr effekten af køn for blodtryk. b justerer ikke for fedme, og konkluderer at der ikke er forskel. Mens d) der justerer for fedme ser en forskel på kønnene. Hvad kan det skyldes? Mon ikke det er fordi kvinder har en højere fedmegrad end mænd, og at det maskerer effekten af køn i den ujusterede analyse."
   },
   {
     "objectID": "slides/normalfordelingen.html#hvad-er-en-sandsynlighedsfordeling",
@@ -2475,7 +2475,7 @@
     "href": "slides/linreg.html#hoppeopgaven.",
     "title": "Lineær regression",
     "section": "Hoppeopgaven.",
-    "text": "Hoppeopgaven.\nRecap: 249 børn, dregne og piger har fået målt hvor langt de kan hoppe på højre og venstre. Forskellen er målt som “diff”. gender er kodet som 1: dreng, 2: pige\n\nHvilken analyse?\n\n\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.\n\n\nHvad er referenceværdien for køn?\n\n\nDet er drengene.\n\n\nEr kønsforskellen signifikant?\n\n\nJa, p-værdien er 0.00065, der er en signifikant kønsforskel\n\n\nHvor stor er den?\n\n\nEstimaet på -3.775 er den estimerede diff, altså forskel i hoppelængde for drengene (da de er “baseline” eller reference kategori)\nDen er ikke signifikant - da p er over 0.05.\n\net 95% KI kan beregnes til: -3.775 + c(-1,1)1.963.471 = -10.57816 3.02816 Intervallet indeholder 0, hvilket matcher at estimatet ikke er signifikant (vi kan ikke afvise null-hypotesen om at estimatet i virkeligheden er 0) Der ser altså ikke ud til at være forskel i drengenes hoppelængde mellem højre og venstre ben.\nEstimatet på 16.28 er den estimerede middelværdi for forskellen i hoppelængde mellem pigerne og drengene. Den er signifikant med en p-værdi under 0.05 (så vi kan afvise null-hypotesen om at den sande værdi af estimatet er 0). Den har et 95% ki på: 16.283+c(-1,1)1.964.714 = 7.04356 25.52244\nder er derfor statisisk evidens for at pigerne - i gennemsnit - hopper længere på højre end venstre ben. Forskellen estimeres til -3.775+16.283 = 12.508. Så forskellen på højre og venstre er, for drengene -3.775 cm. En pige vil have en forskel der er 16.283 cm længere end en dreng (i gennemsnit)."
+    "text": "Hoppeopgaven."
   },
   {
     "objectID": "slides/SEM.html#hop-videre",
@@ -2490,5 +2490,544 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Sidste Hop - for denne gang",
     "text": "Sidste Hop - for denne gang\n\n\n\nGennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\n\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\n\n\nHvad er normalområdet?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvorfor-var-normalfordelingen-vigtig",
+    "href": "slides/hypotesetests.html#hvorfor-var-normalfordelingen-vigtig",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvorfor var normalfordelingen vigtig?",
+    "text": "Hvorfor var normalfordelingen vigtig?\nDer er ofte typeopgaver til eksamen hvor I skal demonstrere at I forstår den\nOg hvor I skal bruge qnorm og pnorm til at regne frem og tilbage."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#men-også-fordi",
+    "href": "slides/hypotesetests.html#men-også-fordi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Men også fordi!",
+    "text": "Men også fordi!\n\n\nVi kunne rigtig godt tænke os at vide hvad det gennemsnitlige systoliske blodtryk for en gruppe patienter er.\n\n\nDet er ikke realistisk at måle blodtryk på alle patienter i den gruppe.\n\n\nI stedet kan vi tage en stikprøve, og måle blodtrykket på de patienter.\n\n\nMen det fortæller os kun hvad gennemsnittet er i den stikprøve.\n\n\nIkke hvad den “sande” middelværdi for hele populationen er.\n\n\nVi har normalt “kun” en stikprøve, som vi har trukket fra populationen.\n\n\nVi kender ikke den “sande” middelværdi i populationen.\n\n\nEller den “sande” spredning/standardafvigelse\n\n\nMen vi vil stadig rigtig gerne kunne sige noget om hvad den “sande” middelværdi er."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#den-centrale-grænseværdisætning",
+    "href": "slides/hypotesetests.html#den-centrale-grænseværdisætning",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den centrale grænseværdisætning",
+    "text": "Den centrale grænseværdisætning\n\nTager vi tilstrækkeligt mange (tilpas store) stikprøver, vil disse stikprøvers middelværdier følge en fordeling.\n\n\nDet vil være en normalfordeling\n\n\nDen normalfordeling vil have en middelværdi der er lig med den “sande” middelværdi for populationen."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#clt",
+    "href": "slides/hypotesetests.html#clt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "CLT?",
+    "text": "CLT?\n\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\n\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\n\n\nVi beregner gennemsnittet af den stikprøve og gemmer det.\n\n\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\n\n\nDet gør vi mange gange.\n\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelingen.\n\n\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\n\n\nDet kan man føre bevis for. Men det springer vi over."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#en-gang-til---det-er-vigtigt",
+    "href": "slides/hypotesetests.html#en-gang-til---det-er-vigtigt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En gang til - det er vigtigt!",
+    "text": "En gang til - det er vigtigt!\nHvis vi tager mange stikprøver, og beregner deres middelværdier. Så vil de middelværdier følge normalfordelingen.\nDet gælder kun hvis stikprøven er tilpas stor. Ofte er 30 nok.\nHvis populationen selv er normalfordelt, er middelværdien normalfordelt uanset størrelsen af stikprøven.\nBemærk at vi ikke kender disse middelværdiers spredning. Eller hvad middelværdien af middelværdierne er. Det kommer vi til."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#clt-demo",
+    "href": "slides/hypotesetests.html#clt-demo",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "CLT demo",
+    "text": "CLT demo\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvordan-hjælper-det-os",
+    "href": "slides/hypotesetests.html#hvordan-hjælper-det-os",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvordan hjælper det os?",
+    "text": "Hvordan hjælper det os?\nVi har tidligere set hvordan vi beregnede et 95% normalområde for en værdi.\n\nDet krævede at vi havde middelværdien, og standardafvigelsen.\n\n\nNu har vi mange middelværdier. Hvis vi havde “standardafvigelsen” for de middelværdier.\n\n\nSå kunne vi beregne et interval, hvor 95% af middelværdierne fra stikprøverne var.\n\n\nDet kalder vi et 95% konfidensinterval"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval",
+    "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad er et 95% konfidensinterval?",
+    "text": "Hvad er et 95% konfidensinterval?\n\nDet område, hvor, hvis værdierne var normalfordelte, vi kan forvente at finde 95% af dem.\n\n\nMiddelværdierne af stikprøverne vil, når vi har nok af dem, være normalfordelte.\n\n\nSå 95% af vores stikprøver vil have en middelværdi der ligger inden for det område."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
+    "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad er et 95% konfidensinterval?",
+    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#så",
+    "href": "slides/hypotesetests.html#så",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "så",
+    "text": "så\n\nHvis vi kender spredningen på stikprøvens middelværdier.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvordan-beregner-vi-så-det",
+    "href": "slides/hypotesetests.html#hvordan-beregner-vi-så-det",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvordan beregner vi så det?",
+    "text": "Hvordan beregner vi så det?\n\nDa vi beregnede normalområdet skulle vi bruge en middelværdi og en standardafvigelse.\n\nStandardafvigelsen fortæller hvordan de enkelte målinger i vores stikprøve afviger fra middelværdien af stikprøven.\n\n\nIkke hvordan middelværdierne fra mange stikprøver afviger.\n\n\nVi springer matematikken over, men spredningen af middelværdien af stikprøven kalder vi “Standard Error of the Mean”. SEM blandt venner.\n\n\nOg den vi beregner vi ved\n\\[SEM = \\frac{\\sigma}{\\sqrt{n}}\\]\n\nVi har et estimat på “mean”. Der ikke 100% korrekt. Det har en fejl, “error”. Hvad er vores bedste bud på størrelsen af den fejl? SEM.\n\n\n\n\nIntuitivt: Jo mindre sigma vi har i stikprøven, jo tættere ligger observationerne på hinanden. Det gør de nok også i populationen. Og tættere de ligger på hinanden jo bedre er vores estimat nok. Og jo større stikprøve vi har, jo mere præcist bliver det nok."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvordan-regner-vi-så",
+    "href": "slides/hypotesetests.html#hvordan-regner-vi-så",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvordan regner vi så?",
+    "text": "Hvordan regner vi så?\n\nVi fandt 95% normalområdet ved\n\n\n\\(\\mu \\pm 1.96\\cdot\\sigma\\)\n\n\nVi finder så 95% konfidensintervallet ved\n\n\n\\(\\hat{x} \\pm 1.96\\cdot\\text{SEM}\\)\n\n\nOg SEM fandt vi ved:\n\n\n\\(\\text{SEM} = \\frac{s}{\\sqrt{n}}\\)\nn er antallet af observationer. Og vi skriver \\(s\\) i stedet for \\(\\sigma\\) fordi?\n\n\n\\(\\sigma\\) er den “sande” standardafvigelse i populationen. Vi har ikke målt på hele populationen. Så den kender vi ikke, og derfor bruger vi \\(s\\) i stedet."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#en-del-af-en-eksamensopgave",
+    "href": "slides/hypotesetests.html#en-del-af-en-eksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "En del af en eksamensopgave",
+    "text": "En del af en eksamensopgave\n\n\n\nVi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:\n\n\n\n\n\n\n\n\ngruppe\nAntal\nGennemsnit\nSpredning\n\n\n\n\nDiabetikere\n227\n0.719\n0.068\n\n\nIkke-diabetikere\n140\n0.810\n0.057\n\n\n\n\n\n\n\nBeregn 95% konfidensinterval (KI) for hver af de to grupper.\nJa, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\\(SEM_{dia} = \\frac{0.068}{\\sqrt(227)}\\)\n\\(SEM_{ikke-dia} = \\frac{0.057}{\\sqrt(140)}\\)\ndet vi skal lægge mærke til er, at middel for diabetikere ikke er indeholdt i ki for non diabetikere. Og omvendt.\nEr der forskel?"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#testværdi",
+    "href": "slides/hypotesetests.html#testværdi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Testværdi",
+    "text": "Testværdi\n\nVi fandt et 95% KI for plasma-magnesium for diabetikere: [0.7101539, 0.7278461]. SEM var 0.004513319\nNu får vi en værdi for plasma-magnesium for ikke-diabetikere. Det giver os et estimat for plasma-magnesium for ikke-diabetikere på 0.810.\nEr den så tæt på værdierne for diabetikerne, at vi ikke kan se forskel? Eller er den så langt væk at vi kan konkludere, at den nok er forskellig?\n\nVi kan intuitivt se at hvis 0.810 ikke er indeholdt i KI, og KI med 95% sikkerhed indeholder den sande værdi - så er 0.810 nok så langt væk fra den sande værdi, at der må være en forskel.\n\n\nEller at 0.81 ligger så langt væk fra 0.719, at sandsynligheden for at 0.81 er indeholdt i konfidensintervallet, er meget lille."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#testværdi-1",
+    "href": "slides/hypotesetests.html#testværdi-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Testværdi",
+    "text": "Testværdi\nMan kan også se, at:\n\\(\\frac{0.810-0.719}{SEM} = \\frac{0.810-0.719}{0.004513319} = 20.16255\\)\n\nDet er det samme som:\n\\(0.81 = 0.719 + 20.16255\\cdot SEM\\)\n\n\nVi kalder 20.16255 for testværdien.\n\n\nDen kritiske værdi ved 95% er 1.96. Er 20.16255 større? Ja, så ligger værdien længere væk end 1.96 standardfejl fra (estimatet for) middelværdien. Og så ligger den udenfor 95% konfidensintervallet."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#visualiseret",
+    "href": "slides/hypotesetests.html#visualiseret",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Visualiseret",
+    "text": "Visualiseret"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hypotesetest",
+    "href": "slides/hypotesetests.html#hypotesetest",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hypotesetest",
+    "text": "Hypotesetest\nDet var en hypotesetest.\n\nVi testede om 0.810 kunne være indeholdt i konfidensintervallet på [0.7101539, 0.7278461] og SEM = 0.004513319.\n\n\nDet kan vi se at den ikke er. Afvigelsen er stor, men det kunne jo være et statistisk tilfælde.\n\n\nHvordan tester vi det mere generelt?"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvad-er-en-hypotese",
+    "href": "slides/hypotesetests.html#hvad-er-en-hypotese",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad er en hypotese",
+    "text": "Hvad er en hypotese\n\nEn antagelse om en parameter i populationen.\n\nEn bestemt middelværdi, eg \\(\\mu = 0.81\\)\nEn bestemt forskel på to middelværdier, ofte som \\(\\mu_1 - \\mu_2 = 0\\)\nEn bestemt andel eller ratio (senere)\n\n\nVi opstiller en null-hypotese \\(H_0\\):\n\n\n\n\\(\\mu = 0.81\\)\n\\(\\mu_1 - \\mu_2 = 0\\)\n\n\n\nEller mere generelt \\(\\theta = \\theta_0\\). \\(\\theta_0\\) den konkrete værdi vi tester parameteren imod, eg. 0.81 eller 0.\n\n\nI praksis “ingen forskel” eller “ingen effekt”.\n\nVi skriver \\(\\theta\\) fordi theta starter med t, og det er vores testværdi. Det er mere generelt end \\(\\mu\\), og tillader os at bruge samme notation uanset om det er middelværdier eller noget andet vi tester. Vi kalder \\(H_0\\) for “null”-hypotesen, fordi “null” er en prætentiøs måde at sige “ingenting”. Og vi tester om der ingen effekt er. Ofte kalder vi den så nul-hypotesen i stedet, fordi vi jo skriver 0 i \\(H_0\\)."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#den-alternative-hypotese",
+    "href": "slides/hypotesetests.html#den-alternative-hypotese",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den alternative hypotese",
+    "text": "Den alternative hypotese\n\n\nKaldet \\(H_A\\), enten at\n\n\n\n\\(\\mu \\neq 0.81\\)\n\\(\\mu_1 - \\mu_2 \\neq 0\\)\n\n\n\nDet er tosidet. Der \\(\\mu\\) kan være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.\n\n\nEller, ensidet:\n\n\\(\\mu &gt; 0.81\\) eller\n\\(\\mu &lt; 0.81\\)\n\n\n\nTosidet: Enhver forskel\nEnsidet: En forskel i en bestemt retning"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#kernen-i-hypotesetesten",
+    "href": "slides/hypotesetests.html#kernen-i-hypotesetesten",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Kernen i hypotesetesten",
+    "text": "Kernen i hypotesetesten\nVi har en null-hypotese, \\(H_0: \\theta = \\theta_0\\).\n\nHvor vi tester om \\(\\theta_0\\) kunne være den “sande” værdi i populationen; givet vores data, som har givet os et estimat \\(\\hat{\\theta}\\) fra vores observationer.\n\n\nVi kigger lige nu på middelværdier og ville normalt skrive \\(\\mu\\). Men bruger \\(\\theta\\) fordi vi så kan generalisere.\n\n\nHvor langt ligger estimatet fra \\(H_0\\), målt i standardfejl?\n\n\nLigger den for langt væk, forkaster vi \\(H_0\\). Det betyder ikke (!) at \\(H_A\\) er sand eller bevist."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvor-langt-er-for-langt",
+    "href": "slides/hypotesetests.html#hvor-langt-er-for-langt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvor langt er for langt?",
+    "text": "Hvor langt er for langt?\n\nHvis estimatet ligger “for langt” fra \\(H_0\\), forkaster vi \\(H_0\\) (og konkluderer at data understøtter \\(H_A\\)).\n\n\nNår vi skal tage stilling til hvor langt for langt er, skal vi vælge hvor stor risiko vi vil løbe for at forkaste \\(H_0\\). Selvom \\(H_0\\) faktisk er sand.\n\n\nDen risiko betegner vi \\(\\alpha\\). Normalt sætter vi den til 5%, eller 0.05.\n\n\nVær vågne hvis opgaven taler om noget som helst andet!"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#det-er-den-kritiske-værdi",
+    "href": "slides/hypotesetests.html#det-er-den-kritiske-værdi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Det er den kritiske værdi",
+    "text": "Det er den kritiske værdi\nTo-sidet. Hvor vi er interesseret i enhver forskel:"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#ensidet---større-end",
+    "href": "slides/hypotesetests.html#ensidet---større-end",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ensidet - større end",
+    "text": "Ensidet - større end"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#ensidigt---mindre-end",
+    "href": "slides/hypotesetests.html#ensidigt---mindre-end",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ensidigt - mindre end",
+    "text": "Ensidigt - mindre end"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#den-kritiske-værdi",
+    "href": "slides/hypotesetests.html#den-kritiske-værdi",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den kritiske værdi",
+    "text": "Den kritiske værdi\n\nHvis vi vil finde enhver forskel, typisk at \\(mu_1 - mu_2 = 0\\), er vi ligeglade med om testværdien er “for lille” eller “for stor”. De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.\n\nHar vi \\(\\alpha = 0.5\\) skal den altså fordeles på begge sider og vi bruger:\n\nc(-1,1)*qnorm(1 - 0.05/2)\n\n[1] -1.959964  1.959964\n\n\n\n\nHvis vi er interesseret i om en værdi er mindre (\\(H_A: \\theta &lt; \\theta_0\\)) - så må testværdien gerne være for stor. Den må blot ikke være for lille.\n\nqnorm(0.05)\n\n[1] -1.644854\n\n\n\n\nOg hvis vi er interesseret i om en værdi er større (\\(H_A: \\theta &gt; \\theta_0\\)) - så må testværdien gerne være for lille. Den må blot ikke være for stor.\n\nqnorm(1-0.05)\n\n[1] 1.644854"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#testværdien",
+    "href": "slides/hypotesetests.html#testværdien",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Testværdien",
+    "text": "Testværdien\n\nVi har besluttet hvilken hypotese vi vil teste.\n\n\nVi har fundet den kritiske værdi - ud fra ønsket \\(\\alpha\\) og retningen af testen.\n\n\nSå mangler vi blot testværdien, som vi skal sammenligne med den kritiske værdi.\n\n\nDer skal bruges to ting:\nHvad er afstanden fra vores estimat til \\(H_0\\), og\nHvad er standardfejlen\nDen skal vi nemlig bruge beregne afstanden målt i standardfejl."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#afstanden",
+    "href": "slides/hypotesetests.html#afstanden",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Afstanden",
+    "text": "Afstanden\nVi havde den generelle \\(H_0: \\theta = \\theta_0\\)\n\nEller hvis vi taler om middelværdier: \\(H_0: \\mu = \\mu_0\\)\n\n\nVi havde også et estimat på hvad \\(\\mu\\) kunne være. Det fik vi fra vores data. Vi bør kalde den for \\(\\hat{\\mu}\\).\n\n\nAfstanden finder vi så ved at trække \\(\\mu_0\\) fra \\(\\hat{\\mu}\\)\n\n\nSå hvis vores estimat var 0.719 og vores null-hypotese var \\(\\mu = 0.81\\)\nEr afstanden: 0.719 - 0.81 = -0.091\n\nMiddelværdier ved vi godt hvordan vi beregner.\nMen vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.\nHvis vi skal sammenligne to middelværdier er \\(H_0\\) typisk at forskellen på dem er 0.\nTil eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.\nEller også får vi oplyst hvad forskellen er på dem."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#standardfejlen",
+    "href": "slides/hypotesetests.html#standardfejlen",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Standardfejlen",
+    "text": "Standardfejlen\nVi skulle måle afstanden i enheder af standardfejlen.\n\nDen afhænger af hvad vi tester - ikke af hypotesen!\n\n\nFor en enkelt middelværdi: SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\nHvis vi sammenligner to middelværdier der ikke er parrede:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\nOg hvis data er parrede:\n\\(SE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\\)\n\n\n\nOfte kender vi ikke den “sande” \\(\\sigma\\) men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hov-hvad-betyder-parret",
+    "href": "slides/hypotesetests.html#hov-hvad-betyder-parret",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hov! Hvad betyder parret?",
+    "text": "Hov! Hvad betyder parret?\n\nIkke-parrede data kommer fra to uafhængige grupper. Med forskellige individer i hver gruppe.\n\nBehandling vs kontrol\nKvinder vs mænd\n\nHer har vi to separate middelværdier. Og undersøger variation mellem personer.\nParrede data kommer fra to grupper der ikke er uafhængige. Så de afhænger!\n\nSamme individer målt to gange\nMatchede par\n\nDet kan være\n\nFør og efter behandling\nTvillinger/matchede personer\n\nHer undersøger vi variation indenfor “samme” person."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#trin-for-trin",
+    "href": "slides/hypotesetests.html#trin-for-trin",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Trin for trin",
+    "text": "Trin for trin\n\nOpstil \\(H_0\\)\nEr den alternative hypotese en- eller tosidet?\nVælg signifikansniveau (typisk 0.05)\nBestem den kritiske værdi (afhænger af: En- eller tosidet og \\(\\alpha\\))\nBeregn estimatet\nBeregn standardfejlen\nBeregn testværdien\nSammenlign testværdi med kritisk værdi\nKonkluder: Forkaster vi \\(H_0\\)? ja eller nej."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#tilbage-til-plasma-magnesium",
+    "href": "slides/hypotesetests.html#tilbage-til-plasma-magnesium",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Tilbage til plasma magnesium",
+    "text": "Tilbage til plasma magnesium\n\nVi fik oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:\n\n\n# A tibble: 2 × 4\n  gruppe           Antal Gennemsnit Sprdening\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Diabetikere        227      0.719     0.068\n2 Ikke-diabetikere   140      0.81      0.057\n\n\nVi beregnede 95% konfidensintervaller på hver af de to grupper, og konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at der derfor var signifikant forskel på niveauet.\nDet var i hvert fald konklusionen i modelbesvarelsen.\nHvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning?"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne",
+    "href": "slides/hypotesetests.html#forskellen-på-middelværdierne",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Forskellen på middelværdierne",
+    "text": "Forskellen på middelværdierne\n\nEr den 0?\n\n\nEller:\n\n\n\\(H_0: \\mu_{dia} - \\mu_{ejdia} = 0\\)\n\n\nEr den alternative hypotese en- eller to-sidet?\n\n\nVi er ude efter enhver forskel, så to-sidet.\n\n\nSignifikansniveau?\n\n\n\\(\\alpha = 0.05\\)\nDet er et valg vi træffer."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-1",
+    "href": "slides/hypotesetests.html#forskellen-på-middelværdierne-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Forskellen på middelværdierne",
+    "text": "Forskellen på middelværdierne\nHvad er så den kritiske værdi?\n\n1.96\n\n\neller\n\nc(-1,1)*qnorm(1-0.05/2)\n\n[1] -1.959964  1.959964"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-2",
+    "href": "slides/hypotesetests.html#forskellen-på-middelværdierne-2",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Forskellen på middelværdierne",
+    "text": "Forskellen på middelværdierne\nOg hvor langt er vores estimat fra \\(H_0\\)?\n\n\\(H_0: \\mu_{dia} - \\mu_{ejdia} = 0\\)\n\n\n\\(\\mu_{dia} = 0.719, \\mu_{ejdia} = 0.810\\), så vores estimat er:\n0.719-0.810 = -0.091\n\n\nOg afstanden fra \\(H_0\\) er så: 0 - -0.091 = 0.091"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-3",
+    "href": "slides/hypotesetests.html#forskellen-på-middelværdierne-3",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Forskellen på middelværdierne",
+    "text": "Forskellen på middelværdierne\nHvad er standardfejlen?\n\nHvor mange samples?\n\n\nTo. Er de parrede?\n\n\nNej.\n\n\nSå skal vi bruge:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(s_1 = 0.068\\), \\(n_1 = 227\\)\n\\(s_2 = 0.057\\), \\(n_2 = 140\\)\n\n\nog derfor: \\(SE_{diff} = \\sqrt{\\frac{0.068^2}{227} + \\frac{0.057^2}{140}} = 0.00660\\)"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-4",
+    "href": "slides/hypotesetests.html#forskellen-på-middelværdierne-4",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Forskellen på middelværdierne",
+    "text": "Forskellen på middelværdierne\nHvor stor er forskellen så, målt i standardfejl?\n\n0.091/0.00660 = 13.78788\n\n\nEr den større end den kritiske værdi?\n\n\nJa.\nHvad betyder det?\n\n\nAt vores estimat ligger så langt fra \\(H_0\\), at vi kan forkaste \\(H_0\\), at forskellen på de to middelværdier er 0.\nOg det kan vi med en sikkerhed på \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#ændring-i-blodtryk",
+    "href": "slides/hypotesetests.html#ændring-i-blodtryk",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk",
+    "text": "Ændring i blodtryk\n\nEn gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter).\nDer måles blodtryk før behandling (baseline), og efter 12 måneders behandling.\nForskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”.\nFor kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant?\nKunne det tænkes at den sande middelværdi er 0?"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#ændring-i-blodtryk---intervention",
+    "href": "slides/hypotesetests.html#ændring-i-blodtryk---intervention",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk - intervention",
+    "text": "Ændring i blodtryk - intervention\n\n\n\nHvad er konfidensintervallet på forskellen?\n\n\nFor interventionsgruppen:\nFald: -19.6\nSpredning: 17.4\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#ændring-i-blodtryk---kontrol",
+    "href": "slides/hypotesetests.html#ændring-i-blodtryk---kontrol",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Ændring i blodtryk - kontrol",
+    "text": "Ændring i blodtryk - kontrol\n\n\n\nHvad er konfidensintervallet på forskellen?\nSamme beregninger - nu\n\n\nFor kontrolgruppen:\nFald: -16.6\nSpredning: 19.9\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#bredde-af-konfidensinterval",
+    "href": "slides/hypotesetests.html#bredde-af-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Bredde af konfidensinterval",
+    "text": "Bredde af konfidensinterval\n\n\nVi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4].\nBeregnet baseret på 11279 kvinder.\nHvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?\n\nHint: \\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#blodtrykssænkende",
+    "href": "slides/hypotesetests.html#blodtrykssænkende",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Blodtrykssænkende",
+    "text": "Blodtrykssænkende\n\nVi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.\nVi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82      152.5      18.4\n2 Placebo       90      156.5      19.1\n\n\nEr der en signifikant forskel?\n\nHvad prøver vi at estimere?\n\n\nHvor mange grupper er der?\n\n\nForskel i middelværdier for to, ikke-parrede grupper."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#blodtrykssænkende-1",
+    "href": "slides/hypotesetests.html#blodtrykssænkende-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Blodtrykssænkende",
+    "text": "Blodtrykssænkende\n\n\nTo samples, uparret.\nSå vi skal se om forskellen på de to middelværdier er signifikant forskellig fra 0.\n\n\\(H_0: \\mu_1 - \\mu_2 = 0\\)\n\n\nSamlet SE:\n\\(SE_{diff} = \\sqrt{\\frac{s_1}{n_1} + \\frac{s_2}{n_2}}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82      152.5      18.4\n2 Placebo       90      156.5      19.1\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#videre---ønsket-størrelse-af-konfidensinterval",
+    "href": "slides/hypotesetests.html#videre---ønsket-størrelse-af-konfidensinterval",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Videre - ønsket størrelse af konfidensinterval",
+    "text": "Videre - ønsket størrelse af konfidensinterval\nLidt kringlet eksamensspørgsmål\nHvis antallet af forsøgspersoner der skal have behandlingen kaldes \\(n_1\\) og antallet af personer i kontrollen (placebo) kaldes \\(n_0\\). og vi vil have at der er dobbelt så mange i kontrolgruppen som i forsøgsgruppen (\\(n_0 = 2*n_1\\)). hvor mange personer skal vi så have ialt, hvis det 95% konfidensinterval vi beregnede lige før får længden 8 i stedet. Givet at spredningerne er uændrede.\nPuha."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#bredde-af-ki",
+    "href": "slides/hypotesetests.html#bredde-af-ki",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Bredde af KI",
+    "text": "Bredde af KI\n\n\n\nUdtrykt ved \\(n_0\\) og \\(n_1\\), hvad er så svaret?\n\\(n_0 + n_1 = 3n_1\\) fordi \\(n_0 = 2n_1\\)\nHvis et konfidensinterval er givet ved:\n\\(\\text{estimat} \\pm1.96\\text{SE}\\)\nHvad skal så være lig 8?\n\\(2\\cdot1.96\\text{SE} = 8\\)\nHvordan beregner vi SE?\n\\(SE_{diff} = \\sqrt{\\frac{s_0}{n_0} + \\frac{s_1}{n_1}}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSvar: \\(n_1 = 125\\) - fordi det er let at rode rundt i tallene."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave",
+    "href": "slides/hypotesetests.html#endnu-en-eksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Endnu en eksamensopgave",
+    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
+    "href": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Endnu en eksamensopgave",
+    "text": "Endnu en eksamensopgave\n\n\nHvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?\n\nP(13.0 &lt; X &lt; 13.6)\n\n\nP(X &lt; 13.6) - P(X&lt; 13.0)\n\n\nStandardiser. \\(\\mu = 13.3\\)\n\\(\\sigma =  1.12\\)\nSEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\), \\(\\mu = 13.3\\)\n\n\npnorm eller qnorm?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#resten-af-opgaven",
+    "href": "slides/hypotesetests.html#resten-af-opgaven",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Resten af opgaven",
+    "text": "Resten af opgaven\n\n\nHvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem \\(\\mu-0.2\\) og \\(\\mu+0.2\\)\n\n95% intervallet er:\n\\(\\mu \\pm 1.96\\text{SEM}\\)\n\n\nSå \\(1.96\\text{SEM} = 0.2\\)\n\n\n\\(1.96\\frac{\\sigma}{\\sqrt{n}} = 0.2\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hoppeeksamensopgave",
+    "href": "slides/hypotesetests.html#hoppeeksamensopgave",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hoppeeksamensopgave",
+    "text": "Hoppeeksamensopgave\n\n\n\nMan har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen\ngender: Køn, 1 dreng, 2 pige\nage: barnets alder\nheight: barnets højde i cm\ncohR: Længde af hop på højre ben (cm)\ncohL: Længde af hop på venstre ben (cm)\ndiff: forskel på cohR og cohL\nVi får også oplyst de første fire observationer:\n\n\n# A tibble: 4 × 7\n   idnr gender   age height  cohR  cohL  diff\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1      1    10  148.2 185.9 207.3 -21.4\n2     2      2     9  136.2 257.4 223    34.4\n3     3      1     9  139.4 203.5 250.3 -46.8\n4     4      2     9  137.6 347   388.4 -41.4\n\n\n\nOg noget summarisk data:\n&gt;mean(cohR)\n270.441\n&gt;mean(cohL)\n265.3871\n&gt;mean(diff)\n5.053815\n&gt;sd(cohR)\n74.69524\n&gt;sd(cohL)\n79.73807\n&gt;sd(diff)\n37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hop-videre",
+    "href": "slides/hypotesetests.html#hop-videre",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hop videre",
+    "text": "Hop videre\n\n\n\nEn elle to grupper?\n\n\nParret eller u-parret?\n\n\nEn gruppe - parret t-test. Det er differencen vi kigger på.\n\n\nSå vi skal have fat i SEM.\n\nmean(diff)\n5.053815\nsd(diff)\n37.87201\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#sidste-hop---for-denne-gang",
+    "href": "slides/hypotesetests.html#sidste-hop---for-denne-gang",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Sidste Hop - for denne gang",
+    "text": "Sidste Hop - for denne gang\n\n\n\nGennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\n\nEller - falder den diff vi ser for Berit uden for hvad vi forventer? Altså uden for 95% normalområdet?\n\n\nHvad er normalområdet?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk",
+    "href": "slides/linreg.html#fedme-og-blodtryk",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\n\nVi skal se på sammenhængen mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.\nDer er variabler: KØN (1=kvinde, 0= mand)\nFEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten\nBLODTRYK: Systolisk blodtryk (i mmHg)\n\nDe første 6 observationer, og nogle deskriptive størrelser:\n\n\n# A tibble: 6 × 3\n    KØN FEDME BLODTRYK\n  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1     0  1.31      130\n2     0  1.31      148\n3     0  1.19      146\n4     0  1.11      122\n5     0  1.34      140\n6     0  1.17      146\n\n\nmean(BLODTRYK[KØN==0]) 127.9545 mean(BLODTRYK[KØN==1]) 126.3103 sd(BLODTRYK[KØN==0]) 16.59077 sd(BLODTRYK[KØN==1]) 19.41893\n\n\n\nBeregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?"
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-1",
+    "href": "slides/linreg.html#fedme-og-blodtryk-1",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\n\nDer er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte.\nmean(BLODTRYK[KØN==1]) 126.3103 sd(BLODTRYK[KØN==1]) 19.41893\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-2",
+    "href": "slides/linreg.html#fedme-og-blodtryk-2",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\nundersøg om blodtrykket er ens for de to køn ved en t-test.\n\nEn eller to samples? Parret? Hvad er vores \\(H_0\\)?\n\nDer er to uparrede samples.\n\\(H_0: \\mu_0 - \\mu_1 = 0\\)\n\n\nHvordan beregner vi så SE for hver gruppe?\n\n\n\\(\\text{SE} = \\frac{s}{\\sqrt{n}}\\)\n\n\nOg SE for differensen?\n\n\n\\(SE_{diff} = \\sqrt{SE_0^2 + SE_1^2}\\)"
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-3",
+    "href": "slides/linreg.html#fedme-og-blodtryk-3",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\nSå er vi klar til at regne\n\nmean(BLODTRYK[KØN==0]) 127.9545 mean(BLODTRYK[KØN==1]) 126.3103 sd(BLODTRYK[KØN==0]) 16.59077 sd(BLODTRYK[KØN==1]) 19.41893\nAntal kvinder (1): 58\nAntal mænd (0): 44\nHvad er test-værdien?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-4",
+    "href": "slides/linreg.html#fedme-og-blodtryk-4",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\n\nder bliver lavet en analyse, der giver dette output:\n\n\n\n\n\n\n\n\n\nCall: lm(formula = BLODTRYK ~ FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n96.818\n8.920\n10.86\n&lt;2e-16***\n\n\nFEDME\n23.001\n6.667\n3.45\n0.000822***\n\n\n\n\n\n\n\nHvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi estimaterne\n\n\n\n(multipel) Lineær regression\n\n\nmed BLODTRYK som responsvariabel\n\n\nog FEDME som den uafhængige variabel.\n\n\nVi estimerer at hvis FEDME graden stiger med 1\n\n\nvil blodtrykket stige med ca. 23\n\n\nDette estimat er statistisk signifikant på 95% niveau.\n\n\nInterceptet svarer til blodtrykket ved en fedmegrad på 0, og kan derfor ikke fortolkes."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-5",
+    "href": "slides/linreg.html#fedme-og-blodtryk-5",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\nSå laver vi en anden analyse, hvor vi inddrager KØN.\n\n\n\n\n\n\n\n\nCall: lm(formula = BLODTRYK ~ factor(KØN) + FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n93.287\n8.937\n10.438\n&lt;2e-16***\n\n\nfactor(KØN)1\n-7.730\n3.715\n\n\n\n\nFEDME\n\n7.172\n4.049\n\n\n\n\n\n\n\n\nBeregn det manglende estimat for FEDME og t value for KØN.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk---sidste-omgang",
+    "href": "slides/linreg.html#fedme-og-blodtryk---sidste-omgang",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk - sidste omgang",
+    "text": "Fedme og blodtryk - sidste omgang\n\nSammenlign resultaterne i b) og d) (b var testen af forskellig middelværdi for de to køn, d var den lineære model med KØN inkluderet) og kommenter på en eventuel forskel i betydningen af køn for blodtrykket\n\nDe to analyser gav forskellige konklusioner vedr. effekten af KØN for blodtrykket.\n\n\nHvad er forskellen?\n\n\nDen første test justerer ikke for fedme og konkluderer at der ikke er forskel på blodtrykket for mænd og kvinder.\n\n\nDen anden model justerer for fedme og ser en forskel på kønnene.\n\n\nHvad kan det skyldes?\n\n\nPotentielt at kvinder har en højere fedmegrad end mænd, hvilket maskerer effekten af køn i den ujusterede analyse."
+  },
+  {
+    "objectID": "slides/linreg.html#fedme-og-blodtryk-6",
+    "href": "slides/linreg.html#fedme-og-blodtryk-6",
+    "title": "Lineær regression",
+    "section": "Fedme og blodtryk",
+    "text": "Fedme og blodtryk\n\n\nFortolk estimater og konkluder.\n\n\n\n\n\n\n\n\nCall: lm(formula = BLODTRYK ~ factor(KØN) + FEDME)\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n93.287\n8.937\n10.438\n&lt;2e-16***\n\n\nfactor(KØN)1\n-7.730\n3.715\n\n\n\n\nFEDME\n\n7.172\n4.049\n\n\n\n\n\n\n\n\n\n\n\nt value for KØN var (i absolutte tal) større end 1.96\n\n\nog er derfor statistisk signifikant på et 5% niveau.\n\n\nEn stigning på 1 i fedmegrad, estimerer vi derfor til at give en\n\n\nstigning på 29 i blodtrykket, kontrolleret for KØN.\n\n\nJusteret for FEDME, ser vi at kvinderne i gennemsnit har\n\n\net lavere blodtryk end mændene. Vi estimerer forskellen til at være 7.73\n\n\nDenne forskel er signifikant på et 5% niveau."
+  },
+  {
+    "objectID": "slides/linreg.html#hoppemålinger-genbesøgt",
+    "href": "slides/linreg.html#hoppemålinger-genbesøgt",
+    "title": "Lineær regression",
+    "section": "Hoppemålinger genbesøgt",
+    "text": "Hoppemålinger genbesøgt\n\n\n\nRecap: 249 børn, drenge (1) og piger (2) har fået målt hvor langt de kan hoppe på højre og venstre. Forskellen er målt som “diff” (højre - venstre). Nu udføres følgende analyse: summary(lm(diff~factor(gender))) og vi får dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\nHvilken analyse har vi gennemført? Hvad kan vi konkludere?\nFortolk de to værdier i søjlen “Estimate”\n\n\n\n\nHvilken analyse?\n\n\nMultipel lineær regression med diff som afhængig variabel, og køn som kategorisk forklarende variabel.\n\n\nHvad er referenceværdien for køn?\n\n\nDet er drengene.\n\n\nEr kønsforskellen signifikant?\n\n\nJa, p-værdien er 0.00065, der er en signifikant kønsforskel (i forskellen på hvor langt børnene kan hoppe på højre og venstre ben)\n\n\nHvor stor er den?\n\n\nVi estimerer at pigerne i middel kan hoppe 16.283 - 3.775 = 12.508 cm længere på højre end på venstre ben.\nDenne forskel var statistisk signifikant\n\n\nHvordan med drengene?\n\n\nVi estimerer forskellen på hoppelængde (på højre - venstre pen) for drengene er -3.775\nDenne forskel er ikke signifikant.\n\n\n\n::::"
+  },
+  {
+    "objectID": "slides/linreg.html#the-final-hoppe-opgave",
+    "href": "slides/linreg.html#the-final-hoppe-opgave",
+    "title": "Lineær regression",
+    "section": "The final hoppe opgave",
+    "text": "The final hoppe opgave\n\n\nBeregn de tilhørende 95% konfidensintervaller på estimaterne\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning",
+    "href": "slides/logistisk.html#mors-rygning",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\n\nVi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.\nNu ser vi på den primære responsvariabel, som var fosterdød.\nRecap af de relevante variable i datasættet:\nepisodes: antal episoder med feber under graviditeten death: Fosterdød (ja = 1, nej = 0)\nmage: Morderens alder smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)\nVi får også oplyst:\n&gt; table(fever$episodes)\n\n\n   0    1    2    3    4    5    6    7   10 \n9693 1872  183   20    3    3    1    1    2 \n\n\nEr der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig graviditet."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning-1",
+    "href": "slides/logistisk.html#mors-rygning-1",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\nVi får oplyst at den korrekte analyse gav dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\ni((mage-25)/10) skal vi lige holde tungen lige i munden. mage er moderens alder ved interview. Vi sætter et nulpunkt der er 25, og måler derefter i enheder af 10 år.\n\n\nHvad kan vi konkludere på denne analyse? Fortolk relevante estimater"
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning-2",
+    "href": "slides/logistisk.html#mors-rygning-2",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\n\nDet er en logistisk regression, så estimaterne er\n\n\nlog-odds\n\n\nFor at få odds skal vi derfor\n\n\nexponentiere estimaterne for at få odds.\n\n\nHvordan fandt vi en sandsynlighed ud fra odds?\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)"
+  },
+  {
+    "objectID": "slides/logistisk.html#resten",
+    "href": "slides/logistisk.html#resten",
+    "title": "Logistisk regression",
+    "section": "resten",
+    "text": "resten\np_NS = 68/(153+68) = 0.308 p_SM = 88/(117+88) = 0.429\nDen relative risiko er så: 0.429/0.308 = 1.392857\ndvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med hvis donor ikke har været ryger.\nEr det signifikant?\nVi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722\nHvad er standardfejlen? 1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal observationer i gruppen. kvadratroden af det hele sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991\ngiver os standardfejlen på logaritmen til risikoratio.\nSå er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se\nEller: 0.34 + c(-1,1)1.960.1290991 = 0.08696576 0.59303424\nog derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470\n1 er ikke indeholdt, og der er en signifikant sammenhæng.\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+  },
+  {
+    "objectID": "slides/logistisk.html#prediktion",
+    "href": "slides/logistisk.html#prediktion",
+    "title": "Logistisk regression",
+    "section": "Prediktion",
+    "text": "Prediktion\n\nforudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og ikke har feberepisoder\n\nDet har vi lavet - for det er baseline, intercept.\nLogodds er -5.0526. Så oddsratio er:\n\n\n[1] 0.006392691\n\n\nSandsynligheden er så:\n\n\n[1] 0.006352084\n\n\n0.63%\nFor en kvinde der er 40 år (og ikke ryger og heller ikke har feberepisoder. )\nDet eneste vi skal justere er værdien for I((mage-25)/10). Den er ikke længere 0, men (40-25)/10 = 1.5\nEpisoder og smoke er 0, så vi finder logodds ved: -5.0526+1.5*0.7423 = -3.93915\nodds er så:\n\n\n[1] 0.01946475\n\n\nog sandsynligheden:\n\n\n[1] 0.01909311\n\n\nLidt under 2 procent. Her kan vi også beregne konfidensintervallet."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---intercept",
+    "href": "slides/logistisk.html#mors-rygning---intercept",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - intercept",
+    "text": "Mors rygning - intercept\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nHvad repræsenterer interceptet?\n\n\nBaseline - hvad er det?\n\n\nFind: Odds, sandsynlighed og 95% KI for Intercept\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---alder",
+    "href": "slides/logistisk.html#mors-rygning---alder",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - alder",
+    "text": "Mors rygning - alder\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nHvad sker der med odds for fosterdød når mors alder stiger?\n\n\nHusk at det er i enheder af 10 år\n\n\nFind: Odds, sandsynlighed og 95% KI for I((mage-25)/10)\n\n\nSignifikant?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---resten",
+    "href": "slides/logistisk.html#mors-rygning---resten",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - resten",
+    "text": "Mors rygning - resten\nHverken antallet af feberepisoder eller rygning har statistisk signifikant betydning.\nVi kan beregne OR på dem og konfidensintervaller.\nDen der kommer tættest på er rygning niveau 3, men den er ikke signifikant ved et 5% niveau."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---prediktion",
+    "href": "slides/logistisk.html#mors-rygning---prediktion",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - prediktion",
+    "text": "Mors rygning - prediktion\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nForudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og ikke har feberepisoder.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---prediktion-2",
+    "href": "slides/logistisk.html#mors-rygning---prediktion-2",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - prediktion 2",
+    "text": "Mors rygning - prediktion 2\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nGentag forudsigelsen for en kvinde der er 40 år.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#regne",
+    "href": "slides/logistisk.html#regne",
+    "title": "Logistisk regression",
+    "section": "regne",
+    "text": "regne\n\n\n\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\nHvad er den relative risiko?\nHvor er 95% KI?\nEr det signifikant?\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nHusk, vi regner i log.\nHvad betyder det hvis RR = 1?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donerer",
+    "href": "slides/logistisk.html#rygende-donerer",
+    "title": "Logistisk regression",
+    "section": "Rygende donerer",
+    "text": "Rygende donerer\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer",
+    "href": "slides/logistisk.html#rygende-donorer",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer",
+    "text": "Rygende donorer\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
+  },
+  {
+    "objectID": "slides/logistisk.html#donorrygning",
+    "href": "slides/logistisk.html#donorrygning",
+    "title": "Logistisk regression",
+    "section": "Donorrygning",
+    "text": "Donorrygning\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer---regne",
+    "href": "slides/logistisk.html#rygende-donorer---regne",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer - regne",
+    "text": "Rygende donorer - regne\n\n\n\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\nHvad er den relative risiko?\nHvor er 95% KI?\nEr det signifikant?\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nHusk, vi regner i log.\nHvad betyder det hvis RR = 1?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer-1",
+    "href": "slides/logistisk.html#rygende-donorer-1",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer",
+    "text": "Rygende donorer\nNu udfører vi en analyse, og får følgende output:\n\n\n\n\n\n\n\n\nCall: glm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable"
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer-2",
+    "href": "slides/logistisk.html#rygende-donorer-2",
+    "title": "Logistisk regression",
+    "section": "rygende donorer",
+    "text": "rygende donorer\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
   }
 ]
