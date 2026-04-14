@@ -564,7 +564,7 @@
     "href": "slides/logistisk.html#teoridelen-er-done.-nu-er-det-opgaver",
     "title": "Logistisk regression",
     "section": "teoridelen er done. Nu er det opgaver!",
-    "text": "teoridelen er done. Nu er det opgaver!"
+    "text": "teoridelen er done. Nu er det opgaver!\nhm."
   },
   {
     "objectID": "slides/logistisk.html#opgave-fra-opgave-maj-2025-1-b",
@@ -578,7 +578,7 @@
     "href": "slides/logistisk.html#eksamensopgave",
     "title": "Logistisk regression",
     "section": "Eksamensopgave",
-    "text": "Eksamensopgave\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har været nødt til at bruge ældre donorer, der også kan have været rygere. Derer observationer fra 426 patienter og vi har følgende variable: Surv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0. SMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker” don_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\nvi får følgende output:\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder.\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\np_NS = 68/(153+68) = 0.308 p_SM = 88/(117+88) = 0.429\nDen relative risiko er så: 0.429/0.308 = 1.392857\ndvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med hvis donor ikke har været ryger.\nEr det signifikant?\nVi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722\nHvad er standardfejlen? 1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal observationer i gruppen. kvadratroden af det hele sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991\ngiver os standardfejlen på logaritmen til risikoratio.\nSå er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se\nEller: 0.34 + c(-1,1)1.960.1290991 = 0.08696576 0.59303424\nog derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470\n1 er ikke indeholdt, og der er en signifikant sammenhæng.\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+    "text": "Eksamensopgave\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
   },
   {
     "objectID": "index.html",
@@ -2910,5 +2910,124 @@
     "title": "Lineær regression",
     "section": "The final hoppe opgave",
     "text": "The final hoppe opgave\n\n\nBeregn de tilhørende 95% konfidensintervaller på estimaterne\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-3.775\n3.471\n-1.087\n0.27795\n\n\nfactor(gender)2\n16.283\n4.714\n3.454\n0.00065***\n\n\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning",
+    "href": "slides/logistisk.html#mors-rygning",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\n\nVi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.\nNu ser vi på den primære responsvariabel, som var fosterdød.\nRecap af de relevante variable i datasættet:\nepisodes: antal episoder med feber under graviditeten death: Fosterdød (ja = 1, nej = 0)\nmage: Morderens alder smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)\nVi får også oplyst:\n&gt; table(fever$episodes)\n\n\n   0    1    2    3    4    5    6    7   10 \n9693 1872  183   20    3    3    1    1    2 \n\n\nEr der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig graviditet."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning-1",
+    "href": "slides/logistisk.html#mors-rygning-1",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\nVi får oplyst at den korrekte analyse gav dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\ni((mage-25)/10) skal vi lige holde tungen lige i munden. mage er moderens alder ved interview. Vi sætter et nulpunkt der er 25, og måler derefter i enheder af 10 år.\n\n\nHvad kan vi konkludere på denne analyse? Fortolk relevante estimater"
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning-2",
+    "href": "slides/logistisk.html#mors-rygning-2",
+    "title": "Logistisk regression",
+    "section": "Mors rygning",
+    "text": "Mors rygning\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\n\nDet er en logistisk regression, så estimaterne er\n\n\nlog-odds\n\n\nFor at få odds skal vi derfor\n\n\nexponentiere estimaterne for at få odds.\n\n\nHvordan fandt vi en sandsynlighed ud fra odds?\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)"
+  },
+  {
+    "objectID": "slides/logistisk.html#resten",
+    "href": "slides/logistisk.html#resten",
+    "title": "Logistisk regression",
+    "section": "resten",
+    "text": "resten\np_NS = 68/(153+68) = 0.308 p_SM = 88/(117+88) = 0.429\nDen relative risiko er så: 0.429/0.308 = 1.392857\ndvs ca 1.4 gange højere risiko for at dø indenfor 3 år efter transplantationen hvis donor har været ryger. Sammenlignet med hvis donor ikke har været ryger.\nEr det signifikant?\nVi skal regne i logodds. Så log(RR) = log(1.4) = 0.3364722\nHvad er standardfejlen? 1 over det interessante udfald. Minus 1 over antal observationer i gruppen. + 1 over det interessante udfald minus 1 over antal observationer i gruppen. kvadratroden af det hele sqrt(1/68 - 1/221 + 1/88 - 1/205) = 0.1290991\ngiver os standardfejlen på logaritmen til risikoratio.\nSå er vores 95% konfidensinterval for log(RR): log(RR) +/- 1.96*se\nEller: 0.34 + c(-1,1)1.960.1290991 = 0.08696576 0.59303424\nog derfor er 95% konfidensintervallet for RR: exp(c(0.08696576,0.59303424)) = 1.090859 1.809470\n1 er ikke indeholdt, og der er en signifikant sammenhæng.\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+  },
+  {
+    "objectID": "slides/logistisk.html#prediktion",
+    "href": "slides/logistisk.html#prediktion",
+    "title": "Logistisk regression",
+    "section": "Prediktion",
+    "text": "Prediktion\n\nforudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og ikke har feberepisoder\n\nDet har vi lavet - for det er baseline, intercept.\nLogodds er -5.0526. Så oddsratio er:\n\n\n[1] 0.006392691\n\n\nSandsynligheden er så:\n\n\n[1] 0.006352084\n\n\n0.63%\nFor en kvinde der er 40 år (og ikke ryger og heller ikke har feberepisoder. )\nDet eneste vi skal justere er værdien for I((mage-25)/10). Den er ikke længere 0, men (40-25)/10 = 1.5\nEpisoder og smoke er 0, så vi finder logodds ved: -5.0526+1.5*0.7423 = -3.93915\nodds er så:\n\n\n[1] 0.01946475\n\n\nog sandsynligheden:\n\n\n[1] 0.01909311\n\n\nLidt under 2 procent. Her kan vi også beregne konfidensintervallet."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---intercept",
+    "href": "slides/logistisk.html#mors-rygning---intercept",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - intercept",
+    "text": "Mors rygning - intercept\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nHvad repræsenterer interceptet?\n\n\nBaseline - hvad er det?\n\n\nFind: Odds, sandsynlighed og 95% KI for Intercept\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---alder",
+    "href": "slides/logistisk.html#mors-rygning---alder",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - alder",
+    "text": "Mors rygning - alder\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nHvad sker der med odds for fosterdød når mors alder stiger?\n\n\nHusk at det er i enheder af 10 år\n\n\nFind: Odds, sandsynlighed og 95% KI for I((mage-25)/10)\n\n\nSignifikant?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---resten",
+    "href": "slides/logistisk.html#mors-rygning---resten",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - resten",
+    "text": "Mors rygning - resten\nHverken antallet af feberepisoder eller rygning har statistisk signifikant betydning.\nVi kan beregne OR på dem og konfidensintervaller.\nDen der kommer tættest på er rygning niveau 3, men den er ikke signifikant ved et 5% niveau."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---prediktion",
+    "href": "slides/logistisk.html#mors-rygning---prediktion",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - prediktion",
+    "text": "Mors rygning - prediktion\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nForudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og ikke har feberepisoder.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#mors-rygning---prediktion-2",
+    "href": "slides/logistisk.html#mors-rygning---prediktion-2",
+    "title": "Logistisk regression",
+    "section": "Mors rygning - prediktion 2",
+    "text": "Mors rygning - prediktion 2\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-5.0526\n0.1758\n-28.725\n&lt;2e-16***\n\n\nI((mage - 25)/10)\n0.7423\n0.2149\n3.454\n0.0005***\n\n\nepisodes\n-0.0752\n0.2048\n-0.368\n0.713\n\n\nfactor(smoke)2\n0.2063\n0.2569\n0.803\n0.421\n\n\nfactor(smoke)3\n0.4364\n0.2569\n1.699\n0.089\n\n\n\n\n\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nGentag forudsigelsen for en kvinde der er 40 år.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#regne",
+    "href": "slides/logistisk.html#regne",
+    "title": "Logistisk regression",
+    "section": "regne",
+    "text": "regne\n\n\n\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\nHvad er den relative risiko?\nHvor er 95% KI?\nEr det signifikant?\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nHusk, vi regner i log.\nHvad betyder det hvis RR = 1?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donerer",
+    "href": "slides/logistisk.html#rygende-donerer",
+    "title": "Logistisk regression",
+    "section": "Rygende donerer",
+    "text": "Rygende donerer\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer",
+    "href": "slides/logistisk.html#rygende-donorer",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer",
+    "text": "Rygende donorer\n\nVi ser på 3 års overlevelsen af lungetransplanterede patienter. Man har brugt ældre donorer, der også kan have været rygere. Der er observationer fra 426 patienter og vi har følgende variable:\n\nSurv3y: 3 års overlevelsen, med værdien 1 hvis patienten er død inden for tre år efter transplantationen. Ellers 0.\nSMOKE: Rygestatus for donor, med værdierne “Never smoker” eller “Smoker or former smoker”\ndon_age_cat: Donor alder (&lt;40, 40-55, &gt;= 56). Den sidste kategori er kodet som 56 i data.\n\n\n\nDe første 6 observationer:\n\n\n# A tibble: 6 × 3\n  Surv3y don_age_cat SMOKE                  \n   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                  \n1      0 0-39        Never smoker           \n2      1 0-39        Never smoker           \n3      1 40-55       Smoker or former smoker\n4      1 56          Never smoker           \n5      1 40-55       Smoker or former smoker\n6      1 56          Smoker or former smoker\n\n\n\nvi får følgende output:\n\ntable(Surv3y,SMOKE)\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\n\nBaseret på dette - er der en sammenhæng mellem donors rygestatus og patientens 3 års overlevelse. Hvis der er signifikant sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% konfidensinterval. Forklar hvad det betyder."
+  },
+  {
+    "objectID": "slides/logistisk.html#donorrygning",
+    "href": "slides/logistisk.html#donorrygning",
+    "title": "Logistisk regression",
+    "section": "Donorrygning",
+    "text": "Donorrygning\nNu udfører vi en analyse, ogfår følgende output:\n\n\n\n\n\n\n\n\nCall:\n\n\nglm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\n\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer---regne",
+    "href": "slides/logistisk.html#rygende-donorer---regne",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer - regne",
+    "text": "Rygende donorer - regne\n\n\n\n\n\n      SMOKE\nSurv3y Never smoker Smoker or former smoker\n     0          153                     117\n     1           68                      88\n\n\nHvad er sandsynligheden for død inden for de 3 år for de to grupper?\nHvad er den relative risiko?\nHvor er 95% KI?\nEr det signifikant?\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\nHusk, vi regner i log.\nHvad betyder det hvis RR = 1?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer-1",
+    "href": "slides/logistisk.html#rygende-donorer-1",
+    "title": "Logistisk regression",
+    "section": "Rygende donorer",
+    "text": "Rygende donorer\nNu udfører vi en analyse, og får følgende output:\n\n\n\n\n\n\n\n\nCall: glm(formula = Surv3y ~ factor(SMOKE) + factor(don_age_cat), familiy = 'binomial')\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-1.2848\n0.2362\n-5.439\n5.36-8***\n\n\nfactor(SMOKE)Smoker or former smoker\n0.5751\n0.2066\n2.783\n0.00538**\n\n\nfactor(don_age_cat)40-55\n0.4440\n0.2527\n1.757\n0.07896.\n\n\nfactor(don_age_cat)56\n0.9395\n0.2891\n3.249\n0.00116**\n\n\n\n\n\n\n\nHvilken analyse er der tale om? hvad er respons og hvad er forklarende variable\nDet er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende variable"
+  },
+  {
+    "objectID": "slides/logistisk.html#rygende-donorer-2",
+    "href": "slides/logistisk.html#rygende-donorer-2",
+    "title": "Logistisk regression",
+    "section": "rygende donorer",
+    "text": "rygende donorer\n\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevatne odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\n\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n-1.2848 er estimatet på intercept. Det giver den estimerede sandsynlighed for at dø indenfor 3 år, for den patientgruppe der har fået lunger fra en donor under 40, der var ikkeryger."
   }
 ]

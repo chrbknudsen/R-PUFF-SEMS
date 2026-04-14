@@ -9,7 +9,6 @@ filters:
   - webr
 ---
 
-Forskellen på kategoriske og kontinuærte variable
 
 
 
