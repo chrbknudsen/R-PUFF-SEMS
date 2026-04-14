@@ -23,9 +23,11 @@ Det er lavet til situationer, hvor jeg hurtigt skal kunne:
 - finde n, power, $\delta$, $\alpha$ eller en ukendt standardafvigelse
 - skelne mellem situationer med middelværdier, proportioner og ratio-mål
 
-Det er ikke fordi matematikken er specielt kompleks. Men jeg har ikke ork til at isolere n fra en eller anden formel mere end en gang.
+Det er ikke fordi matematikken er specielt kompleks. Men der er ingen grund til at skulle isolere n fra en eller anden formel mere end en gang.
 
 Der tages forbehold for taste og regnefejl! Det er jeres eget ansvar at jeres eksamensbesvarelse er korrekt!
+
+Metoden tager udgangspunkt i "powerrelationen". Den er gældende for relativt enkle situationer hvor observationerne er (tilnærmelsesvist) normalfordelte og undersøgelsesdesignet ikke er specielt kompliceret. For en del undersøgelsesdesigns _kan_ der ikke opstilles såkaldt "lukkede matematiske udtryk" for powerberegningerne - de kræver numeriske simulationer.
 
 Den grundlæggende idé er:
 
@@ -95,7 +97,6 @@ Til eksamen forventes det normalt at man baserer sig på z-værdier.
 
 # Eksamensstrategi
 
-DE HER TRIN SKAL JUSTERES.
 
 ## Trin 1: Hvilken type udfald?
 
