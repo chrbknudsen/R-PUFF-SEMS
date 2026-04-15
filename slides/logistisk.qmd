@@ -1091,3 +1091,4 @@ Den går fra odds til sandsynlighed - så vi får?
 Den estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger.
 :::: 
 ::::
+

@@ -1385,7 +1385,7 @@ Vi estimerer forskellen på hoppelængde (på højre - venstre pen) for drengene
 Denne forskel er _ikke_ signifikant.
 
 ::::
-
+::::
 ::::
 
 ::::

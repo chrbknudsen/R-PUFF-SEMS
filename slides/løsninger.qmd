@@ -3,6 +3,11 @@ title: "Opgaveløsninger"
 format: html
 ---
 
+
+```{r}
+library(tidyverse)
+```
+
 # Lineær regression
 
 ## Drenge - hormoner
