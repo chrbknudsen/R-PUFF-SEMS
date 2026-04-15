@@ -1,0 +1,99 @@
+---
+title: "Opgaveløsninger"
+format: html
+---
+
+
+```{r}
+library(tidyverse)
+```
+
+# Lineær regression
+
+## Drenge - hormoner
+Vi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem 
+denne koncentration og drengenes alder og BMI.
+
+a. Hvilken analyse er der udført.
+
+ud fra "model = lm(osv)" kan vi se at det er en lineær regression. Den er multipel fordi der er mere end en forklarende variabel.
+Vi har alder som kategorisk forklarende variabel, og BMI som kontinuert forklarende variabel.
+
+b. fortolk resultaterne. 
+vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er  hormonniveauet for 
+alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle 
+aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen.
+BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)
+
+c. Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.
+
+Det finder vi ved: 
+Den 6-årige:
+5.40 + 0.058*17 
+
+for den 14-årige
+5.40+0.229+0.058*18
+
+# Logistisk
+
+## Rygende donorer
+
+Hvad kan vi konkludere på baggrund af den analyse. Beregn relevante odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller
+
+Begge de forklarende variable er signifikante.
+
+SMOKE har en OR på exp(0.5751) = 1.777308
+det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)*1.96*0.21)
+
+dvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder).
+KI indeholder ikke 1, og det er signifikant.
+
+donoralder.
+Her har vi to.
+OR_40-55 = exp(0.444) =  1.55893 og KI: exp(0.444 + c(-1,1)*1.96*0.2527) = 0.9500012 2.5581696
+
+og
+OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)*1.96*0.2891) = 1.451887 4.509273
+
+Dvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med 
+en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.
+
+og
+2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med 
+en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.
+
+
+Endelig blev følgende regnestykke fortaget:
+
+```{r echo = TRUE}
+exp(-1.2848)/(1+exp(-1.2848))
+```
+
+Hvordan fortolker vi det tal?
+
+
+-1.2848 er estimatet på intercept. 
+
+
+Det var for referencegruppen. Den patientguppe der har fået lunger fra en donor under 40 år, der var ikke ryger.
+
+
+Hvad er det så vi beregner?
+
+
+exp(-1.2848) går fra
+
+
+Log Odds(ratio) til:
+
+
+Odds
+
+
+Og brøken giver?
+
+
+Den går fra odds til sandsynlighed - så vi får?
+
+
+Den estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger.

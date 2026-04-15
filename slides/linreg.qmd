@@ -847,7 +847,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 ```
 
 ## Fedme og blodtryk
-:::: {.evensmaller}
+::::: {.evensmaller}
 :::: {.columns}
 :::: {.column}
 Vi skal se på sammenhængen mellem blodtryk og fedme. Vi får oplyst at der er 
@@ -888,7 +888,7 @@ tribble(~KØN, ~FEDME, ~BLODTRYK,
 ::::
 ::::
 
-::::
+:::::
 
 
 a) Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?
@@ -1385,7 +1385,7 @@ Vi estimerer forskellen på hoppelængde (på højre - venstre pen) for drengene
 Denne forskel er _ikke_ signifikant.
 
 ::::
-::::
+
 ::::
 
 ::::
@@ -1459,6 +1459,302 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 ::::
 ::::
 
+## Drenge - hormoner
+
+:::: smaller
+Vi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem 
+denne koncentration og drengenes alder og BMI.
+
+Drengene blev opdelt i aldersgrupper, og vi får oplyst hvor mange der var i hver:
+```{r echo = FALSE}
+tælling <- c(115,44,40,45,43,29,33,38,37,32,32,10)
+names(tælling) <- c("(5,8]","(8,9]"
+, "(9,10]"
+, "(10,11]"
+, "(11,12]"
+, "(12,13]"
+, "(13,14]"
+, "(14,15]"
+, "(15,16]"
+, "(16,17]"
+, "(17,18]"
+, "(18,20]")
+tælling
+```
+
+Vi får også et eksempel på data fra datasættet:
+```{r drengehormoner_eksempel_data}
+library(tidyverse)
+tribble(~horm, ~BMI, ~Ald.gr,
+5.72, 15.2, "(5,8]",
+8.71, 15.3, "(5,8]",
+5.80, 14.7, "(5,8]",
+7.17, 16.9, "(5,8]",
+7.46, 17.0, "(9,10]",
+6.51, 16.9, "(9,10]")
+```
+
+:::: 
+
+## Drenge - hormoner
+
+
+:::: {.columns}
+:::: {.column  width="60%"}
+:::: evensmaller
+Vi får nu oplyst at der er foretaget følgende analyse:
+
+> model=lm(horm~factor(Ald.gr)+BMI)  
+> summary(model)
+
+Hvilket giver dette resultat:
+```{r}
+Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
+, "factor(Ald.gr)(9,10]"
+, "factor(Ald.gr)(10,11]"
+, "factor(Ald.gr)(11,12]"
+, "factor(Ald.gr)(12,13]"
+, "factor(Ald.gr)(13,14]"
+, "factor(Ald.gr)(14,15]"
+, "factor(Ald.gr)(15,16]"
+, "factor(Ald.gr)(16,17]"
+, "factor(Ald.gr)(17,18]"
+, "factor(Ald.gr)(18,20]",
+"BMI")
+Estimate <- c(5.40224, 0.07335, 0.35709,
+              0.57922, 1.08688, 1.37499, 
+              2.28810, 2.11722, 2.23563, 
+              1.71083, 1.72436, 1.31706, 0.05815)
+
+`Std. Error` <- c(0.36791,0.20220,0.19914,0.20870,0.19665,0.22077,0.21874,0.21133,0.20853,0.22950,0.22674,0.32117,0.02176)
+
+`Pr(>|t|)`  <- c("<2e-16 ***",
+                  "0.71700",
+                  "0.07382 .",
+                  "0.00581 **",
+                  "6.42e-08 ***",
+                  "1.37e-09 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "7.30e-13 ***",
+                  "2.71e-13 ***",
+                  "5.14e-05 ***",
+                  "0.00791 **")
+
+tibble(Coefficients, Estimate,`Std. Error`) |> 
+  mutate(`t value` = Estimate/`Std. Error`) |> 
+  mutate(`Pr(>|t|)` = `Pr(>|t|)`)
+
+```
+
+Hvilken analyse er der udført?  
+
+::::
 
 
 
+
+::::
+:::: {.column width="40%"}
+:::: {.tiny}
+
+:::: {.fragment}
+Hvilken model?
+::::
+
+:::: {.fragment}
+"model = lm(osv)": Lineær regression
+::::
+
+:::: {.fragment}
+Med hormonniveau som den afhængige variabel. Hvad er den ellers?
+::::
+
+
+:::: {.fragment}
+multipel, fordi?
+::::
+
+:::: {.fragment}
+Mere end en forklarende, eller uafhængig, variabel
+::::
+
+
+:::: {.fragment}
+Hvilke?
+::::
+
+:::: {.fragment}
+Aldersgruppen er kategorisk forklarende variabel. BMI er en kontinuert forklarende variabel. 
+::::
+
+
+
+::::
+
+
+::::
+::::
+
+## Drenge - hormoner
+
+
+:::: {.columns}
+:::: {.column  width="60%"}
+:::: evensmaller
+> model=lm(horm~factor(Ald.gr)+BMI)  
+> summary(model)
+
+```{r}
+Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
+, "factor(Ald.gr)(9,10]"
+, "factor(Ald.gr)(10,11]"
+, "factor(Ald.gr)(11,12]"
+, "factor(Ald.gr)(12,13]"
+, "factor(Ald.gr)(13,14]"
+, "factor(Ald.gr)(14,15]"
+, "factor(Ald.gr)(15,16]"
+, "factor(Ald.gr)(16,17]"
+, "factor(Ald.gr)(17,18]"
+, "factor(Ald.gr)(18,20]",
+"BMI")
+Estimate <- c(5.40224, 0.07335, 0.35709,
+              0.57922, 1.08688, 1.37499, 
+              2.28810, 2.11722, 2.23563, 
+              1.71083, 1.72436, 1.31706, 0.05815)
+
+`Std. Error` <- c(0.36791,0.20220,0.19914,0.20870,0.19665,0.22077,0.21874,0.21133,0.20853,0.22950,0.22674,0.32117,0.02176)
+
+`Pr(>|t|)`  <- c("<2e-16 ***",
+                  "0.71700",
+                  "0.07382 .",
+                  "0.00581 **",
+                  "6.42e-08 ***",
+                  "1.37e-09 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "7.30e-13 ***",
+                  "2.71e-13 ***",
+                  "5.14e-05 ***",
+                  "0.00791 **")
+
+tibble(Coefficients, Estimate,`Std. Error`) |> 
+  mutate(`t value` = Estimate/`Std. Error`) |> 
+  mutate(`Pr(>|t|)` = `Pr(>|t|)`)
+```
+
+Fortolk resultaterne.
+
+::::
+
+
+
+
+::::
+:::: {.column width="40%"}
+:::: {.tiny}
+
+Hvad ser vi?
+
+::::: {.fragment}
+Hormonniveauet stiger tilsyneladende med stigende alder (og fastholdt BMI)
+:::::
+::::: {.fragment}
+Giv et eksempel
+:::::
+::::: {.fragment}
+Hormonniveuaet for alderskategorien (11,12] er 1.08688 højere end for referencen (5,8]. 
+:::::
+::::: {.fragment}
+Er det statistisk signifikant?
+:::::
+::::: {.fragment}
+Ja, stigningen er statistisk signifikant for næsten alle aldersgrupper. 
+:::::
+::::: {.fragment}
+Er der noget vi bør tilføje i den sammenhæng?
+:::::
+::::: {.fragment}
+Ja, der er en vis variation i hvor meget hormonniveauet stiger med alderen.
+:::::
+::::: {.fragment}
+Hvad med BMI?
+:::::
+::::: {.fragment}
+BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)
+::::: 
+
+
+
+::::
+
+
+
+::::
+::::
+
+
+
+## Drenge - hormoner - prediktion
+
+:::: {.columns}
+:::: {.column width="60%"}
+:::: {.tiny}
+Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.
+
+> model=lm(horm~factor(Ald.gr)+BMI)  
+
+```{r}
+Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
+, "factor(Ald.gr)(9,10]"
+, "factor(Ald.gr)(10,11]"
+, "factor(Ald.gr)(11,12]"
+, "factor(Ald.gr)(12,13]"
+, "factor(Ald.gr)(13,14]"
+, "factor(Ald.gr)(14,15]"
+, "factor(Ald.gr)(15,16]"
+, "factor(Ald.gr)(16,17]"
+, "factor(Ald.gr)(17,18]"
+, "factor(Ald.gr)(18,20]",
+"BMI")
+Estimate <- c(5.40224, 0.07335, 0.35709,
+              0.57922, 1.08688, 1.37499, 
+              2.28810, 2.11722, 2.23563, 
+              1.71083, 1.72436, 1.31706, 0.05815)
+
+`Std. Error` <- c(0.36791,0.20220,0.19914,0.20870,0.19665,0.22077,0.21874,0.21133,0.20853,0.22950,0.22674,0.32117,0.02176)
+
+`Pr(>|t|)`  <- c("<2e-16 ***",
+                  "0.71700",
+                  "0.07382 .",
+                  "0.00581 **",
+                  "6.42e-08 ***",
+                  "1.37e-09 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "< 2e-16 ***",
+                  "7.30e-13 ***",
+                  "2.71e-13 ***",
+                  "5.14e-05 ***",
+                  "0.00791 **")
+
+tibble(Coefficients, Estimate,`Std. Error`) |> 
+  mutate(`t value` = Estimate/`Std. Error`) |> 
+  mutate(`Pr(>|t|)` = `Pr(>|t|)`)
+```
+
+
+::::
+
+::::
+:::: {.column width="40%"}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::

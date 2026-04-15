@@ -756,3 +756,5 @@ Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi te
 
 
 ## Flere øvelser
+
+

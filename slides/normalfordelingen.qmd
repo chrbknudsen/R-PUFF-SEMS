@@ -1484,4 +1484,4 @@ pnorm(50, mean = 47, sd = 42)
 For de typeopgaver hvor vi skal finde $\mu$ og/eller $\sigma$ hjælper det ikke. Eksamenstaktisk er det nok også bedre at skalere manuelt (det demonstrerer at I har forstået teknikken; det er det de tester). Men så har I en kontrol på om I har regnet rigtigt.
 :::
 
-:::: 
+::::
