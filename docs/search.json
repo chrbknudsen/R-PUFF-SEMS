@@ -3106,5 +3106,12 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Resten",
     "text": "Resten\nHvordan ser et 95% KI ud?\nmiddel +/- 1.96*SE\nHvordan med et 90% KI?\nDet er nok en anden værdi end 1.96. Hvilken?\nved 95% ligger der 2.5% på hver side\nDerfor bruger vi\nqnorm(0.975) til at finde 1.96\nVed et 90% ligger der 5% på hver side\nSå bruger vi\nqnorm(0.95)\nSå vores 90% KI er beregnet ved middel +/- 1.644854 * SE\nVi har stadig ikke fundet SE\nStart med at finde middelværdien.\nEt referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8\nSå skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:\nDet vil sige at der skal ligge 5% på hver side af intervallet\n\n\n[1] 1.644854\n\n\n0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%\nIntervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4\nSå ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:\n14.4/sqrt(18) = 3.394113\nOg så finder vi konfidensintervallet ved: 112.8 + c(-1,1)1.9614.4/sqrt(18)\nOg her er der altså en regnefejl i modelløsningen… måske det er fordi de postulerer at sd er 14.4. Hvor vi skal gange med kvardratrod 18?"
+  },
+  {
+    "objectID": "slides/kategoriske.html#eksamensopgave",
+    "href": "slides/kategoriske.html#eksamensopgave",
+    "title": "Kategoriske udfald",
+    "section": "eksamensopgave",
+    "text": "eksamensopgave\nEt studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.\n\nBeregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\n\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n\n[1] 0.06172795 0.08827205\n\n\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\n\n[1] 0.03\n\n\nse_dk:\n\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
   }
 ]

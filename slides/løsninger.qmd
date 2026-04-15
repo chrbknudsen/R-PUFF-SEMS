@@ -8,6 +8,101 @@ format: html
 library(tidyverse)
 ```
 
+# Hypotesetests
+
+## Opgave
+
+Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
+Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
+20% mere end idealvægten.
+
+```{r}
+c(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |> sd()
+```
+
+Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)
+
+a. Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
+
+Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8
+
+Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:
+
+```{r}
+qnorm(0.95)
+```
+
+0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%
+
+Intervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -> s = (136.5-112.8)/1.644854 = 14.4
+
+Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:
+
+14.4/sqrt(18)  =  3.394113
+
+Og så finder vi konfidensintervallet ved:
+112.8 + c(-1,1)*1.96*14.4/sqrt(18)
+
+Og her er der altså en regnefejl i modelløsningen...
+
+b. Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, 
+samt eventuelt relevant estimat.
+
+fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor
+mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 
+112.8 med et 95% KI på det vi tidligere beregnede. 
+
+# Kategorisk
+
+## eksamensopgave
+Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
+incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
+
+a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
+
+```{r}
+se_gb <- sqrt(0.075*(1-0.075)/1513)
+se_gb
+```
+Der er et 0 for lidt i modelbesvarelsen...
+
+
+```{r}
+0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
+```
+
+b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
+Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
+
+forskel:
+
+```{r}
+diff <- 0.075-0.045
+diff
+```
+
+se_dk:
+
+```{r}
+se_dk <- sqrt(0.045*(1-0.045)/51851)
+```
+
+
+```{r}
+se_diff <- sqrt(se_dk^2 + se_gb^2)
+se_diff
+```
+
+et 95% ki for diffen:
+
+```{r}
+diff + c(-1,1)*1.96*se_diff
+```
+Intervallet indeholder _ikke_  0, og vi kan konkludere at der er en statistisk signifikant forskel.
+
+
+
 # Lineær regression
 
 ## Drenge - hormoner

@@ -757,4 +757,49 @@ Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi te
 
 ## Flere øvelser
 
+## eksamensopgave
+Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
+incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
 
+a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
+
+```{r}
+se_gb <- sqrt(0.075*(1-0.075)/1513)
+se_gb
+```
+Der er et 0 for lidt i modelbesvarelsen...
+
+
+```{r}
+0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
+```
+
+b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
+Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
+
+forskel:
+
+```{r}
+diff <- 0.075-0.045
+diff
+```
+
+se_dk:
+
+```{r}
+se_dk <- sqrt(0.045*(1-0.045)/51851)
+```
+
+
+```{r}
+se_diff <- sqrt(se_dk^2 + se_gb^2)
+se_diff
+```
+
+et 95% ki for diffen:
+
+```{r}
+diff + c(-1,1)*1.96*se_diff
+```
+Intervallet indeholder _ikke_  0, og vi kan konkludere at der er en statistisk signifikant forskel.
