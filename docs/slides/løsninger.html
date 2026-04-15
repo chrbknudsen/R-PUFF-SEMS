@@ -184,6 +184,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<section id="hypotesetests" class="level1">
+<h1>Hypotesetests</h1>
+<section id="opgave" class="level2">
+<h2 class="anchored" data-anchor-id="opgave">Opgave</h2>
+<p>Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">107</span>,<span class="dv">119</span>,<span class="dv">99</span>,<span class="dv">114</span>,<span class="dv">120</span>,<span class="dv">104</span>,<span class="dv">88</span>,<span class="dv">114</span>,<span class="dv">124</span>,<span class="dv">116</span>,<span class="dv">101</span>,<span class="dv">121</span>,<span class="dv">152</span>,<span class="dv">100</span>,<span class="dv">125</span>,<span class="dv">114</span>,<span class="dv">95</span>,<span class="dv">117</span>) <span class="sc">|&gt;</span> <span class="fu">sd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.42447</code></pre>
+</div>
+</div>
+<p>Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)</p>
+<ol type="a">
+<li>Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.</li>
+</ol>
+<p>Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8</p>
+<p>Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+</div>
+<p>0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%</p>
+<p>Intervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4</p>
+<p>Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:</p>
+<p>14.4/sqrt(18) = 3.394113</p>
+<p>Og så finder vi konfidensintervallet ved: 112.8 + c(-1,1)<em>1.96</em>14.4/sqrt(18)</p>
+<p>Og her er der altså en regnefejl i modelløsningen…</p>
+<ol start="2" type="a">
+<li>Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.</li>
+</ol>
+<p>fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede.</p>
+</section>
+</section>
+<section id="kategorisk" class="level1">
+<h1>Kategorisk</h1>
+<section id="eksamensopgave" class="level2">
+<h2 class="anchored" data-anchor-id="eksamensopgave">eksamensopgave</h2>
+<p>Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.</p>
+<ol type="a">
+<li>Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p<em>(1-p)/n) = sqrt(0.075</em>(1-0.075)/1513)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>se_gb <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>se_gb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.006771456</code></pre>
+</div>
+</div>
+<p>Der er et 0 for lidt i modelbesvarelsen…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.075</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06172795 0.08827205</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?</li>
+</ol>
+<p>forskel:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">0.075-0.045</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03</code></pre>
+</div>
+</div>
+<p>se_dk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>se_dk <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.045</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.045</span>)<span class="sc">/</span><span class="dv">51851</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>se_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(se_dk<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se_gb<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.006832381</code></pre>
+</div>
+</div>
+<p>et 95% ki for diffen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diff <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01660853 0.04339147</code></pre>
+</div>
+</div>
+<p>Intervallet indeholder <em>ikke</em> 0, og vi kan konkludere at der er en statistisk signifikant forskel.</p>
+</section>
+</section>
 <section id="lineær-regression" class="level1">
 <h1>Lineær regression</h1>
 <section id="drenge---hormoner" class="level2">
@@ -215,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>og 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.</p>
 <p>Endelig blev følgende regnestykke fortaget:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2167343</code></pre>
 </div>

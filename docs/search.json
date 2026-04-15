@@ -3113,5 +3113,68 @@
     "title": "Kategoriske udfald",
     "section": "eksamensopgave",
     "text": "eksamensopgave\nEt studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.\n\nBeregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\n\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n\n[1] 0.06172795 0.08827205\n\n\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\n\n[1] 0.03\n\n\nse_dk:\n\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
+  },
+  {
+    "objectID": "slides/løsninger.html",
+    "href": "slides/løsninger.html",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.2.0\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.2     ✔ tibble    3.3.1\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+  },
+  {
+    "objectID": "slides/løsninger.html#opgave",
+    "href": "slides/løsninger.html#opgave",
+    "title": "Opgaveløsninger",
+    "section": "Opgave",
+    "text": "Opgave\nVi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.\n\nc(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |&gt; sd()\n\n[1] 14.42447\n\n\nVi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)\n\nBeregn et 95% konfidensinterval for den sande middelprocent af idealvægt.\n\nEt referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8\nSå skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%\nIntervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4\nSå ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:\n14.4/sqrt(18) = 3.394113\nOg så finder vi konfidensintervallet ved: 112.8 + c(-1,1)1.9614.4/sqrt(18)\nOg her er der altså en regnefejl i modelløsningen…\n\nIndeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.\n\nfra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede."
+  },
+  {
+    "objectID": "slides/løsninger.html#eksamensopgave",
+    "href": "slides/løsninger.html#eksamensopgave",
+    "title": "Opgaveløsninger",
+    "section": "eksamensopgave",
+    "text": "eksamensopgave\nEt studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.\n\nBeregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\n\nse_gb &lt;- sqrt(0.075*(1-0.075)/1513)\nse_gb\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)\n\n[1] 0.06172795 0.08827205\n\n\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\ndiff &lt;- 0.075-0.045\ndiff\n\n[1] 0.03\n\n\nse_dk:\n\nse_dk &lt;- sqrt(0.045*(1-0.045)/51851)\n\n\nse_diff &lt;- sqrt(se_dk^2 + se_gb^2)\nse_diff\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\ndiff + c(-1,1)*1.96*se_diff\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
+  },
+  {
+    "objectID": "slides/løsninger.html#drenge---hormoner",
+    "href": "slides/løsninger.html#drenge---hormoner",
+    "title": "Opgaveløsninger",
+    "section": "Drenge - hormoner",
+    "text": "Drenge - hormoner\nVi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem denne koncentration og drengenes alder og BMI.\n\nHvilken analyse er der udført.\n\nud fra “model = lm(osv)” kan vi se at det er en lineær regression. Den er multipel fordi der er mere end en forklarende variabel. Vi har alder som kategorisk forklarende variabel, og BMI som kontinuert forklarende variabel.\n\nfortolk resultaterne. vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er hormonniveauet for alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen. BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)\nPrædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.\n\nDet finder vi ved: Den 6-årige: 5.40 + 0.058*17\nfor den 14-årige 5.40+0.229+0.058*18"
+  },
+  {
+    "objectID": "slides/løsninger.html#rygende-donorer",
+    "href": "slides/løsninger.html#rygende-donorer",
+    "title": "Opgaveløsninger",
+    "section": "Rygende donorer",
+    "text": "Rygende donorer\nHvad kan vi konkludere på baggrund af den analyse. Beregn relevante odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller\nBegge de forklarende variable er signifikante.\nSMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)1.960.21)\ndvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.\ndonoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)1.960.2527) = 0.9500012 2.5581696\nog OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)1.960.2891) = 1.451887 4.509273\nDvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.\nog 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n\n[1] 0.2167343\n\n\nHvordan fortolker vi det tal?\n-1.2848 er estimatet på intercept.\nDet var for referencegruppen. Den patientguppe der har fået lunger fra en donor under 40 år, der var ikke ryger.\nHvad er det så vi beregner?\nexp(-1.2848) går fra\nLog Odds(ratio) til:\nOdds\nOg brøken giver?\nDen går fra odds til sandsynlighed - så vi får?\nDen estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger."
+  },
+  {
+    "objectID": "slides/kategoriske.html#for-tidlig-fødsel",
+    "href": "slides/kategoriske.html#for-tidlig-fødsel",
+    "title": "Kategoriske udfald",
+    "section": "For tidlig fødsel",
+    "text": "For tidlig fødsel\n\n\n\nEt studie i England undersøgte faktorer for tidlig fødsel blandt 1513 gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5%.\nBeregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.\n\nHvordan ser et 95% KI ud?\n\n\n\\(\\text{estimat}\\pm1.96\\text{SE}\\)\n\n\nHvordan ser SE for en andel ud?\n\n\n\\(SE_{prop} = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nHar I fået fingre i modelbesvarelsen, er der en tastefejl i standardfejlen."
+  },
+  {
+    "objectID": "slides/kategoriske.html#resten",
+    "href": "slides/kategoriske.html#resten",
+    "title": "Kategoriske udfald",
+    "section": "resten",
+    "text": "resten\nphat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n\n[1] 0.06172795 0.08827205\n\n\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\n\n[1] 0.03\n\n\nse_dk:\n\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
+  },
+  {
+    "objectID": "slides/kategoriske.html#for-tidlig-fødsel---i-danmark",
+    "href": "slides/kategoriske.html#for-tidlig-fødsel---i-danmark",
+    "title": "Kategoriske udfald",
+    "section": "For tidlig fødsel - i Danmark",
+    "text": "For tidlig fødsel - i Danmark\n\n\n\nEt tilsvarende dansk studie med 51851 kvinder fandt en incidens på 4.5%\nEstimer forskellen i incidensen for tidlig fødsel i England vs danmark.\nEr der signifikant forskel?\n\nHvad er \\(H_0\\)?\n\n\n\\(H_0: p_{gb} - p_{dk} = 0\\)\n\n\nHvordan ser den samlede standardfejl ud?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\\(p_{gb} = 7.5\\%, n_{gb} = 1513\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/kategoriske.html#forskel",
+    "href": "slides/kategoriske.html#forskel",
+    "title": "Kategoriske udfald",
+    "section": "forskel:",
+    "text": "forskel:\ndiff &lt;- 0.075-0.045 diff\nse_dk:\nse_dk &lt;- sqrt(0.045*(1-0.045)/51851)\nse_diff &lt;- sqrt(se_dk^2 + se_gb^2) se_diff\net 95% ki for diffen:\ndiff + c(-1,1)1.96se_diff\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
   }
 ]

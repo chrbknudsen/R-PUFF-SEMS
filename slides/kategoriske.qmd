@@ -755,51 +755,90 @@ Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet i
 Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.
 
 
+
+
+## For tidlig fødsel
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Et studie i England undersøgte faktorer for tidlig fødsel blandt 1513 gravide kvinder og fandt at 
+incidensen for tidlig fødsel var 7.5%.
+
+Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+
+:::: {.fragment}
+Hvordan ser et 95% KI ud?
+::::
+:::: {.fragment}
+$\text{estimat}\pm1.96\text{SE}$
+::::
+:::: {.fragment}
+Hvordan ser SE for en andel ud?
+::::
+:::: {.fragment}
+$SE_{prop} = \sqrt{\frac{p(1-p)}{n}}$
+::::
+::::
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+:::: tiny
+Har I fået fingre i modelbesvarelsen, er der en tastefejl i standardfejlen.
+::::
+
+## For tidlig fødsel - i Danmark
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+
+Et tilsvarende dansk studie med 51851 kvinder fandt en incidens på 4.5%  
+Estimer forskellen i incidensen for tidlig fødsel i England vs danmark.  
+Er der signifikant forskel?
+
+:::: {.fragment}
+Hvad er $H_0$?
+::::
+
+:::: {.fragment}
+$H_0: p_{gb} - p_{dk} = 0$
+::::
+
+:::: {.fragment}
+Hvordan ser den samlede standardfejl ud?
+::::
+
+:::: {.fragment}
+$SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
+::::
+
+:::: {.fragment}
+$p_{gb} = 7.5\%, n_{gb} = 1513$
+::::
+
+
+::::
+
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
 ## Flere øvelser
-
-## eksamensopgave
-Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
-incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
-
-a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
-phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
-
-```{r}
-se_gb <- sqrt(0.075*(1-0.075)/1513)
-se_gb
-```
-Der er et 0 for lidt i modelbesvarelsen...
-
-
-```{r}
-0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
-```
-
-b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
-Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
-
-forskel:
-
-```{r}
-diff <- 0.075-0.045
-diff
-```
-
-se_dk:
-
-```{r}
-se_dk <- sqrt(0.045*(1-0.045)/51851)
-```
-
-
-```{r}
-se_diff <- sqrt(se_dk^2 + se_gb^2)
-se_diff
-```
-
-et 95% ki for diffen:
-
-```{r}
-diff + c(-1,1)*1.96*se_diff
-```
-Intervallet indeholder _ikke_  0, og vi kan konkludere at der er en statistisk signifikant forskel.
