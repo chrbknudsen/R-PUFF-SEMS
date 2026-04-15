@@ -3036,5 +3036,40 @@
     "title": "Logistisk regression",
     "section": "Rygende donorer",
     "text": "Rygende donorer\n\nEndelig blev følgende regnestykke fortaget:\n\nexp(-1.2848)/(1+exp(-1.2848))\n\n[1] 0.2167343\n\n\nHvordan fortolker vi det tal?\n\n-1.2848 er estimatet på intercept.\n\n\nDet var for referencegruppen. Den patientguppe der har fået lunger fra en donor under 40 år, der var ikke ryger.\n\n\nHvad er det så vi beregner?\n\n\nexp(-1.2848) går fra\n\n\nLog Odds(ratio) til:\n\n\nOdds\n\n\nOg brøken giver?\n\n\nDen går fra odds til sandsynlighed - så vi får?\n\n\nDen estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger."
+  },
+  {
+    "objectID": "slides/linreg.html#drenge---hormoner",
+    "href": "slides/linreg.html#drenge---hormoner",
+    "title": "Lineær regression",
+    "section": "Drenge - hormoner",
+    "text": "Drenge - hormoner\n\nVi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem denne koncentration og drengenes alder og BMI.\nDrengene blev opdelt i aldersgrupper, og vi får oplyst hvor mange der var i hver:\n\n\n  (5,8]   (8,9]  (9,10] (10,11] (11,12] (12,13] (13,14] (14,15] (15,16] (16,17] \n    115      44      40      45      43      29      33      38      37      32 \n(17,18] (18,20] \n     32      10 \n\n\nVi får også et eksempel på data fra datasættet:\n\n\n# A tibble: 6 × 3\n   horm   BMI Ald.gr\n  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; \n1  5.72  15.2 (5,8] \n2  8.71  15.3 (5,8] \n3  5.8   14.7 (5,8] \n4  7.17  16.9 (5,8] \n5  7.46  17   (9,10]\n6  6.51  16.9 (9,10]"
+  },
+  {
+    "objectID": "slides/linreg.html#drenge---hormoner-1",
+    "href": "slides/linreg.html#drenge---hormoner-1",
+    "title": "Lineær regression",
+    "section": "Drenge - hormoner",
+    "text": "Drenge - hormoner\n\n\n\nVi får nu oplyst at der er foretaget følgende analyse:\n\nmodel=lm(horm~factor(Ald.gr)+BMI)\nsummary(model)\n\nHvilket giver dette resultat:\n\n\n# A tibble: 13 × 5\n   Coefficients          Estimate `Std. Error` `t value` `Pr(&gt;|t|)`  \n   &lt;chr&gt;                    &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       \n 1 (Intercept)             5.40         0.368     14.7   &lt;2e-16 ***  \n 2 factor(Ald.gr)(8,9]     0.0734       0.202      0.363 0.71700     \n 3 factor(Ald.gr)(9,10]    0.357        0.199      1.79  0.07382 .   \n 4 factor(Ald.gr)(10,11]   0.579        0.209      2.78  0.00581 **  \n 5 factor(Ald.gr)(11,12]   1.09         0.197      5.53  6.42e-08 ***\n 6 factor(Ald.gr)(12,13]   1.37         0.221      6.23  1.37e-09 ***\n 7 factor(Ald.gr)(13,14]   2.29         0.219     10.5   &lt; 2e-16 *** \n 8 factor(Ald.gr)(14,15]   2.12         0.211     10.0   &lt; 2e-16 *** \n 9 factor(Ald.gr)(15,16]   2.24         0.209     10.7   &lt; 2e-16 *** \n10 factor(Ald.gr)(16,17]   1.71         0.230      7.45  7.30e-13 ***\n11 factor(Ald.gr)(17,18]   1.72         0.227      7.61  2.71e-13 ***\n12 factor(Ald.gr)(18,20]   1.32         0.321      4.10  5.14e-05 ***\n13 BMI                     0.0582       0.0218     2.67  0.00791 **  \n\n\nHvilken analyse er der udført?\n\n\n\n\nHvilken model?\n\n\n“model = lm(osv)”: Lineær regression\n\n\nMed hormonniveau som den afhængige variabel. Hvad er den ellers?\n\n\nmultipel, fordi?\n\n\nMere end en forklarende, eller uafhængig, variabel\n\n\nHvilke?\n\n\nAldersgruppen er kategorisk forklarende variabel. BMI er en kontinuert forklarende variabel."
+  },
+  {
+    "objectID": "slides/linreg.html#rest",
+    "href": "slides/linreg.html#rest",
+    "title": "Lineær regression",
+    "section": "rest",
+    "text": "rest\n\nfortolk resultaterne. vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er hormonniveauet for alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen. BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)\nPrædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.\n\nDet finder vi ved: Den 6-årige: 5.40 + 0.058*17\nfor den 14-årige 5.40+0.229+0.058*18"
+  },
+  {
+    "objectID": "slides/linreg.html#drenge---hormoner-2",
+    "href": "slides/linreg.html#drenge---hormoner-2",
+    "title": "Lineær regression",
+    "section": "Drenge - hormoner",
+    "text": "Drenge - hormoner\n\n\n\n\nmodel=lm(horm~factor(Ald.gr)+BMI)\nsummary(model)\n\nHvilket giver dette resultat:\n\n\n# A tibble: 13 × 5\n   Coefficients          Estimate `Std. Error` `t value` `Pr(&gt;|t|)`  \n   &lt;chr&gt;                    &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       \n 1 (Intercept)             5.40         0.368     14.7   &lt;2e-16 ***  \n 2 factor(Ald.gr)(8,9]     0.0734       0.202      0.363 0.71700     \n 3 factor(Ald.gr)(9,10]    0.357        0.199      1.79  0.07382 .   \n 4 factor(Ald.gr)(10,11]   0.579        0.209      2.78  0.00581 **  \n 5 factor(Ald.gr)(11,12]   1.09         0.197      5.53  6.42e-08 ***\n 6 factor(Ald.gr)(12,13]   1.37         0.221      6.23  1.37e-09 ***\n 7 factor(Ald.gr)(13,14]   2.29         0.219     10.5   &lt; 2e-16 *** \n 8 factor(Ald.gr)(14,15]   2.12         0.211     10.0   &lt; 2e-16 *** \n 9 factor(Ald.gr)(15,16]   2.24         0.209     10.7   &lt; 2e-16 *** \n10 factor(Ald.gr)(16,17]   1.71         0.230      7.45  7.30e-13 ***\n11 factor(Ald.gr)(17,18]   1.72         0.227      7.61  2.71e-13 ***\n12 factor(Ald.gr)(18,20]   1.32         0.321      4.10  5.14e-05 ***\n13 BMI                     0.0582       0.0218     2.67  0.00791 **  \n\n\nFortolk resultaterne.\n\n\n\nHvad ser vi?\n\nHormonniveauet stiger tilsyneladende med stigende alder (og fastholdt BMI)\n\n\nGiv et eksempel\n\n\nHormonniveuaet for alderskategorien (11,12] er 1.08688 højere end for referencen (5,8].\n\n\nEr det statistisk signifikant?\n\n\nJa, stigningen er statistisk signifikant for næsten alle aldersgrupper.\n\n\nEr der noget vi bør tilføje i den sammenhæng?\n\n\nJa, der er en vis variation i hvor meget hormonniveauet stiger med alderen.\n\n\nHvad med BMI?\n\n\nBMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)"
+  },
+  {
+    "objectID": "slides/linreg.html#drenge---hormoner---prediktion",
+    "href": "slides/linreg.html#drenge---hormoner---prediktion",
+    "title": "Lineær regression",
+    "section": "Drenge - hormoner - prediktion",
+    "text": "Drenge - hormoner - prediktion\n\n\n\nPrædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.\n\nmodel=lm(horm~factor(Ald.gr)+BMI)\n\n\n\n# A tibble: 13 × 5\n   Coefficients          Estimate `Std. Error` `t value` `Pr(&gt;|t|)`  \n   &lt;chr&gt;                    &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       \n 1 (Intercept)             5.40         0.368     14.7   &lt;2e-16 ***  \n 2 factor(Ald.gr)(8,9]     0.0734       0.202      0.363 0.71700     \n 3 factor(Ald.gr)(9,10]    0.357        0.199      1.79  0.07382 .   \n 4 factor(Ald.gr)(10,11]   0.579        0.209      2.78  0.00581 **  \n 5 factor(Ald.gr)(11,12]   1.09         0.197      5.53  6.42e-08 ***\n 6 factor(Ald.gr)(12,13]   1.37         0.221      6.23  1.37e-09 ***\n 7 factor(Ald.gr)(13,14]   2.29         0.219     10.5   &lt; 2e-16 *** \n 8 factor(Ald.gr)(14,15]   2.12         0.211     10.0   &lt; 2e-16 *** \n 9 factor(Ald.gr)(15,16]   2.24         0.209     10.7   &lt; 2e-16 *** \n10 factor(Ald.gr)(16,17]   1.71         0.230      7.45  7.30e-13 ***\n11 factor(Ald.gr)(17,18]   1.72         0.227      7.61  2.71e-13 ***\n12 factor(Ald.gr)(18,20]   1.32         0.321      4.10  5.14e-05 ***\n13 BMI                     0.0582       0.0218     2.67  0.00791 **  \n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]

@@ -3,6 +3,32 @@ title: "Opgaveløsninger"
 format: html
 ---
 
+# Lineær regression
+
+## Drenge - hormoner
+Vi har undersøgt koncentrationen af et hormon hos ellers sunde og raske drenge. Vi ønsker at undersøge sammenhængen mellem 
+denne koncentration og drengenes alder og BMI.
+
+a. Hvilken analyse er der udført.
+
+ud fra "model = lm(osv)" kan vi se at det er en lineær regression. Den er multipel fordi der er mere end en forklarende variabel.
+Vi har alder som kategorisk forklarende variabel, og BMI som kontinuert forklarende variabel.
+
+b. fortolk resultaterne. 
+vi ser at hormonniveauet tilsyneladende stiger med stigende alder (og fastholdt BMI). Eksempelvis er  hormonniveauet for 
+alderskategorien (11,12] 1.08688 højere end for referencen (5,8]. Stigningen er statistisk signifikant for næsten alle 
+aldersgrupper. Der er dog en vis variation i hvor meget hormonniveauet stiger med alderen.
+BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058 pr BMI-point (ved fastholdt alder)
+
+c. Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.
+
+Det finder vi ved: 
+Den 6-årige:
+5.40 + 0.058*17 
+
+for den 14-årige
+5.40+0.229+0.058*18
+
 # Logistisk
 
 ## Rygende donorer
