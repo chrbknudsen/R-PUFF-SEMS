@@ -1431,23 +1431,54 @@ Hvad er normalområdet?
 ::::
 ::::
 
-## Opgave
+## Diabetikere - fra et interval til et andet
 
 Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
-Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
-20% mere end idealvægten.
 
 ```{r}
-c(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |> sd()
+c(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117)
 ```
 
-Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)
+Data er procent af idealvægt. 95 betyder at pågældende individ vejer 5% mindre end idealvægten. 120 betyder at vedkommende vejer 
+20% mere end idealvægten.
 
-a. Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
+Vi får oplyst at et 90% reference interval kan beregnes til [89.1; 136.5]
+
+Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
+
+## Diabetikere - fra et interval til et andet
+
+Hvordan ser et 95% KI ud?
+
+middel +/- 1.96*SE
+
+Hvordan med et 90% KI?
+
+Det er nok en anden værdi end 1.96. Hvilken?
+
+ved 95% ligger der 2.5% på hver side
+
+Derfor bruger vi
+
+qnorm(0.975) til at finde 1.96
+
+Ved et 90% ligger der 5% på hver side
+
+Så bruger vi 
+
+qnorm(0.95)
+
+Så vores 90% KI er beregnet ved middel +/- 1.644854 * SE
+
+Vi har stadig ikke fundet SE
+
+Start med at finde middelværdien.
 
 Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8
 
 Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:
+
+Det vil sige at der skal ligge 5% på hver side af intervallet
 
 ```{r}
 qnorm(0.95)
@@ -1464,9 +1495,10 @@ Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensinterva
 Og så finder vi konfidensintervallet ved:
 112.8 + c(-1,1)*1.96*14.4/sqrt(18)
 
-Og her er der altså en regnefejl i modelløsningen...
+Og her er der altså en regnefejl i modelløsningen... måske det er fordi de postulerer at sd er 14.4. Hvor vi skal gange med kvardratrod 18?
 
-b. Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, 
+## Diabetikere - fra et interval til et andet
+Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, 
 samt eventuelt relevant estimat.
 
 fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor
