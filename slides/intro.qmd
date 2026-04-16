@@ -43,6 +43,8 @@ Så... Mere eksamensforberedelse end statistikkursus
 
 Der er typisk to opgaver - med delspørgsmål
 
+:::: smaller
+
 - Beregning af konfidensintervaller og signifikans (SEMS og KI for middelværdier)
 - Lineær regression, tolkning og prediktion
 - Logistisk regression, tolkning og prediktion
@@ -52,6 +54,8 @@ Der er typisk to opgaver - med delspørgsmål
 - Hypotesetest - primært parret t-test
 - Chi-i-anden test
 - Vurdering af konfidensinterval baseret på antal observationer. 
+
+::::
 
 ## Vi kører slides
 
