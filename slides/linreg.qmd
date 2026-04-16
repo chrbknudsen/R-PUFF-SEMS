@@ -1966,13 +1966,12 @@ Og hvis donor var (tidligere) ryger?
 ::::
 
 
-## Transplanteret lungevolumen 2
+## Transplanteret lungevolumen
 
 :::: {.columns}
 :::: {.column}
 
-:::: {.evensmaller}
-   
+:::: {.tiny}
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -2019,66 +2018,55 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
      font = list(google_font("Courier Prime"), default_fonts())) 
 ```
 
-Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?
+Fortolk værdierne i søjlen "Estimate". Beregn også de tilhørende 95% KI.
+
+:::: {.fragment}
+Intercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.
+::::
+
+:::: {.fragment}
+Hvad er estimatet?
+::::
+
+
+:::: {.fragment}
+1.3697
+::::
+
+
+:::: {.fragment}
+Og 95% KI?
+::::
+
+
+:::: {.fragment}
+Hvad med de der fik lunger fra en (tidligere) ryger?
+::::
+:::: {.fragment}
+Der var forbedringen lidt mindre. 
+::::
+:::: {.fragment}
+Hvor meget?
+::::
+
+:::: {.fragment}
+0.19 mindre end hvis de havde fået lunger fra en ikke-ryger
+::::
+:::: {.fragment}
+95% KI?
+::::
 
 ::::
 
 ::::
 :::: {.column}
 
-:::: {.evensmaller}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
 
-:::: {.fragment}
-Hvilken slags analyse?
-::::
-:::: {.fragment}
-(multipel) lineær regression
-::::
-
-:::: {.fragment}
-Hvilke variable?
-::::
-
-:::: {.fragment}
-fevl_diff er den kontinuærte responsvariabel
-::::
-:::: {.fragment}
-SMOKE er den forklarende, kategoriske (og binære) variabel
-::::
-
-:::: {.fragment}
-Er der en ændring i lungefunktionen for reference gruppen
-::::
-:::: {.fragment}
-Ja, den bliver bedre
-::::
-:::: {.fragment}
-Og hvis donor var (tidligere) ryger?
-::::
-:::: {.fragment}
-Ændringen i lungefunktionen efter transplantation afhænger af om donor var (tidligere) ryger. Den er statistisk signifikant med en p-værdi på 0.0485
-::::
-
-
-
-::::
-::::
-::::
-
-
-
-
-Intercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. 
-Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:
-
-```{r}
-1.36970 + c(-1,1)*1.96*0.06646
 ```
+::::
+::::
 
-Forbedringen i lungefunktion er lidt mindre for patienter med en donor som
-var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være
-0.19092 laverem, med det tilhørende 95% KI på:
-
-```{r}
--0.19092+c(-1,1)*1.96*0.09644
-```

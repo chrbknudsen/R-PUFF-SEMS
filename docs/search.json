@@ -697,7 +697,7 @@
     "href": "slides/linreg.html#transplanteret-lungevolumen-2-1",
     "title": "Lineær regression",
     "section": "Transplanteret lungevolumen 2",
-    "text": "Transplanteret lungevolumen 2\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?\n\n\n\n\nHvilken slags analyse?\n\n\n(multipel) lineær regression\n\n\nHvilke variable?\n\n\nfevl_diff er den kontinuærte responsvariabel\n\n\nSMOKE er den forklarende, kategoriske (og binære) variabel\n\n\nEr der en ændring i lungefunktionen for reference gruppen\n\n\nJa, den bliver bedre\n\n\nOg hvis donor var (tidligere) ryger?\n\n\nÆndringen i lungefunktionen efter transplantation afhænger af om donor var (tidligere) ryger. Den er statistisk signifikant med en p-værdi på 0.0485\n\n\n\nIntercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:\n\n\n[1] 1.239438 1.499962\n\n\nForbedringen i lungefunktion er lidt mindre for patienter med en donor som var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være 0.19092 laverem, med det tilhørende 95% KI på:\n\n\n[1] -0.3799424 -0.0018976"
+    "text": "Transplanteret lungevolumen 2\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/kategoriske.html#kategoriske-udfald",
@@ -2154,5 +2154,19 @@
     "title": "webR in Quarto HTML Documents",
     "section": "Øvelse 1",
     "text": "Øvelse 1\n\n\nHer skriver vi hvad der skal stå til venstre\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#transplanteret-lungevolumen-sidste-del",
+    "href": "slides/linreg.html#transplanteret-lungevolumen-sidste-del",
+    "title": "Lineær regression",
+    "section": "Transplanteret lungevolumen sidste del",
+    "text": "Transplanteret lungevolumen sidste del\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#transplanteret-lungevolumen-3",
+    "href": "slides/linreg.html#transplanteret-lungevolumen-3",
+    "title": "Lineær regression",
+    "section": "Transplanteret lungevolumen",
+    "text": "Transplanteret lungevolumen\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
