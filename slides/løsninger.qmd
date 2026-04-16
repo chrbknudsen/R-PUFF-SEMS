@@ -8,6 +8,101 @@ format: html
 library(tidyverse)
 ```
 
+# Hypotesetests
+
+## Opgave
+
+Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
+Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
+20% mere end idealvægten.
+
+```{r}
+c(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |> sd()
+```
+
+Vi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)
+
+a. Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
+
+Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8
+
+Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:
+
+```{r}
+qnorm(0.95)
+```
+
+0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%
+
+Intervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -> s = (136.5-112.8)/1.644854 = 14.4
+
+Så ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:
+
+14.4/sqrt(18)  =  3.394113
+
+Og så finder vi konfidensintervallet ved:
+112.8 + c(-1,1)*1.96*14.4/sqrt(18)
+
+Og her er der altså en regnefejl i modelløsningen...
+
+b. Indeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, 
+samt eventuelt relevant estimat.
+
+fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor
+mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 
+112.8 med et 95% KI på det vi tidligere beregnede. 
+
+# Kategorisk
+
+## eksamensopgave
+Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
+incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
+
+a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
+
+```{r}
+se_gb <- sqrt(0.075*(1-0.075)/1513)
+se_gb
+```
+Der er et 0 for lidt i modelbesvarelsen...
+
+
+```{r}
+0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
+```
+
+b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
+Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
+
+forskel:
+
+```{r}
+diff <- 0.075-0.045
+diff
+```
+
+se_dk:
+
+```{r}
+se_dk <- sqrt(0.045*(1-0.045)/51851)
+```
+
+
+```{r}
+se_diff <- sqrt(se_dk^2 + se_gb^2)
+se_diff
+```
+
+et 95% ki for diffen:
+
+```{r}
+diff + c(-1,1)*1.96*se_diff
+```
+Intervallet indeholder _ikke_  0, og vi kan konkludere at der er en statistisk signifikant forskel.
+
+
+
 # Lineær regression
 
 ## Drenge - hormoner
@@ -33,6 +128,120 @@ Den 6-årige:
 
 for den 14-årige
 5.40+0.229+0.058*18
+
+## transplanteret lungevolumen
+
+Vi ser på data for lungetransplanterede patienter. Man har været ndøt til at bruge
+ældre donorer, der også kan have været rygere. Vi har observationer for 426 
+patienter.
+
+De første 6 observationer er givet:
+
+```{r}
+tribble(~fevl_prior_to_tx, ~fevl_after, ~fevl_diff, ~SMOKE,
+1.40, 3.8, 2.4, "Never smoker",
+0.56, 0.95, 0.39, "Smoker or former smoker",
+0.37, 1.25, 0.88, "Smoker or former smoker",
+0.54, 2.35, 1.81, "Smoker or former smoker",
+0.71, 1.60, 0.89, "Never smoker",
+1.78, 2.08, 0.30, "Never smoker")
+```
+
+fevl_prior_to_tx: fevl målt før transplantation
+fevl_after: fevl målet efter transplantation
+fevl_diff: differencen mellem fevl_after og fevl_prior_to_tx
+SMOKE: Rygstatus for donor.
+
+Vi får oplyst følgende:
+
+| | mean | sd |
+|-|-|-|
+|fevl_prior_to_tx | 0.835086 | 0.5365149 |
+|fevl_after|2.122762|0.9459951|
+|fevl_diff|1.279024|0.9411598|
+
+Undersøg ved brug af relevant statistik metode om patienternes lungefunktion (fevl) har ændret sig efter transplantationen.
+
+Det er en parret t-test (for vi har målinger på samme patient både før og efter)
+
+```{r}
+1.279024/(0.9411598/sqrt(426))
+```
+
+Det er større end 1.96, så statistisk signifikant (nogen føler trang til at sige "klart signifikant")
+
+b) Nu udførtes følgende analyse:
+> model <- lm(fevl_diff~factor(SMOKE))
+> summary(model)
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "1.36970", "0.06646", "20.61", "<2e-16***",
+"factor(SMOKE)Smoker or former smoker", "-0.19092", "0.09644", "-1.98", "0.0485*"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?
+
+Det er en multipel lineær regression med en forklarende kategorisk (og binær) variabel; SMOKE. Responsvariabel er fevl_diff. Ændringen i liungefunktion 
+efter transplantationen er afhængig af om donor var ryger eller ikke-ryger.
+Det estimeres at lungefunktionen er lavere hvis donor var ryger - denne forskel
+er statistisk signifikant med p = 0.0485.
+
+c) Fortolk værdierne i søjlen "Estimate". Beregn tilhørende 95% KI
+
+Intercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. 
+Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:
+
+```{r}
+1.36970 + c(-1,1)*1.96*0.06646
+```
+
+Forbedringen i lungefunktion er lidt mindre for patienter med en donor som
+var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være
+0.19092 laverem, med det tilhørende 95% KI på:
+
+```{r}
+-0.19092+c(-1,1)*1.96*0.09644
+```
 
 # Logistisk
 
