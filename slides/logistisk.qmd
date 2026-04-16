@@ -1037,7 +1037,7 @@ Husk - log(odds)!
 
 
 ## Rygende donorer
-:::: tiny 
+:::: reallysmall 
 Endelig blev følgende regnestykke fortaget:
 
 ```{r echo = TRUE}
@@ -1090,5 +1090,319 @@ Den går fra odds til sandsynlighed - så vi får?
 
 Den estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger.
 :::: 
+::::
+
+
+## DTP-vaccine
+
+:::: {.columns}
+:::: {.column}
+:::: {.reallysmall}
+
+1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod 
+specifikke sygdomme, også var en generelt reduceret børne-dødelighed.
+
+Børnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret.
+anden gang ca. 6 måneder senere, hvor der blev fulgt op.
+En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).
+
+Vi får oplyst de seks første observationer i datasættet:
+
+
+```{r}
+tribble(~alder, ~status, ~dtp, ~etngr, ~vaegt,
+0.592, 0,  1, 1, 5.6,
+0.425, 1 , 1 ,1 , 6.0,
+0.510, 0,  1 ,1, 6.2,
+0.592, 0,1,1, 6.2,
+0.173,0,0,1, 5.6,
+0.173,0
+,0,1, 5.2)
+```
+::::
+
+::::
+:::: {.column}
+:::: {.evensmaller}
+Variablene i datasættet oplyses at være:  
+alder - alder ved vaccinationen - i år  
+status - status ved opfølgning. 1: død, 0: i live  
+dtp: blev barnet vaccineret. 1: ja, 0: nej  
+vægt: barnets vægt ved vaccination (i kg)  
+etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden
+
+Og optælling:  
+
+```{r}
+dtp <- c(
+  rep(0, 526), rep(0, 9),
+  rep(1, 892), rep(1, 46)
+)
+
+status <- c(
+  rep(0, 526), rep(1, 9),
+  rep(0, 892), rep(1, 46)
+)
+```
+
+```{r echo = TRUE}
+table(dtp,status)
+```
+::::
+::::
+::::
+
+
+## DTP-vaccine - kort udgave
+
+:::: smaller
+
+Lad os lige koge det ned til kernen
+
+:::: {.fragment}
+
+1473 observationer. 
+
+::::
+:::: {.fragment}
+Med oplysning om alder og vægt - kontinuærte variable
+
+og 
+
+::::
+:::: {.fragment}
+
+Status (død/levende), dtp (vaccine, ja/nej) og etnisk gruppe. Alle tre kategoriske og binære.  
+Status er den primære responsvariabel - det vi undersøger.  
+
+::::
+:::: {.fragment}
+
+Og så tabellen
+
+```{r}
+dtp <- c(
+  rep(0, 526), rep(0, 9),
+  rep(1, 892), rep(1, 46)
+)
+
+status <- c(
+  rep(0, 526), rep(1, 9),
+  rep(0, 892), rep(1, 46)
+)
+```
+
+```{r echo = TRUE}
+table(dtp,status)
+```
+
+::::
+:::: {.fragment}
+Resten er fluff, og en del af taktikken når I skal løse opgaver er at skære dem ind til benet.
+::::
+::::
+
+
+## DTP-vaccine
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.tiny}
+Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?
+
+:::: {.fragment}
+Hvordan vil vi gribe det an?
+::::
+:::: {.fragment}
+Vi vil sammenligne de forskellige risici. Så Risk Ratio.
+::::
+:::: {.fragment}
+Hvad skal vi bruge?
+::::
+:::: {.fragment}
+Risikoen for død blandt de vaccinerede. Og risikoen for død blandt de ikke vaccinerede.
+::::
+:::: {.fragment}
+Og så skal vi opstille en $H_0$. Når vi arbejder med RR, hvordan ser den så _altid_ ud?
+::::
+:::: {.fragment}
+$H_0: RR = 1$
+::::
+:::: {.fragment}
+Hvad skal vi bruge der?
+::::
+:::: {.fragment}
+En test-værdi som vi kan sammenligne med 1.96
+::::
+:::: {.fragment}
+Hvordan beregner vi den?
+::::
+:::: {.fragment}
+$\frac{\text{Estimat}}{SE}$
+::::
+:::: {.fragment}
+Og hvordan beregner vi SE?
+::::
+:::: {.fragment}
+$SE\big(\log(RR)\big)=\sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+::::
+:::: {.fragment}
+HUSK! Vi regner på log(RR)
+::::
+::::
+
+::::
+:::: {.column}
+:::: smaller
+```{r}
+table(dtp,status)
+```
+::::
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## DTP-vaccine
+:::: {.reallysmall}
+
+:::: {.columns}
+:::: {.column}
+Opgaven fortsætter: Hvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus hvor der justeres for de øvrige variable? Angiv den tilsvarende R-kode
+
+:::: {.fragment}
+Den formulering er kode for: Hvilken model vil vi opstille?
+::::
+:::: {.fragment}
+Hvad er responsvariablen?
+::::
+:::: {.fragment}
+Den er død
+::::
+:::: {.fragment}
+Er det kategorisk eller kontinuært?
+::::
+:::: {.fragment}
+Det bliver ikke mere kategorisk!
+::::
+:::: {.fragment}
+Hvilken slags model skal vi så opstille?
+::::
+:::: {.fragment}
+En logistisk regression, med dødeligheden som afhængig variabel.
+::::
+:::: {.fragment}
+Hvad skal vi have med som forklarende variable?
+::::
+:::: {.fragment}
+vaccinestatus. Og resten af de variable vi havde i datasættet. 
+::::
+
+
+::::
+:::: {.column}
+
+:::: {.fragment}
+Eksemplet på data var:
+::::
+:::: {.fragment}
+
+```{r}
+tribble(~alder, ~status, ~dtp, ~etngr, ~vaegt,
+0.592, 0,  1, 1, 5.6,
+0.425, 1 , 1 ,1 , 6.0,
+0.510, 0,  1 ,1, 6.2,
+0.592, 0,1,1, 6.2,
+0.173,0,0,1, 5.6,
+0.173,0
+,0,1, 5.2)
+```
+
+::::
+:::: {.fragment}
+Så det er?
+::::
+:::: {.fragment}
+Alder, vægt (vaegt) etnicitet (etngr) og vaccinestatus (dtp).
+::::
+:::: {.fragment}
+Hvad er de?
+::::
+:::: {.fragment}
+Alder og vægt er kontinuærte, etnicitet og vaccinestatus er kategoriske.
+::::
+:::: {.fragment}
+Så hvordan ser R-koden ud?
+::::
+:::: {.fragment}
+glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = "binomial")
+::::
+
+::::
+::::
+::::
+
+## DTP-vaccine
+
+:::: {.columns}
+:::: {.column}
+:::: {.evensmaller}
+
+Typisk bliver I hjulpet hvis I læser det næste spørgsmål. Der er nemlig ofte en formulering:
+
+"Den korrekte analyse gav nedenstående resultat:"
+
+
+```{r}
+tribble(~Coefficients, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", 0.05666, 0.02866, 1.98, "0.048 *",
+"factor(dtp)1", 0.02609, 0.01162, 2.25, "0.025 *",
+"factor(etngr)1", 0.02294, 0.01033, 2.22, "0.027 *",
+"alder", 0.05845, 0.03897, 1.50, "0.134",
+"vaegt", -0.01140, 0.00527, -2.16, "0.031 *")
+```
+
+Fortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? 
+
+Giv et relevant effektmål med tilhørende 95% konfidensinterval
+
+::::
+
+::::
+:::: {.column}
+:::: {.evensmaller}
+
+:::: {.fragment}
+Er dtp signifikant?
+::::
+:::: {.fragment}
+Ja, dtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025
+::::
+:::: {.fragment}
+Hvad er effektmålet? Husk i den logistiske regression får vi ?
+::::
+:::: {.fragment}
+log-odds - så hvordan finder vi Odds(ratio)?
+::::
+:::: {.fragment}
+Og KI?
+::::
+:::: {.fragment}
+
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
 ::::
 

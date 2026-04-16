@@ -697,7 +697,7 @@
     "href": "slides/linreg.html#transplanteret-lungevolumen-2-1",
     "title": "Lineær regression",
     "section": "Transplanteret lungevolumen 2",
-    "text": "Transplanteret lungevolumen 2\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af denne?\n\n\n\n\nHvilken slags analyse?\n\n\n(multipel) lineær regression\n\n\nHvilke variable?\n\n\nfevl_diff er den kontinuærte responsvariabel\n\n\nSMOKE er den forklarende, kategoriske (og binære) variabel\n\n\nEr der en ændring i lungefunktionen for reference gruppen\n\n\nJa, den bliver bedre\n\n\nOg hvis donor var (tidligere) ryger?\n\n\nÆndringen i lungefunktionen efter transplantation afhænger af om donor var (tidligere) ryger. Den er statistisk signifikant med en p-værdi på 0.0485\n\n\n\nIntercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:\n\n\n[1] 1.239438 1.499962\n\n\nForbedringen i lungefunktion er lidt mindre for patienter med en donor som var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være 0.19092 laverem, med det tilhørende 95% KI på:\n\n\n[1] -0.3799424 -0.0018976"
+    "text": "Transplanteret lungevolumen 2\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/kategoriske.html#kategoriske-udfald",
@@ -2154,5 +2154,75 @@
     "title": "webR in Quarto HTML Documents",
     "section": "Øvelse 1",
     "text": "Øvelse 1\n\n\nHer skriver vi hvad der skal stå til venstre\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#transplanteret-lungevolumen-sidste-del",
+    "href": "slides/linreg.html#transplanteret-lungevolumen-sidste-del",
+    "title": "Lineær regression",
+    "section": "Transplanteret lungevolumen sidste del",
+    "text": "Transplanteret lungevolumen sidste del\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#transplanteret-lungevolumen-3",
+    "href": "slides/linreg.html#transplanteret-lungevolumen-3",
+    "title": "Lineær regression",
+    "section": "Transplanteret lungevolumen",
+    "text": "Transplanteret lungevolumen\n\n\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n1.36970\n0.06646\n20.61\n&lt;2e-16***\n\n\nfactor(SMOKE)Smoker or former smoker\n-0.19092\n0.09644\n-1.98\n0.0485*\n\n\n\n\n\n\n\nFortolk værdierne i søjlen “Estimate”. Beregn også de tilhørende 95% KI.\n\nIntercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.\n\n\nHvad er estimatet?\n\n\n1.3697\n\n\nOg 95% KI?\n\n\nHvad med de der fik lunger fra en (tidligere) ryger?\n\n\nDer var forbedringen lidt mindre.\n\n\nHvor meget?\n\n\n0.19 mindre end hvis de havde fået lunger fra en ikke-ryger\n\n\n95% KI?\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#opgave",
+    "href": "slides/logistisk.html#opgave",
+    "title": "Logistisk regression",
+    "section": "opgave",
+    "text": "opgave\n\n\n\n1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod specifikke sygdomme, også var en generelt reduceret børne-dødelighed.\nBørnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret. anden gang ca. 6 måneder senere, hvor der blev fulgt op. En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).\nVi får oplyst de seks første observationer i datasættet:\n\n\n# A tibble: 6 × 5\n  alder status   dtp etngr vaegt\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 0.592      0     1     1   5.6\n2 0.425      1     1     1   6  \n3 0.51       0     1     1   6.2\n4 0.592      0     1     1   6.2\n5 0.173      0     0     1   5.6\n6 0.173      0     0     1   5.2\n\n\n\n\n\nVariablene i datasættet oplyses at være:\nalder - alder ved vaccinationen - i år\nstatus - status ved opfølgning. 1: død, 0: i live\ndtp: blev barnet vaccineret. 1: ja, 0: nej\nvægt: barnets vægt ved vaccination (i kg)\netniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden\nOg optælling:\n\ntable(dtp,status)\n\n   status\ndtp   0   1\n  0 526   9\n  1 892  46"
+  },
+  {
+    "objectID": "slides/logistisk.html#resten",
+    "href": "slides/logistisk.html#resten",
+    "title": "Logistisk regression",
+    "section": "resten",
+    "text": "resten\n\n\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial\nDen korrekte analyse gav nedenstående resultat:\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)"
+  },
+  {
+    "objectID": "slides/logistisk.html#resten-1",
+    "href": "slides/logistisk.html#resten-1",
+    "title": "Logistisk regression",
+    "section": "Resten",
+    "text": "Resten\nVi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?\np_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%\nDen relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.\nHvad er det tilhørende 95% konfidens interval?\nLog(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))\nDETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)1.960.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1\n\nHvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)\nDen korrekte analyse gav nedenstående resultat:\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)"
+  },
+  {
+    "objectID": "slides/logistisk.html#dtp-vaccine",
+    "href": "slides/logistisk.html#dtp-vaccine",
+    "title": "Logistisk regression",
+    "section": "DTP-vaccine",
+    "text": "DTP-vaccine\n\n\n\n1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod specifikke sygdomme, også var en generelt reduceret børne-dødelighed.\nBørnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret. anden gang ca. 6 måneder senere, hvor der blev fulgt op. En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).\nVi får oplyst de seks første observationer i datasættet:\n\n\n# A tibble: 6 × 5\n  alder status   dtp etngr vaegt\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 0.592      0     1     1   5.6\n2 0.425      1     1     1   6  \n3 0.51       0     1     1   6.2\n4 0.592      0     1     1   6.2\n5 0.173      0     0     1   5.6\n6 0.173      0     0     1   5.2\n\n\n\n\n\nVariablene i datasættet oplyses at være:\nalder - alder ved vaccinationen - i år\nstatus - status ved opfølgning. 1: død, 0: i live\ndtp: blev barnet vaccineret. 1: ja, 0: nej\nvægt: barnets vægt ved vaccination (i kg)\netniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden\nOg optælling:\n\ntable(dtp,status)\n\n   status\ndtp   0   1\n  0 526   9\n  1 892  46"
+  },
+  {
+    "objectID": "slides/logistisk.html#dtp-vaccine-1",
+    "href": "slides/logistisk.html#dtp-vaccine-1",
+    "title": "Logistisk regression",
+    "section": "DTP-vaccine",
+    "text": "DTP-vaccine\n\n\n\nSer det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?\n\nHvordan vil vi gribe det an?\n\n\nVi vil sammenligne de forskellige risici. Så Risk Ratio.\n\n\nHvad skal vi bruge?\n\n\nRisikoen for død blandt de vaccinerede. Og risikoen for død blandt de ikke vaccinerede.\n\n\nOg så skal vi opstille en \\(H_0\\). Når vi arbejder med RR, hvordan ser den så altid ud?\n\n\n\\(H_0: RR = 1\\)\n\n\nHvad skal vi bruge der?\n\n\nEn test-værdi som vi kan sammenligne med 1.96\n\n\nHvordan beregner vi den?\n\n\n\\(\\frac{\\text{Estimat}}{SE}\\)\n\n\nOg hvordan beregner vi SE?\n\n\n\\(SE\\big(\\log(RR)\\big)=\\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\nHUSK! Vi regner på log(RR)\n\n\n\n\n\n\n   status\ndtp   0   1\n  0 526   9\n  1 892  46\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#dtp-vaccine---kort-udgave",
+    "href": "slides/logistisk.html#dtp-vaccine---kort-udgave",
+    "title": "Logistisk regression",
+    "section": "DTP-vaccine - kort udgave",
+    "text": "DTP-vaccine - kort udgave\n\nLad os lige koge det ned til kernen\n\n1473 observationer.\n\n\nMed oplysning om alder og vægt - kontinuærte variable\nog\n\n\nStatus (død/levende), dtp (vaccine, ja/nej) og etnisk gruppe. Alle tre kategoriske og binære.\nStatus er den primære responsvariabel - det vi undersøger.\n\n\nOg så tabellen\n\ntable(dtp,status)\n\n   status\ndtp   0   1\n  0 526   9\n  1 892  46\n\n\n\n\nResten er fluff, og en del af taktikken når I skal løse opgaver er at skære dem ind til benet."
+  },
+  {
+    "objectID": "slides/logistisk.html#dtp-vaccine-2",
+    "href": "slides/logistisk.html#dtp-vaccine-2",
+    "title": "Logistisk regression",
+    "section": "DTP-vaccine",
+    "text": "DTP-vaccine\n\n\n\nOpgaven fortsætter: Hvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus hvor der justeres for de øvrige variable? Angiv den tilsvarende R-kode\n\nDen formulering er kode for: Hvilken model vil vi opstille?\n\n\nHvad er responsvariablen?\n\n\nDen er død\n\n\nEr det kategorisk eller kontinuært?\n\n\nDet bliver ikke mere kategorisk!\n\n\nHvilken slags model skal vi så opstille?\n\n\nEn logistisk regression, med dødeligheden som afhængig variabel.\n\n\nHvad skal vi have med som forklarende variable?\n\n\nvaccinestatus. Og resten af de variable vi havde i datasættet.\n\n\n\nEksemplet på data var:\n\n\n\n\n# A tibble: 6 × 5\n  alder status   dtp etngr vaegt\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 0.592      0     1     1   5.6\n2 0.425      1     1     1   6  \n3 0.51       0     1     1   6.2\n4 0.592      0     1     1   6.2\n5 0.173      0     0     1   5.6\n6 0.173      0     0     1   5.2\n\n\n\n\nSå det er?\n\n\nAlder, vægt (vaegt) etnicitet (etngr) og vaccinestatus (dtp).\n\n\nHvad er de?\n\n\nAlder og vægt er kontinuærte, etnicitet og vaccinestatus er kategoriske.\n\n\nSå hvordan ser R-koden ud?\n\n\nglm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)"
+  },
+  {
+    "objectID": "slides/logistisk.html#dtp-vaccine-3",
+    "href": "slides/logistisk.html#dtp-vaccine-3",
+    "title": "Logistisk regression",
+    "section": "DTP-vaccine",
+    "text": "DTP-vaccine\n\n\n\nTypisk bliver I hjulpet hvis I læser det næste spørgsmål. Der er nemlig ofte en formulering:\n“Den korrekte analyse gav nedenstående resultat:”\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden?\nGiv et relevant effektmål med tilhørende 95% konfidensinterval\n\n\n\n\nEr dtp signifikant?\n\n\nJa, dtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\n\n\nHvad er effektmålet? Husk i den logistiske regression får vi ?\n\n\nlog-odds - så hvordan finder vi Odds(ratio)?\n\n\nOg KI?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
