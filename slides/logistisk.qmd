@@ -1393,7 +1393,7 @@ log-odds - så hvordan finder vi Odds(ratio)?
 :::: {.fragment}
 Og KI?
 ::::
-:::: {.fragment}
+
 
 
 ```{webr-r}
@@ -1405,4 +1405,752 @@ Og KI?
 
 ::::
 ::::
+::::
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.evensmaller}
+
+Vi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.
+
+Vi har data på en repræsentativ gruppe ny-diagnosticerede danske type-2 diabetikere.
+
+Der er følgende variable i datasættet:
+
+HBAAlC_dik: 1 hvis HbAlc < 9%, 0 hvis HbAlc >= 9% 
+SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt  
+AGE: Alder i år  
+SEX: Køn. 0: Kvinde, 1: Mand  
+
+::::
+
+
+
+::::
+:::: {.column}
+:::: {.evensmaller}
+Vi gør i R følgende og får:
+```{r glykæmisk_data, echo = FALSE}
+SRH_dik <- c(rep(0, 412), rep(0, 264), rep(1, 354), rep(1, 188))
+HBAlC_dik <- c(rep(0, 412), rep(1, 264), rep(0, 354), rep(1, 188))
+```
+
+```{r glykæmisk_tabel, echo = TRUE}
+table(SRH_dik, HBAlC_dik)
+```
+
+
+::::
+
+::::
+::::
+
+
+
+:::: tiny
+Note til ikke-medicineren: HBAAlC_dik = 1  indikerer god glykæmisk kontrol
+::::
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Baseret på den tabel - er der sammenhæng mellem de to variable?
+
+```{r glykæmisk_tabel_2, echo = TRUE}
+table(SRH_dik, HBAlC_dik)
+```
+
+Hvordan kan vi gøre det?
+
+:::: {.fragment}
+Relativ risiko.
+::::
+:::: {.fragment}
+Så hvad er den relative risiko for godt (selvvurderet) helbred, hvis HbAlc er 1 - altså velreguleret.
+::::
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.reallysmall}
+
+Vi fandt en RR på 0.9
+
+:::: {.fragment}
+Hvad betyder det?
+::::
+:::: {.fragment}
+At der er lavere sandsynlighed for selvrapporteret godt helbred hvis ens blodsukker er velreguleret.
+::::
+:::: {.fragment}
+Er det statistisk signifikant?
+::::
+:::: {.fragment}
+Hvordan afgør vi det?
+::::
+:::: {.fragment}
+En testværdi. Men lad os denne gang beregne et 95% KI i stedet
+::::
+:::: {.fragment}
+Hvordan ser det ud?
+::::
+:::: {.fragment}
+$\text{Estimat} \pm1.96\cdot\text{SE}$
+::::
+:::: {.fragment}
+Og hvordan beregnede vi SE?
+::::
+:::: {.fragment}
+$SE\big(\log(RR)\big)=\sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+::::
+:::: {.fragment}
+
+```{r glykæmisk_tabel_3, echo = TRUE}
+table(SRH_dik, HBAlC_dik)
+```
+
+::::
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Nu udfører vi denne analyse i R:  
+>model1 <- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = "binomial")  
+>summary(model1)
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.717969", "0.350389", "2.049", "0.04046*",
+"factor(HBAlC_dik)1", "-0.188731", "0.120637", "-1.564", "0.11771",
+"factor(SEX)1", "0.252051", "0.117514", "2.145", "0.03196*",
+"AGE", "-0.015573", "0.005099", "-3.054", "0.00226**"
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvad har vi gjort, og hvordan fortolker vi resultaterne?
+
+::::
+
+
+
+::::
+:::: {.column}
+
+:::: {.smaller}
+
+:::: {.fragment}
+Der er lavet en logistisk regression.
+::::
+
+:::: {.fragment}
+Hvad var responsvariabel?
+::::
+
+:::: {.fragment}
+SRH_dik - selvrapporteret, godt helbred.
+::::
+
+:::: {.fragment}
+Hvad var der af forklarende variable?
+::::
+
+:::: {.fragment}
+AGE som kontinuert og HBAlC_dik og SEX som kategoriske variable.
+::::
+
+:::: {.fragment}
+Er der nogen af dem der er signifikante?
+::::
+
+:::: {.fragment}
+Både køn og alder er signifikante, med p-værdier på hhv 0.032 og 0.0023
+::::
+
+:::: {.fragment}
+HBAlC - altså om patienten er i glykæmisk kontrol, er ikke signifikant.
+::::
+
+
+:::: 
+
+
+
+
+
+::::
+::::
+
+ 
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Vi må hellere beregne nogle 95% KI også og odds-ratios også.
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.717969", "0.350389", "2.049", "0.04046*",
+"factor(HBAlC_dik)1", "-0.188731", "0.120637", "-1.564", "0.11771",
+"factor(SEX)1", "0.252051", "0.117514", "2.145", "0.03196*",
+"AGE", "-0.015573", "0.005099", "-3.054", "0.00226**"
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+
+::::
+
+
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+
+
+
+::::
+::::
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.reallysmall}
+Hvad så vi så?
+
+:::: {.fragment}
+
+Køn var statistisk signifikant med tilhørende odds-ratio på 
+
+```{r echo = TRUE}
+exp(0.252051)
+```
+::::
+:::: {.fragment}
+
+Hvad betyder det? 
+::::
+:::: {.fragment}
+Mandlige diabetikere har 28% større odds for (selvrapporteret) godt helbred sammenlignet med kvindelige diabetikere. 
+::::
+:::: {.fragment}
+Og med et 95% KI på 
+
+```{r echo = TRUE}
+exp(0.252051 + c(-1,1)*1.96*0.117514)
+```
+
+Med alder og HBA1C_dik fastholdt.
+::::
+:::: {.fragment}
+Age var også statistisk signifikant med tilhørende odds-ratio på 
+
+```{r echo = TRUE}
+exp(-0.015573)
+```
+::::
+
+
+::::
+::::
+:::: {.column}
+:::: {.reallysmall}
+
+
+:::: {.fragment}
+Og et 95% KI på:
+
+```{r echo = TRUE}
+exp(-0.015573 +c(-1,1)*1.96*0.005099)
+```
+::::
+:::: {.fragment}
+
+Så ved 1 års øget alder, ses ca. 1.5% reduceret odds for godt selvvurderet helbred.
+
+::::
+:::: {.fragment}
+Hvad hvis vi øger med 5 år?
+
+::::
+:::: {.fragment}
+```{r echo = TRUE}
+exp(-0.015573*5)
+```
+::::
+:::: {.fragment}
+Hvad er konfidensintervallet hvis vi øger alderen med fem år?
+::::
+:::: {.fragment}
+Koefficienten ganger vi "bare" med 5. Usikkerheden - den akkumulerer, så den skal også ganges med 5. 
+::::
+:::: {.fragment}
+Så:
+```{r echo = TRUE}
+exp(-0.015573*5 +c(-1,1)*1.96*0.005099*5)
+```
+::::
+::::
+::::
+::::
+
+
+## Laparotomi
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Vi ser på data fra ca 1000 patienters risiko for at dø ved en operation (laparotomi). Har øget ilt-tilførsel
+under operationen betydning for død i en opfølgningsperiode på ca. 3 år. 
+Patienterne blev randomiseret til et af to ilt-regimer
+
+Vi har følgende variable:  
+*Allokering*: X - patient fik 80% ilt, Y Patient fik 30% ilt  
+*diagn_cancer*: j: cancer, n: ikke cancer  
+*blod*: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion  
+*bmi*: patientens BMI  
+*dead*: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever
+
+
+
+::::
+
+::::
+:::: {.column}
+
+:::: {.smaller}
+De første 6 observationer:
+
+```{r echo = FALSE}
+ilt_data <- tribble(~Allokering, ~diagn_cancer, ~blod, ~bmi, ~dead,
+"Y", "n", "n", 29.3, 0,
+"X", "n", "n", 28.1 ,0,
+"X", "j", "n", 21.5, 1,
+"X", "j", "n", 17.3, 1,
+"Y", "n", "n", 24.2, 0,
+"Y", "n", "n", 18.2, 0)
+```
+
+```{r}
+head(ilt_data)
+```
+
+::::
+
+::::
+::::
+
+
+## Laparotomi
+
+:::: reallysmall
+
+Hvis vi alene betragter patienternes bmi, hvordan ville vi så undersøge om den har signifikant betydning for risikoen for dø efter 
+operation.
+
+:::: {.fragment}
+Hvad er vores outcome?
+::::
+:::: {.fragment}
+Det er dead
+::::
+:::: {.fragment}
+Hvad er det? 
+::::
+:::: {.fragment}
+Det er så kategorisk som det kan blive
+::::
+:::: {.fragment}
+Så ved vi at vi skal lave en?
+::::
+:::: {.fragment}
+Logistisk regression.
+::::
+:::: {.fragment}
+Hvad har vi som forklarende variabel?
+::::
+:::: {.fragment}
+bmi.
+::::
+:::: {.fragment}
+Hvad er det?
+::::
+:::: {.fragment}
+Det er kontinuært.
+::::
+:::: {.fragment}
+Så:
+::::
+:::: {.fragment}
+En logistisk regression med dead som kategorisk responsvariabel og bmi som kontinuært forklarende variabel.
+::::
+::::
+
+## Laparotomi
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Når vi gør det, får vi følgende resultat (de synes det er sjovt at fjerne dele af output):
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-0.007041", "0.386263", "-0.018", "0.98546",
+"bmi", "", "0.015385", "-3.151", ""
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvad kan vi sige ud fra det?
+
+Estimat for bmi?
+
+Er det i øvrigt signifikant?
+
+Hvad er OR?
+
+Og et 95% KI?
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Laparotomi
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+
+Nu ser vi bort fra bmi, og undersøger om ilt-allokeringen har betydning for risikoen for død efter operation. 
+
+Vi får oplyst at følgende gøres:
+```{r laparotomi_data, echo = FALSE}
+dead <- c(
+  rep(1, 139),  
+  rep(1, 107),
+  rep(0, 414),
+  rep(0, 418)
+)
+
+Allokering <- c(
+  rep("X", 139),
+  rep("Y", 107),
+  rep("X", 414),
+  rep("Y", 418)
+)
+```
+
+
+```{r laparotomi_tabel, echo = TRUE}
+table(dead,Allokering)
+```
+
+Hvad kan vi konkludere ud fra det?
+
+:::: {.fragment}
+Vi har haft gang i en logistisk regression, så det er oplagt at kigge på OR. Men Risk Ratios ville også være korrekt.
+::::
+:::: {.fragment}
+Hvad er OR så?
+::::
+:::: {.fragment}
+Hvad er et 95% KI på den?
+::::
+:::: {.fragment}
+Her bliver vi glade for at vi valgte OR frem for RR, for SE på log-Odds(ratio) er lettere at huske.
+::::
+:::: {.fragment}
+$SE\big(\log(OR)\big)=\sqrt{\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d}}$
+::::
+
+::::
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+:::: tiny
+Husk nu. Det er odds, ikke risiko, for død der er højere ved det høje iltregime sammenlignet med det lave. Og selvom vi må konkludere at det ikke er signifikant,
+er de glade for at nævne at det er tæt på at være signifikant.
+::::
+
+## Laparotomi
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Tabellen deles nu op efter den opererede patients diagnose (cancer, ja/nej):
+
+```{r echo = FALSE}
+dead <- c(
+  rep(1,101), rep(1,74), rep(0,188), rep(0,213),
+  rep(1,38),  rep(1,33), rep(0,226), rep(0,205)
+)
+
+Allokering <- c(
+  rep("X",101), rep("Y",74),  rep("X",188), rep("Y",213),
+  rep("X",38),  rep("Y",33),  rep("X",226), rep("Y",205)
+)
+
+diagn_cancer <- c(
+  rep("j",101), rep("j",74),  rep("j",188), rep("j",213),
+  rep("n",38),  rep("n",33),  rep("n",226), rep("n",205)
+)
+
+```
+
+```{r echo = TRUE}
+table(dead, Allokering, diagn_cancer)
+
+```
+
+Giver det anledning til at ændre den tidligere konklusion? Begrund med effektestimater og 95% konfidensintervaller.
+
+Samme øvelse som før, men nu med OR hver gruppe
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Laparotomi - opsamling
+
+:::: reallysmall
+
+OR for cancerpatienterne var 
+
+OR = (101/188) / (74/213) =  1.546363
+
+Med  s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346
+
+og 
+
+KI: exp(log(1.546363) + c(-1,1)*1.96*0.1828346) = [1.080636; 2.212806]
+
+Så for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i
+KI.
+
+Ikke-cancer patienter havde:
+
+OR = (38/226) / (33/205) = 1.044516
+
+og se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) =  0.2567521
+
+og derfor:
+
+KI: exp(log(1.044516) + c(-1,1)*1.96* 0.2567521) = 0.6314854 1.7276943
+
+Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.
+
+Så ilt-regime har betydning for cancerpatienter, men ikke for ikke-cancerpatienter.
+
+::::
+
+
+
 

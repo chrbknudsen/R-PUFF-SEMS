@@ -2072,3 +2072,501 @@ Hvor meget?
 
 
 
+## Leversygdom
+
+:::: {.reallysmall}
+
+:::: {.columns}
+:::: {.column}
+583 personer, er blevet henvist til undersøgelse pga mistanke om
+leversygdom. De første 6 observationer er:
+```{r}
+library(tidyverse)
+tribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,
+65, 3.3, 0.90, 3.666667, 1, 1, "F",  -0.1053605,
+62, 3.2, 0.74, 4.324324, 1, 2, "M", -0.3011051,
+62, 3.3, 0.89, 3.707865, 1, 3, "M", -0.1165338,
+58, 3.4,1.00,3.400000,1,4,"M",0,
+72, 2.4, 0.4, 6, 1,5,"M",-0.9162907,
+46, 4.4,1.3,3.384615,1,6,"M",0.2623643
+)
+```
+Variable:
+_idnr_: Løbenummer  
+_sex_: Køn  
+_age_: alder i år  
+_status_: leversygdom, 1=ja  
+_albumin_: serum albumin g/dL  
+_globulin_: serum globulin g/dL  
+_ratio_: ratio m. albumin og globulin  
+_l_ratio_: log(ratio) (den naturlige logaritme)
+
+
+
+::::
+:::: {.column}
+
+
+Vi får denne tabel:
+
+
+```{r leversygdom_data}
+status <- c(rep(0, 50 + 117),
+            rep(1, 92 + 324))
+
+sex <- c(rep("F", 50), rep("M", 117),
+         rep("F", 92), rep("M", 324))
+
+```
+
+```{r leversygdom_tabel, echo = TRUE}
+table(status, sex)
+```
+
+Og oplyst at log-ratio er normalfordelt.
+
+For status = 0 får vi:
+
+| | Gennemsnit | Spredning (sd)|
+|--|---|--
+|l_ratio | -0.011 | 0.289 |
+|age| 41.2 | 17.0|
+
+og for status = 1
+
+| | Gennemsnit | Spredning (sd)|
+|--|---|--
+|l_ratio | -0.152 | 0.358 |
+|age| 46.2 | 15.7|
+
+Er der forskel i log-ratio mellem syge og raske, når der ikke tages
+højde for forskel i alder og køn?
+
+::::
+::::
+
+::::
+
+
+## Leversygdom
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.tiny}
+
+Vi skal ikke lade os forvirre over log-ratio - det er "bare" logaritmen af forholdet mellem albumin og globulin. Vi behandler den som ethvert andet tal.
+
+:::: {.fragment}
+Men husk alligevel at en generel tommelfingerregel er, at ting der ikke er normalfordelte bliver (mere) normalfordelte hvis vi tager logaritmen.
+::::
+:::: {.fragment}
+Hvordan tester vi om to middelværdier var forskellige?
+::::
+:::: {.fragment}
+$H_0: \mu_0 - \mu_1 = 0$
+::::
+:::: {.fragment}
+Så vi skal have differensen.
+::::
+:::: {.fragment}
+Og vi skal have SE for differensen.
+::::
+:::: {.fragment}
+Den fandt vi ved:
+::::
+:::: {.fragment}
+$SE(\bar{x}_1 - \bar{x}_2)=\sqrt{SE_1^2 + SE_2^2}$
+::::
+:::: {.fragment}
+Så vi skal have SEM for hver middelværdi
+::::
+:::: {.fragment}
+$\text{SEM} = \frac{sd}{\sqrt(n)}$
+::::
+:::: {.fragment}
+Og så kan vi beregne hvad?
+::::
+:::: {.fragment}
+Teststørrelsen.
+::::
+::::
+
+
+
+::::
+:::: {.column}
+
+:::: {.tiny}
+l_ratio:  
+
+|Status | Gennemsnit | Spredning (sd)|
+|--|---|--|
+|0 | -0.011 | 0.289 |
+|1 | -0.152 | 0.358 |
+
+::::
+
+
+
+
+
+
+
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Leversygdom
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.tiny}
+
+Undersøg nu om kønsfordelingen er den samme for de syge og de raske.
+
+```{r}
+table(status, sex)
+```
+
+Hvordan gør vi det?
+
+:::: {.fragment}
+Der er flere måder - lad os igen kigge på differensen.
+::::
+:::: {.fragment}
+Så forskellen på sandsynligheden for at være kvinde hvis man er rask
+og sandsynligheden for at være kvinde hvis man er syg.
+::::
+:::: {.fragment}
+$H_0: p_{f:r} - p_{f:s} = 0$
+::::
+:::: {.fragment}
+$p_{f:r}$ er andelen af kvinder blandt de raske.
+::::
+:::: {.fragment}
+Hvordan fandt vi SE for en andel?
+::::
+:::: {.fragment}
+$\text{SE}_p = \sqrt{\frac{p(1-p)}{n}}$
+::::
+:::: {.fragment}
+SE for differensen er stadig:
+::::
+:::: {.fragment}
+$SE(\hat{p}_1 - \hat{p}_2)=\sqrt{SE_1^2 + SE_2^2}$
+::::
+:::: {.fragment}
+Hvad beregner vi så?
+::::
+:::: {.fragment}
+En testværdi.
+::::
+::::
+
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Leversygdom 
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+
+Er aldersfordelingen den samme for syge som for raske? Hvordan vil vi undersøge det?
+
+:::: {.fragment}
+Det er nøjagtig det samme som før. 
+::::
+:::: {.fragment}
+Der er to samples hvor vi sammenligner middelværdierne af alder:
+::::
+:::: {.fragment}
+Two-sample t-test
+::::
+:::: {.fragment}
+$H_0: \mu_1 - \mu_2 = 0$
+::::
+:::: {.fragment}
+$SE = \frac{sd}{\sqrt{n}}$
+::::
+:::: {.fragment}
+$SE(\bar{x}_1 - \bar{x}_2)=\sqrt{SE_1 + SE_2}$
+::::
+:::: {.fragment}
+age:
+
+
+
+|status | Gennemsnit | Spredning (sd)|
+|--|---|--|
+|0| 41.2 | 17.0|
+|1| 46.2 | 15.7|
+
+::::
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Leversygdom
+
+:::: {.columns}
+:::: {.column width = "55%"}
+
+:::: {.reallysmall}
+
+Nu laver vi denne analyse i R, hvor vi inddrager alder og køn:  
+> analyse1 <- lm(l_ratio~factor(status)+factor(sex)+age)  
+> summary(analyse1)
+
+Det gav dette output:
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.1730998", "0.0488724", "3.542", "0.000430***",
+"factor(status)1", "-0.1196883", "0.0310025", "-3.861", "0.000126***",
+"factor(sex)M", "0.0042939", "0.0324442", "0.132", "0.894756",
+"age", "-0.0045177", "0.0008616", "-5.241", "2.24e-7***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af den? Fortolk
+værdier i søjlen "Estimate" svarende til variablene status og age.
+
+:::: {.fragment}
+Det er en multipel lineær regression med l_ratio som responsvariabel og status, sex og 
+age som forklarende variable.
+::::
+
+::::
+
+:::: 
+:::: {.column width = "45%"}
+:::: {.tiny}
+
+:::: {.fragment}
+Hvad er de variable?
+::::
+
+:::: {.fragment}
+age er kontinuert, status og sex er kategoriske
+::::
+
+:::: {.fragment}
+Hvad kan vi sige om de syge patienter?
+::::
+
+:::: {.fragment}
+De har i gennemsnit, alt andet lige, en lavere l_ratio en raske
+::::
+
+:::: {.fragment}
+Hvad estimerer vi den til?
+::::
+
+:::: {.fragment}
+ca. 0.12 lavere
+::::
+
+:::: {.fragment}
+Har vi justeret for noget?
+::::
+
+:::: {.fragment}
+Der er justeret for køn og alder.
+::::
+
+:::: {.fragment}
+Er den signifikant?
+::::
+
+
+:::: {.fragment}
+Ja, p-værdien er 0.0001
+::::
+
+:::: {.fragment}
+Hvad med alderen?
+::::
+
+:::: {.fragment}
+Alderseffekten er også signifikant (p<0.001).
+::::
+
+:::: {.fragment}
+l_ratio ændrer sig hvordan?
+::::
+
+:::: {.fragment}
+l_ratio falder, i gennemsnit,
+med 0.0045 pr år. Justeret for status og køn.
+::::
+
+
+
+::::
+::::
+::::
+
+
+
+
+## Leversygdom
+:::: {.columns}
+:::: {.column width = "55%"}
+
+:::: {.reallysmall}
+
+Predikter median-ratio for de syge (status 1) kvinder i populationen med en alder på 50 år.
+```{r leversygdom_reg_output_2, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.1730998", "0.0488724", "3.542", "0.000430***",
+"factor(status)1", "-0.1196883", "0.0310025", "-3.861", "0.000126***",
+"factor(sex)M", "0.0042939", "0.0324442", "0.132", "0.894756",
+"age", "-0.0045177", "0.0008616", "-5.241", "2.24e-7***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+:::: {.fragment}
+Hvad fik vi oplyst at vi kunne antage om l_ratio?
+::::
+:::: {.fragment}
+At den var normalfordelt.
+::::
+:::: {.fragment}
+Hvad ved vi om medianen i en normalfordeling?
+::::
+:::: {.fragment}
+At medianen er lig middelværdien (og omvendt)
+::::
+:::: {.fragment}
+Bemærk at vi spørges til medianen af ratio, ikke medianen af log-ratio
+::::
+:::: {.fragment}
+Hvordan fikser vi det?
+::::
+:::: {.fragment}
+Vi beregner medianen (middelværdien) af l_ratio, og exponentierer.
+:::: 
+::::
+
+::::
+:::: {.column width = "45%"}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
