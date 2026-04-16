@@ -1410,48 +1410,157 @@ Og KI?
 
 ## Glykæmisk kontrol
 
+:::: {.columns}
+:::: {.column}
+:::: {.evensmaller}
+
 Vi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.
 
-Vi har følgende variable
+Vi har data på en repræsentativ gruppe ny-diagnosticerede danske type-2 diabetikere.
 
-HBAAlC_dik: 1 hvis HbAlc < 9%, 0 hvis HbAlc >= 9% (note til ikke-medicineren. 1 er godt helbred)
-SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt
-AGE: Alder i år
-SEX: Køn. 0: Kvinde, 1: Mand
+Der er følgende variable i datasættet:
 
+HBAAlC_dik: 1 hvis HbAlc < 9%, 0 hvis HbAlc >= 9% 
+SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt  
+AGE: Alder i år  
+SEX: Køn. 0: Kvinde, 1: Mand  
+
+::::
+
+
+
+::::
+:::: {.column}
+:::: {.evensmaller}
 Vi gør i R følgende og får:
->table(SRH_dik, HBAlC_dik)
-
-
-```{r echo = FALSE}
+```{r glykæmisk_data, echo = FALSE}
 SRH_dik <- c(rep(0, 412), rep(0, 264), rep(1, 354), rep(1, 188))
 HBAlC_dik <- c(rep(0, 412), rep(1, 264), rep(0, 354), rep(1, 188))
+```
+
+```{r glykæmisk_tabel, echo = TRUE}
 table(SRH_dik, HBAlC_dik)
 ```
 
-a) Baseret på den tabel - er der sammenhæng mellem de to variable?
 
-Hvad er den relative risiko for at have godt helbred hvis HbAlc er 1 - altså velreguleret.
+::::
 
-Den relative risiko finder vi ved: (188/(188+264))/(354/(354+412)) = 0.900005
-pas på paranteserne!
+::::
+::::
 
-Der er dermed reduceret sandsynlighed for godt selvvurderet helbred hvis man er velreguleret.
+
+
+:::: tiny
+Note til ikke-medicineren: HBAAlC_dik = 1  indikerer god glykæmisk kontrol
+::::
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.smaller}
+Baseret på den tabel - er der sammenhæng mellem de to variable?
+
+```{r glykæmisk_tabel_2, echo = TRUE}
+table(SRH_dik, HBAlC_dik)
+```
+
+Hvordan kan vi gøre det?
+
+:::: {.fragment}
+Relativ risiko.
+::::
+:::: {.fragment}
+Så hvad er den relative risiko for godt (selvvurderet) helbred, hvis HbAlc er 1 - altså velreguleret.
+::::
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.reallysmall}
+
+Vi fandt en RR på 0.9
+
+:::: {.fragment}
+Hvad betyder det?
+::::
+:::: {.fragment}
+At der er lavere sandsynlighed for selvrapporteret godt helbred hvis ens blodsukker er velreguleret.
+::::
+:::: {.fragment}
 Er det statistisk signifikant?
+::::
+:::: {.fragment}
+Hvordan afgør vi det?
+::::
+:::: {.fragment}
+En testværdi. Men lad os denne gang beregne et 95% KI i stedet
+::::
+:::: {.fragment}
+Hvordan ser det ud?
+::::
+:::: {.fragment}
+$\text{Estimat} \pm1.96\cdot\text{SE}$
+::::
+:::: {.fragment}
+Og hvordan beregnede vi SE?
+::::
+:::: {.fragment}
+$SE\big(\log(RR)\big)=\sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
+::::
+:::: {.fragment}
 
-Det kræver vi har s.e. for rr
-sqrt(1/188 - 1/(188+264) + 1/354 - 1/(354+412)) = 0.0680157
- 
- deter standardfejlen på log RR
- exp(log(0.900005) + c(-1,1)*1.96*0.0680157)
- Da det omfatter 1, er den reducerede sandsynlighed ikke signifikant.
+```{r glykæmisk_tabel_3, echo = TRUE}
+table(SRH_dik, HBAlC_dik)
+```
 
- Man kan også bruge chi^2
+::::
+::::
 
- b)
- Nu udfører vi denne analyse i R:
- >model1 <- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = "binomial")
- >summary(model1)
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+::::
+::::
+
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Nu udfører vi denne analyse i R:  
+>model1 <- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = "binomial")  
+>summary(model1)
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -1503,17 +1612,222 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 
 Hvad har vi gjort, og hvordan fortolker vi resultaterne?
 
-Vi har gennemført en logistisk regression, med tre forklarende variable, AGE som kontinuert og HBAlC_dik og SEX som kategoriske variabel.
-Vi ser at HBAlC ikke er signifikant. Både køn og alder er signifikante med tilhørende Odds-ratio på exp(0.252051) = 1.28 for køn, med
-et 95%KI på 
+::::
+
+
+
+::::
+:::: {.column}
+
+:::: {.smaller}
+
+:::: {.fragment}
+Der er lavet en logistisk regression.
+::::
+
+:::: {.fragment}
+Hvad var responsvariabel?
+::::
+
+:::: {.fragment}
+SRH_dik - selvrapporteret, godt helbred.
+::::
+
+:::: {.fragment}
+Hvad var der af forklarende variable?
+::::
+
+:::: {.fragment}
+AGE som kontinuert og HBAlC_dik og SEX som kategoriske variable.
+::::
+
+:::: {.fragment}
+Er der nogen af dem der er signifikante?
+::::
+
+:::: {.fragment}
+Både køn og alder er signifikante, med p-værdier på hhv 0.032 og 0.0023
+::::
+
+:::: {.fragment}
+HBAlC - altså om patienten er i glykæmisk kontrol, er ikke signifikant.
+::::
+
+
+:::: 
+
+
+
+
+
+::::
+::::
+
+ 
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Vi må hellere beregne nogle 95% KI også og odds-ratios også.
+
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "0.717969", "0.350389", "2.049", "0.04046*",
+"factor(HBAlC_dik)1", "-0.188731", "0.120637", "-1.564", "0.11771",
+"factor(SEX)1", "0.252051", "0.117514", "2.145", "0.03196*",
+"AGE", "-0.015573", "0.005099", "-3.054", "0.00226**"
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+
+::::
+
+
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+
+
+
+::::
+::::
+
+
+## Glykæmisk kontrol
+
+:::: {.columns}
+:::: {.column}
+:::: {.reallysmall}
+Hvad så vi så?
+
+:::: {.fragment}
+
+Køn var statistisk signifikant med tilhørende odds-ratio på 
+
+```{r echo = TRUE}
+exp(0.252051)
+```
+::::
+:::: {.fragment}
+
+Hvad betyder det? 
+::::
+:::: {.fragment}
+Mandlige diabetikere har 28% større odds for (selvrapporteret) godt helbred sammenlignet med kvindelige diabetikere. 
+::::
+:::: {.fragment}
+Og med et 95% KI på 
+
+```{r echo = TRUE}
 exp(0.252051 + c(-1,1)*1.96*0.117514)
-Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt.
+```
 
-Alder er også statistisk signifkant
-med odds ratio på exp(-0.015573) = 0.9845476 diabetikere har derfor ~1.2% reduceret odds for
-godt helbred (med fastholdt køn og HBAlC) ved en 1 års øgning ialder.
-KI:
+Med alder og HBA1C_dik fastholdt.
+::::
+:::: {.fragment}
+Age var også statistisk signifikant med tilhørende odds-ratio på 
 
-exp(-0.015573 + c(-1,1)*1.96*0.005099)
+```{r echo = TRUE}
+exp(-0.015573)
+```
+::::
 
-Hvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen
+
+::::
+::::
+:::: {.column}
+:::: {.reallysmall}
+
+
+:::: {.fragment}
+Og et 95% KI på:
+
+```{r echo = TRUE}
+exp(-0.015573 +c(-1,1)*1.96*0.005099)
+```
+::::
+:::: {.fragment}
+
+Så ved 1 års øget alder, ses ca. 1.5% reduceret odds for godt selvvurderet helbred.
+
+::::
+:::: {.fragment}
+Hvad hvis vi øger med 5 år?
+
+::::
+:::: {.fragment}
+```{r echo = TRUE}
+exp(-0.015573*5)
+```
+::::
+:::: {.fragment}
+Hvad er konfidensintervallet hvis vi øger alderen med fem år?
+::::
+:::: {.fragment}
+Koefficienten ganger vi "bare" med 5. Usikkerheden - den akkumulerer, så den skal også ganges med 5. 
+::::
+:::: {.fragment}
+Så:
+```{r echo = TRUE}
+exp(-0.015573*5 +c(-1,1)*1.96*0.005099*5)
+```
+::::
+::::
+::::
+::::
+
+
+
+
+
+

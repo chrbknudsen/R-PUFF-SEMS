@@ -2181,7 +2181,7 @@
     "href": "slides/logistisk.html#resten",
     "title": "Logistisk regression",
     "section": "resten",
-    "text": "resten\n\n\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial\nDen korrekte analyse gav nedenstående resultat:\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)"
+    "text": "resten\nVi har gennemført en logistisk regression, med tre forklarende variable, AGE som kontinuert og HBAlC_dik og SEX som kategoriske variabel. Vi ser at HBAlC ikke er signifikant. Både køn og alder er signifikante med tilhørende Odds-ratio på exp(0.252051) = 1.28 for køn, med et 95%KI på exp(0.252051 + c(-1,1)1.960.117514) Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt.\nAlder er også statistisk signifkant med odds ratio på exp(-0.015573) = 0.9845476 diabetikere har derfor ~1.2% reduceret odds for godt helbred (med fastholdt køn og HBAlC) ved en 1 års øgning ialder. KI:\nexp(-0.015573 + c(-1,1)1.960.005099)\nHvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen"
   },
   {
     "objectID": "slides/logistisk.html#resten-1",
@@ -2230,6 +2230,41 @@
     "href": "slides/logistisk.html#glykæmisk-kontrol",
     "title": "Logistisk regression",
     "section": "Glykæmisk kontrol",
-    "text": "Glykæmisk kontrol\nVi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.\nVi har følgende variable\nHBAAlC_dik: 1 hvis HbAlc &lt; 9%, 0 hvis HbAlc &gt;= 9% (note til ikke-medicineren. 1 er godt helbred) SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt AGE: Alder i år SEX: Køn. 0: Kvinde, 1: Mand\nVi gør i R følgende og får: &gt;table(SRH_dik, HBAlC_dik)\n\n\n       HBAlC_dik\nSRH_dik   0   1\n      0 412 264\n      1 354 188\n\n\n\nBaseret på den tabel - er der sammenhæng mellem de to variable?\n\nHvad er den relative risiko for at have godt helbred hvis HbAlc er 1 - altså velreguleret.\nDen relative risiko finder vi ved: (188/(188+264))/(354/(354+412)) = 0.900005 pas på paranteserne!\nDer er dermed reduceret sandsynlighed for godt selvvurderet helbred hvis man er velreguleret. Er det statistisk signifikant?\nDet kræver vi har s.e. for rr sqrt(1/188 - 1/(188+264) + 1/354 - 1/(354+412)) = 0.0680157\ndeter standardfejlen på log RR exp(log(0.900005) + c(-1,1)1.960.0680157) Da det omfatter 1, er den reducerede sandsynlighed ikke signifikant.\nMan kan også bruge chi^2\n\nNu udfører vi denne analyse i R: &gt;model1 &lt;- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = “binomial”) &gt;summary(model1)\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.717969\n0.350389\n2.049\n0.04046*\n\n\nfactor(HBAlC_dik)1\n-0.188731\n0.120637\n-1.564\n0.11771\n\n\nfactor(SEX)1\n0.252051\n0.117514\n2.145\n0.03196*\n\n\nAGE\n-0.015573\n0.005099\n-3.054\n0.00226**\n\n\n\n\n\n\n\nHvad har vi gjort, og hvordan fortolker vi resultaterne?\nVi har gennemført en logistisk regression, med tre forklarende variable, AGE som kontinuert og HBAlC_dik og SEX som kategoriske variabel. Vi ser at HBAlC ikke er signifikant. Både køn og alder er signifikante med tilhørende Odds-ratio på exp(0.252051) = 1.28 for køn, med et 95%KI på exp(0.252051 + c(-1,1)1.960.117514) Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt.\nAlder er også statistisk signifkant med odds ratio på exp(-0.015573) = 0.9845476 diabetikere har derfor ~1.2% reduceret odds for godt helbred (med fastholdt køn og HBAlC) ved en 1 års øgning ialder. KI:\nexp(-0.015573 + c(-1,1)1.960.005099)\nHvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen"
+    "text": "Glykæmisk kontrol\n\n\n\nVi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.\nVi har data på en repræsentativ gruppe ny-diagnosticerede danske type-2 diabetikere.\nDer er følgende variable i datasættet:\nHBAAlC_dik: 1 hvis HbAlc &lt; 9%, 0 hvis HbAlc &gt;= 9% SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt\nAGE: Alder i år\nSEX: Køn. 0: Kvinde, 1: Mand\n\n\n\nVi gør i R følgende og får:\n\ntable(SRH_dik, HBAlC_dik)\n\n       HBAlC_dik\nSRH_dik   0   1\n      0 412 264\n      1 354 188\n\n\n\n\n\nNote til ikke-medicineren: HBAAlC_dik = 1 indikerer god glykæmisk kontrol"
+  },
+  {
+    "objectID": "slides/logistisk.html#glykæmisk-kontrol-1",
+    "href": "slides/logistisk.html#glykæmisk-kontrol-1",
+    "title": "Logistisk regression",
+    "section": "Glykæmisk kontrol",
+    "text": "Glykæmisk kontrol\n\n\n\nBaseret på den tabel - er der sammenhæng mellem de to variable?\n\ntable(SRH_dik, HBAlC_dik)\n\n       HBAlC_dik\nSRH_dik   0   1\n      0 412 264\n      1 354 188\n\n\nHvordan kan vi gøre det?\n\nRelativ risiko.\n\n\nSå hvad er den relative risiko for godt (selvvurderet) helbred, hvis HbAlc er 1 - altså velreguleret.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#glykæmisk-kontrol-2",
+    "href": "slides/logistisk.html#glykæmisk-kontrol-2",
+    "title": "Logistisk regression",
+    "section": "Glykæmisk kontrol",
+    "text": "Glykæmisk kontrol\n\n\n\nVi fandt en RR på 0.9\n\nHvad betyder det?\n\n\nAt der er lavere sandsynlighed for selvrapporteret godt helbred hvis ens blodsukker er velreguleret.\n\n\nEr det statistisk signifikant?\n\n\nHvordan afgør vi det?\n\n\nEn testværdi. Men lad os denne gang beregne et 95% KI i stedet\n\n\nHvordan ser det ud?\n\n\n\\(\\text{Estimat} \\pm1.96\\cdot\\text{SE}\\)\n\n\nOg hvordan beregnede vi SE?\n\n\n\\(SE\\big(\\log(RR)\\big)=\\sqrt{\\frac{1}{a}-\\frac{1}{a+b}+\\frac{1}{c}-\\frac{1}{c+d}}\\)\n\n\n\ntable(SRH_dik, HBAlC_dik)\n\n       HBAlC_dik\nSRH_dik   0   1\n      0 412 264\n      1 354 188\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#glykæmisk-kontrol-3",
+    "href": "slides/logistisk.html#glykæmisk-kontrol-3",
+    "title": "Logistisk regression",
+    "section": "Glykæmisk kontrol",
+    "text": "Glykæmisk kontrol\n\n\n\nNu udfører vi denne analyse i R:\n&gt;model1 &lt;- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = “binomial”)\n&gt;summary(model1)\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.717969\n0.350389\n2.049\n0.04046*\n\n\nfactor(HBAlC_dik)1\n-0.188731\n0.120637\n-1.564\n0.11771\n\n\nfactor(SEX)1\n0.252051\n0.117514\n2.145\n0.03196*\n\n\nAGE\n-0.015573\n0.005099\n-3.054\n0.00226**\n\n\n\n\n\n\n\nHvad har vi gjort, og hvordan fortolker vi resultaterne?\n\n\n\n\nDer er lavet en logistisk regression.\n\n\nHvad var responsvariabel?\n\n\nSRH_dik - selvrapporteret, godt helbred.\n\n\nHvad var der af forklarende variable?\n\n\nAGE som kontinuert og HBAlC_dik og SEX som kategoriske variable.\n\n\nEr der nogen af dem der er signifikante?\n\n\nBåde køn og alder er signifikante, med p-værdier på hhv 0.032 og 0.0023\n\n\nHBAlC - altså om patienten er i glykæmisk kontrol, er ikke signifikant."
+  },
+  {
+    "objectID": "slides/logistisk.html#glykæmisk-kontrol-4",
+    "href": "slides/logistisk.html#glykæmisk-kontrol-4",
+    "title": "Logistisk regression",
+    "section": "Glykæmisk kontrol",
+    "text": "Glykæmisk kontrol\n\n\n\nVi må hellere beregne nogle 95% KI også og odds-ratios også.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.717969\n0.350389\n2.049\n0.04046*\n\n\nfactor(HBAlC_dik)1\n-0.188731\n0.120637\n-1.564\n0.11771\n\n\nfactor(SEX)1\n0.252051\n0.117514\n2.145\n0.03196*\n\n\nAGE\n-0.015573\n0.005099\n-3.054\n0.00226**\n\n\n\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#glykæmisk-kontrol-5",
+    "href": "slides/logistisk.html#glykæmisk-kontrol-5",
+    "title": "Logistisk regression",
+    "section": "Glykæmisk kontrol",
+    "text": "Glykæmisk kontrol\n\n\n\nHvad så vi så?\n\nKøn var statistisk signifikant med tilhørende odds-ratio på\n\nexp(0.252051)\n\n[1] 1.286662\n\n\n\n\nHvad betyder det?\n\n\nMandlige diabetikere har 28% større odds for (selvrapporteret) godt helbred sammenlignet med kvindelige diabetikere.\n\n\nOg med et 95% KI på\n\nexp(0.252051 + c(-1,1)*1.96*0.117514)\n\n[1] 1.021961 1.619923\n\n\nMed alder og HBA1C_dik fastholdt.\n\n\nAge var også statistisk signifikant med tilhørende odds-ratio på\n\nexp(-0.015573)\n\n[1] 0.9845476\n\n\n\n\n\n\n\nOg et 95% KI på:\n\nexp(-0.015573 +c(-1,1)*1.96*0.005099)\n\n[1] 0.9747570 0.9944366\n\n\n\n\nSå ved 1 års øget alder, ses ca. 1.5% reduceret odds for godt selvvurderet helbred.\n\n\nHvad hvis vi øger med 5 år?\n\n\n\nexp(-0.015573*5)\n\n[1] 0.9250893\n\n\n\n\nHvad er konfidensintervallet hvis vi øger alderen med fem år?\n\n\nKoefficienten ganger vi “bare” med 5. Usikkerheden - den akkumulerer, så den skal også ganges med 5.\n\n\nSå:\n\nexp(-0.015573*5 +c(-1,1)*1.96*0.005099*5)\n\n[1] 0.8799984 0.9724907"
   }
 ]
