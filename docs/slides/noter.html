@@ -133,78 +133,8 @@
 </div>
 
 </section>
-<section id="en-ret-sjælden-opgave" class="slide level2">
-<h2>en ret sjælden opgave</h2>
+<section class="slide level2">
 
-<img data-src="noter_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p>SKAL HAVE JUSTERET LABELS! Hvad kan vi sige om disse fordelinger?</p>
-<p>Ud over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte.</p>
-<ol start="2" type="a">
-<li>Vi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59</li>
-</ol>
-<p>Polske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61</p>
-<p>Beregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.</p>
-<p>Danske: 0.495/sqrt(59) polske: 0.418/sqrt(61)</p>
-<ol start="3" type="a">
-<li>Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?</li>
-</ol>
-<p>danske:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.084691 3.337309</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.284102 3.493898</code></pre>
-</div>
-</div>
-<p>Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel.</p>
-<ol start="4" type="a">
-<li>Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.</li>
-</ol>
-<p>forskel:</p>
-<p>::: {.cell}</p>
-<p>:::</p>
-<p>poolet SEM</p>
-<p>Testværdien:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.136821</code></pre>
-</div>
-</div>
-<p>Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.</p>
-<p>p-værdi:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03464261</code></pre>
-</div>
-</div>
-<p>Og der skal ganges med to…</p>
-<ol start="5" type="a">
-<li>angtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.</li>
-</ol>
-<p>Det danske referenceinterval:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.24668 4.17532</code></pre>
-</div>
-</div>
-<p>Hvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)</p>
-<p>Vi kan bruge pnorm direkte (cowboytricket)</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9668844</code></pre>
-</div>
-</div>
-<p>Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.</p>
-</section>
-<section id="gad-vide-hvor-det-her-kommer-fra" class="slide level2">
-<h2>gad vide hvor det her kommer fra?</h2>
-<p>analyse for kvinder summary(lm(diff[sex == “female”] ~ factor(group[sex==“female”])))</p>
-<p>analyse for mænd summary(lm(diff[sex == “male”] ~ factor(group[sex==“male”])))</p>
-<p>Hvilke analyser?</p>
-<p>lineær regression. Diff som respons og group som forklarende variabel. Den forkarende variabel er kategorisk.</p>
-<p>intercept for de to grupper viser forskellen i blodtryk - i begge tilfælde et fald. Den forklarende variabel viser at blodtrykke falder yderligere (statistisk signifikant) for kvinder, men ikke for mænd.</p>
 
 
 </section>
