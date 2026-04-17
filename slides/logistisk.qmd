@@ -2613,3 +2613,361 @@ $p = \frac{odds}{1 + odds}$
 ::::
 
 
+
+## Bilirubin
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+349 patienter med leversygdom blev randomiseret til behandlingen UDC (176 patienter), eller placebo (173) patienter.
+
+Et udfald, "failure of medical treatment" blev defineret som enten "død" eller "levertransplantation" i en periode på 6 år.
+
+Patienterne blev fulgt fra de blev randomiseret til enten "failure of medical treatment", eller til der var gået 6 år.
+
+
+Variable:  
+_Y_ er udfaldsvariablen (1: "treatment failure"),  
+_R_ angiver behandling (1  = UDC),  
+_X_ den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet
+
+
+::::
+
+
+::::
+:::: {.column}
+:::: {.evensmaller}
+
+De første 6 observationer.
+```{r bilirubin_data_exempel}
+library(tidyverse)
+tribble(~Y, ~R, ~X,
+1, 1 , 1.616854293,
+0,1,1.990367802,
+0,1,-0.849360224,
+1,1,1.496709981,
+0,1,1.335441834,
+0,1,-0.561678151)
+```
+
+
+```{r bilirubin_data, echo = FALSE}
+Y <- c(rep(0, 134 + 118),
+            rep(1, 42 + 55))
+
+R <- c(rep(1, 134), rep(0, 118),
+         rep(1, 42), rep(0, 55))
+
+```
+
+```{r bilirubin_tabel, echo = TRUE}
+table(Y, R) #giver
+```
+::::
+
+
+::::
+::::
+
+
+## Bilirubin
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+```{r bilirubin_tabel_2}
+table(Y, R)
+```
+
+Baseret på ovenstående tabel ønskes beregnet relativ risiko
+(med tilhørende 95% KI ) til belysning af effekten af behandlingen
+på det betragtede udfald. Husk at konkludere.
+
+:::: {.tiny}
+Y var udfaldet (1: failure), R var behandlingen (1: UDC, 0: placebo)
+::::
+Hvordan beregner vi KI?
+
+:::: {.fragment}
+
+$\text{Estimat} \pm1.96\cdot\text{SE}$
+::::
+:::: {.fragment}
+Og SE på RR?
+::::
+:::: {.fragment}
+$SE(\log(RR)) = \sqrt{\frac{1}{a} - \frac{1}{a+b} + \frac{1}{c} - \frac{1}{c+d}}$
+::::
+:::: {.fragment}
+Så husk - der arbejdes på log-skala
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+
+## Bilirubin
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Nu udførtes følgende analyse:  
+> model <- glm(Y ~ factor(R) + X, family ="binomial")  
+> summary(model)
+
+Der gav dette output:
+
+```{r bilirubin_reg_output_1, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-1.3922", "0.2088", "-6.668", "2.60e-11***",
+"factor(R)1", "-0.9054", "0.2967", "-3.052", "0.00227**",
+"X", "1.2632", "0.1571", "8.043", "8.79e-16***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+:::: {.evensmaller}
+
+Hvilken analyse er der tale om?
+
+:::: {.fragment}
+Det er en logistisk regression
+::::
+:::: {.fragment}
+Hvordan ser vi det?
+::::
+:::: {.fragment}
+glm, binomial, z-value. Men det skriver vi nok ikke i besvarelsen.
+::::
+::::
+
+
+::::
+
+::::
+:::: {.column}
+
+:::: {.tiny}
+
+
+:::: {.fragment}
+Hvad er variablene?
+::::
+:::: {.fragment}
+Y er den afhængige, kategoriske responsvariabel (Treatment failure)
+::::
+:::: {.fragment}
+R er den uafhængige, kategoriske variabel, der beskriver behandling vs placebo
+::::
+:::: {.fragment}
+X er den uafhængige, kontinuærte variabel - den standardiserede logaritme af bilirubin målingerne
+::::
+:::: {.fragment}
+Hvad vil det sige at den er logaritmeret?
+::::
+:::: {.fragment}
+Vi har taget logaritmen af bilirubin værdierne
+::::
+:::: {.fragment}
+Og at den er standardiseret?
+::::
+:::: {.fragment}
+Vi har centreret til middelværdi 0 ved at trække middelværdien fra alle målingerne
+::::
+:::: {.fragment}
+Og skaleret til sd = 1 ved at dividere alle målingerne med standardafvigelsen af alle målingerne.
+::::
+:::: {.fragment}
+Er der noget signifikant?
+::::
+:::: {.fragment}
+Ja, både behandling og X er statistisk signifikante på et 5% niveau. Vi skal nok i en besvarelse huske at nævne p-værdierne.
+::::
+
+::::
+
+::::
+::::
+
+## Bilirubin
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Angiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.
+
+
+```{r bilirubin_reg_output_2, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-1.3922", "0.2088", "-6.668", "2.60e-11***",
+"factor(R)1", "-0.9054", "0.2967", "-3.052", "0.00227**",
+"X", "1.2632", "0.1571", "8.043", "8.79e-16***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken skala er vi på når vi har en logistisk regression?
+
+:::: {.fragment}
+log-odds
+::::
+:::: {.fragment}
+Hvilke effekter er relevante?
+::::
+:::: {.fragment}
+Ja, det kan debatteres. Tag dem alle sammen.
+::::
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+
+
+::::
+::::
+
+## Hvad så vi så?
+
+:::: {.smaller}
+
+Vi fik en estimeret odds(ratio) på behandlingen på 0.404
+
+:::: {.fragment}
+Er der kontrolleret for noget?
+::::
+:::: {.fragment}
+Ja, der er kontrolleret for den forklarende variabel X. Det skal vi nok huske at skrive.
+::::
+:::: {.fragment}
+Det tilhørende 95% KI var [0.2260652, 0.7233457]
+::::
+:::: {.fragment}
+Og da 1 ikke er indeholdt, er estimatet signifikant
+::::
+:::: {.fragment}
+Men det vidste vi allerede fra p-værdien
+::::
+:::: {.fragment}
+Hvad svarer OR = 0.4 til?
+::::
+:::: {.fragment}
+En reduktion i _odds_ for treatment failure på ca. 60% ved ?
+::::
+:::: {.fragment}
+Behandling sammenlignet med placebo
+::::
+:::: {.fragment}
+Når der ?
+::::
+:::: {.fragment}
+Kontrolleres for bilirubin.
+::::
+::::

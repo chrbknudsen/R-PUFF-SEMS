@@ -9467,6 +9467,1021 @@ status   F   M
 <div id="qwebr-insertion-location-13"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
+</section>
+<section id="blodtryk-i-ghana" class="slide level2">
+<h2>Blodtryk i Ghana</h2>
+<p>Vi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie, der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret hypertension. Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling. Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen.</p>
+<p>Data har følgende variable:</p>
+<p>SBPbl: systolisk blodtryk ved baseline (mmHg) SBP12: systolisk blodtryk efter 12 måneder group (control/treatment) sex (male/female) diff: differensen mellem SBP12 og SBPbl</p>
+<p>Gennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9 De tilsvarende tal i interventionsgruppen er -19.6 og 17.4</p>
+<ol type="a">
+<li>Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.</li>
+</ol>
+<p>Vi starter med SEM for de to grupper:</p>
+<p>Intervention: n= 323</p>
+<p>Så kan vi beregne 95% KI beregnes for de to grupper:</p>
+<p>intervention:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -21.4976 -17.7024</code></pre>
+</div>
+</div>
+<p>kontrol:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -18.78724 -14.41276</code></pre>
+</div>
+</div>
+<p>Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk signifikant.</p>
+<ol start="2" type="a">
+<li>Er faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?</li>
+</ol>
+<p>De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge KI til at konkludere. Vi beregner SEM for differensen:</p>
+<p>Det giver os en teststørrelse på forskellen på de to differenser på:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.030622</code></pre>
+</div>
+</div>
+<p>Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.</p>
+<ol start="3" type="a">
+<li>Nu udførtes følgende analyser for mænd og kvinder hver for sig: &gt; summary(lm(diff[sex==“female”]~factor(group[sex==“female”])))</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div id="frqeytcyna" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#frqeytcyna table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#frqeytcyna thead, #frqeytcyna tbody, #frqeytcyna tfoot, #frqeytcyna tr, #frqeytcyna td, #frqeytcyna th {
+  border-style: none;
+}
+
+#frqeytcyna p {
+  margin: 0;
+  padding: 0;
+}
+
+#frqeytcyna .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#frqeytcyna .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#frqeytcyna .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#frqeytcyna .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#frqeytcyna .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#frqeytcyna .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#frqeytcyna .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#frqeytcyna .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#frqeytcyna .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#frqeytcyna .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#frqeytcyna .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#frqeytcyna .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#frqeytcyna .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#frqeytcyna .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#frqeytcyna .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#frqeytcyna .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#frqeytcyna .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#frqeytcyna .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#frqeytcyna .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#frqeytcyna .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#frqeytcyna .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#frqeytcyna .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#frqeytcyna .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#frqeytcyna .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#frqeytcyna .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#frqeytcyna .gt_left {
+  text-align: left;
+}
+
+#frqeytcyna .gt_center {
+  text-align: center;
+}
+
+#frqeytcyna .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#frqeytcyna .gt_font_normal {
+  font-weight: normal;
+}
+
+#frqeytcyna .gt_font_bold {
+  font-weight: bold;
+}
+
+#frqeytcyna .gt_font_italic {
+  font-style: italic;
+}
+
+#frqeytcyna .gt_super {
+  font-size: 65%;
+}
+
+#frqeytcyna .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#frqeytcyna .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#frqeytcyna .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#frqeytcyna .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#frqeytcyna .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#frqeytcyna .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#frqeytcyna .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#frqeytcyna .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#frqeytcyna div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
+<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">-16.988</td>
+<td class="gt_row gt_left" headers="Std. Error">1.3556</td>
+<td class="gt_row gt_left" headers="t value">-12.527</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">factor(group[sex=='female'])treatment</td>
+<td class="gt_row gt_left" headers="Estimate">-5.915</td>
+<td class="gt_row gt_left" headers="Std. Error">1.901</td>
+<td class="gt_row gt_left" headers="t value">-3.112</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.002**</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote>
+<p>summary(lm(diff[sex==“male”]~factor(group[sex==“male”])))</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div id="bdjaeuyhwy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#bdjaeuyhwy table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bdjaeuyhwy thead, #bdjaeuyhwy tbody, #bdjaeuyhwy tfoot, #bdjaeuyhwy tr, #bdjaeuyhwy td, #bdjaeuyhwy th {
+  border-style: none;
+}
+
+#bdjaeuyhwy p {
+  margin: 0;
+  padding: 0;
+}
+
+#bdjaeuyhwy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bdjaeuyhwy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bdjaeuyhwy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bdjaeuyhwy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bdjaeuyhwy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bdjaeuyhwy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bdjaeuyhwy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bdjaeuyhwy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bdjaeuyhwy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bdjaeuyhwy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bdjaeuyhwy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bdjaeuyhwy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bdjaeuyhwy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bdjaeuyhwy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bdjaeuyhwy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdjaeuyhwy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bdjaeuyhwy .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#bdjaeuyhwy .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#bdjaeuyhwy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdjaeuyhwy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bdjaeuyhwy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdjaeuyhwy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bdjaeuyhwy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdjaeuyhwy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bdjaeuyhwy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdjaeuyhwy .gt_left {
+  text-align: left;
+}
+
+#bdjaeuyhwy .gt_center {
+  text-align: center;
+}
+
+#bdjaeuyhwy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bdjaeuyhwy .gt_font_normal {
+  font-weight: normal;
+}
+
+#bdjaeuyhwy .gt_font_bold {
+  font-weight: bold;
+}
+
+#bdjaeuyhwy .gt_font_italic {
+  font-style: italic;
+}
+
+#bdjaeuyhwy .gt_super {
+  font-size: 65%;
+}
+
+#bdjaeuyhwy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bdjaeuyhwy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bdjaeuyhwy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bdjaeuyhwy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bdjaeuyhwy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bdjaeuyhwy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bdjaeuyhwy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bdjaeuyhwy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bdjaeuyhwy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
+<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
+<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">(Intercept)</td>
+<td class="gt_row gt_left" headers="Estimate">-15.893</td>
+<td class="gt_row gt_left" headers="Std. Error">1.594</td>
+<td class="gt_row gt_left" headers="t value">-9.968</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">factor(group[sex=='male'])treatment</td>
+<td class="gt_row gt_left" headers="Estimate">1.692</td>
+<td class="gt_row gt_left" headers="Std. Error">2.264</td>
+<td class="gt_row gt_left" headers="t value">0.747</td>
+<td class="gt_row gt_left" headers="Pr(>|t|)">0.456</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning af værdierne i “Estimate” søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?</p>
+<p>Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.</p>
+<p>For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)</p>
+<p>For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)</p>
 
 
 </section>

@@ -2570,3 +2570,182 @@ Vi beregner medianen (middelværdien) af l_ratio, og exponentierer.
 ```
 ::::
 ::::
+
+
+## Blodtryk i Ghana
+
+Vi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie,
+der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret
+hypertension. 
+Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling
+med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået 
+en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling.
+Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter
+12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen. 
+
+Data har følgende variable:
+
+SBPbl: systolisk blodtryk ved baseline (mmHg)
+SBP12: systolisk blodtryk efter 12 måneder
+group (control/treatment)
+sex (male/female)
+diff: differensen mellem SBP12 og SBPbl
+
+Gennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9
+De tilsvarende tal i interventionsgruppen er -19.6 og 17.4
+
+a) Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode.
+Besvar samme spørgsmål for kontrolgruppen.
+
+Vi starter med SEM for de to grupper:
+
+
+Intervention: n= 323
+
+```{r}
+SEM_intervention <- 17.4/sqrt(323)
+```
+
+```{r}
+SEM_kontrol <- 19.9/sqrt(641-323)
+```
+
+Så kan vi beregne 95% KI beregnes for de to grupper:
+
+intervention:
+
+```{r}
+-19.6+c(-1,1)*1.96*SEM_intervention
+```
+
+kontrol:
+
+```{r}
+-16.6+c(-1,1)*1.96*SEM_kontrol
+```
+
+Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk
+signifikant.
+
+b) Er faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?
+
+De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge
+KI til at konkludere. Vi beregner SEM for differensen:
+
+```{r}
+SEM_diff <- sqrt(SEM_intervention^2 + SEM_kontrol^2)
+```
+
+Det giver os en teststørrelse på forskellen på de to differenser på:
+
+```{r}
+(-19.6- -16.6)/SEM_diff
+```
+
+Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.
+
+c) Nu udførtes følgende analyser for mænd og kvinder hver for sig:
+> summary(lm(diff[sex=="female"]~factor(group[sex=="female"])))
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-16.988", "1.3556", "-12.527", "<2e-16***",
+"factor(group[sex=='female'])treatment", "-5.915", "1.901", "-3.112", "0.002**"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+> summary(lm(diff[sex=="male"]~factor(group[sex=="male"])))
+```{r echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-15.893", "1.594", "-9.968", "<2e-16***",
+"factor(group[sex=='male'])treatment", "1.692", "2.264", "0.747", "0.456"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+      opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning
+af værdierne i "Estimate" søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?
+
+Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som
+forklarende, kategorisk (og binær) variabel. 
+
+For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)
+
+For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der
+ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
+
+
