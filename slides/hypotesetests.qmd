@@ -1536,13 +1536,13 @@ Det relevante estimat er den estimerede værdi for $\mu$. Angiv det 95% KI vi be
 ::::
 ::::
 
+## Danske og polske piger
 
-
-
-##  Danske og polske piger
-
-
+:::: {.columns}
+:::: {.column}
 ```{r}
+#| fig-height: 7
+#| fig-width: 6
 library(tidyverse)
 
 set.seed(47)
@@ -1563,131 +1563,334 @@ log_right <- log(right_skew)
 log_left  <- log(max(left_skew) + 1 - left_skew)
 
 df <- tibble(
-  value = c(right_skew, left_skew, normal, log_right, log_left),
+  value = c(right_skew, left_skew,  log_right, log_left),
   type = rep(
     c(
       "Højreskæv",
       "Venstreskæv",
-      "Tilnærmelsesvist normal",
       "Log(højreskæv)",
       "Log(venstreskæv)"
+
     ),
     each = n
-  )
-)
+  ) 
+) |> 
+    mutate(type = factor(type, levels = c(
+      "Højreskæv",
+      "Venstreskæv",
+      "Log(højreskæv)",
+      "Log(venstreskæv)"
+      
+
+    )))
 
 ggplot(df, aes(x = value)) +
   geom_histogram(bins = 10, fill = "steelblue", color = "white") +
-  facet_wrap(~type, scales = "free") +
+  facet_wrap(~type, scales = "free", ncol = 1) +
   theme_minimal()
 ```
 
-SKAL HAVE JUSTERET LABELS!
-Hvad kan vi sige om disse fordelinger?
 
-Ud over at vi nok vil blive bedt om at 
-forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden.
-Så skal vi kunne fortælle at "denne er højreskæv" "denne er venstreskæv" og de
-log-transformerede data er tilnærmelsesvist normalfordelte.
 
-b)
-Vi får, om logtransformerede data oplyst;
-Danske piger: log(D-vitaminniveau)
-gennemsnit: 3.211
-sd = 0.492
-n = 59
+::::
+:::: {.column}
 
-Polske piger: log(D-vitaminniveau)
-gennemsnit: 3.389
-sd = 0.418
-n = 61
+:::: {.reallysmall} 
 
-Beregn variationen på gennemsnittene for
+Disse histogrammer er konstrueret til lejligheden, og har ikke meget med det efterfølgende at gøre. 
+
+Men. Hvad kan vi sige om dem?
+
+:::: {.fragment}
+Vi skal kunne genkende en højre-skæv fordeling.
+::::
+:::: {.fragment}
+Og en venstre-skæv fordeling
+::::
+:::: {.fragment}
+I den højre-skæve har vi observationer der ligger og roder rundt ude til højre, relativt til flertallet af observationer.
+::::
+:::: {.fragment}
+Vi skal også kunne se at i hvert fald den nederste er tilnærmelsesvis normalfordelt.
+::::
+:::: {.fragment}
+Hvis vi får oplyst, at plottet "Log(højreskæv)" er de samme data som vi ser i plottet "Højreskæv", blot log-transformeret, skal vi også kunne erkende, at de log-transformerede data er mere normalfordelte end de ikke-log-transformerede data.
+::::
+:::: {.fragment}
+Det gælder generelt, at logaritmen af data er mere normalfordelt end data.
+::::
+
+::::
+::::
+::::
+
+
+
+
+## Danske og polske piger
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Vi skal se på data fra en undersøgelse af D-vitaminniveuaet for danske og polske piger.
+
+Vi får følgende log-transformerede data oplyst:
+
+| Land | Gennemsnit | Spredning | n | 
+|--|---|---|---|
+|DK|3.211|0.492|59|
+|PO|3.389|0.418|61|
+
+Beregn variationen på gennemsnittene (SEM) for
 det log-transformerede D-vitaminniveau for
 hhv de danske og polske piger.
 
-Danske:
-0.495/sqrt(59)
-polske:
-0.418/sqrt(61)
+:::: {.fragment}
+Hvordan var det nu vi beregnede SEM?
+::::
+:::: {.fragment}
+$\text{SEM} = \frac{sd}{\sqrt{n}}$
+::::
+::::
 
-c) Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Danske og polske piger
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om
 forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?
 
-danske: 
-```{r}
-3.211 + c(-1,1)*1.96*0.495/sqrt(59)
+
+| Land | Gennemsnit | Spredning | n | 
+|--|---|---|---|
+|DK|3.211|0.492|59|
+|PO|3.389|0.418|61|
+
+
+Givet 
+
+$\text{SEM} = \frac{sd}{\sqrt{n}}$
+
+Hvordan beregner vi så et 95% KI?
+
+:::: {.fragment}
+$\text{Gennemsnit} \pm1.96\cdot\text{SEM}$
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Hvad kan vi sige om det?
+
+:::: {.evensmaller}
+
+Hvad er det nu et 95% KI fortæller os?
+
+:::: {.fragment}
+Det fortæller os, at hvis vi beregner KI for et større antal stikprøver, så vil 95% af disse indeholde den sande værdi for gennemsnittet af den log-transformerede D-vitaminkoncentration.
+
+For hver af de to grupper.
+::::
+:::: {.fragment}
+Ofte skriver vi nu at hvert KI indeholder det sande middelværdi for (osv) med 95% sandsynlighed.
+
+Men det er faktisk ikke helt korrekt.
+::::
+
+:::: {.fragment}
+Vi så at der var overlap mellem intervallerne.
+::::
+:::: {.fragment}
+Det betyder _ikke_ at vi kan sige noget om en signifikant forskel eller ej.
+::::
+:::: {.fragment}
+Havde de to gennemsnit ligget i det andet KI, ville det være en anden sag.
+
+Men stadig lidt usikkert.
+::::
+:::: {.fragment}
+
+Så vi kan ikke konkludere om der er signifikant forskel på de to populationers D-vitaminniveau.
+::::
+::::
+
+## Danske og polske piger
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+
+Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua).
+Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på D-vitaminniveauet er statistisk signifikant på et 5% niveau.
+
+:::: {.fragment}
+Her bliver I virkelig hjulpet...
+::::
+
+| Land | Gennemsnit | Spredning | n | 
+|--|---|---|---|
+|DK|3.211|0.492|59|
+|PO|3.389|0.418|61|
+
+:::: {.fragment}
+Hvad er det så vi tester?
+::::
+:::: {.fragment}
+$H_0: \mu_{dk} - \mu_{po} = 0$
+::::
+:::: {.fragment}
+Givet $\text{SEM} = \frac{sd}{\sqrt{n}}$
+
+Hvad er så SE for forskellen på middelværdierne?
+::::
+:::: {.fragment}
+$SE(\bar{x}_1 - \bar{x}_2)=\sqrt{SEM_1^2 + SEM_2^2}$
+::::
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Danske og polske piger
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+Vi får nu at vide at vi kan beskrive log(D-vitaminniveau) i begge lande ved en normalfordeling.
+Beregn et 95% reference interval for log(D-vit) for danske piger.
+
+Hvordan beregner vi referenceintervallet?
+
+:::: {.fragment}
+
+$\mu \pm1.96\sigma$
+::::
+:::: {.fragment}
+Skal vi bruge SEM? 
+::::
+:::: {.fragment}
+Nej, for nu antager vi at tallene er normalfordelte.
+::::
+
+| Land | Gennemsnit | Spredning | n | 
+|--|---|---|---|
+|DK|3.211|0.492|59|
+|PO|3.389|0.418|61|
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+
+
+## Danske og polske piger
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+
+Brug derefter $\mu$ og $\sigma$ for de polske piger til at beregne hvor 
+stor en andel af dem der forventes at ligge inden for det danske referenceinterval.
+
+Hvis referenceintervallet for de danske piger er [nedre, øvre], hvordan finder vi
+andelen af polske piger der ligger inden for det?
+
+:::: {.fragment}
+Det er:  P(nedre < X < øvre)
+::::
+
+:::: {.fragment}
+Hvad er det lig med? <span class="fragment">P(X < øvre) - P(X < nedre) </span>
+::::
+
+:::: {.fragment}
+Hvordan får vi beregnet det? <span class="fragment">Vi normaliserer udtrykkene</span>
+::::
+
+:::: {.fragment}
+Med hvad? <span class="fragment">$\mu$ og $\sigma$ for de polske piger</span>
+::::
+:::: {.fragment}
+Og så skal vi bruge? <span class="fragment">pnorm</span>
+::::
+
+:::: {.fragment}
+Fordi <span class="fragment">vi søger en andel/sandsynlighed.</span>
+::::
+
+:::: {.fragment}
+KI for DK piger var [2.24668, 4.17532]
+
+| Land | Gennemsnit | Spredning |
+|--|---|---|
+|PO|3.389|0.418|
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
 
 
-```{r}
-3.389 + c(-1,1)*1.96*0.418/sqrt(61)
-```
-
- Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de
- to grupper.
- Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere
- om der er en signifikant forskel.
-
- d) Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua).
- Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på
- d-vitaminniveauet er statistisk signifikant på et 5% niveau.
-
- forskel:
- 
- ```{r}
- diff <- 3.21-3.389
- ```
-
- poolet SEM
- 
-```{r}
- SEM_poolet <- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)
-```
-
- Testværdien:
- 
-```{r}
- diff/SEM_poolet
-```
-
-Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.
-
-p-værdi:
-```{r}
-2*pt(diff/SEM_poolet, 59+61)
-```
-Og der skal ganges med to...
-
-e) angtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling.
-Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger.
-Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem
-der forventes at ligge inden for det danske referenceinterval.
-
-Det danske referenceinterval:
-```{r}
-3.211+c(-1,1)*1.96*0.492
-```
-
-Hvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418,
-skal vi beregne:
-P(2.24668 < X < 4.17532) <=>
-P(X < 4.17532) - P(X < 2.24668)
-
-Vi kan bruge pnorm direkte (cowboytricket)
-
-```{r}
-pnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)
-```
-
-Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.
-
-
-
-
-
-
-
-
-
-
+::::
+::::
