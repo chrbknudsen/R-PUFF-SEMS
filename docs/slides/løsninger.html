@@ -186,11 +186,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="hypotesetests" class="level1">
 <h1>Hypotesetests</h1>
+<section id="danske-og-polske-piger" class="level2">
+<h2 class="anchored" data-anchor-id="danske-og-polske-piger">Danske og polske piger</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># højreskæv</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>right_skew <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># venstreskæv (spejlet højreskæv)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>left_skew <span class="ot">&lt;-</span> <span class="fu">max</span>(right_skew) <span class="sc">-</span> right_skew</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># tilnærmelsesvist normal</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>normal <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># log-transformerede</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>log_right <span class="ot">&lt;-</span> <span class="fu">log</span>(right_skew)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>log_left  <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">max</span>(left_skew) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> left_skew)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(right_skew, left_skew, normal, log_right, log_left),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">rep</span>(</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Højreskæv"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Venstreskæv"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tilnærmelsesvist normal"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Log(højreskæv)"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Log(venstreskæv)"</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">each =</span> n</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>type, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="løsninger_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>SKAL HAVE JUSTERET LABELS! Hvad kan vi sige om disse fordelinger?</p>
+<p>Ud over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte.</p>
+<ol start="2" type="a">
+<li>Vi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59</li>
+</ol>
+<p>Polske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61</p>
+<p>Beregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.</p>
+<p>Danske: 0.495/sqrt(59) polske: 0.418/sqrt(61)</p>
+<ol start="3" type="a">
+<li>Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?</li>
+</ol>
+<p>danske:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.211</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.495</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.084691 3.337309</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.389</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.418</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">61</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.284102 3.493898</code></pre>
+</div>
+</div>
+<p>Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel.</p>
+<ol start="4" type="a">
+<li>Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.</li>
+</ol>
+<p>forskel:</p>
+<p>::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">3.21-3.389</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<p>poolet SEM</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> SEM_poolet <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="fl">0.495</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">59</span>))<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="fl">0.418</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">61</span>))<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Testværdien:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> diff<span class="sc">/</span>SEM_poolet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.136821</code></pre>
+</div>
+</div>
+<p>Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.</p>
+<p>p-værdi:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(diff<span class="sc">/</span>SEM_poolet, <span class="dv">59</span><span class="sc">+</span><span class="dv">61</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03464261</code></pre>
+</div>
+</div>
+<p>Og der skal ganges med to…</p>
+<ol start="5" type="a">
+<li>angtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.</li>
+</ol>
+<p>Det danske referenceinterval:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.211</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.492</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.24668 4.17532</code></pre>
+</div>
+</div>
+<p>Hvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)</p>
+<p>Vi kan bruge pnorm direkte (cowboytricket)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">4.17532</span>, <span class="fl">3.389</span>, <span class="fl">0.418</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">2.24668</span>, <span class="fl">3.389</span>, <span class="fl">0.418</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9668844</code></pre>
+</div>
+</div>
+<p>Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.</p>
+</section>
 <section id="opgave" class="level2">
 <h2 class="anchored" data-anchor-id="opgave">Opgave</h2>
 <p>Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">107</span>,<span class="dv">119</span>,<span class="dv">99</span>,<span class="dv">114</span>,<span class="dv">120</span>,<span class="dv">104</span>,<span class="dv">88</span>,<span class="dv">114</span>,<span class="dv">124</span>,<span class="dv">116</span>,<span class="dv">101</span>,<span class="dv">121</span>,<span class="dv">152</span>,<span class="dv">100</span>,<span class="dv">125</span>,<span class="dv">114</span>,<span class="dv">95</span>,<span class="dv">117</span>) <span class="sc">|&gt;</span> <span class="fu">sd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">107</span>,<span class="dv">119</span>,<span class="dv">99</span>,<span class="dv">114</span>,<span class="dv">120</span>,<span class="dv">104</span>,<span class="dv">88</span>,<span class="dv">114</span>,<span class="dv">124</span>,<span class="dv">116</span>,<span class="dv">101</span>,<span class="dv">121</span>,<span class="dv">152</span>,<span class="dv">100</span>,<span class="dv">125</span>,<span class="dv">114</span>,<span class="dv">95</span>,<span class="dv">117</span>) <span class="sc">|&gt;</span> <span class="fu">sd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14.42447</code></pre>
 </div>
@@ -202,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Et referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8</p>
 <p>Så skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.644854</code></pre>
 </div>
@@ -228,15 +348,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p<em>(1-p)/n) = sqrt(0.075</em>(1-0.075)/1513)</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>se_gb <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>se_gb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>se_gb <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>se_gb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.006771456</code></pre>
 </div>
 </div>
 <p>Der er et 0 for lidt i modelbesvarelsen…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.075</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.075</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fl">0.075</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.075</span>)<span class="sc">/</span><span class="dv">1513</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.06172795 0.08827205</code></pre>
 </div>
@@ -246,26 +366,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>forskel:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">0.075-0.045</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">0.075-0.045</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03</code></pre>
 </div>
 </div>
 <p>se_dk:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>se_dk <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.045</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.045</span>)<span class="sc">/</span><span class="dv">51851</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>se_dk <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.045</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.045</span>)<span class="sc">/</span><span class="dv">51851</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>se_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(se_dk<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se_gb<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>se_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(se_dk<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se_gb<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.006832381</code></pre>
 </div>
 </div>
 <p>et 95% ki for diffen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diff <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>diff <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>se_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01660853 0.04339147</code></pre>
 </div>
@@ -287,22 +407,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Vi starter med SEM for de to grupper:</p>
 <p>Intervention: n= 323</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>SEM_intervention <span class="ot">&lt;-</span> <span class="fl">17.4</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>SEM_intervention <span class="ot">&lt;-</span> <span class="fl">17.4</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>SEM_kontrol <span class="ot">&lt;-</span> <span class="fl">19.9</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">641-323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>SEM_kontrol <span class="ot">&lt;-</span> <span class="fl">19.9</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">641-323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Så kan vi beregne 95% KI beregnes for de to grupper:</p>
 <p>intervention:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">19.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_intervention</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">19.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_intervention</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -21.4976 -17.7024</code></pre>
 </div>
 </div>
 <p>kontrol:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">16.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_kontrol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">16.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_kontrol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -18.78724 -14.41276</code></pre>
 </div>
@@ -313,11 +433,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge KI til at konkludere. Vi beregner SEM for differensen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SEM_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(SEM_intervention<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> SEM_kontrol<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>SEM_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(SEM_intervention<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> SEM_kontrol<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Det giver os en teststørrelse på forskellen på de to differenser på:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="fl">19.6</span><span class="sc">-</span> <span class="sc">-</span><span class="fl">16.6</span>)<span class="sc">/</span>SEM_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="fl">19.6</span><span class="sc">-</span> <span class="sc">-</span><span class="fl">16.6</span>)<span class="sc">/</span>SEM_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.030622</code></pre>
 </div>
@@ -328,24 +448,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ofvwlaxfpl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bipinjmlit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ofvwlaxfpl table {
+#bipinjmlit table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ofvwlaxfpl thead, #ofvwlaxfpl tbody, #ofvwlaxfpl tfoot, #ofvwlaxfpl tr, #ofvwlaxfpl td, #ofvwlaxfpl th {
+#bipinjmlit thead, #bipinjmlit tbody, #bipinjmlit tfoot, #bipinjmlit tr, #bipinjmlit td, #bipinjmlit th {
   border-style: none;
 }
 
-#ofvwlaxfpl p {
+#bipinjmlit p {
   margin: 0;
   padding: 0;
 }
 
-#ofvwlaxfpl .gt_table {
+#bipinjmlit .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -371,12 +491,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_caption {
+#bipinjmlit .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ofvwlaxfpl .gt_title {
+#bipinjmlit .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -388,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ofvwlaxfpl .gt_subtitle {
+#bipinjmlit .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -400,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ofvwlaxfpl .gt_heading {
+#bipinjmlit .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -412,13 +532,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_bottom_border {
+#bipinjmlit .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_col_headings {
+#bipinjmlit .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -433,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_col_heading {
+#bipinjmlit .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -453,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ofvwlaxfpl .gt_column_spanner_outer {
+#bipinjmlit .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -465,15 +585,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ofvwlaxfpl .gt_column_spanner_outer:first-child {
+#bipinjmlit .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ofvwlaxfpl .gt_column_spanner_outer:last-child {
+#bipinjmlit .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ofvwlaxfpl .gt_column_spanner {
+#bipinjmlit .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -485,11 +605,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ofvwlaxfpl .gt_spanner_row {
+#bipinjmlit .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ofvwlaxfpl .gt_group_heading {
+#bipinjmlit .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -515,7 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ofvwlaxfpl .gt_empty_group_heading {
+#bipinjmlit .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -530,15 +650,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ofvwlaxfpl .gt_from_md > :first-child {
+#bipinjmlit .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ofvwlaxfpl .gt_from_md > :last-child {
+#bipinjmlit .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ofvwlaxfpl .gt_row {
+#bipinjmlit .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -557,7 +677,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ofvwlaxfpl .gt_stub {
+#bipinjmlit .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -570,7 +690,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ofvwlaxfpl .gt_stub_row_group {
+#bipinjmlit .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -584,15 +704,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ofvwlaxfpl .gt_row_group_first td {
+#bipinjmlit .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#ofvwlaxfpl .gt_row_group_first th {
+#bipinjmlit .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#ofvwlaxfpl .gt_summary_row {
+#bipinjmlit .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -602,16 +722,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ofvwlaxfpl .gt_first_summary_row {
+#bipinjmlit .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_first_summary_row.thick {
+#bipinjmlit .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ofvwlaxfpl .gt_last_summary_row {
+#bipinjmlit .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -621,7 +741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_grand_summary_row {
+#bipinjmlit .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -631,7 +751,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ofvwlaxfpl .gt_first_grand_summary_row {
+#bipinjmlit .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -641,7 +761,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_last_grand_summary_row_top {
+#bipinjmlit .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -651,11 +771,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_striped {
+#bipinjmlit .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ofvwlaxfpl .gt_table_body {
+#bipinjmlit .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -664,7 +784,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_footnotes {
+#bipinjmlit .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -678,7 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_footnote {
+#bipinjmlit .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -687,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ofvwlaxfpl .gt_sourcenotes {
+#bipinjmlit .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -701,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ofvwlaxfpl .gt_sourcenote {
+#bipinjmlit .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -709,72 +829,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ofvwlaxfpl .gt_left {
+#bipinjmlit .gt_left {
   text-align: left;
 }
 
-#ofvwlaxfpl .gt_center {
+#bipinjmlit .gt_center {
   text-align: center;
 }
 
-#ofvwlaxfpl .gt_right {
+#bipinjmlit .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ofvwlaxfpl .gt_font_normal {
+#bipinjmlit .gt_font_normal {
   font-weight: normal;
 }
 
-#ofvwlaxfpl .gt_font_bold {
+#bipinjmlit .gt_font_bold {
   font-weight: bold;
 }
 
-#ofvwlaxfpl .gt_font_italic {
+#bipinjmlit .gt_font_italic {
   font-style: italic;
 }
 
-#ofvwlaxfpl .gt_super {
+#bipinjmlit .gt_super {
   font-size: 65%;
 }
 
-#ofvwlaxfpl .gt_footnote_marks {
+#bipinjmlit .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ofvwlaxfpl .gt_asterisk {
+#bipinjmlit .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ofvwlaxfpl .gt_indent_1 {
+#bipinjmlit .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ofvwlaxfpl .gt_indent_2 {
+#bipinjmlit .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ofvwlaxfpl .gt_indent_3 {
+#bipinjmlit .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ofvwlaxfpl .gt_indent_4 {
+#bipinjmlit .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ofvwlaxfpl .gt_indent_5 {
+#bipinjmlit .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ofvwlaxfpl .katex-display {
+#bipinjmlit .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ofvwlaxfpl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bipinjmlit div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -815,24 +935,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rdhvnbrlqp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oryawvaqct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#rdhvnbrlqp table {
+#oryawvaqct table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rdhvnbrlqp thead, #rdhvnbrlqp tbody, #rdhvnbrlqp tfoot, #rdhvnbrlqp tr, #rdhvnbrlqp td, #rdhvnbrlqp th {
+#oryawvaqct thead, #oryawvaqct tbody, #oryawvaqct tfoot, #oryawvaqct tr, #oryawvaqct td, #oryawvaqct th {
   border-style: none;
 }
 
-#rdhvnbrlqp p {
+#oryawvaqct p {
   margin: 0;
   padding: 0;
 }
 
-#rdhvnbrlqp .gt_table {
+#oryawvaqct .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -858,12 +978,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_caption {
+#oryawvaqct .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rdhvnbrlqp .gt_title {
+#oryawvaqct .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -875,7 +995,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#rdhvnbrlqp .gt_subtitle {
+#oryawvaqct .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -887,7 +1007,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#rdhvnbrlqp .gt_heading {
+#oryawvaqct .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -899,13 +1019,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_bottom_border {
+#oryawvaqct .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_col_headings {
+#oryawvaqct .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -920,7 +1040,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_col_heading {
+#oryawvaqct .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -940,7 +1060,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#rdhvnbrlqp .gt_column_spanner_outer {
+#oryawvaqct .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -952,15 +1072,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#rdhvnbrlqp .gt_column_spanner_outer:first-child {
+#oryawvaqct .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rdhvnbrlqp .gt_column_spanner_outer:last-child {
+#oryawvaqct .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rdhvnbrlqp .gt_column_spanner {
+#oryawvaqct .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -972,11 +1092,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#rdhvnbrlqp .gt_spanner_row {
+#oryawvaqct .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rdhvnbrlqp .gt_group_heading {
+#oryawvaqct .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1002,7 +1122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#rdhvnbrlqp .gt_empty_group_heading {
+#oryawvaqct .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1017,15 +1137,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#rdhvnbrlqp .gt_from_md > :first-child {
+#oryawvaqct .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rdhvnbrlqp .gt_from_md > :last-child {
+#oryawvaqct .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rdhvnbrlqp .gt_row {
+#oryawvaqct .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1044,7 +1164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#rdhvnbrlqp .gt_stub {
+#oryawvaqct .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1057,7 +1177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#rdhvnbrlqp .gt_stub_row_group {
+#oryawvaqct .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1071,15 +1191,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#rdhvnbrlqp .gt_row_group_first td {
+#oryawvaqct .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#rdhvnbrlqp .gt_row_group_first th {
+#oryawvaqct .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#rdhvnbrlqp .gt_summary_row {
+#oryawvaqct .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1089,16 +1209,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#rdhvnbrlqp .gt_first_summary_row {
+#oryawvaqct .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_first_summary_row.thick {
+#oryawvaqct .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rdhvnbrlqp .gt_last_summary_row {
+#oryawvaqct .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1108,7 +1228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_grand_summary_row {
+#oryawvaqct .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1118,7 +1238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#rdhvnbrlqp .gt_first_grand_summary_row {
+#oryawvaqct .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1128,7 +1248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_last_grand_summary_row_top {
+#oryawvaqct .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1138,11 +1258,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_striped {
+#oryawvaqct .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rdhvnbrlqp .gt_table_body {
+#oryawvaqct .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -1151,7 +1271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_footnotes {
+#oryawvaqct .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1165,7 +1285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_footnote {
+#oryawvaqct .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1174,7 +1294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#rdhvnbrlqp .gt_sourcenotes {
+#oryawvaqct .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1188,7 +1308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#rdhvnbrlqp .gt_sourcenote {
+#oryawvaqct .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1196,72 +1316,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#rdhvnbrlqp .gt_left {
+#oryawvaqct .gt_left {
   text-align: left;
 }
 
-#rdhvnbrlqp .gt_center {
+#oryawvaqct .gt_center {
   text-align: center;
 }
 
-#rdhvnbrlqp .gt_right {
+#oryawvaqct .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rdhvnbrlqp .gt_font_normal {
+#oryawvaqct .gt_font_normal {
   font-weight: normal;
 }
 
-#rdhvnbrlqp .gt_font_bold {
+#oryawvaqct .gt_font_bold {
   font-weight: bold;
 }
 
-#rdhvnbrlqp .gt_font_italic {
+#oryawvaqct .gt_font_italic {
   font-style: italic;
 }
 
-#rdhvnbrlqp .gt_super {
+#oryawvaqct .gt_super {
   font-size: 65%;
 }
 
-#rdhvnbrlqp .gt_footnote_marks {
+#oryawvaqct .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rdhvnbrlqp .gt_asterisk {
+#oryawvaqct .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rdhvnbrlqp .gt_indent_1 {
+#oryawvaqct .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rdhvnbrlqp .gt_indent_2 {
+#oryawvaqct .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rdhvnbrlqp .gt_indent_3 {
+#oryawvaqct .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rdhvnbrlqp .gt_indent_4 {
+#oryawvaqct .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rdhvnbrlqp .gt_indent_5 {
+#oryawvaqct .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rdhvnbrlqp .katex-display {
+#oryawvaqct .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rdhvnbrlqp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#oryawvaqct div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1306,15 +1426,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="leversygdom">Leversygdom</h2>
 <p>Vi har data fra 583 personer, der er blevet henvist til undersøgelse pga mistanke om leversygdom. De første 6 observationer er:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
     age albumin ratio globulin status  idnr sex   l_ratio
@@ -1330,12 +1450,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
 <p>Vi får denne tabel:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">50</span> <span class="sc">+</span> <span class="dv">117</span>),</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">92</span> <span class="sc">+</span> <span class="dv">324</span>))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"F"</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">"M"</span>, <span class="dv">117</span>),</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="st">"F"</span>, <span class="dv">92</span>), <span class="fu">rep</span>(<span class="st">"M"</span>, <span class="dv">324</span>))</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(status, sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">50</span> <span class="sc">+</span> <span class="dv">117</span>),</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">92</span> <span class="sc">+</span> <span class="dv">324</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"F"</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">"M"</span>, <span class="dv">117</span>),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="st">"F"</span>, <span class="dv">92</span>), <span class="fu">rep</span>(<span class="st">"M"</span>, <span class="dv">324</span>))</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(status, sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      sex
 status   F   M
@@ -1415,24 +1535,24 @@ status   F   M
 <p>Det gav dette output:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bmyudtunym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mrmxxelizs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bmyudtunym table {
+#mrmxxelizs table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bmyudtunym thead, #bmyudtunym tbody, #bmyudtunym tfoot, #bmyudtunym tr, #bmyudtunym td, #bmyudtunym th {
+#mrmxxelizs thead, #mrmxxelizs tbody, #mrmxxelizs tfoot, #mrmxxelizs tr, #mrmxxelizs td, #mrmxxelizs th {
   border-style: none;
 }
 
-#bmyudtunym p {
+#mrmxxelizs p {
   margin: 0;
   padding: 0;
 }
 
-#bmyudtunym .gt_table {
+#mrmxxelizs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1458,12 +1578,12 @@ status   F   M
   border-left-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_caption {
+#mrmxxelizs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bmyudtunym .gt_title {
+#mrmxxelizs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1475,7 +1595,7 @@ status   F   M
   border-bottom-width: 0;
 }
 
-#bmyudtunym .gt_subtitle {
+#mrmxxelizs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1487,7 +1607,7 @@ status   F   M
   border-top-width: 0;
 }
 
-#bmyudtunym .gt_heading {
+#mrmxxelizs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1499,13 +1619,13 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_bottom_border {
+#mrmxxelizs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_col_headings {
+#mrmxxelizs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -1520,7 +1640,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_col_heading {
+#mrmxxelizs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1540,7 +1660,7 @@ status   F   M
   overflow-x: hidden;
 }
 
-#bmyudtunym .gt_column_spanner_outer {
+#mrmxxelizs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1552,15 +1672,15 @@ status   F   M
   padding-right: 4px;
 }
 
-#bmyudtunym .gt_column_spanner_outer:first-child {
+#mrmxxelizs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bmyudtunym .gt_column_spanner_outer:last-child {
+#mrmxxelizs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bmyudtunym .gt_column_spanner {
+#mrmxxelizs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -1572,11 +1692,11 @@ status   F   M
   width: 100%;
 }
 
-#bmyudtunym .gt_spanner_row {
+#mrmxxelizs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bmyudtunym .gt_group_heading {
+#mrmxxelizs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1602,7 +1722,7 @@ status   F   M
   text-align: left;
 }
 
-#bmyudtunym .gt_empty_group_heading {
+#mrmxxelizs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1617,15 +1737,15 @@ status   F   M
   vertical-align: middle;
 }
 
-#bmyudtunym .gt_from_md > :first-child {
+#mrmxxelizs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bmyudtunym .gt_from_md > :last-child {
+#mrmxxelizs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bmyudtunym .gt_row {
+#mrmxxelizs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1644,7 +1764,7 @@ status   F   M
   overflow-x: hidden;
 }
 
-#bmyudtunym .gt_stub {
+#mrmxxelizs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1657,7 +1777,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#bmyudtunym .gt_stub_row_group {
+#mrmxxelizs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1671,15 +1791,15 @@ status   F   M
   vertical-align: top;
 }
 
-#bmyudtunym .gt_row_group_first td {
+#mrmxxelizs .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#bmyudtunym .gt_row_group_first th {
+#mrmxxelizs .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#bmyudtunym .gt_summary_row {
+#mrmxxelizs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1689,16 +1809,16 @@ status   F   M
   padding-right: 5px;
 }
 
-#bmyudtunym .gt_first_summary_row {
+#mrmxxelizs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_first_summary_row.thick {
+#mrmxxelizs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bmyudtunym .gt_last_summary_row {
+#mrmxxelizs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1708,7 +1828,7 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_grand_summary_row {
+#mrmxxelizs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1718,7 +1838,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#bmyudtunym .gt_first_grand_summary_row {
+#mrmxxelizs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1728,7 +1848,7 @@ status   F   M
   border-top-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_last_grand_summary_row_top {
+#mrmxxelizs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1738,11 +1858,11 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_striped {
+#mrmxxelizs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bmyudtunym .gt_table_body {
+#mrmxxelizs .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -1751,7 +1871,7 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_footnotes {
+#mrmxxelizs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1765,7 +1885,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_footnote {
+#mrmxxelizs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1774,7 +1894,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#bmyudtunym .gt_sourcenotes {
+#mrmxxelizs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1788,7 +1908,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#bmyudtunym .gt_sourcenote {
+#mrmxxelizs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1796,72 +1916,72 @@ status   F   M
   padding-right: 5px;
 }
 
-#bmyudtunym .gt_left {
+#mrmxxelizs .gt_left {
   text-align: left;
 }
 
-#bmyudtunym .gt_center {
+#mrmxxelizs .gt_center {
   text-align: center;
 }
 
-#bmyudtunym .gt_right {
+#mrmxxelizs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bmyudtunym .gt_font_normal {
+#mrmxxelizs .gt_font_normal {
   font-weight: normal;
 }
 
-#bmyudtunym .gt_font_bold {
+#mrmxxelizs .gt_font_bold {
   font-weight: bold;
 }
 
-#bmyudtunym .gt_font_italic {
+#mrmxxelizs .gt_font_italic {
   font-style: italic;
 }
 
-#bmyudtunym .gt_super {
+#mrmxxelizs .gt_super {
   font-size: 65%;
 }
 
-#bmyudtunym .gt_footnote_marks {
+#mrmxxelizs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bmyudtunym .gt_asterisk {
+#mrmxxelizs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bmyudtunym .gt_indent_1 {
+#mrmxxelizs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bmyudtunym .gt_indent_2 {
+#mrmxxelizs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bmyudtunym .gt_indent_3 {
+#mrmxxelizs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bmyudtunym .gt_indent_4 {
+#mrmxxelizs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bmyudtunym .gt_indent_5 {
+#mrmxxelizs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bmyudtunym .katex-display {
+#mrmxxelizs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bmyudtunym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mrmxxelizs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1942,13 +2062,13 @@ status   F   M
 <p>Vi ser på data for lungetransplanterede patienter. Man har været ndøt til at bruge ældre donorer, der også kan have været rygere. Vi har observationer for 426 patienter.</p>
 <p>De første 6 observationer er givet:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>fevl_prior_to_tx, <span class="sc">~</span>fevl_after, <span class="sc">~</span>fevl_diff, <span class="sc">~</span>SMOKE,</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.40</span>, <span class="fl">3.8</span>, <span class="fl">2.4</span>, <span class="st">"Never smoker"</span>,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.56</span>, <span class="fl">0.95</span>, <span class="fl">0.39</span>, <span class="st">"Smoker or former smoker"</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.37</span>, <span class="fl">1.25</span>, <span class="fl">0.88</span>, <span class="st">"Smoker or former smoker"</span>,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fl">0.54</span>, <span class="fl">2.35</span>, <span class="fl">1.81</span>, <span class="st">"Smoker or former smoker"</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fl">0.71</span>, <span class="fl">1.60</span>, <span class="fl">0.89</span>, <span class="st">"Never smoker"</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fl">1.78</span>, <span class="fl">2.08</span>, <span class="fl">0.30</span>, <span class="st">"Never smoker"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>fevl_prior_to_tx, <span class="sc">~</span>fevl_after, <span class="sc">~</span>fevl_diff, <span class="sc">~</span>SMOKE,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.40</span>, <span class="fl">3.8</span>, <span class="fl">2.4</span>, <span class="st">"Never smoker"</span>,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.56</span>, <span class="fl">0.95</span>, <span class="fl">0.39</span>, <span class="st">"Smoker or former smoker"</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.37</span>, <span class="fl">1.25</span>, <span class="fl">0.88</span>, <span class="st">"Smoker or former smoker"</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fl">0.54</span>, <span class="fl">2.35</span>, <span class="fl">1.81</span>, <span class="st">"Smoker or former smoker"</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="fl">0.71</span>, <span class="fl">1.60</span>, <span class="fl">0.89</span>, <span class="st">"Never smoker"</span>,</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fl">1.78</span>, <span class="fl">2.08</span>, <span class="fl">0.30</span>, <span class="st">"Never smoker"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   fevl_prior_to_tx fevl_after fevl_diff SMOKE                  
@@ -1992,7 +2112,7 @@ status   F   M
 <p>Undersøg ved brug af relevant statistik metode om patienternes lungefunktion (fevl) har ændret sig efter transplantationen.</p>
 <p>Det er en parret t-test (for vi har målinger på samme patient både før og efter)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.279024</span><span class="sc">/</span>(<span class="fl">0.9411598</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">426</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.279024</span><span class="sc">/</span>(<span class="fl">0.9411598</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">426</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 28.04918</code></pre>
 </div>
@@ -2003,24 +2123,24 @@ status   F   M
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nofsxxticz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="sxfzsajxiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nofsxxticz table {
+#sxfzsajxiu table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nofsxxticz thead, #nofsxxticz tbody, #nofsxxticz tfoot, #nofsxxticz tr, #nofsxxticz td, #nofsxxticz th {
+#sxfzsajxiu thead, #sxfzsajxiu tbody, #sxfzsajxiu tfoot, #sxfzsajxiu tr, #sxfzsajxiu td, #sxfzsajxiu th {
   border-style: none;
 }
 
-#nofsxxticz p {
+#sxfzsajxiu p {
   margin: 0;
   padding: 0;
 }
 
-#nofsxxticz .gt_table {
+#sxfzsajxiu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2046,12 +2166,12 @@ status   F   M
   border-left-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_caption {
+#sxfzsajxiu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nofsxxticz .gt_title {
+#sxfzsajxiu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2063,7 +2183,7 @@ status   F   M
   border-bottom-width: 0;
 }
 
-#nofsxxticz .gt_subtitle {
+#sxfzsajxiu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2075,7 +2195,7 @@ status   F   M
   border-top-width: 0;
 }
 
-#nofsxxticz .gt_heading {
+#sxfzsajxiu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2087,13 +2207,13 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_bottom_border {
+#sxfzsajxiu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_col_headings {
+#sxfzsajxiu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2108,7 +2228,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_col_heading {
+#sxfzsajxiu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2128,7 +2248,7 @@ status   F   M
   overflow-x: hidden;
 }
 
-#nofsxxticz .gt_column_spanner_outer {
+#sxfzsajxiu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2140,15 +2260,15 @@ status   F   M
   padding-right: 4px;
 }
 
-#nofsxxticz .gt_column_spanner_outer:first-child {
+#sxfzsajxiu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nofsxxticz .gt_column_spanner_outer:last-child {
+#sxfzsajxiu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nofsxxticz .gt_column_spanner {
+#sxfzsajxiu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2160,11 +2280,11 @@ status   F   M
   width: 100%;
 }
 
-#nofsxxticz .gt_spanner_row {
+#sxfzsajxiu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nofsxxticz .gt_group_heading {
+#sxfzsajxiu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2190,7 +2310,7 @@ status   F   M
   text-align: left;
 }
 
-#nofsxxticz .gt_empty_group_heading {
+#sxfzsajxiu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2205,15 +2325,15 @@ status   F   M
   vertical-align: middle;
 }
 
-#nofsxxticz .gt_from_md > :first-child {
+#sxfzsajxiu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nofsxxticz .gt_from_md > :last-child {
+#sxfzsajxiu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nofsxxticz .gt_row {
+#sxfzsajxiu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2232,7 +2352,7 @@ status   F   M
   overflow-x: hidden;
 }
 
-#nofsxxticz .gt_stub {
+#sxfzsajxiu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2245,7 +2365,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#nofsxxticz .gt_stub_row_group {
+#sxfzsajxiu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2259,15 +2379,15 @@ status   F   M
   vertical-align: top;
 }
 
-#nofsxxticz .gt_row_group_first td {
+#sxfzsajxiu .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#nofsxxticz .gt_row_group_first th {
+#sxfzsajxiu .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#nofsxxticz .gt_summary_row {
+#sxfzsajxiu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2277,16 +2397,16 @@ status   F   M
   padding-right: 5px;
 }
 
-#nofsxxticz .gt_first_summary_row {
+#sxfzsajxiu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_first_summary_row.thick {
+#sxfzsajxiu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nofsxxticz .gt_last_summary_row {
+#sxfzsajxiu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2296,7 +2416,7 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_grand_summary_row {
+#sxfzsajxiu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2306,7 +2426,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#nofsxxticz .gt_first_grand_summary_row {
+#sxfzsajxiu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2316,7 +2436,7 @@ status   F   M
   border-top-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_last_grand_summary_row_top {
+#sxfzsajxiu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2326,11 +2446,11 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_striped {
+#sxfzsajxiu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nofsxxticz .gt_table_body {
+#sxfzsajxiu .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2339,7 +2459,7 @@ status   F   M
   border-bottom-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_footnotes {
+#sxfzsajxiu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2353,7 +2473,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_footnote {
+#sxfzsajxiu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2362,7 +2482,7 @@ status   F   M
   padding-right: 5px;
 }
 
-#nofsxxticz .gt_sourcenotes {
+#sxfzsajxiu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2376,7 +2496,7 @@ status   F   M
   border-right-color: #D3D3D3;
 }
 
-#nofsxxticz .gt_sourcenote {
+#sxfzsajxiu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2384,72 +2504,72 @@ status   F   M
   padding-right: 5px;
 }
 
-#nofsxxticz .gt_left {
+#sxfzsajxiu .gt_left {
   text-align: left;
 }
 
-#nofsxxticz .gt_center {
+#sxfzsajxiu .gt_center {
   text-align: center;
 }
 
-#nofsxxticz .gt_right {
+#sxfzsajxiu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nofsxxticz .gt_font_normal {
+#sxfzsajxiu .gt_font_normal {
   font-weight: normal;
 }
 
-#nofsxxticz .gt_font_bold {
+#sxfzsajxiu .gt_font_bold {
   font-weight: bold;
 }
 
-#nofsxxticz .gt_font_italic {
+#sxfzsajxiu .gt_font_italic {
   font-style: italic;
 }
 
-#nofsxxticz .gt_super {
+#sxfzsajxiu .gt_super {
   font-size: 65%;
 }
 
-#nofsxxticz .gt_footnote_marks {
+#sxfzsajxiu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nofsxxticz .gt_asterisk {
+#sxfzsajxiu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nofsxxticz .gt_indent_1 {
+#sxfzsajxiu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nofsxxticz .gt_indent_2 {
+#sxfzsajxiu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nofsxxticz .gt_indent_3 {
+#sxfzsajxiu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nofsxxticz .gt_indent_4 {
+#sxfzsajxiu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nofsxxticz .gt_indent_5 {
+#sxfzsajxiu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nofsxxticz .katex-display {
+#sxfzsajxiu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nofsxxticz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sxfzsajxiu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2492,14 +2612,14 @@ status   F   M
 </ol>
 <p>Intercept er den estimerede ændring i lungefunktion (før vs efter transplantation) for patienter med en donor som var ikke-ryger. Den estimerede ændring er i gennemsnit 1.3697, med et 95% KI på:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.36970</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.06646</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.36970</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.06646</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.239438 1.499962</code></pre>
 </div>
 </div>
 <p>Forbedringen i lungefunktion er lidt mindre for patienter med en donor som var ryger (eller ex-ryger). Forbedringen estimeres til i gennemsnit at være 0.19092 laverem, med det tilhørende 95% KI på:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">0.19092</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.09644</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">0.19092</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.09644</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.3799424 -0.0018976</code></pre>
 </div>
@@ -2512,15 +2632,15 @@ status   F   M
 <h2 class="anchored" data-anchor-id="levertal">Levertal</h2>
 <p>583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
     age albumin ratio globulin status  idnr sex   l_ratio
@@ -2536,12 +2656,12 @@ status   F   M
 <p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
 <p>Der defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">99</span> <span class="sc">+</span> <span class="dv">66</span>),</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span> <span class="sc">+</span> <span class="dv">106</span>))</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>AG.positiv <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">99</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">66</span>),</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">106</span>))</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(AG.positiv, status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">99</span> <span class="sc">+</span> <span class="dv">66</span>),</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span> <span class="sc">+</span> <span class="dv">106</span>))</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>AG.positiv <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">99</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">66</span>),</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">106</span>))</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(AG.positiv, status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          status
 AG.positiv   0   1
@@ -2555,8 +2675,8 @@ AG.positiv   0   1
 <p>Her kører vi en chi^2 test:</p>
 <p>input:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -2573,24 +2693,24 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
 <p>Den giver dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="sdmyqnyfzj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lqowkvnfie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#sdmyqnyfzj table {
+#lqowkvnfie table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sdmyqnyfzj thead, #sdmyqnyfzj tbody, #sdmyqnyfzj tfoot, #sdmyqnyfzj tr, #sdmyqnyfzj td, #sdmyqnyfzj th {
+#lqowkvnfie thead, #lqowkvnfie tbody, #lqowkvnfie tfoot, #lqowkvnfie tr, #lqowkvnfie td, #lqowkvnfie th {
   border-style: none;
 }
 
-#sdmyqnyfzj p {
+#lqowkvnfie p {
   margin: 0;
   padding: 0;
 }
 
-#sdmyqnyfzj .gt_table {
+#lqowkvnfie .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2616,12 +2736,12 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_caption {
+#lqowkvnfie .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sdmyqnyfzj .gt_title {
+#lqowkvnfie .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2633,7 +2753,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-bottom-width: 0;
 }
 
-#sdmyqnyfzj .gt_subtitle {
+#lqowkvnfie .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2645,7 +2765,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-top-width: 0;
 }
 
-#sdmyqnyfzj .gt_heading {
+#lqowkvnfie .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2657,13 +2777,13 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_bottom_border {
+#lqowkvnfie .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_col_headings {
+#lqowkvnfie .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2678,7 +2798,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_col_heading {
+#lqowkvnfie .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2698,7 +2818,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   overflow-x: hidden;
 }
 
-#sdmyqnyfzj .gt_column_spanner_outer {
+#lqowkvnfie .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2710,15 +2830,15 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 4px;
 }
 
-#sdmyqnyfzj .gt_column_spanner_outer:first-child {
+#lqowkvnfie .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sdmyqnyfzj .gt_column_spanner_outer:last-child {
+#lqowkvnfie .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sdmyqnyfzj .gt_column_spanner {
+#lqowkvnfie .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2730,11 +2850,11 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   width: 100%;
 }
 
-#sdmyqnyfzj .gt_spanner_row {
+#lqowkvnfie .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sdmyqnyfzj .gt_group_heading {
+#lqowkvnfie .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2760,7 +2880,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   text-align: left;
 }
 
-#sdmyqnyfzj .gt_empty_group_heading {
+#lqowkvnfie .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2775,15 +2895,15 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   vertical-align: middle;
 }
 
-#sdmyqnyfzj .gt_from_md > :first-child {
+#lqowkvnfie .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sdmyqnyfzj .gt_from_md > :last-child {
+#lqowkvnfie .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sdmyqnyfzj .gt_row {
+#lqowkvnfie .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2802,7 +2922,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   overflow-x: hidden;
 }
 
-#sdmyqnyfzj .gt_stub {
+#lqowkvnfie .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2815,7 +2935,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 5px;
 }
 
-#sdmyqnyfzj .gt_stub_row_group {
+#lqowkvnfie .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2829,15 +2949,15 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   vertical-align: top;
 }
 
-#sdmyqnyfzj .gt_row_group_first td {
+#lqowkvnfie .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#sdmyqnyfzj .gt_row_group_first th {
+#lqowkvnfie .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#sdmyqnyfzj .gt_summary_row {
+#lqowkvnfie .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2847,16 +2967,16 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 5px;
 }
 
-#sdmyqnyfzj .gt_first_summary_row {
+#lqowkvnfie .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_first_summary_row.thick {
+#lqowkvnfie .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sdmyqnyfzj .gt_last_summary_row {
+#lqowkvnfie .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2866,7 +2986,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_grand_summary_row {
+#lqowkvnfie .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2876,7 +2996,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 5px;
 }
 
-#sdmyqnyfzj .gt_first_grand_summary_row {
+#lqowkvnfie .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2886,7 +3006,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_last_grand_summary_row_top {
+#lqowkvnfie .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2896,11 +3016,11 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_striped {
+#lqowkvnfie .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sdmyqnyfzj .gt_table_body {
+#lqowkvnfie .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2909,7 +3029,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_footnotes {
+#lqowkvnfie .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2923,7 +3043,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_footnote {
+#lqowkvnfie .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2932,7 +3052,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 5px;
 }
 
-#sdmyqnyfzj .gt_sourcenotes {
+#lqowkvnfie .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2946,7 +3066,7 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdmyqnyfzj .gt_sourcenote {
+#lqowkvnfie .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2954,72 +3074,72 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
   padding-right: 5px;
 }
 
-#sdmyqnyfzj .gt_left {
+#lqowkvnfie .gt_left {
   text-align: left;
 }
 
-#sdmyqnyfzj .gt_center {
+#lqowkvnfie .gt_center {
   text-align: center;
 }
 
-#sdmyqnyfzj .gt_right {
+#lqowkvnfie .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sdmyqnyfzj .gt_font_normal {
+#lqowkvnfie .gt_font_normal {
   font-weight: normal;
 }
 
-#sdmyqnyfzj .gt_font_bold {
+#lqowkvnfie .gt_font_bold {
   font-weight: bold;
 }
 
-#sdmyqnyfzj .gt_font_italic {
+#lqowkvnfie .gt_font_italic {
   font-style: italic;
 }
 
-#sdmyqnyfzj .gt_super {
+#lqowkvnfie .gt_super {
   font-size: 65%;
 }
 
-#sdmyqnyfzj .gt_footnote_marks {
+#lqowkvnfie .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sdmyqnyfzj .gt_asterisk {
+#lqowkvnfie .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sdmyqnyfzj .gt_indent_1 {
+#lqowkvnfie .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sdmyqnyfzj .gt_indent_2 {
+#lqowkvnfie .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sdmyqnyfzj .gt_indent_3 {
+#lqowkvnfie .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sdmyqnyfzj .gt_indent_4 {
+#lqowkvnfie .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sdmyqnyfzj .gt_indent_5 {
+#lqowkvnfie .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sdmyqnyfzj .katex-display {
+#lqowkvnfie .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sdmyqnyfzj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lqowkvnfie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3084,14 +3204,14 @@ X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
 <p>Udfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.</p>
 <p>Vi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Y, <span class="sc">~</span>R, <span class="sc">~</span>X,</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>, <span class="dv">1</span> , <span class="fl">1.616854293</span>,</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.990367802</span>,</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.849360224</span>,</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.496709981</span>,</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.335441834</span>,</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.561678151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Y, <span class="sc">~</span>R, <span class="sc">~</span>X,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>, <span class="dv">1</span> , <span class="fl">1.616854293</span>,</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.990367802</span>,</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.849360224</span>,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.496709981</span>,</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.335441834</span>,</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.561678151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
       Y     R      X
@@ -3132,24 +3252,24 @@ Y     0   1
 <p>der gav dette output:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="uwendgqrxl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="loaxifqsje" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#uwendgqrxl table {
+#loaxifqsje table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uwendgqrxl thead, #uwendgqrxl tbody, #uwendgqrxl tfoot, #uwendgqrxl tr, #uwendgqrxl td, #uwendgqrxl th {
+#loaxifqsje thead, #loaxifqsje tbody, #loaxifqsje tfoot, #loaxifqsje tr, #loaxifqsje td, #loaxifqsje th {
   border-style: none;
 }
 
-#uwendgqrxl p {
+#loaxifqsje p {
   margin: 0;
   padding: 0;
 }
 
-#uwendgqrxl .gt_table {
+#loaxifqsje .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3175,12 +3295,12 @@ Y     0   1
   border-left-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_caption {
+#loaxifqsje .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uwendgqrxl .gt_title {
+#loaxifqsje .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3192,7 +3312,7 @@ Y     0   1
   border-bottom-width: 0;
 }
 
-#uwendgqrxl .gt_subtitle {
+#loaxifqsje .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3204,7 +3324,7 @@ Y     0   1
   border-top-width: 0;
 }
 
-#uwendgqrxl .gt_heading {
+#loaxifqsje .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3216,13 +3336,13 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_bottom_border {
+#loaxifqsje .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_col_headings {
+#loaxifqsje .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3237,7 +3357,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_col_heading {
+#loaxifqsje .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3257,7 +3377,7 @@ Y     0   1
   overflow-x: hidden;
 }
 
-#uwendgqrxl .gt_column_spanner_outer {
+#loaxifqsje .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3269,15 +3389,15 @@ Y     0   1
   padding-right: 4px;
 }
 
-#uwendgqrxl .gt_column_spanner_outer:first-child {
+#loaxifqsje .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uwendgqrxl .gt_column_spanner_outer:last-child {
+#loaxifqsje .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uwendgqrxl .gt_column_spanner {
+#loaxifqsje .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3289,11 +3409,11 @@ Y     0   1
   width: 100%;
 }
 
-#uwendgqrxl .gt_spanner_row {
+#loaxifqsje .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uwendgqrxl .gt_group_heading {
+#loaxifqsje .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3319,7 +3439,7 @@ Y     0   1
   text-align: left;
 }
 
-#uwendgqrxl .gt_empty_group_heading {
+#loaxifqsje .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3334,15 +3454,15 @@ Y     0   1
   vertical-align: middle;
 }
 
-#uwendgqrxl .gt_from_md > :first-child {
+#loaxifqsje .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uwendgqrxl .gt_from_md > :last-child {
+#loaxifqsje .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uwendgqrxl .gt_row {
+#loaxifqsje .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3361,7 +3481,7 @@ Y     0   1
   overflow-x: hidden;
 }
 
-#uwendgqrxl .gt_stub {
+#loaxifqsje .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3374,7 +3494,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#uwendgqrxl .gt_stub_row_group {
+#loaxifqsje .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3388,15 +3508,15 @@ Y     0   1
   vertical-align: top;
 }
 
-#uwendgqrxl .gt_row_group_first td {
+#loaxifqsje .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#uwendgqrxl .gt_row_group_first th {
+#loaxifqsje .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#uwendgqrxl .gt_summary_row {
+#loaxifqsje .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3406,16 +3526,16 @@ Y     0   1
   padding-right: 5px;
 }
 
-#uwendgqrxl .gt_first_summary_row {
+#loaxifqsje .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_first_summary_row.thick {
+#loaxifqsje .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uwendgqrxl .gt_last_summary_row {
+#loaxifqsje .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3425,7 +3545,7 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_grand_summary_row {
+#loaxifqsje .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3435,7 +3555,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#uwendgqrxl .gt_first_grand_summary_row {
+#loaxifqsje .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3445,7 +3565,7 @@ Y     0   1
   border-top-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_last_grand_summary_row_top {
+#loaxifqsje .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3455,11 +3575,11 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_striped {
+#loaxifqsje .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uwendgqrxl .gt_table_body {
+#loaxifqsje .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3468,7 +3588,7 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_footnotes {
+#loaxifqsje .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3482,7 +3602,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_footnote {
+#loaxifqsje .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3491,7 +3611,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#uwendgqrxl .gt_sourcenotes {
+#loaxifqsje .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3505,7 +3625,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#uwendgqrxl .gt_sourcenote {
+#loaxifqsje .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3513,72 +3633,72 @@ Y     0   1
   padding-right: 5px;
 }
 
-#uwendgqrxl .gt_left {
+#loaxifqsje .gt_left {
   text-align: left;
 }
 
-#uwendgqrxl .gt_center {
+#loaxifqsje .gt_center {
   text-align: center;
 }
 
-#uwendgqrxl .gt_right {
+#loaxifqsje .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uwendgqrxl .gt_font_normal {
+#loaxifqsje .gt_font_normal {
   font-weight: normal;
 }
 
-#uwendgqrxl .gt_font_bold {
+#loaxifqsje .gt_font_bold {
   font-weight: bold;
 }
 
-#uwendgqrxl .gt_font_italic {
+#loaxifqsje .gt_font_italic {
   font-style: italic;
 }
 
-#uwendgqrxl .gt_super {
+#loaxifqsje .gt_super {
   font-size: 65%;
 }
 
-#uwendgqrxl .gt_footnote_marks {
+#loaxifqsje .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uwendgqrxl .gt_asterisk {
+#loaxifqsje .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uwendgqrxl .gt_indent_1 {
+#loaxifqsje .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uwendgqrxl .gt_indent_2 {
+#loaxifqsje .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uwendgqrxl .gt_indent_3 {
+#loaxifqsje .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uwendgqrxl .gt_indent_4 {
+#loaxifqsje .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uwendgqrxl .gt_indent_5 {
+#loaxifqsje .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uwendgqrxl .katex-display {
+#loaxifqsje .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uwendgqrxl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#loaxifqsje div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3633,7 +3753,7 @@ Y     0   1
 <p>Vi har følgende variable Allokering: X - patient fik 80% ilt, Y Patient fik 30% ilt diagn_cancer: j: cancer, n: ikke cancer blod: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion bmi: patientens BMI dead: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever</p>
 <p>De første 6 observationer:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ilt_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ilt_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
   Allokering diagn_cancer blod    bmi  dead
@@ -3652,24 +3772,24 @@ Y     0   1
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kbkleosflq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mnttajmaaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kbkleosflq table {
+#mnttajmaaz table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kbkleosflq thead, #kbkleosflq tbody, #kbkleosflq tfoot, #kbkleosflq tr, #kbkleosflq td, #kbkleosflq th {
+#mnttajmaaz thead, #mnttajmaaz tbody, #mnttajmaaz tfoot, #mnttajmaaz tr, #mnttajmaaz td, #mnttajmaaz th {
   border-style: none;
 }
 
-#kbkleosflq p {
+#mnttajmaaz p {
   margin: 0;
   padding: 0;
 }
 
-#kbkleosflq .gt_table {
+#mnttajmaaz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3695,12 +3815,12 @@ Y     0   1
   border-left-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_caption {
+#mnttajmaaz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kbkleosflq .gt_title {
+#mnttajmaaz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3712,7 +3832,7 @@ Y     0   1
   border-bottom-width: 0;
 }
 
-#kbkleosflq .gt_subtitle {
+#mnttajmaaz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3724,7 +3844,7 @@ Y     0   1
   border-top-width: 0;
 }
 
-#kbkleosflq .gt_heading {
+#mnttajmaaz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3736,13 +3856,13 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_bottom_border {
+#mnttajmaaz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_col_headings {
+#mnttajmaaz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3757,7 +3877,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_col_heading {
+#mnttajmaaz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3777,7 +3897,7 @@ Y     0   1
   overflow-x: hidden;
 }
 
-#kbkleosflq .gt_column_spanner_outer {
+#mnttajmaaz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3789,15 +3909,15 @@ Y     0   1
   padding-right: 4px;
 }
 
-#kbkleosflq .gt_column_spanner_outer:first-child {
+#mnttajmaaz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kbkleosflq .gt_column_spanner_outer:last-child {
+#mnttajmaaz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kbkleosflq .gt_column_spanner {
+#mnttajmaaz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -3809,11 +3929,11 @@ Y     0   1
   width: 100%;
 }
 
-#kbkleosflq .gt_spanner_row {
+#mnttajmaaz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kbkleosflq .gt_group_heading {
+#mnttajmaaz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3839,7 +3959,7 @@ Y     0   1
   text-align: left;
 }
 
-#kbkleosflq .gt_empty_group_heading {
+#mnttajmaaz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3854,15 +3974,15 @@ Y     0   1
   vertical-align: middle;
 }
 
-#kbkleosflq .gt_from_md > :first-child {
+#mnttajmaaz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kbkleosflq .gt_from_md > :last-child {
+#mnttajmaaz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kbkleosflq .gt_row {
+#mnttajmaaz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3881,7 +4001,7 @@ Y     0   1
   overflow-x: hidden;
 }
 
-#kbkleosflq .gt_stub {
+#mnttajmaaz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3894,7 +4014,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#kbkleosflq .gt_stub_row_group {
+#mnttajmaaz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3908,15 +4028,15 @@ Y     0   1
   vertical-align: top;
 }
 
-#kbkleosflq .gt_row_group_first td {
+#mnttajmaaz .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#kbkleosflq .gt_row_group_first th {
+#mnttajmaaz .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#kbkleosflq .gt_summary_row {
+#mnttajmaaz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3926,16 +4046,16 @@ Y     0   1
   padding-right: 5px;
 }
 
-#kbkleosflq .gt_first_summary_row {
+#mnttajmaaz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_first_summary_row.thick {
+#mnttajmaaz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kbkleosflq .gt_last_summary_row {
+#mnttajmaaz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3945,7 +4065,7 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_grand_summary_row {
+#mnttajmaaz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3955,7 +4075,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#kbkleosflq .gt_first_grand_summary_row {
+#mnttajmaaz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3965,7 +4085,7 @@ Y     0   1
   border-top-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_last_grand_summary_row_top {
+#mnttajmaaz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3975,11 +4095,11 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_striped {
+#mnttajmaaz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kbkleosflq .gt_table_body {
+#mnttajmaaz .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -3988,7 +4108,7 @@ Y     0   1
   border-bottom-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_footnotes {
+#mnttajmaaz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4002,7 +4122,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_footnote {
+#mnttajmaaz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4011,7 +4131,7 @@ Y     0   1
   padding-right: 5px;
 }
 
-#kbkleosflq .gt_sourcenotes {
+#mnttajmaaz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4025,7 +4145,7 @@ Y     0   1
   border-right-color: #D3D3D3;
 }
 
-#kbkleosflq .gt_sourcenote {
+#mnttajmaaz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4033,72 +4153,72 @@ Y     0   1
   padding-right: 5px;
 }
 
-#kbkleosflq .gt_left {
+#mnttajmaaz .gt_left {
   text-align: left;
 }
 
-#kbkleosflq .gt_center {
+#mnttajmaaz .gt_center {
   text-align: center;
 }
 
-#kbkleosflq .gt_right {
+#mnttajmaaz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kbkleosflq .gt_font_normal {
+#mnttajmaaz .gt_font_normal {
   font-weight: normal;
 }
 
-#kbkleosflq .gt_font_bold {
+#mnttajmaaz .gt_font_bold {
   font-weight: bold;
 }
 
-#kbkleosflq .gt_font_italic {
+#mnttajmaaz .gt_font_italic {
   font-style: italic;
 }
 
-#kbkleosflq .gt_super {
+#mnttajmaaz .gt_super {
   font-size: 65%;
 }
 
-#kbkleosflq .gt_footnote_marks {
+#mnttajmaaz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kbkleosflq .gt_asterisk {
+#mnttajmaaz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kbkleosflq .gt_indent_1 {
+#mnttajmaaz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kbkleosflq .gt_indent_2 {
+#mnttajmaaz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kbkleosflq .gt_indent_3 {
+#mnttajmaaz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kbkleosflq .gt_indent_4 {
+#mnttajmaaz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kbkleosflq .gt_indent_5 {
+#mnttajmaaz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kbkleosflq .katex-display {
+#mnttajmaaz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kbkleosflq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mnttajmaaz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4137,21 +4257,21 @@ Y     0   1
 <p>Hvad kan vi sige ud fra det?</p>
 <p>Vi mangler et estimat for bmi. Det kan vi beregne, fordi z-value finder vi ved at dividere estimatet med standardfejlen. Derfor kan vi finde estimatet ved at gange standardfejl med z value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">3.151</span><span class="sc">*</span><span class="fl">0.015385</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">3.151</span><span class="sc">*</span><span class="fl">0.015385</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.04847813</code></pre>
 </div>
 </div>
 <p>Teststørrelsen er klart signifikant</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">3.151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">3.151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.001627125</code></pre>
 </div>
 </div>
 <p>Vi kan beregne OR:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9526782</code></pre>
 </div>
@@ -4159,7 +4279,7 @@ Y     0   1
 <p>Så holdes alt andet konstant, vil en patient med et bmi der er 1 større end en anden patient, have vil odds for død reduceres med ca 5% for patienten med det højeste bmi.</p>
 <p>Vi kan beregne et 95% KI:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.015385</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.015385</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9243794 0.9818433</code></pre>
 </div>
@@ -4169,7 +4289,7 @@ Y     0   1
 <li>Nu ser vi bort fra bmi, og betrager ilt-allokering.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead,Allokering)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead,Allokering)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Allokering
 dead   X   Y
@@ -4188,7 +4308,7 @@ dead   X   Y
 <li>Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead, Allokering, diagn_cancer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead, Allokering, diagn_cancer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , diagn_cancer = j
 
@@ -4240,24 +4360,24 @@ SRH_dik   0   1
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div id="yniyudicos" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="sucstpoeaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#yniyudicos table {
+#sucstpoeaw table {
   font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yniyudicos thead, #yniyudicos tbody, #yniyudicos tfoot, #yniyudicos tr, #yniyudicos td, #yniyudicos th {
+#sucstpoeaw thead, #sucstpoeaw tbody, #sucstpoeaw tfoot, #sucstpoeaw tr, #sucstpoeaw td, #sucstpoeaw th {
   border-style: none;
 }
 
-#yniyudicos p {
+#sucstpoeaw p {
   margin: 0;
   padding: 0;
 }
 
-#yniyudicos .gt_table {
+#sucstpoeaw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4283,12 +4403,12 @@ SRH_dik   0   1
   border-left-color: #D3D3D3;
 }
 
-#yniyudicos .gt_caption {
+#sucstpoeaw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yniyudicos .gt_title {
+#sucstpoeaw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4300,7 +4420,7 @@ SRH_dik   0   1
   border-bottom-width: 0;
 }
 
-#yniyudicos .gt_subtitle {
+#sucstpoeaw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4312,7 +4432,7 @@ SRH_dik   0   1
   border-top-width: 0;
 }
 
-#yniyudicos .gt_heading {
+#sucstpoeaw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4324,13 +4444,13 @@ SRH_dik   0   1
   border-right-color: #D3D3D3;
 }
 
-#yniyudicos .gt_bottom_border {
+#sucstpoeaw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#yniyudicos .gt_col_headings {
+#sucstpoeaw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4345,7 +4465,7 @@ SRH_dik   0   1
   border-right-color: #D3D3D3;
 }
 
-#yniyudicos .gt_col_heading {
+#sucstpoeaw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4365,7 +4485,7 @@ SRH_dik   0   1
   overflow-x: hidden;
 }
 
-#yniyudicos .gt_column_spanner_outer {
+#sucstpoeaw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4377,15 +4497,15 @@ SRH_dik   0   1
   padding-right: 4px;
 }
 
-#yniyudicos .gt_column_spanner_outer:first-child {
+#sucstpoeaw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yniyudicos .gt_column_spanner_outer:last-child {
+#sucstpoeaw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yniyudicos .gt_column_spanner {
+#sucstpoeaw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -4397,11 +4517,11 @@ SRH_dik   0   1
   width: 100%;
 }
 
-#yniyudicos .gt_spanner_row {
+#sucstpoeaw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yniyudicos .gt_group_heading {
+#sucstpoeaw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4427,7 +4547,7 @@ SRH_dik   0   1
   text-align: left;
 }
 
-#yniyudicos .gt_empty_group_heading {
+#sucstpoeaw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4442,15 +4562,15 @@ SRH_dik   0   1
   vertical-align: middle;
 }
 
-#yniyudicos .gt_from_md > :first-child {
+#sucstpoeaw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yniyudicos .gt_from_md > :last-child {
+#sucstpoeaw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yniyudicos .gt_row {
+#sucstpoeaw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4469,7 +4589,7 @@ SRH_dik   0   1
   overflow-x: hidden;
 }
 
-#yniyudicos .gt_stub {
+#sucstpoeaw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4482,7 +4602,7 @@ SRH_dik   0   1
   padding-right: 5px;
 }
 
-#yniyudicos .gt_stub_row_group {
+#sucstpoeaw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4496,15 +4616,15 @@ SRH_dik   0   1
   vertical-align: top;
 }
 
-#yniyudicos .gt_row_group_first td {
+#sucstpoeaw .gt_row_group_first td {
   border-top-width: 0px;
 }
 
-#yniyudicos .gt_row_group_first th {
+#sucstpoeaw .gt_row_group_first th {
   border-top-width: 0px;
 }
 
-#yniyudicos .gt_summary_row {
+#sucstpoeaw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4514,16 +4634,16 @@ SRH_dik   0   1
   padding-right: 5px;
 }
 
-#yniyudicos .gt_first_summary_row {
+#sucstpoeaw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yniyudicos .gt_first_summary_row.thick {
+#sucstpoeaw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yniyudicos .gt_last_summary_row {
+#sucstpoeaw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4533,7 +4653,7 @@ SRH_dik   0   1
   border-bottom-color: #D3D3D3;
 }
 
-#yniyudicos .gt_grand_summary_row {
+#sucstpoeaw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4543,7 +4663,7 @@ SRH_dik   0   1
   padding-right: 5px;
 }
 
-#yniyudicos .gt_first_grand_summary_row {
+#sucstpoeaw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4553,7 +4673,7 @@ SRH_dik   0   1
   border-top-color: #D3D3D3;
 }
 
-#yniyudicos .gt_last_grand_summary_row_top {
+#sucstpoeaw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4563,11 +4683,11 @@ SRH_dik   0   1
   border-bottom-color: #D3D3D3;
 }
 
-#yniyudicos .gt_striped {
+#sucstpoeaw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yniyudicos .gt_table_body {
+#sucstpoeaw .gt_table_body {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -4576,7 +4696,7 @@ SRH_dik   0   1
   border-bottom-color: #D3D3D3;
 }
 
-#yniyudicos .gt_footnotes {
+#sucstpoeaw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4590,7 +4710,7 @@ SRH_dik   0   1
   border-right-color: #D3D3D3;
 }
 
-#yniyudicos .gt_footnote {
+#sucstpoeaw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4599,7 +4719,7 @@ SRH_dik   0   1
   padding-right: 5px;
 }
 
-#yniyudicos .gt_sourcenotes {
+#sucstpoeaw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4613,7 +4733,7 @@ SRH_dik   0   1
   border-right-color: #D3D3D3;
 }
 
-#yniyudicos .gt_sourcenote {
+#sucstpoeaw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4621,72 +4741,72 @@ SRH_dik   0   1
   padding-right: 5px;
 }
 
-#yniyudicos .gt_left {
+#sucstpoeaw .gt_left {
   text-align: left;
 }
 
-#yniyudicos .gt_center {
+#sucstpoeaw .gt_center {
   text-align: center;
 }
 
-#yniyudicos .gt_right {
+#sucstpoeaw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yniyudicos .gt_font_normal {
+#sucstpoeaw .gt_font_normal {
   font-weight: normal;
 }
 
-#yniyudicos .gt_font_bold {
+#sucstpoeaw .gt_font_bold {
   font-weight: bold;
 }
 
-#yniyudicos .gt_font_italic {
+#sucstpoeaw .gt_font_italic {
   font-style: italic;
 }
 
-#yniyudicos .gt_super {
+#sucstpoeaw .gt_super {
   font-size: 65%;
 }
 
-#yniyudicos .gt_footnote_marks {
+#sucstpoeaw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yniyudicos .gt_asterisk {
+#sucstpoeaw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yniyudicos .gt_indent_1 {
+#sucstpoeaw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yniyudicos .gt_indent_2 {
+#sucstpoeaw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yniyudicos .gt_indent_3 {
+#sucstpoeaw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yniyudicos .gt_indent_4 {
+#sucstpoeaw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yniyudicos .gt_indent_5 {
+#sucstpoeaw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yniyudicos .katex-display {
+#sucstpoeaw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yniyudicos div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sucstpoeaw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4749,13 +4869,13 @@ SRH_dik   0   1
 <p>Variablene i datasættet oplyses at være: alder - alder ved vaccinationen - i år status - status ved opfølgning. 1: død, 0: i live dtp: blev barnet vaccineret. 1: ja, 0: nej vægt;: barnets vægt ved vaccination (i kg) etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden</p>
 <p>Vi får også oplyst de seks første observationer i datasættet:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>alder, <span class="sc">~</span>status, <span class="sc">~</span>dtp, <span class="sc">~</span>etngr, <span class="sc">~</span>vaegt,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,  <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">5.6</span>,</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.425</span>, <span class="dv">1</span> , <span class="dv">1</span> ,<span class="dv">1</span> , <span class="fl">6.0</span>,</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.510</span>, <span class="dv">0</span>,  <span class="dv">1</span> ,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.6</span>,</span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>alder, <span class="sc">~</span>status, <span class="sc">~</span>dtp, <span class="sc">~</span>etngr, <span class="sc">~</span>vaegt,</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,  <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">5.6</span>,</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.425</span>, <span class="dv">1</span> , <span class="dv">1</span> ,<span class="dv">1</span> , <span class="fl">6.0</span>,</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.510</span>, <span class="dv">0</span>,  <span class="dv">1</span> ,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.6</span>,</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
   alder status   dtp etngr vaegt
@@ -4786,12 +4906,12 @@ SRH_dik   0   1
 <p>Det er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)</p>
 <p>Den korrekte analyse gav nedenstående resultat:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Coefficients, <span class="sc">~</span>Estimate, <span class="sc">~</span><span class="st">`</span><span class="at">Std. Error</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">t value</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">Pr(&gt;|t|)</span><span class="st">`</span>,</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="st">"(Intercept)"</span>, <span class="fl">0.05666</span>, <span class="fl">0.02866</span>, <span class="fl">1.98</span>, <span class="st">"0.048 *"</span>,</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(dtp)1"</span>, <span class="fl">0.02609</span>, <span class="fl">0.01162</span>, <span class="fl">2.25</span>, <span class="st">"0.025 *"</span>,</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(etngr)1"</span>, <span class="fl">0.02294</span>, <span class="fl">0.01033</span>, <span class="fl">2.22</span>, <span class="st">"0.027 *"</span>,</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="st">"alder"</span>, <span class="fl">0.05845</span>, <span class="fl">0.03897</span>, <span class="fl">1.50</span>, <span class="st">"0.134"</span>,</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="st">"vaegt"</span>, <span class="sc">-</span><span class="fl">0.01140</span>, <span class="fl">0.00527</span>, <span class="sc">-</span><span class="fl">2.16</span>, <span class="st">"0.031 *"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Coefficients, <span class="sc">~</span>Estimate, <span class="sc">~</span><span class="st">`</span><span class="at">Std. Error</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">t value</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">Pr(&gt;|t|)</span><span class="st">`</span>,</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="st">"(Intercept)"</span>, <span class="fl">0.05666</span>, <span class="fl">0.02866</span>, <span class="fl">1.98</span>, <span class="st">"0.048 *"</span>,</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(dtp)1"</span>, <span class="fl">0.02609</span>, <span class="fl">0.01162</span>, <span class="fl">2.25</span>, <span class="st">"0.025 *"</span>,</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(etngr)1"</span>, <span class="fl">0.02294</span>, <span class="fl">0.01033</span>, <span class="fl">2.22</span>, <span class="st">"0.027 *"</span>,</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="st">"alder"</span>, <span class="fl">0.05845</span>, <span class="fl">0.03897</span>, <span class="fl">1.50</span>, <span class="st">"0.134"</span>,</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="st">"vaegt"</span>, <span class="sc">-</span><span class="fl">0.01140</span>, <span class="fl">0.00527</span>, <span class="sc">-</span><span class="fl">2.16</span>, <span class="st">"0.031 *"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`
@@ -4820,7 +4940,7 @@ SRH_dik   0   1
 <p>og 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.</p>
 <p>Endelig blev følgende regnestykke fortaget:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2167343</code></pre>
 </div>
