@@ -2181,14 +2181,14 @@
     "href": "slides/logistisk.html#resten",
     "title": "Logistisk regression",
     "section": "resten",
-    "text": "resten\n\nTabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):\n\n\n\n, , diagn_cancer = j\n\n    Allokering\ndead   X   Y\n   0 188 213\n   1 101  74\n\n, , diagn_cancer = n\n\n    Allokering\ndead   X   Y\n   0 226 205\n   1  38  33\n\n\nGiver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.\nSamme øvelse som før, men nu på hver gruppe: Cancerpatienter: OR = (101/188) / (74/213) = 1.546363 s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346 KI: exp(log(1.546363) + c(-1,1)1.960.1828346) = 1.080636 2.212806\nSå for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i KI.\nnon-cancer-patienter:\nOR = (38/226) / (33/205) = 1.044516 se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) = 0.2567521 KI: exp(log(1.044516) + c(-1,1)1.96 0.2567521) = 0.6314854 1.7276943 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.\nSå ilt-regime har betydning for cancerpatienter."
+    "text": "resten\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
   },
   {
     "objectID": "slides/logistisk.html#resten-1",
     "href": "slides/logistisk.html#resten-1",
     "title": "Logistisk regression",
     "section": "Resten",
-    "text": "Resten\nVi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?\np_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%\nDen relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.\nHvad er det tilhørende 95% konfidens interval?\nLog(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))\nDETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)1.960.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1\n\nHvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)\nDen korrekte analyse gav nedenstående resultat:\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)"
+    "text": "Resten\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nAngiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
   },
   {
     "objectID": "slides/logistisk.html#dtp-vaccine",
@@ -2427,5 +2427,61 @@
     "title": "Lineær regression",
     "section": "Leversygdom",
     "text": "Leversygdom\n\n\n\nPredikter median-ratio for de syge (status 1) kvinder i populationen med en alder på 50 år.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.1730998\n0.0488724\n3.542\n0.000430***\n\n\nfactor(status)1\n-0.1196883\n0.0310025\n-3.861\n0.000126***\n\n\nfactor(sex)M\n0.0042939\n0.0324442\n0.132\n0.894756\n\n\nage\n-0.0045177\n0.0008616\n-5.241\n2.24e-7***\n\n\n\n\n\n\n\n\nHvad fik vi oplyst at vi kunne antage om l_ratio?\n\n\nAt den var normalfordelt.\n\n\nHvad ved vi om medianen i en normalfordeling?\n\n\nAt medianen er lig middelværdien (og omvendt)\n\n\nBemærk at vi spørges til medianen af ratio, ikke medianen af log-ratio\n\n\nHvordan fikser vi det?\n\n\nVi beregner medianen (middelværdien) af l_ratio, og exponentierer.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#lever",
+    "href": "slides/logistisk.html#lever",
+    "title": "Logistisk regression",
+    "section": "Lever",
+    "text": "Lever"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal",
+    "href": "slides/logistisk.html#levertal",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:\n\ntable(AG.positiv, status)\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\n\n\nVariable:\nidnr: Løbenummer\nsex: Køn\nage: alder i år\nstatus: leversygdom, 1=ja\nalbumin: serum albumin g/dL\nglobulin: serum globulin g/dL\nratio: ratio m. albumin og globulin\nl_ratio: log(ratio) (den naturlige logaritme)\nUndersøg om der er en statistisk signifikant sammenhæng mellem AG.positiv og status."
+  },
+  {
+    "objectID": "slides/løsninger.html#levertal",
+    "href": "slides/løsninger.html#levertal",
+    "title": "Opgaveløsninger",
+    "section": "Levertal",
+    "text": "Levertal\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\nlibrary(tidyverse)\ntribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,\n65, 3.3, 0.90, 3.666667, 1, 1, \"F\",  -0.1053605,\n62, 3.2, 0.74, 4.324324, 1, 2, \"M\", -0.3011051,\n62, 3.3, 0.89, 3.707865, 1, 3, \"M\", -0.1165338,\n58, 3.4,1.00,3.400000,1,4,\"M\",0,\n72, 2.4, 0.4, 6, 1,5,\"M\",-0.9162907,\n46, 4.4,1.3,3.384615,1,6,\"M\",0.2623643\n)\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nVariable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:\n\nstatus &lt;- c(rep(0, 99 + 66),\n            rep(1, 308 + 106))\n\nAG.positiv &lt;- c(rep(1, 99), rep(0, 66),\n         rep(1, 308), rep(0, 106))\ntable(AG.positiv, status)\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\nUndesøg om der er en statistisk signifikant sammenhæng mellem de to variable.\n\nHer kører vi en chi^2 test:\ninput:\n\ninput &lt;- matrix(c(66,106,99,308), ncol = 2, byrow = TRUE)\nchisq.test(input, correct = FALSE)\n\n\n    Pearson's Chi-squared test\n\ndata:  input\nX-squared = 11.709, df = 1, p-value = 0.0006219\n\n\nDet giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.\nDet svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.\n\nNu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)\n\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.postiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-1",
+    "href": "slides/logistisk.html#levertal-1",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nHvordan kan vi gøre det?\n\nVi bør nok kigge på en \\(\\chi^2\\) test, for det har vi ikke gjort andre steder.\n\n\nEn lille komplikation er at vi skal have tal ind i en matrix for at bruge chisq.test()\n\n\nHusker I det med “correct”?\n\n\nDet var korrektionen vi bruger når vi har små tal i matricen. Den er som default TRUE.\n\n\nHvad var små tal?\n\n\nDet er når vi når ned på 5 eller færre forventede observationer i en eller flere celler i matricen\n\n\nHar vi det her?\n\n\nNej, så vi skal ikke korrigere.\n\n\nData var:\n\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-2",
+    "href": "slides/logistisk.html#levertal-2",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nNu udfører vi følgende analyse i R:\n&gt; model &lt;- glm(status~factor(AG.positiv) + factor(sex) + age, binomial)\n&gt; summary(model)\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det?\n\n\n\n\nHvilken analyse?\n\n\nLogistisk regression\n\n\nHvordan ser vi det?\n\n\nglm og “binomial”\n\n\nHvad er responsvariabel?\n\n\nstatus\n\n\nOg de forklarende variable?\n\n\nAG.positiv og sex som forklarende kategoriske variable, age som forklarende kontinuært variabel\n\n\nHvad ser vi helt overordnet?\n\n\nAlder og AG.positiv er signifikante i denne analyse (angiv p-værdier i besvarelsen)\n\n\nKøn er ikke.\n\n\nHvad er der korrigeret for i forhold til tidligere?\n\n\nKøn og alder."
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-3",
+    "href": "slides/logistisk.html#levertal-3",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nAngiv relevant størrelse der kvantificerer effekten af AG.positiv.\nBeregn tilhørende 95% KI.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken skala er estimaterne på?\n\nlog-odds\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-så-vi",
+    "href": "slides/logistisk.html#hvad-så-vi",
+    "title": "Logistisk regression",
+    "section": "Hvad så vi?",
+    "text": "Hvad så vi?\n\n\n\nOR for AG.positiv var 1.81.\n\n\nDerfor estimerer vi at odds for status 1 (at man er syg) er ?\n\n\nEn faktor 1.8 større for ?\n\n\nAG.positive patienter\n\n\nSammenlignet med?\n\n\nAG.negative patienter\n\n\n\nEt 95% KI var:\n\n\n[1.225701, 2.679882]\n\n\nEr det signifikant?\n\n\nJa\n\n\nHvorfor?\n\n\nDet indeholder ikke 1.\n\n\nDet var heldigt, for det fortalte p-værdien også…"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-4",
+    "href": "slides/logistisk.html#levertal-4",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nPrædikter sandsynligheden for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHusk vi er stadig på log-odds skala\nHvordan regnede vi om fra odds til sandsynlighed?\n\n\\(p = \\frac{odds}{1 + odds}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
