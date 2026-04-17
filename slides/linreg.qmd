@@ -2574,85 +2574,180 @@ Vi beregner medianen (middelværdien) af l_ratio, og exponentierer.
 
 ## Blodtryk i Ghana
 
-Vi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie,
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+Vi ser på blodtryksmålinger fra 641 forsøgspersoner i Ghana. 
+
+Det er et interventionsstudie,
 der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret
 hypertension. 
-Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling
-med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået 
-en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling.
-Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter
-12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen. 
 
-Data har følgende variable:
+To grupper, control & treatment. Begge har fået standardbehandling, mens treatmentgruppen dertil har fået personligt tilpasset behandling af sygeplejersker med speciale i behandling af hypertenstion. Den blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Der var 323 individer i treatment gruppen.
 
-SBPbl: systolisk blodtryk ved baseline (mmHg)
-SBP12: systolisk blodtryk efter 12 måneder
-group (control/treatment)
-sex (male/female)
-diff: differensen mellem SBP12 og SBPbl
+::::
 
-Gennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9
-De tilsvarende tal i interventionsgruppen er -19.6 og 17.4
+::::
+:::: {.column}
 
-a) Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode.
+:::: {.evensmaller}
+Variable:  
+_SBPbl_: systolisk blodtryk ved baseline (mmHg)  
+_SBP12_: systolisk blodtryk efter 12 måneder  
+_group_: (control/treatment)  
+_sex_: (male/female)  
+_diff_: differensen mellem SBP12 og SBPbl
+
+Summariske værdier for _diff_:
+
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
+
+:::: {.tiny}
+Vi fik ikke oplyst antallet i kontrolgruppen. Men 641 - 323 = 318
+::::
+
+::::
+
+::::
+::::
+
+
+
+
+## Blodtryk i Ghana
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode.
 Besvar samme spørgsmål for kontrolgruppen.
 
-Vi starter med SEM for de to grupper:
+:::: {.fragment}
+Hvad er det så vi tester?
+::::
+:::: {.fragment}
+$H_0: diff = 0$
+::::
+:::: {.fragment}
+Hvordan gør vi det?
+::::
+:::: {.fragment}
+KI. Og hvordan ser det ud?
+::::
+:::: {.fragment}
+$\text{Estimat} \pm1.96\cdot\text{SEM}$
+::::
+:::: {.fragment}
+$SEM = \frac{s}{\sqrt{n}}$
+::::
+:::: {.fragment}
+Summariske værdier for _diff_:
 
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
 
-Intervention: n= 323
+::::
+::::
 
-```{r}
-SEM_intervention <- 17.4/sqrt(323)
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
+::::
+::::
 
-```{r}
-SEM_kontrol <- 19.9/sqrt(641-323)
+
+## Blodtryk i Ghana
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+Er faldetsignifikant forskelligt i de 2 grupper? 
+Hvad kan vi konkludere vedrørende effekten af præcisionsbehandlingen på blodtrykket på baggrund af det?
+
+
+:::: {.fragment}
+Kan vi bruge KI til at sige noget om det?
+::::
+:::: {.fragment}
+Nej. De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. 
+
+
+::::
+:::: {.fragment}
+Hvad gør vi så?
+::::
+:::: {.fragment}
+Vi beregner SEM for differensen:
+::::
+:::: {.fragment}
+Hvad skal vi så bruge?
+::::
+:::: {.fragment}
+En samlet SE for differensen
+::::
+
+:::: {.fragment}
+$\text{SE}_{\text{diff}} = \sqrt{\text{SE}_1^2 + \text{SE}_2^2}$
+::::
+:::: {.fragment}
+Summariske værdier for _diff_:
+
+:::: {.tiny}
+
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
+
+::::
+
+::::
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
 ```
+::::
+::::
 
-Så kan vi beregne 95% KI beregnes for de to grupper:
+## Blodtryk i Ghana
 
-intervention:
 
-```{r}
--19.6+c(-1,1)*1.96*SEM_intervention
-```
+:::: {.columns}
+:::: {.column width = "60%"}
 
-kontrol:
+:::: {.reallysmall}
 
-```{r}
--16.6+c(-1,1)*1.96*SEM_kontrol
-```
+Nu udførtes følgende analyser for mænd og kvinder hver for sig:
 
-Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk
-signifikant.
-
-b) Er faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?
-
-De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge
-KI til at konkludere. Vi beregner SEM for differensen:
-
-```{r}
-SEM_diff <- sqrt(SEM_intervention^2 + SEM_kontrol^2)
-```
-
-Det giver os en teststørrelse på forskellen på de to differenser på:
-
-```{r}
-(-19.6- -16.6)/SEM_diff
-```
-
-Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.
-
-c) Nu udførtes følgende analyser for mænd og kvinder hver for sig:
-> summary(lm(diff[sex=="female"]~factor(group[sex=="female"])))
-```{r echo = FALSE}
+:::: {.tiny}
+summary(lm(diff[sex=="female"]~factor(group[sex=="female"])))
+::::
+```{r blodtryk_ghana_reg_out_female, echo = FALSE}
 library(tidyverse)
 library(gt)
 
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "-16.988", "1.3556", "-12.527", "<2e-16***",
-"factor(group[sex=='female'])treatment", "-5.915", "1.901", "-3.112", "0.002**"
+"factor(group[sex=='female'])\ntreatment", "-5.915", "1.901", "-3.112", "0.002**"
 ) |> 
 
   gt() |> 
@@ -2691,14 +2786,16 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
      font = list(google_font("Courier Prime"), default_fonts())) 
 ```
 
-> summary(lm(diff[sex=="male"]~factor(group[sex=="male"])))
-```{r echo = FALSE}
+:::: {.tiny}
+summary(lm(diff[sex=="male"]~factor(group[sex=="male"])))
+::::
+```{r blodtryk_ghana_reg_out_male,echo = FALSE}
 library(tidyverse)
 library(gt)
 
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "-15.893", "1.594", "-9.968", "<2e-16***",
-"factor(group[sex=='male'])treatment", "1.692", "2.264", "0.747", "0.456"
+"factor(group[sex=='male'])\ntreatment", "1.692", "2.264", "0.747", "0.456"
 ) |> 
 
   gt() |> 
@@ -2737,15 +2834,40 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
      font = list(google_font("Courier Prime"), default_fonts())) 
 ```
 
-Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning
-af værdierne i "Estimate" søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?
+Hvilke analyser er er tale om, hvad kan vi konkludere på den baggrund? Der ønskes fortolkning
+af værdierne i "Estimate". Giver det anledning til en anden konlusion end den vi fik lige før?
+::::
 
-Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som
-forklarende, kategorisk (og binær) variabel. 
 
-For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)
 
-For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der
+::::
+:::: {.column width = "40%"}
+
+:::: {.reallysmall}
+
+:::: {.fragment}
+To multiple lineære regressioner, med diff som kontinuært responsvariabel og group som
+forklarende, kategorisk (og binær) variabel.
+::::
+:::: {.fragment}
+For kvinder ser vi at blodtrykket i snit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)
+::::
+:::: {.fragment}
+For mænd ser vi at blodtrykket i snit falder med ca. 16 mmHg under kontrolbehandling, men at der
 ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
+::::
+
+::::
+::::
+::::
+
+
+
+## resten
+
+
+
+ 
+
 
 
