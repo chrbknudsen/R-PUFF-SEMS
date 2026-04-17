@@ -2181,14 +2181,14 @@
     "href": "slides/logistisk.html#resten",
     "title": "Logistisk regression",
     "section": "resten",
-    "text": "resten\n\nTabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):\n\n\n\n, , diagn_cancer = j\n\n    Allokering\ndead   X   Y\n   0 188 213\n   1 101  74\n\n, , diagn_cancer = n\n\n    Allokering\ndead   X   Y\n   0 226 205\n   1  38  33\n\n\nGiver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.\nSamme øvelse som før, men nu på hver gruppe: Cancerpatienter: OR = (101/188) / (74/213) = 1.546363 s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346 KI: exp(log(1.546363) + c(-1,1)1.960.1828346) = 1.080636 2.212806\nSå for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i KI.\nnon-cancer-patienter:\nOR = (38/226) / (33/205) = 1.044516 se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) = 0.2567521 KI: exp(log(1.044516) + c(-1,1)1.96 0.2567521) = 0.6314854 1.7276943 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.\nSå ilt-regime har betydning for cancerpatienter."
+    "text": "resten\nFor den forklarende variabel X får vi en estimeret odds ratio (OR) på behandlingen på exp(-0.9054) = 0.4043801 når der kontrolleres for den forklarende variabel X.\nDet tilhøreden 95% konfidensinterval findes ved: exp(-0.9054 + c(-1,1)1.960.2967)\nOR påp 0.4 svarer til en reduktion i odds for treatment failure på ca 60%, ved aktiv behandling vs. placebo, når der kontrolleres for bilirubin. Da KI ikke indeholder 1, er effekten signifikant."
   },
   {
     "objectID": "slides/logistisk.html#resten-1",
     "href": "slides/logistisk.html#resten-1",
     "title": "Logistisk regression",
     "section": "Resten",
-    "text": "Resten\nVi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?\np_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%\nDen relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.\nHvad er det tilhørende 95% konfidens interval?\nLog(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))\nDETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)1.960.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1\n\nHvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)\nDen korrekte analyse gav nedenstående resultat:\n\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)"
+    "text": "Resten\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nAngiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
   },
   {
     "objectID": "slides/logistisk.html#dtp-vaccine",
@@ -2427,5 +2427,229 @@
     "title": "Lineær regression",
     "section": "Leversygdom",
     "text": "Leversygdom\n\n\n\nPredikter median-ratio for de syge (status 1) kvinder i populationen med en alder på 50 år.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n0.1730998\n0.0488724\n3.542\n0.000430***\n\n\nfactor(status)1\n-0.1196883\n0.0310025\n-3.861\n0.000126***\n\n\nfactor(sex)M\n0.0042939\n0.0324442\n0.132\n0.894756\n\n\nage\n-0.0045177\n0.0008616\n-5.241\n2.24e-7***\n\n\n\n\n\n\n\n\nHvad fik vi oplyst at vi kunne antage om l_ratio?\n\n\nAt den var normalfordelt.\n\n\nHvad ved vi om medianen i en normalfordeling?\n\n\nAt medianen er lig middelværdien (og omvendt)\n\n\nBemærk at vi spørges til medianen af ratio, ikke medianen af log-ratio\n\n\nHvordan fikser vi det?\n\n\nVi beregner medianen (middelværdien) af l_ratio, og exponentierer.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#lever",
+    "href": "slides/logistisk.html#lever",
+    "title": "Logistisk regression",
+    "section": "Lever",
+    "text": "Lever"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal",
+    "href": "slides/logistisk.html#levertal",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:\n\ntable(AG.positiv, status)\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\n\n\nVariable:\nidnr: Løbenummer\nsex: Køn\nage: alder i år\nstatus: leversygdom, 1=ja\nalbumin: serum albumin g/dL\nglobulin: serum globulin g/dL\nratio: ratio m. albumin og globulin\nl_ratio: log(ratio) (den naturlige logaritme)\nUndersøg om der er en statistisk signifikant sammenhæng mellem AG.positiv og status."
+  },
+  {
+    "objectID": "slides/løsninger.html#levertal",
+    "href": "slides/løsninger.html#levertal",
+    "title": "Opgaveløsninger",
+    "section": "Levertal",
+    "text": "Levertal\n583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:\n\nlibrary(tidyverse)\ntribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,\n65, 3.3, 0.90, 3.666667, 1, 1, \"F\",  -0.1053605,\n62, 3.2, 0.74, 4.324324, 1, 2, \"M\", -0.3011051,\n62, 3.3, 0.89, 3.707865, 1, 3, \"M\", -0.1165338,\n58, 3.4,1.00,3.400000,1,4,\"M\",0,\n72, 2.4, 0.4, 6, 1,5,\"M\",-0.9162907,\n46, 4.4,1.3,3.384615,1,6,\"M\",0.2623643\n)\n\n# A tibble: 6 × 8\n    age albumin ratio globulin status  idnr sex   l_ratio\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1    65     3.3  0.9      3.67      1     1 F      -0.105\n2    62     3.2  0.74     4.32      1     2 M      -0.301\n3    62     3.3  0.89     3.71      1     3 M      -0.117\n4    58     3.4  1        3.4       1     4 M       0    \n5    72     2.4  0.4      6         1     5 M      -0.916\n6    46     4.4  1.3      3.38      1     6 M       0.262\n\n\nVariable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)\nDer defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:\n\nstatus &lt;- c(rep(0, 99 + 66),\n            rep(1, 308 + 106))\n\nAG.positiv &lt;- c(rep(1, 99), rep(0, 66),\n         rep(1, 308), rep(0, 106))\ntable(AG.positiv, status)\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\nUndesøg om der er en statistisk signifikant sammenhæng mellem de to variable.\n\nHer kører vi en chi^2 test:\ninput:\n\ninput &lt;- matrix(c(66,106,99,308), ncol = 2, byrow = TRUE)\nchisq.test(input, correct = FALSE)\n\n\n    Pearson's Chi-squared test\n\ndata:  input\nX-squared = 11.709, df = 1, p-value = 0.0006219\n\n\nDet giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.\nDet svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.\n\nNu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)\n\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.postiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.\nDet er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.\nOR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)1.960.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)\n\nPrædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\nVi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532\nDet er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-1",
+    "href": "slides/logistisk.html#levertal-1",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nHvordan kan vi gøre det?\n\nVi bør nok kigge på en \\(\\chi^2\\) test, for det har vi ikke gjort andre steder.\n\n\nEn lille komplikation er at vi skal have tal ind i en matrix for at bruge chisq.test()\n\n\nHusker I det med “correct”?\n\n\nDet var korrektionen vi bruger når vi har små tal i matricen. Den er som default TRUE.\n\n\nHvad var små tal?\n\n\nDet er når vi når ned på 5 eller færre forventede observationer i en eller flere celler i matricen\n\n\nHar vi det her?\n\n\nNej, så vi skal ikke korrigere.\n\n\nData var:\n\n\n          status\nAG.positiv   0   1\n         0  66 106\n         1  99 308\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-2",
+    "href": "slides/logistisk.html#levertal-2",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nNu udfører vi følgende analyse i R:\n&gt; model &lt;- glm(status~factor(AG.positiv) + factor(sex) + age, binomial)\n&gt; summary(model)\nDen giver dette resultat:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det?\n\n\n\n\nHvilken analyse?\n\n\nLogistisk regression\n\n\nHvordan ser vi det?\n\n\nglm og “binomial”\n\n\nHvad er responsvariabel?\n\n\nstatus\n\n\nOg de forklarende variable?\n\n\nAG.positiv og sex som forklarende kategoriske variable, age som forklarende kontinuært variabel\n\n\nHvad ser vi helt overordnet?\n\n\nAlder og AG.positiv er signifikante i denne analyse (angiv p-værdier i besvarelsen)\n\n\nKøn er ikke.\n\n\nHvad er der korrigeret for i forhold til tidligere?\n\n\nKøn og alder."
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-3",
+    "href": "slides/logistisk.html#levertal-3",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nAngiv relevant størrelse der kvantificerer effekten af AG.positiv.\nBeregn tilhørende 95% KI.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHvilken skala er estimaterne på?\n\nlog-odds\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-så-vi",
+    "href": "slides/logistisk.html#hvad-så-vi",
+    "title": "Logistisk regression",
+    "section": "Hvad så vi?",
+    "text": "Hvad så vi?\n\n\n\nOR for AG.positiv var 1.81.\n\n\nDerfor estimerer vi at odds for status 1 (at man er syg) er ?\n\n\nEn faktor 1.8 større for ?\n\n\nAG.positive patienter\n\n\nSammenlignet med?\n\n\nAG.negative patienter\n\n\n\nEt 95% KI var:\n\n\n[1.225701, 2.679882]\n\n\nEr det signifikant?\n\n\nJa\n\n\nHvorfor?\n\n\nDet indeholder ikke 1.\n\n\nDet var heldigt, for det fortalte p-værdien også…"
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-4",
+    "href": "slides/logistisk.html#levertal-4",
+    "title": "Logistisk regression",
+    "section": "Levertal",
+    "text": "Levertal\n\n\n\nPrædikter sandsynligheden for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHusk vi er stadig på log-odds skala\nHvordan regnede vi om fra odds til sandsynlighed?\n\n\\(p = \\frac{odds}{1 + odds}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/løsninger.html#bilirubin",
+    "href": "slides/løsninger.html#bilirubin",
+    "title": "Opgaveløsninger",
+    "section": "Bilirubin",
+    "text": "Bilirubin\nVi skal se på et randomiseret klinisk studie udført på seks forskellige europæiske hospitaler. 349 patienter med leversygdom blev randomiseret til enten den eksperimentelle behadnling UDC (176 patienter) eller placebo (173 patienter)\nUdfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.\nVi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet\n\nlibrary(tidyverse)\ntribble(~Y, ~R, ~X,\n1, 1 , 1.616854293,\n0,1,1.990367802,\n0,1,-0.849360224,\n1,1,1.496709981,\n0,1,1.335441834,\n0,1,-0.561678151)\n\n# A tibble: 6 × 3\n      Y     R      X\n  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1     1     1  1.62 \n2     0     1  1.99 \n3     0     1 -0.849\n4     1     1  1.50 \n5     0     1  1.34 \n6     0     1 -0.562\n\n\n\ntable(Y,R) giver:\n\n\n\n   R\nY     0   1\n  0 118 134\n  1  55  42\n\n\n\nbaseret på ovenstående table ønske beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.\n\nRisiko ved behandling: 42/(134+42)= 0.2386364\nRisiko ved placebo: 55/(118+55) = 0.3179191\nRR = 0.2386364/0.3179191 = 0.7506199\nlog(RR) = log(0.7506199) = -0.2868559\nse.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726\net 95% ki for log(rr) findes til; -0.2868559 + c(-1,1)1.960.174726 = -0.62931886 0.05560706\nDerfor er 95% ki for RR: exp(c(-0.62931886, 0.05560706)) = 0.5329547 1.0571822\nRR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822 Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant effekt.\n\nNu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)\n\nder gav dette output:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-1.3922\n0.2088\n-6.668\n2.60e-11***\n\n\nfactor(R)1\n-0.9054\n0.2967\n-3.052\n0.00227**\n\n\nX\n1.2632\n0.1571\n8.043\n8.79e-16***\n\n\n\n\n\n\n\nHvilken analyse er der tale om. Angiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.\nDer er tale om en logistisk regressions analyse, med Y (Treatment failure) som afhængig variabel, og behandling/randomisering som kategorisk uafhængig, forklarende variable, samt X (den standardiserede logartime af bilirubin) som kontinuært forklarende variabel. Såvel behandlingen som X er statistisk signifikante på et 5% niveua.\nFor den forklarende variabel X får vi en estimeret odds ratio (OR) på behandlingen på exp(-0.9054) = 0.4043801 når der kontrolleres for den forklarende variabel X.\nDet tilhøreden 95% konfidensinterval findes ved: exp(-0.9054 + c(-1,1)1.960.2967)\nOR påp 0.4 svarer til en reduktion i odds for treatment failure på ca 60%, ved aktiv behandling vs. placebo, når der kontrolleres for bilirubin. Da KI ikke indeholder 1, er effekten signifikant."
+  },
+  {
+    "objectID": "slides/logistisk.html#bilirubin",
+    "href": "slides/logistisk.html#bilirubin",
+    "title": "Logistisk regression",
+    "section": "Bilirubin",
+    "text": "Bilirubin\n\n\n\n349 patienter med leversygdom blev randomiseret til behandlingen UDC (176 patienter), eller placebo (173) patienter.\nEt udfald, “failure of medical treatment” blev defineret som enten “død” eller “levertransplantation” i en periode på 6 år.\nPatienterne blev fulgt fra de blev randomiseret til enten “failure of medical treatment”, eller til der var gået 6 år.\nVariable:\nY er udfaldsvariablen (1: “treatment failure”),\nR angiver behandling (1 = UDC),\nX den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet\n\n\n\nDe første 6 observationer.\n\n\n# A tibble: 6 × 3\n      Y     R      X\n  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1     1     1  1.62 \n2     0     1  1.99 \n3     0     1 -0.849\n4     1     1  1.50 \n5     0     1  1.34 \n6     0     1 -0.562\n\n\n\ntable(Y, R) #giver\n\n   R\nY     0   1\n  0 118 134\n  1  55  42"
+  },
+  {
+    "objectID": "slides/logistisk.html#bilirubin-1",
+    "href": "slides/logistisk.html#bilirubin-1",
+    "title": "Logistisk regression",
+    "section": "Bilirubin",
+    "text": "Bilirubin\n\n\n\n\n\n   R\nY     0   1\n  0 118 134\n  1  55  42\n\n\nBaseret på ovenstående tabel ønskes beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.\n\nY var udfaldet (1: failure), R var behandlingen (1: UDC, 0: placebo)\n\nHvordan beregner vi KI?\n\n\\(\\text{Estimat} \\pm1.96\\cdot\\text{SE}\\)\n\n\nOg SE på RR?\n\n\n\\(SE(\\log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a+b} + \\frac{1}{c} - \\frac{1}{c+d}}\\)\n\n\nSå husk - der arbejdes på log-skala\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#levertal-42",
+    "href": "slides/logistisk.html#levertal-42",
+    "title": "Logistisk regression",
+    "section": "Levertal 42",
+    "text": "Levertal 42\n\n\n\nPrædikter sandsynligheden for at have status 1 (syg) for en AG.positiv kvinde på 50.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-0.446661\n0.320769\n-1.392\n0.16378\n\n\nfactor(AG.positiv)1\n0.594643\n0.199556\n2.980\n0.00288**\n\n\nfactor(sex)M\n0.407717\n0.211941\n1.924\n0.05439.\n\n\nage\n0.015131\n0.005927\n2.553\n0.01069*\n\n\n\n\n\n\n\nHusk vi er stadig på log-odds skala\nHvordan regnede vi om fra odds til sandsynlighed?\n\n\\(p = \\frac{odds}{1 + odds}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#bilirubin-2",
+    "href": "slides/logistisk.html#bilirubin-2",
+    "title": "Logistisk regression",
+    "section": "Bilirubin",
+    "text": "Bilirubin\n\n\n\nNu udførtes følgende analyse:\n&gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”)\n&gt; summary(model)\nDer gav dette output:\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-1.3922\n0.2088\n-6.668\n2.60e-11***\n\n\nfactor(R)1\n-0.9054\n0.2967\n-3.052\n0.00227**\n\n\nX\n1.2632\n0.1571\n8.043\n8.79e-16***\n\n\n\n\n\n\n\n\nHvilken analyse er der tale om?\n\nDet er en logistisk regression\n\n\nHvordan ser vi det?\n\n\nglm, binomial, z-value. Men det skriver vi nok ikke i besvarelsen.\n\n\n\n\n\n\nHvad er variablene?\n\n\nY er den afhængige, kategoriske responsvariabel (Treatment failure)\n\n\nR er den uafhængige, kategoriske variabel, der beskriver behandling vs placebo\n\n\nX er den uafhængige, kontinuærte variabel - den standardiserede logaritme af bilirubin målingerne\n\n\nHvad vil det sige at den er logaritmeret?\n\n\nVi har taget logaritmen af bilirubin værdierne\n\n\nOg at den er standardiseret?\n\n\nVi har centreret til middelværdi 0 ved at trække middelværdien fra alle målingerne\n\n\nOg skaleret til sd = 1 ved at dividere alle målingerne med standardafvigelsen af alle målingerne.\n\n\nEr der noget signifikant?\n\n\nJa, både behandling og X er statistisk signifikante på et 5% niveau. Vi skal nok i en besvarelse huske at nævne p-værdierne."
+  },
+  {
+    "objectID": "slides/logistisk.html#bilirubin-3",
+    "href": "slides/logistisk.html#bilirubin-3",
+    "title": "Logistisk regression",
+    "section": "Bilirubin",
+    "text": "Bilirubin\n\n\n\nAngiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nz value\nPr(&gt;|z|)\n\n\n\n\n(Intercept)\n-1.3922\n0.2088\n-6.668\n2.60e-11***\n\n\nfactor(R)1\n-0.9054\n0.2967\n-3.052\n0.00227**\n\n\nX\n1.2632\n0.1571\n8.043\n8.79e-16***\n\n\n\n\n\n\n\nHvilken skala er vi på når vi har en logistisk regression?\n\nlog-odds\n\n\nHvilke effekter er relevante?\n\n\nJa, det kan debatteres. Tag dem alle sammen.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/logistisk.html#hvad-så-vi-så",
+    "href": "slides/logistisk.html#hvad-så-vi-så",
+    "title": "Logistisk regression",
+    "section": "Hvad så vi så?",
+    "text": "Hvad så vi så?\n\nVi fik en estimeret odds(ratio) på behandlingen på 0.404\n\nEr der kontrolleret for noget?\n\n\nJa, der er kontrolleret for den forklarende variabel X. Det skal vi nok huske at skrive.\n\n\nDet tilhørende 95% KI var [0.2260652, 0.7233457]\n\n\nOg da 1 ikke er indeholdt, er estimatet signifikant\n\n\nMen det vidste vi allerede fra p-værdien\n\n\nHvad svarer OR = 0.4 til?\n\n\nEn reduktion i odds for treatment failure på ca. 60% ved ?\n\n\nBehandling sammenlignet med placebo\n\n\nNår der ?\n\n\nKontrolleres for bilirubin."
+  },
+  {
+    "objectID": "slides/løsninger.html#blodtryk-i-ghana",
+    "href": "slides/løsninger.html#blodtryk-i-ghana",
+    "title": "Opgaveløsninger",
+    "section": "Blodtryk i Ghana",
+    "text": "Blodtryk i Ghana\nVi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie, der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret hypertension. Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling. Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen.\nData har følgende variable:\nSBPbl: systolisk blodtryk ved baseline (mmHg) SBP12: systolisk blodtryk efter 12 måneder group (control/treatment) sex (male/female) diff: differensen mellem SBP12 og SBPbl\nGennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9 De tilsvarende tal i interventionsgruppen er -19.6 og 17.4\n\nEr der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.\n\nVi starter med SEM for de to grupper:\nIntervention: n= 323\n\nSEM_intervention &lt;- 17.4/sqrt(323)\n\n\nSEM_kontrol &lt;- 19.9/sqrt(641-323)\n\nSå kan vi beregne 95% KI beregnes for de to grupper:\nintervention:\n\n-19.6+c(-1,1)*1.96*SEM_intervention\n\n[1] -21.4976 -17.7024\n\n\nkontrol:\n\n-16.6+c(-1,1)*1.96*SEM_kontrol\n\n[1] -18.78724 -14.41276\n\n\nIngen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk signifikant.\n\nEr faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?\n\nDe to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge KI til at konkludere. Vi beregner SEM for differensen:\n\nSEM_diff &lt;- sqrt(SEM_intervention^2 + SEM_kontrol^2)\n\nDet giver os en teststørrelse på forskellen på de to differenser på:\n\n(-19.6- -16.6)/SEM_diff\n\n[1] -2.030622\n\n\nSom (i absolutte tal) er større end 1.96 - der er en signifikant forskel.\n\nNu udførtes følgende analyser for mænd og kvinder hver for sig: &gt; summary(lm(diff[sex==“female”]~factor(group[sex==“female”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-16.988\n1.3556\n-12.527\n&lt;2e-16***\n\n\nfactor(group[sex=='female'])treatment\n-5.915\n1.901\n-3.112\n0.002**\n\n\n\n\n\n\n\n\nsummary(lm(diff[sex==“male”]~factor(group[sex==“male”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-15.893\n1.594\n-9.968\n&lt;2e-16***\n\n\nfactor(group[sex=='male'])treatment\n1.692\n2.264\n0.747\n0.456\n\n\n\n\n\n\n\nHvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning af værdierne i “Estimate” søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?\nDer er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.\nFor kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)\nFor mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)"
+  },
+  {
+    "objectID": "slides/linreg.html#blodtryk-i-ghana",
+    "href": "slides/linreg.html#blodtryk-i-ghana",
+    "title": "Lineær regression",
+    "section": "Blodtryk i Ghana",
+    "text": "Blodtryk i Ghana\n\n\n\nVi ser på blodtryksmålinger fra 641 forsøgspersoner i Ghana.\nDet er et interventionsstudie, der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret hypertension.\nTo grupper, control & treatment. Begge har fået standardbehandling, mens treatmentgruppen dertil har fået personligt tilpasset behandling af sygeplejersker med speciale i behandling af hypertenstion. Den blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Der var 323 individer i treatment gruppen.\n\n\n\nVariable:\nSBPbl: systolisk blodtryk ved baseline (mmHg)\nSBP12: systolisk blodtryk efter 12 måneder\ngroup: (control/treatment)\nsex: (male/female)\ndiff: differensen mellem SBP12 og SBPbl\nSummariske værdier for diff:\n\n\n\nGruppe\nGennemsnit\nSpredning\nn\n\n\n\n\nControl\n-16.6\n19.9\n318\n\n\nTreatment\n-19.6\n17.4\n323\n\n\n\n\nVi fik ikke oplyst antallet i kontrolgruppen. Men 641 - 323 = 318"
+  },
+  {
+    "objectID": "slides/linreg.html#blodtryk-i-ghana-1",
+    "href": "slides/linreg.html#blodtryk-i-ghana-1",
+    "title": "Lineær regression",
+    "section": "Blodtryk i Ghana",
+    "text": "Blodtryk i Ghana\n\n\n\nEr der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.\n\nHvad er det så vi tester?\n\n\n\\(H_0: diff = 0\\)\n\n\nHvordan gør vi det?\n\n\nKI. Og hvordan ser det ud?\n\n\n\\(\\text{Estimat} \\pm1.96\\cdot\\text{SEM}\\)\n\n\n\\(SEM = \\frac{s}{\\sqrt{n}}\\)\n\n\nSummariske værdier for diff:\n\n\n\nGruppe\nGennemsnit\nSpredning\nn\n\n\n\n\nControl\n-16.6\n19.9\n318\n\n\nTreatment\n-19.6\n17.4\n323\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#resten-1",
+    "href": "slides/linreg.html#resten-1",
+    "title": "Lineær regression",
+    "section": "resten",
+    "text": "resten"
+  },
+  {
+    "objectID": "slides/linreg.html#blodtryk-i-ghana-2",
+    "href": "slides/linreg.html#blodtryk-i-ghana-2",
+    "title": "Lineær regression",
+    "section": "Blodtryk i Ghana",
+    "text": "Blodtryk i Ghana\n\n\n\nEr faldetsignifikant forskelligt i de 2 grupper? Hvad kan vi konkludere vedrørende effekten af præcisionsbehandlingen på blodtrykket på baggrund af det?\n\nKan vi bruge KI til at sige noget om det?\n\n\nNej. De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI.\n\n\nHvad gør vi så?\n\n\nVi beregner SEM for differensen:\n\n\nHvad skal vi så bruge?\n\n\nEn samlet SE for differensen\n\n\n\\(\\text{SE}_{\\text{diff}} = \\sqrt{\\text{SE}_1^2 + \\text{SE}_2^2}\\)\n\n\nSummariske værdier for diff:\n\n\n\n\nGruppe\nGennemsnit\nSpredning\nn\n\n\n\n\nControl\n-16.6\n19.9\n318\n\n\nTreatment\n-19.6\n17.4\n323\n\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/linreg.html#blodtryk-i-ghana-3",
+    "href": "slides/linreg.html#blodtryk-i-ghana-3",
+    "title": "Lineær regression",
+    "section": "Blodtryk i Ghana",
+    "text": "Blodtryk i Ghana\n\n\n\nNu udførtes følgende analyser for mænd og kvinder hver for sig:\n\nsummary(lm(diff[sex==“female”]~factor(group[sex==“female”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-16.988\n1.3556\n-12.527\n&lt;2e-16***\n\n\nfactor(group[sex=='female']) treatment\n-5.915\n1.901\n-3.112\n0.002**\n\n\n\n\n\n\n\n\nsummary(lm(diff[sex==“male”]~factor(group[sex==“male”])))\n\n\n\n\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n-15.893\n1.594\n-9.968\n&lt;2e-16***\n\n\nfactor(group[sex=='male']) treatment\n1.692\n2.264\n0.747\n0.456\n\n\n\n\n\n\n\nHvilke analyser er er tale om, hvad kan vi konkludere på den baggrund? Der ønskes fortolkning af værdierne i “Estimate”. Giver det anledning til en anden konlusion end den vi fik lige før?\n\n\n\n\nTo multiple lineære regressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.\n\n\nFor kvinder ser vi at blodtrykket i snit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)\n\n\nFor mænd ser vi at blodtrykket i snit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)"
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger",
+    "href": "slides/løsninger.html#danske-og-polske-piger",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\nlibrary(tidyverse)\n\nset.seed(47)\n\nn &lt;- 100\n\n# højreskæv\nright_skew &lt;- rgamma(n, shape = 2, scale = 2)\n\n# venstreskæv (spejlet højreskæv)\nleft_skew &lt;- max(right_skew) - right_skew\n\n# tilnærmelsesvist normal\nnormal &lt;- rnorm(n, mean = 10, sd = 2)\n\n# log-transformerede\nlog_right &lt;- log(right_skew)\nlog_left  &lt;- log(max(left_skew) + 1 - left_skew)\n\ndf &lt;- tibble(\n  value = c(right_skew, left_skew, normal, log_right, log_left),\n  type = rep(\n    c(\n      \"Højreskæv\",\n      \"Venstreskæv\",\n      \"Tilnærmelsesvist normal\",\n      \"Log(højreskæv)\",\n      \"Log(venstreskæv)\"\n    ),\n    each = n\n  )\n)\n\nggplot(df, aes(x = value)) +\n  geom_histogram(bins = 10, fill = \"steelblue\", color = \"white\") +\n  facet_wrap(~type, scales = \"free\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nSKAL HAVE JUSTERET LABELS! Hvad kan vi sige om disse fordelinger?\nUd over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte.\n\nVi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59\n\nPolske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61\nBeregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.\nDanske: 0.495/sqrt(59) polske: 0.418/sqrt(61)\n\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\n\ndanske:\n\n3.211 + c(-1,1)*1.96*0.495/sqrt(59)\n\n[1] 3.084691 3.337309\n\n\n\n3.389 + c(-1,1)*1.96*0.418/sqrt(61)\n\n[1] 3.284102 3.493898\n\n\nHvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel.\n\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.\n\nforskel:\n::: {.cell}\ndiff &lt;- 3.21-3.389\n:::\npoolet SEM\n\n SEM_poolet &lt;- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)\n\nTestværdien:\n\n diff/SEM_poolet\n\n[1] -2.136821\n\n\nTestværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.\np-værdi:\n\n2*pt(diff/SEM_poolet, 59+61)\n\n[1] 0.03464261\n\n\nOg der skal ganges med to…\n\nangtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\n\nDet danske referenceinterval:\n\n3.211+c(-1,1)*1.96*0.492\n\n[1] 2.24668 4.17532\n\n\nHvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\n\npnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)\n\n[1] 0.9668844\n\n\nEller vi kan standardisere så vi kan bruge standardnormalfordelingen."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\n\n\n\n\n\n\n\n\n\n\nDisse histogrammer er konstrueret til lejligheden, og har ikke meget med det efterfølgende at gøre.\nMen. Hvad kan vi sige om dem?\n\nVi skal kunne genkende en højre-skæv fordeling.\n\n\nOg en venstre-skæv fordeling\n\n\nI den højre-skæve har vi observationer der ligger og roder rundt ude til højre, relativt til flertallet af observationer.\n\n\nVi skal også kunne se at i hvert fald den nederste er tilnærmelsesvis normalfordelt.\n\n\nHvis vi får oplyst, at plottet “Log(højreskæv)” er de samme data som vi ser i plottet “Højreskæv”, blot log-transformeret, skal vi også kunne erkende, at de log-transformerede data er mere normalfordelte end de ikke-log-transformerede data.\n\n\nDet gælder generelt, at logaritmen af data er mere normalfordelt end data."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#resten",
+    "href": "slides/hypotesetests.html#resten",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Resten",
+    "text": "Resten\n\n\n\nBrug derefter \\(\\mu\\) og \\(\\sigma\\) for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\nHvis referenceintervallet for de danske piger er [nedre, øvre], hvordan finder vi andelen af polske piger der ligger inden for det?\n\nDet er: P(nedre &lt; X &lt; øvre)\n\n\nHvad er det lig med? P(X &lt; øvre) - P(X &lt; nedre) \n\n\nHvordan får vi beregnet det? Vi normaliserer udtrykkene\n\n\nMed hvad? \\(\\mu\\) og \\(\\sigma\\) for de polske piger\n\n\nOg så skal vi bruge? pnorm\n\n\nFordi vi søger en andel/sandsynlighed.\n\n\nKI for DK piger var [2.24668, 4.17532]\n\n\n\nLand\nGennemsnit\nSpredning\n\n\n\n\nPO\n3.389\n0.418\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nDet danske referenceinterval:\n3.211+c(-1,1)1.960.492\nHvis X er normalfordelt med middelværdi 3.389 og spredning 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\npnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)"
+  },
+  {
+    "objectID": "slides/hypotesetests.html#reste",
+    "href": "slides/hypotesetests.html#reste",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "reste",
+    "text": "reste\nHvad kan vi sige om disse fordelinger?\nVi skal kunne se forskel på højre- og venstreskæve fordelinger. Vi skal kunne konstatere at de to nederste er mere symmetriske og klokkeformede. Eller at de mere ligner en normalfordeling."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger-1",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\nVi skal se på data fra en undersøgelse af D-vitaminniveuaet for danske og polske piger.\nVi får følgende log-transformerede data oplyst:\n\n\n\nLand\nGennemsnit\nSpredning\nn\n\n\n\n\nDK\n3.211\n0.492\n59\n\n\nPO\n3.389\n0.418\n61\n\n\n\nBeregn variationen på gennemsnittene (SEM) for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.\n\nHvordan var det nu vi beregnede SEM?\n\n\n\\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger-2",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger-2",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\n\n\n\nLand\nGennemsnit\nSpredning\nn\n\n\n\n\nDK\n3.211\n0.492\n59\n\n\nPO\n3.389\n0.418\n61\n\n\n\nGivet\n\\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\nHvordan beregner vi så et 95% KI?\n\n\\(\\text{Gennemsnit} \\pm1.96\\cdot\\text{SEM}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#hvad-kan-vi-sige-om-det",
+    "href": "slides/hypotesetests.html#hvad-kan-vi-sige-om-det",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Hvad kan vi sige om det?",
+    "text": "Hvad kan vi sige om det?\n\nHvad er det nu et 95% KI fortæller os?\n\nDet fortæller os, at hvis vi beregner KI for et større antal stikprøver, så vil 95% af disse indeholde den sande værdi for gennemsnittet af den log-transformerede D-vitaminkoncentration.\nFor hver af de to grupper.\n\n\nOfte skriver vi nu at hvert KI indeholder det sande middelværdi for (osv) med 95% sandsynlighed.\nMen det er faktisk ikke helt korrekt.\n\n\nVi så at der var overlap mellem intervallerne.\n\n\nDet betyder ikke at vi kan sige noget om en signifikant forskel eller ej.\n\n\nHavde de to gennemsnit ligget i det andet KI, ville det være en anden sag.\nMen stadig lidt usikkert.\n\n\nSå vi kan ikke konkludere om der er signifikant forskel på de to populationers D-vitaminniveau."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#resten.",
+    "href": "slides/hypotesetests.html#resten.",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Resten.",
+    "text": "Resten.\n\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.\n\nforskel:\ndiff &lt;- 3.21-3.389\npoolet SEM\nSEM_poolet &lt;- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)\nTestværdien:\ndiff/SEM_poolet\nTestværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.\np-værdi:\n2*pt(diff/SEM_poolet, 59+61)\nOg der skal ganges med to…\n\nangtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\n\nDet danske referenceinterval:\n3.211+c(-1,1)1.960.492\nHvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\npnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)\nEller vi kan standardisere så vi kan bruge standardnormalfordelingen."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger-3",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger-3",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på D-vitaminniveauet er statistisk signifikant på et 5% niveau.\n\nHer bliver I virkelig hjulpet…\n\n\n\n\nLand\nGennemsnit\nSpredning\nn\n\n\n\n\nDK\n3.211\n0.492\n59\n\n\nPO\n3.389\n0.418\n61\n\n\n\n\nHvad er det så vi tester?\n\n\n\\(H_0: \\mu_{dk} - \\mu_{po} = 0\\)\n\n\nGivet \\(\\text{SEM} = \\frac{sd}{\\sqrt{n}}\\)\nHvad er så SE for forskellen på middelværdierne?\n\n\n\\(SE(\\bar{x}_1 - \\bar{x}_2)=\\sqrt{SEM_1^2 + SEM_2^2}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger-4",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger-4",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\nVi får nu at vide at vi kan beskrive log(D-vitaminniveau) i begge lande ved en normalfordeling. Beregn et 95% reference interval for log(D-vit) for danske piger.\nHvordan beregner vi referenceintervallet?\n\n\\(\\mu \\pm1.96\\sigma\\)\n\n\nSkal vi bruge SEM?\n\n\nNej, for nu antager vi at tallene er normalfordelte.\n\n\n\n\nLand\nGennemsnit\nSpredning\nn\n\n\n\n\nDK\n3.211\n0.492\n59\n\n\nPO\n3.389\n0.418\n61\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#danske-og-polske-piger-5",
+    "href": "slides/hypotesetests.html#danske-og-polske-piger-5",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\n\n\n\nBrug derefter \\(\\mu\\) og \\(\\sigma\\) for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\nHvis referenceintervallet for de danske piger er [nedre, øvre], hvordan finder vi andelen af polske piger der ligger inden for det?\n\nDet er: P(nedre &lt; X &lt; øvre)\n\n\nHvad er det lig med? P(X &lt; øvre) - P(X &lt; nedre) \n\n\nHvordan får vi beregnet det? Vi normaliserer udtrykkene\n\n\nMed hvad? \\(\\mu\\) og \\(\\sigma\\) for de polske piger\n\n\nOg så skal vi bruge? pnorm\n\n\nFordi vi søger en andel/sandsynlighed.\n\n\nKI for DK piger var [2.24668, 4.17532]\n\n\n\nLand\nGennemsnit\nSpredning\n\n\n\n\nPO\n3.389\n0.418\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]

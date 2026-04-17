@@ -2570,3 +2570,304 @@ Vi beregner medianen (middelværdien) af l_ratio, og exponentierer.
 ```
 ::::
 ::::
+
+
+## Blodtryk i Ghana
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+Vi ser på blodtryksmålinger fra 641 forsøgspersoner i Ghana. 
+
+Det er et interventionsstudie,
+der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret
+hypertension. 
+
+To grupper, control & treatment. Begge har fået standardbehandling, mens treatmentgruppen dertil har fået personligt tilpasset behandling af sygeplejersker med speciale i behandling af hypertenstion. Den blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Der var 323 individer i treatment gruppen.
+
+::::
+
+::::
+:::: {.column}
+
+:::: {.evensmaller}
+Variable:  
+_SBPbl_: systolisk blodtryk ved baseline (mmHg)  
+_SBP12_: systolisk blodtryk efter 12 måneder  
+_group_: (control/treatment)  
+_sex_: (male/female)  
+_diff_: differensen mellem SBP12 og SBPbl
+
+Summariske værdier for _diff_:
+
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
+
+:::: {.tiny}
+Vi fik ikke oplyst antallet i kontrolgruppen. Men 641 - 323 = 318
+::::
+
+::::
+
+::::
+::::
+
+
+
+
+## Blodtryk i Ghana
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode.
+Besvar samme spørgsmål for kontrolgruppen.
+
+:::: {.fragment}
+Hvad er det så vi tester?
+::::
+:::: {.fragment}
+$H_0: diff = 0$
+::::
+:::: {.fragment}
+Hvordan gør vi det?
+::::
+:::: {.fragment}
+KI. Og hvordan ser det ud?
+::::
+:::: {.fragment}
+$\text{Estimat} \pm1.96\cdot\text{SEM}$
+::::
+:::: {.fragment}
+$SEM = \frac{s}{\sqrt{n}}$
+::::
+:::: {.fragment}
+Summariske værdier for _diff_:
+
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
+
+::::
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Blodtryk i Ghana
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+Er faldetsignifikant forskelligt i de 2 grupper? 
+Hvad kan vi konkludere vedrørende effekten af præcisionsbehandlingen på blodtrykket på baggrund af det?
+
+
+:::: {.fragment}
+Kan vi bruge KI til at sige noget om det?
+::::
+:::: {.fragment}
+Nej. De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. 
+
+
+::::
+:::: {.fragment}
+Hvad gør vi så?
+::::
+:::: {.fragment}
+Vi beregner SEM for differensen:
+::::
+:::: {.fragment}
+Hvad skal vi så bruge?
+::::
+:::: {.fragment}
+En samlet SE for differensen
+::::
+
+:::: {.fragment}
+$\text{SE}_{\text{diff}} = \sqrt{\text{SE}_1^2 + \text{SE}_2^2}$
+::::
+:::: {.fragment}
+Summariske værdier for _diff_:
+
+:::: {.tiny}
+
+| Gruppe | Gennemsnit | Spredning | n |
+|--|--|--|--|
+|Control| -16.6 | 19.9 | 318|
+|Treatment | -19.6 | 17.4 | 323 |
+
+::::
+
+::::
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+## Blodtryk i Ghana
+
+
+:::: {.columns}
+:::: {.column width = "60%"}
+
+:::: {.reallysmall}
+
+Nu udførtes følgende analyser for mænd og kvinder hver for sig:
+
+:::: {.tiny}
+summary(lm(diff[sex=="female"]~factor(group[sex=="female"])))
+::::
+```{r blodtryk_ghana_reg_out_female, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-16.988", "1.3556", "-12.527", "<2e-16***",
+"factor(group[sex=='female'])\ntreatment", "-5.915", "1.901", "-3.112", "0.002**"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+:::: {.tiny}
+summary(lm(diff[sex=="male"]~factor(group[sex=="male"])))
+::::
+```{r blodtryk_ghana_reg_out_male,echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
+"(Intercept)", "-15.893", "1.594", "-9.968", "<2e-16***",
+"factor(group[sex=='male'])\ntreatment", "1.692", "2.264", "0.747", "0.456"
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `t value` = "t value",
+    `Pr(>|t|)` = "Pr(>|t|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+      opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilke analyser er er tale om, hvad kan vi konkludere på den baggrund? Der ønskes fortolkning
+af værdierne i "Estimate". Giver det anledning til en anden konlusion end den vi fik lige før?
+::::
+
+
+
+::::
+:::: {.column width = "40%"}
+
+:::: {.reallysmall}
+
+:::: {.fragment}
+To multiple lineære regressioner, med diff som kontinuært responsvariabel og group som
+forklarende, kategorisk (og binær) variabel.
+::::
+:::: {.fragment}
+For kvinder ser vi at blodtrykket i snit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)
+::::
+:::: {.fragment}
+For mænd ser vi at blodtrykket i snit falder med ca. 16 mmHg under kontrolbehandling, men at der
+ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
+::::
+
+::::
+::::
+::::
+
+
+
+## resten
+
+
+
+ 
+
+
+

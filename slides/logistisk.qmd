@@ -2152,8 +2152,13 @@ Så ilt-regime har betydning for cancerpatienter, men ikke for ikke-cancerpatien
 ::::
 
 
-## Lever
+
 ## Levertal
+
+:::: {.columns}
+:::: {.column width = "55%"}
+
+:::: {.smaller}
 
 583 personer er henvist til undersøgelse pga mistanke om leversygdom
 De første seks observationer:
@@ -2169,60 +2174,125 @@ tribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,
 )
 ```
 
-Variable:
-idnr: Løbenummer
-sex: Køn
-age: alder i år
-status: leversygdom, 1=ja
-albumin: serum albumin g/dL
-globulin: serum globulin g/dL
-ratio: ratio m. albumin og globulin
-l_ratio: log(ratio) (den naturlige logaritme)
-
 Der defineres en binær variabel AG.positiv som ratio < 1.1
 Det giver os denne tabel:
 
 
-```{r}
+```{r levertal_data}
 status <- c(rep(0, 99 + 66),
             rep(1, 308 + 106))
 
 AG.positiv <- c(rep(1, 99), rep(0, 66),
          rep(1, 308), rep(0, 106))
+```
+
+```{r levertal_tabel, echo  = TRUE}
 table(AG.positiv, status)
 ```
 
-a) Undesøg om der er en statistisk signifikant sammenhæng mellem de to variable.
+::::
 
-Her kører vi en chi^2 test:
 
-input: 
+::::
+:::: {.column width = "45%"}
 
-```{r}
-input <- matrix(c(66,106,99,308), ncol = 2, byrow = TRUE)
-chisq.test(input, correct = FALSE)
+:::: {.smaller}
+
+Variable:  
+_idnr_: Løbenummer  
+_sex_: Køn  
+_age_: alder i år  
+_status_: leversygdom, 1=ja  
+_albumin_: serum albumin g/dL  
+_globulin_: serum globulin g/dL  
+_ratio_: ratio m. albumin og globulin  
+_l_ratio_: log(ratio) (den naturlige logaritme)  
+
+Undersøg om der er en statistisk signifikant sammenhæng mellem AG.positiv og status.
+
+::::
+
+::::
+::::
+
+
+## Levertal
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.reallysmall}
+
+Hvordan kan vi gøre det?
+
+:::: {.fragment}
+
+Vi bør nok kigge på en $\chi^2$ test, for det har vi ikke gjort andre steder.
+::::
+:::: {.fragment}
+
+En lille komplikation er at vi skal have tal ind i en matrix for at bruge `chisq.test()`
+::::
+:::: {.fragment}
+Husker I det med "correct"? 
+::::
+:::: {.fragment}
+Det var korrektionen vi bruger når vi har små tal i matricen. Den er som default TRUE.
+::::
+:::: {.fragment}
+Hvad var små tal?
+::::
+:::: {.fragment}
+Det er når vi når ned på 5 eller færre forventede observationer i en eller flere celler i matricen
+::::
+:::: {.fragment}
+Har vi det her?
+::::
+:::: {.fragment}
+Nej, så vi skal ikke korrigere.
+::::
+:::: {.fragment}
+Data var:
+
+```{r levertal_tabel_uden_kode}
+table(AG.positiv, status)
 ```
+::::
 
-Det giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i 
-tabellen er "store", som i større end 5.
+::::
 
-Det svarer til en p-værdi der er <0.001. Så der er signifikant forskel. modelbesvarlsaer bruger
-ofte formuleringen "klart signifikant". teknisk set er der ikke noget der er mere signifikant end
-andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke "næsten" eller "meget" signifikant.
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
 
-b)
-Nu udfører vi følgende analyse i R:
-> model <- glm(status~factor(AG.positiv)+factor(sex)+age, binomial)
+```
+::::
+::::
+
+
+## Levertal
+
+
+:::: {.columns}
+:::: {.column width = "53%"}
+
+:::: {.evensmaller}
+
+Nu udfører vi følgende analyse i R:  
+> model <- glm(status~factor(AG.positiv) + factor(sex) + age, binomial)  
 > summary(model)
 
 Den giver dette resultat:
-```{r echo = FALSE}
+```{r levertal_reg_out_1, echo = FALSE}
 library(tidyverse)
 library(gt)
 
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 "(Intercept)", "-0.446661", "0.320769", "-1.392", "0.16378",
-"factor(AG.postiv)1", "0.594643", "0.199556", "2.980", "0.00288**",
+"factor(AG.positiv)1", "0.594643", "0.199556", "2.980", "0.00288**",
 "factor(sex)M", "0.407717", "0.211941", "1.924", "0.05439.",
 "age", "0.015131", "0.005927", "2.553", "0.01069*"
 
@@ -2266,26 +2336,638 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 ```
 
 Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det?
-Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.
 
-Det er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel.
-Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.
+::::
 
-OR for AG.positiv exp(0.594643) = 1.812384
-og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større
-hvis AG.positive patienter, sammenlignet med AG.negative. 
-KI:
-exp(0.594643 + c(-1,1)*1.96*0.199556)
-Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så
-fra p-værdien)
+::::
+:::: {.column width = "47%"}
 
-c) Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.
+:::: {.reallysmall}
 
-Vi beregner:
--0.446661 +  0.594643 + 50*0.015131 = 0.904532
+:::: {.fragment}
+Hvilken analyse?
+::::
+:::: {.fragment}
+Logistisk regression
+::::
+:::: {.fragment}
+Hvordan ser vi det? 
+::::
+:::: {.fragment}
+glm og "binomial"
+::::
+:::: {.fragment}
+Hvad er responsvariabel?
+::::
+:::: {.fragment}
+status
+::::
+:::: {.fragment}
+Og de forklarende variable?
+::::
+:::: {.fragment}
+AG.positiv og sex som forklarende kategoriske variable, age som forklarende kontinuært variabel
+::::
+:::: {.fragment}
+Hvad ser vi helt overordnet?
+::::
+:::: {.fragment}
+Alder og AG.positiv er signifikante i denne analyse (angiv p-værdier i besvarelsen)
+::::
+:::: {.fragment}
+Køn er ikke.
+::::
+:::: {.fragment}
+Hvad er der korrigeret for i forhold til tidligere?
+::::
+:::: {.fragment}
+Køn og alder.
+::::
 
-Det er logodds. Så vi finder sandsynligheden ved:
-odds er så: exp(0.904532) = 2.470775
-Og sandsynligheden finder vi ved:
-odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799
+::::
 
+::::
+::::
+
+
+
+## Levertal
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Angiv relevant størrelse der kvantificerer effekten af AG.positiv. 
+
+Beregn tilhørende 95% KI.
+
+
+```{r levertal_reg_out_2, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-0.446661", "0.320769", "-1.392", "0.16378",
+"factor(AG.positiv)1", "0.594643", "0.199556", "2.980", "0.00288**",
+"factor(sex)M", "0.407717", "0.211941", "1.924", "0.05439.",
+"age", "0.015131", "0.005927", "2.553", "0.01069*"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken skala er estimaterne på?
+
+:::: {.fragment}
+log-odds
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+## Hvad så vi?
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.fragment}
+OR for AG.positiv var 1.81.
+::::
+:::: {.fragment}
+Derfor estimerer vi at odds for status 1 (at man er syg) er ?
+::::
+:::: {.fragment}
+En faktor 1.8 større for ?
+::::
+:::: {.fragment}
+AG.positive patienter
+::::
+:::: {.fragment}
+Sammenlignet med?
+::::
+:::: {.fragment}
+AG.negative patienter
+::::
+
+
+
+
+::::
+:::: {.column}
+
+
+:::: {.fragment}
+Et 95% KI var:
+::::
+:::: {.fragment}
+[1.225701, 2.679882]
+::::
+:::: {.fragment}
+Er det signifikant?
+::::
+:::: {.fragment}
+Ja
+::::
+:::: {.fragment}
+Hvorfor?
+::::
+:::: {.fragment}
+Det indeholder ikke 1.
+::::
+:::: {.fragment}
+Det var heldigt, for det fortalte p-værdien også...
+::::
+
+::::
+::::
+
+
+
+
+## Levertal
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Prædikter sandsynligheden for at have status 1 (syg) for en AG.positiv kvinde på 50.
+
+
+```{r levertal_reg_out_3, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-0.446661", "0.320769", "-1.392", "0.16378",
+"factor(AG.positiv)1", "0.594643", "0.199556", "2.980", "0.00288**",
+"factor(sex)M", "0.407717", "0.211941", "1.924", "0.05439.",
+"age", "0.015131", "0.005927", "2.553", "0.01069*"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Husk vi er stadig på log-odds skala
+
+Hvordan regnede vi om fra odds til sandsynlighed?
+
+:::: {.fragment}
+$p = \frac{odds}{1 + odds}$
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+## Bilirubin
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.evensmaller}
+
+349 patienter med leversygdom blev randomiseret til behandlingen UDC (176 patienter), eller placebo (173) patienter.
+
+Et udfald, "failure of medical treatment" blev defineret som enten "død" eller "levertransplantation" i en periode på 6 år.
+
+Patienterne blev fulgt fra de blev randomiseret til enten "failure of medical treatment", eller til der var gået 6 år.
+
+
+Variable:  
+_Y_ er udfaldsvariablen (1: "treatment failure"),  
+_R_ angiver behandling (1  = UDC),  
+_X_ den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet
+
+
+::::
+
+
+::::
+:::: {.column}
+:::: {.evensmaller}
+
+De første 6 observationer.
+```{r bilirubin_data_exempel}
+library(tidyverse)
+tribble(~Y, ~R, ~X,
+1, 1 , 1.616854293,
+0,1,1.990367802,
+0,1,-0.849360224,
+1,1,1.496709981,
+0,1,1.335441834,
+0,1,-0.561678151)
+```
+
+
+```{r bilirubin_data, echo = FALSE}
+Y <- c(rep(0, 134 + 118),
+            rep(1, 42 + 55))
+
+R <- c(rep(1, 134), rep(0, 118),
+         rep(1, 42), rep(0, 55))
+
+```
+
+```{r bilirubin_tabel, echo = TRUE}
+table(Y, R) #giver
+```
+::::
+
+
+::::
+::::
+
+
+## Bilirubin
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+```{r bilirubin_tabel_2}
+table(Y, R)
+```
+
+Baseret på ovenstående tabel ønskes beregnet relativ risiko
+(med tilhørende 95% KI ) til belysning af effekten af behandlingen
+på det betragtede udfald. Husk at konkludere.
+
+:::: {.tiny}
+Y var udfaldet (1: failure), R var behandlingen (1: UDC, 0: placebo)
+::::
+Hvordan beregner vi KI?
+
+:::: {.fragment}
+
+$\text{Estimat} \pm1.96\cdot\text{SE}$
+::::
+:::: {.fragment}
+Og SE på RR?
+::::
+:::: {.fragment}
+$SE(\log(RR)) = \sqrt{\frac{1}{a} - \frac{1}{a+b} + \frac{1}{c} - \frac{1}{c+d}}$
+::::
+:::: {.fragment}
+Så husk - der arbejdes på log-skala
+::::
+
+::::
+
+::::
+:::: {.column}
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+::::
+::::
+
+
+
+
+## Bilirubin
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Nu udførtes følgende analyse:  
+> model <- glm(Y ~ factor(R) + X, family ="binomial")  
+> summary(model)
+
+Der gav dette output:
+
+```{r bilirubin_reg_output_1, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-1.3922", "0.2088", "-6.668", "2.60e-11***",
+"factor(R)1", "-0.9054", "0.2967", "-3.052", "0.00227**",
+"X", "1.2632", "0.1571", "8.043", "8.79e-16***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+:::: {.evensmaller}
+
+Hvilken analyse er der tale om?
+
+:::: {.fragment}
+Det er en logistisk regression
+::::
+:::: {.fragment}
+Hvordan ser vi det?
+::::
+:::: {.fragment}
+glm, binomial, z-value. Men det skriver vi nok ikke i besvarelsen.
+::::
+::::
+
+
+::::
+
+::::
+:::: {.column}
+
+:::: {.tiny}
+
+
+:::: {.fragment}
+Hvad er variablene?
+::::
+:::: {.fragment}
+Y er den afhængige, kategoriske responsvariabel (Treatment failure)
+::::
+:::: {.fragment}
+R er den uafhængige, kategoriske variabel, der beskriver behandling vs placebo
+::::
+:::: {.fragment}
+X er den uafhængige, kontinuærte variabel - den standardiserede logaritme af bilirubin målingerne
+::::
+:::: {.fragment}
+Hvad vil det sige at den er logaritmeret?
+::::
+:::: {.fragment}
+Vi har taget logaritmen af bilirubin værdierne
+::::
+:::: {.fragment}
+Og at den er standardiseret?
+::::
+:::: {.fragment}
+Vi har centreret til middelværdi 0 ved at trække middelværdien fra alle målingerne
+::::
+:::: {.fragment}
+Og skaleret til sd = 1 ved at dividere alle målingerne med standardafvigelsen af alle målingerne.
+::::
+:::: {.fragment}
+Er der noget signifikant?
+::::
+:::: {.fragment}
+Ja, både behandling og X er statistisk signifikante på et 5% niveau. Vi skal nok i en besvarelse huske at nævne p-værdierne.
+::::
+
+::::
+
+::::
+::::
+
+## Bilirubin
+
+
+:::: {.columns}
+:::: {.column}
+
+:::: {.smaller}
+
+Angiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.
+
+
+```{r bilirubin_reg_output_2, echo = FALSE}
+library(tidyverse)
+library(gt)
+
+tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
+"(Intercept)", "-1.3922", "0.2088", "-6.668", "2.60e-11***",
+"factor(R)1", "-0.9054", "0.2967", "-3.052", "0.00227**",
+"X", "1.2632", "0.1571", "8.043", "8.79e-16***"
+
+
+) |> 
+
+  gt() |> 
+  cols_label(
+    Term = "",
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+    `Pr(>|z|)` = "Pr(>|z|)"
+  ) |> 
+  cols_align(
+    align = "left",
+    everything()
+  ) |> 
+    
+  tab_options(
+    # Ydre kanter
+    table.border.top.width = px(0),
+    table.border.bottom.width = px(0),
+
+    # Overskrift og kolonneetiketter
+    heading.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    column_labels.border.bottom.width = px(0),
+
+    # Krop: ingen vandrette linjer
+    table_body.hlines.width = px(0),
+    table_body.border.bottom.width = px(0),
+
+    # Gruppe-linjer (hvis nogen)
+    table_body.border.top.width = px(0),
+    row_group.border.top.width = px(0),
+    row_group.border.bottom.width = px(0)
+  ) |> 
+  opt_table_font(
+     font = list(google_font("Courier Prime"), default_fonts())) 
+```
+
+Hvilken skala er vi på når vi har en logistisk regression?
+
+:::: {.fragment}
+log-odds
+::::
+:::: {.fragment}
+Hvilke effekter er relevante?
+::::
+:::: {.fragment}
+Ja, det kan debatteres. Tag dem alle sammen.
+::::
+::::
+
+::::
+:::: {.column}
+
+```{webr-r}
+#| context: interactive
+#| layout: horizontal
+#| autorun: false
+
+```
+
+
+
+::::
+::::
+
+## Hvad så vi så?
+
+:::: {.smaller}
+
+Vi fik en estimeret odds(ratio) på behandlingen på 0.404
+
+:::: {.fragment}
+Er der kontrolleret for noget?
+::::
+:::: {.fragment}
+Ja, der er kontrolleret for den forklarende variabel X. Det skal vi nok huske at skrive.
+::::
+:::: {.fragment}
+Det tilhørende 95% KI var [0.2260652, 0.7233457]
+::::
+:::: {.fragment}
+Og da 1 ikke er indeholdt, er estimatet signifikant
+::::
+:::: {.fragment}
+Men det vidste vi allerede fra p-værdien
+::::
+:::: {.fragment}
+Hvad svarer OR = 0.4 til?
+::::
+:::: {.fragment}
+En reduktion i _odds_ for treatment failure på ca. 60% ved ?
+::::
+:::: {.fragment}
+Behandling sammenlignet med placebo
+::::
+:::: {.fragment}
+Når der ?
+::::
+:::: {.fragment}
+Kontrolleres for bilirubin.
+::::
+::::
