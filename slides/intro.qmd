@@ -64,3 +64,5 @@ Fordi
 - Der er mere forklaring end kode
 - Vi kan køre kode inde i slides, men ikke slides inde i kode
 - I ikke skal skrive ret megen kode til eksamen
+- Men hav alligevel RStudio eller Positron åben
+- Hvis I bruger Positron, så husk at %>% er (næsten) nøjagtig det samme som |>
