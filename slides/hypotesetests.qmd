@@ -191,7 +191,7 @@ Men vi kan beregne et interval.
 
 . . .
 
-Intuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.
+Intuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.
 
 . . .
 

@@ -963,7 +963,7 @@
     "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvad er et 95% konfidensinterval?",
-    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
+    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
   },
   {
     "objectID": "slides/hypotesetests.html#så",
