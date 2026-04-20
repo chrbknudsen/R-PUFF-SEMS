@@ -2863,11 +2863,3 @@ ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
 
 
 
-## resten
-
-
-
- 
-
-
-
