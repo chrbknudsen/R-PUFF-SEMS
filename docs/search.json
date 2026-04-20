@@ -326,7 +326,7 @@
     "href": "slides/løsninger.html",
     "title": "Opgaveløsninger",
     "section": "",
-    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.2.0\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.2     ✔ tibble    3.3.1\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+    "text": "Hvis vores observationer er normalfordelte med \\(\\mu = 0\\) og \\(\\sigma = 1\\)\nHvor stor en andel af observationerne er mindre end 1 (\\(\\sigma\\))?\n\npnorm(1)*100\n\n[1] 84.13447\n\n\nHvor mange observationer er mindre end -2 (\\(\\sigma\\))\n\npnorm(-2)*100\n\n[1] 2.275013\n\n\nhvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)?\n\nqnorm(0.159)\n\n[1] -0.9985763\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\npnorm(-3)\n\n[1] 0.001349898\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\npnorm(2)\n\n[1] 0.9772499\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\n1- pnorm(2)\n\n[1] 0.02275013\n\n\n\n\n\nHvad er 25% af observationerne mindre end?\n\nqnorm(0.25)\n\n[1] -0.6744898\n\n\n\n\n\nHvad er 40% af observationerne større end?\n\nqnorm(1-0.4)\n\n[1] 0.2533471\n\n\n\n\n\nHvilken andel af observationerne ligger mellem 1 og 1.5?\nHvilken andel ligger under 1.5?\nHvilken andel ligger under 1?\nDet er så\n\npnorm(1.5) - pnorm(1)\n\n[1] 0.09184805\n\n\n\n\n\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvor meget ligger så uden for det interval?\n53%\nDet skal fordeles ligeligt på begge sider, så 53/2=26.5\n\nqnorm(0.265)\n\n[1] -0.628006\n\n\n\n\n\nHvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?\n1-0.95 = 0.05\nDet skal fordeles ligeligt på begge sider så 0.05/2 = 0.025\n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nog\n\nqnorm(1-0.025)\n\n[1] 1.959964\n\n\n\n\n\nNappet direkte fra en eksamensopgave\nFor en population af normalfordelte værdier ved vi at: 40% af værdierne er større end 0.1, og 70% af værdierne er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?\nDen tager vi på tavlen.\nDet er oplyst at X∼N(μ,σ)\nP(X&gt;0.1)=0.4⇔P(X&lt;0.1)=1−0.4=0.6\nStandardiseret:\nP(X−μσ&lt;0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253\nOg:\nP(X&lt;1)=0.7\nStandardiseret:\nP(X−μσ&lt;1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524\nDermed:\n0.1−μσ=0.253⇔0.1−μ=0.253σ\nog\n1−μσ=0.524⇔1−μ=0.524σ\nTræk første ligning fra den anden og isoler σ:\n(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ\n1−0.1=0.271σ⇔0.90.271=σ=3.32\nIndsæt i en af ligningerne for at finde μ:\n1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77\n\n\n\nVi har en normalfordelt population med σ=6.52 . 40% af værdierne er mindre end 0. Hvad er så μ for denne fordeling?\nX∼N(μ,6.52)\nP(X&lt;0) = 0.4\nSkaler: P(Z&lt;0−μ6.52)=0.4\n0−μ6.52=qnorm(0.4)=−0.2533471 Isoler μ\n\n\n\nEn normalfordelt population har middelværdi μ=12.5 og standardafvigelse σ=3.2 . Hvor stor en andel af værdierne er mindre end 10?\nMed andre ord, hvad er: P(X&lt;10)\nTransformer til standardnormalfordelingen: P(Z&lt;(10−μ)/σ)\nIndsæt\n\npnorm((10-12.5)/3.2)\n\n[1] 0.2173277\n\n\n\n\n\nI en normalfordelt population er μ=85 og 25% af værdierne er større end 95. Hvad er σ for denne fordeling?\nP(x &gt; 95) = 0.25\nP(X &lt; 95) = 1-0.25\nStandardiser\n\\(P(Z &lt; \\frac{95 - \\mu}{\\sigma}) = 0.75\\)\nIndsæt og brug qnorm til at komme af med P\n\\((95-85)/\\sigma = qnorm(0.75)\\)\nIsoler \\(\\sigma\\)\n\\(10/qnorm(0.75) = \\sigma\\)\n\n\n\nEn normalfordelt variabel har μ=50 og σ=8 . For hvilken værdi y er 90% af observationerne &lt; y?\nP(X &lt; y) = 0.9\nStandardiser\nP(Z &lt; (y-μ)/σ) = 0.9\nqnorm of at komme af med P\n(y-μ)/σ = qnorm(0.9)\nIndsæt (y-50)/8 = qnorm(0.9)\nIsoler y\n\ny &lt;- qnorm(0.9)*8+50\ny\n\n[1] 60.25241\n\n\n\n\n\nFor en normalfordeling gælder at σ=4.5 og 75% af værdierne er &gt; 18. Hvad er μ?\nP(X &gt; 18) = 0.75\nP(X &lt; 18) = 1- 0.75\nStandardiser\nP(Z &lt; (18-μ)/σ) = 0.25\nIndsæt og brug qnorm til at komme af med P\n(18-μ)/4.5 = qnorm(0.25)\nIsoler μ\n\nmu &lt;- 18-  qnorm(0.25)*4.5 \nmu\n\n[1] 21.0352\n\n\nManglende interval-grænse En normalfordelt population har μ=100 og σ=15 . Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x , hvad er da denne øvre grænse?\nEller: find y således at: P(85 &lt; X &lt; y) = 0.8\nTAVLE\nSamlet sandsynlighed op til y P(X &lt; y)\nFra det skal vi trække den del hvor X er mindre end 85\nP(X &lt; 85)\nSå: P(X &lt; y) - P(X &lt; 85) = 0.80\nP(X &lt; 85) kan vi beregne\nStandardiser\nP(Z &lt; (85-μ)/σ))\nIndsæt, og brug pnorm for at få sandsynligheden\n\npnorm((85-100)/15)\n\n[1] 0.1586553\n\n\nSå ved vi at P(X &lt; y) - P(X &lt; 85) = 0.80\nbliver P(X &lt; y) - 0.1586553 = 0.80\nog derfor at\nP(X &lt; y) = 0.80 + 0.1586553 = 0.9586553\nStandardiser (igen)\nP(X &lt; (y-μ)σ) = 0.9586553\nAf med P ved hjælp af qnorm, og indsæt\n(y-100)/15 = qnorm(0.9586553)\nIsoler y\ny = 15*qnorm(0.9586553) +100\n\n\n\n“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:\nA tibble: 2 × 4 gruppe Antal Gennemsnit Spredning     1 Diabetikere 227 0.719 0.068 2 Ikke-diabetikere 140 0.81 0.057 Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).\n0.81 + c(-1,1)*0.057\nHVAD ER DET VI GØR MED c(-1,1)\n\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) = P(X &lt; 0.92) - P(X &lt; 0.7)\nTAVLE!\nDiabetikerne havde middel = 0.719 og spredning 0.068\nNormaliser\nP(X &lt; 0.92) - P(X &lt; 0.7)\nP(Z &lt; (0.92-0.719)/0.068) - P(Z &lt; (0.7-0.719)/0.068)\n\npnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)\n\n[1] 0.6084767"
   },
   {
     "objectID": "slides/løsninger.html#opgave",
@@ -1901,7 +1901,7 @@
     "href": "slides/normalfordelingen.html#normalområde",
     "title": "Normalfordelingen",
     "section": "Normalområde",
-    "text": "Normalområde\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) =\nP(X &lt; 0.92) - P(X &lt; 0.7)\n\nTavle!\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n[1] 0.6084767"
+    "text": "Normalområde\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\n\nEller: P(0.7 &lt; X &lt; 0.92) =\nP(X &lt; 0.92) - P(X &lt; 0.7)\n\n\nTavle!\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n[1] 0.6084767"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområde---cowboy-trick",
@@ -2665,5 +2665,124 @@
     "title": "Kategoriske udfald",
     "section": "Hvor ens er de?",
     "text": "Hvor ens er de?\n\n\n\nTag denne 2x2 tabel:\n\n\n\n\nTreatment\nPlacebo\n\n\n\n\nSyg\n42\n27\n\n\nRask\n58\n73\n\n\n\nEr der forskel på andelen af syge hhv raske i de to grupper?\n\n\n\n\n\n\n\nType\n\n\nTestværdi\n\n\n\n\n\n\n\\(p_1 - p_0\\)\n\n\n2.259538\n\n\n\n\nOR\n\n\n2.217594\n\n\n\n\nRR\n\n\n2.186153\n\n\n\n\n\\(\\chi^2\\)\n\n\n4.978427\n\n\n\n\n\\(\\chi\\)\n\n\n2.231239\n\n\n\n\n\n\n\n\n\nDifferensen: \\(p_t - p_p\\):\nDe to andele og deres SE:\n\\(p_t = 42/(42+58) = 0.42\\)\n\\(p_p = 27/(27+73) = 0.27\\)\n\\(SE_{prop} = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\\(SE_t = \\sqrt{\\frac{0.42(1-0.42)}{100}} = 0.04935585\\)\n\\(SE_p = \\sqrt{\\frac{0.27(1-0.27)}{100}} = 0.04439595\\)\nDen samlede SE:\n\\(\\text{SE}_\\text{diff} = \\sqrt{SE_t^2 + SE_p^2}\\)\n\\(\\text{SE}_\\text{diff} = \\sqrt{0.04935585^2 + 0.04439595^2} =  0.06638524\\)\nDifferensen\n\\(\\text{diff} = \\hat{p_t} - \\hat{p_p} = 0.42-0.27 = 0.15\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\n\\(0.15/0.06638524 = 2.259538\\)\n\n\nOdds Ratio:\nDe to odds, og ratio:\n\\(Odds_t = 42/58 = 0.7241379\\)\n\\(Odds_p = 27/73 = 0.369863\\)\n\\(OR = 0.7241379/0.369863 = 1.957854\\)\nSE for log(OR):\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}\\)\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{42} + \\frac{1}{58} + \\frac{1}{27} + \\frac{1}{73}} = 0.302963\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.957854)/0.302963 = 2.217594\\)\n\n\nRisk Ratio:\nDe to risici og ratio:\n\\(R_t = 42/(42+58) = 0.42\\)\n\\(R_p = 27/(27+73) = 0.27\\)\n\\(RR = 0.42/0.27 = 1.555556\\)\nSE for log(RR):\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a + b} + \\frac{1}{c} - \\frac{1}{c + d}}\\)\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{42} - \\frac{1}{100} + \\frac{1}{27} - \\frac{1}{100}} = 0.2021053\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.555556)/0.2021053 = 2.186153\\)\n\n\n\\(\\chi^2\\) Her gør vi det i hånden - det er ikke normalt…\n\\(\\chi^2\\) har en særlig testværdi \\(\\chi^2 = \\sum{\\frac{(O-E)^2}{E}}\\)\nHvor O er den observerede værdi, og E er den forventede værdi\nBeregner forventede værdier:\n\\(E_{ST} = \\frac{(42+27)\\cdot100}{200} = 34.5\\) \\(E_{SP} = \\frac{69\\cdot100}{200} = 34.5\\) \\(E_{RT} = \\frac{(58+73)\\cdot100}{200} = 65.5\\) \\(E_{RP} = \\frac{131\\cdot100}{200} = 65.5\\)\nBeregner \\(\\chi^2 = \\frac{(42 - 34.5)^2}{34.5} + \\frac{(27-34.5)^2}{34.5} + \\frac{(58-65.5)^2}{65.5} + \\frac{(73-65.5)^2}{65.5} = 4.978427\\)\nI \\(\\chi^2\\) testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84\nDet er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men chisq.test() gør arbejdet for jer og giver en p-værdi (qchisq(1-0.05, df = 1))\n\n\n\\(\\chi^2\\) frister til at tage kvadratroden. \\(\\sqrt{4.978427} = 2.231239\\).\nTestværdien er så \\(\\sqrt{3.841459} = 1.959964\\) der virker meget bekendt…\nDer er små forskelle, fordi de divergerer når:\nstikprøverne er små (her er de i mellemstørrelse)\nDe forventede værdier er meget små (&lt;5) eller\ngrupperne er meget skæve."
+  },
+  {
+    "objectID": "slides/løsninger.html#et-par-hurtige-øvelser",
+    "href": "slides/løsninger.html#et-par-hurtige-øvelser",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vores observationer er normalfordelte med \\(\\mu = 0\\) og \\(\\sigma = 1\\)\nHvor stor en andel af observationerne er mindre end 1 (\\(\\sigma\\))?\n\npnorm(1)*100\n\n[1] 84.13447\n\n\nHvor mange observationer er mindre end -2 (\\(\\sigma\\))\n\npnorm(-2)*100\n\n[1] 2.275013\n\n\nhvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)?\n\nqnorm(0.159)\n\n[1] -0.9985763"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-1",
+    "href": "slides/løsninger.html#øvelse-1",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\npnorm(-3)\n\n[1] 0.001349898"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-2",
+    "href": "slides/løsninger.html#øvelse-2",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\npnorm(2)\n\n[1] 0.9772499"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-3",
+    "href": "slides/løsninger.html#øvelse-3",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\n1- pnorm(2)\n\n[1] 0.02275013"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-4",
+    "href": "slides/løsninger.html#øvelse-4",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvad er 25% af observationerne mindre end?\n\nqnorm(0.25)\n\n[1] -0.6744898"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-5",
+    "href": "slides/løsninger.html#øvelse-5",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvad er 40% af observationerne større end?\n\nqnorm(1-0.4)\n\n[1] 0.2533471"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-6",
+    "href": "slides/løsninger.html#øvelse-6",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne ligger mellem 1 og 1.5?\nHvilken andel ligger under 1.5?\nHvilken andel ligger under 1?\nDet er så\n\npnorm(1.5) - pnorm(1)\n\n[1] 0.09184805"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-7",
+    "href": "slides/løsninger.html#øvelse-7",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvor meget ligger så uden for det interval?\n53%\nDet skal fordeles ligeligt på begge sider, så 53/2=26.5\n\nqnorm(0.265)\n\n[1] -0.628006"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "href": "slides/løsninger.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?\n1-0.95 = 0.05\nDet skal fordeles ligeligt på begge sider så 0.05/2 = 0.025\n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nog\n\nqnorm(1-0.025)\n\n[1] 1.959964"
+  },
+  {
+    "objectID": "slides/løsninger.html#endnu-en-øvelse",
+    "href": "slides/løsninger.html#endnu-en-øvelse",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Nappet direkte fra en eksamensopgave\nFor en population af normalfordelte værdier ved vi at: 40% af værdierne er større end 0.1, og 70% af værdierne er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?\nDen tager vi på tavlen.\nDet er oplyst at X∼N(μ,σ)\nP(X&gt;0.1)=0.4⇔P(X&lt;0.1)=1−0.4=0.6\nStandardiseret:\nP(X−μσ&lt;0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253\nOg:\nP(X&lt;1)=0.7\nStandardiseret:\nP(X−μσ&lt;1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524\nDermed:\n0.1−μσ=0.253⇔0.1−μ=0.253σ\nog\n1−μσ=0.524⇔1−μ=0.524σ\nTræk første ligning fra den anden og isoler σ:\n(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ\n1−0.1=0.271σ⇔0.90.271=σ=3.32\nIndsæt i en af ligningerne for at finde μ:\n1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse",
+    "href": "slides/løsninger.html#øvelse",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Vi har en normalfordelt population med σ=6.52 . 40% af værdierne er mindre end 0. Hvad er så μ for denne fordeling?\nX∼N(μ,6.52)\nP(X&lt;0) = 0.4\nSkaler: P(Z&lt;0−μ6.52)=0.4\n0−μ6.52=qnorm(0.4)=−0.2533471 Isoler μ"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse---manglende-procentil",
+    "href": "slides/løsninger.html#øvelse---manglende-procentil",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "En normalfordelt population har middelværdi μ=12.5 og standardafvigelse σ=3.2 . Hvor stor en andel af værdierne er mindre end 10?\nMed andre ord, hvad er: P(X&lt;10)\nTransformer til standardnormalfordelingen: P(Z&lt;(10−μ)/σ)\nIndsæt\n\npnorm((10-12.5)/3.2)\n\n[1] 0.2173277"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse---manglende-σ",
+    "href": "slides/løsninger.html#øvelse---manglende-σ",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "I en normalfordelt population er μ=85 og 25% af værdierne er større end 95. Hvad er σ for denne fordeling?\nP(x &gt; 95) = 0.25\nP(X &lt; 95) = 1-0.25\nStandardiser\n\\(P(Z &lt; \\frac{95 - \\mu}{\\sigma}) = 0.75\\)\nIndsæt og brug qnorm til at komme af med P\n\\((95-85)/\\sigma = qnorm(0.75)\\)\nIsoler \\(\\sigma\\)\n\\(10/qnorm(0.75) = \\sigma\\)"
+  },
+  {
+    "objectID": "slides/løsninger.html#manglende-værdi-kendt-procentil",
+    "href": "slides/løsninger.html#manglende-værdi-kendt-procentil",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "En normalfordelt variabel har μ=50 og σ=8 . For hvilken værdi y er 90% af observationerne &lt; y?\nP(X &lt; y) = 0.9\nStandardiser\nP(Z &lt; (y-μ)/σ) = 0.9\nqnorm of at komme af med P\n(y-μ)/σ = qnorm(0.9)\nIndsæt (y-50)/8 = qnorm(0.9)\nIsoler y\n\ny &lt;- qnorm(0.9)*8+50\ny\n\n[1] 60.25241"
+  },
+  {
+    "objectID": "slides/løsninger.html#manglende-middelværdi-variant-2",
+    "href": "slides/løsninger.html#manglende-middelværdi-variant-2",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "For en normalfordeling gælder at σ=4.5 og 75% af værdierne er &gt; 18. Hvad er μ?\nP(X &gt; 18) = 0.75\nP(X &lt; 18) = 1- 0.75\nStandardiser\nP(Z &lt; (18-μ)/σ) = 0.25\nIndsæt og brug qnorm til at komme af med P\n(18-μ)/4.5 = qnorm(0.25)\nIsoler μ\n\nmu &lt;- 18-  qnorm(0.25)*4.5 \nmu\n\n[1] 21.0352\n\n\nManglende interval-grænse En normalfordelt population har μ=100 og σ=15 . Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x , hvad er da denne øvre grænse?\nEller: find y således at: P(85 &lt; X &lt; y) = 0.8\nTAVLE\nSamlet sandsynlighed op til y P(X &lt; y)\nFra det skal vi trække den del hvor X er mindre end 85\nP(X &lt; 85)\nSå: P(X &lt; y) - P(X &lt; 85) = 0.80\nP(X &lt; 85) kan vi beregne\nStandardiser\nP(Z &lt; (85-μ)/σ))\nIndsæt, og brug pnorm for at få sandsynligheden\n\npnorm((85-100)/15)\n\n[1] 0.1586553\n\n\nSå ved vi at P(X &lt; y) - P(X &lt; 85) = 0.80\nbliver P(X &lt; y) - 0.1586553 = 0.80\nog derfor at\nP(X &lt; y) = 0.80 + 0.1586553 = 0.9586553\nStandardiser (igen)\nP(X &lt; (y-μ)σ) = 0.9586553\nAf med P ved hjælp af qnorm, og indsæt\n(y-100)/15 = qnorm(0.9586553)\nIsoler y\ny = 15*qnorm(0.9586553) +100"
+  },
+  {
+    "objectID": "slides/løsninger.html#normalområde---en-eksamensopgave",
+    "href": "slides/løsninger.html#normalområde---en-eksamensopgave",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:\nA tibble: 2 × 4 gruppe Antal Gennemsnit Spredning     1 Diabetikere 227 0.719 0.068 2 Ikke-diabetikere 140 0.81 0.057 Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).\n0.81 + c(-1,1)*0.057\nHVAD ER DET VI GØR MED c(-1,1)"
+  },
+  {
+    "objectID": "slides/løsninger.html#normalområde",
+    "href": "slides/løsninger.html#normalområde",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) = P(X &lt; 0.92) - P(X &lt; 0.7)\nTAVLE!\nDiabetikerne havde middel = 0.719 og spredning 0.068\nNormaliser\nP(X &lt; 0.92) - P(X &lt; 0.7)\nP(Z &lt; (0.92-0.719)/0.068) - P(Z &lt; (0.7-0.719)/0.068)\n\npnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)\n\n[1] 0.6084767"
   }
 ]

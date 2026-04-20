@@ -4,9 +4,354 @@ format: html
 ---
 
 
-```{r}
+```{r warnings=FALSE, echo = FALSE, message=FALSE}
 library(tidyverse)
 ```
+
+# Normalfordelingen
+
+## Et par hurtige øvelser
+
+Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
+
+Hvor stor en andel af observationerne er mindre end 1 ($\sigma$)? 
+
+```{r}
+pnorm(1)*100
+```
+
+Hvor mange observationer er mindre end -2 ($\sigma$)
+
+```{r}
+pnorm(-2)*100
+```
+
+hvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)? 
+
+```{r}
+qnorm(0.159)
+```
+
+
+## Øvelse 1
+Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?
+
+```{r}
+pnorm(-3)
+```
+
+## Øvelse 2
+Hvilken andel af observationerne i standardnormalfordelingen er mindre end 2?
+
+```{r}
+pnorm(2)
+```
+
+## Øvelse 3
+Hvilken andel af observationerne i standardnormalfordelingen er større end 2?
+
+```{r}
+1- pnorm(2)
+```
+
+## Øvelse 4
+Hvad er 25% af observationerne mindre end?
+
+```{r}
+qnorm(0.25)
+```
+
+## Øvelse 5
+Hvad er 40% af observationerne større end?
+
+```{r}
+qnorm(1-0.4)
+```
+
+## Øvelse 6
+Hvilken andel af observationerne ligger mellem 1 og 1.5?
+
+Hvilken andel ligger under 1.5?
+
+Hvilken andel ligger under 1?
+
+Det er så
+
+```{r}
+pnorm(1.5) - pnorm(1)
+```
+
+## Øvelse 7
+Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+Hvor meget ligger så uden for det interval?
+
+53%
+
+Det skal fordeles ligeligt på begge sider, så 53/2=26.5
+
+```{r}
+qnorm(0.265)
+```
+
+
+## Øvelse 8 - og det vigtigste tal I skal kende!
+Hvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+Hvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?
+
+1-0.95 = 0.05
+
+Det skal fordeles ligeligt på begge sider så 0.05/2 = 0.025
+
+
+```{r}
+qnorm(0.025)
+```
+
+og 
+
+```{r}
+qnorm(1-0.025)
+```
+
+
+## Endnu en øvelse
+Nappet direkte fra en eksamensopgave
+
+For en population af normalfordelte værdier ved vi at:
+40% af værdierne er større end 0.1, og
+70% af værdierne er mindre end 1.
+Hvad er middelværdi og spredning i denne normalfordeling?
+
+Den tager vi på tavlen.
+
+Det er oplyst at X∼N(μ,σ)
+
+P(X>0.1)=0.4⇔P(X<0.1)=1−0.4=0.6
+
+Standardiseret:
+
+P(X−μσ<0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253
+
+Og:
+
+P(X<1)=0.7
+
+Standardiseret:
+
+P(X−μσ<1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524
+
+Dermed:
+
+0.1−μσ=0.253⇔0.1−μ=0.253σ
+
+og
+
+1−μσ=0.524⇔1−μ=0.524σ
+
+Træk første ligning fra den anden og isoler σ:
+
+(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ
+
+1−0.1=0.271σ⇔0.90.271=σ=3.32
+
+Indsæt i en af ligningerne for at finde μ:
+
+1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77
+
+
+## Øvelse
+Vi har en normalfordelt population med σ=6.52
+. 40% af værdierne er mindre end 0. Hvad er så μ
+ for denne fordeling?
+
+X∼N(μ,6.52)
+
+P(X<0) = 0.4
+
+Skaler: P(Z<0−μ6.52)=0.4
+
+0−μ6.52=qnorm(0.4)=−0.2533471
+ Isoler μ
+
+## Øvelse - Manglende procentil:
+En normalfordelt population har middelværdi μ=12.5
+ og standardafvigelse σ=3.2
+. Hvor stor en andel af værdierne er mindre end 10?
+
+Med andre ord, hvad er: P(X<10)
+
+Transformer til standardnormalfordelingen:
+P(Z<(10−μ)/σ)
+
+Indsæt
+
+```{r}
+pnorm((10-12.5)/3.2)
+```
+
+## Øvelse - Manglende σ
+I en normalfordelt population er μ=85
+ og 25% af værdierne er større end 95. Hvad er σ
+ for denne fordeling?
+
+P(x > 95) = 0.25
+
+P(X < 95) = 1-0.25
+
+Standardiser
+
+$P(Z < \frac{95 - \mu}{\sigma}) = 0.75$
+
+Indsæt og brug qnorm til at komme  af med P
+
+$(95-85)/\sigma = qnorm(0.75)$
+
+Isoler $\sigma$
+
+$10/qnorm(0.75) = \sigma$
+
+## Manglende værdi, kendt procentil:
+En normalfordelt variabel har μ=50
+ og σ=8
+. For hvilken værdi y er 90% af observationerne < y?
+
+P(X < y) = 0.9
+
+Standardiser
+
+P(Z < (y-μ)/σ) = 0.9
+
+qnorm of at komme af med P
+
+(y-μ)/σ = qnorm(0.9)
+
+Indsæt
+(y-50)/8 = qnorm(0.9)
+
+Isoler y
+
+```{r}
+y <- qnorm(0.9)*8+50
+y
+```
+
+## Manglende middelværdi (variant 2):
+For en normalfordeling gælder at σ=4.5
+ og 75% af værdierne er > 18. Hvad er μ?
+
+P(X > 18) = 0.75
+
+P(X < 18) = 1- 0.75
+
+Standardiser
+
+P(Z < (18-μ)/σ) = 0.25
+
+Indsæt og brug qnorm til at komme af med P
+
+(18-μ)/4.5 = qnorm(0.25)
+
+Isoler μ
+
+```{r}
+mu <- 18-  qnorm(0.25)*4.5 
+mu
+```
+
+Manglende interval-grænse
+En normalfordelt population har μ=100
+ og σ=15
+. Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x
+, hvad er da denne øvre grænse?
+
+Eller: find y således at:
+P(85 < X < y) = 0.8
+
+TAVLE
+
+Samlet sandsynlighed op til y
+P(X < y)
+
+Fra det skal vi trække den del hvor X er mindre end 85
+
+P(X < 85)
+
+Så:
+P(X < y) - P(X < 85) = 0.80
+
+P(X < 85) kan vi beregne
+
+Standardiser
+
+P(Z < (85-μ)/σ))
+
+Indsæt, og brug pnorm for at få sandsynligheden
+
+```{r}
+pnorm((85-100)/15)
+```
+
+Så ved vi at 
+P(X < y) - P(X < 85) = 0.80
+
+bliver
+P(X < y) - 0.1586553 = 0.80
+
+og derfor at 
+
+P(X < y) = 0.80 + 0.1586553 = 0.9586553
+
+Standardiser (igen)
+
+P(X < (y-μ)σ) =  0.9586553
+
+Af med P ved hjælp af qnorm, og indsæt
+
+(y-100)/15 = qnorm(0.9586553) 
+
+Isoler y
+
+y = 15*qnorm(0.9586553) +100
+ 
+
+## Normalområde - en eksamensopgave
+“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:
+
+A tibble: 2 × 4
+  gruppe           Antal Gennemsnit Spredning
+  <chr>            <dbl>      <dbl>     <dbl>
+1 Diabetikere        227      0.719     0.068
+2 Ikke-diabetikere   140      0.81      0.057
+Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).
+
+0.81 + c(-1,1)*0.057
+
+HVAD ER DET VI GØR MED c(-1,1)
+
+## Normalområde
+Hvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
+
+Eller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
+
+Eller: P(0.7 < X < 0.92) =
+P(X < 0.92) - P(X < 0.7)
+
+TAVLE!
+
+Diabetikerne havde middel = 0.719 og spredning 0.068
+
+Normaliser
+
+P(X < 0.92) - P(X < 0.7)
+
+P(Z < (0.92-0.719)/0.068) - P(Z < (0.7-0.719)/0.068)
+
+```{r}
+pnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)
+```
+
 
 # Hypotesetests
 
