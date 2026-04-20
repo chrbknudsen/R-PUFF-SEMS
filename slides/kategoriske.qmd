@@ -811,7 +811,18 @@ Er der forskel på andelen af syge hhv raske i de to grupper?
 .reveal .fragment.current-visible.current-fragment {
   display: inline;
 }
+
+.reveal .fragment.current-visible {
+  display: none;
+}
+
+.reveal .fragment.current-visible.current-fragment {
+  display: block;
+}
+
 </style>
+
+:::: {.reallysmall}
 
 <table class="click-table" style="border-collapse: collapse; border: none;">
 <thead style="border: none;">
@@ -851,9 +862,7 @@ Er der forskel på andelen af syge hhv raske i de to grupper?
 </tbody>
 </table>
 
-
-
-</span>
+::::
 
 ::::
 
@@ -862,7 +871,7 @@ Er der forskel på andelen af syge hhv raske i de to grupper?
 :::: {.column}
 :::: {.reallysmall}
 
-<span class="fragment current-visible" data-fragment-index="1">
+<div class="fragment current-visible" data-fragment-index="1">
 Differensen: $p_t - p_p$:  
 De to andele og deres SE:  
 $p_t = 42/(42+58) = 0.42$  
@@ -877,9 +886,9 @@ Differensen
 $\text{diff} = \hat{p_t} - \hat{p_p} = 0.42-0.27 = 0.15$  
 Testværdien = $\frac{Estimatet}{Standardfejlen}$  
 $0.15/0.06638524 = 2.259538$
-</span>
+</div>
 
-<span class="fragment current-visible" data-fragment-index="3">
+<div class="fragment current-visible" data-fragment-index="3">
 Odds Ratio:    
 De to odds, og ratio:  
 $Odds_t = 42/58 = 0.7241379$  
@@ -891,9 +900,9 @@ $SE(log(OR)) = \sqrt{\frac{1}{42} + \frac{1}{58} + \frac{1}{27} + \frac{1}{73}} 
 Testværdien = $\frac{Estimatet}{Standardfejlen}$  
 Husk vi er på log skala så:
 $log(1.957854)/0.302963 = 2.217594$
-</span>
+</div>
 
-<span class="fragment current-visible" data-fragment-index="5">
+<div class="fragment current-visible" data-fragment-index="5">
 Risk Ratio:  
 De to risici og ratio:  
 $R_t = 42/(42+58) = 0.42$  
@@ -905,13 +914,12 @@ $SE(log(RR)) = \sqrt{\frac{1}{42} - \frac{1}{100} + \frac{1}{27} - \frac{1}{100}
 Testværdien = $\frac{Estimatet}{Standardfejlen}$  
 Husk vi er på log skala så:
 $log(1.555556)/0.2021053 = 2.186153$
-</span>
+</div>
 
 
 
-<span class="fragment current-visible" data-fragment-index="7">
-$chi^2$  
-Her gør vi det i hånden - det er ikke normalt... 
+<div class="fragment current-visible" data-fragment-index="7">
+$\chi^2$ Her gør vi det i hånden - det er ikke normalt... 
 
 $\chi^2$ har en særlig testværdi
 $\chi^2 = \sum{\frac{(O-E)^2}{E}}$
@@ -924,14 +932,14 @@ $E_{SP} = \frac{69\cdot100}{200} = 34.5$
 $E_{RT} = \frac{(58+73)\cdot100}{200} = 65.5$
 $E_{RP} = \frac{131\cdot100}{200} = 65.5$
 
-Beregner $\chi^2 = \frac{(42 - 34.5)^2}{} + \frac{(27-34.5)^2}{34.5} + \frac{(58-65.5)^2}{65.5} + \frac{(73-65.5)^2}{65.5} = 4.978427$
+Beregner $\chi^2 = \frac{(42 - 34.5)^2}{34.5} + \frac{(27-34.5)^2}{34.5} + \frac{(58-65.5)^2}{65.5} + \frac{(73-65.5)^2}{65.5} = 4.978427$
 
 I $\chi^2$ testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84 
 
 Det er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men `chisq.test()` gør arbejdet for jer og giver en p-værdi (`qchisq(1-0.05, df = 1)`)
-</span>
+</div>
 
-<span class="fragment current-visible" data-fragment-index="9">
+<div class="fragment current-visible" data-fragment-index="9">
 $\chi^2$ frister til at tage kvadratroden. $\sqrt{4.978427} = 2.231239$.
 
 Testværdien er så $\sqrt{3.841459} = 1.959964$ der virker meget bekendt...
@@ -939,8 +947,8 @@ Testværdien er så $\sqrt{3.841459} = 1.959964$ der virker meget bekendt...
 Der er små forskelle, fordi de divergerer når:  
 stikprøverne er små (her er de i mellemstørrelse)   
 De forventede værdier er meget små (<5) eller  
-grupperne er meget skæve. Her er de ret (men ikke meget) skæve. 
-</span>
+grupperne er meget skæve. 
+</div>
 
 ::::
 
