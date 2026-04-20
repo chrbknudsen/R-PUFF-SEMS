@@ -2021,7 +2021,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 Fortolk værdierne i søjlen "Estimate". Beregn også de tilhørende 95% KI.
 
 :::: {.fragment}
-Intercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donr der var ikke-ryger.
+Intercept er den estimerede ændring i lungefunktion (dvs. før vs efter transplantationen), for patienter med en donor der var ikke-ryger.
 ::::
 
 :::: {.fragment}

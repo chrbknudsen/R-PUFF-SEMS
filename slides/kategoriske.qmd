@@ -754,8 +754,207 @@ Den kritiske værdi er 1.96. Den knytter sig til 95% KI. Skal I bruge et andet i
 
 Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi tester.
 
+## Og hvilken skal man så vælge?
+
+:::: {.evensmaller}
+
+- Forskel i proportion
+- RR
+- OR
+- $\chi^2$
+
+:::: {.fragment}
+
+Hvis opgaven nævner odds. Så skal I bruge OR. Taler den om risici. Så er det RR. Hvis den "bare" taler om forskel, så er det forskelle i proportioner. Hvis den taler om at det skal undersøges om der er forskel på fordeling. Så er det $\chi^2$. 
+
+Forskelle i proportioner måler absolutte forskelle. Mens RR måler relative forskelle. Hvad er forskellen? Forskelle i proportioner. "Hvor meget større end?". Som regel RR.
+
+Husk: $\chi^2$ _kun_ svarer på om der er forskel i fordelingen af eg TB i to grupper. Den svarer _ikke_ på om der er større risiko i den ene gruppe end den anden. 
+
+Læs også det næste delspørgsmål. Hvis der optræder en logistisk regression. Så beregner I OR. Optræder der RR i delspørgsmål b, så skal I formentlig også regne RR i delspørgsmål a.
+
+::::
+
+:::: {.fragment}
+Men den hemmelighed I nok ikke har fået fortalt er, at de her fire måder at se forskel, faktisk er ret ens...
+::::
+::::
+
+## Hvor ens er de?
+
+:::: {.columns}
+
+:::: {.column}
+:::: {.evensmaller}
+Tag denne 2x2 tabel:
+
+| | Treatment| Placebo |
+|-|-|-| 
+|Syg | 42 | 27 |
+|Rask | 58 | 73|
+
+Er der forskel på andelen af syge hhv raske i de to grupper?
 
 
+<!-- lokal styling af tabel -->
+<style>
+.reveal table.click-table tr.fragment {
+  display: none;
+}
+.reveal table.click-table tr.fragment.visible {
+  display: table-row;
+}
+.reveal .fragment.current-visible {
+  display: none;
+}
+
+.reveal .fragment.current-visible.current-fragment {
+  display: inline;
+}
+
+.reveal .fragment.current-visible {
+  display: none;
+}
+
+.reveal .fragment.current-visible.current-fragment {
+  display: block;
+}
+
+</style>
+
+:::: {.reallysmall}
+
+<table class="click-table" style="border-collapse: collapse; border: none;">
+<thead style="border: none;">
+<tr class="fragment" data-fragment-index="0" style="border: none;">
+<th style="border: none; padding: 0.4em 1em;">Type</th>
+<th style="border: none; padding: 0.4em 1em;">Testværdi</th>
+</tr>
+</thead>
+
+<tbody style="border: none;">
+
+<tr class="fragment" data-fragment-index="2" style="border: none;">
+<td style="border: none; border-top: 2px solid black !important; padding: 0.4em 1em;">$p_1 - p_0$</td>
+<td style="border: none; border-top: 2px solid black !important; padding: 0.4em 1em;">2.259538</td>
+</tr>
+
+<tr class="fragment" data-fragment-index="4" style="border: none;">
+<td style="border: none; padding: 0.4em 1em;">OR</td>
+<td style="border: none; padding: 0.4em 1em;">2.217594</td>
+</tr>
+
+<tr class="fragment" data-fragment-index="6" style="border: none;">
+<td style="border: none; padding: 0.4em 1em;">RR</td>
+<td style="border: none; padding: 0.4em 1em;">2.186153</td>
+</tr>
+
+<tr class="fragment" data-fragment-index="8" style="border: none;">
+<td style="border: none; padding: 0.4em 1em;">$\chi^2$</td>
+<td style="border: none; padding: 0.4em 1em;">4.978427</td>
+</tr>
+
+<tr class="fragment" data-fragment-index="10" style="border: none;">
+<td style="border: none; padding: 0.4em 1em;">$\chi$</td>
+<td style="border: none; padding: 0.4em 1em;">2.231239</td>
+</tr>
+
+</tbody>
+</table>
+
+::::
+
+::::
+
+::::
+
+:::: {.column}
+:::: {.reallysmall}
+
+<div class="fragment current-visible" data-fragment-index="1">
+Differensen: $p_t - p_p$:  
+De to andele og deres SE:  
+$p_t = 42/(42+58) = 0.42$  
+$p_p = 27/(27+73) = 0.27$  
+$SE_{prop} = \sqrt{\frac{p(1-p)}{n}}$  
+$SE_t = \sqrt{\frac{0.42(1-0.42)}{100}} = 0.04935585$  
+$SE_p = \sqrt{\frac{0.27(1-0.27)}{100}} = 0.04439595$  
+Den samlede SE:  
+$\text{SE}_\text{diff} = \sqrt{SE_t^2 + SE_p^2}$  
+$\text{SE}_\text{diff} = \sqrt{0.04935585^2 + 0.04439595^2} =  0.06638524$  
+Differensen  
+$\text{diff} = \hat{p_t} - \hat{p_p} = 0.42-0.27 = 0.15$  
+Testværdien = $\frac{Estimatet}{Standardfejlen}$  
+$0.15/0.06638524 = 2.259538$
+</div>
+
+<div class="fragment current-visible" data-fragment-index="3">
+Odds Ratio:    
+De to odds, og ratio:  
+$Odds_t = 42/58 = 0.7241379$  
+$Odds_p = 27/73 = 0.369863$  
+$OR = 0.7241379/0.369863 = 1.957854$  
+SE for log(OR):  
+$SE(log(OR)) = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}$  
+$SE(log(OR)) = \sqrt{\frac{1}{42} + \frac{1}{58} + \frac{1}{27} + \frac{1}{73}} = 0.302963$  
+Testværdien = $\frac{Estimatet}{Standardfejlen}$  
+Husk vi er på log skala så:
+$log(1.957854)/0.302963 = 2.217594$
+</div>
+
+<div class="fragment current-visible" data-fragment-index="5">
+Risk Ratio:  
+De to risici og ratio:  
+$R_t = 42/(42+58) = 0.42$  
+$R_p = 27/(27+73) = 0.27$  
+$RR = 0.42/0.27 = 1.555556$  
+SE for log(RR):  
+$SE(log(RR)) = \sqrt{\frac{1}{a} - \frac{1}{a + b} + \frac{1}{c} - \frac{1}{c + d}}$  
+$SE(log(RR)) = \sqrt{\frac{1}{42} - \frac{1}{100} + \frac{1}{27} - \frac{1}{100}} = 0.2021053$  
+Testværdien = $\frac{Estimatet}{Standardfejlen}$  
+Husk vi er på log skala så:
+$log(1.555556)/0.2021053 = 2.186153$
+</div>
+
+
+
+<div class="fragment current-visible" data-fragment-index="7">
+$\chi^2$ Her gør vi det i hånden - det er ikke normalt... 
+
+$\chi^2$ har en særlig testværdi
+$\chi^2 = \sum{\frac{(O-E)^2}{E}}$
+
+Hvor O er den observerede værdi, og E er den forventede værdi
+
+Beregner forventede værdier:  
+$E_{ST} = \frac{(42+27)\cdot100}{200} = 34.5$
+$E_{SP} = \frac{69\cdot100}{200} = 34.5$
+$E_{RT} = \frac{(58+73)\cdot100}{200} = 65.5$
+$E_{RP} = \frac{131\cdot100}{200} = 65.5$
+
+Beregner $\chi^2 = \frac{(42 - 34.5)^2}{34.5} + \frac{(27-34.5)^2}{34.5} + \frac{(58-65.5)^2}{65.5} + \frac{(73-65.5)^2}{65.5} = 4.978427$
+
+I $\chi^2$ testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84 
+
+Det er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men `chisq.test()` gør arbejdet for jer og giver en p-værdi (`qchisq(1-0.05, df = 1)`)
+</div>
+
+<div class="fragment current-visible" data-fragment-index="9">
+$\chi^2$ frister til at tage kvadratroden. $\sqrt{4.978427} = 2.231239$.
+
+Testværdien er så $\sqrt{3.841459} = 1.959964$ der virker meget bekendt...
+
+Der er små forskelle, fordi de divergerer når:  
+stikprøverne er små (her er de i mellemstørrelse)   
+De forventede værdier er meget små (<5) eller  
+grupperne er meget skæve. 
+</div>
+
+::::
+
+::::
+
+::::
 
 ## For tidlig fødsel
 
@@ -839,6 +1038,3 @@ $p_{gb} = 7.5\%, n_{gb} = 1513$
 ```
 ::::
 ::::
-
-
-## Flere øvelser
