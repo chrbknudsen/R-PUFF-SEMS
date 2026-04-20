@@ -1299,7 +1299,7 @@
     "href": "slides/intro.html#vi-kører-slides",
     "title": "Intro",
     "section": "Vi kører slides",
-    "text": "Vi kører slides\nFordi\n\nDer er mere forklaring end kode\nVi kan køre kode inde i slides, men ikke slides inde i kode\nI ikke skal skrive ret megen kode til eksamen"
+    "text": "Vi kører slides\nFordi\n\nDer er mere forklaring end kode\nVi kan køre kode inde i slides, men ikke slides inde i kode\nI ikke skal skrive ret megen kode til eksamen\nMen hav alligevel RStudio eller Positron åben\nHvis I bruger Positron, så husk at %&gt;% er (næsten) nøjagtig det samme som |&gt;"
   },
   {
     "objectID": "slides/kritiske_vaerdier.html",
