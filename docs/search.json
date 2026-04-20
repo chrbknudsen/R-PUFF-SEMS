@@ -1215,7 +1215,7 @@
     "href": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Endnu en eksamensopgave",
-    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
