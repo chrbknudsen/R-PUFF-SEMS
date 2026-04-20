@@ -1062,7 +1062,7 @@ Og så bruges den i de statistiske tests. Det kommer vi også til.
 Populært spørgsmål - hvad er normalområdet for "noget"?
 
 Hvis de 95% hyppigste observationer i en normalfordelt population er "normalområdet". 
-I hvilket interval ligger de de så?
+I hvilket interval ligger de så?
 
 . . . 
 
