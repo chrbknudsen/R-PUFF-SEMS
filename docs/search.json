@@ -1810,7 +1810,7 @@
     "href": "slides/normalfordelingen.html#normalområdet",
     "title": "Normalfordelingen",
     "section": "Normalområdet",
-    "text": "Normalområdet\nPopulært spørgsmål - hvad er normalområdet for “noget”?\nHvis de 95% hyppigste observationer i en normalfordelt population er “normalområdet”. I hvilket interval ligger de de så?\n\nHvis de er centreret om en middelværdi, så ligger 100% - 95% = 5% udenfor\n\n\nSå 2.5% ligger lavere, og 2.5% ligger højere.\n\n\nKender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger"
+    "text": "Normalområdet\nPopulært spørgsmål - hvad er normalområdet for “noget”?\nHvis de 95% hyppigste observationer i en normalfordelt population er “normalområdet”. I hvilket interval ligger de så?\n\nHvis de er centreret om en middelværdi, så ligger 100% - 95% = 5% udenfor\n\n\nSå 2.5% ligger lavere, og 2.5% ligger højere.\n\n\nKender vi middelværdi og standardafvigelse kan vi beregne intervallet i hvilket 95% af observationerne ligger"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområdet---øvelse",
