@@ -963,7 +963,7 @@
     "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvad er et 95% konfidensinterval?",
-    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
+    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
   },
   {
     "objectID": "slides/hypotesetests.html#så",
@@ -1033,7 +1033,7 @@
     "href": "slides/hypotesetests.html#den-alternative-hypotese",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Den alternative hypotese",
-    "text": "Den alternative hypotese\n\n\nKaldet \\(H_A\\), enten at\n\n\n\n\\(\\mu \\neq 0.81\\)\n\\(\\mu_1 - \\mu_2 \\neq 0\\)\n\n\n\nDet er tosidet. Der \\(\\mu\\) kan være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.\n\n\nEller, ensidet:\n\n\\(\\mu &gt; 0.81\\) eller\n\\(\\mu &lt; 0.81\\)\n\n\n\nTosidet: Enhver forskel\nEnsidet: En forskel i en bestemt retning"
+    "text": "Den alternative hypotese\n\n\nKaldet \\(H_A\\), enten at\n\n\n\n\\(\\mu \\neq 0.81\\)\n\\(\\mu_1 - \\mu_2 \\neq 0\\)\n\n\n\nDet er tosidet. Der kan \\(\\mu\\) være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.\n\n\nEller, ensidet:\n\n\\(\\mu &gt; 0.81\\) eller\n\\(\\mu &lt; 0.81\\)\n\n\n\nTosidet: Enhver forskel\nEnsidet: En forskel i en bestemt retning"
   },
   {
     "objectID": "slides/hypotesetests.html#kernen-i-hypotesetesten",
@@ -1075,7 +1075,7 @@
     "href": "slides/hypotesetests.html#den-kritiske-værdi",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Den kritiske værdi",
-    "text": "Den kritiske værdi\n\nHvis vi vil finde enhver forskel, typisk at \\(mu_1 - mu_2 = 0\\), er vi ligeglade med om testværdien er “for lille” eller “for stor”. De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.\n\nHar vi \\(\\alpha = 0.5\\) skal den altså fordeles på begge sider og vi bruger:\n\nc(-1,1)*qnorm(1 - 0.05/2)\n\n[1] -1.959964  1.959964\n\n\n\n\nHvis vi er interesseret i om en værdi er mindre (\\(H_A: \\theta &lt; \\theta_0\\)) - så må testværdien gerne være for stor. Den må blot ikke være for lille.\n\nqnorm(0.05)\n\n[1] -1.644854\n\n\n\n\nOg hvis vi er interesseret i om en værdi er større (\\(H_A: \\theta &gt; \\theta_0\\)) - så må testværdien gerne være for lille. Den må blot ikke være for stor.\n\nqnorm(1-0.05)\n\n[1] 1.644854"
+    "text": "Den kritiske værdi\n\nHvis vi vil finde enhver forskel, typisk at \\(\\mu_1 - \\mu_2 = 0\\), er vi ligeglade med om testværdien er “for lille” eller “for stor”. De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.\n\nHar vi \\(\\alpha = 0.5\\) skal den altså fordeles på begge sider og vi bruger:\n\nc(-1,1)*qnorm(1 - 0.05/2)\n\n[1] -1.959964  1.959964\n\n\n\n\nHvis vi er interesseret i om en værdi er mindre (\\(H_A: \\theta &lt; \\theta_0\\)) - så må testværdien gerne være for stor. Den må blot ikke være for lille.\n\nqnorm(0.05)\n\n[1] -1.644854\n\n\n\n\nOg hvis vi er interesseret i om en værdi er større (\\(H_A: \\theta &gt; \\theta_0\\)) - så må testværdien gerne være for lille. Den må blot ikke være for stor.\n\nqnorm(1-0.05)\n\n[1] 1.644854"
   },
   {
     "objectID": "slides/hypotesetests.html#testværdien",
@@ -1089,14 +1089,14 @@
     "href": "slides/hypotesetests.html#afstanden",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Afstanden",
-    "text": "Afstanden\nVi havde den generelle \\(H_0: \\theta = \\theta_0\\)\n\nEller hvis vi taler om middelværdier: \\(H_0: \\mu = \\mu_0\\)\n\n\nVi havde også et estimat på hvad \\(\\mu\\) kunne være. Det fik vi fra vores data. Vi bør kalde den for \\(\\hat{\\mu}\\).\n\n\nAfstanden finder vi så ved at trække \\(\\mu_0\\) fra \\(\\hat{\\mu}\\)\n\n\nSå hvis vores estimat var 0.719 og vores null-hypotese var \\(\\mu = 0.81\\)\nEr afstanden: 0.719 - 0.81 = -0.091\n\nMiddelværdier ved vi godt hvordan vi beregner.\nMen vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.\nHvis vi skal sammenligne to middelværdier er \\(H_0\\) typisk at forskellen på dem er 0.\nTil eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.\nEller også får vi oplyst hvad forskellen er på dem."
+    "text": "Afstanden\nVi havde den generelle \\(H_0: \\theta = \\theta_0\\)\n\nEller hvis vi taler om middelværdier: \\(H_0: \\mu = \\mu_0\\)\n\n\nVi havde også et estimat på hvad \\(\\mu\\) kunne være. Det fik vi fra vores data. Vi bør kalde den for \\(\\hat{\\mu}\\).\n\n\nAfstanden finder vi så ved at trække \\(\\mu_0\\) fra \\(\\hat{\\mu}\\)\n\n\nSå hvis vores estimat var 0.719 og vores null-hypotese var \\(\\mu = 0.81\\)\nEr afstanden: 0.719 - 0.81 = -0.091\n\nMiddelværdier ved vi godt hvordan vi beregner.\nMen vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.\nHvis vi skal sammenligne to middelværdier er \\(H_0\\) typisk at forskellen på dem er 0.\nTil eksamen får vi typisk enten oplyst to middelværdier, og trækker så den ene fra den anden.\nEller også får vi oplyst hvad forskellen er på dem. Så skal vi ikke engang trække ting fra hinanden."
   },
   {
     "objectID": "slides/hypotesetests.html#standardfejlen",
     "href": "slides/hypotesetests.html#standardfejlen",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Standardfejlen",
-    "text": "Standardfejlen\nVi skulle måle afstanden i enheder af standardfejlen.\n\nDen afhænger af hvad vi tester - ikke af hypotesen!\n\n\nFor en enkelt middelværdi: SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\nHvis vi sammenligner to middelværdier der ikke er parrede:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\nOg hvis data er parrede:\n\\(SE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\\)\n\n\n\nOfte kender vi ikke den “sande” \\(\\sigma\\) men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme."
+    "text": "Standardfejlen\nVi skulle måle afstanden i enheder af standardfejlen.\n\nDen afhænger af hvad vi tester - ikke af hypotesen!\n\n\nFor en enkelt middelværdi: SEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\nHvis vi sammenligner to middelværdier der ikke er parrede:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}} = \\sqrt{SEM_1^2 + SEM_2^2}\\)\n\n\nOg hvis data er parrede:\n\\(SE(\\bar{d}) = \\frac{s_d}{\\sqrt{n}}\\)\n\n\n\nOfte kender vi ikke den “sande” \\(\\sigma\\) men har et estimat af standardafvigelserne fra data. Så bruger vi latinske bogstaver i stedet for græske. Matematikken er den samme."
   },
   {
     "objectID": "slides/hypotesetests.html#hov-hvad-betyder-parret",
@@ -1117,14 +1117,14 @@
     "href": "slides/hypotesetests.html#tilbage-til-plasma-magnesium",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Tilbage til plasma magnesium",
-    "text": "Tilbage til plasma magnesium\n\nVi fik oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:\n\n\n# A tibble: 2 × 4\n  gruppe           Antal Gennemsnit Sprdening\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Diabetikere        227      0.719     0.068\n2 Ikke-diabetikere   140      0.81      0.057\n\n\nVi beregnede 95% konfidensintervaller på hver af de to grupper, og konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at der derfor var signifikant forskel på niveauet.\nDet var i hvert fald konklusionen i modelbesvarelsen.\nHvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning?"
+    "text": "Tilbage til plasma magnesium\n\nVi fik oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:\n\n\n# A tibble: 2 × 4\n  gruppe           Antal Gennemsnit Sprdening\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Diabetikere        227      0.719     0.068\n2 Ikke-diabetikere   140      0.81      0.057\n\n\nVi beregnede 95% konfidensintervaller på hver af de to grupper, og konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-diabetikere og omvendt, og at der derfor var signifikant forskel på niveauet.\nDet var i hvert fald konklusionen i modelbesvarelsen.\n\n\nMen jeg antydede at det måske ikke var 100% korrekt at konkludere på den måde…\n\n\nHvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning?"
   },
   {
     "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne",
     "href": "slides/hypotesetests.html#forskellen-på-middelværdierne",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Forskellen på middelværdierne",
-    "text": "Forskellen på middelværdierne\n\nEr den 0?\n\n\nEller:\n\n\n\\(H_0: \\mu_{dia} - \\mu_{ejdia} = 0\\)\n\n\nEr den alternative hypotese en- eller to-sidet?\n\n\nVi er ude efter enhver forskel, så to-sidet.\n\n\nSignifikansniveau?\n\n\n\\(\\alpha = 0.05\\)\nDet er et valg vi træffer."
+    "text": "Forskellen på middelværdierne\n\nEr den 0?\n\n\nEller:\n\n\n\\(H_0: \\mu_{dia} - \\mu_{ejdia} = 0\\)\n\n\nEr den alternative hypotese en- eller to-sidet?\n\n\nVi er ude efter enhver forskel, så to-sidet.\n\n\nSignifikansniveau?\n\n\n\\(\\alpha = 0.05\\)\nDet er et valg vi træffer.\n\nDet er der historiske årsager til. Se American Psychologist 1982, vol 37(5), p. 553-558 for en af flere historiske gennemgange."
   },
   {
     "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-1",
@@ -1166,14 +1166,14 @@
     "href": "slides/hypotesetests.html#ændring-i-blodtryk---intervention",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Ændring i blodtryk - intervention",
-    "text": "Ændring i blodtryk - intervention\n\n\n\nHvad er konfidensintervallet på forskellen?\n\n\nFor interventionsgruppen:\nFald: -19.6\nSpredning: 17.4\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Ændring i blodtryk - intervention\n\n\n\nHvad er konfidensintervallet på forskellen?\n\n\nFor interventionsgruppen (323 patienter):\nFald: -19.6\nSpredning: 17.4\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#ændring-i-blodtryk---kontrol",
     "href": "slides/hypotesetests.html#ændring-i-blodtryk---kontrol",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Ændring i blodtryk - kontrol",
-    "text": "Ændring i blodtryk - kontrol\n\n\n\nHvad er konfidensintervallet på forskellen?\nSamme beregninger - nu\n\n\nFor kontrolgruppen:\nFald: -16.6\nSpredning: 19.9\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Ændring i blodtryk - kontrol\n\n\n\nHvad er konfidensintervallet på forskellen?\nSamme beregninger - nu\n\n\nFor kontrolgruppen (318):\nFald: -16.6\nSpredning: 19.9\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#bredde-af-konfidensinterval",
@@ -1208,21 +1208,21 @@
     "href": "slides/hypotesetests.html#bredde-af-ki",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Bredde af KI",
-    "text": "Bredde af KI\n\n\n\nUdtrykt ved \\(n_0\\) og \\(n_1\\), hvad er så svaret?\n\\(n_0 + n_1 = 3n_1\\) fordi \\(n_0 = 2n_1\\)\nHvis et konfidensinterval er givet ved:\n\\(\\text{estimat} \\pm1.96\\text{SE}\\)\nHvad skal så være lig 8?\n\\(2\\cdot1.96\\text{SE} = 8\\)\nHvordan beregner vi SE?\n\\(SE_{diff} = \\sqrt{\\frac{s_0}{n_0} + \\frac{s_1}{n_1}}\\)\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSvar: \\(n_1 = 125\\) - fordi det er let at rode rundt i tallene."
+    "text": "Bredde af KI\n\n\n\nUdtrykt ved \\(n_0\\) og \\(n_1\\), hvad er så svaret?\n\n\\(n_0 + n_1 = 3n_1\\) fordi \\(n_0 = 2n_1\\)\n\n\nHvis et konfidensinterval er givet ved:\n\n\n\\(\\text{estimat} \\pm1.96\\text{SE}\\)\n\n\nHvad skal så være lig 8?\n\n\n\\(2\\cdot1.96\\text{SE} = 8\\)\n\n\nHvordan beregner vi SE?\n\n\n\\(SE_{diff} = \\sqrt{(\\frac{s_0}{n_0})^2 + (\\frac{s_1}{n_1})^2}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe     n     gennemsnit spredning\n  &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling n_1        152.5      18.4\n2 Placebo    n_0        156.5      19.1\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSvar: \\(n_1 = 125\\) - fordi det er let at rode rundt i tallene."
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "href": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Endnu en eksamensopgave",
-    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
     "href": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Endnu en eksamensopgave",
-    "text": "Endnu en eksamensopgave\n\n\nHvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?\n\nP(13.0 &lt; X &lt; 13.6)\n\n\nP(X &lt; 13.6) - P(X&lt; 13.0)\n\n\nStandardiser. \\(\\mu = 13.3\\)\n\\(\\sigma =  1.12\\)\nSEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\), \\(\\mu = 13.3\\)\n\n\npnorm eller qnorm?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Endnu en eksamensopgave\n\n\nHvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?\n\nP(13.0 &lt; X &lt; 13.6)\n\n\nP(X &lt; 13.6) - P(X&lt; 13.0)\n\n\nStandardiser.\n\\(\\mu = 13.3\\)\n\\(\\sigma =  1.12\\)\nSEM = \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\npnorm eller qnorm?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#resten-af-opgaven",
@@ -1243,7 +1243,7 @@
     "href": "slides/hypotesetests.html#hop-videre",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hop videre",
-    "text": "Hop videre\n\n\n\nEn elle to grupper?\n\n\nParret eller u-parret?\n\n\nEn gruppe - parret t-test. Det er differencen vi kigger på.\n\n\nSå vi skal have fat i SEM.\n\nmean(diff)\n5.053815\nsd(diff)\n37.87201\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Hop videre\n\n\n\nEn elle to grupper?\n\n\nParret eller u-parret?\n\n\nEn gruppe - parret t-test. Det er differencen vi kigger på.\n\n\nSå vi skal have fat i SEM.\n\nmean(diff)\n5.053815\nsd(diff)\n37.87201\n\nOg der var 249 børn\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#sidste-hop---for-denne-gang",
@@ -2966,5 +2966,12 @@
     "title": "Opgaveløsninger",
     "section": "For tidlig fødsel",
     "text": "For tidlig fødsel\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\ndiff &lt;- 0.075-0.045\ndiff\n\n[1] 0.03\n\n\nse_dk:\n\nse_dk &lt;- sqrt(0.045*(1-0.045)/51851)\n\n\nse_diff &lt;- sqrt(se_dk^2 + se_gb^2)\nse_diff\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\ndiff + c(-1,1)*1.96*se_diff\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#den-centrale-grænseværdisætning-clt",
+    "href": "slides/hypotesetests.html#den-centrale-grænseværdisætning-clt",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den centrale grænseværdisætning (CLT)?",
+    "text": "Den centrale grænseværdisætning (CLT)?\n\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\n\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\n\n\nVi beregner gennemsnittet af den stikprøve og gemmer det.\n\n\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\n\n\nDet gør vi mange gange.\n\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelingen.\n\n\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\n\n\nDet kan man føre bevis for. Men det springer vi over."
   }
 ]
