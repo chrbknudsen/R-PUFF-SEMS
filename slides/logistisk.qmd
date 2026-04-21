@@ -2103,7 +2103,7 @@ table(dead, Allokering, diagn_cancer)
 
 Giver det anledning til at ændre den tidligere konklusion? Begrund med effektestimater og 95% konfidensintervaller.
 
-Samme øvelse som før, men nu med OR hver gruppe
+Samme øvelse som før, men nu med OR hver gruppe.
 
 ::::
 
