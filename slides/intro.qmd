@@ -10,7 +10,7 @@ filters:
   - webr
 ---
 
-## Hvad jeg har aftalt med PUFF
+## Hvad har jeg aftalt med PUFF
 :::: smaller
 :::: {.fragment}
 Eksamensrelevant. 
@@ -29,7 +29,7 @@ Vi holder os til statistik...
 
 
 ::: {.incremental}
-- _Meget_ tæt på typeopgaverne til SEMS-eksamen
+- _Meget(!)_ tæt på typeopgaverne til SEMS-eksamen
 - Teori på niveau af det der skal bruges i dem
 - Måske en smule mere - for at binde tingene sammen
 :::
@@ -45,15 +45,15 @@ Der er typisk to opgaver - med delspørgsmål
 
 :::: smaller
 
+- Normalfordelingseksersits
 - Beregning af konfidensintervaller og signifikans (SEMS og KI for middelværdier)
+- Hypotesetest - primært parret t-test
+- Vurdering af konfidensinterval baseret på antal observationer. 
+- Sandsynligheder for kategoriske variable. RR, OR, konfidensintervaller og signifkans
+- Chi-i-anden test
 - Lineær regression, tolkning og prediktion
 - Logistisk regression, tolkning og prediktion
 - Powerberegninger
-- Normalfordelingseksersits
-- Sandsynligheder for kategoriske variable. RR, OR, konfidensintervaller og signifkans
-- Hypotesetest - primært parret t-test
-- Chi-i-anden test
-- Vurdering af konfidensinterval baseret på antal observationer. 
 
 ::::
 
@@ -66,3 +66,40 @@ Fordi
 - I ikke skal skrive ret megen kode til eksamen
 - Men hav alligevel RStudio eller Positron åben
 - Hvis I bruger Positron, så husk at %>% er (næsten) nøjagtig det samme som |>
+
+## Spørg!
+
+:::: {.smaller}
+Der er 6 hovedoverskrifter.
+
+::::{.fragment}
+Og vi har 2x3 = 6 timer.
+::::
+::::{.fragment}
+Så ca. en time til hver.
+::::
+::::{.fragment}
+Den sidste handler om en ret sjælden type opgaver, så den bruger vi som buffer.
+::::
+::::{.fragment}
+Vi kører en smule teori - nok til at kunne løse opgaver.
+::::
+::::{.fragment}
+Og så løser vi opgaver.
+::::
+::::{.fragment}
+Nogen af emnerne har ikke så mange opgaver. Men de dukker op igen senere! 
+::::
+::::{.fragment}
+Det er ikke meget vigtigt at I har en dyb forståelse af teorien. 
+::::
+::::{.fragment}
+Men det er lidt vigtigt at I ikke er alt for forvirrede over metoderne.
+::::
+::::{.fragment}
+Så spørg!
+::::
+:::: {.fragment}
+Lass uns anfangen!
+::::
+:::: 

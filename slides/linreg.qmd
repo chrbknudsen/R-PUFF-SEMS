@@ -853,10 +853,10 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 Vi skal se på sammenhængen mellem blodtryk og fedme. Vi får oplyst at der er 
 et datasæt med 102 individer, 44 mænd, 58 kvinder.
 
-Der er variabler:
-KØN (1=kvinde, 0= mand)  
-FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten  
-BLODTRYK: Systolisk blodtryk (i mmHg)
+Variable:    
+_KØN_ (1=kvinde, 0= mand)  
+_FEDME_: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten  
+_BLODTRYK_: Systolisk blodtryk (i mmHg)
 
 
 
@@ -891,7 +891,7 @@ tribble(~KØN, ~FEDME, ~BLODTRYK,
 :::::
 
 
-a) Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?
+Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?
 
 ## Fedme og blodtryk
 
@@ -906,6 +906,15 @@ Vi antager at målingerne er normalfordelte.
 126.3103
 `sd(BLODTRYK[KØN==1])`
 19.41893
+
+:::: {.fragment}
+:::: {.evensmaller}
+En fælde! Når vi beregner referenceintervaller beskriver vi spredning i data. Derfor bruger vi standardafvigelsen.  
+Når vi beregner konfidensintervaller beskriver vi usikkerheden på middelværdien. Derfor bruger vi SEM.  
+Så her _skal_ vi bruge standardafvigelsen, og ikke dividere med kvadratroden af antallet.
+::::
+::::
+
 ::::
 ::::
 :::: {.column}
@@ -920,7 +929,7 @@ Vi antager at målingerne er normalfordelte.
 
 ## Fedme og blodtryk
 
-b) undersøg om blodtrykket er ens for de to køn ved en t-test.
+Undersøg nu om blodtrykket er ens for de to køn ved en t-test.
 
 En eller to samples? Parret? Hvad er vores $H_0$?
 
@@ -945,6 +954,12 @@ Og SE for differensen?
 $SE_{diff} = \sqrt{SE_0^2 + SE_1^2}$
 ::::
 
+:::: {.fragment}
+:::: {.tiny}
+t-test er kode for at vi sammenligner middelværdier
+::::
+::::
+
 ## Fedme og blodtryk
 :::: {.columns}
 :::: {.column}
@@ -965,6 +980,9 @@ Antal kvinder (1): 58
 Antal mænd (0): 44
 
 Hvad er test-værdien?
+
+$SE_{diff} = \sqrt{SE_0^2 + SE_1^2}$
+
 ::::
 ::::
 :::: {.column}
@@ -983,7 +1001,7 @@ Hvad er test-værdien?
 
 :::: {.columns}
 :::: {.column}
-c) der bliver lavet en analyse, der giver dette output:
+Der bliver lavet en analyse, der giver dette output:
 
 ```{r}
 library(tidyverse)
@@ -1042,15 +1060,15 @@ Hvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi 
 
 ::::
 :::: {.column}
-:::: {.smaller}
+:::: {.evensmaller}
 :::: {.fragment}
 (multipel) Lineær regression
 ::::
 :::: {.fragment}
-med BLODTRYK som responsvariabel
+med BLODTRYK som kontinuært responsvariabel
 ::::
 :::: {.fragment}
-og FEDME som den uafhængige variabel. 
+og FEDME som den uafhængige variabel. Der er også kontinuær. 
 ::::
 
 :::: {.fragment}
@@ -1060,6 +1078,10 @@ hvis FEDME graden stiger med 1
 
 :::: {.fragment}
 vil blodtrykket stige med ca. 23
+::::
+
+:::: {.fragment}
+I gennemsnit.
 ::::
 
 :::: {.fragment}
@@ -1153,8 +1175,8 @@ library(tidyverse)
 library(gt)
 tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
 "(Intercept)", "93.287", "8.937", "10.438", "<2e-16***",
-"factor(KØN)1", "-7.730", "3.715", "", "",
-"FEDME", "", "7.172", "4.049", ""
+"factor(KØN)1", "-7.730", "3.715", "-2.080754", "",
+"FEDME", "29.03943", "7.172", "4.049", ""
 ) |> 
 
   gt() |> 
@@ -1214,23 +1236,28 @@ og er derfor statistisk signifikant på et 5% niveau.
 ::::
 
 :::: {.fragment}
-En stigning på 1 i fedmegrad, estimerer vi derfor til at give en 
-::::
-
-:::: {.fragment}
-stigning på 29 i blodtrykket, kontrolleret for KØN.
-::::
-
-:::: {.fragment}
-Justeret for FEDME, ser vi at kvinderne i gennemsnit har
+_Justeret_ for FEDME, ser vi at kvinderne i gennemsnit har
 ::::
 
 :::: {.fragment}
 et lavere blodtryk end mændene. Vi estimerer forskellen til at være 7.73
 ::::
 
+
+:::: {.fragment}
+En stigning på 1 i fedmegrad, estimerer vi til at give en 
+::::
+
+:::: {.fragment}
+gennemsnitlig stigning på 29 i blodtrykket, _kontrolleret_ for KØN.
+::::
+
 :::: {.fragment}
 Denne forskel er signifikant på et 5% niveau.
+::::
+
+:::: {.fragment}
+Intercept svarer stadig til en fedmegrad på 0, og kan derfor ikke fortolkes.
 ::::
 
 ::::
@@ -1504,8 +1531,8 @@ tribble(~horm, ~BMI, ~Ald.gr,
 :::: evensmaller
 Vi får nu oplyst at der er foretaget følgende analyse:
 
-> model=lm(horm~factor(Ald.gr)+BMI)  
-> summary(model)
+`model=lm(horm~factor(Ald.gr)+BMI)`  
+`summary(model)`
 
 Hvilket giver dette resultat:
 ```{r}
@@ -1603,8 +1630,8 @@ Aldersgruppen er kategorisk forklarende variabel. BMI er en kontinuert forklaren
 :::: {.columns}
 :::: {.column  width="60%"}
 :::: evensmaller
-> model=lm(horm~factor(Ald.gr)+BMI)  
-> summary(model)
+`model=lm(horm~factor(Ald.gr)+BMI)`  
+`summary(model)`
 
 ```{r}
 Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
@@ -1704,7 +1731,7 @@ BMI er også klart signifikant med en middel stigning i hormonniveuaet på 0.058
 :::: {.tiny}
 Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.
 
-> model=lm(horm~factor(Ald.gr)+BMI)  
+`model=lm(horm~factor(Ald.gr)+BMI)`  
 
 ```{r}
 Coefficients <- c("(Intercept)", "factor(Ald.gr)(8,9]"
@@ -1759,6 +1786,11 @@ tibble(Coefficients, Estimate,`Std. Error`) |>
 ::::
 ::::
 
+:::: {.fragment}
+:::: {.reallysmall}
+Bum. Det var en hel eksamensopgave. Hvis man kan fortolke outputtet af en regression, foretage en prediktion og måske beregne et konfidensinterval på et estimat (eller to), kommer man langt.
+::::
+::::
 
 ## Transplanteret lungevolumen
 
@@ -1786,10 +1818,10 @@ tribble(~fevl_prior_to_tx, ~fevl_after, ~fevl_diff, ~SMOKE,
 
 ::::
 :::: {.column  width = "45%"}
-fevl_prior_to_tx: fevl målt før transplantation  
-fevl_after: fevl målt efter transplantation  
-fevl_diff: differencen mellem fevl_after og fevl_prior_to_tx  
-SMOKE: Rygestatus for donor.  
+_fevl_prior_to_tx_: fevl målt før transplantation  
+_fevl_after_: fevl målt efter transplantation  
+_fevl_diff_: differencen mellem fevl_after og fevl_prior_to_tx  
+_SMOKE_: Rygestatus for donor.  
 
 Vi får oplyst følgende:
 
@@ -1812,7 +1844,6 @@ Vi får oplyst følgende:
 :::: {.evensmaller}
 Undersøg ved brug af relevant statistik metode om patienternes lungefunktion (fevl) har ændret sig efter transplantationen.
 
-
 Hvad er det for en test?
 
 :::: {.fragment}
@@ -1822,10 +1853,11 @@ Parret t-test (vi har målinger på samme patient før _og_ efter)
 :::: {.fragment}
 Det er sådan set kun forskellen vi er interesserede i:
 
+:::: {.reallysmall}
 | | mean | sd |
 |-|-|-|
 |fevl_diff|1.279024|0.9411598|
-
+::::
 ::::
 
 :::: {.fragment}
@@ -1871,8 +1903,8 @@ $SE = \frac{sd}{\sqrt{n}}$
 :::: {.evensmaller}
 
 Nu udførtes følgende analyse:  
-> model <- lm(fevl_diff~factor(SMOKE))  
-> summary(model)
+`model <- lm(fevl_diff~factor(SMOKE))`  
+`summary(model)`
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -1947,10 +1979,10 @@ SMOKE er den forklarende, kategoriske (og binære) variabel
 ::::
 
 :::: {.fragment}
-Er der en ændring i lungefunktionen for reference gruppen
+Er der en ændring i lungefunktionen for reference gruppen?
 ::::
 :::: {.fragment}
-Ja, den bliver bedre
+Ja, den bliver 1.37 l bedre
 ::::
 :::: {.fragment}
 Og hvis donor var (tidligere) ryger?
@@ -2105,7 +2137,7 @@ _l_ratio_: log(ratio) (den naturlige logaritme)
 
 ::::
 :::: {.column}
-
+:::: {.evensmaller}
 
 Vi får denne tabel:
 
@@ -2142,6 +2174,25 @@ og for status = 1
 Er der forskel i log-ratio mellem syge og raske, når der ikke tages
 højde for forskel i alder og køn?
 
+:::: {.fragment}
+Hvor mange raske (status 0) er der?
+::::
+
+:::: {.fragment}
+50+  117 = 167
+::::
+
+:::: {.fragment}
+Hvor mange syge (status 1) er der?
+::::
+
+:::: {.fragment}
+92 + 324 = 416
+::::
+
+
+
+::::
 ::::
 ::::
 
@@ -2166,6 +2217,10 @@ Hvordan tester vi om to middelværdier var forskellige?
 :::: {.fragment}
 $H_0: \mu_0 - \mu_1 = 0$
 ::::
+:::: {.fragment}
+Husk at nævne at det er en t-test
+::::
+
 :::: {.fragment}
 Så vi skal have differensen.
 ::::
@@ -2200,10 +2255,10 @@ Teststørrelsen.
 :::: {.tiny}
 l_ratio:  
 
-|Status | Gennemsnit | Spredning (sd)|
-|--|---|--|
-|0 | -0.011 | 0.289 |
-|1 | -0.152 | 0.358 |
+|Status | Gennemsnit | Spredning (sd)| n |
+|--|---|--|--|
+|0 | -0.011 | 0.289 | 167 |
+|1 | -0.152 | 0.358 | 416 |
 
 ::::
 
