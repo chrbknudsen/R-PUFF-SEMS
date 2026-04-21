@@ -72,7 +72,7 @@ populationen.
 
 
 
-## CLT?
+## Den centrale grænseværdisætning (CLT)?
 
 :::: smaller
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
