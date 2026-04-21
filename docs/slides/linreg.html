@@ -4103,9 +4103,10 @@ F-statistic:  2194 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column">
 <p>Vi skal se på sammenhængen mellem blodtryk og fedme. Vi får oplyst at der er et datasæt med 102 individer, 44 mænd, 58 kvinder.</p>
-<p>Der er variabler: KØN (1=kvinde, 0= mand)<br>
-FEDME: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten<br>
-BLODTRYK: Systolisk blodtryk (i mmHg)</p>
+<p>Variable:<br>
+<em>KØN</em> (1=kvinde, 0= mand)<br>
+<em>FEDME</em>: Fedmegrad - vægt i forhold til idealvægt. 1.2 betyder at man vejer 20% mere end man burde. Svarende til 120% af idealvægten<br>
+<em>BLODTRYK</em>: Systolisk blodtryk (i mmHg)</p>
 </div><div class="column">
 <p>De første 6 observationer, og nogle deskriptive størrelser:</p>
 <div class="cell">
@@ -4124,9 +4125,7 @@ BLODTRYK: Systolisk blodtryk (i mmHg)</p>
 <p><code>mean(BLODTRYK[KØN==0])</code> 127.9545 <code>mean(BLODTRYK[KØN==1])</code> 126.3103 <code>sd(BLODTRYK[KØN==0])</code> 16.59077 <code>sd(BLODTRYK[KØN==1])</code> 19.41893</p>
 </div></div>
 </div>
-<ol type="a">
-<li>Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?</li>
-</ol>
+<p>Beregn for kvinderne et referenceinterval for blodtrykket. Hvad udtrykker det?</p>
 </section>
 <section id="fedme-og-blodtryk-1" class="slide level2">
 <h2>Fedme og blodtryk</h2>
@@ -4135,6 +4134,13 @@ BLODTRYK: Systolisk blodtryk (i mmHg)</p>
 <div class="smaller">
 <p>Der er ikke angivet hvilket referenceinterval der ønskes. Så vi går med et der indeholder 95% af observationerne. Vi antager at målingerne er normalfordelte.</p>
 <p><code>mean(BLODTRYK[KØN==1])</code> 126.3103 <code>sd(BLODTRYK[KØN==1])</code> 19.41893</p>
+<div class="fragment">
+<div class="evensmaller">
+<p>En fælde! Når vi beregner referenceintervaller beskriver vi spredning i data. Derfor bruger vi standardafvigelsen.<br>
+Når vi beregner konfidensintervaller beskriver vi usikkerheden på middelværdien. Derfor bruger vi SEM.<br>
+Så her <em>skal</em> vi bruge standardafvigelsen, og ikke dividere med kvadratroden af antallet.</p>
+</div>
+</div>
 </div>
 </div><div class="column">
 <div id="qwebr-insertion-location-3"></div>
@@ -4143,9 +4149,7 @@ BLODTRYK: Systolisk blodtryk (i mmHg)</p>
 </section>
 <section id="fedme-og-blodtryk-2" class="slide level2">
 <h2>Fedme og blodtryk</h2>
-<ol start="2" type="a">
-<li>undersøg om blodtrykket er ens for de to køn ved en t-test.</li>
-</ol>
+<p>Undersøg nu om blodtrykket er ens for de to køn ved en t-test.</p>
 <p>En eller to samples? Parret? Hvad er vores <span class="math inline">\(H_0\)</span>?</p>
 <div class="fragment">
 <p>Der er to uparrede samples.<br>
@@ -4163,6 +4167,11 @@ BLODTRYK: Systolisk blodtryk (i mmHg)</p>
 <div class="fragment">
 <p><span class="math inline">\(SE_{diff} = \sqrt{SE_0^2 + SE_1^2}\)</span></p>
 </div>
+<div class="fragment">
+<div class="tiny">
+<p>t-test er kode for at vi sammenligner middelværdier</p>
+</div>
+</div>
 </section>
 <section id="fedme-og-blodtryk-3" class="slide level2">
 <h2>Fedme og blodtryk</h2>
@@ -4174,6 +4183,7 @@ BLODTRYK: Systolisk blodtryk (i mmHg)</p>
 <p>Antal kvinder (1): 58<br>
 Antal mænd (0): 44</p>
 <p>Hvad er test-værdien?</p>
+<p><span class="math inline">\(SE_{diff} = \sqrt{SE_0^2 + SE_1^2}\)</span></p>
 </div>
 </div><div class="column">
 <div id="qwebr-insertion-location-4"></div>
@@ -4184,9 +4194,7 @@ Antal mænd (0): 44</p>
 <h2>Fedme og blodtryk</h2>
 <div class="columns">
 <div class="column">
-<ol start="3" type="a">
-<li>der bliver lavet en analyse, der giver dette output:</li>
-</ol>
+<p>Der bliver lavet en analyse, der giver dette output:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="gbpmsxtogd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4676,21 +4684,24 @@ Antal mænd (0): 44</p>
 </div>
 <p>Hvilken analyse er der udført? Hvad kan vi konkludere, og hvordan fortolker vi estimaterne</p>
 </div><div class="column">
-<div class="smaller">
+<div class="evensmaller">
 <div class="fragment">
 <p>(multipel) Lineær regression</p>
 </div>
 <div class="fragment">
-<p>med BLODTRYK som responsvariabel</p>
+<p>med BLODTRYK som kontinuært responsvariabel</p>
 </div>
 <div class="fragment">
-<p>og FEDME som den uafhængige variabel.</p>
+<p>og FEDME som den uafhængige variabel. Der er også kontinuær.</p>
 </div>
 <div class="fragment">
 <p>Vi estimerer at hvis FEDME graden stiger med 1</p>
 </div>
 <div class="fragment">
 <p>vil blodtrykket stige med ca. 23</p>
+</div>
+<div class="fragment">
+<p>I gennemsnit.</p>
 </div>
 <div class="fragment">
 <p>Dette estimat er statistisk signifikant på 95% niveau.</p>
@@ -5689,12 +5700,12 @@ Antal mænd (0): 44</p>
 <td class="gt_row gt_left" headers="Term">factor(KØN)1</td>
 <td class="gt_row gt_left" headers="Estimate">-7.730</td>
 <td class="gt_row gt_left" headers="Std. Error">3.715</td>
-<td class="gt_row gt_left" headers="t value"></td>
+<td class="gt_row gt_left" headers="t value">-2.080754</td>
 <td class="gt_row gt_left" headers="Pr(>|t|)"></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="Term">FEDME</td>
-<td class="gt_row gt_left" headers="Estimate"></td>
+<td class="gt_row gt_left" headers="Estimate">29.03943</td>
 <td class="gt_row gt_left" headers="Std. Error">7.172</td>
 <td class="gt_row gt_left" headers="t value">4.049</td>
 <td class="gt_row gt_left" headers="Pr(>|t|)"></td>
@@ -5714,19 +5725,22 @@ Antal mænd (0): 44</p>
 <p>og er derfor statistisk signifikant på et 5% niveau.</p>
 </div>
 <div class="fragment">
-<p>En stigning på 1 i fedmegrad, estimerer vi derfor til at give en</p>
-</div>
-<div class="fragment">
-<p>stigning på 29 i blodtrykket, kontrolleret for KØN.</p>
-</div>
-<div class="fragment">
-<p>Justeret for FEDME, ser vi at kvinderne i gennemsnit har</p>
+<p><em>Justeret</em> for FEDME, ser vi at kvinderne i gennemsnit har</p>
 </div>
 <div class="fragment">
 <p>et lavere blodtryk end mændene. Vi estimerer forskellen til at være 7.73</p>
 </div>
 <div class="fragment">
+<p>En stigning på 1 i fedmegrad, estimerer vi til at give en</p>
+</div>
+<div class="fragment">
+<p>gennemsnitlig stigning på 29 i blodtrykket, <em>kontrolleret</em> for KØN.</p>
+</div>
+<div class="fragment">
 <p>Denne forskel er signifikant på et 5% niveau.</p>
+</div>
+<div class="fragment">
+<p>Intercept svarer stadig til en fedmegrad på 0, og kan derfor ikke fortolkes.</p>
 </div>
 </div>
 </div></div>
@@ -6814,10 +6828,8 @@ Fortolk de to værdier i søjlen “Estimate”</p>
 <div class="column" style="width:60%;">
 <div class="evensmaller">
 <p>Vi får nu oplyst at der er foretaget følgende analyse:</p>
-<blockquote>
-<p>model=lm(horm~factor(Ald.gr)+BMI)<br>
-summary(model)</p>
-</blockquote>
+<p><code>model=lm(horm~factor(Ald.gr)+BMI)</code><br>
+<code>summary(model)</code></p>
 <p>Hvilket giver dette resultat:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -6872,10 +6884,8 @@ summary(model)</p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="evensmaller">
-<blockquote>
-<p>model=lm(horm~factor(Ald.gr)+BMI)<br>
-summary(model)</p>
-</blockquote>
+<p><code>model=lm(horm~factor(Ald.gr)+BMI)</code><br>
+<code>summary(model)</code></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 5
@@ -6937,9 +6947,7 @@ summary(model)</p>
 <div class="column" style="width:60%;">
 <div class="tiny">
 <p>Prædikter (forudsig) hormonniveauet for en dreng på 6 år med et BMI på 17 og for en dreng på 14 med et BMI på 18.</p>
-<blockquote>
-<p>model=lm(horm~factor(Ald.gr)+BMI)</p>
-</blockquote>
+<p><code>model=lm(horm~factor(Ald.gr)+BMI)</code></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 5
@@ -6965,6 +6973,11 @@ summary(model)</p>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div></div>
+<div class="fragment">
+<div class="reallysmall">
+<p>Bum. Det var en hel eksamensopgave. Hvis man kan fortolke outputtet af en regression, foretage en prediktion og måske beregne et konfidensinterval på et estimat (eller to), kommer man langt.</p>
+</div>
+</div>
 </section>
 <section id="transplanteret-lungevolumen" class="slide level2">
 <h2>Transplanteret lungevolumen</h2>
@@ -6987,10 +7000,10 @@ summary(model)</p>
 </div>
 </div>
 </div><div class="column" style="width:45%;">
-<p>fevl_prior_to_tx: fevl målt før transplantation<br>
-fevl_after: fevl målt efter transplantation<br>
-fevl_diff: differencen mellem fevl_after og fevl_prior_to_tx<br>
-SMOKE: Rygestatus for donor.</p>
+<p><em>fevl_prior_to_tx</em>: fevl målt før transplantation<br>
+<em>fevl_after</em>: fevl målt efter transplantation<br>
+<em>fevl_diff</em>: differencen mellem fevl_after og fevl_prior_to_tx<br>
+<em>SMOKE</em>: Rygestatus for donor.</p>
 <p>Vi får oplyst følgende:</p>
 <table class="caption-top">
 <thead>
@@ -7033,6 +7046,7 @@ SMOKE: Rygestatus for donor.</p>
 </div>
 <div class="fragment">
 <p>Det er sådan set kun forskellen vi er interesserede i:</p>
+<div class="reallysmall">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -7049,6 +7063,7 @@ SMOKE: Rygestatus for donor.</p>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="fragment">
 <p>Hvordan beregner vi testværdien?</p>
@@ -7074,8 +7089,8 @@ SMOKE: Rygestatus for donor.</p>
 <div class="column">
 <div class="evensmaller">
 <p>Nu udførtes følgende analyse:<br>
-&gt; model &lt;- lm(fevl_diff~factor(SMOKE))<br>
-&gt; summary(model)</p>
+<code>model &lt;- lm(fevl_diff~factor(SMOKE))</code><br>
+<code>summary(model)</code></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="kaysjuvmkk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -7580,10 +7595,10 @@ SMOKE: Rygestatus for donor.</p>
 <p>SMOKE er den forklarende, kategoriske (og binære) variabel</p>
 </div>
 <div class="fragment">
-<p>Er der en ændring i lungefunktionen for reference gruppen</p>
+<p>Er der en ændring i lungefunktionen for reference gruppen?</p>
 </div>
 <div class="fragment">
-<p>Ja, den bliver bedre</p>
+<p>Ja, den bliver 1.37 l bedre</p>
 </div>
 <div class="fragment">
 <p>Og hvis donor var (tidligere) ryger?</p>
@@ -8145,6 +8160,7 @@ SMOKE: Rygestatus for donor.</p>
 <em>ratio</em>: ratio m. albumin og globulin<br>
 <em>l_ratio</em>: log(ratio) (den naturlige logaritme)</p>
 </div><div class="column">
+<div class="evensmaller">
 <p>Vi får denne tabel:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">table</span>(status, sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -8201,6 +8217,19 @@ status   F   M
 </tbody>
 </table>
 <p>Er der forskel i log-ratio mellem syge og raske, når der ikke tages højde for forskel i alder og køn?</p>
+<div class="fragment">
+<p>Hvor mange raske (status 0) er der?</p>
+</div>
+<div class="fragment">
+<p>50+ 117 = 167</p>
+</div>
+<div class="fragment">
+<p>Hvor mange syge (status 1) er der?</p>
+</div>
+<div class="fragment">
+<p>92 + 324 = 416</p>
+</div>
+</div>
 </div></div>
 </div>
 </section>
@@ -8218,6 +8247,9 @@ status   F   M
 </div>
 <div class="fragment">
 <p><span class="math inline">\(H_0: \mu_0 - \mu_1 = 0\)</span></p>
+</div>
+<div class="fragment">
+<p>Husk at nævne at det er en t-test</p>
 </div>
 <div class="fragment">
 <p>Så vi skal have differensen.</p>
@@ -8253,6 +8285,7 @@ status   F   M
 <th>Status</th>
 <th>Gennemsnit</th>
 <th>Spredning (sd)</th>
+<th>n</th>
 </tr>
 </thead>
 <tbody>
@@ -8260,11 +8293,13 @@ status   F   M
 <td>0</td>
 <td>-0.011</td>
 <td>0.289</td>
+<td>167</td>
 </tr>
 <tr class="even">
 <td>1</td>
 <td>-0.152</td>
 <td>0.358</td>
+<td>416</td>
 </tr>
 </tbody>
 </table>
