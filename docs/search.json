@@ -2314,7 +2314,7 @@
     "href": "slides/logistisk.html#laparotomi-4",
     "title": "Logistisk regression",
     "section": "Laparotomi",
-    "text": "Laparotomi\n\n\n\nTabellen deles nu op efter den opererede patients diagnose (cancer, ja/nej):\n\ntable(dead, Allokering, diagn_cancer)\n\n, , diagn_cancer = j\n\n    Allokering\ndead   X   Y\n   0 188 213\n   1 101  74\n\n, , diagn_cancer = n\n\n    Allokering\ndead   X   Y\n   0 226 205\n   1  38  33\n\n\nGiver det anledning til at ændre den tidligere konklusion? Begrund med effektestimater og 95% konfidensintervaller.\nSamme øvelse som før, men nu med OR hver gruppe\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Laparotomi\n\n\n\nTabellen deles nu op efter den opererede patients diagnose (cancer, ja/nej):\n\ntable(dead, Allokering, diagn_cancer)\n\n, , diagn_cancer = j\n\n    Allokering\ndead   X   Y\n   0 188 213\n   1 101  74\n\n, , diagn_cancer = n\n\n    Allokering\ndead   X   Y\n   0 226 205\n   1  38  33\n\n\nGiver det anledning til at ændre den tidligere konklusion? Begrund med effektestimater og 95% konfidensintervaller.\nSamme øvelse som før, men nu med OR hver gruppe.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/logistisk.html#rest",
