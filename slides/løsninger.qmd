@@ -458,11 +458,11 @@ Vi undersøger effekten af et blodtrykssænkende præparat i sammenligning med p
 
 Vi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:
 
-# A tibble: 2 × 4
-  Gruppe         n gennemsnit spredning
-  <chr>      <dbl>      <dbl>     <dbl>
-1 Behandling    82      152.5      18.4
-2 Placebo       90      156.5      19.1
+A tibble: 2 × 4
+  Gruppe         n gennemsnit spredning  
+  <chr>      <dbl>      <dbl>     <dbl>  
+1 Behandling    82      152.5      18.4  
+2 Placebo       90      156.5      19.1  
 Er der en signifikant forskel?
 
 Hvad prøver vi at estimere?
@@ -594,13 +594,13 @@ diff: forskel på cohR og cohL
 
 Vi får også oplyst de første fire observationer:
 
-# A tibble: 4 × 7
-   idnr gender   age height  cohR  cohL  diff
-  <dbl>  <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>
-1     1      1    10  148.2 185.9 207.3 -21.4
-2     2      2     9  136.2 257.4 223    34.4
-3     3      1     9  139.4 203.5 250.3 -46.8
-4     4      2     9  137.6 347   388.4 -41.4
+A tibble: 4 × 7
+   idnr gender   age height  cohR  cohL  diff  
+  <dbl>  <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>  
+1     1      1    10  148.2 185.9 207.3 -21.4  
+2     2      2     9  136.2 257.4 223    34.4  
+3     3      1     9  139.4 203.5 250.3 -46.8  
+4     4      2     9  137.6 347   388.4 -41.4  
 Og noget summarisk data:
 >mean(cohR)
 270.441
@@ -637,42 +637,6 @@ for forskellen.
 Berits forfskel er 50 cm. Det er indenfor normalområde.
 
 ## Diabetikere - fra et interval til et andet
-Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere.
-
-[1] 107 119  99 114 120 104  88 114 124 116 101 121 152 100 125 114  95 117
-Data er procent af idealvægt. 95 betyder at pågældende individ vejer 5% mindre end idealvægten. 120 betyder at vedkommende vejer 20% mere end idealvægten.
-
-Vi får oplyst at et 90% reference interval kan beregnes til [89.1; 136.5]
-
-BEMÆRK AT DET ER ET 90% INTERVAL!
-
-TAVLE!
-
-Beregn et 95% konfidensinterval for den sande middelprocent af idealvægt.
-
-Find middelværdien. Så kan vi finde sprednignen.
-
-De 1.96 får vi fra 
-
-```{r}
-qnorm(1-0.025)
-```
-
-Så 
-
-```{r}
-qnorm(1-0.05)
-```
-
-sd = 136.5 minus middelværdie. Divideret med den kritiske værdi vi fandt.
-
-Ud fra den sd kan vi så beregne SEM (sqrt(18)). Som vi så ganger med 1.96.
-
-Da det 95% ki ikke indeholder 100, må vi afvise null-hypotesen. Angiv estimat 112.8 med tilhørende KI.
-
-## diabetikere - potentielt bedre løsning
-
-## Opgave
 
 Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
 Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
@@ -835,9 +799,9 @@ PO	3.389	0.418	61
 
  forskel:
  
- ```{r}
+```{r}
  diff <- 3.21-3.389
- ```
+```
 
  samlet SEM
  
@@ -918,11 +882,138 @@ Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.
 
 # Kategorisk
 
-## eksamensopgave
+## En opgave
+Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.
+I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.
+
+Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?
+
+ja så er det alle tb positive divideret med alle. 
+
+Antal positive: 
+
+```{r}
+0.247*97 + 0.174*161
+```
+
+vi regner med 52...
+
+Og hvor mange var der ialt?
+161+97
+
+Så andelen er
+
+```{r}
+52/258
+```
+
+
+
+## Hvor sikker var vi?
+Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?
+
+Proportionen beregnede vi til 0.2015504
+
+Standardfejlen er givet ved:
+
+$SE_{prop} = \sqrt{\frac{9(1-p)}{n}}$
+
+Der var 258 observationer i stikprøven
+
+estimat±1.96⋅SE
+
+```{r}
+prop <- 0.2015504
+se_prop <- sqrt((prop*(1-prop)/285))
+se_prop
+prop + c(-1,1)*1.96*se_prop
+```
+
+## Så kan vi regne
+Prævalens af TB blandt de 97 der delte sprøjter: 24.7%
+Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%
+
+```{r}
+SE_deler <- sqrt(0.247*(1-0.247)/97)
+SE_deler_ikke <- sqrt(0.174*(1-0.174)/161)
+SE_diff <- sqrt(SE_deler^2  + SE_deler_ikke^2)
+dif <- 0.247-0.174
+test <- dif/SE_diff
+test
+```
+
+Modelbesvarelsen bytter om på 161 og 97 i beregningen af SE, og giver derfor en forkert testværdi. Men dog samme konklusion.
+
+Ved et 5% signifikansniveau (kritisk værdi 1.96) er testværdien 1.38 mindre end den kritiske værdi. Vi kan derfor _ikke_ forkaste nullhypotesen, $H_0: p_deler - p_deler_ikke = 0$ og konkluderer at der i data
+ikke er evidens for den alternative hypotese, at der skulle være forskel i prævalens for de to grupper.
+
+## Forholdet mellem de to prævalenser RR
+
+og så er vi ca. klar til at regne
+
+Hvordan finder vi tabellen?
+
+```{r}
+0.247*97
+97-0.247*97
+0.174*161
+161-0.174*161
+```
+
+Konklusionen bliver den samme uanset om vi dividerer den ene risiko med den anden eller omvendt. Men tolkningen af resultatet vil være forskellig.
+
+```{r} 
+SE_log_rr <- sqrt(1/24 - 1/(24+73) + 1/28 - 1/(28+133))
+risk_deler <- 24/(24+73)
+risk_deler_ikke <- 28/(28+133)
+rr <- risk_deler/risk_deler_ikke
+testværdi <- log(rr)/SE_log_rr
+ki_log <- log(rr) + c(-1,1)*1.96*SE_log_rr
+ki <- exp(ki_log)
+```
+
+Vi estimerer at RR er 1.42, hvilket svarer til at de der deler sprøjter har ca. 42% højere risiko for TB end de der ikke deler sprøjter.
+Vi finder et 95% konfidens interval til [0.8772285, 2.3072887]. Da 1 er indeholdt i intervallet, kan vi ikke afvise $H_0$ på et 5% signifikansniveau.
+Null-hypotesen var $H_0: RR = 1$. 
+Alternativt finder vi testværdien til at være ca 1.43 hvilket er mindre end den kritiske værdi 1.96 ved et 5% signifikansniveau. Vi kan derfor ikke forkaste $H_0$, og må også på denne baggrund konkludere at der ikke i data er evidens for forskel i prævalensen for TB mellem del to grupper.
+
+## Odds-ratio
+
+```{r}
+odds_deler <- 24/73
+odds_deler_ikke <- 28/133
+OR <- odds_deler/odds_deler_ikke
+SE_log_OR <- sqrt(1/24 + 1/73 + 1/28 + 1/133)
+test_værdi <- log(OR)/SE_log_OR
+KI_log_OR <- log(OR) + c(-1,1)*1.96*SE_log_OR
+KI_OR <- exp(KI_log_OR)
+```
+
+## $\chi^2$
+
+```{r}
+tab <- matrix(
+  c(24, 73,
+    28, 133),
+  nrow = 2,
+  byrow = TRUE
+)
+
+dimnames(tab) <- list(
+  Exposure = c("Deler", "Deler_ikke"),
+  TB = c("Ja", "Nej")
+)
+chisq.test(tab, correct = FALSE)
+```
+
+p-værdien er 0.154. p-værdien er sandsynligheden for at 
+
+## For tidlig fødsel
 Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
 incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
 
-a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
 phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
 
 ```{r}
@@ -935,6 +1026,9 @@ Der er et 0 for lidt i modelbesvarelsen...
 ```{r}
 0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
 ```
+
+
+## For tidlig fødsel
 
 b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
 Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?
