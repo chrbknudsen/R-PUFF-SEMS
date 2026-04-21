@@ -547,7 +547,7 @@ Kaldet $H_A$, enten at
 - $\mu_1 - \mu_2 \neq 0$
 ::::
 :::: {.fragment}
-Det er tosidet. Der $\mu$ kan være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.
+Det er tosidet. Der kan $\mu$ være større eller mindre, vi er ligeglade og kun interesseret i om der er en forskel.
 ::::
 :::: {.fragment}
 Eller, ensidet:
@@ -697,7 +697,7 @@ ggplot(df_plot, aes(x, y)) +
 
 ## Den kritiske værdi
 :::: smaller
-Hvis vi vil finde enhver forskel, typisk at $mu_1 - mu_2 = 0$, er vi ligeglade med om testværdien er "for lille" eller "for stor". De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.
+Hvis vi vil finde enhver forskel, typisk at $\mu_1 - \mu_2 = 0$, er vi ligeglade med om testværdien er "for lille" eller "for stor". De 5% risiko vi accepterer kan derfor ligge på begge sider af kurven.
 
 :::: {.fragment}
 
@@ -776,8 +776,8 @@ Er afstanden: 0.719 - 0.81 = -0.091
 Middelværdier ved vi godt hvordan vi beregner.  
 Men vi bliver normalt ikke bedt om det til eksamen - der får vi dem oplyst.  
 Hvis vi skal sammenligne to middelværdier er $H_0$ typisk at forskellen på dem er 0.  
-Til eksamen får vi typisk enten oplyst to middelværdier, trækker så den ene fra den anden.  
-Eller også får vi oplyst hvad forskellen er på dem.
+Til eksamen får vi typisk enten oplyst to middelværdier, og trækker så den ene fra den anden.  
+Eller også får vi oplyst hvad forskellen er på dem. Så skal vi ikke engang trække ting fra hinanden.
 
 ::::
 
@@ -797,7 +797,7 @@ For en enkelt middelværdi: SEM = $\frac{\sigma}{\sqrt{n}}$
 
 Hvis vi sammenligner to middelværdier der ikke er parrede:
 
-$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} = \sqrt{SEM_1^2 + SEM_2^2}$ 
 
 . . .
 
@@ -863,6 +863,12 @@ konstaterede at middelværdien for diabetikere ikke er indeholdt i KI for ikke-d
 
 Det var i hvert fald konklusionen i modelbesvarelsen.
 
+:::: {.fragment}
+:::: {.tiny}
+Men jeg antydede at det måske ikke var 100% korrekt at konkludere på den måde...
+::::
+::::
+
 Hvordan kunne vi ellers teste - når nu vi har lært den generelle metode for hypotesetestning?
 
 ::::
@@ -898,6 +904,10 @@ Signifikansniveau?
 $\alpha = 0.05$
 
 Det er et valg vi træffer.
+
+:::: {.tiny}
+Det er der historiske årsager til. Se American Psychologist 1982, vol 37(5), p. 553-558 for en af flere historiske gennemgange.
+::::
 
 ## Forskellen på middelværdierne
 
@@ -1014,7 +1024,7 @@ Kunne det tænkes at den sande middelværdi er 0?
 Hvad er konfidensintervallet på forskellen?
 ::::
 :::: {.fragment}
-For interventionsgruppen:  
+For interventionsgruppen (323 patienter):   
 Fald: -19.6  
 Spredning: 17.4
 ::::
@@ -1044,7 +1054,7 @@ Hvad er konfidensintervallet på forskellen?
 Samme beregninger - nu 
 ::::
 :::: {.fragment}
-For kontrolgruppen:  
+For kontrolgruppen (318):  
 Fald: -16.6  
 Spredning: 19.9
 ::::
@@ -1178,20 +1188,35 @@ Puha.
 :::: {.smaller}
 Udtrykt ved $n_0$ og $n_1$, hvad er så svaret?
 
+:::: {.fragment}
 $n_0 + n_1 = 3n_1$ fordi $n_0 = 2n_1$
-
+::::
+:::: {.fragment}
 Hvis et konfidensinterval er givet ved:
-
+::::
+:::: {.fragment}
 $\text{estimat} \pm1.96\text{SE}$
-
+::::
+:::: {.fragment}
 Hvad skal så være lig 8?
-
+::::
+:::: {.fragment}
 $2\cdot1.96\text{SE} = 8$
-
+::::
+:::: {.fragment}
 Hvordan beregner vi SE?
-
-$SE_{diff} = \sqrt{\frac{s_0}{n_0} + \frac{s_1}{n_1}}$
-
+::::
+:::: {.fragment}
+$SE_{diff} = \sqrt{(\frac{s_0}{n_0})^2 + (\frac{s_1}{n_1})^2}$
+::::
+:::: {.fragment}
+```{r}
+options(pillar.sigfig = 10)
+tribble(~Gruppe, ~n, ~gennemsnit, ~spredning,
+"Behandling", "n_1", 152.5, 18.4,
+"Placebo", "n_0", 156.5, 19.1) 
+```
+::::
 ::::
 
 ::::
@@ -1257,10 +1282,10 @@ P(X < 13.6) - P(X< 13.0)
 ::::
 
 :::: {.fragment}
-Standardiser.
+Standardiser.  
 $\mu = 13.3$  
 $\sigma =  1.12$  
-SEM = $\frac{\sigma}{\sqrt{n}}$, $\mu = 13.3$
+SEM = $\frac{\sigma}{\sqrt{n}}$
 ::::
 
 :::: {.fragment}
@@ -1383,7 +1408,10 @@ Så vi skal have fat i SEM.
 >mean(diff)  
 5.053815  
 >sd(diff)  
-37.87201  
+37.87201 
+
+Og der var 249 børn
+
 ::::
 
 

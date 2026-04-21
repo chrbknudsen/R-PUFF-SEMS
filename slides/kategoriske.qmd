@@ -575,7 +575,7 @@ $\log{OR} \pm 1.96 \cdot SE(\log{OR})$
 
 
 ## Hvad så vi
-:::: smaller
+:::: evensmaller
 OR var 1.56
 
 Det vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.
@@ -595,7 +595,18 @@ Vi kunne også finde testværdien: $\frac{\log{OR}}{SE(\log{OR})} = 1.420$. Den 
 :::: {.fragment}
 Vær skarpe her. Odds er noget andet end risiko. Så husk _altid_ at skrive odds i stedet for risiko.
 ::::
+:::: {.fragment}
+Hvorfor finder vi testværdien ved log(OR)/SE(log OR)? Fordi OR ikke er pæn og symmetrisk og normalfordelt. Men det er log(OR)! Og så fungerer matematikken.
 ::::
+::::
+
+## Hvad hvis OR var mindre end 1?
+
+En OR på 1.56 betød at odds var 56% større for (det vi undersøger), end for (det vi sammenligner med).
+
+Hvad hvis OR havde været 0.95?
+
+Ja, så havde odds været 5% mindre end (det vi undersøger) end for (det vi sammenligner med).
 
 ## Fra sandsynlighed til odds
 :::: evensmaller
@@ -739,9 +750,44 @@ dimnames(tab) <- list(
 
 
 
+## p-værdien?
 
+:::: {.reallysmall}
 
+Det er vist første gang vi støder på den.
 
+:::: {.fragment}
+Testværdien fortæller hvor langt fra $H_0$ vi er, målt i standardafvigelser.
+::::
+:::: {.fragment}
+Hvis vi placerer testværdien i normalfordelingen [link](The_Normal_Distribution.svg){target="_blank"}, så svarer det til en sandsynlighed.  
+::::
+:::: {.fragment}
+Den sandsynlighed er sandsynligheden for at vi ser en testværdi af den størrelse, eller større, hvis $H_0$ er sand.  
+::::
+:::: {.fragment}
+Det kan vi også forstå som risikoen for at vi afviser $H_0$, selvom $H_0$ faktisk er sand.  
+::::
+:::: {.fragment}
+Så når vi afviser $H_0$, fordi testværdien er langt væk, er der stadig en sandsynlighed for at vi tager fejl.  
+::::
+:::: {.fragment}
+Det er helt i orden, det er der altid, den skal bare være lille nok.
+::::
+:::: {.fragment}
+Her var sandsynligheden 0.154. Eller 15%  
+::::
+:::: {.fragment}
+Hvis vi afviser $H_0$, er der altså 15% sandsynlighed, risiko, for at vi afviser den selvom den er falsk.
+::::
+:::: {.fragment}
+Eller, mere teknisk korrekt, sandsynligheden for at vi ser data der er så ekstreme som det er tilfældet (ekstreme relativt til $H_0$), hvis $H_0$ er sand.
+Og selvom det er teknisk mere korrekt, er det her I bliver forvirrede, så hold jer til intuitionen om at det er risikoen for at begå en type-1 fejl.
+::::
+:::: {.fragment}
+Det kalder vi også en type-1 fejl. En falsk positiv. Vi tror vi har evidens for at den alternative hypotese er sand. Men det har vi ikke.
+::::
+::::  
 ## Sammenfattende
 
 Det er ca. altid:
@@ -766,13 +812,15 @@ Og så skal standardfejlen beregnes forskelligt - afhængig af hvad det er vi te
 :::: {.fragment}
 
 Hvis opgaven nævner odds. Så skal I bruge OR. Taler den om risici. Så er det RR. Hvis den "bare" taler om forskel, så er det forskelle i proportioner. Hvis den taler om at det skal undersøges om der er forskel på fordeling. Så er det $\chi^2$. 
-
-Forskelle i proportioner måler absolutte forskelle. Mens RR måler relative forskelle. Hvad er forskellen? Forskelle i proportioner. "Hvor meget større end?". Som regel RR.
-
+::::
+:::: {.fragment}
+Forskelle i proportioner måler absolutte forskelle. Mens RR måler relative forskelle. Hvad er forskellen? => Forskelle i proportioner. "Hvor meget større end?" => Som regel RR.
+::::
+:::: {.fragment}
 Husk: $\chi^2$ _kun_ svarer på om der er forskel i fordelingen af eg TB i to grupper. Den svarer _ikke_ på om der er større risiko i den ene gruppe end den anden. 
-
+::::
+:::: {.fragment}
 Læs også det næste delspørgsmål. Hvis der optræder en logistisk regression. Så beregner I OR. Optræder der RR i delspørgsmål b, så skal I formentlig også regne RR i delspørgsmål a.
-
 ::::
 
 :::: {.fragment}
@@ -854,7 +902,7 @@ Er der forskel på andelen af syge hhv raske i de to grupper?
 <td style="border: none; padding: 0.4em 1em;">4.978427</td>
 </tr>
 
-<tr class="fragment" data-fragment-index="10" style="border: none;">
+<tr class="fragment" data-fragment-index="9" style="border: none;">
 <td style="border: none; padding: 0.4em 1em;">$\chi$</td>
 <td style="border: none; padding: 0.4em 1em;">2.231239</td>
 </tr>
@@ -936,7 +984,8 @@ Beregner $\chi^2 = \frac{(42 - 34.5)^2}{34.5} + \frac{(27-34.5)^2}{34.5} + \frac
 
 I $\chi^2$ testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84 
 
-Det er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men `chisq.test()` gør arbejdet for jer og giver en p-værdi (`qchisq(1-0.05, df = 1)`)
+Det er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men `chisq.test()` gør arbejdet for jer og finder den ved:  
+`qchisq(1-0.05, df = 1)`
 </div>
 
 <div class="fragment current-visible" data-fragment-index="9">
@@ -945,9 +994,12 @@ $\chi^2$ frister til at tage kvadratroden. $\sqrt{4.978427} = 2.231239$.
 Testværdien er så $\sqrt{3.841459} = 1.959964$ der virker meget bekendt...
 
 Der er små forskelle, fordi de divergerer når:  
-stikprøverne er små (her er de i mellemstørrelse)   
-De forventede værdier er meget små (<5) eller  
-grupperne er meget skæve. 
+
+* stikprøverne er små (her er de i mellemstørrelse)   
+* De forventede værdier er meget små (<5) (det er de ikke her)
+* grupperne er meget skæve (her er de fuldstændigt ens)
+
+Man skal konstruere meget skæve, meget små datasæt for at opleve at de fire metoder er uenige om konklusionen.
 </div>
 
 ::::
@@ -1023,6 +1075,11 @@ $SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
 $p_{gb} = 7.5\%, n_{gb} = 1513$
 ::::
 
+:::: {.fragment}
+:::: {.tiny}
+Der spørges til forskel i incidens. Ikke til forskel i risiko eller odds. Eller om der er forskel i fordelingerne de to lande imellem.
+::::
+::::
 
 ::::
 

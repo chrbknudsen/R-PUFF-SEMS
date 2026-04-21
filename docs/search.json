@@ -326,14 +326,14 @@
     "href": "slides/løsninger.html",
     "title": "Opgaveløsninger",
     "section": "",
-    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.2.0\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.2     ✔ tibble    3.3.1\n✔ lubridate 1.9.5     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+    "text": "Hvis vores observationer er normalfordelte med \\(\\mu = 0\\) og \\(\\sigma = 1\\)\nHvor stor en andel af observationerne er mindre end 1 (\\(\\sigma\\))?\n\npnorm(1)*100\n\n[1] 84.13447\n\n\nHvor mange observationer er mindre end -2 (\\(\\sigma\\))\n\npnorm(-2)*100\n\n[1] 2.275013\n\n\nhvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)?\n\nqnorm(0.159)\n\n[1] -0.9985763\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\npnorm(-3)\n\n[1] 0.001349898\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\npnorm(2)\n\n[1] 0.9772499\n\n\n\n\n\nHvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\n1- pnorm(2)\n\n[1] 0.02275013\n\n\n\n\n\nHvad er 25% af observationerne mindre end?\n\nqnorm(0.25)\n\n[1] -0.6744898\n\n\n\n\n\nHvad er 40% af observationerne større end?\n\nqnorm(1-0.4)\n\n[1] 0.2533471\n\n\n\n\n\nHvilken andel af observationerne ligger mellem 1 og 1.5?\nHvilken andel ligger under 1.5?\nHvilken andel ligger under 1?\nDet er så\n\npnorm(1.5) - pnorm(1)\n\n[1] 0.09184805\n\n\n\n\n\nHvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvor meget ligger så uden for det interval?\n53%\nDet skal fordeles ligeligt på begge sider, så 53/2=26.5\n\nqnorm(0.265)\n\n[1] -0.628006\n\n\n\n\n\nHvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?\n1-0.95 = 0.05\nDet skal fordeles ligeligt på begge sider så 0.05/2 = 0.025\n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nog\n\nqnorm(1-0.025)\n\n[1] 1.959964\n\n\n\n\n\nNappet direkte fra en eksamensopgave\nFor en population af normalfordelte værdier ved vi at: 40% af værdierne er større end 0.1, og 70% af værdierne er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?\nDen tager vi på tavlen.\nDet er oplyst at X∼N(μ,σ)\nP(X&gt;0.1)=0.4⇔P(X&lt;0.1)=1−0.4=0.6\nStandardiseret:\nP(X−μσ&lt;0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253\nOg:\nP(X&lt;1)=0.7\nStandardiseret:\nP(X−μσ&lt;1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524\nDermed:\n0.1−μσ=0.253⇔0.1−μ=0.253σ\nog\n1−μσ=0.524⇔1−μ=0.524σ\nTræk første ligning fra den anden og isoler σ:\n(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ\n1−0.1=0.271σ⇔0.90.271=σ=3.32\nIndsæt i en af ligningerne for at finde μ:\n1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77\n\n\n\nVi har en normalfordelt population med σ=6.52 . 40% af værdierne er mindre end 0. Hvad er så μ for denne fordeling?\nX∼N(μ,6.52)\nP(X&lt;0) = 0.4\nSkaler: P(Z&lt;0−μ6.52)=0.4\n0−μ6.52=qnorm(0.4)=−0.2533471 Isoler μ\n\n\n\nEn normalfordelt population har middelværdi μ=12.5 og standardafvigelse σ=3.2 . Hvor stor en andel af værdierne er mindre end 10?\nMed andre ord, hvad er: P(X&lt;10)\nTransformer til standardnormalfordelingen: P(Z&lt;(10−μ)/σ)\nIndsæt\n\npnorm((10-12.5)/3.2)\n\n[1] 0.2173277\n\n\n\n\n\nI en normalfordelt population er μ=85 og 25% af værdierne er større end 95. Hvad er σ for denne fordeling?\nP(x &gt; 95) = 0.25\nP(X &lt; 95) = 1-0.25\nStandardiser\n\\(P(Z &lt; \\frac{95 - \\mu}{\\sigma}) = 0.75\\)\nIndsæt og brug qnorm til at komme af med P\n\\((95-85)/\\sigma = qnorm(0.75)\\)\nIsoler \\(\\sigma\\)\n\\(10/qnorm(0.75) = \\sigma\\)\n\n\n\nEn normalfordelt variabel har μ=50 og σ=8 . For hvilken værdi y er 90% af observationerne &lt; y?\nP(X &lt; y) = 0.9\nStandardiser\nP(Z &lt; (y-μ)/σ) = 0.9\nqnorm of at komme af med P\n(y-μ)/σ = qnorm(0.9)\nIndsæt (y-50)/8 = qnorm(0.9)\nIsoler y\n\ny &lt;- qnorm(0.9)*8+50\ny\n\n[1] 60.25241\n\n\n\n\n\nFor en normalfordeling gælder at σ=4.5 og 75% af værdierne er &gt; 18. Hvad er μ?\nP(X &gt; 18) = 0.75\nP(X &lt; 18) = 1- 0.75\nStandardiser\nP(Z &lt; (18-μ)/σ) = 0.25\nIndsæt og brug qnorm til at komme af med P\n(18-μ)/4.5 = qnorm(0.25)\nIsoler μ\n\nmu &lt;- 18-  qnorm(0.25)*4.5 \nmu\n\n[1] 21.0352\n\n\nManglende interval-grænse En normalfordelt population har μ=100 og σ=15 . Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x , hvad er da denne øvre grænse?\nEller: find y således at: P(85 &lt; X &lt; y) = 0.8\nTAVLE\nSamlet sandsynlighed op til y P(X &lt; y)\nFra det skal vi trække den del hvor X er mindre end 85\nP(X &lt; 85)\nSå: P(X &lt; y) - P(X &lt; 85) = 0.80\nP(X &lt; 85) kan vi beregne\nStandardiser\nP(Z &lt; (85-μ)/σ))\nIndsæt, og brug pnorm for at få sandsynligheden\n\npnorm((85-100)/15)\n\n[1] 0.1586553\n\n\nSå ved vi at P(X &lt; y) - P(X &lt; 85) = 0.80\nbliver P(X &lt; y) - 0.1586553 = 0.80\nog derfor at\nP(X &lt; y) = 0.80 + 0.1586553 = 0.9586553\nStandardiser (igen)\nP(X &lt; (y-μ)σ) = 0.9586553\nAf med P ved hjælp af qnorm, og indsæt\n(y-100)/15 = qnorm(0.9586553)\nIsoler y\ny = 15*qnorm(0.9586553) +100\n\n\n\n“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:\nA tibble: 2 × 4 gruppe Antal Gennemsnit Spredning     1 Diabetikere 227 0.719 0.068 2 Ikke-diabetikere 140 0.81 0.057 Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).\n0.81 + c(-1,1)*0.057\nHVAD ER DET VI GØR MED c(-1,1)\n\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) = P(X &lt; 0.92) - P(X &lt; 0.7)\nTAVLE!\nDiabetikerne havde middel = 0.719 og spredning 0.068\nNormaliser\nP(X &lt; 0.92) - P(X &lt; 0.7)\nP(Z &lt; (0.92-0.719)/0.068) - P(Z &lt; (0.7-0.719)/0.068)\n\npnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)\n\n[1] 0.6084767"
   },
   {
     "objectID": "slides/løsninger.html#opgave",
     "href": "slides/løsninger.html#opgave",
     "title": "Opgaveløsninger",
-    "section": "Opgave",
-    "text": "Opgave\nVi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.\n\nc(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |&gt; sd()\n\n[1] 14.42447\n\n\nVi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)\n\nBeregn et 95% konfidensinterval for den sande middelprocent af idealvægt.\n\nEt referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8\nSå skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%\nIntervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4\nSå ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:\n14.4/sqrt(18) = 3.394113\nOg så finder vi konfidensintervallet ved: 112.8 + c(-1,1)1.9614.4/sqrt(18)\nOg her er der altså en regnefejl i modelløsningen…\n\nIndeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.\n\nfra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede."
+    "section": "opgave",
+    "text": "opgave\n1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod specifikke sygdomme, også var en generelt reduceret børne-dødelighed.\nBørnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret. anden gang ca. 6 måneder senere, hvor der blev fulgt op. En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).\nVariablene i datasættet oplyses at være: alder - alder ved vaccinationen - i år status - status ved opfølgning. 1: død, 0: i live dtp: blev barnet vaccineret. 1: ja, 0: nej vægt;: barnets vægt ved vaccination (i kg) etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden\nVi får også oplyst de seks første observationer i datasættet:\n\ntribble(~alder, ~status, ~dtp, ~etngr, ~vaegt,\n0.592, 0,  1, 1, 5.6,\n0.425, 1 , 1 ,1 , 6.0,\n0.510, 0,  1 ,1, 6.2,\n0.592, 0,1,1, 6.2,\n0.173,0,0,1, 5.6,\n0.173,0,0,1, 5.2)\n\n# A tibble: 6 × 5\n  alder status   dtp etngr vaegt\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 0.592      0     1     1   5.6\n2 0.425      1     1     1   6  \n3 0.51       0     1     1   6.2\n4 0.592      0     1     1   6.2\n5 0.173      0     0     1   5.6\n6 0.173      0     0     1   5.2\n\n\nOg optælling: &lt; table(dtp,status)\nstatus dtp 0 1 0 526 9 1 892 46\n\nSer det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?\n\nVi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?\np_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%\nDen relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.\n3 gange så høj risiko for død\nHvad er det tilhørende 95% konfidens interval?\nLog(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))\nDETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)1.960.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1\n\nHvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?\n\nDet er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)\nDen korrekte analyse gav nedenstående resultat:\n\ntribble(~Coefficients, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(&gt;|t|)`,\n\"(Intercept)\", 0.05666, 0.02866, 1.98, \"0.048 *\",\n\"factor(dtp)1\", 0.02609, 0.01162, 2.25, \"0.025 *\",\n\"factor(etngr)1\", 0.02294, 0.01033, 2.22, \"0.027 *\",\n\"alder\", 0.05845, 0.03897, 1.50, \"0.134\",\n\"vaegt\", -0.01140, 0.00527, -2.16, \"0.031 *\")\n\n# A tibble: 5 × 5\n  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`\n  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     \n1 (Intercept)      0.0567      0.0287       1.98 0.048 *   \n2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   \n3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   \n4 alder            0.0584      0.0390       1.5  0.134     \n5 vaegt           -0.0114      0.00527     -2.16 0.031 *   \n\n\nFortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval\ndtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025\nOR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)1.960.012)\nVaccinerede har ca. 2.6% højere odds for død end ikke-vaccinerede"
   },
   {
     "objectID": "slides/løsninger.html#eksamensopgave",
@@ -837,7 +837,7 @@
     "href": "slides/kategoriske.html#hvad-så-vi-1",
     "title": "Kategoriske udfald",
     "section": "Hvad så vi",
-    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\n\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\n\n\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\n\n\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n\n\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\n\n\nVær skarpe her. Odds er noget andet end risiko. Så husk altid at skrive odds i stedet for risiko."
+    "text": "Hvad så vi\n\nOR var 1.56\nDet vil vi formulere som at odds for at teste positiv for tb er 56% højere hvis man deler sprøjter end hvis man ikke gør.\n\nMen 95% konfidensintervallet på log-OR var [-0.170; 1.061]\n\n\nOg da 0 er indeholdt i intervallet kan vi afvise hypotesen om at odds er højere for at være TB+ hvis man deler sprøjter, sammenlignet med hvis man ikke deler sprøjter.\n\n\nVi kunne også finde testværdien: \\(\\frac{\\log{OR}}{SE(\\log{OR})} = 1.420\\). Den er mindre end den kritiske værdi (1.96), hvorfor vi ikke kan afvise \\(H_0\\).\n\n\n95% konfidensintervallet på OR var [0.844; 2.890]. 1 er indeholdt i intervallet, og vi kan derfor ikke afvise \\(H_0\\)\n\n\nVær skarpe her. Odds er noget andet end risiko. Så husk altid at skrive odds i stedet for risiko.\n\n\nHvorfor finder vi testværdien ved log(OR)/SE(log OR)? Fordi OR ikke er pæn og symmetrisk og normalfordelt. Men det er log(OR)! Og så fungerer matematikken."
   },
   {
     "objectID": "slides/kategoriske.html#fra-sandsynlighed-til-odds",
@@ -893,7 +893,7 @@
     "href": "slides/kategoriske.html#for-tidlig-fødsel---i-danmark",
     "title": "Kategoriske udfald",
     "section": "For tidlig fødsel - i Danmark",
-    "text": "For tidlig fødsel - i Danmark\n\n\n\nEt tilsvarende dansk studie med 51851 kvinder fandt en incidens på 4.5%\nEstimer forskellen i incidensen for tidlig fødsel i England vs danmark.\nEr der signifikant forskel?\n\nHvad er \\(H_0\\)?\n\n\n\\(H_0: p_{gb} - p_{dk} = 0\\)\n\n\nHvordan ser den samlede standardfejl ud?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\\(p_{gb} = 7.5\\%, n_{gb} = 1513\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "For tidlig fødsel - i Danmark\n\n\n\nEt tilsvarende dansk studie med 51851 kvinder fandt en incidens på 4.5%\nEstimer forskellen i incidensen for tidlig fødsel i England vs danmark.\nEr der signifikant forskel?\n\nHvad er \\(H_0\\)?\n\n\n\\(H_0: p_{gb} - p_{dk} = 0\\)\n\n\nHvordan ser den samlede standardfejl ud?\n\n\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\\(p_{gb} = 7.5\\%, n_{gb} = 1513\\)\n\n\n\nDer spørges til forskel i incidens. Ikke til forskel i risiko eller odds. Eller om der er forskel i fordelingerne de to lande imellem.\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/kategoriske.html#flere-øvelser",
@@ -963,7 +963,7 @@
     "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvad er et 95% konfidensinterval?",
-    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
+    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå det interval, som at vi er 95% sikre på indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
   },
   {
     "objectID": "slides/hypotesetests.html#så",
@@ -1215,7 +1215,7 @@
     "href": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Endnu en eksamensopgave",
-    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøver beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
@@ -1901,7 +1901,7 @@
     "href": "slides/normalfordelingen.html#normalområde",
     "title": "Normalfordelingen",
     "section": "Normalområde",
-    "text": "Normalområde\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) =\nP(X &lt; 0.92) - P(X &lt; 0.7)\n\nTavle!\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n[1] 0.6084767"
+    "text": "Normalområde\n\n\nHvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\n\nEller: P(0.7 &lt; X &lt; 0.92) =\nP(X &lt; 0.92) - P(X &lt; 0.7)\n\n\nTavle!\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n[1] 0.6084767"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområde---cowboy-trick",
@@ -2580,7 +2580,7 @@
     "href": "slides/løsninger.html#danske-og-polske-piger",
     "title": "Opgaveløsninger",
     "section": "Danske og polske piger",
-    "text": "Danske og polske piger\n\nlibrary(tidyverse)\n\nset.seed(47)\n\nn &lt;- 100\n\n# højreskæv\nright_skew &lt;- rgamma(n, shape = 2, scale = 2)\n\n# venstreskæv (spejlet højreskæv)\nleft_skew &lt;- max(right_skew) - right_skew\n\n# tilnærmelsesvist normal\nnormal &lt;- rnorm(n, mean = 10, sd = 2)\n\n# log-transformerede\nlog_right &lt;- log(right_skew)\nlog_left  &lt;- log(max(left_skew) + 1 - left_skew)\n\ndf &lt;- tibble(\n  value = c(right_skew, left_skew, normal, log_right, log_left),\n  type = rep(\n    c(\n      \"Højreskæv\",\n      \"Venstreskæv\",\n      \"Tilnærmelsesvist normal\",\n      \"Log(højreskæv)\",\n      \"Log(venstreskæv)\"\n    ),\n    each = n\n  )\n)\n\nggplot(df, aes(x = value)) +\n  geom_histogram(bins = 10, fill = \"steelblue\", color = \"white\") +\n  facet_wrap(~type, scales = \"free\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nSKAL HAVE JUSTERET LABELS! Hvad kan vi sige om disse fordelinger?\nUd over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte.\n\nVi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59\n\nPolske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61\nBeregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.\nDanske: 0.495/sqrt(59) polske: 0.418/sqrt(61)\n\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\n\ndanske:\n\n3.211 + c(-1,1)*1.96*0.495/sqrt(59)\n\n[1] 3.084691 3.337309\n\n\n\n3.389 + c(-1,1)*1.96*0.418/sqrt(61)\n\n[1] 3.284102 3.493898\n\n\nHvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel.\n\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på d-vitaminniveauet er statistisk signifikant på et 5% niveau.\n\nforskel:\n::: {.cell}\ndiff &lt;- 3.21-3.389\n:::\npoolet SEM\n\n SEM_poolet &lt;- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)\n\nTestværdien:\n\n diff/SEM_poolet\n\n[1] -2.136821\n\n\nTestværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.\np-værdi:\n\n2*pt(diff/SEM_poolet, 59+61)\n\n[1] 0.03464261\n\n\nOg der skal ganges med to…\n\nangtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling. Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger. Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\n\nDet danske referenceinterval:\n\n3.211+c(-1,1)*1.96*0.492\n\n[1] 2.24668 4.17532\n\n\nHvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\n\npnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)\n\n[1] 0.9668844\n\n\nEller vi kan standardisere så vi kan bruge standardnormalfordelingen."
+    "text": "Danske og polske piger"
   },
   {
     "objectID": "slides/hypotesetests.html#danske-og-polske-piger",
@@ -2657,13 +2657,314 @@
     "href": "slides/kategoriske.html#og-hvilken-skal-man-så-vælge",
     "title": "Kategoriske udfald",
     "section": "Og hvilken skal man så vælge?",
-    "text": "Og hvilken skal man så vælge?\n\n\nForskel i proportion\nRR\nOR\n\\(\\chi^2\\)\n\n\nHvis opgaven nævner odds. Så skal I bruge OR. Taler den om risici. Så er det RR. Hvis den “bare” taler om forskel, så er det forskelle i proportioner. Hvis den taler om at det skal undersøges om der er forskel på fordeling. Så er det \\(\\chi^2\\).\nForskelle i proportioner måler absolutte forskelle. Mens RR måler relative forskelle. Hvad er forskellen? Forskelle i proportioner. “Hvor meget større end?”. Som regel RR.\nHusk: \\(\\chi^2\\) kun svarer på om der er forskel i fordelingen af eg TB i to grupper. Den svarer ikke på om der er større risiko i den ene gruppe end den anden.\nLæs også det næste delspørgsmål. Hvis der optræder en logistisk regression. Så beregner I OR. Optræder der RR i delspørgsmål b, så skal I formentlig også regne RR i delspørgsmål a.\n\n\nMen den hemmelighed I nok ikke har fået fortalt er, at de her fire måder at se forskel, faktisk er ret ens…"
+    "text": "Og hvilken skal man så vælge?\n\n\nForskel i proportion\nRR\nOR\n\\(\\chi^2\\)\n\n\nHvis opgaven nævner odds. Så skal I bruge OR. Taler den om risici. Så er det RR. Hvis den “bare” taler om forskel, så er det forskelle i proportioner. Hvis den taler om at det skal undersøges om der er forskel på fordeling. Så er det \\(\\chi^2\\).\n\n\nForskelle i proportioner måler absolutte forskelle. Mens RR måler relative forskelle. Hvad er forskellen? =&gt; Forskelle i proportioner. “Hvor meget større end?” =&gt; Som regel RR.\n\n\nHusk: \\(\\chi^2\\) kun svarer på om der er forskel i fordelingen af eg TB i to grupper. Den svarer ikke på om der er større risiko i den ene gruppe end den anden.\n\n\nLæs også det næste delspørgsmål. Hvis der optræder en logistisk regression. Så beregner I OR. Optræder der RR i delspørgsmål b, så skal I formentlig også regne RR i delspørgsmål a.\n\n\nMen den hemmelighed I nok ikke har fået fortalt er, at de her fire måder at se forskel, faktisk er ret ens…"
   },
   {
     "objectID": "slides/kategoriske.html#hvor-ens-er-de",
     "href": "slides/kategoriske.html#hvor-ens-er-de",
     "title": "Kategoriske udfald",
     "section": "Hvor ens er de?",
-    "text": "Hvor ens er de?\n\n\n\nTag denne 2x2 tabel:\n\n\n\n\nTreatment\nPlacebo\n\n\n\n\nSyg\n42\n27\n\n\nRask\n58\n73\n\n\n\nEr der forskel på andelen af syge hhv raske i de to grupper?\n\n\n\n\n\n\n\nType\n\n\nTestværdi\n\n\n\n\n\n\n\\(p_1 - p_0\\)\n\n\n2.259538\n\n\n\n\nOR\n\n\n2.217594\n\n\n\n\nRR\n\n\n2.186153\n\n\n\n\n\\(\\chi^2\\)\n\n\n4.978427\n\n\n\n\n\\(\\chi\\)\n\n\n2.231239\n\n\n\n\n\n\n\n\n\nDifferensen: \\(p_t - p_p\\):\nDe to andele og deres SE:\n\\(p_t = 42/(42+58) = 0.42\\)\n\\(p_p = 27/(27+73) = 0.27\\)\n\\(SE_{prop} = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\\(SE_t = \\sqrt{\\frac{0.42(1-0.42)}{100}} = 0.04935585\\)\n\\(SE_p = \\sqrt{\\frac{0.27(1-0.27)}{100}} = 0.04439595\\)\nDen samlede SE:\n\\(\\text{SE}_\\text{diff} = \\sqrt{SE_t^2 + SE_p^2}\\)\n\\(\\text{SE}_\\text{diff} = \\sqrt{0.04935585^2 + 0.04439595^2} =  0.06638524\\)\nDifferensen\n\\(\\text{diff} = \\hat{p_t} - \\hat{p_p} = 0.42-0.27 = 0.15\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\n\\(0.15/0.06638524 = 2.259538\\)\n\n\nOdds Ratio:\nDe to odds, og ratio:\n\\(Odds_t = 42/58 = 0.7241379\\)\n\\(Odds_p = 27/73 = 0.369863\\)\n\\(OR = 0.7241379/0.369863 = 1.957854\\)\nSE for log(OR):\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}\\)\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{42} + \\frac{1}{58} + \\frac{1}{27} + \\frac{1}{73}} = 0.302963\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.957854)/0.302963 = 2.217594\\)\n\n\nRisk Ratio:\nDe to risici og ratio:\n\\(R_t = 42/(42+58) = 0.42\\)\n\\(R_p = 27/(27+73) = 0.27\\)\n\\(RR = 0.42/0.27 = 1.555556\\)\nSE for log(RR):\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a + b} + \\frac{1}{c} - \\frac{1}{c + d}}\\)\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{42} - \\frac{1}{100} + \\frac{1}{27} - \\frac{1}{100}} = 0.2021053\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.555556)/0.2021053 = 2.186153\\)\n\n\n\\(\\chi^2\\) Her gør vi det i hånden - det er ikke normalt…\n\\(\\chi^2\\) har en særlig testværdi \\(\\chi^2 = \\sum{\\frac{(O-E)^2}{E}}\\)\nHvor O er den observerede værdi, og E er den forventede værdi\nBeregner forventede værdier:\n\\(E_{ST} = \\frac{(42+27)\\cdot100}{200} = 34.5\\) \\(E_{SP} = \\frac{69\\cdot100}{200} = 34.5\\) \\(E_{RT} = \\frac{(58+73)\\cdot100}{200} = 65.5\\) \\(E_{RP} = \\frac{131\\cdot100}{200} = 65.5\\)\nBeregner \\(\\chi^2 = \\frac{(42 - 34.5)^2}{34.5} + \\frac{(27-34.5)^2}{34.5} + \\frac{(58-65.5)^2}{65.5} + \\frac{(73-65.5)^2}{65.5} = 4.978427\\)\nI \\(\\chi^2\\) testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84\nDet er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men chisq.test() gør arbejdet for jer og giver en p-værdi (qchisq(1-0.05, df = 1))\n\n\n\\(\\chi^2\\) frister til at tage kvadratroden. \\(\\sqrt{4.978427} = 2.231239\\).\nTestværdien er så \\(\\sqrt{3.841459} = 1.959964\\) der virker meget bekendt…\nDer er små forskelle, fordi de divergerer når:\nstikprøverne er små (her er de i mellemstørrelse)\nDe forventede værdier er meget små (&lt;5) eller\ngrupperne er meget skæve."
+    "text": "Hvor ens er de?\n\n\n\nTag denne 2x2 tabel:\n\n\n\n\nTreatment\nPlacebo\n\n\n\n\nSyg\n42\n27\n\n\nRask\n58\n73\n\n\n\nEr der forskel på andelen af syge hhv raske i de to grupper?\n\n\n\n\n\n\n\nType\n\n\nTestværdi\n\n\n\n\n\n\n\\(p_1 - p_0\\)\n\n\n2.259538\n\n\n\n\nOR\n\n\n2.217594\n\n\n\n\nRR\n\n\n2.186153\n\n\n\n\n\\(\\chi^2\\)\n\n\n4.978427\n\n\n\n\n\\(\\chi\\)\n\n\n2.231239\n\n\n\n\n\n\n\n\n\nDifferensen: \\(p_t - p_p\\):\nDe to andele og deres SE:\n\\(p_t = 42/(42+58) = 0.42\\)\n\\(p_p = 27/(27+73) = 0.27\\)\n\\(SE_{prop} = \\sqrt{\\frac{p(1-p)}{n}}\\)\n\\(SE_t = \\sqrt{\\frac{0.42(1-0.42)}{100}} = 0.04935585\\)\n\\(SE_p = \\sqrt{\\frac{0.27(1-0.27)}{100}} = 0.04439595\\)\nDen samlede SE:\n\\(\\text{SE}_\\text{diff} = \\sqrt{SE_t^2 + SE_p^2}\\)\n\\(\\text{SE}_\\text{diff} = \\sqrt{0.04935585^2 + 0.04439595^2} =  0.06638524\\)\nDifferensen\n\\(\\text{diff} = \\hat{p_t} - \\hat{p_p} = 0.42-0.27 = 0.15\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\n\\(0.15/0.06638524 = 2.259538\\)\n\n\nOdds Ratio:\nDe to odds, og ratio:\n\\(Odds_t = 42/58 = 0.7241379\\)\n\\(Odds_p = 27/73 = 0.369863\\)\n\\(OR = 0.7241379/0.369863 = 1.957854\\)\nSE for log(OR):\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}\\)\n\\(SE(log(OR)) = \\sqrt{\\frac{1}{42} + \\frac{1}{58} + \\frac{1}{27} + \\frac{1}{73}} = 0.302963\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.957854)/0.302963 = 2.217594\\)\n\n\nRisk Ratio:\nDe to risici og ratio:\n\\(R_t = 42/(42+58) = 0.42\\)\n\\(R_p = 27/(27+73) = 0.27\\)\n\\(RR = 0.42/0.27 = 1.555556\\)\nSE for log(RR):\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{a} - \\frac{1}{a + b} + \\frac{1}{c} - \\frac{1}{c + d}}\\)\n\\(SE(log(RR)) = \\sqrt{\\frac{1}{42} - \\frac{1}{100} + \\frac{1}{27} - \\frac{1}{100}} = 0.2021053\\)\nTestværdien = \\(\\frac{Estimatet}{Standardfejlen}\\)\nHusk vi er på log skala så: \\(log(1.555556)/0.2021053 = 2.186153\\)\n\n\n\\(\\chi^2\\) Her gør vi det i hånden - det er ikke normalt…\n\\(\\chi^2\\) har en særlig testværdi \\(\\chi^2 = \\sum{\\frac{(O-E)^2}{E}}\\)\nHvor O er den observerede værdi, og E er den forventede værdi\nBeregner forventede værdier:\n\\(E_{ST} = \\frac{(42+27)\\cdot100}{200} = 34.5\\) \\(E_{SP} = \\frac{69\\cdot100}{200} = 34.5\\) \\(E_{RT} = \\frac{(58+73)\\cdot100}{200} = 65.5\\) \\(E_{RP} = \\frac{131\\cdot100}{200} = 65.5\\)\nBeregner \\(\\chi^2 = \\frac{(42 - 34.5)^2}{34.5} + \\frac{(27-34.5)^2}{34.5} + \\frac{(58-65.5)^2}{65.5} + \\frac{(73-65.5)^2}{65.5} = 4.978427\\)\nI \\(\\chi^2\\) testen er den kritiske værdi også anderledes. Her er den ved 1 frihedsgrad og 5% 3.84\nDet er en af årsagerne til at den er lidt sjælden i eksamensopgaver. Men chisq.test() gør arbejdet for jer og finder den ved:\nqchisq(1-0.05, df = 1)\n\n\n\\(\\chi^2\\) frister til at tage kvadratroden. \\(\\sqrt{4.978427} = 2.231239\\).\nTestværdien er så \\(\\sqrt{3.841459} = 1.959964\\) der virker meget bekendt…\nDer er små forskelle, fordi de divergerer når:\n\nstikprøverne er små (her er de i mellemstørrelse)\n\nDe forventede værdier er meget små (&lt;5) (det er de ikke her)\ngrupperne er meget skæve (her er de fuldstændigt ens)\n\nMan skal konstruere meget skæve, meget små datasæt for at opleve at de fire metoder er uenige om konklusionen."
+  },
+  {
+    "objectID": "slides/løsninger.html#et-par-hurtige-øvelser",
+    "href": "slides/løsninger.html#et-par-hurtige-øvelser",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vores observationer er normalfordelte med \\(\\mu = 0\\) og \\(\\sigma = 1\\)\nHvor stor en andel af observationerne er mindre end 1 (\\(\\sigma\\))?\n\npnorm(1)*100\n\n[1] 84.13447\n\n\nHvor mange observationer er mindre end -2 (\\(\\sigma\\))\n\npnorm(-2)*100\n\n[1] 2.275013\n\n\nhvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)?\n\nqnorm(0.159)\n\n[1] -0.9985763"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-1",
+    "href": "slides/løsninger.html#øvelse-1",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?\n\npnorm(-3)\n\n[1] 0.001349898"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-2",
+    "href": "slides/løsninger.html#øvelse-2",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er mindre end 2?\n\npnorm(2)\n\n[1] 0.9772499"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-3",
+    "href": "slides/løsninger.html#øvelse-3",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne i standardnormalfordelingen er større end 2?\n\n1- pnorm(2)\n\n[1] 0.02275013"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-4",
+    "href": "slides/løsninger.html#øvelse-4",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvad er 25% af observationerne mindre end?\n\nqnorm(0.25)\n\n[1] -0.6744898"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-5",
+    "href": "slides/løsninger.html#øvelse-5",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvad er 40% af observationerne større end?\n\nqnorm(1-0.4)\n\n[1] 0.2533471"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-6",
+    "href": "slides/løsninger.html#øvelse-6",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af observationerne ligger mellem 1 og 1.5?\nHvilken andel ligger under 1.5?\nHvilken andel ligger under 1?\nDet er så\n\npnorm(1.5) - pnorm(1)\n\n[1] 0.09184805"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-7",
+    "href": "slides/løsninger.html#øvelse-7",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvor meget ligger så uden for det interval?\n53%\nDet skal fordeles ligeligt på begge sider, så 53/2=26.5\n\nqnorm(0.265)\n\n[1] -0.628006"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "href": "slides/løsninger.html#øvelse-8---og-det-vigtigste-tal-i-skal-kende",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?\nHvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?\n1-0.95 = 0.05\nDet skal fordeles ligeligt på begge sider så 0.05/2 = 0.025\n\nqnorm(0.025)\n\n[1] -1.959964\n\n\nog\n\nqnorm(1-0.025)\n\n[1] 1.959964"
+  },
+  {
+    "objectID": "slides/løsninger.html#endnu-en-øvelse",
+    "href": "slides/løsninger.html#endnu-en-øvelse",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Nappet direkte fra en eksamensopgave\nFor en population af normalfordelte værdier ved vi at: 40% af værdierne er større end 0.1, og 70% af værdierne er mindre end 1. Hvad er middelværdi og spredning i denne normalfordeling?\nDen tager vi på tavlen.\nDet er oplyst at X∼N(μ,σ)\nP(X&gt;0.1)=0.4⇔P(X&lt;0.1)=1−0.4=0.6\nStandardiseret:\nP(X−μσ&lt;0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253\nOg:\nP(X&lt;1)=0.7\nStandardiseret:\nP(X−μσ&lt;1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524\nDermed:\n0.1−μσ=0.253⇔0.1−μ=0.253σ\nog\n1−μσ=0.524⇔1−μ=0.524σ\nTræk første ligning fra den anden og isoler σ:\n(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ\n1−0.1=0.271σ⇔0.90.271=σ=3.32\nIndsæt i en af ligningerne for at finde μ:\n1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse",
+    "href": "slides/løsninger.html#øvelse",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Vi har en normalfordelt population med σ=6.52 . 40% af værdierne er mindre end 0. Hvad er så μ for denne fordeling?\nX∼N(μ,6.52)\nP(X&lt;0) = 0.4\nSkaler: P(Z&lt;0−μ6.52)=0.4\n0−μ6.52=qnorm(0.4)=−0.2533471 Isoler μ"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse---manglende-procentil",
+    "href": "slides/løsninger.html#øvelse---manglende-procentil",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "En normalfordelt population har middelværdi μ=12.5 og standardafvigelse σ=3.2 . Hvor stor en andel af værdierne er mindre end 10?\nMed andre ord, hvad er: P(X&lt;10)\nTransformer til standardnormalfordelingen: P(Z&lt;(10−μ)/σ)\nIndsæt\n\npnorm((10-12.5)/3.2)\n\n[1] 0.2173277"
+  },
+  {
+    "objectID": "slides/løsninger.html#øvelse---manglende-σ",
+    "href": "slides/løsninger.html#øvelse---manglende-σ",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "I en normalfordelt population er μ=85 og 25% af værdierne er større end 95. Hvad er σ for denne fordeling?\nP(x &gt; 95) = 0.25\nP(X &lt; 95) = 1-0.25\nStandardiser\n\\(P(Z &lt; \\frac{95 - \\mu}{\\sigma}) = 0.75\\)\nIndsæt og brug qnorm til at komme af med P\n\\((95-85)/\\sigma = qnorm(0.75)\\)\nIsoler \\(\\sigma\\)\n\\(10/qnorm(0.75) = \\sigma\\)"
+  },
+  {
+    "objectID": "slides/løsninger.html#manglende-værdi-kendt-procentil",
+    "href": "slides/løsninger.html#manglende-værdi-kendt-procentil",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "En normalfordelt variabel har μ=50 og σ=8 . For hvilken værdi y er 90% af observationerne &lt; y?\nP(X &lt; y) = 0.9\nStandardiser\nP(Z &lt; (y-μ)/σ) = 0.9\nqnorm of at komme af med P\n(y-μ)/σ = qnorm(0.9)\nIndsæt (y-50)/8 = qnorm(0.9)\nIsoler y\n\ny &lt;- qnorm(0.9)*8+50\ny\n\n[1] 60.25241"
+  },
+  {
+    "objectID": "slides/løsninger.html#manglende-middelværdi-variant-2",
+    "href": "slides/løsninger.html#manglende-middelværdi-variant-2",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "For en normalfordeling gælder at σ=4.5 og 75% af værdierne er &gt; 18. Hvad er μ?\nP(X &gt; 18) = 0.75\nP(X &lt; 18) = 1- 0.75\nStandardiser\nP(Z &lt; (18-μ)/σ) = 0.25\nIndsæt og brug qnorm til at komme af med P\n(18-μ)/4.5 = qnorm(0.25)\nIsoler μ\n\nmu &lt;- 18-  qnorm(0.25)*4.5 \nmu\n\n[1] 21.0352\n\n\nManglende interval-grænse En normalfordelt population har μ=100 og σ=15 . Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x , hvad er da denne øvre grænse?\nEller: find y således at: P(85 &lt; X &lt; y) = 0.8\nTAVLE\nSamlet sandsynlighed op til y P(X &lt; y)\nFra det skal vi trække den del hvor X er mindre end 85\nP(X &lt; 85)\nSå: P(X &lt; y) - P(X &lt; 85) = 0.80\nP(X &lt; 85) kan vi beregne\nStandardiser\nP(Z &lt; (85-μ)/σ))\nIndsæt, og brug pnorm for at få sandsynligheden\n\npnorm((85-100)/15)\n\n[1] 0.1586553\n\n\nSå ved vi at P(X &lt; y) - P(X &lt; 85) = 0.80\nbliver P(X &lt; y) - 0.1586553 = 0.80\nog derfor at\nP(X &lt; y) = 0.80 + 0.1586553 = 0.9586553\nStandardiser (igen)\nP(X &lt; (y-μ)σ) = 0.9586553\nAf med P ved hjælp af qnorm, og indsæt\n(y-100)/15 = qnorm(0.9586553)\nIsoler y\ny = 15*qnorm(0.9586553) +100"
+  },
+  {
+    "objectID": "slides/løsninger.html#normalområde---en-eksamensopgave",
+    "href": "slides/løsninger.html#normalområde---en-eksamensopgave",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:\nA tibble: 2 × 4 gruppe Antal Gennemsnit Spredning     1 Diabetikere 227 0.719 0.068 2 Ikke-diabetikere 140 0.81 0.057 Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).\n0.81 + c(-1,1)*0.057\nHVAD ER DET VI GØR MED c(-1,1)"
+  },
+  {
+    "objectID": "slides/løsninger.html#normalområde",
+    "href": "slides/løsninger.html#normalområde",
+    "title": "Opgaveløsninger",
+    "section": "",
+    "text": "Hvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?\nEller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?\nEller: P(0.7 &lt; X &lt; 0.92) = P(X &lt; 0.92) - P(X &lt; 0.7)\nTAVLE!\nDiabetikerne havde middel = 0.719 og spredning 0.068\nNormaliser\nP(X &lt; 0.92) - P(X &lt; 0.7)\nP(Z &lt; (0.92-0.719)/0.068) - P(Z &lt; (0.7-0.719)/0.068)\n\npnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)\n\n[1] 0.6084767"
+  },
+  {
+    "objectID": "slides/løsninger.html#ændring-i-blodtryk",
+    "href": "slides/løsninger.html#ændring-i-blodtryk",
+    "title": "Opgaveløsninger",
+    "section": "Ændring i blodtryk",
+    "text": "Ændring i blodtryk\nEn gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter). Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling. Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”. For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9\nFor interventionsgruppen er de tilsvarende tal -19.6 og 17.4\nVi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.\nDet ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant? Kunne det tænkes at den sande middelværdi er 0?\nHvad er konfidensintervallet på forskellen?\nFor interventionsgruppen (323 patienter) : Fald: -19.6 Spredning: 17.4\n\nSEM_intervention &lt;- 17.4/sqrt(323)\n\nInterval\n\n-19.6 + c(-1,1)*1.96*SEM_intervention\n\n[1] -21.4976 -17.7024\n\n\n0 er ikke indeholdt. faldet er signifikant på et 5% niveau (95% konfidens).\nFor kontrollen\n\nSEM_kontrol &lt;- 19.9/sqrt(318)\n\nInterval\n\n-16.6 + c(-1,1)*1.96*SEM_kontrol\n\n[1] -18.78724 -14.41276\n\n\nHer er 0 heller ikke indeholdt. Faldet er signifikant."
+  },
+  {
+    "objectID": "slides/løsninger.html#bredde-af-konfidensinterval",
+    "href": "slides/løsninger.html#bredde-af-konfidensinterval",
+    "title": "Opgaveløsninger",
+    "section": "Bredde af konfidensinterval",
+    "text": "Bredde af konfidensinterval\nVi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4]. Beregnet baseret på 11279 kvinder.\nHvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?\nHvad er det der styrer bredden? Ja, bredden er fra det nedre til det øvre. sd er ukendt. Men bredden er ækvivalent med kvadratroden af n\nSå - bredden er 2 gange 1.96*SEM\nEller ca. 4SEM. Eller 4sd/sqrt(11279)\nNu går vi til 200 kvinder.\nSå er bredden ca. 4*sd/sqrt(200)\nHvor meget bredere er det sidste end det første? TAVLE\n\nsqrt(11279)/sqrt(200)\n\n[1] 7.50966"
+  },
+  {
+    "objectID": "slides/løsninger.html#blodtrykssænkende",
+    "href": "slides/løsninger.html#blodtrykssænkende",
+    "title": "Opgaveløsninger",
+    "section": "Blodtrykssænkende",
+    "text": "Blodtrykssænkende\nVi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.\nVi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:\nA tibble: 2 × 4 Gruppe n gennemsnit spredning\n   \n1 Behandling 82 152.5 18.4\n2 Placebo 90 156.5 19.1\nEr der en signifikant forskel?\nHvad prøver vi at estimere?\nVi prøver at estimere en forskel Der er to grupper. De er ikke parrede\nHvad er diff?\n\n152.5-156.5\n\n[1] -4\n\n\nhvad er SEM på den ene gruppe?\n\nSEM_b &lt;- 18.4/sqrt(82)\nSEM_b\n\n[1] 2.03194\n\n\nOg på den anden?\n\nSEM_p &lt;- 19.1/sqrt(90)\nSEM_p\n\n[1] 2.013317\n\n\nSå den samlede SE er:\n\nse_diff &lt;- sqrt(SEM_b^2 + SEM_p^2)\nse_diff\n\n[1] 2.860459\n\n\nTestværiden er så:\n\n-4/se_diff\n\n[1] -1.398377\n\n\nIkke signifikant.\nHvad med KI?\n\n-4 + c(-1,1)*1.96*se_diff\n\n[1] -9.606499  1.606499\n\n\nHer ser vi også at det ikke er signifikant, da 0 er indeholdt. Det beregnede 95% KI indeholder med 95% sandsynlighed den sande forskel."
+  },
+  {
+    "objectID": "slides/løsninger.html#videre---ønsket-størrelse-af-konfidensinterval",
+    "href": "slides/løsninger.html#videre---ønsket-størrelse-af-konfidensinterval",
+    "title": "Opgaveløsninger",
+    "section": "Videre - ønsket størrelse af konfidensinterval",
+    "text": "Videre - ønsket størrelse af konfidensinterval\nTAVLE\nHvis 21.96SE = 8, skal SE være lig 8/(2*1.96)\n\\(SE_{diff} = \\sqrt{(\\frac{s_0}{n_0})^2 + (\\frac{s_1}{n_1})^2}\\)\n\\(SE_{diff} = \\sqrt{(\\frac{s_0}{n_0})^2 + (\\frac{s_1}{n_1})^2}\\)\nIndsæt n_0 = 2n_1\n\\(SE_{diff} = \\sqrt{(\\frac{s_0}{2n_1})^2 + (\\frac{s_1}{n_1})^2}\\)\nIndsæt resten\n\\(4/1.96 = \\sqrt{(\\frac{19.1}{2n_1})^2 + (\\frac{18.4}{n_1})^2}\\)\n\\((4/1.96)^2 = \\frac{19.1}{2n_1})^2 + (\\frac{18.4}{n_1})^2\\)\n\\((4/1.96)^2 = \\frac{19.1^2}{4n_1^2} + \\frac{18.4^2}{n_1^2}\\)"
+  },
+  {
+    "objectID": "slides/løsninger.html#endnu-en-eksamensopgave",
+    "href": "slides/løsninger.html#endnu-en-eksamensopgave",
+    "title": "Opgaveløsninger",
+    "section": "Endnu en eksamensopgave",
+    "text": "Endnu en eksamensopgave\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\nHvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?\nVi skal ikke bruge sd, det er SEM for det er andelen af stikprøverne!\nμ=13.3\nσ=1.12\nP(13.0 &lt; X &lt; 13.6)\nP(X &lt; 13.6) - P(X&lt; 13.0)\nP(Z &lt; (13.6 - 13.3)/SEM) - P(Z &lt; (13-13.3)/SEM)\nSEM = 1.12/sqrt(15)\nsvaret er ca 70%"
+  },
+  {
+    "objectID": "slides/løsninger.html#resten-af-opgaven",
+    "href": "slides/løsninger.html#resten-af-opgaven",
+    "title": "Opgaveløsninger",
+    "section": "Resten af opgaven",
+    "text": "Resten af opgaven\nHvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem μ−0.2 og μ+0.2\n\\(\\mu \\pm 1.96SEM\\)\nSå \\(1.96SEM  = 0.2\\)\n1.96*sigma = 0.2 sqrt(n)"
+  },
+  {
+    "objectID": "slides/løsninger.html#hoppeeksamensopgave",
+    "href": "slides/løsninger.html#hoppeeksamensopgave",
+    "title": "Opgaveløsninger",
+    "section": "Hoppeeksamensopgave",
+    "text": "Hoppeeksamensopgave\nMan har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:\nidnr: løbenummer for personen gender: Køn, 1 dreng, 2 pige age: barnets alder height: barnets højde i cm cohR: Længde af hop på højre ben (cm) cohL: Længde af hop på venstre ben (cm) diff: forskel på cohR og cohL\nVi får også oplyst de første fire observationer:\nA tibble: 4 × 7 idnr gender age height cohR cohL diff\n      \n1 1 1 10 148.2 185.9 207.3 -21.4\n2 2 2 9 136.2 257.4 223 34.4\n3 3 1 9 139.4 203.5 250.3 -46.8\n4 4 2 9 137.6 347 388.4 -41.4\nOg noget summarisk data: &gt;mean(cohR) 270.441 &gt;mean(cohL) 265.3871 &gt;mean(diff) 5.053815 &gt;sd(cohR) 74.69524 &gt;sd(cohL) 79.73807 &gt;sd(diff) 37.87201\nEr der overordnet forskel på hoppelængde på højre og venstre ben?"
+  },
+  {
+    "objectID": "slides/løsninger.html#hop-videre",
+    "href": "slides/løsninger.html#hop-videre",
+    "title": "Opgaveløsninger",
+    "section": "Hop videre",
+    "text": "Hop videre\nSEM = sd_diff/sqrt(n)\ntestværdi 5.05381/SEM\nSidste Hop - for denne gang Gennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15\nNår Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?\nnormalområdet er så\n12.51 +/- 1.96*SE\nfor forskellen.\nBerits forfskel er 50 cm. Det er indenfor normalområde."
+  },
+  {
+    "objectID": "slides/løsninger.html#diabetikere---fra-et-interval-til-et-andet",
+    "href": "slides/løsninger.html#diabetikere---fra-et-interval-til-et-andet",
+    "title": "Opgaveløsninger",
+    "section": "Diabetikere - fra et interval til et andet",
+    "text": "Diabetikere - fra et interval til et andet\nVi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.\n\nc(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |&gt; sd()\n\n[1] 14.42447\n\n\nVi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)\n\nBeregn et 95% konfidensinterval for den sande middelprocent af idealvægt.\n\nEt referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8\nSå skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%\nIntervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4\nSå ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:\n14.4/sqrt(18) = 3.394113\nOg så finder vi konfidensintervallet ved: 112.8 + c(-1,1)1.9614.4/sqrt(18)\nOg her er der altså en regnefejl i modelløsningen…\n\nIndeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.\n\nfra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede."
+  },
+  {
+    "objectID": "slides/løsninger.html#histogrammerne",
+    "href": "slides/løsninger.html#histogrammerne",
+    "title": "Opgaveløsninger",
+    "section": "Histogrammerne",
+    "text": "Histogrammerne\n\nlibrary(tidyverse)\n\nset.seed(47)\n\nn &lt;- 100\n\n# højreskæv\nright_skew &lt;- rgamma(n, shape = 2, scale = 2)\n\n# venstreskæv (spejlet højreskæv)\nleft_skew &lt;- max(right_skew) - right_skew\n\n# tilnærmelsesvist normal\nnormal &lt;- rnorm(n, mean = 10, sd = 2)\n\n# log-transformerede\nlog_right &lt;- log(right_skew)\nlog_left  &lt;- log(max(left_skew) + 1 - left_skew)\n\ndf &lt;- tibble(\n  value = c(right_skew, left_skew, normal, log_right, log_left),\n  type = rep(\n    c(\n      \"Højreskæv\",\n      \"Venstreskæv\",\n      \"Tilnærmelsesvist normal\",\n      \"Log(højreskæv)\",\n      \"Log(venstreskæv)\"\n    ),\n    each = n\n  )\n)\n\nggplot(df, aes(x = value)) +\n  geom_histogram(bins = 10, fill = \"steelblue\", color = \"white\") +\n  facet_wrap(~type, scales = \"free\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nUd over at vi nok vil blive bedt om at forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden. Så skal vi kunne fortælle at “denne er højreskæv” “denne er venstreskæv” og de log-transformerede data er tilnærmelsesvist normalfordelte."
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger-1",
+    "href": "slides/løsninger.html#danske-og-polske-piger-1",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\nVi skal se på data fra en undersøgelse af D-vitaminniveuaet for danske og polske piger.\nVi får følgende log-transformerede data oplyst:\nLand Gennemsnit Spredning n DK 3.211 0.492 59 PO 3.389 0.418 61 Beregn variationen på gennemsnittene (SEM) for det log-transformerede D-vitaminniveau for hhv de danske og polske piger. Vi får, om logtransformerede data oplyst; Danske piger: log(D-vitaminniveau) gennemsnit: 3.211 sd = 0.492 n = 59\nPolske piger: log(D-vitaminniveau) gennemsnit: 3.389 sd = 0.418 n = 61\nBeregn variationen på gennemsnittene for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.\nDanske: 0.495/sqrt(59) polske: 0.418/sqrt(61)"
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger-2",
+    "href": "slides/løsninger.html#danske-og-polske-piger-2",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\nLand Gennemsnit Spredning n DK 3.211 0.492 59 PO 3.389 0.418 61 Givet\nSEM=sdn√\nHvordan beregner vi så et 95% KI?\n\nBeregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?\n\ndanske:\n\n3.211 + c(-1,1)*1.96*0.495/sqrt(59)\n\n[1] 3.084691 3.337309\n\n\n\n3.389 + c(-1,1)*1.96*0.418/sqrt(61)\n\n[1] 3.284102 3.493898\n\n\nHvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de to grupper. Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere om der er en signifikant forskel."
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger-3",
+    "href": "slides/løsninger.html#danske-og-polske-piger-3",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\nUdregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på D-vitaminniveauet er statistisk signifikant på et 5% niveau.\nLand Gennemsnit Spredning n DK 3.211 0.492 59 PO 3.389 0.418 61\nforskel:\n\n diff &lt;- 3.21-3.389\n\nsamlet SEM\n\n SEM_samlet &lt;- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)\n\nTestværdien:\n\n diff/SEM_samlet\n\n[1] -2.136821\n\n\nTestværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.\np-værdi:\n\n2*pt(diff/SEM_samlet, 59+61)\n\n[1] 0.03464261\n\n\nOg der skal ganges med to…"
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger-4",
+    "href": "slides/løsninger.html#danske-og-polske-piger-4",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\nVi får nu at vide at vi kan beskrive log(D-vitaminniveau) i begge lande ved en normalfordeling. Beregn et 95% reference interval for log(D-vit) for danske piger.\nHvordan beregner vi referenceintervallet?\nμ±1.96σ\nSkal vi bruge SEM?\nNej, for nu antager vi at tallene er normalfordelte.\nLand Gennemsnit Spredning n DK 3.211 0.492 59 PO 3.389 0.418 61\nDet danske referenceinterval:\n\n3.211+c(-1,1)*1.96*0.492\n\n[1] 2.24668 4.17532"
+  },
+  {
+    "objectID": "slides/løsninger.html#danske-og-polske-piger-5",
+    "href": "slides/løsninger.html#danske-og-polske-piger-5",
+    "title": "Opgaveløsninger",
+    "section": "Danske og polske piger",
+    "text": "Danske og polske piger\nTAVLE Brug derefter μ og σ for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.\nHvis referenceintervallet for de danske piger er [nedre, øvre], hvordan finder vi andelen af polske piger der ligger inden for det?\nHvis X er normalfordelt med middelværdi 3.389 og spredning 0.418, skal vi beregne: P(2.24668 &lt; X &lt; 4.17532) &lt;=&gt; P(X &lt; 4.17532) - P(X &lt; 2.24668)\nVi kan bruge pnorm direkte (cowboytricket)\n\npnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)\n\n[1] 0.9668844\n\n\nEller vi kan standardisere så vi kan bruge standardnormalfordelingen."
+  },
+  {
+    "objectID": "slides/løsninger.html#diabetikere---potentielt-bedre-løsning",
+    "href": "slides/løsninger.html#diabetikere---potentielt-bedre-løsning",
+    "title": "Opgaveløsninger",
+    "section": "diabetikere - potentielt bedre løsning",
+    "text": "diabetikere - potentielt bedre løsning\nVi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 20% mere end idealvægten.\n\nc(107,119,99,114,120,104,88,114,124,116,101,121,152,100,125,114,95,117) |&gt; sd()\n\n[1] 14.42447\n\n\nVi får oplyst at et 90% reference interval kan beregnes til (89.1; 136.5)\n\nBeregn et 95% konfidensinterval for den sande middelprocent af idealvægt.\n\nEt referenceinterval er centreret om middelværdien. Så middel finder vi ved: (89.1+136.5)/2 = 112.8\nSå skal vi finde spredningen. Det er et 90% interval. så den kvantil der er brugt er ikke 95% kvantilen (1.96), men 90% kvantilen:\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n0.95 i stedet for 0.975 fordi der skal være 5% på hver side, ikke 2.5%\nIntervallet er +/- på hver side af middelværdienm så: 136.5-112.8 = 1.644854*s -&gt; s = (136.5-112.8)/1.644854 = 14.4\nSå ved vi hvad standardafvigelsen er på data. Nu skal vi have konfidensintervallet på middelværdien - så vi skal bruge SEM:\n14.4/sqrt(18) = 3.394113\nOg så finder vi konfidensintervallet ved: 112.8 + c(-1,1)1.9614.4/sqrt(18)\nOg her er der altså en regnefejl i modelløsningen…\n\nIndeholder det konfidensinterval vi har beregnet 100%? Hvad fortæller svaret på det spørgsmål? Angiv relevant nullhypotese, samt eventuelt relevant estimat.\n\nfra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise nullhypotesen H_0: mu = 100, hvor mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 112.8 med et 95% KI på det vi tidligere beregnede."
+  },
+  {
+    "objectID": "slides/løsninger.html#hvor-sikker-var-vi",
+    "href": "slides/løsninger.html#hvor-sikker-var-vi",
+    "title": "Opgaveløsninger",
+    "section": "Hvor sikker var vi?",
+    "text": "Hvor sikker var vi?\nHvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?\nProportionen beregnede vi til 0.2015504\nStandardfejlen er givet ved:\n\\(SE_{prop} = \\sqrt{\\frac{9(1-p)}{n}}\\)\nDer var 258 observationer i stikprøven\nestimat±1.96⋅SE\n\nprop &lt;- 0.2015504\nse_prop &lt;- sqrt((prop*(1-prop)/285))\nse_prop\n\n[1] 0.02376256\n\nprop + c(-1,1)*1.96*se_prop\n\n[1] 0.1549758 0.2481250"
+  },
+  {
+    "objectID": "slides/løsninger.html#så-kan-vi-regne",
+    "href": "slides/løsninger.html#så-kan-vi-regne",
+    "title": "Opgaveløsninger",
+    "section": "Så kan vi regne",
+    "text": "Så kan vi regne\nPrævalens af TB blandt de 97 der delte sprøjter: 24.7% Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%\n\nSE_deler &lt;- sqrt(0.247*(1-0.247)/97)\nSE_deler_ikke &lt;- sqrt(0.174*(1-0.174)/161)\nSE_diff &lt;- sqrt(SE_deler^2  + SE_deler_ikke^2)\ndif &lt;- 0.247-0.174\ntest &lt;- dif/SE_diff\ntest\n\n[1] 1.377082\n\n\nModelbesvarelsen bytter om på 161 og 97 i beregningen af SE, og giver derfor en forkert testværdi. Men dog samme konklusion.\nVed et 5% signifikansniveau (kritisk værdi 1.96) er testværdien 1.38 mindre end den kritiske værdi. Vi kan derfor ikke forkaste nullhypotesen, \\(H_0: p_deler - p_deler_ikke = 0\\) og konkluderer at der i data ikke er evidens for den alternative hypotese, at der skulle være forskel i prævalens for de to grupper."
+  },
+  {
+    "objectID": "slides/kategoriske.html#p-værdien",
+    "href": "slides/kategoriske.html#p-værdien",
+    "title": "Kategoriske udfald",
+    "section": "p-værdien?",
+    "text": "p-værdien?\n\nDet er vist første gang vi støder på den.\n\nTestværdien fortæller hvor langt fra \\(H_0\\) vi er, målt i standardafvigelser.\n\n\nHvis vi placerer testværdien i normalfordelingen link, så svarer det til en sandsynlighed.\n\n\nDen sandsynlighed er sandsynligheden for at vi ser en testværdi af den størrelse, eller større, hvis \\(H_0\\) er sand.\n\n\nDet kan vi også forstå som risikoen for at vi afviser \\(H_0\\), selvom \\(H_0\\) faktisk er sand.\n\n\nSå når vi afviser \\(H_0\\), fordi testværdien er langt væk, er der stadig en sandsynlighed for at vi tager fejl.\n\n\nDet er helt i orden, det er der altid, den skal bare være lille nok.\n\n\nHer var sandsynligheden 0.154. Eller 15%\n\n\nHvis vi afviser \\(H_0\\), er der altså 15% sandsynlighed, risiko, for at vi afviser den selvom den er falsk.\n\n\nEller, mere teknisk korrekt, sandsynligheden for at vi ser data der er så ekstreme som det er tilfældet (ekstreme relativt til \\(H_0\\)), hvis \\(H_0\\) er sand. Og selvom det er teknisk mere korrekt, er det her I bliver forvirrede, så hold jer til intuitionen om at det er risikoen for at begå en type-1 fejl.\n\n\nDet kalder vi også en type-1 fejl. En falsk positiv. Vi tror vi har evidens for at den alternative hypotese er sand. Men det har vi ikke."
+  },
+  {
+    "objectID": "slides/kategoriske.html#hvad-hvis-or-var-mindre-end-1",
+    "href": "slides/kategoriske.html#hvad-hvis-or-var-mindre-end-1",
+    "title": "Kategoriske udfald",
+    "section": "Hvad hvis OR var mindre end 1?",
+    "text": "Hvad hvis OR var mindre end 1?\nEn OR på 1.56 betød at odds var 56% større for (det vi undersøger), end for (det vi sammenligner med).\nHvad hvis OR havde været 0.95?\nJa, så havde odds været 5% mindre end (det vi undersøger) end for (det vi sammenligner med)."
+  },
+  {
+    "objectID": "slides/løsninger.html#en-opgave",
+    "href": "slides/løsninger.html#en-opgave",
+    "title": "Opgaveløsninger",
+    "section": "En opgave",
+    "text": "En opgave\nVi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner. I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB. I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.\nHvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?\nja så er det alle tb positive divideret med alle.\nAntal positive:\n\n0.247*97 + 0.174*161\n\n[1] 51.973\n\n\nvi regner med 52…\nOg hvor mange var der ialt? 161+97\nSå andelen er\n\n52/258\n\n[1] 0.2015504"
+  },
+  {
+    "objectID": "slides/løsninger.html#forholdet-mellem-de-to-prævalenser-rr",
+    "href": "slides/løsninger.html#forholdet-mellem-de-to-prævalenser-rr",
+    "title": "Opgaveløsninger",
+    "section": "Forholdet mellem de to prævalenser RR",
+    "text": "Forholdet mellem de to prævalenser RR\nog så er vi ca. klar til at regne\nHvordan finder vi tabellen?\n\n0.247*97\n\n[1] 23.959\n\n97-0.247*97\n\n[1] 73.041\n\n0.174*161\n\n[1] 28.014\n\n161-0.174*161\n\n[1] 132.986\n\n\nKonklusionen bliver den samme uanset om vi dividerer den ene risiko med den anden eller omvendt. Men tolkningen af resultatet vil være forskellig.\n\nSE_log_rr &lt;- sqrt(1/24 - 1/(24+73) + 1/28 - 1/(28+133))\nrisk_deler &lt;- 24/(24+73)\nrisk_deler_ikke &lt;- 28/(28+133)\nrr &lt;- risk_deler/risk_deler_ikke\ntestværdi &lt;- log(rr)/SE_log_rr\nki_log &lt;- log(rr) + c(-1,1)*1.96*SE_log_rr\nki &lt;- exp(ki_log)\n\nVi estimerer at RR er 1.42, hvilket svarer til at de der deler sprøjter har ca. 42% højere risiko for TB end de der ikke deler sprøjter. Vi finder et 95% konfidens interval til [0.8772285, 2.3072887]. Da 1 er indeholdt i intervallet, kan vi ikke afvise \\(H_0\\) på et 5% signifikansniveau. Null-hypotesen var \\(H_0: RR = 1\\). Alternativt finder vi testværdien til at være ca 1.43 hvilket er mindre end den kritiske værdi 1.96 ved et 5% signifikansniveau. Vi kan derfor ikke forkaste \\(H_0\\), og må også på denne baggrund konkludere at der ikke i data er evidens for forskel i prævalensen for TB mellem del to grupper."
+  },
+  {
+    "objectID": "slides/løsninger.html#odds-ratio",
+    "href": "slides/løsninger.html#odds-ratio",
+    "title": "Opgaveløsninger",
+    "section": "Odds-ratio",
+    "text": "Odds-ratio\n\nodds_deler &lt;- 24/73\nodds_deler_ikke &lt;- 28/133\nOR &lt;- odds_deler/odds_deler_ikke\nSE_log_OR &lt;- sqrt(1/24 + 1/73 + 1/28 + 1/133)\ntest_værdi &lt;- log(OR)/SE_log_OR\nKI_log_OR &lt;- log(OR) + c(-1,1)*1.96*SE_log_OR\nKI_OR &lt;- exp(KI_log_OR)"
+  },
+  {
+    "objectID": "slides/løsninger.html#chi2",
+    "href": "slides/løsninger.html#chi2",
+    "title": "Opgaveløsninger",
+    "section": "\\(\\chi^2\\)",
+    "text": "\\(\\chi^2\\)\n\ntab &lt;- matrix(\n  c(24, 73,\n    28, 133),\n  nrow = 2,\n  byrow = TRUE\n)\n\ndimnames(tab) &lt;- list(\n  Exposure = c(\"Deler\", \"Deler_ikke\"),\n  TB = c(\"Ja\", \"Nej\")\n)\nchisq.test(tab, correct = FALSE)\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 2.0325, df = 1, p-value = 0.154\n\n\np-værdien er 0.154. p-værdien er sandsynligheden for at"
+  },
+  {
+    "objectID": "slides/løsninger.html#for-tidlig-fødsel",
+    "href": "slides/løsninger.html#for-tidlig-fødsel",
+    "title": "Opgaveløsninger",
+    "section": "For tidlig fødsel",
+    "text": "For tidlig fødsel\nEt studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.\nBeregn 95% KI for insidensen for tidlig fødsel baseret på disse tal. phat(E) = 0.075. se(phate) = sqrt(p(1-p)/n) = sqrt(0.075(1-0.075)/1513)\n\nse_gb &lt;- sqrt(0.075*(1-0.075)/1513)\nse_gb\n\n[1] 0.006771456\n\n\nDer er et 0 for lidt i modelbesvarelsen…\n\n0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)\n\n[1] 0.06172795 0.08827205"
+  },
+  {
+    "objectID": "slides/løsninger.html#for-tidlig-fødsel-1",
+    "href": "slides/løsninger.html#for-tidlig-fødsel-1",
+    "title": "Opgaveløsninger",
+    "section": "For tidlig fødsel",
+    "text": "For tidlig fødsel\n\nEt tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?\n\nforskel:\n\ndiff &lt;- 0.075-0.045\ndiff\n\n[1] 0.03\n\n\nse_dk:\n\nse_dk &lt;- sqrt(0.045*(1-0.045)/51851)\n\n\nse_diff &lt;- sqrt(se_dk^2 + se_gb^2)\nse_diff\n\n[1] 0.006832381\n\n\net 95% ki for diffen:\n\ndiff + c(-1,1)*1.96*se_diff\n\n[1] 0.01660853 0.04339147\n\n\nIntervallet indeholder ikke 0, og vi kan konkludere at der er en statistisk signifikant forskel."
   }
 ]

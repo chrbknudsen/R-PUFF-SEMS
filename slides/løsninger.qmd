@@ -4,169 +4,639 @@ format: html
 ---
 
 
-```{r}
+```{r warnings=FALSE, echo = FALSE, message=FALSE}
 library(tidyverse)
 ```
+
+# Normalfordelingen
+
+## Et par hurtige øvelser
+
+Hvis vores observationer er normalfordelte med $\mu = 0$ og $\sigma = 1$
+
+Hvor stor en andel af observationerne er mindre end 1 ($\sigma$)? 
+
+```{r}
+pnorm(1)*100
+```
+
+Hvor mange observationer er mindre end -2 ($\sigma$)
+
+```{r}
+pnorm(-2)*100
+```
+
+hvilken værdi (af σ) er 15.9% af observationerne mindre (end denne værdi)? 
+
+```{r}
+qnorm(0.159)
+```
+
+
+## Øvelse 1
+Hvilken andel af observationerne i standardnormalfordelingen er mindre end -3?
+
+```{r}
+pnorm(-3)
+```
+
+## Øvelse 2
+Hvilken andel af observationerne i standardnormalfordelingen er mindre end 2?
+
+```{r}
+pnorm(2)
+```
+
+## Øvelse 3
+Hvilken andel af observationerne i standardnormalfordelingen er større end 2?
+
+```{r}
+1- pnorm(2)
+```
+
+## Øvelse 4
+Hvad er 25% af observationerne mindre end?
+
+```{r}
+qnorm(0.25)
+```
+
+## Øvelse 5
+Hvad er 40% af observationerne større end?
+
+```{r}
+qnorm(1-0.4)
+```
+
+## Øvelse 6
+Hvilken andel af observationerne ligger mellem 1 og 1.5?
+
+Hvilken andel ligger under 1.5?
+
+Hvilken andel ligger under 1?
+
+Det er så
+
+```{r}
+pnorm(1.5) - pnorm(1)
+```
+
+## Øvelse 7
+Hvis vi vil have 47% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+Hvor meget ligger så uden for det interval?
+
+53%
+
+Det skal fordeles ligeligt på begge sider, så 53/2=26.5
+
+```{r}
+qnorm(0.265)
+```
+
+
+## Øvelse 8 - og det vigtigste tal I skal kende!
+Hvis vi vil have 95% af observationerne, hvilket interval (centreret om 0) skal vi så have?
+
+Hvis intervallet skal indeholde 95% af observationerne - hvor meget ligger så uden for?
+
+1-0.95 = 0.05
+
+Det skal fordeles ligeligt på begge sider så 0.05/2 = 0.025
+
+
+```{r}
+qnorm(0.025)
+```
+
+og 
+
+```{r}
+qnorm(1-0.025)
+```
+
+
+## Endnu en øvelse
+Nappet direkte fra en eksamensopgave
+
+For en population af normalfordelte værdier ved vi at:
+40% af værdierne er større end 0.1, og
+70% af værdierne er mindre end 1.
+Hvad er middelværdi og spredning i denne normalfordeling?
+
+Den tager vi på tavlen.
+
+Det er oplyst at X∼N(μ,σ)
+
+P(X>0.1)=0.4⇔P(X<0.1)=1−0.4=0.6
+
+Standardiseret:
+
+P(X−μσ<0.1−μσ)=0.6⇒0.1−μσ=qnorm(0.6)=0.253
+
+Og:
+
+P(X<1)=0.7
+
+Standardiseret:
+
+P(X−μσ<1−μσ)=0.7⇒1−μσ=qnorm(0.7)=0.524
+
+Dermed:
+
+0.1−μσ=0.253⇔0.1−μ=0.253σ
+
+og
+
+1−μσ=0.524⇔1−μ=0.524σ
+
+Træk første ligning fra den anden og isoler σ:
+
+(1−μ)−(0.1−μ)=0.524σ−0.253σ⇔1−μ−0.1+μ=(0.524−0.253)σ
+
+1−0.1=0.271σ⇔0.90.271=σ=3.32
+
+Indsæt i en af ligningerne for at finde μ:
+
+1−μ=0.524σ⇔1−μ=0.534⋅3.32⇔1−0.534⋅3.32=μ=−0.77
+
+
+## Øvelse
+Vi har en normalfordelt population med σ=6.52
+. 40% af værdierne er mindre end 0. Hvad er så μ
+ for denne fordeling?
+
+X∼N(μ,6.52)
+
+P(X<0) = 0.4
+
+Skaler: P(Z<0−μ6.52)=0.4
+
+0−μ6.52=qnorm(0.4)=−0.2533471
+ Isoler μ
+
+## Øvelse - Manglende procentil:
+En normalfordelt population har middelværdi μ=12.5
+ og standardafvigelse σ=3.2
+. Hvor stor en andel af værdierne er mindre end 10?
+
+Med andre ord, hvad er: P(X<10)
+
+Transformer til standardnormalfordelingen:
+P(Z<(10−μ)/σ)
+
+Indsæt
+
+```{r}
+pnorm((10-12.5)/3.2)
+```
+
+## Øvelse - Manglende σ
+I en normalfordelt population er μ=85
+ og 25% af værdierne er større end 95. Hvad er σ
+ for denne fordeling?
+
+P(x > 95) = 0.25
+
+P(X < 95) = 1-0.25
+
+Standardiser
+
+$P(Z < \frac{95 - \mu}{\sigma}) = 0.75$
+
+Indsæt og brug qnorm til at komme  af med P
+
+$(95-85)/\sigma = qnorm(0.75)$
+
+Isoler $\sigma$
+
+$10/qnorm(0.75) = \sigma$
+
+## Manglende værdi, kendt procentil:
+En normalfordelt variabel har μ=50
+ og σ=8
+. For hvilken værdi y er 90% af observationerne < y?
+
+P(X < y) = 0.9
+
+Standardiser
+
+P(Z < (y-μ)/σ) = 0.9
+
+qnorm of at komme af med P
+
+(y-μ)/σ = qnorm(0.9)
+
+Indsæt
+(y-50)/8 = qnorm(0.9)
+
+Isoler y
+
+```{r}
+y <- qnorm(0.9)*8+50
+y
+```
+
+## Manglende middelværdi (variant 2):
+For en normalfordeling gælder at σ=4.5
+ og 75% af værdierne er > 18. Hvad er μ?
+
+P(X > 18) = 0.75
+
+P(X < 18) = 1- 0.75
+
+Standardiser
+
+P(Z < (18-μ)/σ) = 0.25
+
+Indsæt og brug qnorm til at komme af med P
+
+(18-μ)/4.5 = qnorm(0.25)
+
+Isoler μ
+
+```{r}
+mu <- 18-  qnorm(0.25)*4.5 
+mu
+```
+
+Manglende interval-grænse
+En normalfordelt population har μ=100
+ og σ=15
+. Hvis 80% af værdierne ligger mellem 85 og en øvre grænse x
+, hvad er da denne øvre grænse?
+
+Eller: find y således at:
+P(85 < X < y) = 0.8
+
+TAVLE
+
+Samlet sandsynlighed op til y
+P(X < y)
+
+Fra det skal vi trække den del hvor X er mindre end 85
+
+P(X < 85)
+
+Så:
+P(X < y) - P(X < 85) = 0.80
+
+P(X < 85) kan vi beregne
+
+Standardiser
+
+P(Z < (85-μ)/σ))
+
+Indsæt, og brug pnorm for at få sandsynligheden
+
+```{r}
+pnorm((85-100)/15)
+```
+
+Så ved vi at 
+P(X < y) - P(X < 85) = 0.80
+
+bliver
+P(X < y) - 0.1586553 = 0.80
+
+og derfor at 
+
+P(X < y) = 0.80 + 0.1586553 = 0.9586553
+
+Standardiser (igen)
+
+P(X < (y-μ)σ) =  0.9586553
+
+Af med P ved hjælp af qnorm, og indsæt
+
+(y-100)/15 = qnorm(0.9586553) 
+
+Isoler y
+
+y = 15*qnorm(0.9586553) +100
+ 
+
+## Normalområde - en eksamensopgave
+“Summariske regnestørrelser” for plasma magnesium er givet. Og vi får lov at antage at det er normalfordelt for de to populationer stikprøverne er trukket:
+
+A tibble: 2 × 4
+  gruppe           Antal Gennemsnit Spredning
+  <chr>            <dbl>      <dbl>     <dbl>
+1 Diabetikere        227      0.719     0.068
+2 Ikke-diabetikere   140      0.81      0.057
+Beregn et interval, der indeholder 95% af målingerne for kontrol populationen (ikke-diabetikere).
+
+0.81 + c(-1,1)*0.057
+
+HVAD ER DET VI GØR MED c(-1,1)
+
+## Normalområde
+Hvilken andel af målingerne i populationen af diabetikere vil ligge i det interval vi beregnede for ikke-diabetikerne?
+
+Eller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
+
+Eller: P(0.7 < X < 0.92) =
+P(X < 0.92) - P(X < 0.7)
+
+TAVLE!
+
+Diabetikerne havde middel = 0.719 og spredning 0.068
+
+Normaliser
+
+P(X < 0.92) - P(X < 0.7)
+
+P(Z < (0.92-0.719)/0.068) - P(Z < (0.7-0.719)/0.068)
+
+```{r}
+pnorm((0.92-0.719)/0.068) - pnorm((0.7-0.719)/0.068)
+```
+
 
 # Hypotesetests
 
+Vi får oplyst “summariske regnestørrelser” for plasma magnesium for diabetikere. Vi får lov at antage at plasma magnesium er normalfordelt for de to populationer stikprøverne er trukket fra:
 
+gruppe	Antal	Gennemsnit	Spredning
+Diabetikere	227	0.719	0.068
+Ikke-diabetikere	140	0.810	0.057
+Beregn 95% konfidensinterval (KI) for hver af de to grupper.
 
-##  Danske og polske piger
+Ja, det ligner noget vi har set før. Dengang skulle vi se på det interval der indeholdt 95% af observationer. Nu skal vi estimere to middelværdier.
 
+SÅ NU SKAL VI BRUGE SEM!
 
-```{r}
-library(tidyverse)
-
-set.seed(47)
-
-n <- 100
-
-# højreskæv
-right_skew <- rgamma(n, shape = 2, scale = 2)
-
-# venstreskæv (spejlet højreskæv)
-left_skew <- max(right_skew) - right_skew
-
-# tilnærmelsesvist normal
-normal <- rnorm(n, mean = 10, sd = 2)
-
-# log-transformerede
-log_right <- log(right_skew)
-log_left  <- log(max(left_skew) + 1 - left_skew)
-
-df <- tibble(
-  value = c(right_skew, left_skew, normal, log_right, log_left),
-  type = rep(
-    c(
-      "Højreskæv",
-      "Venstreskæv",
-      "Tilnærmelsesvist normal",
-      "Log(højreskæv)",
-      "Log(venstreskæv)"
-    ),
-    each = n
-  )
-)
-
-ggplot(df, aes(x = value)) +
-  geom_histogram(bins = 10, fill = "steelblue", color = "white") +
-  facet_wrap(~type, scales = "free") +
-  theme_minimal()
-```
-
-SKAL HAVE JUSTERET LABELS!
-Hvad kan vi sige om disse fordelinger?
-
-Ud over at vi nok vil blive bedt om at 
-forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden.
-Så skal vi kunne fortælle at "denne er højreskæv" "denne er venstreskæv" og de
-log-transformerede data er tilnærmelsesvist normalfordelte.
-
-b)
-Vi får, om logtransformerede data oplyst;
-Danske piger: log(D-vitaminniveau)
-gennemsnit: 3.211
-sd = 0.492
-n = 59
-
-Polske piger: log(D-vitaminniveau)
-gennemsnit: 3.389
-sd = 0.418
-n = 61
-
-Beregn variationen på gennemsnittene for
-det log-transformerede D-vitaminniveau for
-hhv de danske og polske piger.
-
-Danske:
-0.495/sqrt(59)
-polske:
-0.418/sqrt(61)
-
-c) Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om
-forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?
-
-danske: 
-```{r}
-3.211 + c(-1,1)*1.96*0.495/sqrt(59)
-```
-
+$SEM = \frac{sd}{\sqrt{n}}$
 
 ```{r}
-3.389 + c(-1,1)*1.96*0.418/sqrt(61)
+SEM_dia <- 0.068/sqrt(227)
+interval_dia <- 0.719 + c(-1,1)*1.96*SEM_dia
+interval_dia
 ```
-
- Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de
- to grupper.
- Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere
- om der er en signifikant forskel.
-
- d) Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua).
- Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på
- d-vitaminniveauet er statistisk signifikant på et 5% niveau.
-
- forskel:
- 
- ```{r}
- diff <- 3.21-3.389
- ```
-
- poolet SEM
- 
-```{r}
- SEM_poolet <- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)
-```
-
- Testværdien:
- 
-```{r}
- diff/SEM_poolet
-```
-
-Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.
-
-p-værdi:
-```{r}
-2*pt(diff/SEM_poolet, 59+61)
-```
-Og der skal ganges med to...
-
-e) angtager vi at log(D-vitaminniveau) i begge lande kan beskrives ved en normalfordeling.
-Beregn et 95% reference interval for log(D-vitaminniveauet) for danske piger.
-Brug derefter gennemsnit og sd for de polske piger til at beregne hvor stor en andel af dem
-der forventes at ligge inden for det danske referenceinterval.
-
-Det danske referenceinterval:
-```{r}
-3.211+c(-1,1)*1.96*0.492
-```
-
-Hvis X er normalfordelt med middelværdi 3.389 og sprednign 0.418,
-skal vi beregne:
-P(2.24668 < X < 4.17532) <=>
-P(X < 4.17532) - P(X < 2.24668)
-
-Vi kan bruge pnorm direkte (cowboytricket)
 
 ```{r}
-pnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)
+SEM_ikke <- 0.057/sqrt(140)
+interval_non_dia <- 0.8100 + c(-1,1)*1.96*SEM_ikke
+interval_non_dia
 ```
 
-Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.
+Er der forskel? Ja, for de to intervaller overlapper ikke. Og vigtigere, gennemsnittet for ikke-diabetikere er ikke indeholdt i intervallet for diabetikere, og omvendt.
+
+Det er i hvert fald en konklusion de stiller sig tilfredse med i en modelbesvarelse. Det holder ikke helt (men er nu rigtigt alligevel). Vi kommer til den korrekte måde at teste det på.
+
+## Ændring i blodtryk
+En gruppe patienter deles op i to, kontrol (318 patienter) og behandling (intervention, 323 patienter).
+Der måles blodtryk før behandling (baseline), og efter 12 måneders behandling.
+Forskellen i systolisk blodtryk mellem baseline og efter 12 måneder, oplyses som “diff”.
+For kontrolgruppen får vi oplyst at forskellen er -16.6 mmHg og spredningen er 19.9
+
+For interventionsgruppen er de tilsvarende tal -19.6 og 17.4
+
+Vi skal nu finde ud af om der er et signifikant fald i blodtrykket for interventionsgruppen.
+
+Det ser jo ud til at det falder. Forskellen er -19.6, men er det signifikant?
+Kunne det tænkes at den sande middelværdi er 0?
+
+Hvad er konfidensintervallet på forskellen?
+
+For interventionsgruppen (323 patienter) :
+Fald: -19.6
+Spredning: 17.4
+
+```{r}
+SEM_intervention <- 17.4/sqrt(323)
+```
+
+Interval
+
+```{r}
+-19.6 + c(-1,1)*1.96*SEM_intervention
+```
+
+0 er ikke indeholdt. faldet er signifikant på et 5% niveau (95% konfidens).
+
+For kontrollen
+
+```{r}
+SEM_kontrol <- 19.9/sqrt(318)
+```
+
+Interval
+
+```{r}
+-16.6 + c(-1,1)*1.96*SEM_kontrol
+```
+
+Her er 0 heller ikke indeholdt. Faldet er signifikant.
+
+## Bredde af konfidensinterval
+Vi får oplyst et konfidensinterval for fødselsvægte (g): [3561.5; 3583.4].
+Beregnet baseret på 11279 kvinder.
+
+Hvor meget bredere havde konfidensintervallet været, hvis vi kun havde haft data for 200 kvinder?
+
+Hvad er det der styrer bredden? Ja, bredden er fra det nedre til det øvre. sd er ukendt. Men bredden er ækvivalent med kvadratroden af n
+
+Så - bredden er 2 gange 1.96*SEM
+
+Eller ca. 4*SEM. Eller 4*sd/sqrt(11279)
+
+Nu går vi til 200 kvinder.
+
+Så er bredden ca. 4*sd/sqrt(200)
+
+Hvor meget bredere er det sidste end det første? TAVLE
+
+```{r}
+sqrt(11279)/sqrt(200)
+```
 
 
 
+## Blodtrykssænkende
+Vi undersøger effekten af et blodtrykssænkende præparat i sammenligning med placebo.
+
+Vi får oplyst regnestørrelser for det systoliske blodtryk i mmHg for de to grupper:
+
+A tibble: 2 × 4
+  Gruppe         n gennemsnit spredning  
+  <chr>      <dbl>      <dbl>     <dbl>  
+1 Behandling    82      152.5      18.4  
+2 Placebo       90      156.5      19.1  
+Er der en signifikant forskel?
+
+Hvad prøver vi at estimere?
+
+Vi prøver at estimere en forskel 
+Der er to grupper. De er ikke parrede
+
+Hvad er diff?
+
+```{r}
+152.5-156.5
+```
+
+hvad er SEM på den ene gruppe?
+
+```{r}
+SEM_b <- 18.4/sqrt(82)
+SEM_b
+```
+
+Og på den anden?
+
+```{r}
+SEM_p <- 19.1/sqrt(90)
+SEM_p
+```
+
+Så den samlede SE er:
+
+```{r}
+se_diff <- sqrt(SEM_b^2 + SEM_p^2)
+se_diff
+```
+
+Testværiden er så:
+
+```{r}
+-4/se_diff
+```
+
+Ikke signifikant.
+
+Hvad med KI?
+
+```{r}
+-4 + c(-1,1)*1.96*se_diff
+```
+
+Her ser vi også at det ikke er signifikant, da 0 er indeholdt. Det beregnede 95% KI indeholder med 95% sandsynlighed den sande forskel.
+
+## Videre - ønsket størrelse af konfidensinterval
+
+TAVLE
+
+Hvis 2*1.96*SE = 8, skal SE være lig 8/(2*1.96)
+
+$SE_{diff} = \sqrt{(\frac{s_0}{n_0})^2 + (\frac{s_1}{n_1})^2}$
+
+$SE_{diff} = \sqrt{(\frac{s_0}{n_0})^2 + (\frac{s_1}{n_1})^2}$
+
+Indsæt n_0 = 2n_1
+
+$SE_{diff} = \sqrt{(\frac{s_0}{2n_1})^2 + (\frac{s_1}{n_1})^2}$
+
+Indsæt resten
+
+$4/1.96 = \sqrt{(\frac{19.1}{2n_1})^2 + (\frac{18.4}{n_1})^2}$
+
+$(4/1.96)^2 = \frac{19.1}{2n_1})^2 + (\frac{18.4}{n_1})^2$
+
+$(4/1.96)^2 = \frac{19.1^2}{4n_1^2} + \frac{18.4^2}{n_1^2}$
+
+
+## Endnu en eksamensopgave
+
+Antag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med $\mu$ = 13.3 g/100 ml. Spredning $\sigma$ = 1.12 g/100 ml.
+
+Vi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte
+med middelværdi $\mu$ (hvis vi udtager uendeligt mange stikprøver)
+
+Hvad er spredningen i fordelingen af stikprøvegennemsnittene?
+
+Det er SEM. Den beregner vi ved $\frac{\sigma}{\sqrt{n}}$
+
+
+Hvis vi sætter n til 15, hvilken andel af stikprøverne vil ligge mellem 13.0 og 13.6 g/100ml?
+
+Vi skal ikke bruge sd, det er SEM for det er andelen af stikprøverne!
 
 
 
+μ=13.3
+
+σ=1.12
 
 
+P(13.0 < X < 13.6)
+
+P(X < 13.6) - P(X< 13.0)
 
 
+P(Z < (13.6 - 13.3)/SEM) - P(Z < (13-13.3)/SEM)
+
+SEM = 1.12/sqrt(15)
+
+svaret er ca 70%
+
+## Resten af opgaven
+Hvor stor skal n være hvis 95% af stikprøverne skal have et snit der ligger mellem μ−0.2
+ og  μ+0.2
+
+$\mu \pm 1.96SEM$
+
+Så $1.96SEM  = 0.2$
+
+1.96*sigma = 0.2 sqrt(n) 
 
 
-## Opgave
+## Hoppeeksamensopgave
+Man har undersøgt 249 børn for hvor langt de kan hoppe. Der er følgende variable i datasættet:
+
+idnr: løbenummer for personen
+gender: Køn, 1 dreng, 2 pige
+age: barnets alder
+height: barnets højde i cm
+cohR: Længde af hop på højre ben (cm)
+cohL: Længde af hop på venstre ben (cm)
+diff: forskel på cohR og cohL
+
+Vi får også oplyst de første fire observationer:
+
+A tibble: 4 × 7
+   idnr gender   age height  cohR  cohL  diff  
+  <dbl>  <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>  
+1     1      1    10  148.2 185.9 207.3 -21.4  
+2     2      2     9  136.2 257.4 223    34.4  
+3     3      1     9  139.4 203.5 250.3 -46.8  
+4     4      2     9  137.6 347   388.4 -41.4  
+Og noget summarisk data:
+>mean(cohR)
+270.441
+>mean(cohL)
+265.3871
+>mean(diff)
+5.053815
+>sd(cohR)
+74.69524
+>sd(cohL)
+79.73807
+>sd(diff)
+37.87201
+
+Er der overordnet forskel på hoppelængde på højre og venstre ben?
+
+## Hop videre
+
+SEM = sd_diff/sqrt(n)
+
+testværdi 5.05381/SEM
+
+Sidste Hop - for denne gang
+Gennemsnit og spredning for diff for pigerne beregnes til hhv 12.51 og 36.15
+
+Når Berit hopper 250 cm på højre ben, men kun 200 cm på venstre ben er der så grund til at tro at der er noget galt med hendes venstre ben?
+
+normalområdet er så
+
+12.51 +/- 1.96*SE
+
+for forskellen.
+
+Berits forfskel er 50 cm. Det er indenfor normalområde.
+
+## Diabetikere - fra et interval til et andet
 
 Vi får oplyst data for 18 tilfældigt valgte insulin-afhængige diabetikere. 
 Data er procent af idealvægt. 95 betyder at pågældende individ fjer 5% mindre end idealvægten. 120 beetyder at vedkommende vejer 
@@ -208,13 +678,342 @@ fra a ser vi at 95% konfidensintervallet ikke indeholder 100 - så vi må afvise
 mu angiver den sande middelprocent af idealvægt for populationen af insulin-afhængige diabeetikere. Estimatet for mu er 
 112.8 med et 95% KI på det vi tidligere beregnede. 
 
+
+##  Danske og polske piger
+
+## Histogrammerne
+```{r}
+library(tidyverse)
+
+set.seed(47)
+
+n <- 100
+
+# højreskæv
+right_skew <- rgamma(n, shape = 2, scale = 2)
+
+# venstreskæv (spejlet højreskæv)
+left_skew <- max(right_skew) - right_skew
+
+# tilnærmelsesvist normal
+normal <- rnorm(n, mean = 10, sd = 2)
+
+# log-transformerede
+log_right <- log(right_skew)
+log_left  <- log(max(left_skew) + 1 - left_skew)
+
+df <- tibble(
+  value = c(right_skew, left_skew, normal, log_right, log_left),
+  type = rep(
+    c(
+      "Højreskæv",
+      "Venstreskæv",
+      "Tilnærmelsesvist normal",
+      "Log(højreskæv)",
+      "Log(venstreskæv)"
+    ),
+    each = n
+  )
+)
+
+ggplot(df, aes(x = value)) +
+  geom_histogram(bins = 10, fill = "steelblue", color = "white") +
+  facet_wrap(~type, scales = "free") +
+  theme_minimal()
+```
+
+
+Ud over at vi nok vil blive bedt om at 
+forholde os til hvor gennemsnittene sådan på øjemål ligger, og om der er mere eller mindre spredning i den ene frem for den anden.
+Så skal vi kunne fortælle at "denne er højreskæv" "denne er venstreskæv" og de
+log-transformerede data er tilnærmelsesvist normalfordelte.
+
+## Danske og polske piger
+Vi skal se på data fra en undersøgelse af D-vitaminniveuaet for danske og polske piger.
+
+Vi får følgende log-transformerede data oplyst:
+
+Land	Gennemsnit	Spredning	n
+DK	3.211	0.492	59
+PO	3.389	0.418	61
+Beregn variationen på gennemsnittene (SEM) for det log-transformerede D-vitaminniveau for hhv de danske og polske piger.
+Vi får, om logtransformerede data oplyst;
+Danske piger: log(D-vitaminniveau)
+gennemsnit: 3.211
+sd = 0.492
+n = 59
+
+Polske piger: log(D-vitaminniveau)
+gennemsnit: 3.389
+sd = 0.418
+n = 61
+
+Beregn variationen på gennemsnittene for
+det log-transformerede D-vitaminniveau for
+hhv de danske og polske piger.
+
+Danske:
+0.495/sqrt(59)
+polske:
+0.418/sqrt(61)
+
+
+## Danske og polske piger
+Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?
+
+Land	Gennemsnit	Spredning	n
+DK	3.211	0.492	59
+PO	3.389	0.418	61
+Givet
+
+SEM=sdn√
+
+Hvordan beregner vi så et 95% KI?
+
+c) Beregn 95% KI for de danske og polske piger separat. Hvordan fortolker vi resultaterne? Kan vi konkludere noget om
+forskellen i D-viatminniveau mellem de danske og polske piger? Er den signifikant?
+
+danske: 
+```{r}
+3.211 + c(-1,1)*1.96*0.495/sqrt(59)
+```
+
+
+```{r}
+3.389 + c(-1,1)*1.96*0.418/sqrt(61)
+```
+
+ Hvert KI indeholder med 95% sandsynlighed den sande værdi for den log-transformerede D-vitaminkoncentration for de
+ to grupper.
+ Intervallerne overlapper, men ingen af de to gennemsnit ligger i det andet KI, og vi kan derfor ikke konkludere
+ om der er en signifikant forskel.
+
+
+## Danske og polske piger
+Udregn teststørrelsen for den approksimative t-test for sammenligning af log(D-vitaminniveua). Brug de beregnede variationer på gennemsnittene. Brug teststørrelsen til at konkludere om forskellen på D-vitaminniveauet er statistisk signifikant på et 5% niveau.
+
+
+Land	Gennemsnit	Spredning	n
+DK	3.211	0.492	59
+PO	3.389	0.418	61
+
+ forskel:
+ 
+```{r}
+ diff <- 3.21-3.389
+```
+
+ samlet SEM
+ 
+```{r}
+ SEM_samlet <- sqrt((0.495/sqrt(59))^2 + (0.418/sqrt(61))^2)
+```
+
+ Testværdien:
+ 
+```{r}
+ diff/SEM_samlet
+```
+
+Testværdien er større end 1.96 (i absolutte værdier). Og forskellen er derfor signifikant.
+
+p-værdi:
+```{r}
+2*pt(diff/SEM_samlet, 59+61)
+```
+Og der skal ganges med to...
+
+
+## Danske og polske piger
+Vi får nu at vide at vi kan beskrive log(D-vitaminniveau) i begge lande ved en normalfordeling. Beregn et 95% reference interval for log(D-vit) for danske piger.
+
+Hvordan beregner vi referenceintervallet?
+
+μ±1.96σ
+
+Skal vi bruge SEM?
+
+Nej, for nu antager vi at tallene er normalfordelte.
+
+Land	Gennemsnit	Spredning	n
+DK	3.211	0.492	59
+PO	3.389	0.418	61
+
+
+Det danske referenceinterval:
+```{r}
+3.211+c(-1,1)*1.96*0.492
+```
+
+## Danske og polske piger
+
+TAVLE
+Brug derefter μ
+ og σ
+ for de polske piger til at beregne hvor stor en andel af dem der forventes at ligge inden for det danske referenceinterval.
+
+Hvis referenceintervallet for de danske piger er [nedre, øvre], hvordan finder vi andelen af polske piger der ligger inden for det?
+
+Hvis X er normalfordelt med middelværdi 3.389 og spredning 0.418,
+skal vi beregne:
+P(2.24668 < X < 4.17532) <=>
+P(X < 4.17532) - P(X < 2.24668)
+
+Vi kan bruge pnorm direkte (cowboytricket)
+
+```{r}
+pnorm(4.17532, 3.389, 0.418) - pnorm(2.24668, 3.389, 0.418)
+```
+
+Eller vi kan standardisere så vi kan bruge standardnormalfordelingen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Kategorisk
 
-## eksamensopgave
+## En opgave
+Vi skal se på prævalensen af tuberkulose blandt stiknarkomaner og om den er afhængig af om der deles sprøjter med andre narkomaner.
+I en gruppe med 97 narkomaner der deler sprøjte med andre narkomaner, testede 24.7% positiv for TB.
+I en gruppe på 161 narkomaner der ikke delte sprøjte, testede 17.4% positive for TB.
+
+Hvis vi antager at prævalensen ikke afhænger af om der deles sprøjter - hvad estimerer vi så prævalensen til at være?
+
+ja så er det alle tb positive divideret med alle. 
+
+Antal positive: 
+
+```{r}
+0.247*97 + 0.174*161
+```
+
+vi regner med 52...
+
+Og hvor mange var der ialt?
+161+97
+
+Så andelen er
+
+```{r}
+52/258
+```
+
+
+
+## Hvor sikker var vi?
+Hvad er et 95% KI for prævalensen af TB blandt stiknarkomaner, hvis vi antager at den ikke afhænger af om man deler sprøjte eller ej?
+
+Proportionen beregnede vi til 0.2015504
+
+Standardfejlen er givet ved:
+
+$SE_{prop} = \sqrt{\frac{9(1-p)}{n}}$
+
+Der var 258 observationer i stikprøven
+
+estimat±1.96⋅SE
+
+```{r}
+prop <- 0.2015504
+se_prop <- sqrt((prop*(1-prop)/285))
+se_prop
+prop + c(-1,1)*1.96*se_prop
+```
+
+## Så kan vi regne
+Prævalens af TB blandt de 97 der delte sprøjter: 24.7%
+Prævalens af TB blandt de 161 der ikke delte sprøjter: 17.4%
+
+```{r}
+SE_deler <- sqrt(0.247*(1-0.247)/97)
+SE_deler_ikke <- sqrt(0.174*(1-0.174)/161)
+SE_diff <- sqrt(SE_deler^2  + SE_deler_ikke^2)
+dif <- 0.247-0.174
+test <- dif/SE_diff
+test
+```
+
+Modelbesvarelsen bytter om på 161 og 97 i beregningen af SE, og giver derfor en forkert testværdi. Men dog samme konklusion.
+
+Ved et 5% signifikansniveau (kritisk værdi 1.96) er testværdien 1.38 mindre end den kritiske værdi. Vi kan derfor _ikke_ forkaste nullhypotesen, $H_0: p_deler - p_deler_ikke = 0$ og konkluderer at der i data
+ikke er evidens for den alternative hypotese, at der skulle være forskel i prævalens for de to grupper.
+
+## Forholdet mellem de to prævalenser RR
+
+og så er vi ca. klar til at regne
+
+Hvordan finder vi tabellen?
+
+```{r}
+0.247*97
+97-0.247*97
+0.174*161
+161-0.174*161
+```
+
+Konklusionen bliver den samme uanset om vi dividerer den ene risiko med den anden eller omvendt. Men tolkningen af resultatet vil være forskellig.
+
+```{r} 
+SE_log_rr <- sqrt(1/24 - 1/(24+73) + 1/28 - 1/(28+133))
+risk_deler <- 24/(24+73)
+risk_deler_ikke <- 28/(28+133)
+rr <- risk_deler/risk_deler_ikke
+testværdi <- log(rr)/SE_log_rr
+ki_log <- log(rr) + c(-1,1)*1.96*SE_log_rr
+ki <- exp(ki_log)
+```
+
+Vi estimerer at RR er 1.42, hvilket svarer til at de der deler sprøjter har ca. 42% højere risiko for TB end de der ikke deler sprøjter.
+Vi finder et 95% konfidens interval til [0.8772285, 2.3072887]. Da 1 er indeholdt i intervallet, kan vi ikke afvise $H_0$ på et 5% signifikansniveau.
+Null-hypotesen var $H_0: RR = 1$. 
+Alternativt finder vi testværdien til at være ca 1.43 hvilket er mindre end den kritiske værdi 1.96 ved et 5% signifikansniveau. Vi kan derfor ikke forkaste $H_0$, og må også på denne baggrund konkludere at der ikke i data er evidens for forskel i prævalensen for TB mellem del to grupper.
+
+## Odds-ratio
+
+```{r}
+odds_deler <- 24/73
+odds_deler_ikke <- 28/133
+OR <- odds_deler/odds_deler_ikke
+SE_log_OR <- sqrt(1/24 + 1/73 + 1/28 + 1/133)
+test_værdi <- log(OR)/SE_log_OR
+KI_log_OR <- log(OR) + c(-1,1)*1.96*SE_log_OR
+KI_OR <- exp(KI_log_OR)
+```
+
+## $\chi^2$
+
+```{r}
+tab <- matrix(
+  c(24, 73,
+    28, 133),
+  nrow = 2,
+  byrow = TRUE
+)
+
+dimnames(tab) <- list(
+  Exposure = c("Deler", "Deler_ikke"),
+  TB = c("Ja", "Nej")
+)
+chisq.test(tab, correct = FALSE)
+```
+
+p-værdien er 0.154. p-værdien er sandsynligheden for at 
+
+## For tidlig fødsel
 Et studie i England undersøgte faktorer for tidlig fødsel blandt gravide kvinder og fandt at 
 incidensen for tidlig fødsel var 7.5% blandt de 1513 kvinder der var med i studiet.
 
-a) Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
+Beregn 95% KI for insidensen for tidlig fødsel baseret på disse tal.
 phat(E) = 0.075. se(phate) = sqrt(p*(1-p)/n) = sqrt(0.075*(1-0.075)/1513)
 
 ```{r}
@@ -227,6 +1026,9 @@ Der er et 0 for lidt i modelbesvarelsen...
 ```{r}
 0.075+c(-1,1)*1.96*sqrt(0.075*(1-0.075)/1513)
 ```
+
+
+## For tidlig fødsel
 
 b) Et tilsvarende studie i Danmark fandt en incidens på 4.5% blandt 51851 kvinder der deltog
 Estimer forskellen i incidensen for tidlig fødsel i England vs danmark. Er der signifikant forskel?

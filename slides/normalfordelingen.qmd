@@ -1426,9 +1426,11 @@ Hvilken andel af målingerne i populationen af diabetikere vil ligge i det inter
 
 Eller for: X ~ N(0.719, 0.068) hvor mange ligger over værdien 0.7. og hvor mange ligger under 0.92?
 
+:::: {.fragment}
+
 Eller: P(0.7 < X < 0.92) =  
 P(X < 0.92) - P(X < 0.7)
-
+::::
 
 ::::
 :::: {.column}
