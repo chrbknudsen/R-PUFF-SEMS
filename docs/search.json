@@ -1383,7 +1383,7 @@
     "href": "slides/logistisk.html#mors-rygning",
     "title": "Logistisk regression",
     "section": "Mors rygning",
-    "text": "Mors rygning\n\nVi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.\nNu ser vi på den primære responsvariabel, som var fosterdød.\nRecap af de relevante variable i datasættet:\nepisodes: antal episoder med feber under graviditeten death: Fosterdød (ja = 1, nej = 0)\nmage: Morderens alder smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)\nVi får også oplyst:\n&gt; table(fever$episodes)\n\n\n   0    1    2    3    4    5    6    7   10 \n9693 1872  183   20    3    3    1    1    2 \n\n\nEr der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig graviditet."
+    "text": "Mors rygning\n\nVi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.\nNu ser vi på den primære responsvariabel, som var fosterdød.\nRecap af de relevante variable i datasættet:\nepisodes: antal episoder med feber under graviditeten\ndeath: Fosterdød (ja = 1, nej = 0)\nmage: Morderens alder\nsmoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)\nVi får også oplyst:\n&gt; table(fever$episodes)\n\n\n   0    1    2    3    4    5    6    7   10 \n9693 1872  183   20    3    3    1    1    2 \n\n\nEr der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig graviditet."
   },
   {
     "objectID": "slides/logistisk.html#mors-rygning-1",
@@ -1628,7 +1628,7 @@
     "href": "slides/normalfordelingen.html#eller",
     "title": "Normalfordelingen",
     "section": "Eller",
-    "text": "Eller\n\npnorm giver os sandsynligheden p, når vi har en kvantil\nqnorm giver os quantilen når vi har en sandsynlighed\n\nP(X &lt; kvantil) = sandsynlighed\n\nHvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden\nHvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne kvantilen"
+    "text": "Eller\n\npnorm giver os sandsynligheden p, når vi har en kvantil\nqnorm giver os quantilen når vi har en sandsynlighed\n\nP(X &lt; kvantil) = sandsynlighed\n\nHvis vi ved hvad værdien/kvantilen er, bruger vi pnorm til at beregne sandsynligheden\nHvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne kvantilen"
   },
   {
     "objectID": "slides/normalfordelingen.html#husk",
