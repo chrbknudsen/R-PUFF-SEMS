@@ -520,7 +520,7 @@ qnorm(1-0.025)
 
 P(X < kvantil) = sandsynlighed
 
-- Hvis vi ved hvad værdien er, bruger vi pnorm til at beregne sandsynligheden
+- Hvis vi ved hvad værdien/kvantilen er, bruger vi pnorm til at beregne sandsynligheden
 - Hvis vi ved hvad sandsynligheden er, bruger vi qnorm til at beregne kvantilen
 
 ## HUSK!
