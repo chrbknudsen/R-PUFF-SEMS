@@ -2352,7 +2352,7 @@ En testværdi.
 Er aldersfordelingen den samme for syge som for raske? Hvordan vil vi undersøge det?
 
 :::: {.fragment}
-Det er nøjagtig det samme som før. 
+Det er nøjagtig det samme som før. Men nu middelværdier i stedet for andele.
 ::::
 :::: {.fragment}
 Der er to samples hvor vi sammenligner middelværdierne af alder:
@@ -2367,17 +2367,17 @@ $H_0: \mu_1 - \mu_2 = 0$
 $SE = \frac{sd}{\sqrt{n}}$
 ::::
 :::: {.fragment}
-$SE(\bar{x}_1 - \bar{x}_2)=\sqrt{SE_1 + SE_2}$
+$SE(\bar{x}_1 - \bar{x}_2)=\sqrt{SE_1^2 + SE_2^2}$
 ::::
 :::: {.fragment}
 age:
 
 
 
-|status | Gennemsnit | Spredning (sd)|
-|--|---|--|
-|0| 41.2 | 17.0|
-|1| 46.2 | 15.7|
+|status | Gennemsnit | Spredning (sd)| n |
+|--|---|--|--|
+|0| 41.2 | 17.0| 167 |
+|1| 46.2 | 15.7| 416 |
 
 ::::
 ::::
@@ -2729,7 +2729,7 @@ Summariske værdier for _diff_:
 :::: {.column}
 
 :::: {.reallysmall}
-Er faldetsignifikant forskelligt i de 2 grupper? 
+Er faldet signifikant forskelligt i de 2 grupper? 
 Hvad kan vi konkludere vedrørende effekten af præcisionsbehandlingen på blodtrykket på baggrund af det?
 
 
@@ -2916,5 +2916,13 @@ ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
 ::::
 ::::
 
+## Det var den lineære regression
 
+Vi skal kunne opstille sådan en
+
+Vi skal kunne beregne evt. manglende estimater, standardfejl eller t-værdier
+
+Vi skal kunne fortolke outputtet af regressionen
+
+Vi skal kunne prædiktere en værdi ud fra modellen
 

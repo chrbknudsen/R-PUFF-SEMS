@@ -251,6 +251,9 @@ Først og fremmest - "alt andet lige".
 Hvad er referencegruppen?
 ::::
 ::::{.fragment}
+25 år gammel, ingen feberepisoder, ingen rygning.
+::::
+::::{.fragment}
 De efterfølgende giver os log-odds-ratio (OR). Hvor meget stiger odds med?
 ::::
 ::::{.fragment}
@@ -316,7 +319,6 @@ Vi exponentierer!
 ```
 ::::
 ::::
-
 
 
 ## Mors rygning
@@ -864,19 +866,29 @@ sammenhæng, skal det kvantificeres som en relativ risiko med tilhørende 95% ko
 ```{r echo = FALSE}
 table(Surv3y,SMOKE)
 ```
-Hvad er sandsynligheden for død inden for de 3 år for de to grupper?
 
+:::: {.fragment}
+Hvad er sandsynligheden for død (1) inden for de 3 år for de to grupper?
+::::
+:::: {.fragment}
 Hvad er den relative risiko?
-
+::::
+:::: {.fragment}
 Hvor er 95% KI?
-
+::::
+:::: {.fragment}
 Er det signifikant?
-
+::::
+:::: {.fragment}
 $SE(log(RR)) = \sqrt{\frac{1}{a}-\frac{1}{a+b}+\frac{1}{c}-\frac{1}{c+d}}$
-
+::::
+:::: {.fragment}
 Husk, vi regner i log.
+::::
+:::: {.fragment}
 
 Hvad betyder det hvis RR = 1?
+::::
 
 ::::
 
@@ -948,21 +960,21 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
   )
 ```
 
-Hvilken analyse er der tale om? hvad er respons og hvad er forklarende variable?
+Hvilken analyse er der tale om? Hvad er respons og hvad er forklarende variable?
 
 . . .
 
 Det er en logistisk regression, med Surv3y som respons (den er binær) og SMOKE og don_age_cat som kategoriske forklarende
-variable
+variable.
 
 
 ## Rygende donorer
 
 
 :::: {.columns}
-:::: {.column}
+:::: {.column width = "55%"}
 :::: {.evensmaller}
-Hvad kan vi konkludere på baggrund af den analyse. Beregn relevante odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller
+Hvad kan vi konkludere på baggrund af den analyse? Beregn relevante odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -1020,7 +1032,7 @@ Husk - log(odds)!
 ::::
 
 ::::
-:::: {.column}
+:::: {.column width = "45%"}
 ```{webr-r}
 #| context: interactive
 #| layout: horizontal
@@ -1030,7 +1042,66 @@ Husk - log(odds)!
 ::::
 ::::
 
+## Rygende donorer - hvad så vi?
+ 
+:::: {.reallysmall}
+:::: {.columns}
+:::: {.column}
 
+:::: {.fragment}
+OR for SMOKE var 1.777308
+::::
+:::: {.fragment}
+Det vil sige ca. 1.78 gange højere odds for at dø inden for 3 år efter transplantationen, hvis donor havde røget, sammenlignet med hvis donor havde været ikke-ryger.
+::::
+:::: {.fragment}
+Har vi kontrolleret for noget?
+::::
+:::: {.fragment}
+Ja, det er for fastholdt donor-alder.
+::::
+:::: {.fragment}
+95% KI var [1.177508, 2.682100]
+::::
+:::: {.fragment}
+For donoralder 40-55 var OR 1.55893
+::::
+:::: {.fragment}
+Det vil sige, ca 1.56 gange højere odds for at dø (etc), hvis donor var i alderskategorien 40-55, sammenlignet med hvis donor havde været under 40.
+::::
+::::
+:::: {.column}
+
+:::: {.fragment}
+Har vi kontrolleret for noget? 
+::::
+:::: {.fragment}
+Ja, for fastholdt rygestatus for donor
+::::
+:::: {.fragment}
+KI var 0.9500012 2.5581696
+::::
+:::: {.fragment}
+Var det signifikant?
+::::
+:::: {.fragment}
+Nej, 1 er indeholdt i intervallet. Vi kan også se det på p-værdien.
+::::
+:::: {.fragment}
+Og for donor alder >55 år
+::::
+:::: {.fragment}
+OR var 2.558702 og KI [1.451887, 4.509273]
+::::
+:::: {.fragment}
+Det vil sige 2.56 gange højere odds for at osv. hvis donor var ældre end 55 år, sammenlignet med hvis donor havde været under 40. Igen for fastholdt rygestatus for donor.
+::::
+:::: {.fragment}
+Den effekt er signifikant (på et 5% niveau)
+::::
+::::
+::::
+::::
 
 ## Rygende donorer
 :::: reallysmall 
@@ -1205,7 +1276,7 @@ Resten er fluff, og en del af taktikken når I skal løse opgaver er at skære d
 :::: {.column}
 
 :::: {.tiny}
-Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?
+Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden (status 1: død) og vaccinestatus (dtp 1: vaccineret)?
 
 :::: {.fragment}
 Hvordan vil vi gribe det an?
@@ -1337,7 +1408,7 @@ Alder og vægt er kontinuærte, etnicitet og vaccinestatus er kategoriske.
 Så hvordan ser R-koden ud?
 ::::
 :::: {.fragment}
-glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = "binomial")
+glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = "binomial", data = data)
 ::::
 
 ::::
@@ -1416,10 +1487,10 @@ Vi har data på en repræsentativ gruppe ny-diagnosticerede danske type-2 diabet
 
 Der er følgende variable i datasættet:
 
-HBAAlC_dik: 1 hvis HbAlc < 9%, 0 hvis HbAlc >= 9% 
-SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt  
-AGE: Alder i år  
-SEX: Køn. 0: Kvinde, 1: Mand  
+_HBAAlC_dik_: 1 hvis HbAlc < 9%, 0 hvis HbAlc >= 9% 
+_SRH_dik_: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt  
+_AGE_: Alder i år  
+_SEX_: Køn. 0: Kvinde, 1: Mand  
 
 ::::
 
@@ -1467,7 +1538,7 @@ Hvordan kan vi gøre det?
 Relativ risiko.
 ::::
 :::: {.fragment}
-Så hvad er den relative risiko for godt (selvvurderet) helbred, hvis HbAlc er 1 - altså velreguleret.
+Så hvad er den relative risiko for godt (selvvurderet) helbred (1), hvis HbAlc er 1 - altså velreguleret.
 ::::
 ::::
 
@@ -1717,7 +1788,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
      font = list(google_font("Courier Prime"), default_fonts())) 
 ```
 
-
+Dem skal vi nemlig bruge hvis opgaven efterspørger effektestimater med tilhørende 95% KI. Og det gør den ofte.
 ::::
 
 

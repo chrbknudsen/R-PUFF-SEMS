@@ -1139,25 +1139,423 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 </div>
 </div>
 <p>det er klart signifikant (den er næsten fem standardafvigelser fra 0). der er en signifikant lavere l_ratio blandt de syge.</p>
-<p>@@@@</p>
-<ol start="2" type="a">
-<li>undersøg om kønsfordelingen er den samme for de syge og de raske. Sandsynligheden for at være kvinde blandt de raske: p0 = 50/(50+117) = 0.2994012 Sandsynligheden for at være kvinde blandt de syge: p1 = 92/(92+324) = 0.2211538</li>
-</ol>
-<p>Hvordan beregnes standardfejlen på det?</p>
-<p>s.e. for en andel finder vi ved sqrt(p(1-p)/n)</p>
-<p>så se_0 = sqrt(0.2994012<em>(1-0.2994012)/(50+117)) = 0.03544078 og se_1 = sqrt(0.2211538</em>(1-0.2211538)/(92+324)) = 0.02034822</p>
-<p>Er den sande værdi af forskellen på de to andele (af kvinder i hhv syg og rask-grupperne) i virkeligheden 0?</p>
-<p>Vi ved ikke om spredningen er ens i de to grupper. Så vi skal bruge den poolede se.: se_p = sqrt(0.03544078^2+ 0.02034822^2) = 0.04086684</p>
-<p>forskellen er: 0.2994012-0.2211538 = 0.0782474</p>
-<p>og den ligger så: 0.0782474/0.04086684 = 1.914692 standardfejl fra 0. Og det er ikke signifikant - fordi det er mindre end 1.96.</p>
-<ol start="3" type="a">
-<li>Er aldersfordelingen den samme for syge som for raske? Hvordan vil vi undersøge det?</li>
-</ol>
+</section>
+<section id="leversygdom---kønsfordeling" class="level2">
+<h2 class="anchored" data-anchor-id="leversygdom---kønsfordeling">Leversygdom - kønsfordeling</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sandsynligheden for at være kvinde blandt de raske:</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>p_0 <span class="ot">=</span> <span class="dv">50</span><span class="sc">/</span>(<span class="dv">50</span><span class="sc">+</span><span class="dv">117</span>)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>p_0 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2994012</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sandsynligheden for at være kvinde blandt de syge:</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>p_1 <span class="ot">=</span> <span class="dv">92</span><span class="sc">/</span>(<span class="dv">92</span><span class="sc">+</span><span class="dv">324</span>)</span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>p_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2211538</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>se_0 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.2994012</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.2994012</span>)<span class="sc">/</span>(<span class="dv">50</span><span class="sc">+</span><span class="dv">117</span>))</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>se_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03544078</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>se_1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.2211538</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.2211538</span>)<span class="sc">/</span>(<span class="dv">92</span><span class="sc">+</span><span class="dv">324</span>)) </span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>se_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02034822</code></pre>
+</div>
+</div>
+<p>Er den sande værdi af forskellen på de to andele (af kvinder i hhv syg og rask-grupperne) i virkeligheden 0? samlet se</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>se_p <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(se_0<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se_1<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>se_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04086684</code></pre>
+</div>
+</div>
+<p>Og så testværdien:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">0.2994012-0.2211538</span></span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>diff<span class="sc">/</span>se_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.914692</code></pre>
+</div>
+</div>
+<p>Og det er så ikke signifikant. Null-hypotesen var at der ikke var forskel. Den kan vi ikke forkaste.</p>
+</section>
+<section id="leversygdom---aldersfordeling" class="level2">
+<h2 class="anchored" data-anchor-id="leversygdom---aldersfordeling">Leversygdom - aldersfordeling</h2>
+<p>Er aldersfordelingen den samme for syge som for raske?</p>
 <p>two-sample t-test. så er forskellen på gennemsnitlig alder forskellig fra 0? Her nævnte eksamensspørgsmålet specifikt at man blot skulle forklare hvad man ville gøre - man skulle ikke regne.</p>
-<ol start="4" type="a">
-<li>Nu laver vi denne analyse i R, hvor vi inddrager alder og køn: &gt; analyse1 &lt;- lm(l_ratio~factor(status)+factor(sex)+age) &gt; summary(analyse1)</li>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> <span class="fl">46.2-41.2</span></span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>sem_0 <span class="ot">&lt;-</span> <span class="fl">17.0</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">167</span>)</span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>sem_1 <span class="ot">&lt;-</span> <span class="fl">15.7</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">416</span>)</span>
+<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a>sem_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sem_0<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sem_1<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a>diff<span class="sc">/</span>sem_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.280496</code></pre>
+</div>
+</div>
+<p>Vi kan afvise 0-hypotesen</p>
+</section>
+<section id="leversygdom---prediktion" class="level2">
+<h2 class="anchored" data-anchor-id="leversygdom---prediktion">Leversygdom - prediktion</h2>
+<p>predikter median-ratio for de syge i studiepopulationen med en alder på 50 år, som er kvinder.</p>
+<p>vores estimat på en middelværdi for l_ration - som altså er log er:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1730998</span><span class="sc">+-</span><span class="fl">0.1196883</span><span class="sc">+</span><span class="dv">50</span><span class="sc">*-</span><span class="fl">0.0045177</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1724735</code></pre>
+</div>
+</div>
+<p>Og så skal vi eksponentiere:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.17</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8436648</code></pre>
+</div>
+</div>
+</section>
+<section id="blodtryk-i-ghana" class="level2">
+<h2 class="anchored" data-anchor-id="blodtryk-i-ghana">Blodtryk i Ghana</h2>
+<p>Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.</p>
+<p>Vi starter med SEM for de to grupper: Intervention: n= 323</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>SEM_intervention <span class="ot">&lt;-</span> <span class="fl">17.4</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>SEM_kontrol <span class="ot">&lt;-</span> <span class="fl">19.9</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">641-323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Så kan vi beregne 95% KI beregnes for de to grupper:</p>
+<p>intervention:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">19.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_intervention</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -21.4976 -17.7024</code></pre>
+</div>
+</div>
+<p>kontrol:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">16.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_kontrol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -18.78724 -14.41276</code></pre>
+</div>
+</div>
+<p>Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk signifikant.</p>
+</section>
+<section id="blodtryk-i-ghana-1" class="level2">
+<h2 class="anchored" data-anchor-id="blodtryk-i-ghana-1">Blodtryk i Ghana</h2>
+<p>Er faldet i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>SEM_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(SEM_intervention<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> SEM_kontrol<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Det giver os en teststørrelse på forskellen på de to differenser på:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="fl">19.6</span><span class="sc">-</span> <span class="sc">-</span><span class="fl">16.6</span>)<span class="sc">/</span>SEM_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.030622</code></pre>
+</div>
+</div>
+<p>Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.</p>
+</section>
+<section id="blodtryk-i-ghana-2" class="level2">
+<h2 class="anchored" data-anchor-id="blodtryk-i-ghana-2">Blodtryk i Ghana</h2>
+<ol start="3" type="a">
+<li>Nu udførtes følgende analyser for mænd og kvinder hver for sig: &gt; summary(lm(diff[sex==“female”]~factor(group[sex==“female”]))) Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning af værdierne i “Estimate” søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?</li>
 </ol>
-<p>Det gav dette output:</p>
+<p>Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.</p>
+<p>For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)</p>
+<p>For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)</p>
+</section>
+</section>
+<section id="logistisk" class="level1">
+<h1>Logistisk</h1>
+<section id="hvordan-ser-resultatet-ud" class="level2">
+<h2 class="anchored" data-anchor-id="hvordan-ser-resultatet-ud">Hvordan ser resultatet ud?</h2>
+<p>Vi skal lave et regnestykke der illustrerer sammenhængen mellem estimat, fejl og z value</p>
+</section>
+<section id="hvor-sikre-er-vi-på-de-estimater" class="level2">
+<h2 class="anchored" data-anchor-id="hvor-sikre-er-vi-på-de-estimater">Hvor sikre er vi på de estimater?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.7423</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.2149</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.321096 1.163504</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.7423</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.100762</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.7423</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.2149</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.378638 3.201130</code></pre>
+</div>
+</div>
+<p>Så - vores estimat er at en stigning i alder på 10 år er associeret med 2.1 gange højere odds. Og et konfidensinterval på det estimat mellem 38% og 220% højere odds.</p>
+</section>
+<section id="rygende-donorer---regne" class="level2">
+<h2 class="anchored" data-anchor-id="rygende-donorer---regne">Rygende donorer - regne</h2>
+<p>For død inden for tre år Ikkerygerdonor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>p_NS <span class="ot">&lt;-</span> <span class="dv">68</span><span class="sc">/</span>(<span class="dv">68</span><span class="sc">+</span><span class="dv">153</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>rygerdonor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>p_SM <span class="ot">&lt;-</span> <span class="dv">117</span><span class="sc">/</span>(<span class="dv">117</span><span class="sc">+</span><span class="dv">153</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>(RR <span class="ot">&lt;-</span> p_SM<span class="sc">/</span>p_NS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.408333</code></pre>
+</div>
+</div>
+<p>Og det er smoker divideret med non-smoker fordi vi ser på den øgede risiko for død hvis donor har været ryger.</p>
+<p>1.4 gange højere risiko for død inden for tre år - sammenlignet med hvis donor ikke havde været ryger.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>(se_log_rr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">68</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">153</span><span class="sc">+</span><span class="dv">68</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">88</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">88</span><span class="sc">+</span><span class="dv">117</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1290991</code></pre>
+</div>
+</div>
+<p>KI for log(RR)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>(KI_log_rr <span class="ot">&lt;-</span> <span class="fu">log</span>(RR) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>se_log_rr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.08937269 0.59544125</code></pre>
+</div>
+</div>
+<p>Og KI for RR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(KI_log_rr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.093488 1.813831</code></pre>
+</div>
+</div>
+<p>1 er ikke indeholdt - så signifikant sammenhæng.</p>
+</section>
+<section id="rygende-donorer---regressionen" class="level2">
+<h2 class="anchored" data-anchor-id="rygende-donorer---regressionen">Rygende donorer - regressionen</h2>
+<p>Vi kan konkludere at der er signifikant effekt af begge forklarende variable, rygestatus for donor og alderskategorien for donor.</p>
+<p>SMOKE har en OR på</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.5751</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.777308</code></pre>
+</div>
+</div>
+<p>KI:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.575</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.21</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.177508 2.682100</code></pre>
+</div>
+</div>
+<p>det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)<em>1.96</em>0.21)</p>
+<p>dvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.</p>
+<p>donoralder. Her har vi to. OR_40-55</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.444</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.55893</code></pre>
+</div>
+</div>
+<p>og KI:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.444</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.2527</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9500012 2.5581696</code></pre>
+</div>
+</div>
+<p>og OR_56</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.9395</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.558702</code></pre>
+</div>
+</div>
+<p>KI</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.9395</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.2891</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.451887 4.509273</code></pre>
+</div>
+</div>
+<p>Dvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.</p>
+<p>og 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.</p>
+</section>
+<section id="rygende-donorer-endeligt-regnestykke" class="level2">
+<h2 class="anchored" data-anchor-id="rygende-donorer-endeligt-regnestykke">rygende donorer endeligt regnestykke</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2167343</code></pre>
+</div>
+</div>
+<p>Det I skal opdage her er at vi har omregningen fra odds til sandsynlighed!</p>
+<p>Hvordan fortolker vi det tal?</p>
+<p>-1.2848 er estimatet på intercept.</p>
+<p>Det var for referencegruppen. Den patientguppe der har fået lunger fra en donor under 40 år, der var ikke ryger.</p>
+<p>Hvad er det så vi beregner?</p>
+<p>exp(-1.2848) går fra</p>
+<p>Log Odds(ratio) til:</p>
+<p>Odds</p>
+<p>Og brøken giver?</p>
+<p>Den går fra odds til sandsynlighed - så vi får?</p>
+<p>Den estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger.</p>
+</section>
+<section id="dtp-vaccine-umiddelbar-sammenhæng" class="level2">
+<h2 class="anchored" data-anchor-id="dtp-vaccine-umiddelbar-sammenhæng">DTP-vaccine umiddelbar sammenhæng?</h2>
+<p>Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?</p>
+<p>Sandsynlighed for død ved de to vaccine-statuser</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb185"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a>(p_0 <span class="ot">&lt;-</span> <span class="dv">9</span><span class="sc">/</span>(<span class="dv">526</span><span class="sc">+</span><span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01682243</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb187"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a>(p_1 <span class="ot">&lt;-</span> <span class="dv">46</span><span class="sc">/</span>(<span class="dv">46</span><span class="sc">+</span><span class="dv">892</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04904051</code></pre>
+</div>
+</div>
+<p>RR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb189"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb189-1"><a href="#cb189-1" aria-hidden="true" tabindex="-1"></a>(RR <span class="ot">&lt;-</span> p_1<span class="sc">/</span>p_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.915186</code></pre>
+</div>
+</div>
+<p>Det vil sige ca. 2.9 gange så høj risiko for død. Ved vaccine!</p>
+<p>SE-log-rr</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a>(SE_log_rr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">9</span><span class="sc">+</span><span class="dv">526</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">46</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">46</span><span class="sc">+</span><span class="dv">892</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3604372</code></pre>
+</div>
+</div>
+<p>testværdien</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(RR)<span class="sc">/</span>SE_log_rr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.968433</code></pre>
+</div>
+</div>
+<p>Resultatet er derfor statistisk signifikant på et 5% niveua. Vi kan nok også beregne et KI på RR</p>
+</section>
+<section id="dtp-vaccine" class="level2">
+<h2 class="anchored" data-anchor-id="dtp-vaccine">DTP-vaccine</h2>
+<p>OR for effekten af vaccinestatus estimeres til</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.0261</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.026444</code></pre>
+</div>
+</div>
+<p>Med et KI på:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb197"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.0261</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.0116</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.003370 1.050048</code></pre>
+</div>
+</div>
+<p>Vaccinerede har ca. 2.6% højere odds for død end ikke-vaccinerede</p>
+</section>
+<section id="glykæmisk-kontrol" class="level2">
+<h2 class="anchored" data-anchor-id="glykæmisk-kontrol">Glykæmisk kontrol</h2>
+<p>Baseret på den tabel - er der sammenhæng mellem de to variable?</p>
+<p>Hvad er den relative risiko for at have godt helbred hvis HbAlc er 1 - altså velreguleret.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb199"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a>(R_velreg <span class="ot">&lt;-</span> <span class="dv">188</span><span class="sc">/</span>(<span class="dv">188</span><span class="sc">+</span><span class="dv">264</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4159292</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb201"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a>(R_ejreg <span class="ot">&lt;-</span> <span class="dv">354</span><span class="sc">/</span>(<span class="dv">354</span><span class="sc">+</span><span class="dv">412</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.462141</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb203"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a>(RR <span class="ot">&lt;-</span> R_velreg<span class="sc">/</span>R_ejreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.900005</code></pre>
+</div>
+</div>
+<p>Så - den relative risiko for at have et godt selvvurdereet helbred er reduceret for diabetikere under glykæmisk kontrol, sammenlignet med diabetere der ikke er under glykæmisk kontrol.</p>
+<p>Det er kontraintuitivt for ikke-medicineren her.</p>
+</section>
+<section id="glykæmisk-kontrol---er-det-signifikant" class="level2">
+<h2 class="anchored" data-anchor-id="glykæmisk-kontrol---er-det-signifikant">glykæmisk kontrol - Er det signifikant?</h2>
+<p>se_log_rr</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb205"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" aria-hidden="true" tabindex="-1"></a>(se_log_rr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">188</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">188</span><span class="sc">+</span><span class="dv">264</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">354</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">354</span><span class="sc">+</span><span class="dv">412</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0680157</code></pre>
+</div>
+</div>
+<p>Så KI er</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb207"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" aria-hidden="true" tabindex="-1"></a>log_ki <span class="ot">&lt;-</span> <span class="fu">log</span>(RR) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>se_log_rr</span>
+<span id="cb207-2"><a href="#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(log_ki)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7876781 1.0283502</code></pre>
+</div>
+</div>
+<p>1 er indeholdt i intervallet, og estimatet på RR er derfor ikke signifikant.</p>
+</section>
+<section id="glykæmisk-kontrol---model" class="level2">
+<h2 class="anchored" data-anchor-id="glykæmisk-kontrol---model">Glykæmisk kontrol - model</h2>
+<p>Glykæmisk kontrol har vi allerede regnet på.</p>
+<p>Køn. OR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb209"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.252051</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.286662</code></pre>
+</div>
+</div>
+<p>Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb211"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.252051</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.117514</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.021961 1.619923</code></pre>
+</div>
+</div>
+<p>Alder, der også var statistisk signifikant (p-værdien)</p>
+<p>OR:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb213"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.015573</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9845476</code></pre>
+</div>
+</div>
+<p>ved fastholdt køn og HBAlC. ca. 1.2% reduceret odds for selvrapporteret godt helbred for hver øgning af alder med 1 år</p>
+<p>Ved fastholddt køn og hbalc</p>
+<p>Hvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen</p>
+<p>@@@@ ## Laparotomi</p>
+<p>Vi ser på data fra ca 1000 patienters risiko for at dø ved en operation (laparotomi). Har øget ilt-tilførsel under operationen betydning for død i en opfølgnigsperiode på ca. 3 år. Patienterne blev randomiseret til et af to ilt-regimer</p>
+<p>Vi har følgende variable Allokering: X - patient fik 80% ilt, Y Patient fik 30% ilt diagn_cancer: j: cancer, n: ikke cancer blod: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion bmi: patientens BMI dead: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever</p>
+<p>De første 6 observationer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb215"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ilt_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  Allokering diagn_cancer blod    bmi  dead
+  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Y          n            n      29.3     0
+2 X          n            n      28.1     0
+3 X          j            n      21.5     1
+4 X          j            n      17.3     1
+5 Y          n            n      24.2     0
+6 Y          n            n      18.2     0</code></pre>
+</div>
+</div>
+<ol type="a">
+<li><p>Hvis vi alene betragter patienternes bmi, hvordan ville vi så undersøge om den har signifikant betydning for risikoen for dø efter operation. Outcome - dead er binær og bmi er kontinuært. Så vi vil modellere et kategorisk outcome med kontinært forklarende variabel: logistisk regression</p></li>
+<li><p>Når vi gør det, får vi følgende resultat (de fortsætter deres juleleg med at fjerne dele af output):</p></li>
+</ol>
 <div class="cell">
 <div class="cell-output-display">
 <div id="bipinjmlit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1617,38 +2015,24 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 <th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
 <th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
 <th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
-<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
+<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">0.1730998</td>
-<td class="gt_row gt_left" headers="Std. Error">0.0488724</td>
-<td class="gt_row gt_left" headers="t value">3.542</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.000430***</td>
+<td class="gt_row gt_left" headers="Estimate">-0.007041</td>
+<td class="gt_row gt_left" headers="Std. Error">0.386263</td>
+<td class="gt_row gt_left" headers="z value">-0.018</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.98546</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(status)1</td>
-<td class="gt_row gt_left" headers="Estimate">-0.1196883</td>
-<td class="gt_row gt_left" headers="Std. Error">0.0310025</td>
-<td class="gt_row gt_left" headers="t value">-3.861</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.000126***</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(sex)M</td>
-<td class="gt_row gt_left" headers="Estimate">0.0042939</td>
-<td class="gt_row gt_left" headers="Std. Error">0.0324442</td>
-<td class="gt_row gt_left" headers="t value">0.132</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.894756</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">age</td>
-<td class="gt_row gt_left" headers="Estimate">-0.0045177</td>
-<td class="gt_row gt_left" headers="Std. Error">0.0008616</td>
-<td class="gt_row gt_left" headers="t value">-5.241</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">2.24e-7***</td>
+<td class="gt_row gt_left" headers="Term">bmi</td>
+<td class="gt_row gt_left" headers="Estimate"></td>
+<td class="gt_row gt_left" headers="Std. Error">0.015385</td>
+<td class="gt_row gt_left" headers="z value">-3.151</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)"></td>
 </tr>
 </tbody>
 </table>
@@ -1656,69 +2040,147 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 </div>
 </div>
 </div>
-<p>Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af den? Fortolk værdier i søjlen “Estimate” svarende til variablene status og age.</p>
-<p>Det er en multipel lineær regression med l_ratio som responsvariabel og status, sex og age som forklarende variable. age er kontinuer, status og sex er kategoriske (det ser vi bladnt andet af “factor”). Syge har i gennemsnit, alt andet lige, en signifikant lavere l_ratio end raske. Den estimerer vi til at være ca. 0.12 lavere, jsuteret for køn og alder. Den tilhørende p-værdi er 0.0001 og derfor signifikant. Alderseffekten er også signifikant (p&lt;0.001), og l_ratio falder, i gennemsnit, med 0.0045 pr år. Justeret for status og køn.</p>
-<ol start="5" type="a">
-<li>predikter median-ratio for de syge i studiepopulationen med en alder på 50 år, som er kvinder.</li>
-</ol>
-<p>middelværdien kan vi beregne ved: 0.1730998+-0.1196883+50*-0.0045177 = -0.17 Vi har fået oplyst at l_ratio er normalfordelt. I så fald er median og middel ens, så det er medianen vi har fundet. Der efterspørges ratio, ikke l_ratio, så vi skal beregne exp(-0.17) = 0.8436648</p>
-<ol start="6" type="a">
-<li>Hvordan ville vi undersøge om alder, køn og l_ratio er signifikante prædiktorer for sygdomsstatus? Angiv relevant R-kode</li>
-</ol>
-<p>Sygdomsstatus er en kategorisk, binær variabel. Så vi ville lave en logistisk regression: glm(status~age+factor(sex1)+l_ratio, family=“binomial”).</p>
-<p>Og så ville vi se om p-værdierne var tilstrækkeligt små til at vi kan konkludere at de er signifikante.</p>
-</section>
-<section id="blodtryk-i-ghana" class="level2">
-<h2 class="anchored" data-anchor-id="blodtryk-i-ghana">Blodtryk i Ghana</h2>
-<p>Vi skal se på blodtryksmålinger fra 641 forsøgspersoner i Ghana. Det er et interventionsstudie, der skulle undersøge om en ny behandling kunne sænke blodtrykket for patienter med ukontrolleret hypertension. Der er to behandlingsgrupper: control og treatment. Begge grupper har fået standard behandling med primærpleje, medicinsk konsultation, test og medicin. treatmentgruppen har dertil fået en personligt tilpasset behandling af sygepeljersker med speciale i hypertensionsbehandling. Behandlingen blev randomiseret, og vi har blodtryksmålinger fra baseline (før behandling) og efter 12 måneder. Vi kender patienternes køn. Der var 323 individer i treatment gruppen.</p>
-<p>Data har følgende variable:</p>
-<p>SBPbl: systolisk blodtryk ved baseline (mmHg) SBP12: systolisk blodtryk efter 12 måneder group (control/treatment) sex (male/female) diff: differensen mellem SBP12 og SBPbl</p>
-<p>Gennemsnit og spredning for diff i kontrolgruppen er -16.6 hhv 19.9 De tilsvarende tal i interventionsgruppen er -19.6 og 17.4</p>
-<ol type="a">
-<li>Er der et signifikant fald i blodtrykket i interventionsgruppen i den undersøgte periode. Besvar samme spørgsmål for kontrolgruppen.</li>
-</ol>
-<p>Vi starter med SEM for de to grupper:</p>
-<p>Intervention: n= 323</p>
+<p>Hvad kan vi sige ud fra det?</p>
+<p>Vi mangler et estimat for bmi. Det kan vi beregne, fordi z-value finder vi ved at dividere estimatet med standardfejlen. Derfor kan vi finde estimatet ved at gange standardfejl med z value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>SEM_intervention <span class="ot">&lt;-</span> <span class="fl">17.4</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>SEM_kontrol <span class="ot">&lt;-</span> <span class="fl">19.9</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">641-323</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Så kan vi beregne 95% KI beregnes for de to grupper:</p>
-<p>intervention:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">19.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_intervention</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb217"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">3.151</span><span class="sc">*</span><span class="fl">0.015385</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -21.4976 -17.7024</code></pre>
+<pre><code>[1] -0.04847813</code></pre>
 </div>
 </div>
-<p>kontrol:</p>
+<p>Teststørrelsen er klart signifikant</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">16.6</span><span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SEM_kontrol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb219"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">3.151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -18.78724 -14.41276</code></pre>
+<pre><code>[1] 0.001627125</code></pre>
 </div>
 </div>
-<p>Ingen af de to KI indeholder 0, så vi kan konkludere at begge behandlinger sænker det systoliske blodtryk signifikant.</p>
-<ol start="2" type="a">
-<li>Er faldt i blodtryk signifikant forskelligt i de to gruypper? hvad kan vi konkludere vedrønde effekten af præcisionsbehandlingen på blodtrykket påå baggrund af de beregninger vi har udført indtil videre?</li>
-</ol>
-<p>De to KI overlapper, men ingen af dem indeholder gennemsnittet fra det andet KI. så vi kan ikke bruge KI til at konkludere. Vi beregner SEM for differensen:</p>
+<p>Vi kan beregne OR:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>SEM_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(SEM_intervention<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> SEM_kontrol<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Det giver os en teststørrelse på forskellen på de to differenser på:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="fl">19.6</span><span class="sc">-</span> <span class="sc">-</span><span class="fl">16.6</span>)<span class="sc">/</span>SEM_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb221"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.030622</code></pre>
+<pre><code>[1] 0.9526782</code></pre>
 </div>
 </div>
-<p>Som (i absolutte tal) er større end 1.96 - der er en signifikant forskel.</p>
+<p>Så holdes alt andet konstant, vil en patient med et bmi der er 1 større end en anden patient, have vil odds for død reduceres med ca 5% for patienten med det højeste bmi.</p>
+<p>Vi kan beregne et 95% KI:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb223"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.015385</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9243794 0.9818433</code></pre>
+</div>
+</div>
+<p>1 er ikke indeholdt i intervallet, og forskellen er derfor signifkant. Det så vi også fra p-værdien vi beregnede tidligere.</p>
 <ol start="3" type="a">
-<li>Nu udførtes følgende analyser for mænd og kvinder hver for sig: &gt; summary(lm(diff[sex==“female”]~factor(group[sex==“female”])))</li>
+<li>Nu ser vi bort fra bmi, og betrager ilt-allokering.</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb225"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead,Allokering)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Allokering
+dead   X   Y
+   0 414 418
+   1 139 107</code></pre>
+</div>
+</div>
+<p>Hvad kan vi konkludere ud fra det?</p>
+<p>Vi sammenligner død (1) for de to ilt-regimer X og Y: odds_X = 139/414 = 0.3357488 P_y = 107/418 = 0.2559809</p>
+<p>OR (X mod Y) = 0.3357488/0.2559809 = 1.311617 dvs at odds for at dø estimeres at være ca. 31% højere ved det høje ilt-regime, sammenlignet med det lave (alt andet fastholdt)</p>
+<p>95% KI: standardfejlen på log(OR): sqrt(1/139 + 1/414 + 1/107 + 1/418) = 0.146109</p>
+<p>exp(log(1.311617) + c(-1,1)<em>1.96</em>0.146109)</p>
+<p>Det indeholder 1 og estimatet er derfor ikke statistisk signifikant (de er dog i modelbesvarelser glade for at nævne at det er tæt på at være signifikant)</p>
+<p>BETON FORSKEL PÅ OR OG RR!</p>
+<ol start="4" type="a">
+<li>Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead, Allokering, diagn_cancer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , diagn_cancer = j
+
+    Allokering
+dead   X   Y
+   0 188 213
+   1 101  74
+
+, , diagn_cancer = n
+
+    Allokering
+dead   X   Y
+   0 226 205
+   1  38  33</code></pre>
+</div>
+</div>
+<p>Giver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.</p>
+<p>Samme øvelse som før, men nu på hver gruppe: Cancerpatienter: OR = (101/188) / (74/213) = 1.546363 s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346 KI: exp(log(1.546363) + c(-1,1)<em>1.96</em>0.1828346) = 1.080636 2.212806</p>
+<p>Så for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i KI.</p>
+<p>non-cancer-patienter:</p>
+<p>OR = (38/226) / (33/205) = 1.044516 se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) = 0.2567521 KI: exp(log(1.044516) + c(-1,1)<em>1.96</em> 0.2567521) = 0.6314854 1.7276943 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.</p>
+<p>Så ilt-regime har betydning for cancerpatienter.</p>
+</section>
+<section id="levertal" class="level2">
+<h2 class="anchored" data-anchor-id="levertal">Levertal</h2>
+<p>583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb229-2"><a href="#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
+<span id="cb229-3"><a href="#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
+<span id="cb229-4"><a href="#cb229-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
+<span id="cb229-5"><a href="#cb229-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
+<span id="cb229-6"><a href="#cb229-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
+<span id="cb229-7"><a href="#cb229-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
+<span id="cb229-8"><a href="#cb229-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
+<span id="cb229-9"><a href="#cb229-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+    age albumin ratio globulin status  idnr sex   l_ratio
+  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1    65     3.3  0.9      3.67      1     1 F      -0.105
+2    62     3.2  0.74     4.32      1     2 M      -0.301
+3    62     3.3  0.89     3.71      1     3 M      -0.117
+4    58     3.4  1        3.4       1     4 M       0    
+5    72     2.4  0.4      6         1     5 M      -0.916
+6    46     4.4  1.3      3.38      1     6 M       0.262</code></pre>
+</div>
+</div>
+<p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
+<p>Der defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">99</span> <span class="sc">+</span> <span class="dv">66</span>),</span>
+<span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span> <span class="sc">+</span> <span class="dv">106</span>))</span>
+<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb231-4"><a href="#cb231-4" aria-hidden="true" tabindex="-1"></a>AG.positiv <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">99</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">66</span>),</span>
+<span id="cb231-5"><a href="#cb231-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">106</span>))</span>
+<span id="cb231-6"><a href="#cb231-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(AG.positiv, status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          status
+AG.positiv   0   1
+         0  66 106
+         1  99 308</code></pre>
+</div>
+</div>
+<ol type="a">
+<li>Undesøg om der er en statistisk signifikant sammenhæng mellem de to variable.</li>
+</ol>
+<p>Her kører vi en chi^2 test:</p>
+<p>input:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb233"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb233-1"><a href="#cb233-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb233-2"><a href="#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  input
+X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
+</div>
+</div>
+<p>Det giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.</p>
+<p>Det svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.</p>
+<ol start="2" type="a">
+<li>Nu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)</li>
+</ol>
+<p>Den giver dette resultat:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="oryawvaqct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2178,24 +2640,38 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 <th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
 <th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
 <th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
-<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
+<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
+<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-16.988</td>
-<td class="gt_row gt_left" headers="Std. Error">1.3556</td>
-<td class="gt_row gt_left" headers="t value">-12.527</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
+<td class="gt_row gt_left" headers="Estimate">-0.446661</td>
+<td class="gt_row gt_left" headers="Std. Error">0.320769</td>
+<td class="gt_row gt_left" headers="z value">-1.392</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.16378</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(group[sex=='female'])treatment</td>
-<td class="gt_row gt_left" headers="Estimate">-5.915</td>
-<td class="gt_row gt_left" headers="Std. Error">1.901</td>
-<td class="gt_row gt_left" headers="t value">-3.112</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.002**</td>
+<td class="gt_row gt_left" headers="Term">factor(AG.postiv)1</td>
+<td class="gt_row gt_left" headers="Estimate">0.594643</td>
+<td class="gt_row gt_left" headers="Std. Error">0.199556</td>
+<td class="gt_row gt_left" headers="z value">2.980</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.00288**</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Term">factor(sex)M</td>
+<td class="gt_row gt_left" headers="Estimate">0.407717</td>
+<td class="gt_row gt_left" headers="Std. Error">0.211941</td>
+<td class="gt_row gt_left" headers="z value">1.924</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.05439.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Term">age</td>
+<td class="gt_row gt_left" headers="Estimate">0.015131</td>
+<td class="gt_row gt_left" headers="Std. Error">0.005927</td>
+<td class="gt_row gt_left" headers="z value">2.553</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">0.01069*</td>
 </tr>
 </tbody>
 </table>
@@ -2203,9 +2679,67 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 </div>
 </div>
 </div>
+<p>Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.</p>
+<p>Det er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.</p>
+<p>OR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)<em>1.96</em>0.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)</p>
+<ol start="3" type="a">
+<li>Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.</li>
+</ol>
+<p>Vi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532</p>
+<p>Det er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799</p>
+</section>
+<section id="bilirubin" class="level2">
+<h2 class="anchored" data-anchor-id="bilirubin">Bilirubin</h2>
+<p>Vi skal se på et randomiseret klinisk studie udført på seks forskellige europæiske hospitaler. 349 patienter med leversygdom blev randomiseret til enten den eksperimentelle behadnling UDC (176 patienter) eller placebo (173 patienter)</p>
+<p>Udfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.</p>
+<p>Vi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb235"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb235-1"><a href="#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb235-2"><a href="#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Y, <span class="sc">~</span>R, <span class="sc">~</span>X,</span>
+<span id="cb235-3"><a href="#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>, <span class="dv">1</span> , <span class="fl">1.616854293</span>,</span>
+<span id="cb235-4"><a href="#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.990367802</span>,</span>
+<span id="cb235-5"><a href="#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.849360224</span>,</span>
+<span id="cb235-6"><a href="#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.496709981</span>,</span>
+<span id="cb235-7"><a href="#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.335441834</span>,</span>
+<span id="cb235-8"><a href="#cb235-8" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.561678151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+      Y     R      X
+  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1     1     1  1.62 
+2     0     1  1.99 
+3     0     1 -0.849
+4     1     1  1.50 
+5     0     1  1.34 
+6     0     1 -0.562</code></pre>
+</div>
+</div>
 <blockquote class="blockquote">
-<p>summary(lm(diff[sex==“male”]~factor(group[sex==“male”])))</p>
+<p>table(Y,R) giver:</p>
 </blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   R
+Y     0   1
+  0 118 134
+  1  55  42</code></pre>
+</div>
+</div>
+<ol type="a">
+<li>baseret på ovenstående table ønske beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.</li>
+</ol>
+<p>Risiko ved behandling: 42/(134+42)= 0.2386364</p>
+<p>Risiko ved placebo: 55/(118+55) = 0.3179191</p>
+<p>RR = 0.2386364/0.3179191 = 0.7506199</p>
+<p>log(RR) = log(0.7506199) = -0.2868559</p>
+<p>se.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726</p>
+<p>et 95% ki for log(rr) findes til; -0.2868559 + c(-1,1)<em>1.96</em>0.174726 = -0.62931886 0.05560706</p>
+<p>Derfor er 95% ki for RR: exp(c(-0.62931886, 0.05560706)) = 0.5329547 1.0571822</p>
+<p>RR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822 Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant effekt.</p>
+<ol start="2" type="a">
+<li>Nu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)</li>
+</ol>
+<p>der gav dette output:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="mrmxxelizs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2665,1120 +3199,6 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 <th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
 <th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
 <th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
-<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-15.893</td>
-<td class="gt_row gt_left" headers="Std. Error">1.594</td>
-<td class="gt_row gt_left" headers="t value">-9.968</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">&lt;2e-16***</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(group[sex=='male'])treatment</td>
-<td class="gt_row gt_left" headers="Estimate">1.692</td>
-<td class="gt_row gt_left" headers="Std. Error">2.264</td>
-<td class="gt_row gt_left" headers="t value">0.747</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.456</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvilke analyser er er tale om, og hvad kan vi konkludere på baggrund af disse? Der ønskes en fortolkning af værdierne i “Estimate” søjlerne. Giver det anledning til en anden konlusion end den vi fik lige før?</p>
-<p>Der er tale om to multiple lineære rgressioner, med diff som kontinuært responsvariabel og group som forklarende, kategorisk (og binær) variabel.</p>
-<p>For kvinderne ser vi at blodtrykket i gennemsnit falder med ca 17 mmHg under kontrolbehandling (signifikant, med p ~ 0), og yderligere ca 6 mmHg ved præcisionsbehandlingen (signifikant med p = 0.002)</p>
-<p>For mændene ser vi at blodtrykket i gennemsnit falder med ca. 16 mmHg under kontrolbehandling, men at der ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)</p>
-</section>
-</section>
-<section id="logistisk" class="level1">
-<h1>Logistisk</h1>
-<section id="levertal" class="level2">
-<h2 class="anchored" data-anchor-id="levertal">Levertal</h2>
-<p>583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
-<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
-<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
-<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
-<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
-<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-    age albumin ratio globulin status  idnr sex   l_ratio
-  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    65     3.3  0.9      3.67      1     1 F      -0.105
-2    62     3.2  0.74     4.32      1     2 M      -0.301
-3    62     3.3  0.89     3.71      1     3 M      -0.117
-4    58     3.4  1        3.4       1     4 M       0    
-5    72     2.4  0.4      6         1     5 M      -0.916
-6    46     4.4  1.3      3.38      1     6 M       0.262</code></pre>
-</div>
-</div>
-<p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
-<p>Der defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">99</span> <span class="sc">+</span> <span class="dv">66</span>),</span>
-<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span> <span class="sc">+</span> <span class="dv">106</span>))</span>
-<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>AG.positiv <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">99</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">66</span>),</span>
-<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">106</span>))</span>
-<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(AG.positiv, status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          status
-AG.positiv   0   1
-         0  66 106
-         1  99 308</code></pre>
-</div>
-</div>
-<ol type="a">
-<li>Undesøg om der er en statistisk signifikant sammenhæng mellem de to variable.</li>
-</ol>
-<p>Her kører vi en chi^2 test:</p>
-<p>input:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test
-
-data:  input
-X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
-</div>
-</div>
-<p>Det giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.</p>
-<p>Det svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.</p>
-<ol start="2" type="a">
-<li>Nu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)</li>
-</ol>
-<p>Den giver dette resultat:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="sxfzsajxiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#sxfzsajxiu table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#sxfzsajxiu thead, #sxfzsajxiu tbody, #sxfzsajxiu tfoot, #sxfzsajxiu tr, #sxfzsajxiu td, #sxfzsajxiu th {
-  border-style: none;
-}
-
-#sxfzsajxiu p {
-  margin: 0;
-  padding: 0;
-}
-
-#sxfzsajxiu .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#sxfzsajxiu .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#sxfzsajxiu .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#sxfzsajxiu .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#sxfzsajxiu .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#sxfzsajxiu .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#sxfzsajxiu .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#sxfzsajxiu .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#sxfzsajxiu .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#sxfzsajxiu .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#sxfzsajxiu .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#sxfzsajxiu .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#sxfzsajxiu .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#sxfzsajxiu .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#sxfzsajxiu .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sxfzsajxiu .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#sxfzsajxiu .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#sxfzsajxiu .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#sxfzsajxiu .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sxfzsajxiu .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#sxfzsajxiu .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sxfzsajxiu .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#sxfzsajxiu .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sxfzsajxiu .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#sxfzsajxiu .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#sxfzsajxiu .gt_left {
-  text-align: left;
-}
-
-#sxfzsajxiu .gt_center {
-  text-align: center;
-}
-
-#sxfzsajxiu .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#sxfzsajxiu .gt_font_normal {
-  font-weight: normal;
-}
-
-#sxfzsajxiu .gt_font_bold {
-  font-weight: bold;
-}
-
-#sxfzsajxiu .gt_font_italic {
-  font-style: italic;
-}
-
-#sxfzsajxiu .gt_super {
-  font-size: 65%;
-}
-
-#sxfzsajxiu .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#sxfzsajxiu .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#sxfzsajxiu .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#sxfzsajxiu .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#sxfzsajxiu .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#sxfzsajxiu .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#sxfzsajxiu .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#sxfzsajxiu .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#sxfzsajxiu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
-<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-0.446661</td>
-<td class="gt_row gt_left" headers="Std. Error">0.320769</td>
-<td class="gt_row gt_left" headers="z value">-1.392</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.16378</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(AG.postiv)1</td>
-<td class="gt_row gt_left" headers="Estimate">0.594643</td>
-<td class="gt_row gt_left" headers="Std. Error">0.199556</td>
-<td class="gt_row gt_left" headers="z value">2.980</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.00288**</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(sex)M</td>
-<td class="gt_row gt_left" headers="Estimate">0.407717</td>
-<td class="gt_row gt_left" headers="Std. Error">0.211941</td>
-<td class="gt_row gt_left" headers="z value">1.924</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.05439.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">age</td>
-<td class="gt_row gt_left" headers="Estimate">0.015131</td>
-<td class="gt_row gt_left" headers="Std. Error">0.005927</td>
-<td class="gt_row gt_left" headers="z value">2.553</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.01069*</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.</p>
-<p>Det er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.</p>
-<p>OR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)<em>1.96</em>0.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)</p>
-<ol start="3" type="a">
-<li>Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.</li>
-</ol>
-<p>Vi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532</p>
-<p>Det er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799</p>
-</section>
-<section id="bilirubin" class="level2">
-<h2 class="anchored" data-anchor-id="bilirubin">Bilirubin</h2>
-<p>Vi skal se på et randomiseret klinisk studie udført på seks forskellige europæiske hospitaler. 349 patienter med leversygdom blev randomiseret til enten den eksperimentelle behadnling UDC (176 patienter) eller placebo (173 patienter)</p>
-<p>Udfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.</p>
-<p>Vi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Y, <span class="sc">~</span>R, <span class="sc">~</span>X,</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>, <span class="dv">1</span> , <span class="fl">1.616854293</span>,</span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.990367802</span>,</span>
-<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.849360224</span>,</span>
-<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.496709981</span>,</span>
-<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.335441834</span>,</span>
-<span id="cb143-8"><a href="#cb143-8" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.561678151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-      Y     R      X
-  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-1     1     1  1.62 
-2     0     1  1.99 
-3     0     1 -0.849
-4     1     1  1.50 
-5     0     1  1.34 
-6     0     1 -0.562</code></pre>
-</div>
-</div>
-<blockquote class="blockquote">
-<p>table(Y,R) giver:</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   R
-Y     0   1
-  0 118 134
-  1  55  42</code></pre>
-</div>
-</div>
-<ol type="a">
-<li>baseret på ovenstående table ønske beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.</li>
-</ol>
-<p>Risiko ved behandling: 42/(134+42)= 0.2386364</p>
-<p>Risiko ved placebo: 55/(118+55) = 0.3179191</p>
-<p>RR = 0.2386364/0.3179191 = 0.7506199</p>
-<p>log(RR) = log(0.7506199) = -0.2868559</p>
-<p>se.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726</p>
-<p>et 95% ki for log(rr) findes til; -0.2868559 + c(-1,1)<em>1.96</em>0.174726 = -0.62931886 0.05560706</p>
-<p>Derfor er 95% ki for RR: exp(c(-0.62931886, 0.05560706)) = 0.5329547 1.0571822</p>
-<p>RR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822 Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant effekt.</p>
-<ol start="2" type="a">
-<li>Nu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)</li>
-</ol>
-<p>der gav dette output:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="lqowkvnfie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#lqowkvnfie table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#lqowkvnfie thead, #lqowkvnfie tbody, #lqowkvnfie tfoot, #lqowkvnfie tr, #lqowkvnfie td, #lqowkvnfie th {
-  border-style: none;
-}
-
-#lqowkvnfie p {
-  margin: 0;
-  padding: 0;
-}
-
-#lqowkvnfie .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#lqowkvnfie .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#lqowkvnfie .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#lqowkvnfie .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#lqowkvnfie .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#lqowkvnfie .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#lqowkvnfie .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#lqowkvnfie .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#lqowkvnfie .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#lqowkvnfie .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#lqowkvnfie .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#lqowkvnfie .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#lqowkvnfie .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#lqowkvnfie .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#lqowkvnfie .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqowkvnfie .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#lqowkvnfie .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#lqowkvnfie .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#lqowkvnfie .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqowkvnfie .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#lqowkvnfie .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqowkvnfie .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#lqowkvnfie .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqowkvnfie .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lqowkvnfie .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqowkvnfie .gt_left {
-  text-align: left;
-}
-
-#lqowkvnfie .gt_center {
-  text-align: center;
-}
-
-#lqowkvnfie .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#lqowkvnfie .gt_font_normal {
-  font-weight: normal;
-}
-
-#lqowkvnfie .gt_font_bold {
-  font-weight: bold;
-}
-
-#lqowkvnfie .gt_font_italic {
-  font-style: italic;
-}
-
-#lqowkvnfie .gt_super {
-  font-size: 65%;
-}
-
-#lqowkvnfie .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#lqowkvnfie .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#lqowkvnfie .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#lqowkvnfie .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#lqowkvnfie .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#lqowkvnfie .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#lqowkvnfie .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#lqowkvnfie .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#lqowkvnfie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
 <th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
 <th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
 </tr>
@@ -3816,1215 +3236,6 @@ Y     0   1
 <p>For den forklarende variabel X får vi en estimeret odds ratio (OR) på behandlingen på exp(-0.9054) = 0.4043801 når der kontrolleres for den forklarende variabel X.</p>
 <p>Det tilhøreden 95% konfidensinterval findes ved: exp(-0.9054 + c(-1,1)<em>1.96</em>0.2967)</p>
 <p>OR påp 0.4 svarer til en reduktion i odds for treatment failure på ca 60%, ved aktiv behandling vs.&nbsp;placebo, når der kontrolleres for bilirubin. Da KI ikke indeholder 1, er effekten signifikant.</p>
-</section>
-<section id="laparotomi" class="level2">
-<h2 class="anchored" data-anchor-id="laparotomi">Laparotomi</h2>
-<p>Vi ser på data fra ca 1000 patienters risiko for at dø ved en operation (laparotomi). Har øget ilt-tilførsel under operationen betydning for død i en opfølgnigsperiode på ca. 3 år. Patienterne blev randomiseret til et af to ilt-regimer</p>
-<p>Vi har følgende variable Allokering: X - patient fik 80% ilt, Y Patient fik 30% ilt diagn_cancer: j: cancer, n: ikke cancer blod: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion bmi: patientens BMI dead: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever</p>
-<p>De første 6 observationer:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ilt_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  Allokering diagn_cancer blod    bmi  dead
-  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 Y          n            n      29.3     0
-2 X          n            n      28.1     0
-3 X          j            n      21.5     1
-4 X          j            n      17.3     1
-5 Y          n            n      24.2     0
-6 Y          n            n      18.2     0</code></pre>
-</div>
-</div>
-<ol type="a">
-<li><p>Hvis vi alene betragter patienternes bmi, hvordan ville vi så undersøge om den har signifikant betydning for risikoen for dø efter operation. Outcome - dead er binær og bmi er kontinuært. Så vi vil modellere et kategorisk outcome med kontinært forklarende variabel: logistisk regression</p></li>
-<li><p>Når vi gør det, får vi følgende resultat (de fortsætter deres juleleg med at fjerne dele af output):</p></li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div id="loaxifqsje" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#loaxifqsje table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#loaxifqsje thead, #loaxifqsje tbody, #loaxifqsje tfoot, #loaxifqsje tr, #loaxifqsje td, #loaxifqsje th {
-  border-style: none;
-}
-
-#loaxifqsje p {
-  margin: 0;
-  padding: 0;
-}
-
-#loaxifqsje .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#loaxifqsje .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#loaxifqsje .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#loaxifqsje .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#loaxifqsje .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#loaxifqsje .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#loaxifqsje .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#loaxifqsje .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#loaxifqsje .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#loaxifqsje .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#loaxifqsje .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#loaxifqsje .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#loaxifqsje .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#loaxifqsje .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#loaxifqsje .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#loaxifqsje .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#loaxifqsje .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#loaxifqsje .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#loaxifqsje .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#loaxifqsje .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#loaxifqsje .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#loaxifqsje .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#loaxifqsje .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#loaxifqsje .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#loaxifqsje .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#loaxifqsje .gt_left {
-  text-align: left;
-}
-
-#loaxifqsje .gt_center {
-  text-align: center;
-}
-
-#loaxifqsje .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#loaxifqsje .gt_font_normal {
-  font-weight: normal;
-}
-
-#loaxifqsje .gt_font_bold {
-  font-weight: bold;
-}
-
-#loaxifqsje .gt_font_italic {
-  font-style: italic;
-}
-
-#loaxifqsje .gt_super {
-  font-size: 65%;
-}
-
-#loaxifqsje .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#loaxifqsje .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#loaxifqsje .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#loaxifqsje .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#loaxifqsje .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#loaxifqsje .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#loaxifqsje .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#loaxifqsje .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#loaxifqsje div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
-<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-0.007041</td>
-<td class="gt_row gt_left" headers="Std. Error">0.386263</td>
-<td class="gt_row gt_left" headers="z value">-0.018</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.98546</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">bmi</td>
-<td class="gt_row gt_left" headers="Estimate"></td>
-<td class="gt_row gt_left" headers="Std. Error">0.015385</td>
-<td class="gt_row gt_left" headers="z value">-3.151</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)"></td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvad kan vi sige ud fra det?</p>
-<p>Vi mangler et estimat for bmi. Det kan vi beregne, fordi z-value finder vi ved at dividere estimatet med standardfejlen. Derfor kan vi finde estimatet ved at gange standardfejl med z value.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">3.151</span><span class="sc">*</span><span class="fl">0.015385</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.04847813</code></pre>
-</div>
-</div>
-<p>Teststørrelsen er klart signifikant</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">3.151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.001627125</code></pre>
-</div>
-</div>
-<p>Vi kan beregne OR:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9526782</code></pre>
-</div>
-</div>
-<p>Så holdes alt andet konstant, vil en patient med et bmi der er 1 større end en anden patient, have vil odds for død reduceres med ca 5% for patienten med det højeste bmi.</p>
-<p>Vi kan beregne et 95% KI:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.04847813</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.015385</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9243794 0.9818433</code></pre>
-</div>
-</div>
-<p>1 er ikke indeholdt i intervallet, og forskellen er derfor signifkant. Det så vi også fra p-værdien vi beregnede tidligere.</p>
-<ol start="3" type="a">
-<li>Nu ser vi bort fra bmi, og betrager ilt-allokering.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead,Allokering)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    Allokering
-dead   X   Y
-   0 414 418
-   1 139 107</code></pre>
-</div>
-</div>
-<p>Hvad kan vi konkludere ud fra det?</p>
-<p>Vi sammenligner død (1) for de to ilt-regimer X og Y: odds_X = 139/414 = 0.3357488 P_y = 107/418 = 0.2559809</p>
-<p>OR (X mod Y) = 0.3357488/0.2559809 = 1.311617 dvs at odds for at dø estimeres at være ca. 31% højere ved det høje ilt-regime, sammenlignet med det lave (alt andet fastholdt)</p>
-<p>95% KI: standardfejlen på log(OR): sqrt(1/139 + 1/414 + 1/107 + 1/418) = 0.146109</p>
-<p>exp(log(1.311617) + c(-1,1)<em>1.96</em>0.146109)</p>
-<p>Det indeholder 1 og estimatet er derfor ikke statistisk signifikant (de er dog i modelbesvarelser glade for at nævne at det er tæt på at være signifikant)</p>
-<p>BETON FORSKEL PÅ OR OG RR!</p>
-<ol start="4" type="a">
-<li>Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dead, Allokering, diagn_cancer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>, , diagn_cancer = j
-
-    Allokering
-dead   X   Y
-   0 188 213
-   1 101  74
-
-, , diagn_cancer = n
-
-    Allokering
-dead   X   Y
-   0 226 205
-   1  38  33</code></pre>
-</div>
-</div>
-<p>Giver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.</p>
-<p>Samme øvelse som før, men nu på hver gruppe: Cancerpatienter: OR = (101/188) / (74/213) = 1.546363 s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346 KI: exp(log(1.546363) + c(-1,1)<em>1.96</em>0.1828346) = 1.080636 2.212806</p>
-<p>Så for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i KI.</p>
-<p>non-cancer-patienter:</p>
-<p>OR = (38/226) / (33/205) = 1.044516 se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) = 0.2567521 KI: exp(log(1.044516) + c(-1,1)<em>1.96</em> 0.2567521) = 0.6314854 1.7276943 Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.</p>
-<p>Så ilt-regime har betydning for cancerpatienter.</p>
-</section>
-<section id="glykæmisk-kontrol" class="level2">
-<h2 class="anchored" data-anchor-id="glykæmisk-kontrol">Glykæmisk kontrol</h2>
-<p>Vi skal undersøge om type 2 diabetes patienter med bedre glykæmisk kontrol, har et bedre selvvurderet helbred.</p>
-<p>Vi har følgende variable</p>
-<p>HBAAlC_dik: 1 hvis HbAlc &lt; 9%, 0 hvis HbAlc &gt;= 9% (note til ikke-medicineren. 1 er godt helbred) SRH_dik: 1 hvis selvvurderet helbred er godt/meget godt. 0 hvis det er nogenlunde/dårligt/meget dårligt AGE: Alder i år SEX: Køn. 0: Kvinde, 1: Mand</p>
-<p>Vi gør i R følgende og får: &gt;table(SRH_dik, HBAlC_dik)</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>       HBAlC_dik
-SRH_dik   0   1
-      0 412 264
-      1 354 188</code></pre>
-</div>
-</div>
-<ol type="a">
-<li>Baseret på den tabel - er der sammenhæng mellem de to variable?</li>
-</ol>
-<p>Hvad er den relative risiko for at have godt helbred hvis HbAlc er 1 - altså velreguleret.</p>
-<p>Den relative risiko finder vi ved: (188/(188+264))/(354/(354+412)) = 0.900005 pas på paranteserne!</p>
-<p>Der er dermed reduceret sandsynlighed for godt selvvurderet helbred hvis man er velreguleret. Er det statistisk signifikant?</p>
-<p>Det kræver vi har s.e. for rr sqrt(1/188 - 1/(188+264) + 1/354 - 1/(354+412)) = 0.0680157</p>
-<p>deter standardfejlen på log RR exp(log(0.900005) + c(-1,1)<em>1.96</em>0.0680157) Da det omfatter 1, er den reducerede sandsynlighed ikke signifikant.</p>
-<p>Man kan også bruge chi^2</p>
-<ol start="2" type="a">
-<li>Nu udfører vi denne analyse i R: &gt;model1 &lt;- glm(SRH_dik ~ factor(HBAlC_dik)+ factor(SEX) + Age, family = “binomial”) &gt;summary(model1)</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<div id="mnttajmaaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mnttajmaaz table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#mnttajmaaz thead, #mnttajmaaz tbody, #mnttajmaaz tfoot, #mnttajmaaz tr, #mnttajmaaz td, #mnttajmaaz th {
-  border-style: none;
-}
-
-#mnttajmaaz p {
-  margin: 0;
-  padding: 0;
-}
-
-#mnttajmaaz .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#mnttajmaaz .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#mnttajmaaz .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#mnttajmaaz .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#mnttajmaaz .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#mnttajmaaz .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#mnttajmaaz .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#mnttajmaaz .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#mnttajmaaz .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#mnttajmaaz .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#mnttajmaaz .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#mnttajmaaz .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#mnttajmaaz .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#mnttajmaaz .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#mnttajmaaz .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mnttajmaaz .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#mnttajmaaz .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#mnttajmaaz .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#mnttajmaaz .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mnttajmaaz .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#mnttajmaaz .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mnttajmaaz .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#mnttajmaaz .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mnttajmaaz .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#mnttajmaaz .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#mnttajmaaz .gt_left {
-  text-align: left;
-}
-
-#mnttajmaaz .gt_center {
-  text-align: center;
-}
-
-#mnttajmaaz .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#mnttajmaaz .gt_font_normal {
-  font-weight: normal;
-}
-
-#mnttajmaaz .gt_font_bold {
-  font-weight: bold;
-}
-
-#mnttajmaaz .gt_font_italic {
-  font-style: italic;
-}
-
-#mnttajmaaz .gt_super {
-  font-size: 65%;
-}
-
-#mnttajmaaz .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#mnttajmaaz .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#mnttajmaaz .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#mnttajmaaz .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#mnttajmaaz .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#mnttajmaaz .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#mnttajmaaz .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#mnttajmaaz .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#mnttajmaaz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="t-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">t value</th>
-<th id="Pr(>|t|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|t|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">0.717969</td>
-<td class="gt_row gt_left" headers="Std. Error">0.350389</td>
-<td class="gt_row gt_left" headers="t value">2.049</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.04046*</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(HBAlC_dik)1</td>
-<td class="gt_row gt_left" headers="Estimate">-0.188731</td>
-<td class="gt_row gt_left" headers="Std. Error">0.120637</td>
-<td class="gt_row gt_left" headers="t value">-1.564</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.11771</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(SEX)1</td>
-<td class="gt_row gt_left" headers="Estimate">0.252051</td>
-<td class="gt_row gt_left" headers="Std. Error">0.117514</td>
-<td class="gt_row gt_left" headers="t value">2.145</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.03196*</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">AGE</td>
-<td class="gt_row gt_left" headers="Estimate">-0.015573</td>
-<td class="gt_row gt_left" headers="Std. Error">0.005099</td>
-<td class="gt_row gt_left" headers="t value">-3.054</td>
-<td class="gt_row gt_left" headers="Pr(>|t|)">0.00226**</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Hvad har vi gjort, og hvordan fortolker vi resultaterne?</p>
-<p>Vi har gennemført en logistisk regression, med tre forklarende variable, AGE som kontinuert og HBAlC_dik og SEX som kategoriske variabel. Vi ser at HBAlC ikke er signifikant. Både køn og alder er signifikante med tilhørende Odds-ratio på exp(0.252051) = 1.28 for køn, med et 95%KI på exp(0.252051 + c(-1,1)<em>1.96</em>0.117514) Mandlige diabetikere har derfor 28% større odds for godt helbred (selvrapporteret) sammenlignet med kvindelige diabetikere, og et KI på med alder og HBAlC fastholdt.</p>
-<p>Alder er også statistisk signifkant med odds ratio på exp(-0.015573) = 0.9845476 diabetikere har derfor ~1.2% reduceret odds for godt helbred (med fastholdt køn og HBAlC) ved en 1 års øgning ialder. KI:</p>
-<p>exp(-0.015573 + c(-1,1)<em>1.96</em>0.005099)</p>
-<p>Hvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen</p>
-</section>
-<section id="opgave" class="level2">
-<h2 class="anchored" data-anchor-id="opgave">opgave</h2>
-<p>1473 børn i Guinea-Bissau blev undersøgt for at finde ud af om der, ud over gavnlig effekt af vaccination mod specifikke sygdomme, også var en generelt reduceret børne-dødelighed.</p>
-<p>Børnene blev besøgt to gange i deres hjem. Første gang tidligt efter fødslen hvor der blev vaccineret. anden gang ca. 6 måneder senere, hvor der blev fulgt op. En del, men ikke alle børn blev vaccineret med DTP (difteri, tetanus og pertussis).</p>
-<p>Variablene i datasættet oplyses at være: alder - alder ved vaccinationen - i år status - status ved opfølgning. 1: død, 0: i live dtp: blev barnet vaccineret. 1: ja, 0: nej vægt;: barnets vægt ved vaccination (i kg) etniskgr: etnisk gruppe 0: Manjaco, Fula, 1: Mandinga og anden</p>
-<p>Vi får også oplyst de seks første observationer i datasættet:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>alder, <span class="sc">~</span>status, <span class="sc">~</span>dtp, <span class="sc">~</span>etngr, <span class="sc">~</span>vaegt,</span>
-<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,  <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">5.6</span>,</span>
-<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fl">0.425</span>, <span class="dv">1</span> , <span class="dv">1</span> ,<span class="dv">1</span> , <span class="fl">6.0</span>,</span>
-<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="fl">0.510</span>, <span class="dv">0</span>,  <span class="dv">1</span> ,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
-<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="fl">0.592</span>, <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="fl">6.2</span>,</span>
-<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.6</span>,</span>
-<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="fl">0.173</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">5.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  alder status   dtp etngr vaegt
-  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 0.592      0     1     1   5.6
-2 0.425      1     1     1   6  
-3 0.51       0     1     1   6.2
-4 0.592      0     1     1   6.2
-5 0.173      0     0     1   5.6
-6 0.173      0     0     1   5.2</code></pre>
-</div>
-</div>
-<p>Og optælling: &lt; table(dtp,status)</p>
-<p>status dtp 0 1 0 526 9 1 892 46</p>
-<ol type="a">
-<li>Ser det umiddelbart ud til at der er en sammenhæng mellem dødeligheden og vaccinestatus?</li>
-</ol>
-<p>Vi har tælletal Hvad er sandsynligheden for død ved dtp lig 0 og 1?</p>
-<p>p_0 = 9/(526+9) = 1.7% p_1 = 46/(46+892) = 4.9%</p>
-<p>Den relative risiko: RR_1:0 ) 4.9/1.7 = 2.88.</p>
-<p>3 gange så høj risiko for død</p>
-<p>Hvad er det tilhørende 95% konfidens interval?</p>
-<p>Log(RR) = 1.06, standardfejlen på log(rr) = sqrt(1/9 + 1/46 - 1/(526+9)-1/(46+892))</p>
-<p>DETTE UDLØSER ET HELT NYT SÆT SLIDES og modelløsnignen har tastefejl… exp(1.06 + c(-1,1)<em>1.96</em>0.36). Under alle omstændigheder - 1 - som ville være at der ikke var forskel, er ikke indeholdt. for H_0 er at RR = 1</p>
-<ol start="2" type="a">
-<li>Hvordan vil vi undersøge sammenhængen mellem dødeligheden og vaccinestatus?, hvor der justeres for de øvrei variable?</li>
-</ol>
-<p>Det er et binært udfald. Så en logistisk regression. Det gør vi i glm, med family binomial glm(status~vaegt + alder + factor(dtp) + factor(etngr), family = “binomial”)</p>
-<p>Den korrekte analyse gav nedenstående resultat:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Coefficients, <span class="sc">~</span>Estimate, <span class="sc">~</span><span class="st">`</span><span class="at">Std. Error</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">t value</span><span class="st">`</span>, <span class="sc">~</span><span class="st">`</span><span class="at">Pr(&gt;|t|)</span><span class="st">`</span>,</span>
-<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="st">"(Intercept)"</span>, <span class="fl">0.05666</span>, <span class="fl">0.02866</span>, <span class="fl">1.98</span>, <span class="st">"0.048 *"</span>,</span>
-<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(dtp)1"</span>, <span class="fl">0.02609</span>, <span class="fl">0.01162</span>, <span class="fl">2.25</span>, <span class="st">"0.025 *"</span>,</span>
-<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="st">"factor(etngr)1"</span>, <span class="fl">0.02294</span>, <span class="fl">0.01033</span>, <span class="fl">2.22</span>, <span class="st">"0.027 *"</span>,</span>
-<span id="cb163-5"><a href="#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="st">"alder"</span>, <span class="fl">0.05845</span>, <span class="fl">0.03897</span>, <span class="fl">1.50</span>, <span class="st">"0.134"</span>,</span>
-<span id="cb163-6"><a href="#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="st">"vaegt"</span>, <span class="sc">-</span><span class="fl">0.01140</span>, <span class="fl">0.00527</span>, <span class="sc">-</span><span class="fl">2.16</span>, <span class="st">"0.031 *"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 5
-  Coefficients   Estimate `Std. Error` `t value` `Pr(&gt;|t|)`
-  &lt;chr&gt;             &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     
-1 (Intercept)      0.0567      0.0287       1.98 0.048 *   
-2 factor(dtp)1     0.0261      0.0116       2.25 0.025 *   
-3 factor(etngr)1   0.0229      0.0103       2.22 0.027 *   
-4 alder            0.0584      0.0390       1.5  0.134     
-5 vaegt           -0.0114      0.00527     -2.16 0.031 *   </code></pre>
-</div>
-</div>
-<p>Fortolk resultatet. Er der sammenhæng mellem vaccinestatus og dødeligheden? Giv et relevant effektmål med tilhørende 95% konfidensinterval</p>
-<p>dtp er signifikant, også efter der justeres for etnicitet, alder og vægt, med p = 0.025</p>
-<p>OR estimeres til exp(0.026) = 1.026 med et 95% konfidensinterval på: exp(0.026 + c(-1,1)<em>1.96</em>0.012)</p>
-<p>Vaccinerede har ca. 2.6% højere odds for død end ikke-vaccinerede</p>
-</section>
-<section id="rygende-donorer" class="level2">
-<h2 class="anchored" data-anchor-id="rygende-donorer">Rygende donorer</h2>
-<p>Hvad kan vi konkludere på baggrund af den analyse. Beregn relevante odds ratios (OR), beregn også de tilhørende 95% konfidensintervaller</p>
-<p>Begge de forklarende variable er signifikante.</p>
-<p>SMOKE har en OR på exp(0.5751) = 1.777308 det tilhørende konfidensinterval finder vi ved: exp(0.575 + c(-1,1)<em>1.96</em>0.21)</p>
-<p>dvs 1.77 gange højere odds for at dø inden for 3 år efter transplatation sammen lignet med ikkeryger donor (og fastholdt donoralder). KI indeholder ikke 1, og det er signifikant.</p>
-<p>donoralder. Her har vi to. OR_40-55 = exp(0.444) = 1.55893 og KI: exp(0.444 + c(-1,1)<em>1.96</em>0.2527) = 0.9500012 2.5581696</p>
-<p>og OR_56 = exp(0.9395) = 2.558702 og KI: exp(0.9395 + c(-1,1)<em>1.96</em>0.2891) = 1.451887 4.509273</p>
-<p>Dvs 1.55 gange højere odds for at dø indenfor 3 år efter transplantation for en patient med en donor der var 40-55 sammenlignet med en donoer der var under 40. Ved fastholdt rygestatus for donor. KI indeholder 1, og er derfor ikke signifikant.</p>
-<p>og 2.56 gange højere odds for at dø indenfor 3 år efter transplatatione for en patient med en donor der var over 56, sammenlignet med en donor der var under 40. Ved fastholdt rygestatus for donor. KI indeholder ikke 1, og er derfor signifikant.</p>
-<p>Endelig blev følgende regnestykke fortaget:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">1.2848</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2167343</code></pre>
-</div>
-</div>
-<p>Hvordan fortolker vi det tal?</p>
-<p>-1.2848 er estimatet på intercept.</p>
-<p>Det var for referencegruppen. Den patientguppe der har fået lunger fra en donor under 40 år, der var ikke ryger.</p>
-<p>Hvad er det så vi beregner?</p>
-<p>exp(-1.2848) går fra</p>
-<p>Log Odds(ratio) til:</p>
-<p>Odds</p>
-<p>Og brøken giver?</p>
-<p>Den går fra odds til sandsynlighed - så vi får?</p>
-<p>Den estimerede sandsynlighed for at dø inden for 3 år, for den patientgruppe der fik lunger fra en donor under 40, der var ikke-ryger.</p>
 
 
 </section>
