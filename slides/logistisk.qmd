@@ -324,7 +324,7 @@ Vi exponentierer!
 hm.
 
 ## Mors rygning
-:::: smaller
+:::: evensmaller
 
 Vi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.
 
@@ -332,9 +332,9 @@ Nu ser vi på den primære responsvariabel, som var fosterdød.
 
 Recap af de relevante variable i datasættet:
 
-episodes: antal episoder med feber under graviditeten
+episodes: antal episoder med feber under graviditeten  
 death: Fosterdød (ja = 1, nej = 0)  
-mage: Morderens alder
+mage: Morderens alder  
 smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)
 
 
