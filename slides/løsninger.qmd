@@ -1347,7 +1347,7 @@ ikke er signifikant forskel på effekten af de to behandlinger (p=0.456)
 
 Vi skal lave et regnestykke der illustrerer sammenhængen mellem estimat, fejl og z value 
 
-## Hvor sikre er vi på de estimater?
+## Hvor sikre er vi på de estimater? 
 
 ```{r}
 0.7423 + c(-1,1)*1.96*0.2149
@@ -1355,8 +1355,105 @@ exp(0.7423)
 exp(0.7423 + c(-1,1)*1.96*0.2149)
 ```
 
-Så - vores estimat er at en stigning i alder på 10 år er associeret med 2.1 gange højere odds. 
+Så - vores estimat er at en stigning i alder p å 10 år er associeret med 2.1 gange højere odds. 
 Og et konfidensinterval på det estimat mellem 38% og 220% højere odds.
+
+## Mors rygning - intercept
+
+Interceptet er log-odds for fosterdød for baseline.
+
+Baseline er en 25 årig kvinde. Uden feber episoder, der ikke har røget under graviditeten
+
+odds:
+
+```{r}
+(odds <- exp(-5.0526))
+```
+
+Meget lav. 
+
+95% KI. Vi finder det først på log-odds skala
+
+```{r}
+(log_ki <- -5.0526 + c(-1,1)*1.96*0.1758)
+```
+
+Og så på odds skala
+
+```{r}
+(ki <- exp(log_ki))
+```
+
+Sandsynlighed:
+
+```{r}
+(p <- odds/(1+odds))
+```
+
+Gang med 100 for at få procent
+
+Den hurtige vej fra ki-odds til ki p:
+```{r}
+ki/(1+ki)
+```
+
+
+Ved meget små odds er sandsynlighed og odds næsten det samme. Hvorfor? fordi vi dividerer med noget der er næste 1, ford i odds er ret lille. 
+
+## Mors rygning alder
+
+Det er samme regnestykker som sidst.
+
+Oddratio (RATIO!)
+
+```{r}
+(OR <- exp(0.7423))
+```
+
+log-ki for log-OR for alder:
+
+```{r}
+(log_ki <- 0.7423 + c(-1,1)*1.96*0.2149)
+```
+
+og ki for or:
+
+```{r}
+exp(log_ki)
+```
+
+Estimatet var 2.1, det vil sige 2.1 gange så høje odds for fosterdød når mors alder stiger med 10 år.
+
+Og den sande effekt ligger plausibelt mellem 38 og 220% højere odds
+
+## Mors rygning - prediktion 25 år
+
+Det er baseline. 
+
+```{r}
+(log_odds <- -5.0526 + 0*0.7423)
+
+(odds <- exp(log_odds))
+odds/(1+odds)
+
+plogis(log_odds)
+
+```
+
+
+## Mors rygning - prediktion 40 år
+
+Det er baseline. 
+
+```{r}
+(log_odds <- -5.0526 + (40-25)/10*0.7423)
+
+(odds <- exp(log_odds))
+odds/(1+odds)
+
+plogis(log_odds)
+
+```
 
 ## Rygende donorer - regne
 For død inden for tre år
@@ -1606,215 +1703,113 @@ Ved fastholddt køn og hbalc
 
 Hvis vi ønsker hvad det er for eg 5 år, skal der ganges med 5 på både estimatet og standardfejlen
 
-@@@@
 ## Laparotomi
 
-Vi ser på data fra ca 1000 patienters risiko for at dø ved en operation (laparotomi). Har øget ilt-tilførsel
-under operationen betydning for død i en opfølgnigsperiode på ca. 3 år. 
-Patienterne blev randomiseret til et af to ilt-regimer
+Vi starter med at finde et estimat for bmi
 
-Vi har følgende variable
-Allokering: X - patient fik 80% ilt, Y Patient fik 30% ilt
-diagn_cancer: j: cancer, n: ikke cancer
-blod: j perioperativ blodtransfusion, n ikke perioperativ blodtransfusion
-bmi: patientens BMI
-dead: 1 patienten dør i løbet af opfølgningsperioden, 0 patienten overlever
-
-De første 6 observationer:
-
-```{r echo = FALSE}
-ilt_data <- tribble(~Allokering, ~diagn_cancer, ~blod, ~bmi, ~dead,
-"Y", "n", "n", 29.3, 0,
-"X", "n", "n", 28.1 ,0,
-"X", "j", "n", 21.5, 1,
-"X", "j", "n", 17.3, 1,
-"Y", "n", "n", 24.2, 0,
-"Y", "n", "n", 18.2, 0)
-```
 
 ```{r}
-head(ilt_data)
+(OR_bmi <- -3.151*0.015385)
 ```
 
-a) Hvis vi alene betragter patienternes bmi, hvordan ville vi så undersøge om den har signifikant betydning for risikoen for dø efter 
-operation.
-Outcome - dead er binær og bmi er kontinuært. Så vi vil modellere et kategorisk outcome med kontinært forklarende variabel: logistisk
-regression
-
-b) Når vi gør det, får vi følgende resultat (de fortsætter deres juleleg med at fjerne dele af output):
-
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
-
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
-"(Intercept)", "-0.007041", "0.386263", "-0.018", "0.98546",
-"bmi", "", "0.015385", "-3.151", ""
-
-
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `z value` = "z value",
-    `Pr(>|z|)` = "Pr(>|z|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-     font = list(google_font("Courier Prime"), default_fonts())) 
-```
-
-Hvad kan vi sige ud fra det?
-
-Vi mangler et estimat for bmi. Det kan vi beregne, fordi z-value finder vi ved at dividere estimatet med standardfejlen. Derfor kan
-vi finde estimatet ved at gange standardfejl med z value.
-
-```{r}
--3.151*0.015385
-```
-
-Teststørrelsen er klart signifikant
+Vi mangler også en p-værdi. Men teststørrelsen fortæller os at det er klart signifikant.
 
 ```{r}
 2*pnorm(-3.151)
 ```
 
-Vi kan beregne OR: 
+Det giver ikke mening at regne på intercept. Hvorfor? Fordi det svarer til et bmi på 0.
+
+Kunne vi have fået et intercept der var meningsfuldt? Hvis vi husker hvordan vi håndterede mors alder i 
+de rygende mødre - der satte vi et nulpunkt. Vi kunne gøre det samme med BMI, så havde vi fået en reference, hvor
+intercept havde været log-odds for risikoen for død ved et bestemt BMI.
+
+Det gør vi ikke i denne opgave.
+
+
+
+
+OR på BMI
 
 ```{r}
-exp(-0.04847813)
+exp(OR_bmi)
 ```
 
 Så holdes alt andet konstant, vil en patient med et bmi der er 1 større end en anden patient, have vil odds for død reduceres med ca 5% for patienten med det højeste bmi.
 
-Vi kan beregne et 95% KI:
+Vi kan beregne et 95% KI for:
 
 
 ```{r}
 exp(-0.04847813 + c(-1,1)*1.96*0.015385)
 ```
+
 1 er ikke indeholdt i intervallet, og forskellen er derfor signifkant. Det så vi også fra p-værdien vi beregnede tidligere.
 
-c) 
-Nu ser vi bort fra bmi, og betrager ilt-allokering. 
+## Laparotomi - ilt
+Vi sammenligner død (1) for de to ilt-regimer X og Y:
 
-
-```{r echo = FALSE}
-dead <- c(
-  rep(1, 139),
-  rep(1, 107),
-  rep(0, 414),
-  rep(0, 418)
-)
-
-Allokering <- c(
-  rep("X", 139),
-  rep("Y", 107),
-  rep("X", 414),
-  rep("Y", 418)
-)
+odds for død 
+```{r}
+(odds_x <- 139/414)
+(odds_y <- 107/418)
 ```
 
+OR - vi er interesserede i det høje iltregime
+```{r}
+(OR <- odds_x/odds_y)
+```
 
 ```{r}
-table(dead,Allokering)
+(SE_log_OR <- sqrt(1/414 + 1/139 + 1/418 + 1/107))
 ```
-
-Hvad kan vi konkludere ud fra det?
-
-Vi sammenligner død (1) for de to ilt-regimer X og Y:
-odds_X = 139/414 = 0.3357488
-P_y = 107/418 = 0.2559809
-
-OR (X mod Y) = 0.3357488/0.2559809 = 1.311617
-dvs at odds for at dø estimeres at være ca. 31% højere ved det høje ilt-regime, sammenlignet med det lave (alt andet fastholdt)
 
 95% KI:
-standardfejlen på log(OR):
-sqrt(1/139 + 1/414 + 1/107 + 1/418) = 0.146109
-
-exp(log(1.311617) + c(-1,1)*1.96*0.146109)
-
-Det indeholder 1 og estimatet er derfor ikke statistisk signifikant (de er dog i modelbesvarelser glade for at nævne at det er 
-tæt på at være signifikant)
-
-BETON FORSKEL PÅ OR OG RR!
-
-
-d)
-Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):
-
-```{r echo = FALSE}
-dead <- c(
-  rep(1,101), rep(1,74), rep(0,188), rep(0,213),
-  rep(1,38),  rep(1,33), rep(0,226), rep(0,205)
-)
-
-Allokering <- c(
-  rep("X",101), rep("Y",74),  rep("X",188), rep("Y",213),
-  rep("X",38),  rep("Y",33),  rep("X",226), rep("Y",205)
-)
-
-diagn_cancer <- c(
-  rep("j",101), rep("j",74),  rep("j",188), rep("j",213),
-  rep("n",38),  rep("n",33),  rep("n",226), rep("n",205)
-)
-
-```
 
 ```{r}
-table(dead, Allokering, diagn_cancer)
+(log_odds_ki <- log(OR) + c(-1,1)*1.96*SE_log_OR)
+exp(log_odds_ki)
+```
+
+Så vi estimereer at odds for at dø ved det høje ilt regime (X) er ca 31% højere end ved det lave, med et 95% KI på xx, der indeholder 1, og derfor ikke er signifikant.
+
+Husk forskellen på OR og RR - det er odds, ikke risiko!
+
+
+## Laparotomi - diagnose
+Tabellen deles nu op efter den opererede patients diagnose (cancer, ja,nej):
+
+Nu laver vi samme øvelse, men på hver gruppe.
+
+Cancer patienter:
+
+```{r}
+(odds_x <- 101/188)
+(odds_y <- 74/213)
+(OR <- odds_x/odds_y)
+(SE_log_or <- sqrt(1/101 + 1/74 + 1/188 + 1/213))
+(log_ki <- log(OR) + c(-1,1)*1.96*SE_log_or)
+exp(log_ki)
+```
+
+odds for at dø for cancerpatienter er ca. 1.55 gange højere ved det høje iltregime end ved det lave. 1 er ikke indeholdt i 95% KI for OR, og estimatet er derfor signifikant på et 5% niveau. Vi ser det også ved at log_ki ikke indeholder 0.
+
+For ikke-cancerpatienter
+
+```{r}
+(odds_x <- 38/226) 
+(odds_y <- 33/205)
+(OR <- odds_x/odds_y)
+(SE_log_or <- sqrt(1/38 + 1/226 + 1/33 + 1/205))
+(log_ki <- log(OR) + c(-1,1)*1.96*SE_log_or)
+exp(log_ki)
 
 ```
 
-Giver det anledning til at ændre den tidligere konklusion? Begnd med effektestimater og 95% konfidensintervaller.
+Her estimerer vi at odds for at dø er 1.04 (4%) højer for at dø ved det høje ilt-regime sammenlignet med det lave for ikke-cancerpatienter,
+med det fundne 95% KI. Da 1 er indeholdt i KI, kan vi konkludere at estimatet ikke er signifikant.
 
-Samme øvelse som før, men nu på hver gruppe:
-Cancerpatienter:
-OR = (101/188) / (74/213) =  1.546363
-s.e. på log(OR): sqrt(1/101 + 1/188 + 1/74 + 1/213) = 0.1828346
-KI: exp(log(1.546363) + c(-1,1)*1.96*0.1828346) = 1.080636 2.212806
-
-Så for cancerpatienter er odds for at dø ved det høje ilt regime ca 55% højere, med et KI som angivet. Signifikant, da 1 ikke er med i
-KI.
-
-non-cancer-patienter:
-
-OR = (38/226) / (33/205) = 1.044516
-se på log(OR) = sqrt(1/38 + 1/226 + 1/33 + 1/205) =  0.2567521
-KI: exp(log(1.044516) + c(-1,1)*1.96* 0.2567521) = 0.6314854 1.7276943
-Så odds er 1.04 gange større i det høje ilt-regime for ikke-cancerpatienter. Men det er ikke signifikant - for 1 er indeholdt i KI.
-
-Så ilt-regime har betydning for cancerpatienter.
-
-
-
+Så ilt-regimet har betyding for cancer patienter, men ikke for ikke-cancerpatienter. 
 
 ## Levertal
 

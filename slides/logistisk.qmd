@@ -65,8 +65,15 @@ Funktionen er derfor `glm()` i stedet or `lm()`.
 ::::
 
 ## Hvordan ser det ud i praksis?
-:::: evensmaller 
-Har vi et datasæt med følgende variable (det virker bekendt):
+
+:::: evensmaller
+
+Vi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.
+
+Nu ser vi på den primære responsvariabel, som var fosterdød.
+
+
+Vi har et datasæt med følgende variable:
 
 **episodes**: Antal episoder med feber under graviditeten (før interview)  
 **death**: Fosterdød (ja = 1, nej = 0)  
@@ -75,11 +82,15 @@ Har vi et datasæt med følgende variable (det virker bekendt):
 **alco**: Antal genstande pr uge under graviditet  
 **weight**: Fødselsvægt i gram  
 
-Kan vi derfor modellere den primære outcome variabel "death" som funktion af rygning, feberepisoder og moderens alder ved:
+Og vi kan modellere fosterdød ved:
 
 ```{r eval = FALSE, echo = TRUE}
 glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = "binomial")
 ```
+
+:::: {.tiny}
+Den der sære konstruktion med I((mage-25)/10), hvor kom den fra? Den var oplyst i et eksamenssæt.
+::::
 
 ::::
 
@@ -91,7 +102,7 @@ glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, 
 glm(factor(death) ~ I((mage-25)/10) + episodes + factor(smoke), data = dataset, family = "binomial")
 ```
 
-Hvad får vi ved at trække 25 fra, og dividere mors alder med 10?
+Hvad får vi ved at trække 25 fra, og  dividere mors alder med 10?
 
 :::: {.fragment}
 Mors alder målt i enheden "10 år", med et nulpunkt på 25 år. Ikke væsensforskelligt fra at standardisere værdier, men dog ikke med middelværdi og standardafvigelse
@@ -172,7 +183,7 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
 
 Logistisk? "z values" i stedet for "t values". Og opgaven fortalte at responsvariablen var fosterdød. Der er ret kategorisk.
 
-Tolkningen af estimatet vender vi tilbage til. 
+Tolkningen af estimater vender vi tilbage til. 
 
 z value er testværdien. Hvordan hænger den sammen med Estimate og Std. Error?
 
@@ -321,93 +332,8 @@ Vi exponentierer!
 ::::
 
 
-## Mors rygning
-:::: evensmaller
-
-Vi har tidligere kigget på sammenhængen mellem fødselsvægt og mors rygning/alkohol indtag under graviditeten.
-
-Nu ser vi på den primære responsvariabel, som var fosterdød.
-
-Recap af de relevante variable i datasættet:
-
-episodes: antal episoder med feber under graviditeten  
-death: Fosterdød (ja = 1, nej = 0)  
-mage: Morderens alder  
-smoke: Rygning under graviditet (1=0 cigaretter/dag, 2=1-10 cigaretter/dag, 3=11+ cigaretter/dag)
 
 
-Vi får også oplyst:  
-> table(fever$episodes)
-
-```{r}
-episoder <- c(9693,1872,183,20,3,3,1,1,2)
-names(episoder) <- c(0,1,2,3,4,5,6,7,10)
-episoder 
-```
-
-Er der en sammenhæng mellem den primære responsvariabel (død), og feber i tidlig 
-graviditet.
-
-::::
-
-## Mors rygning
-
-Vi får oplyst at den korrekte analyse gav dette resultat:
-
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
-
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
-"(Intercept)", "-5.0526", "0.1758", "-28.725", "<2e-16***",
-"I((mage - 25)/10)", "0.7423", "0.2149", "3.454", "0.0005***",
-"episodes", "-0.0752", "0.2048", "-0.368", "0.713",
-"factor(smoke)2", "0.2063", "0.2569", "0.803", "0.421",
-"factor(smoke)3", "0.4364", "0.2569", "1.699", "0.089"
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `t value` = "t value",
-    `Pr(>|t|)` = "Pr(>|t|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-      font = list(google_font("Courier Prime"), default_fonts()))
-```
-
-:::: tiny
-i((mage-25)/10) skal vi lige holde tungen lige i munden. mage er moderens alder ved interview. Vi sætter et nulpunkt der er 25, og 
-måler derefter i enheder af 10 år.
-::::
-
-c) Hvad kan vi konkludere på denne analyse? Fortolk relevante estimater
 
 ## Mors rygning
 
@@ -540,9 +466,12 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
       font = list(google_font("Courier Prime"), default_fonts()))
 ```
 
-$p = \frac{\text{odds}}{1 + \text{odds}}$
+
 
 :::: {.smaller}
+:::: {.fragment}
+Find: Odds, sandsynlighed og 95% KI for Intercept
+::::
 :::: {.fragment}
 Hvad repræsenterer interceptet?
 ::::
@@ -550,8 +479,16 @@ Hvad repræsenterer interceptet?
 Baseline - hvad er det?
 ::::
 :::: {.fragment}
-Find: Odds, sandsynlighed og 95% KI for Intercept
+Hvordan fandt vi sandsynligheden?
 ::::
+
+:::: {.fragment}
+$p = \frac{\text{odds}}{1 + \text{odds}}$
+::::
+
+
+
+
 ::::
 ::::
 :::: {.column}
@@ -617,21 +554,25 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
       font = list(google_font("Courier Prime"), default_fonts()))
 ```
 
-$p = \frac{\text{odds}}{1 + \text{odds}}$
+
 
 :::: {.smaller}
 :::: {.fragment}
-Hvad sker der med odds for fosterdød når mors alder stiger?
+Hvad sker der med oddsratio for fosterdød når mors alder stiger?
 ::::
 :::: {.fragment}
 Husk at det er i enheder af 10 år
 ::::
 :::: {.fragment}
-Find: Odds, sandsynlighed og 95% KI for I((mage-25)/10)
+Find: Oddsratio og 95% KI for I((mage-25)/10)
 ::::
 :::: {.fragment}
 Signifikant?
 ::::
+
+
+
+
 ::::
 ::::
 :::: {.column}
@@ -647,12 +588,29 @@ Signifikant?
 
 
 ## Mors rygning - resten
-
+:::: {.evensmaller}
 Hverken antallet af feberepisoder eller rygning har statistisk signifikant betydning. 
 
 Vi kan beregne OR på dem og konfidensintervaller. 
 
 Den der kommer tættest på er rygning niveau 3, men den er ikke signifikant ved et 5% niveau.
+
+Bemærk også: Vi beregner odds for baseline. 
+
+Men når vi regner på alderen, så regner vi på hvordan odds ændrer sig når vi ændrer på alderen.
+
+Derfor er det odds-_ratio_ vi beregner!
+
+Og derfor er det ikke specielt meningsfuldt at beregne sandsynligheder ved en aldersstigning.
+
+Derfor taler vi _heller ikke_ om at der er 2.1 gange højere sandsynlighed (!)
+
+Det er 2.1 gange højere _odds_ der er associeret med en stigning på 10 år i mors alder.
+
+
+
+::::
+
 
 ## Mors rygning - prediktion
 
@@ -705,11 +663,18 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
   opt_table_font(
       font = list(google_font("Courier Prime"), default_fonts()))
 ```
+:::: {.smaller}
+Forudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og
+ikke har feberepisoder. 
 
 $p = \frac{\text{odds}}{1 + \text{odds}}$
 
-Forudsig (predikter) risiko for fosterdød for gravid kvinde, 25 år gammel der ikke ryger og
-ikke har feberepisoder. 
+eller, cowboy-trick:
+
+`plogis(log_odds)`
+
+::::
+
 ::::
 :::: {.column}
 ```{webr-r}
@@ -776,9 +741,11 @@ tribble(~Term, ~Estimate, ~`Std. Error`, ~`t value`, ~`Pr(>|t|)`,
       font = list(google_font("Courier Prime"), default_fonts()))
 ```
 
+Gentag forudsigelsen for en kvinde der er 40 år.
+
 $p = \frac{\text{odds}}{1 + \text{odds}}$
 
-Gentag forudsigelsen for en kvinde der er 40 år.
+
 
 
 ::::
@@ -792,6 +759,11 @@ Gentag forudsigelsen for en kvinde der er 40 år.
 ::::
 ::::
 
+## Sidste note om de rygende mødre
+
+Man kan godt beregne KI på sandsynlighederne. Men.
+
+Det kræver adgang til det oprindelige datasæt.
 
 
 
@@ -907,6 +879,7 @@ Hvad betyder det hvis RR = 1?
 
 
 ## Rygende donorer
+
 Nu udfører vi en analyse, og får følgende output:
 
 ```{r echo = FALSE}
@@ -1686,7 +1659,7 @@ Hvad har vi gjort, og hvordan fortolker vi resultaterne?
 ::::
 :::: {.column}
 
-:::: {.smaller}
+:::: {.evensmaller}
 
 :::: {.fragment}
 Der er lavet en logistisk regression.
