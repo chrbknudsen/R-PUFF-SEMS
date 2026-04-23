@@ -1790,53 +1790,12 @@ sd(BLODTRYK[KØN==1]) 19.41893</p>
 </section>
 <section id="levertal" class="level2">
 <h2 class="anchored" data-anchor-id="levertal">Levertal</h2>
-<p>583 personer er henvist til undersøgelse pga mistanke om leversygdom De første seks observationer:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb291"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb291-1"><a href="#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb291-2"><a href="#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>age, <span class="sc">~</span>albumin, <span class="sc">~</span>ratio, <span class="sc">~</span>globulin, <span class="sc">~</span>status, <span class="sc">~</span>idnr, <span class="sc">~</span>sex, <span class="sc">~</span>l_ratio,</span>
-<span id="cb291-3"><a href="#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span>, <span class="fl">3.3</span>, <span class="fl">0.90</span>, <span class="fl">3.666667</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"F"</span>,  <span class="sc">-</span><span class="fl">0.1053605</span>,</span>
-<span id="cb291-4"><a href="#cb291-4" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.2</span>, <span class="fl">0.74</span>, <span class="fl">4.324324</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.3011051</span>,</span>
-<span id="cb291-5"><a href="#cb291-5" aria-hidden="true" tabindex="-1"></a><span class="dv">62</span>, <span class="fl">3.3</span>, <span class="fl">0.89</span>, <span class="fl">3.707865</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"M"</span>, <span class="sc">-</span><span class="fl">0.1165338</span>,</span>
-<span id="cb291-6"><a href="#cb291-6" aria-hidden="true" tabindex="-1"></a><span class="dv">58</span>, <span class="fl">3.4</span>,<span class="fl">1.00</span>,<span class="fl">3.400000</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="st">"M"</span>,<span class="dv">0</span>,</span>
-<span id="cb291-7"><a href="#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="dv">72</span>, <span class="fl">2.4</span>, <span class="fl">0.4</span>, <span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">5</span>,<span class="st">"M"</span>,<span class="sc">-</span><span class="fl">0.9162907</span>,</span>
-<span id="cb291-8"><a href="#cb291-8" aria-hidden="true" tabindex="-1"></a><span class="dv">46</span>, <span class="fl">4.4</span>,<span class="fl">1.3</span>,<span class="fl">3.384615</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="st">"M"</span>,<span class="fl">0.2623643</span></span>
-<span id="cb291-9"><a href="#cb291-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-    age albumin ratio globulin status  idnr sex   l_ratio
-  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    65     3.3  0.9      3.67      1     1 F      -0.105
-2    62     3.2  0.74     4.32      1     2 M      -0.301
-3    62     3.3  0.89     3.71      1     3 M      -0.117
-4    58     3.4  1        3.4       1     4 M       0    
-5    72     2.4  0.4      6         1     5 M      -0.916
-6    46     4.4  1.3      3.38      1     6 M       0.262</code></pre>
-</div>
-</div>
-<p>Variable: idnr: Løbenummer sex: Køn age: alder i år status: leversygdom, 1=ja albumin: serum albumin g/dL globulin: serum globulin g/dL ratio: ratio m. albumin og globulin l_ratio: log(ratio) (den naturlige logaritme)</p>
-<p>Der defineres en binær variabel AG.positiv som ratio &lt; 1.1 Det giver os denne tabel:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb293"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb293-1"><a href="#cb293-1" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">99</span> <span class="sc">+</span> <span class="dv">66</span>),</span>
-<span id="cb293-2"><a href="#cb293-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span> <span class="sc">+</span> <span class="dv">106</span>))</span>
-<span id="cb293-3"><a href="#cb293-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb293-4"><a href="#cb293-4" aria-hidden="true" tabindex="-1"></a>AG.positiv <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">99</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">66</span>),</span>
-<span id="cb293-5"><a href="#cb293-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">308</span>), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">106</span>))</span>
-<span id="cb293-6"><a href="#cb293-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(AG.positiv, status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          status
-AG.positiv   0   1
-         0  66 106
-         1  99 308</code></pre>
-</div>
-</div>
-<ol type="a">
-<li>Undesøg om der er en statistisk signifikant sammenhæng mellem de to variable.</li>
-</ol>
+<p>Undersøg om der er en statistisk signifikant sammenhæng mellem de to variable.</p>
 <p>Her kører vi en chi^2 test:</p>
 <p>input:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb295"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb295-1"><a href="#cb295-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb295-2"><a href="#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb291"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb291-1"><a href="#cb291-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">66</span>,<span class="dv">106</span>,<span class="dv">99</span>,<span class="dv">308</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb291-2"><a href="#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(input, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -1845,1064 +1804,114 @@ data:  input
 X-squared = 11.709, df = 1, p-value = 0.0006219</code></pre>
 </div>
 </div>
-<p>Det giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i tabellen er “store”, som i større end 5.</p>
 <p>Det svarer til en p-værdi der er &lt;0.001. Så der er signifikant forskel. modelbesvarlsaer bruger ofte formuleringen “klart signifikant”. teknisk set er der ikke noget der er mere signifikant end andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke “næsten” eller “meget” signifikant.</p>
-<ol start="2" type="a">
-<li>Nu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)</li>
-</ol>
-<p>Den giver dette resultat:</p>
+</section>
+<section id="levertal---regression" class="level2">
+<h2 class="anchored" data-anchor-id="levertal---regression">Levertal - regression</h2>
+<p>Nu udfører vi følgende analyse i R: &gt; model &lt;- glm(status~factor(AG.positiv)+factor(sex)+age, binomial) &gt; summary(model)</p>
+<p>OR for AG.positiv</p>
 <div class="cell">
-<div class="cell-output-display">
-<div id="bipinjmlit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bipinjmlit table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#bipinjmlit thead, #bipinjmlit tbody, #bipinjmlit tfoot, #bipinjmlit tr, #bipinjmlit td, #bipinjmlit th {
-  border-style: none;
-}
-
-#bipinjmlit p {
-  margin: 0;
-  padding: 0;
-}
-
-#bipinjmlit .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#bipinjmlit .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#bipinjmlit .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#bipinjmlit .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#bipinjmlit .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#bipinjmlit .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#bipinjmlit .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#bipinjmlit .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#bipinjmlit .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#bipinjmlit .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#bipinjmlit .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#bipinjmlit .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#bipinjmlit .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#bipinjmlit .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#bipinjmlit .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bipinjmlit .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#bipinjmlit .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#bipinjmlit .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#bipinjmlit .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bipinjmlit .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#bipinjmlit .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bipinjmlit .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#bipinjmlit .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bipinjmlit .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bipinjmlit .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bipinjmlit .gt_left {
-  text-align: left;
-}
-
-#bipinjmlit .gt_center {
-  text-align: center;
-}
-
-#bipinjmlit .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#bipinjmlit .gt_font_normal {
-  font-weight: normal;
-}
-
-#bipinjmlit .gt_font_bold {
-  font-weight: bold;
-}
-
-#bipinjmlit .gt_font_italic {
-  font-style: italic;
-}
-
-#bipinjmlit .gt_super {
-  font-size: 65%;
-}
-
-#bipinjmlit .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#bipinjmlit .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#bipinjmlit .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#bipinjmlit .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#bipinjmlit .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#bipinjmlit .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#bipinjmlit .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#bipinjmlit .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#bipinjmlit div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
-<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-0.446661</td>
-<td class="gt_row gt_left" headers="Std. Error">0.320769</td>
-<td class="gt_row gt_left" headers="z value">-1.392</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.16378</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(AG.postiv)1</td>
-<td class="gt_row gt_left" headers="Estimate">0.594643</td>
-<td class="gt_row gt_left" headers="Std. Error">0.199556</td>
-<td class="gt_row gt_left" headers="z value">2.980</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.00288**</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">factor(sex)M</td>
-<td class="gt_row gt_left" headers="Estimate">0.407717</td>
-<td class="gt_row gt_left" headers="Std. Error">0.211941</td>
-<td class="gt_row gt_left" headers="z value">1.924</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.05439.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">age</td>
-<td class="gt_row gt_left" headers="Estimate">0.015131</td>
-<td class="gt_row gt_left" headers="Std. Error">0.005927</td>
-<td class="gt_row gt_left" headers="z value">2.553</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.01069*</td>
-</tr>
-</tbody>
-</table>
-
+<div class="sourceCode cell-code" id="cb293"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb293-1"><a href="#cb293-1" aria-hidden="true" tabindex="-1"></a>(OR <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fl">0.594643</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.812384</code></pre>
 </div>
 </div>
+<p>og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større</p>
+<p>hvis AG.positive patienter, sammenlignet med AG.negative.</p>
+<p>KI:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb295"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb295-1"><a href="#cb295-1" aria-hidden="true" tabindex="-1"></a>(KI_log_or <span class="ot">&lt;-</span> <span class="fl">0.594643</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.199556</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2035132 0.9857728</code></pre>
 </div>
-<p>Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det? Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.</p>
-<p>Det er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel. Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.</p>
-<p>OR for AG.positiv exp(0.594643) = 1.812384 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større hvis AG.positive patienter, sammenlignet med AG.negative. KI: exp(0.594643 + c(-1,1)<em>1.96</em>0.199556) Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)</p>
-<ol start="3" type="a">
-<li>Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.</li>
-</ol>
-<p>Vi beregner: -0.446661 + 0.594643 + 50*0.015131 = 0.904532</p>
-<p>Det er logodds. Så vi finder sandsynligheden ved: odds er så: exp(0.904532) = 2.470775 Og sandsynligheden finder vi ved: odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799</p>
+<div class="sourceCode cell-code" id="cb297"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb297-1"><a href="#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(KI_log_or)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.225701 2.679882</code></pre>
+</div>
+</div>
+<p>Og det vi så svarer er: ORE for AG.positiv estimerer vi til</p>
+<p>Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så fra p-værdien)</p>
+</section>
+<section id="levertal---prediktion" class="level2">
+<h2 class="anchored" data-anchor-id="levertal---prediktion">Levertal - prediktion</h2>
+<p>Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb299"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb299-1"><a href="#cb299-1" aria-hidden="true" tabindex="-1"></a>(log_odds_syg <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.446661</span> <span class="sc">+</span>  <span class="fl">0.594643</span> <span class="sc">+</span> <span class="dv">50</span><span class="sc">*</span><span class="fl">0.015131</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.904532</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb301"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb301-1"><a href="#cb301-1" aria-hidden="true" tabindex="-1"></a>(odds_syg <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_odds_syg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.470775</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb303"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb303-1"><a href="#cb303-1" aria-hidden="true" tabindex="-1"></a>(sandsynlighed <span class="ot">&lt;-</span> odds_syg<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_syg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7118799</code></pre>
+</div>
+</div>
+<p>Så sandsynligheden for at være syg, hvis man er AG.positiv 50-årig kvinde er 71%</p>
 </section>
 <section id="bilirubin" class="level2">
 <h2 class="anchored" data-anchor-id="bilirubin">Bilirubin</h2>
-<p>Vi skal se på et randomiseret klinisk studie udført på seks forskellige europæiske hospitaler. 349 patienter med leversygdom blev randomiseret til enten den eksperimentelle behadnling UDC (176 patienter) eller placebo (173 patienter)</p>
-<p>Udfaldet “failure of medical treatment” blev defineret som enten død eller levertransplantation i den 6 årige undersgelsesperiode. Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående udfald - eller til de 6 år var gået.</p>
-<p>Vi får de første 6t observationer i sættet. Y er udfaldsvariablen (1 “treatment failure”), R angiver behandling (1 = UDC), X den standardiserede version af logaritmen af bilirubin (umol/L), målt for hver patient ved starten af studiet</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb297"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb297-1"><a href="#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb297-2"><a href="#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>Y, <span class="sc">~</span>R, <span class="sc">~</span>X,</span>
-<span id="cb297-3"><a href="#cb297-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>, <span class="dv">1</span> , <span class="fl">1.616854293</span>,</span>
-<span id="cb297-4"><a href="#cb297-4" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.990367802</span>,</span>
-<span id="cb297-5"><a href="#cb297-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.849360224</span>,</span>
-<span id="cb297-6"><a href="#cb297-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.496709981</span>,</span>
-<span id="cb297-7"><a href="#cb297-7" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.335441834</span>,</span>
-<span id="cb297-8"><a href="#cb297-8" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="fl">0.561678151</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-      Y     R      X
-  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-1     1     1  1.62 
-2     0     1  1.99 
-3     0     1 -0.849
-4     1     1  1.50 
-5     0     1  1.34 
-6     0     1 -0.562</code></pre>
-</div>
-</div>
-<blockquote class="blockquote">
-<p>table(Y,R) giver:</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   R
-Y     0   1
-  0 118 134
-  1  55  42</code></pre>
-</div>
-</div>
 <ol type="a">
 <li>baseret på ovenstående table ønske beregnet relativ risiko (med tilhørende 95% KI ) til belysning af effekten af behandlingen på det betragtede udfald. Husk at konkludere.</li>
 </ol>
-<p>Risiko ved behandling: 42/(134+42)= 0.2386364</p>
-<p>Risiko ved placebo: 55/(118+55) = 0.3179191</p>
-<p>RR = 0.2386364/0.3179191 = 0.7506199</p>
-<p>log(RR) = log(0.7506199) = -0.2868559</p>
-<p>se.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726</p>
-<p>et 95% ki for log(rr) findes til; -0.2868559 + c(-1,1)<em>1.96</em>0.174726 = -0.62931886 0.05560706</p>
-<p>Derfor er 95% ki for RR: exp(c(-0.62931886, 0.05560706)) = 0.5329547 1.0571822</p>
-<p>RR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822 Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant effekt.</p>
-<ol start="2" type="a">
-<li>Nu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)</li>
-</ol>
-<p>der gav dette output:</p>
+<p>Risiko ved behandling:</p>
 <div class="cell">
-<div class="cell-output-display">
-<div id="oryawvaqct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#oryawvaqct table {
-  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#oryawvaqct thead, #oryawvaqct tbody, #oryawvaqct tfoot, #oryawvaqct tr, #oryawvaqct td, #oryawvaqct th {
-  border-style: none;
-}
-
-#oryawvaqct p {
-  margin: 0;
-  padding: 0;
-}
-
-#oryawvaqct .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#oryawvaqct .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#oryawvaqct .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#oryawvaqct .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#oryawvaqct .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#oryawvaqct .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#oryawvaqct .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#oryawvaqct .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#oryawvaqct .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#oryawvaqct .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#oryawvaqct .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#oryawvaqct .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#oryawvaqct .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#oryawvaqct .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#oryawvaqct .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#oryawvaqct .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#oryawvaqct .gt_row_group_first td {
-  border-top-width: 0px;
-}
-
-#oryawvaqct .gt_row_group_first th {
-  border-top-width: 0px;
-}
-
-#oryawvaqct .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#oryawvaqct .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#oryawvaqct .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#oryawvaqct .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#oryawvaqct .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 0px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 0px;
-  border-bottom-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#oryawvaqct .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#oryawvaqct .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#oryawvaqct .gt_left {
-  text-align: left;
-}
-
-#oryawvaqct .gt_center {
-  text-align: center;
-}
-
-#oryawvaqct .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#oryawvaqct .gt_font_normal {
-  font-weight: normal;
-}
-
-#oryawvaqct .gt_font_bold {
-  font-weight: bold;
-}
-
-#oryawvaqct .gt_font_italic {
-  font-style: italic;
-}
-
-#oryawvaqct .gt_super {
-  font-size: 65%;
-}
-
-#oryawvaqct .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#oryawvaqct .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#oryawvaqct .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#oryawvaqct .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#oryawvaqct .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#oryawvaqct .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#oryawvaqct .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#oryawvaqct .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#oryawvaqct div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="Term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
-<th id="Estimate" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Estimate</th>
-<th id="Std.-Error" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Std. Error</th>
-<th id="z-value" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z value</th>
-<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">(Intercept)</td>
-<td class="gt_row gt_left" headers="Estimate">-1.3922</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2088</td>
-<td class="gt_row gt_left" headers="z value">-6.668</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">2.60e-11***</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Term">factor(R)1</td>
-<td class="gt_row gt_left" headers="Estimate">-0.9054</td>
-<td class="gt_row gt_left" headers="Std. Error">0.2967</td>
-<td class="gt_row gt_left" headers="z value">-3.052</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">0.00227**</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Term">X</td>
-<td class="gt_row gt_left" headers="Estimate">1.2632</td>
-<td class="gt_row gt_left" headers="Std. Error">0.1571</td>
-<td class="gt_row gt_left" headers="z value">8.043</td>
-<td class="gt_row gt_left" headers="Pr(>|z|)">8.79e-16***</td>
-</tr>
-</tbody>
-</table>
-
+<div class="sourceCode cell-code" id="cb305"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb305-1"><a href="#cb305-1" aria-hidden="true" tabindex="-1"></a>(R_udc <span class="ot">&lt;-</span> <span class="dv">42</span><span class="sc">/</span>(<span class="dv">134</span><span class="sc">+</span><span class="dv">42</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2386364</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb307"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb307-1"><a href="#cb307-1" aria-hidden="true" tabindex="-1"></a>(R_pla <span class="ot">&lt;-</span> <span class="dv">55</span><span class="sc">/</span>(<span class="dv">118</span><span class="sc">+</span><span class="dv">55</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3179191</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb309"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb309-1"><a href="#cb309-1" aria-hidden="true" tabindex="-1"></a>(RR <span class="ot">&lt;-</span> R_udc<span class="sc">/</span>R_pla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7506198</code></pre>
 </div>
 </div>
+<p>RR er 0.75 - det betyder at der er en ca. 25% reduceret risiko for treatment failure ved UDC behandlingen. KI</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb311"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb311-1"><a href="#cb311-1" aria-hidden="true" tabindex="-1"></a>(SE_log_rr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">42</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">134</span><span class="sc">+</span><span class="dv">42</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">55</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">118</span><span class="sc">+</span><span class="dv">55</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.174726</code></pre>
 </div>
-<p>Hvilken analyse er der tale om. Angiv relevante effektestimater baseret på analysen og formuler konklusioner derfra.</p>
-<p>Der er tale om en logistisk regressions analyse, med Y (Treatment failure) som afhængig variabel, og behandling/randomisering som kategorisk uafhængig, forklarende variable, samt X (den standardiserede logartime af bilirubin) som kontinuært forklarende variabel. Såvel behandlingen som X er statistisk signifikante på et 5% niveua.</p>
+<div class="sourceCode cell-code" id="cb313"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb313-1"><a href="#cb313-1" aria-hidden="true" tabindex="-1"></a>(KI_log <span class="ot">&lt;-</span> <span class="fu">log</span>(RR) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span>SE_log_rr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.6293189  0.0556070</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb315"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb315-1"><a href="#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(KI_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5329547 1.0571821</code></pre>
+</div>
+</div>
+</section>
+<section id="bilirun---regression" class="level2">
+<h2 class="anchored" data-anchor-id="bilirun---regression">Bilirun - regression</h2>
+<p>Nu udførtes følgende analyse: &gt; model &lt;- glm(Y ~ factor(R) + X, family =“binomial”) summary(model)</p>
+<p>Såvel behandlingen som X er statistisk signifikante på et 5% niveua.</p>
+<p>Det giver ikke mening at tolke på X, der er en standardiseret udgave af logaritmen af bilirubin (målt i umol/L). Så det er en stigning i OR for hver stigning på en standardafvigelse af logaritmen af bilirubin, relativt til middelværdien.</p>
+<p>For den forklarende variabel R, der er det vi faktisk kan styre selv - det var behandling UDC vs.&nbsp;placebo</p>
+<p>OR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb317"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb317-1"><a href="#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.9054</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4043801</code></pre>
+</div>
+</div>
+<p>Når der kontrolleres for bilirubin. når den er ca. 0.4, så svarer det til en reduktion på ca. 60% i odds for treatment failure ved aktiv behandling kontra placebo.</p>
+<p>KI</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb319"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb319-1"><a href="#cb319-1" aria-hidden="true" tabindex="-1"></a>(KI_log <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.9054</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fl">0.2967</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.486932 -0.323868</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb321"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb321-1"><a href="#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(KI_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2260652 0.7233457</code></pre>
+</div>
+</div>
 <p>For den forklarende variabel X får vi en estimeret odds ratio (OR) på behandlingen på exp(-0.9054) = 0.4043801 når der kontrolleres for den forklarende variabel X.</p>
 <p>Det tilhøreden 95% konfidensinterval findes ved: exp(-0.9054 + c(-1,1)<em>1.96</em>0.2967)</p>
 <p>OR påp 0.4 svarer til en reduktion i odds for treatment failure på ca 60%, ved aktiv behandling vs.&nbsp;placebo, når der kontrolleres for bilirubin. Da KI ikke indeholder 1, er effekten signifikant.</p>

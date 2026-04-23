@@ -21,18 +21,20 @@ I de fleste tilfælde vil vi gerne kunne afvise $H_0$.
 
 
 ## Vi har prøvet det
-
+:::: smaller
 To grupper, med hver deres middelværdi $\mu$ og standardafvigelse $\sigma$ og antal observationer, n, i hver gruppe.
 
 Beregn SEM for hver af grupperne: $SEM = \frac{\sigma}{\sqrt{n}}$
 
-Beregn en poolet SEM for differencen: $SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
+Beregn en samlet SE for differencen: $SE_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}$
 
 Og et 95% konfidensinterval:
 
-$(\mu_1 - \mu_2) \pm 1.96SEM_{diff}$
+$(\mu_1 - \mu_2) \pm 1.96SE _{diff}$
 
 Ligger 0 i intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser $H_0$ (på et 5% signifikansniveau).
+
+::::
 
 ## Hvad betød det?
 
@@ -201,15 +203,26 @@ Hvis vi kender værdierne af fire af dem - så kan vi finde værdien af den femt
 
 ## Og hvad spørges der til til eksamen?
 
+:::: {.smaller}
+
 Her er fire værdier. Find den femte.
 
-. . .
-
+:::: {.fragment}
 Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?
-
-. . .
+::::
+:::: {.fragment}
+Det handler typisk om beregning af stikprøvestørrelser.  
+Hvor mange patienter skal vi have med i vores forsøg for at vi kan forvente at se en effekt af ene bestemt størrelse? 
+::::
+:::: {.fragment}
+Eller beregning af effektstørrelser.  
+Hvor stor en forskel mellem to grupper forventer vi at kunne få øje på. Når vi har et bestemt antal patienter med i forsøget.
+::::
+:::: {.fragment}
 
 Det er dog ikke et specielt hyppigt forekommende eksamensspørgsmål.
+::::
+::::
 
 ## Det har R funktioner til.
 
@@ -302,11 +315,55 @@ Forskel mellem to proportioner: $SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2
 
 Forskel mellem to proportioner, hvor grupperne er lige store: $SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}$
 
+## Og hvad gør vi så i praksis?
+
+:::: {.evensmaller}
+
+Vi har powerrelationen
+
+$\frac{\text{effekt}}{\text{standardfejl}} = z_{1-\alpha/2}+z_{1-\beta}$
+
+:::: {.fragment}
+
+$z_{1-\alpha/2} = 1.96$ (hvis $\alpha = 0.05$). $z_{1-\beta}$ beregner vi med `qnorm(1-beta)`
+::::
+:::: {.fragment}
+Vi får oplyst at vi vil kunne se en bestemt forskel i to middelværdier (det var effekten), ofte "behandling vs. placebo".
+::::
+:::: {.fragment}
+Med en power på 80% (svarende til  $\beta = 0.2$)
+::::
+:::: {.fragment}
+Vi får at vide at der skal være lige mange i hver gruppe.
+::::
+:::: {.fragment}
+Hvis vi er heldige får vi også at vide at vi må antage at standardafvigelsen er den samme i de to grupper (og hvad den er).
+::::
+:::: {.fragment}
+Og vi ved så, at vi kan beregne standardfejlen ved 
+$\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
+::::
+:::: {.fragment}
+Og fordi $n_1 = n_2$
+::::
+:::: {.fragment}
+Så er det "bare" at indsætte tallene i powerrelationen, og isolere n.
+::::
+
+:::: {.fragment}
+:::: {.tiny}
+Eller også får vi at vide at $n_1 = 100$ og vi skal finde $n_2$. Eller vi får oplyst både $n_1$ og $n_2$ og alt det andet, men skal beregne den forskel vi kan forvente at se.  
+Grundlæggende: Vi får alt, bortset fra én parameter oplyst. Indsæt i formlen, isoler det manglende. 
+::::
+::::
+::::
+
+
 ## Et par fælder
 
 Vi runder altid op. Hvis n beregnes til 7.8, runder vi op til 8.
 
-Vi får næsten altid at vide hvor mange observationer der er i hver gruppe.
+Resultatet af vores beregninger er næsten altid antallet af mange observationer der skal være i hver gruppe.
 
 Hvis n er 8, skal vi bruge 16 observationer.
 
@@ -317,7 +374,7 @@ gruppe. Så får vi svaret på hvor mange vi skal bruge i den anden gruppe.
 
 Vi skal sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. 
 Hvor mange patienter skal inkluderes i studiet hvis forskelle i enzymkoncentrationen på mindre
-end 1 standardafvigelse (\sigma) ikke er relevante. 
+end 1 standardafvigelse ($\sigma$) ikke er relevante. 
 
 Ønsket styrke er 80% eller 0.8, så $\beta = 1-0.8=0.2$, signifikansniveauet sættes til 5%, så $\alpha = 0.05$.
 
@@ -329,7 +386,7 @@ Hvilken type udfald?
 
 . . . 
 
-Middelværdier - forskel på to grupper. Grupperne skal være lige store.
+Middelværdier - forskel på to grupper. En differens. Grupperne skal være lige store.
 
 . . . 
 
@@ -345,7 +402,7 @@ Hvilken effekt ønsker vi at kunne se?
 
 . . . 
 
-Ønsket effekt vi vil kunne se er 1$\sigma$
+Ønsket effekt vi vil kunne opdage er 1$\sigma$
 
 
 ## Opstil powerrelationen
@@ -422,26 +479,29 @@ Bemærk at vi nu ikke længere har lige mange i hver gruppe!
 
 ## Hvordan ser vores standardfejl så ud?
 
-. . .
- 
-$$
-\text{SE} = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}
-$$
+:::: {.smaller}
 
-. . . 
+:::: {.fragment}
+ 
+$\text{SE} = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}$
+
+::::
+:::: {.fragment}
 
 Vi skal stadig bruge powerrelationen:
 
-. . . 
+::::
+:::: {.fragment}
 
-$$
-\frac{\text{effekt}}{\text{standardfejl}}
-= z_{1-α/2}+z_{1-β}
-$$
+$\frac{\text{effekt}}{\text{standardfejl}} = z_{1-α/2}+z_{1-β}$
 
-. . . 
+::::
+:::: {.fragment}
  
 Og effekten er stadig 1$\sigma$
+
+::::
+::::
 
 ## Næste trin
 Indsæt i powerrelationen:
@@ -494,7 +554,7 @@ populationsværdier
 
 Det ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten har samme middelværdi ($\mu$).
 
-Hvis der indsamles n observationer af fødelsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig $\mu$ = 3500?
+Hvis der indsamles n observationer af fødselsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig $\mu$ = 3500?
 
 Angiv konkret teststørrelse beregnet baseret på de n observationer.
 
@@ -509,10 +569,10 @@ Og dernæst teststørrelsen: $\frac{X - 3500}{SEM}$
 
 ## Og så til powerberegningen
 
-Hvis den sande $\mu$ er under 3200 gram (eller over 3800 gram),
+Hvis den sande $\mu$ (og det er altså for de rygende kvinder) er under 3200 gram (eller over 3800 gram),
 og vi kun vil acceptere en 10% risiko for ikke at opdage en sådan
 forskel på de to middelværdier, hvor stor en stikprøve skal der
-så anvendes, med et signifikans niveau på 5%.
+så anvendes, med et signifikans niveau på 5%. 
 
 Hvad er $H_0$ og $H_A$?
 
@@ -532,7 +592,13 @@ $\delta = 3800-3500 = 300$
 
 . . . 
 
-Risikoen for ikke at opdage forskellen må være på 10%: $\beta = 0.1$ 
+Risikoen for ikke at opdage forskellen må være på 10%: 
+
+. . .
+
+$\beta = 0.1$ 
+
+. . .
 
 Eller: Power = 0.9
 
@@ -548,18 +614,33 @@ Standardafvigelse $\sigma = 430$
 
 :::: {.columns}
 :::: {.column}
+
+:::: {.smaller}
+
 $$
-\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
+\frac{\text{effekt}}{\text{standardfejl}} \\ 
+= \frac{\delta}{SE}
 = z_{1-α/2}+z_{1-β}
 $$
 
-$\beta = 0.1$, $\delta = 430$, $SE = \frac{\sigma}{\sqrt{n}}$, $\sigma = 430$
-
+:::: {.fragment}
+Hvad fik vi oplyst?
+::::
+:::: {.fragment}
+$\beta = 0.1$, $\delta = 300$, $SE = \frac{\sigma}{\sqrt{n}}$, $\sigma = 430$, $\alpha = 0.05$
+::::
+:::: {.fragment}
+Indsæt
+::::
+:::: {.fragment}
 $$
 z_{1-\alpha/2}+z_{1-\beta} = \frac{300}{\frac{430}{\sqrt{n}}}
 $$
-
+::::
+:::: {.fragment}
 Isoler n - det gør vi på tavlen
+::::
+::::
 
 ::::
 :::: {.column}
@@ -593,18 +674,30 @@ Samme forudsætninger som før.
 
 :::: {.columns}
 :::: {.column}
+:::: {.smaller}
 $$
-\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
-= z_{1-α/2}+z_{1-β}
+\frac{\text{effekt}}{\text{standardfejl}} = \\
+\frac{\delta}{SE} = z_{1-α/2}+z_{1-β}
 $$
 
+:::: {.fragment}
+Hvad fik vi oplyst?
+::::
+:::: {.fragment}
 $\beta = 0.1$, $SE = \frac{\sigma}{\sqrt{n}}$, $\sigma = 430$, n = 100
-
+::::
+:::: {.fragment}
+Indsæt
+::::
+:::: {.fragment}
 $$
 z_{1-\alpha/2}+z_{1-\beta} = \frac{\delta}{\frac{430}{\sqrt{100}}}
 $$
-
+::::
+:::: {.fragment}
 Isoler $\delta$ - det gør vi på tavlen
+::::
+::::
 
 ::::
 :::: {.column}
