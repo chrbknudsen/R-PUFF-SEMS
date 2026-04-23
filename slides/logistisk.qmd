@@ -2955,7 +2955,7 @@ log-odds
 Hvilke effekter er relevante?
 ::::
 :::: {.fragment}
-Ja, det kan debatteres. Tag dem alle sammen.
+Behandling er. X giver det ikke mening at tolke på. Det er en logaritmeret værdi.
 ::::
 ::::
 

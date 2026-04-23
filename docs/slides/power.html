@@ -2045,12 +2045,14 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="vi-har-prøvet-det" class="slide level2">
 <h2>Vi har prøvet det</h2>
+<div class="smaller">
 <p>To grupper, med hver deres middelværdi <span class="math inline">\(\mu\)</span> og standardafvigelse <span class="math inline">\(\sigma\)</span> og antal observationer, n, i hver gruppe.</p>
 <p>Beregn SEM for hver af grupperne: <span class="math inline">\(SEM = \frac{\sigma}{\sqrt{n}}\)</span></p>
-<p>Beregn en poolet SEM for differencen: <span class="math inline">\(SEM_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}\)</span></p>
+<p>Beregn en samlet SE for differencen: <span class="math inline">\(SE_{diff} = \sqrt{SEM_{1}^2 + SEM_2^2}\)</span></p>
 <p>Og et 95% konfidensinterval:</p>
-<p><span class="math inline">\((\mu_1 - \mu_2) \pm 1.96SEM_{diff}\)</span></p>
+<p><span class="math inline">\((\mu_1 - \mu_2) \pm 1.96SE _{diff}\)</span></p>
 <p>Ligger 0 i intervallet, er der ingen forskel (på et 5% signifikansniveua). Ligger det udenfor, er der forskel, og vi afviser <span class="math inline">\(H_0\)</span> (på et 5% signifikansniveau).</p>
+</div>
 </section>
 <section id="hvad-betød-det" class="slide level2">
 <h2>Hvad betød det?</h2>
@@ -2176,12 +2178,22 @@ Data understøtter <em>ikke</em> den alternative hypotese</p>
 </section>
 <section id="og-hvad-spørges-der-til-til-eksamen" class="slide level2">
 <h2>Og hvad spørges der til til eksamen?</h2>
+<div class="smaller">
 <p>Her er fire værdier. Find den femte.</p>
 <div class="fragment">
 <p>Eksempelvis: Vi ønsker et signifikansniveau på 5% og en power på 80%. Vi ønsker at kunne se en forskel på 42 i middelværdierne på to stikprøver, standardafvigelsen kan antages at være den samme i begge stikprøver. Der er 100 observationer i den ene stikprøve. Hvor mange skal der være i den anden?</p>
 </div>
 <div class="fragment">
+<p>Det handler typisk om beregning af stikprøvestørrelser.<br>
+Hvor mange patienter skal vi have med i vores forsøg for at vi kan forvente at se en effekt af ene bestemt størrelse?</p>
+</div>
+<div class="fragment">
+<p>Eller beregning af effektstørrelser.<br>
+Hvor stor en forskel mellem to grupper forventer vi at kunne få øje på. Når vi har et bestemt antal patienter med i forsøget.</p>
+</div>
+<div class="fragment">
 <p>Det er dog ikke et specielt hyppigt forekommende eksamensspørgsmål.</p>
+</div>
 </div>
 </section>
 <section id="det-har-r-funktioner-til." class="slide level2">
@@ -2255,16 +2267,53 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <p>Forskel mellem to proportioner: <span class="math inline">\(SE = \sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\)</span></p>
 <p>Forskel mellem to proportioner, hvor grupperne er lige store: <span class="math inline">\(SE = \sqrt{\frac{p_1(1 - p_1) + p_2(1-p_2)}{n}}\)</span></p>
 </section>
+<section id="og-hvad-gør-vi-så-i-praksis" class="slide level2">
+<h2>Og hvad gør vi så i praksis?</h2>
+<div class="evensmaller">
+<p>Vi har powerrelationen</p>
+<p><span class="math inline">\(\frac{\text{effekt}}{\text{standardfejl}} = z_{1-\alpha/2}+z_{1-\beta}\)</span></p>
+<div class="fragment">
+<p><span class="math inline">\(z_{1-\alpha/2} = 1.96\)</span> (hvis <span class="math inline">\(\alpha = 0.05\)</span>). <span class="math inline">\(z_{1-\beta}\)</span> beregner vi med <code>qnorm(1-beta)</code></p>
+</div>
+<div class="fragment">
+<p>Vi får oplyst at vi vil kunne se en bestemt forskel i to middelværdier (det var effekten), ofte “behandling vs.&nbsp;placebo”.</p>
+</div>
+<div class="fragment">
+<p>Med en power på 80% (svarende til <span class="math inline">\(\beta = 0.2\)</span>)</p>
+</div>
+<div class="fragment">
+<p>Vi får at vide at der skal være lige mange i hver gruppe.</p>
+</div>
+<div class="fragment">
+<p>Hvis vi er heldige får vi også at vide at vi må antage at standardafvigelsen er den samme i de to grupper (og hvad den er).</p>
+</div>
+<div class="fragment">
+<p>Og vi ved så, at vi kan beregne standardfejlen ved <span class="math inline">\(\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}\)</span></p>
+</div>
+<div class="fragment">
+<p>Og fordi <span class="math inline">\(n_1 = n_2\)</span></p>
+</div>
+<div class="fragment">
+<p>Så er det “bare” at indsætte tallene i powerrelationen, og isolere n.</p>
+</div>
+<div class="fragment">
+<div class="tiny">
+<p>Eller også får vi at vide at <span class="math inline">\(n_1 = 100\)</span> og vi skal finde <span class="math inline">\(n_2\)</span>. Eller vi får oplyst både <span class="math inline">\(n_1\)</span> og <span class="math inline">\(n_2\)</span> og alt det andet, men skal beregne den forskel vi kan forvente at se.<br>
+Grundlæggende: Vi får alt, bortset fra én parameter oplyst. Indsæt i formlen, isoler det manglende.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="et-par-fælder" class="slide level2">
 <h2>Et par fælder</h2>
 <p>Vi runder altid op. Hvis n beregnes til 7.8, runder vi op til 8.</p>
-<p>Vi får næsten altid at vide hvor mange observationer der er i hver gruppe.</p>
+<p>Resultatet af vores beregninger er næsten altid antallet af mange observationer der skal være i hver gruppe.</p>
 <p>Hvis n er 8, skal vi bruge 16 observationer.</p>
 <p>Undtagelsen er selvfølgelig hvis vi får at vide at der er 100 observationer i den ene gruppe. Så får vi svaret på hvor mange vi skal bruge i den anden gruppe.</p>
 </section>
 <section id="så-er-vi-klar-lad-os-tage-et-eksempel" class="slide level2">
 <h2>Så er vi klar, lad os tage et eksempel!</h2>
-<p>Vi skal sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. Hvor mange patienter skal inkluderes i studiet hvis forskelle i enzymkoncentrationen på mindre end 1 standardafvigelse () ikke er relevante.</p>
+<p>Vi skal sammenligne en enzymkoncentration for patienter med en bestemt sygdom med en rask kontrolgruppe, således at der er lige mange patienter og kontroller i studiet. Hvor mange patienter skal inkluderes i studiet hvis forskelle i enzymkoncentrationen på mindre end 1 standardafvigelse (<span class="math inline">\(\sigma\)</span>) ikke er relevante.</p>
 <p>Ønsket styrke er 80% eller 0.8, så <span class="math inline">\(\beta = 1-0.8=0.2\)</span>, signifikansniveauet sættes til 5%, så <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p>Vi får lov at antage at enzymkoncentrationen varierer lige meget blandt patienter og kontroller.</p>
 </section>
@@ -2272,7 +2321,7 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <h2>Første trin</h2>
 <p>Hvilken type udfald?</p>
 <div class="fragment">
-<p>Middelværdier - forskel på to grupper. Grupperne skal være lige store.</p>
+<p>Middelværdier - forskel på to grupper. En differens. Grupperne skal være lige store.</p>
 </div>
 <div class="fragment">
 <p>Hvordan ser vores standardfejl så ud?</p>
@@ -2284,7 +2333,7 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <p>Hvilken effekt ønsker vi at kunne se?</p>
 </div>
 <div class="fragment">
-<p>Ønsket effekt vi vil kunne se er 1<span class="math inline">\(\sigma\)</span></p>
+<p>Ønsket effekt vi vil kunne opdage er 1<span class="math inline">\(\sigma\)</span></p>
 </div>
 </section>
 <section id="opstil-powerrelationen" class="slide level2">
@@ -2345,22 +2394,19 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 </section>
 <section id="hvordan-ser-vores-standardfejl-så-ud" class="slide level2">
 <h2>Hvordan ser vores standardfejl så ud?</h2>
+<div class="smaller">
 <div class="fragment">
-<p><span class="math display">\[
-\text{SE} = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}
-\]</span></p>
+<p><span class="math inline">\(\text{SE} = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2}} = \sqrt{\sigma^2(\frac{1}{n_1} + \frac{1}{n_2})} = \sigma\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}\)</span></p>
 </div>
 <div class="fragment">
 <p>Vi skal stadig bruge powerrelationen:</p>
 </div>
 <div class="fragment">
-<p><span class="math display">\[
-\frac{\text{effekt}}{\text{standardfejl}}
-= z_{1-α/2}+z_{1-β}
-\]</span></p>
+<p><span class="math inline">\(\frac{\text{effekt}}{\text{standardfejl}} = z_{1-α/2}+z_{1-β}\)</span></p>
 </div>
 <div class="fragment">
 <p>Og effekten er stadig 1<span class="math inline">\(\sigma\)</span></p>
+</div>
 </div>
 </section>
 <section id="næste-trin" class="slide level2">
@@ -2396,7 +2442,7 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <div class="smaller">
 <p>Fødselsvægten for børn født indenfor termin med gestationsalder 40 uger antages approksimativt normalfordelt med middelværdi 3500 gram og spredning 430 gram. Vi antager at det er populationsværdier</p>
 <p>Det ønskes undersøgt om fødselsvægten for børn hvis mødre røg gennem hele graviditeten har samme middelværdi (<span class="math inline">\(\mu\)</span>).</p>
-<p>Hvis der indsamles n observationer af fødelsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig <span class="math inline">\(\mu\)</span> = 3500?</p>
+<p>Hvis der indsamles n observationer af fødselsvægten af børn af disse mødre, hvilken test ville vi så anvende for at undersøge om deres gennemsnitlige fødselsvægt X er lig <span class="math inline">\(\mu\)</span> = 3500?</p>
 <p>Angiv konkret teststørrelse beregnet baseret på de n observationer.</p>
 <div class="fragment">
 <p>Vi vil skulle beregne SEM for disse børn <span class="math inline">\(\left(\frac{\sigma}{\sqrt{n}}\right)\)</span></p>
@@ -2406,7 +2452,7 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 </section>
 <section id="og-så-til-powerberegningen" class="slide level2">
 <h2>Og så til powerberegningen</h2>
-<p>Hvis den sande <span class="math inline">\(\mu\)</span> er under 3200 gram (eller over 3800 gram), og vi kun vil acceptere en 10% risiko for ikke at opdage en sådan forskel på de to middelværdier, hvor stor en stikprøve skal der så anvendes, med et signifikans niveau på 5%.</p>
+<p>Hvis den sande <span class="math inline">\(\mu\)</span> (og det er altså for de rygende kvinder) er under 3200 gram (eller over 3800 gram), og vi kun vil acceptere en 10% risiko for ikke at opdage en sådan forskel på de to middelværdier, hvor stor en stikprøve skal der så anvendes, med et signifikans niveau på 5%.</p>
 <p>Hvad er <span class="math inline">\(H_0\)</span> og <span class="math inline">\(H_A\)</span>?</p>
 <div class="fragment">
 <p><span class="math inline">\(H_0: \mu = 3500\)</span></p>
@@ -2420,7 +2466,12 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <p><span class="math inline">\(\delta = 3800-3500 = 300\)</span></p>
 </div>
 <div class="fragment">
-<p>Risikoen for ikke at opdage forskellen må være på 10%: <span class="math inline">\(\beta = 0.1\)</span></p>
+<p>Risikoen for ikke at opdage forskellen må være på 10%:</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\beta = 0.1\)</span></p>
+</div>
+<div class="fragment">
 <p>Eller: Power = 0.9</p>
 </div>
 <div class="fragment">
@@ -2434,15 +2485,30 @@ Hvis I ikke har, så er der et bud på hvordan her.</p>
 <h2>Powerrelationen opstilles</h2>
 <div class="columns">
 <div class="column">
+<div class="smaller">
 <p><span class="math display">\[
-\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
+\frac{\text{effekt}}{\text{standardfejl}} \\
+= \frac{\delta}{SE}
 = z_{1-α/2}+z_{1-β}
 \]</span></p>
-<p><span class="math inline">\(\beta = 0.1\)</span>, <span class="math inline">\(\delta = 430\)</span>, <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>, <span class="math inline">\(\sigma = 430\)</span></p>
+<div class="fragment">
+<p>Hvad fik vi oplyst?</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\beta = 0.1\)</span>, <span class="math inline">\(\delta = 300\)</span>, <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>, <span class="math inline">\(\sigma = 430\)</span>, <span class="math inline">\(\alpha = 0.05\)</span></p>
+</div>
+<div class="fragment">
+<p>Indsæt</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 z_{1-\alpha/2}+z_{1-\beta} = \frac{300}{\frac{430}{\sqrt{n}}}
 \]</span></p>
+</div>
+<div class="fragment">
 <p>Isoler n - det gør vi på tavlen</p>
+</div>
+</div>
 </div><div class="column">
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -2471,15 +2537,29 @@ z_{1-\alpha/2}+z_{1-\beta} = \frac{300}{\frac{430}{\sqrt{n}}}
 <h2>Opstil powerrelationen</h2>
 <div class="columns">
 <div class="column">
+<div class="smaller">
 <p><span class="math display">\[
-\frac{\text{effekt}}{\text{standardfejl}} = \frac{\delta}{SE}
-= z_{1-α/2}+z_{1-β}
+\frac{\text{effekt}}{\text{standardfejl}} = \\
+\frac{\delta}{SE} = z_{1-α/2}+z_{1-β}
 \]</span></p>
+<div class="fragment">
+<p>Hvad fik vi oplyst?</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(\beta = 0.1\)</span>, <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>, <span class="math inline">\(\sigma = 430\)</span>, n = 100</p>
+</div>
+<div class="fragment">
+<p>Indsæt</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 z_{1-\alpha/2}+z_{1-\beta} = \frac{\delta}{\frac{430}{\sqrt{100}}}
 \]</span></p>
+</div>
+<div class="fragment">
 <p>Isoler <span class="math inline">\(\delta\)</span> - det gør vi på tavlen</p>
+</div>
+</div>
 </div><div class="column">
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>

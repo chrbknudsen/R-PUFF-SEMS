@@ -1813,44 +1813,7 @@ Så ilt-regimet har betyding for cancer patienter, men ikke for ikke-cancerpatie
 
 ## Levertal
 
-583 personer er henvist til undersøgelse pga mistanke om leversygdom
-De første seks observationer:
-```{r}
-library(tidyverse)
-tribble(~age, ~albumin, ~ratio, ~globulin, ~status, ~idnr, ~sex, ~l_ratio,
-65, 3.3, 0.90, 3.666667, 1, 1, "F",  -0.1053605,
-62, 3.2, 0.74, 4.324324, 1, 2, "M", -0.3011051,
-62, 3.3, 0.89, 3.707865, 1, 3, "M", -0.1165338,
-58, 3.4,1.00,3.400000,1,4,"M",0,
-72, 2.4, 0.4, 6, 1,5,"M",-0.9162907,
-46, 4.4,1.3,3.384615,1,6,"M",0.2623643
-)
-```
-
-Variable:
-idnr: Løbenummer
-sex: Køn
-age: alder i år
-status: leversygdom, 1=ja
-albumin: serum albumin g/dL
-globulin: serum globulin g/dL
-ratio: ratio m. albumin og globulin
-l_ratio: log(ratio) (den naturlige logaritme)
-
-Der defineres en binær variabel AG.positiv som ratio < 1.1
-Det giver os denne tabel:
-
-
-```{r}
-status <- c(rep(0, 99 + 66),
-            rep(1, 308 + 106))
-
-AG.positiv <- c(rep(1, 99), rep(0, 66),
-         rep(1, 308), rep(0, 106))
-table(AG.positiv, status)
-```
-
-a) Undesøg om der er en statistisk signifikant sammenhæng mellem de to variable.
+Undersøg om der er en statistisk signifikant sammenhæng mellem de to variable.
 
 Her kører vi en chi^2 test:
 
@@ -1861,223 +1824,106 @@ input <- matrix(c(66,106,99,308), ncol = 2, byrow = TRUE)
 chisq.test(input, correct = FALSE)
 ```
 
-Det giver en teststørrelse på 11.7. Vi sætter correct = FALSE fordi de forventede værdier i 
-tabellen er "store", som i større end 5.
 
-Det svarer til en p-værdi der er <0.001. Så der er signifikant forskel. modelbesvarlsaer bruger
+Det svarer til en p-værdi der er <0.001. Så der er signifikant forskel. 
+modelbesvarlsaer bruger
 ofte formuleringen "klart signifikant". teknisk set er der ikke noget der er mere signifikant end
 andet. det er signifikant på et bestemt niveua. Eller også er det ikke. Det er ikke "næsten" eller "meget" signifikant.
 
-b)
+## Levertal - regression
+
 Nu udfører vi følgende analyse i R:
 > model <- glm(status~factor(AG.positiv)+factor(sex)+age, binomial)
 > summary(model)
 
-Den giver dette resultat:
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
-
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
-"(Intercept)", "-0.446661", "0.320769", "-1.392", "0.16378",
-"factor(AG.postiv)1", "0.594643", "0.199556", "2.980", "0.00288**",
-"factor(sex)M", "0.407717", "0.211941", "1.924", "0.05439.",
-"age", "0.015131", "0.005927", "2.553", "0.01069*"
-
-
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `z value` = "z value",
-    `Pr(>|z|)` = "Pr(>|z|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-     font = list(google_font("Courier Prime"), default_fonts())) 
+OR for AG.positiv
+```{r}
+(OR <- exp(0.594643))
 ```
 
-Hvilken analyse er der tale om, og hvad kan vi konkludere på baggrund af det?
-Angiv relevant størrelse der kvantificerer effekten af AG.positiv. beregn tilhørende 95% KI.
-
-Det er en logistisk regression med status som responsvariabel og AG.positiv og køn som kategoriske forklarende variable, og alder som kontinuær forklarende variabel.
-Alder og AG.positiv er signifikante i denne justerede analyse, kønnet er ikke.
-
-OR for AG.positiv exp(0.594643) = 1.812384
 og vi estimerer derfor at odds for at status er 1 (at man er syg) er en faktor 1.8 større
+
 hvis AG.positive patienter, sammenlignet med AG.negative. 
+
 KI:
-exp(0.594643 + c(-1,1)*1.96*0.199556)
+```{r}
+(KI_log_or <- 0.594643 + c(-1,1)*1.96*0.199556)
+exp(KI_log_or)
+
+```
+
+Og det vi så svarer er: ORE for AG.positiv estimerer vi til 
+
 Da det ikke indeholder 1, er resultatet signifikant (i overensstemmelse med hvad vi så
 fra p-værdien)
 
-c) Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.
+## Levertal - prediktion
 
-Vi beregner:
--0.446661 +  0.594643 + 50*0.015131 = 0.904532
+Prædikter sandsynlighednen for at have status 1 (syg) for en AG.positiv kvinde på 50.
 
-Det er logodds. Så vi finder sandsynligheden ved:
-odds er så: exp(0.904532) = 2.470775
-Og sandsynligheden finder vi ved:
-odds/(1+odds) = 2.470775/(1+2.470775) = 0.7118799
+```{r}
+(log_odds_syg <- -0.446661 +  0.594643 + 50*0.015131 )
+(odds_syg <- exp(log_odds_syg))
+(sandsynlighed <- odds_syg/(1+odds_syg))
+```
 
+Så sandsynligheden for at være syg, hvis man er AG.positiv 50-årig kvinde er 71%
 
 
 ## Bilirubin
 
-Vi skal se på et randomiseret klinisk studie udført på seks forskellige
-europæiske hospitaler. 349 patienter med leversygdom blev randomiseret
-til enten den eksperimentelle behadnling UDC (176 patienter) eller
-placebo (173 patienter)
-
-Udfaldet "failure of medical treatment" blev defineret som enten
-død eller levertransplantation i den 6 årige undersgelsesperiode.
-Pateienter blev fulgt fra randomiseringstidspunktet til ovenstående
-udfald - eller til de 6 år var gået.
-
-Vi får de første 6t observationer i sættet. Y er udfaldsvariablen
-(1 "treatment failure"), R angiver behandling (1  = UDC), X den 
-standardiserede version af logaritmen af bilirubin (umol/L), målt
-for hver patient ved starten af studiet
-
-
-```{r}
-library(tidyverse)
-tribble(~Y, ~R, ~X,
-1, 1 , 1.616854293,
-0,1,1.990367802,
-0,1,-0.849360224,
-1,1,1.496709981,
-0,1,1.335441834,
-0,1,-0.561678151)
-```
-
->table(Y,R) giver:
-
-
-```{r echo = FALSE}
-Y <- c(rep(0, 134 + 118),
-            rep(1, 42 + 55))
-
-R <- c(rep(1, 134), rep(0, 118),
-         rep(1, 42), rep(0, 55))
-table(Y, R)
-```
 
 a) baseret på ovenstående table ønske beregnet relativ risiko
 (med tilhørende 95% KI ) til belysning af effekten af behandlingen
 på det betragtede udfald. Husk at konkludere.
 
+
+
 Risiko ved behandling:
-42/(134+42)= 0.2386364
 
-Risiko ved placebo:
-55/(118+55) = 0.3179191
+```{r}
+(R_udc <- 42/(134+42))
+(R_pla <- 55/(118+55))
+(RR <- R_udc/R_pla)
+```
 
-RR = 0.2386364/0.3179191 = 0.7506199
+RR er 0.75 - det betyder at der er en ca. 25% reduceret risiko for treatment failure ved UDC behandlingen. 
+KI
+```{r}
+(SE_log_rr <- sqrt(1/42 - 1/(134+42) + 1/55 - 1/(118+55)))
+(KI_log <- log(RR) + c(-1,1)*1.96*SE_log_rr)
+exp(KI_log)
+```
 
-log(RR) = log(0.7506199) =  -0.2868559
-
-se.(log(rr)) = sqrt(1/42-1/176+1/55-1/173) = 0.174726
-
-et 95% ki for log(rr) findes til;
--0.2868559 + c(-1,1)*1.96*0.174726 = -0.62931886  0.05560706
-
-Derfor er 95% ki for RR:
-exp(c(-0.62931886, 0.05560706)) =  0.5329547 1.0571822
-
-RR er 0.75. Så vi estimerer at behandlingen reducerer treatment failure med 25% med et 95% KI på 0.5329547 1.0571822
-Da 1 er indeholdt i KI er der dermed ikke tale om en signifikant
-effekt.
-
-b)
+## Bilirun - regression
 Nu udførtes følgende analyse:
 > model <- glm(Y ~ factor(R) + X, family ="binomial")
 summary(model)
 
-der gav dette output:
+Såvel behandlingen som X er statistisk signifikante på et 5% niveua.
 
-```{r echo = FALSE}
-library(tidyverse)
-library(gt)
+Det giver ikke mening at tolke på X, der er en standardiseret udgave af logaritmen af bilirubin (målt i umol/L).
+Så det er en stigning i OR for hver stigning på en standardafvigelse af logaritmen af bilirubin, relativt til middelværdien.
 
-tribble(~Term, ~Estimate, ~`Std. Error`, ~`z value`, ~`Pr(>|z|)`,
-"(Intercept)", "-1.3922", "0.2088", "-6.668", "2.60e-11***",
-"factor(R)1", "-0.9054", "0.2967", "-3.052", "0.00227**",
-"X", "1.2632", "0.1571", "8.043", "8.79e-16***"
+For den forklarende variabel R, der er det vi faktisk kan styre selv - det var behandling UDC vs. placebo
 
+OR
 
-) |> 
-
-  gt() |> 
-  cols_label(
-    Term = "",
-    Estimate = "Estimate",
-    `Std. Error` = "Std. Error",
-    `z value` = "z value",
-    `Pr(>|z|)` = "Pr(>|z|)"
-  ) |> 
-  cols_align(
-    align = "left",
-    everything()
-  ) |> 
-    
-  tab_options(
-    # Ydre kanter
-    table.border.top.width = px(0),
-    table.border.bottom.width = px(0),
-
-    # Overskrift og kolonneetiketter
-    heading.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    column_labels.border.bottom.width = px(0),
-
-    # Krop: ingen vandrette linjer
-    table_body.hlines.width = px(0),
-    table_body.border.bottom.width = px(0),
-
-    # Gruppe-linjer (hvis nogen)
-    table_body.border.top.width = px(0),
-    row_group.border.top.width = px(0),
-    row_group.border.bottom.width = px(0)
-  ) |> 
-  opt_table_font(
-     font = list(google_font("Courier Prime"), default_fonts())) 
+```{r}
+exp(-0.9054)
 ```
 
-Hvilken analyse er der tale om. Angiv relevante effektestimater
-baseret på analysen og formuler konklusioner derfra.
+Når der kontrolleres for bilirubin. når den er ca. 0.4, så svarer det til en reduktion på ca. 60% i odds for treatment failure ved 
+aktiv behandling kontra placebo. 
 
-Der er tale om en logistisk regressions analyse, med Y (Treatment failure) som afhængig variabel, og behandling/randomisering som
-kategorisk uafhængig, forklarende variable, samt X (den standardiserede logartime af bilirubin) som kontinuært forklarende
-variabel.
-Såvel behandlingen som X er statistisk signifikante på et 5% niveua.
+KI
+
+```{r}
+(KI_log <- -0.9054 + c(-1,1)*1.96*0.2967)
+exp(KI_log)
+```
+
+
 
 For den forklarende variabel X får vi en estimeret odds ratio (OR) 
 på behandlingen på exp(-0.9054) =  0.4043801 når der kontrolleres
@@ -2092,3 +1938,62 @@ bilirubin. Da KI ikke indeholder 1, er effekten signifikant.
 
 
 
+# Powerberegninger
+
+$\frac{\sigma}{\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} = z_{1-0.05/2}+z_{1-0.2}$
+
+n_1 = 100
+
+```{r}
+qnorm(0.975) + qnorm(0.8)
+```
+
+
+1 = 2.8* kvadratroden
+
+Af med kvadratroden
+
+1 = 2.8^2 * (1/100 + 1/n_2)  
+1/2.8^2 = 1/100 + 1/n_2  
+
+1/2.8^2 - 1/100 = 1/n  
+1/(1/2.8^2 - 1/100) = n  
+
+```{r}
+1/(1/2.8^2 - 1/100)
+```
+
+Vi runder op!
+
+## powerrelationen opstilles
+
+```{r}
+qnorm(0.975) + qnorm(0.9)
+```
+
+3.2 = 300/(430/sqrt(n))
+3.2*430/sqrt(n) = 300
+sqrt(n)*300 = 3.2*430
+sqrt(n) = 3.2*430/300
+n = (3.2*430/300)^2
+
+```{r}
+(3.2*430/300)^2
+```
+
+og vi runder op!
+
+## Isoler delta
+
+```{r}
+qnorm(0.975) + qnorm(0.9)
+```
+
+3.2 = delta/(430/sqrt(100))
+
+3.2 = delta/(430/10)
+delta = 43*3.2
+
+```{r}
+43*(qnorm(0.975) + qnorm(0.9))
+```
