@@ -2489,7 +2489,10 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p>X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X <em>er</em> er 1, så:</p>
 </div>
 <div class="fragment">
-<p>1 - P(X &lt; -1)</p>
+<p><span class="math inline">\(P(X \geq -1) + P(X &lt; -1) = 1\)</span></p>
+</div>
+<div class="fragment">
+<p>$P(X ) = 1 - P(X &lt; -1)</p>
 </div>
 </section>
 <section id="qnorm" class="slide level2">
@@ -2835,6 +2838,11 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="fragment">
 <p>Det kalder vi at “skalere”.</p>
 </div>
+<div class="fragment">
+<div class="tiny">
+<p>Når vi skalerer X til Z taler vi også om at vi beregner en <em>z-score</em> for en given værdi af x. Det er et lækkert ord at bruge i en eksamensbesvarelse.</p>
+</div>
+</div>
 </section>
 <section id="så-i-praksis" class="slide level2">
 <h2>Så i praksis?</h2>
@@ -2847,6 +2855,8 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </div>
 <div class="fragment">
 <p>Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(P(X&lt;170) = P(\frac{X-\mu}{\sigma} &lt; \frac{170 - 181}{6.5}) = P(Z &lt; -1.692)\)</span></p>
 </div>
 <div class="fragment">
@@ -2864,11 +2874,12 @@ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
 <p>Den standardiserede normalfordeling skriver vi som N(0,1)<br>
-En generelt normalfordeling skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span><br>
+En generel normalfordeling skriver vi som <span class="math inline">\(N(\mu, \sigma)\)</span><br>
 Når data, X, er normalfordelt, skriver vi det som X ~ <span class="math inline">\(N(\mu, \sigma)\)</span></p>
-<p>Eller: P(X &lt; 170) = P(<span class="math inline">\(\frac{X-\mu}{\sigma}\)</span> &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
+<p>I praksis:</p>
+<p>P(X &lt; 170) = P(<span class="math inline">\(\frac{X-\mu}{\sigma}\)</span> &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
 <p>Eller kortere: P(Z &lt; <span class="math inline">\(\frac{170-\mu}{\sigma}\)</span>)</p>
-<p>Når vi normaliserer 170 med <span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span>, får vi en Z-score. Det var den vi så på plottet af normalfordelingen.</p>
+<p>Når vi normaliserer 170 med <span class="math inline">\(\mu\)</span> og <span class="math inline">\(\sigma\)</span>, får vi en z-score. Det var den vi så på plottet af normalfordelingen.</p>
 </section>
 <section id="og-den-anden-vej" class="slide level2">
 <h2>Og den anden vej</h2>
@@ -3078,10 +3089,10 @@ P(X &gt; y) = 0.025 &lt;=&gt; P(X &lt; y) = 1 - 0.025</p>
 </div>
 <div class="fragment">
 <p>Standardiser:<br>
-P(Z &lt; y - 200 / 40 ) = 0.975</p>
+P(Z &lt; (y - 200 )/ 40 ) = 0.975</p>
 </div>
 <div class="fragment">
-<p>y - 200 / 40 = qnorm(0.975) = 1.959964</p>
+<p>(y - 200) / 40 = qnorm(0.975) = 1.959964</p>
 </div>
 <div class="fragment">
 <p>Isoler y:</p>
@@ -3106,6 +3117,10 @@ P(Z &lt; y - 200 / 40 ) = 0.975</p>
 </div>
 </div>
 </div>
+<div class="fragment">
+<p>Helt generelt:</p>
+<p><span class="math inline">\(\mu \pm1.96\cdot\sigma\)</span></p>
+</div>
 </section>
 <section id="hvad-hvis-det-er-et-90-interval-der-er-det-normale" class="slide level2">
 <h2>Hvad hvis det er et 90% interval der er det normale?</h2>
@@ -3125,6 +3140,9 @@ P(Z &lt; y - 200 / 40 ) = 0.975</p>
 <pre><code>[1] 1.644854</code></pre>
 </div>
 </div>
+</div>
+<div class="fragment">
+<p>Eller: <span class="math inline">\(\mu \pm1.64\cdot\sigma\)</span></p>
 </div>
 </section>
 <section id="øvelse" class="slide level2">
