@@ -465,7 +465,11 @@ X er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X 
 
 . . .
 
-1 - P(X < -1)
+$P(X \geq -1) + P(X < -1) = 1$
+
+. . .
+
+$P(X \geq -1) = 1 - P(X < -1)
 
 
 ## qnorm
@@ -826,6 +830,12 @@ $X = Z\sigma + \mu$
 
 Det kalder vi at "skalere".
 
+. . .
+
+:::: tiny
+Når vi skalerer X til Z taler vi også om at vi beregner en _z-score_ for en given værdi af x. Det er et lækkert ord at bruge i en eksamensbesvarelse.
+::::
+
 ## Så i praksis?
 
 Hvis $\mu$ er 181 og $\sigma$ er 6.5 og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.
@@ -842,6 +852,8 @@ Havde vi i stedet haft P(Z < ?) var vi i standardnormalfordelingen og kunne brug
 
 Derfor skalerer vi, og skalerer vi X, skal vi også skalere 170:
 
+. . .
+
 $P(X<170) = P(\frac{X-\mu}{\sigma} < \frac{170 - 181}{6.5}) = P(Z < -1.692)$
 
 . . . 
@@ -857,14 +869,16 @@ Og det er sandsynligheden for at være 1.7 standardafvigelser lavere end gennems
 ## Notation
 
 Den standardiserede normalfordeling skriver vi som N(0,1)  
-En generelt normalfordeling skriver vi som $N(\mu, \sigma)$  
+En generel normalfordeling skriver vi som $N(\mu, \sigma)$  
 Når data, X, er normalfordelt, skriver vi det som X ~ $N(\mu, \sigma)$  
 
-Eller: P(X < 170) = P($\frac{X-\mu}{\sigma}$ < $\frac{170-\mu}{\sigma}$)
+I praksis:
+
+P(X < 170) = P($\frac{X-\mu}{\sigma}$ < $\frac{170-\mu}{\sigma}$)
 
 Eller kortere: P(Z < $\frac{170-\mu}{\sigma}$)
 
-Når vi normaliserer 170 med $\mu$ og $\sigma$, får vi en Z-score. Det var den vi så på plottet af normalfordelingen.
+Når vi normaliserer 170 med $\mu$ og $\sigma$, får vi en z-score. Det var den vi så på plottet af normalfordelingen.
 
 
 ## Og den anden vej
@@ -1131,11 +1145,11 @@ P(X > y) = 0.025 <=> P(X < y) = 1 - 0.025
 . . . 
 
 Standardiser:  
-P(Z < y - 200 / 40 ) = 0.975
+P(Z < (y - 200 )/ 40 ) = 0.975
 
 . . . 
 
-y - 200 / 40 = qnorm(0.975) = 1.959964
+(y - 200) / 40 = qnorm(0.975) = 1.959964
 
 . . . 
 
@@ -1160,6 +1174,13 @@ Eller:
 200 + c(-1,1)*1.96*40
 ```
 
+
+. . .
+
+Helt generelt:
+
+$\mu \pm1.96\cdot\sigma$
+
 ## Hvad hvis det er et 90% interval der er det normale?
 
 . . .
@@ -1179,6 +1200,10 @@ Dvs 5% skal ligge under, og 5% skal ligge over.
 ```{r echo = TRUE}
 qnorm(1-0.05)
 ```
+
+. . .
+
+Eller: $\mu \pm1.64\cdot\sigma$
 
 ## Øvelse
 

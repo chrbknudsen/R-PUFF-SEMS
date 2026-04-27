@@ -279,10 +279,10 @@ Afvise $H_0$.
 . . .
 
 Metoden er den samme som før. $\text{Estimatet} \pm 1.96\cdot\text{SE}$  
-Eller beregne en test-værdi og sammemligne med den kritiske værdi.
+Eller beregne en test-værdi og sammenligne med den kritiske værdi.
 
 :::: {.tiny}
-Prævalensen for TB kan vi også kalde risikoen for at have TB. Det kunne vi også kalde for en risiko. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR.
+Prævalensen for TB kan vi også kalde risikoen for at have TB. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR.
 ::::
 
 . . .
@@ -476,7 +476,7 @@ log(9/1)
 
 . . . 
 
-Hvor _er_ det bare pænt og symmetrisk! 
+Hvor _er_ det bare pænt og symmetrisk! Og lige langt fra log(1) = 0
 
 
 ## Hvad tester vi så med odds?
@@ -636,6 +636,12 @@ $p = \frac{e^x}{1 + e^x}$
 
 Det er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.
 ::::
+:::: {.fragment}
+:::: {.tiny}
+Og hvor ville verden dog være rar hvis de funktioner var indbyggede i R. Er verden rar? Nej, det er den ikke. Derfor findes den funktion heller ikke i R.
+::::
+::::
+
 ::::
 
 ## $\chi^2$ tilgangen
@@ -684,7 +690,7 @@ Blandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at s
 
 Det er hvad vi forventer. Men vi ser at der kun er 28. 
 
-Vi laver de samme beregninger på de to andre celler.
+Vi laver de samme beregninger på de to andre celler. Og så tester vi om der er forskel på hvad vi ser. Og hvad vi forventer (hvis der ikke er forskel).
 
 ## Regne-regne
 
@@ -693,7 +699,7 @@ $\chi^2$ testens $H_0$ er, at der ikke er forskel på fordelingen af TB-status i
 
 :::: {.fragment}
 Testens p-værdi er sandsynligheden for at se så store forskelle på hvad vi 
-forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.
+forventer, og hvad vi faktisk observerer, i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.
 ::::
 :::: {.fragment}
 Styrken er at den kan håndtere flere udfald end to. 

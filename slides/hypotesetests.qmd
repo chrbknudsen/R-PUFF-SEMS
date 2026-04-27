@@ -72,7 +72,7 @@ populationen.
 
 
 
-## Den centrale grænseværdisætning (CLT)?
+## Den centrale grænseværdisætning?
 
 :::: smaller
 Vi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.
@@ -195,9 +195,9 @@ Intuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indehold
 
 . . .
 
-Eller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
+Eller mere korrekt, at hvis vi beregner intervaller ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller.
 
-## så
+## Så
 
 :::: evensmaller
 
@@ -353,7 +353,11 @@ n er antallet af observationer. Og vi skriver $s$ i stedet for $\sigma$ fordi?
 
 . . .
 
+:::: smaller
+
 $\sigma$ er den "sande" standardafvigelse i populationen. Vi har ikke målt på hele populationen. Så den kender vi ikke, og derfor bruger vi $s$ i stedet.
+
+::::
 
 ## En del af en eksamensopgave
 :::: {.columns}
@@ -963,7 +967,7 @@ Nej.
 
 Så skal vi bruge:
 
-$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+$SE(\hat{\mu}_1 - \hat{\mu}_2) = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 
 $s_1 = 0.068$, $n_1 = 227$  
 $s_2 = 0.057$, $n_2 = 140$
@@ -1145,7 +1149,7 @@ $H_0: \mu_1 - \mu_2 = 0$
 ::::
 :::: {.fragment}
 Samlet SE:  
-$SE_{diff} = \sqrt{\frac{s_1}{n_1} + \frac{s_2}{n_2}}$
+$SE_{diff} = \sqrt{SE_1^2 + SE_2^2}$
 ::::
 
 :::: {.fragment}
@@ -1207,7 +1211,7 @@ $2\cdot1.96\text{SE} = 8$
 Hvordan beregner vi SE?
 ::::
 :::: {.fragment}
-$SE_{diff} = \sqrt{(\frac{s_0}{n_0})^2 + (\frac{s_1}{n_1})^2}$
+$SE_{diff} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 ::::
 :::: {.fragment}
 ```{r}
@@ -1235,8 +1239,7 @@ Svar: $n_1 = 125$ - fordi det er let at rode rundt i tallene.
 
 ## Endnu en eksamensopgave
 
-:::: {.columns}
-:::: {.column}
+
 :::: evensmaller
 Antag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med $\mu$ = 13.3 g/100 ml. Spredning $\sigma$ = 1.12 g/100 ml.
 
@@ -1250,17 +1253,8 @@ Hvad er spredningen i fordelingen af stikprøvegennemsnittene?
 Det er SEM. Den beregner vi ved $\frac{\sigma}{\sqrt{n}}$
 ::::
 :::: 
-::::
-:::: {.column}
 
-```{webr-r}
-#| context: interactive
-#| layout: horizontal
-#| autorun: false
-```
 
-::::
-::::
 
 ## Endnu en eksamensopgave
 
@@ -1324,6 +1318,8 @@ Så $1.96\text{SEM} = 0.2$
 
 :::: {.fragment}
 $1.96\frac{\sigma}{\sqrt{n}} = 0.2$
+
+$\sigma = 1.12$
 ::::
  
 ::::
@@ -1490,7 +1486,7 @@ $\mu \pm1.96\sigma$
 De 1.96 var fordi?
 ::::
 :::: {.fragment}
-Så hvilken værdi er der blevet brug ved et 90% KI?
+Så hvilken værdi er der blevet brugt ved et 90% KI?
 ::::
 :::: {.fragment}
 Kan vi så finde $\sigma$ fra 90% KI'et?
@@ -1515,7 +1511,7 @@ $SEM = \frac{\sigma}{\sqrt{n}}$
 ::::
 
 :::: tiny
-Har I fået fingre i modelbesvarelsen - så er der regnefejl... Det er ikke det eneste problem med den løsning...
+Har I fået fingre i modelbesvarelsen - så er der regnefejl...
 ::::
 
 ## Diabetikere - fra et interval til et andet

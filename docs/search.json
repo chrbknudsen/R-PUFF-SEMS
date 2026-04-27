@@ -382,7 +382,7 @@
     "href": "slides/normalfordelingen.html#og-omvendt",
     "title": "Normalfordelingen",
     "section": "Og omvendt?",
-    "text": "Og omvendt?\nHvis sandsynligheden for at at X er mindre end -1 skrives som:\nP(X &lt; -1)\nHvad er så sandsynligheden for at X er \\(\\geq -1\\)?\n\n\\(P(X \\geq -1)\\)\n\n\nX er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X er er 1, så:\n\n\n1 - P(X &lt; -1)"
+    "text": "Og omvendt?\nHvis sandsynligheden for at at X er mindre end -1 skrives som:\nP(X &lt; -1)\nHvad er så sandsynligheden for at X er \\(\\geq -1\\)?\n\n\\(P(X \\geq -1)\\)\n\n\nX er enten mindre end 1. Eller større end 1. Den samlede sansynlighed for at X er er 1, så:\n\n\n\\(P(X \\geq -1) + P(X &lt; -1) = 1\\)\n\n\n$P(X ) = 1 - P(X &lt; -1)"
   },
   {
     "objectID": "slides/normalfordelingen.html#qnorm",
@@ -508,21 +508,21 @@
     "href": "slides/normalfordelingen.html#hvorfor-z",
     "title": "Normalfordelingen",
     "section": "Hvorfor Z?",
-    "text": "Hvorfor Z?\n\nOg ikke X?\n\n\nDet er en konvention: I standardnormalfordelingen skriver vi Z.\n\n\nI en normalfordeling generelt, skriver vi X\n\n\nNår vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen.\n\n\n\\(Z = \\frac{X-\\mu}{\\sigma}\\)\n\n\nOg den anden vej:\n\\(X = Z\\sigma + \\mu\\)\n\n\nDet kalder vi at “skalere”."
+    "text": "Hvorfor Z?\n\nOg ikke X?\n\n\nDet er en konvention: I standardnormalfordelingen skriver vi Z.\n\n\nI en normalfordeling generelt, skriver vi X\n\n\nNår vi skal fra X til Z trækker vi middelværdien af X fra, og dividerer med standardafvigelsen.\n\n\n\\(Z = \\frac{X-\\mu}{\\sigma}\\)\n\n\nOg den anden vej:\n\\(X = Z\\sigma + \\mu\\)\n\n\nDet kalder vi at “skalere”.\n\n\n\nNår vi skalerer X til Z taler vi også om at vi beregner en z-score for en given værdi af x. Det er et lækkert ord at bruge i en eksamensbesvarelse."
   },
   {
     "objectID": "slides/normalfordelingen.html#så-i-praksis",
     "href": "slides/normalfordelingen.html#så-i-praksis",
     "title": "Normalfordelingen",
     "section": "Så i praksis?",
-    "text": "Så i praksis?\nHvis \\(\\mu\\) er 181 og \\(\\sigma\\) er 6.5 og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\n\nDet kan vi skrive som: P(X&lt;170)\n\n\nHavde vi i stedet haft P(Z &lt; ?) var vi i standardnormalfordelingen og kunne bruge pnorm\n\n\nDerfor skalerer vi, og skalerer vi X, skal vi også skalere 170:\n\\(P(X&lt;170) = P(\\frac{X-\\mu}{\\sigma} &lt; \\frac{170 - 181}{6.5}) = P(Z &lt; -1.692)\\)\n\n\n\npnorm(-1.692)\n\n[1] 0.04532299\n\n\n\nOg det er sandsynligheden for at være 1.7 standardafvigelser lavere end gennemsnittet."
+    "text": "Så i praksis?\nHvis \\(\\mu\\) er 181 og \\(\\sigma\\) er 6.5 og vi vil vide hvad sandsynligheden er for at være mindre end 170 cm høj.\n\nDet kan vi skrive som: P(X&lt;170)\n\n\nHavde vi i stedet haft P(Z &lt; ?) var vi i standardnormalfordelingen og kunne bruge pnorm\n\n\nDerfor skalerer vi, og skalerer vi X, skal vi også skalere 170:\n\n\n\\(P(X&lt;170) = P(\\frac{X-\\mu}{\\sigma} &lt; \\frac{170 - 181}{6.5}) = P(Z &lt; -1.692)\\)\n\n\n\npnorm(-1.692)\n\n[1] 0.04532299\n\n\n\nOg det er sandsynligheden for at være 1.7 standardafvigelser lavere end gennemsnittet."
   },
   {
     "objectID": "slides/normalfordelingen.html#notation",
     "href": "slides/normalfordelingen.html#notation",
     "title": "Normalfordelingen",
     "section": "Notation",
-    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1)\nEn generelt normalfordeling skriver vi som \\(N(\\mu, \\sigma)\\)\nNår data, X, er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nEller: P(X &lt; 170) = P(\\(\\frac{X-\\mu}{\\sigma}\\) &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nEller kortere: P(Z &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nNår vi normaliserer 170 med \\(\\mu\\) og \\(\\sigma\\), får vi en Z-score. Det var den vi så på plottet af normalfordelingen."
+    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1)\nEn generel normalfordeling skriver vi som \\(N(\\mu, \\sigma)\\)\nNår data, X, er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nEller: P(X &lt; 170) = P(\\(\\frac{X-\\mu}{\\sigma}\\) &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nEller kortere: P(Z &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nNår vi normaliserer 170 med \\(\\mu\\) og \\(\\sigma\\), får vi en Z-score. Det var den vi så på plottet af normalfordelingen."
   },
   {
     "objectID": "slides/normalfordelingen.html#og-den-anden-vej",
@@ -1145,14 +1145,14 @@
     "href": "slides/hypotesetests.html#hvad-er-et-95-konfidensinterval-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvad er et 95% konfidensinterval?",
-    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner et interval ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
+    "text": "Hvad er et 95% konfidensinterval?\nVi kan også formulere det som:\n\nVi har et estimat. Det er vores bedste bud. Men vi ved at det nok ikke er 100% korrekt. Det er næppe den “sande” værdi.\n\n\nMen vi kan beregne et interval.\n\n\nIntuitivt kan vi forstå intervallet, som at vi er 95% sikre på at det indeholder den sande værdi.\n\n\nEller mere korrekt, at hvis vi beregner intervaller ud fra tilstrækkeligt mange stikprøver, så vil den sande værdi være indeholdt i 95% af de intervaller."
   },
   {
     "objectID": "slides/hypotesetests.html#så",
     "href": "slides/hypotesetests.html#så",
     "title": "Konfidensintervaller og hypotesetests",
-    "section": "så",
-    "text": "så\n\nHvis vi kender spredningen på stikprøvens middelværdier.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
+    "section": "Så",
+    "text": "Så\n\nHvis vi kender spredningen på stikprøvens middelværdier.\n\nKan vi beregne et 95% KI for den middelværdi.\n\n\nDet interval vil, i 95% af tilfældene, indeholde den sande middelværdi for populationen."
   },
   {
     "objectID": "slides/hypotesetests.html#hvordan-beregner-vi-så-det",
@@ -1166,7 +1166,7 @@
     "href": "slides/hypotesetests.html#hvordan-regner-vi-så",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Hvordan regner vi så?",
-    "text": "Hvordan regner vi så?\n\nVi fandt 95% normalområdet ved\n\n\n\\(\\mu \\pm 1.96\\cdot\\sigma\\)\n\n\nVi finder så 95% konfidensintervallet ved\n\n\n\\(\\hat{x} \\pm 1.96\\cdot\\text{SEM}\\)\n\n\nOg SEM fandt vi ved:\n\n\n\\(\\text{SEM} = \\frac{s}{\\sqrt{n}}\\)\nn er antallet af observationer. Og vi skriver \\(s\\) i stedet for \\(\\sigma\\) fordi?\n\n\n\\(\\sigma\\) er den “sande” standardafvigelse i populationen. Vi har ikke målt på hele populationen. Så den kender vi ikke, og derfor bruger vi \\(s\\) i stedet."
+    "text": "Hvordan regner vi så?\n\nVi fandt 95% normalområdet ved\n\n\n\\(\\mu \\pm 1.96\\cdot\\sigma\\)\n\n\nVi finder så 95% konfidensintervallet ved\n\n\n\\(\\hat{x} \\pm 1.96\\cdot\\text{SEM}\\)\n\n\nOg SEM fandt vi ved:\n\n\n\\(\\text{SEM} = \\frac{s}{\\sqrt{n}}\\)\nn er antallet af observationer. Og vi skriver \\(s\\) i stedet for \\(\\sigma\\) fordi?\n\n\n\n\\(\\sigma\\) er den “sande” standardafvigelse i populationen. Vi har ikke målt på hele populationen. Så den kender vi ikke, og derfor bruger vi \\(s\\) i stedet."
   },
   {
     "objectID": "slides/hypotesetests.html#en-del-af-en-eksamensopgave",
@@ -1327,7 +1327,7 @@
     "href": "slides/hypotesetests.html#forskellen-på-middelværdierne-3",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Forskellen på middelværdierne",
-    "text": "Forskellen på middelværdierne\nHvad er standardfejlen?\n\nHvor mange samples?\n\n\nTo. Er de parrede?\n\n\nNej.\n\n\nSå skal vi bruge:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(s_1 = 0.068\\), \\(n_1 = 227\\)\n\\(s_2 = 0.057\\), \\(n_2 = 140\\)\n\n\nog derfor: \\(SE_{diff} = \\sqrt{\\frac{0.068^2}{227} + \\frac{0.057^2}{140}} = 0.00660\\)"
+    "text": "Forskellen på middelværdierne\nHvad er standardfejlen?\n\nHvor mange samples?\n\n\nTo. Er de parrede?\n\n\nNej.\n\n\nSå skal vi bruge:\n\\(SE(\\hat{\\mu}_1 - \\hat{\\mu}_2) = \\sqrt{SE_1^2 + SE_2^2} = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(s_1 = 0.068\\), \\(n_1 = 227\\)\n\\(s_2 = 0.057\\), \\(n_2 = 140\\)\n\n\nog derfor: \\(SE_{diff} = \\sqrt{\\frac{0.068^2}{227} + \\frac{0.057^2}{140}} = 0.00660\\)"
   },
   {
     "objectID": "slides/hypotesetests.html#forskellen-på-middelværdierne-4",
@@ -1376,7 +1376,7 @@
     "href": "slides/hypotesetests.html#blodtrykssænkende-1",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Blodtrykssænkende",
-    "text": "Blodtrykssænkende\n\n\nTo samples, uparret.\nSå vi skal se om forskellen på de to middelværdier er signifikant forskellig fra 0.\n\n\\(H_0: \\mu_1 - \\mu_2 = 0\\)\n\n\nSamlet SE:\n\\(SE_{diff} = \\sqrt{\\frac{s_1}{n_1} + \\frac{s_2}{n_2}}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82      152.5      18.4\n2 Placebo       90      156.5      19.1\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Blodtrykssænkende\n\n\nTo samples, uparret.\nSå vi skal se om forskellen på de to middelværdier er signifikant forskellig fra 0.\n\n\\(H_0: \\mu_1 - \\mu_2 = 0\\)\n\n\nSamlet SE:\n\\(SE_{diff} = \\sqrt{SE_1^2 + SE_2^2}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe         n gennemsnit spredning\n  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling    82      152.5      18.4\n2 Placebo       90      156.5      19.1\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/hypotesetests.html#videre---ønsket-størrelse-af-konfidensinterval",
@@ -1390,14 +1390,14 @@
     "href": "slides/hypotesetests.html#bredde-af-ki",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Bredde af KI",
-    "text": "Bredde af KI\n\n\n\nUdtrykt ved \\(n_0\\) og \\(n_1\\), hvad er så svaret?\n\n\\(n_0 + n_1 = 3n_1\\) fordi \\(n_0 = 2n_1\\)\n\n\nHvis et konfidensinterval er givet ved:\n\n\n\\(\\text{estimat} \\pm1.96\\text{SE}\\)\n\n\nHvad skal så være lig 8?\n\n\n\\(2\\cdot1.96\\text{SE} = 8\\)\n\n\nHvordan beregner vi SE?\n\n\n\\(SE_{diff} = \\sqrt{(\\frac{s_0}{n_0})^2 + (\\frac{s_1}{n_1})^2}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe     n     gennemsnit spredning\n  &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling n_1        152.5      18.4\n2 Placebo    n_0        156.5      19.1\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSvar: \\(n_1 = 125\\) - fordi det er let at rode rundt i tallene."
+    "text": "Bredde af KI\n\n\n\nUdtrykt ved \\(n_0\\) og \\(n_1\\), hvad er så svaret?\n\n\\(n_0 + n_1 = 3n_1\\) fordi \\(n_0 = 2n_1\\)\n\n\nHvis et konfidensinterval er givet ved:\n\n\n\\(\\text{estimat} \\pm1.96\\text{SE}\\)\n\n\nHvad skal så være lig 8?\n\n\n\\(2\\cdot1.96\\text{SE} = 8\\)\n\n\nHvordan beregner vi SE?\n\n\n\\(SE_{diff} = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\n\n\n# A tibble: 2 × 4\n  Gruppe     n     gennemsnit spredning\n  &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;\n1 Behandling n_1        152.5      18.4\n2 Placebo    n_0        156.5      19.1\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSvar: \\(n_1 = 125\\) - fordi det er let at rode rundt i tallene."
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "href": "slides/hypotesetests.html#endnu-en-eksamensopgave",
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Endnu en eksamensopgave",
-    "text": "Endnu en eksamensopgave\n\n\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Endnu en eksamensopgave\n\nAntag at fordelingen af hæmoglobin(koncentrationen) i en population er normalfordelt, med \\(\\mu\\) = 13.3 g/100 ml. Spredning \\(\\sigma\\) = 1.12 g/100 ml.\nVi udtager stikprøver af størrelsen n. For hver stikprøve beregnes stikprøvegennemsnittet. Disse stikprøvegennemsnit er normalfordelte med middelværdi \\(\\mu\\) (hvis vi udtager uendeligt mange stikprøver)\nHvad er spredningen i fordelingen af stikprøvegennemsnittene?\n\nDet er SEM. Den beregner vi ved \\(\\frac{\\sigma}{\\sqrt{n}}\\)"
   },
   {
     "objectID": "slides/hypotesetests.html#endnu-en-eksamensopgave-1",
@@ -1572,7 +1572,7 @@
     "href": "slides/kategoriske.html#forholdet-mellem-de-to-prævalenser",
     "title": "Kategoriske udfald",
     "section": "Forholdet mellem de to prævalenser?",
-    "text": "Forholdet mellem de to prævalenser?\nAt de måske er ens kan vi også udtrykke ved at den ene divideret med den anden giver 1.\n\nDen hypotese vi så tester er:\n\n\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nSå hvad kan vi, hvis estimatet er tilstrækkeligt forskelligt fra 1?\n\n\nAfvise \\(H_0\\).\n\n\nMetoden er den samme som før. \\(\\text{Estimatet} \\pm 1.96\\cdot\\text{SE}\\)\nEller beregne en test-værdi og sammemligne med den kritiske værdi.\n\nPrævalensen for TB kan vi også kalde risikoen for at have TB. Det kunne vi også kalde for en risiko. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR."
+    "text": "Forholdet mellem de to prævalenser?\nAt de måske er ens kan vi også udtrykke ved at den ene divideret med den anden giver 1.\n\nDen hypotese vi så tester er:\n\n\n\\(H_0: \\frac{p_{deler}}{p_{deler ikke}} = 1\\)\nSå hvad kan vi, hvis estimatet er tilstrækkeligt forskelligt fra 1?\n\n\nAfvise \\(H_0\\).\n\n\nMetoden er den samme som før. \\(\\text{Estimatet} \\pm 1.96\\cdot\\text{SE}\\)\nEller beregne en test-værdi og sammenligne med den kritiske værdi.\n\nPrævalensen for TB kan vi også kalde risikoen for at have TB. Eller risk. Forholdet mellem to tal kalder vi også en ratio. Så i jeres branche kalder I det her for - tada - Risk Ratio. Eller RR."
   },
   {
     "objectID": "slides/kategoriske.html#komplikationer",
@@ -1614,7 +1614,7 @@
     "href": "slides/kategoriske.html#odds---fordelene",
     "title": "Kategoriske udfald",
     "section": "Odds - fordelene",
-    "text": "Odds - fordelene\nHvis sandsynligheden for et positivt udfald er 10%\n\nEr der, ved 10 observationer 1 positivt og 9 negative udfald.\n\n\nSom sandsynligheder: 0.1 og 0.9 hhv.\n\n\nSom odds: 1/9 og 9/1 hhv.\nDet er intuitivt hinandens modsætninger.\nOg:\n\n\n\nlog(1/9)\n\n[1] -2.197225\n\n\n\nlog(9/1)\n\n[1] 2.197225\n\n\n\n\nHvor er det bare pænt og symmetrisk!"
+    "text": "Odds - fordelene\nHvis sandsynligheden for et positivt udfald er 10%\n\nEr der, ved 10 observationer 1 positivt og 9 negative udfald.\n\n\nSom sandsynligheder: 0.1 og 0.9 hhv.\n\n\nSom odds: 1/9 og 9/1 hhv.\nDet er intuitivt hinandens modsætninger.\nOg:\n\n\n\nlog(1/9)\n\n[1] -2.197225\n\n\n\nlog(9/1)\n\n[1] 2.197225\n\n\n\n\nHvor er det bare pænt og symmetrisk! Og lige langt fra log(1) = 0"
   },
   {
     "objectID": "slides/kategoriske.html#hvad-tester-vi-så-med-odds",
@@ -1656,7 +1656,7 @@
     "href": "slides/kategoriske.html#fra-sandsynlighed-til-odds",
     "title": "Kategoriske udfald",
     "section": "Fra sandsynlighed til odds",
-    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\n\\(\\text{odds} = \\frac{p}{1-p}\\)\n\n\nHvordan beregner vi sandsynligheden hvis vi kender odds?\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nEn særlig funktion vi kommer til at møde igen:\n\n\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\n\n\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen."
+    "text": "Fra sandsynlighed til odds\n\nHvordan beregner vi odds hvis vi kender sandsynligheden?\n\n\\(\\text{odds} = \\frac{p}{1-p}\\)\n\n\nHvordan beregner vi sandsynligheden hvis vi kender odds?\n\n\n\\(p = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\n\n\nEn særlig funktion vi kommer til at møde igen:\n\n\n\\(\\text{logit}(p) = \\log\\left(\\frac{p}{1 - p}\\right)\\)\nlogit funktionen tager sandsynligheden for et givet udfald, og returnerer log-odds for det udfald.\n\n\nDen omvendte kan også være nyttig. Hvis x = logit(p):\n\\(p = \\frac{e^x}{1 + e^x}\\)\nDet er den inverse logit-funktion. Også (spoiler alert) kaldet logistic-funktionen.\n\n\n\nOg hvor ville verden dog være rar hvis de funktioner var indbyggede i R. Er verden rar? Nej, det er den ikke. Derfor findes den funktion heller ikke i R."
   },
   {
     "objectID": "slides/kategoriske.html#chi2-tilgangen",
@@ -1670,14 +1670,14 @@
     "href": "slides/kategoriske.html#regne-regne",
     "title": "Kategoriske udfald",
     "section": "Regne-regne",
-    "text": "Regne-regne\n52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.\n\nSå må der være \\(\\frac{52}{258}\\cdot97 \\approx 20\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der er 24.\n\n\nBlandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se \\(\\frac{52}{258}\\cdot161 \\approx 32\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der kun er 28.\nVi laver de samme beregninger på de to andre celler."
+    "text": "Regne-regne\n52 ud af 258 er TB+. Hvis der er 97 der deler sprøjter - men det at dele sprøjter ikke påvirker om man tester positiv for TB.\n\nSå må der være \\(\\frac{52}{258}\\cdot97 \\approx 20\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der er 24.\n\n\nBlandt de 161 der ikke deler sprøjter, vil vi med samme antagelse forvente at se \\(\\frac{52}{258}\\cdot161 \\approx 32\\) der tester positiv.\n\n\nDet er hvad vi forventer. Men vi ser at der kun er 28.\nVi laver de samme beregninger på de to andre celler. Og så tester vi om der er forskel på hvad vi ser. Og hvad vi forventer (hvis der ikke er forskel)."
   },
   {
     "objectID": "slides/kategoriske.html#regne-regne-1",
     "href": "slides/kategoriske.html#regne-regne-1",
     "title": "Kategoriske udfald",
     "section": "Regne-regne",
-    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\n\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, som der er i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\n\n\nStyrken er at den kan håndtere flere udfald end to.\n\n\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\n\n\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\n\n\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.\n\n\nFunktionen hedder chisq.test(). Med argumentet correct = FALSE hvis vi vil slå den fra."
+    "text": "Regne-regne\n\n\\(\\chi^2\\) testens \\(H_0\\) er, at der ikke er forskel på fordelingen af TB-status i de to grupper.\n\nTestens p-værdi er sandsynligheden for at se så store forskelle på hvad vi forventer, og hvad vi faktisk observerer, i data. Hvis der i virkeligheden ikke er forskel på fordelingen af TB-status i de to grupper.\n\n\nStyrken er at den kan håndtere flere udfald end to.\n\n\nSvagheden er at den ikke fortæller hvilken gruppe der har størst risiko for at teste positiv for TB. Blot at der er forskel på fordelingen i de to grupper.\n\n\nOg så forudsætter \\(\\chi^2\\) testen at der er mindst 5 forventede observationer i hver “celle”.\n\n\nDet kan man korrigere for, og det gør R funktionen automatisk. Her har vi så store forventede værdier at vi bør slå korrektionen fra.\n\n\nFunktionen hedder chisq.test(). Med argumentet correct = FALSE hvis vi vil slå den fra."
   },
   {
     "objectID": "slides/kategoriske.html#hvordan-gør-vi",
@@ -2931,5 +2931,12 @@
     "title": "Powerberegninger",
     "section": "Og hvad gør vi så i praksis?",
     "text": "Og hvad gør vi så i praksis?\n\nVi har powerrelationen\n\\(\\frac{\\text{effekt}}{\\text{standardfejl}} = z_{1-\\alpha/2}+z_{1-\\beta}\\)\n\n\\(z_{1-\\alpha/2} = 1.96\\) (hvis \\(\\alpha = 0.05\\)). \\(z_{1-\\beta}\\) beregner vi med qnorm(1-beta)\n\n\nVi får oplyst at vi vil kunne se en bestemt forskel i to middelværdier (det var effekten), ofte “behandling vs. placebo”.\n\n\nMed en power på 80% (svarende til \\(\\beta = 0.2\\))\n\n\nVi får at vide at der skal være lige mange i hver gruppe.\n\n\nHvis vi er heldige får vi også at vide at vi må antage at standardafvigelsen er den samme i de to grupper (og hvad den er).\n\n\nOg vi ved så, at vi kan beregne standardfejlen ved \\(\\sigma\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}\\)\n\n\nOg fordi \\(n_1 = n_2\\)\n\n\nSå er det “bare” at indsætte tallene i powerrelationen, og isolere n.\n\n\n\nEller også får vi at vide at \\(n_1 = 100\\) og vi skal finde \\(n_2\\). Eller vi får oplyst både \\(n_1\\) og \\(n_2\\) og alt det andet, men skal beregne den forskel vi kan forvente at se.\nGrundlæggende: Vi får alt, bortset fra én parameter oplyst. Indsæt i formlen, isoler det manglende."
+  },
+  {
+    "objectID": "slides/hypotesetests.html#den-centrale-grænseværdisætning-1",
+    "href": "slides/hypotesetests.html#den-centrale-grænseværdisætning-1",
+    "title": "Konfidensintervaller og hypotesetests",
+    "section": "Den centrale grænseværdisætning?",
+    "text": "Den centrale grænseværdisætning?\n\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\n\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\n\n\nVi beregner gennemsnittet af den stikprøve og gemmer det.\n\n\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\n\n\nDet gør vi mange gange.\n\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelingen.\n\n\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\n\n\nDet kan man føre bevis for. Men det springer vi over."
   }
 ]
