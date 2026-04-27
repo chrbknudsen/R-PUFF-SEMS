@@ -522,7 +522,7 @@
     "href": "slides/normalfordelingen.html#notation",
     "title": "Normalfordelingen",
     "section": "Notation",
-    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1)\nEn generel normalfordeling skriver vi som \\(N(\\mu, \\sigma)\\)\nNår data, X, er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nEller: P(X &lt; 170) = P(\\(\\frac{X-\\mu}{\\sigma}\\) &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nEller kortere: P(Z &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nNår vi normaliserer 170 med \\(\\mu\\) og \\(\\sigma\\), får vi en Z-score. Det var den vi så på plottet af normalfordelingen."
+    "text": "Notation\nDen standardiserede normalfordeling skriver vi som N(0,1)\nEn generel normalfordeling skriver vi som \\(N(\\mu, \\sigma)\\)\nNår data, X, er normalfordelt, skriver vi det som X ~ \\(N(\\mu, \\sigma)\\)\nI praksis:\nP(X &lt; 170) = P(\\(\\frac{X-\\mu}{\\sigma}\\) &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nEller kortere: P(Z &lt; \\(\\frac{170-\\mu}{\\sigma}\\))\nNår vi normaliserer 170 med \\(\\mu\\) og \\(\\sigma\\), får vi en z-score. Det var den vi så på plottet af normalfordelingen."
   },
   {
     "objectID": "slides/normalfordelingen.html#og-den-anden-vej",
@@ -606,21 +606,21 @@
     "href": "slides/normalfordelingen.html#normalområdet---øvre-grænse",
     "title": "Normalfordelingen",
     "section": "Normalområdet - øvre grænse",
-    "text": "Normalområdet - øvre grænse\nDen øvre grænse er så den grænse under hvilken de 95% i normalområdet og de 2.5% under normalområdet ligger.\n\nDvs. P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975\n\n\nEller der hvor 2.5% ligger over:\nP(X &gt; y) = 0.025 &lt;=&gt; P(X &lt; y) = 1 - 0.025\n\n\nStandardiser:\nP(Z &lt; y - 200 / 40 ) = 0.975\n\n\ny - 200 / 40 = qnorm(0.975) = 1.959964\n\n\nIsoler y:\n\n\ny = 200 + 1.959964 * 40 = 278"
+    "text": "Normalområdet - øvre grænse\nDen øvre grænse er så den grænse under hvilken de 95% i normalområdet og de 2.5% under normalområdet ligger.\n\nDvs. P(X &lt; y) = 0.95+0.025 = P(X &lt; y) = 0.975\n\n\nEller der hvor 2.5% ligger over:\nP(X &gt; y) = 0.025 &lt;=&gt; P(X &lt; y) = 1 - 0.025\n\n\nStandardiser:\nP(Z &lt; (y - 200 )/ 40 ) = 0.975\n\n\n(y - 200) / 40 = qnorm(0.975) = 1.959964\n\n\nIsoler y:\n\n\ny = 200 + 1.959964 * 40 = 278"
   },
   {
     "objectID": "slides/normalfordelingen.html#normalområdet-genvej",
     "href": "slides/normalfordelingen.html#normalområdet-genvej",
     "title": "Normalfordelingen",
     "section": "Normalområdet genvej",
-    "text": "Normalområdet genvej\nSvaret viste sig at være:\n\nNedre grænse = middelværdi - 1.96*standardafvigelsen\nØvre grænse = middelværdi + 1.96*standardafvigelsen\n\n\nEller:\n\n200 + c(-1,1)*1.96*40\n\n[1] 121.6 278.4"
+    "text": "Normalområdet genvej\nSvaret viste sig at være:\n\nNedre grænse = middelværdi - 1.96*standardafvigelsen\nØvre grænse = middelværdi + 1.96*standardafvigelsen\n\n\nEller:\n\n200 + c(-1,1)*1.96*40\n\n[1] 121.6 278.4\n\n\n\n\nHelt generelt:\n\\(\\mu \\pm1.96\\cdot\\sigma\\)"
   },
   {
     "objectID": "slides/normalfordelingen.html#hvad-hvis-det-er-et-90-interval-der-er-det-normale",
     "href": "slides/normalfordelingen.html#hvad-hvis-det-er-et-90-interval-der-er-det-normale",
     "title": "Normalfordelingen",
     "section": "Hvad hvis det er et 90% interval der er det normale?",
-    "text": "Hvad hvis det er et 90% interval der er det normale?\n\nSå skal vi bare finde ud af hvad 1.96 skal ændres til.\n\n\n10% skal ligge udenfor området.\n\n\nDvs 5% skal ligge under, og 5% skal ligge over.\n\n\n\nqnorm(1-0.05)\n\n[1] 1.644854"
+    "text": "Hvad hvis det er et 90% interval der er det normale?\n\nSå skal vi bare finde ud af hvad 1.96 skal ændres til.\n\n\n10% skal ligge udenfor området.\n\n\nDvs 5% skal ligge under, og 5% skal ligge over.\n\n\n\nqnorm(1-0.05)\n\n[1] 1.644854\n\n\n\n\nEller: \\(\\mu \\pm1.64\\cdot\\sigma\\)"
   },
   {
     "objectID": "slides/normalfordelingen.html#øvelse",
