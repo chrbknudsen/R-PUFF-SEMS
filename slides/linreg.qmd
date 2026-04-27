@@ -9,7 +9,7 @@ filters:
   - webr
 ---
 
-## Hvad er det nu det er?
+## Hvad er det nu det er? 
 
 ```{r echo = FALSE}
 library(ggplot2)
