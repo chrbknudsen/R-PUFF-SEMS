@@ -5,7 +5,7 @@ format: html
 
 - [Intro](slides/intro.qmd){target="_blank"} [(pdf)](downloads/intro.pdf){target="_blank"}
 - [Normalfordelingen](slides/normalfordelingen.qmd){target="_blank"} [(pdf)](downloads/normalfordelingen.pdf){target="_blank"}
-- [Konfidensintervaller og hypotesetests](slides/hypotesetests.qmd){target="_blank"} [(pdf)](downloads/SEM.pdf){target="_blank"}
+- [Konfidensintervaller og hypotesetests](slides/hypotesetests.qmd){target="_blank"} [(pdf)](downloads/hypotesetests.pdf){target="_blank"}
 - [Kategoriske data](slides/kategoriske.qmd){target="_blank"} [(pdf)](downloads/kategoriske.pdf){target="_blank"}
 - [Lineær regression](slides/linreg.qmd){target="_blank"} [(pdf)](downloads/linreg.pdf){target="_blank"}
 - [Logistisk regression](slides/logistisk.qmd){target="_blank"} [(pdf)](downloads/logistisk.pdf){target="_blank"}
