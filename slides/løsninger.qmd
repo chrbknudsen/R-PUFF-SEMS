@@ -172,18 +172,18 @@ P(X<0) = 0.4
 
 Skaler: P(Z<0−μ6.52)=0.4
 
-0−μ6.52=qnorm(0.4)=−0.2533471
- Isoler μ
+0−$\mu$/6.52=qnorm(0.4)=−0.2533471
+ Isoler $\mu$
 
 ## Øvelse - Manglende procentil:
-En normalfordelt population har middelværdi μ=12.5
- og standardafvigelse σ=3.2
+En normalfordelt population har middelværdi $\mu$=12.5
+ og standardafvigelse $\sigma$=3.2
 . Hvor stor en andel af værdierne er mindre end 10?
 
 Med andre ord, hvad er: P(X<10)
 
 Transformer til standardnormalfordelingen:
-P(Z<(10−μ)/σ)
+P(Z<(10−$\mu$)/$\sigma$)
 
 Indsæt
 
@@ -192,7 +192,7 @@ pnorm((10-12.5)/3.2)
 ```
 
 ## Øvelse - Manglende σ
-I en normalfordelt population er μ=85
+I en normalfordelt population er $\mu$=85
  og 25% af værdierne er større end 95. Hvad er σ
  for denne fordeling?
 
