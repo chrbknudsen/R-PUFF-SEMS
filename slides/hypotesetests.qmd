@@ -1388,7 +1388,7 @@ Er der overordnet forskel på hoppelængde på højre og venstre ben?
 :::: {.columns}
 :::: {.column}
 :::: {.fragment}
-En elle to grupper? 
+En eller to grupper? 
 ::::
 :::: {.fragment}
 Parret eller u-parret?
