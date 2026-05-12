@@ -857,7 +857,7 @@ Her undersøger vi variation indenfor "samme" person.
 
 Vi fik oplyst "summariske regnestørrelser" for plasma magnesium for diabetikere og ikke diabetikere. Og måtte antage normalfordeling i de to populationer:
 ```{r}
-tribble(~gruppe, ~Antal, ~Gennemsnit, ~Sprdening,
+tribble(~gruppe, ~Antal, ~Gennemsnit, ~Spredning,
 "Diabetikere", 227, 0.719, 0.068,
 "Ikke-diabetikere", 140, 0.810, 0.057)
 ```
