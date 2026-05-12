@@ -9,12 +9,14 @@ output:
 ---
 
 :::: tiny
-[pdf](../downloads/intro.pdf) <- men det peger ikke på det rigtige endnu.
+[pdf](../downloads/R-cheatsheet_notat.pdf) 
 ::::
 
 Det er ikke meget R I faktisk skal bruge.
 
 Og egentlig ville jeg foreslå at I deltog på et af vores introkurser til R.
+
+Dette er langt fra færdigt. Fortæl gerne hvad der er brug for!
 
 
 Gem en værdi
@@ -216,6 +218,3 @@ Nyttige funktioner:
 `qnorm`
 
 `pnorm`
-
-
-
