@@ -12,3 +12,5 @@ website:
         href: slides/standardfejl_oversigt.html
       - text: "Kritiske værdier"
         href: slides/kritiske_vaerdier.html
+      - text: "R Cheat Sheet"
+        href: slides/R-cheatsheet_notat.html
