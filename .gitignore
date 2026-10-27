@@ -7,3 +7,5 @@ presentations.Rproj
 /.quarto/
 
 /.luarc.json
+
+**/*.quarto_ipynb

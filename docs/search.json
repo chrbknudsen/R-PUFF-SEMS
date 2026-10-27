@@ -2938,5 +2938,278 @@
     "title": "Konfidensintervaller og hypotesetests",
     "section": "Den centrale grænseværdisætning?",
     "text": "Den centrale grænseværdisætning?\n\nVi er interesseret i gennemsnitshøjden af danske mænd. Vi ved ikke hvilken sandsynlighedsfordeling der beskriver danske mænds højde.\n\nSå vi tager en stikprøve på eksempelvis 20 mænd fra populationen (alle danske mænd) og måler deres højde.\n\n\nVi beregner gennemsnittet af den stikprøve og gemmer det.\n\n\nDet gentager vi mange gange. Ny stikprøve - mål - beregn gennemsnit. Ny stikprøve - mål - beregn gennemsnit.\n\n\nDet gør vi mange gange.\n\n\nDet giver en masse gennemsnit/middelværdier.\n\n\nDe middelværdier vil følge normalfordelingen.\n\n\nUanset hvilken sandsynlighedsfordeling danske mænds højde følger.\n\n\nDet kan man føre bevis for. Men det springer vi over."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#hvad-skal-vi-kunne",
+    "href": "slides/overlevelsesanalyse.html#hvad-skal-vi-kunne",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad skal vi kunne?",
+    "text": "Hvad skal vi kunne?\n\nForklare tid til event, risikosæt og censurering.\nLæse en Kaplan–Meier-kurve og en log-rank-test.\nFortolke koefficienter og hazard ratioer fra Cox-regression.\nGennemskue immortal time bias og andre faldgruber.\n\nVi slutter med opgave 2a og 2b fra SEMS, sommer 2026."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#outcome-er-en-tid",
+    "href": "slides/overlevelsesanalyse.html#outcome-er-en-tid",
+    "title": "Overlevelsesanalyse",
+    "section": "Outcome er en tid",
+    "text": "Outcome er en tid\nVi modellerer tid indtil en hændelse: død, tilbagefald, infektion eller udskrivelse.\nTo personer kan begge være i live ved sidste kontrol, men være fulgt i henholdsvis 1 og 10 år.\nEt simpelt ja/nej-outcome mister den forskel.\nEt gennemsnit af de observerede tider blander tid til event sammen med tid til sidste kontrol."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#før-analysen-definér-tid-nul-og-event",
+    "href": "slides/overlevelsesanalyse.html#før-analysen-definér-tid-nul-og-event",
+    "title": "Overlevelsesanalyse",
+    "section": "Før analysen: definér tid nul og event",
+    "text": "Før analysen: definér tid nul og event\nI eksamensopgaven følger vi patienter på venteliste til hjertetransplantation.\n\n\n\nBegreb\nI opgave 2\n\n\n\n\nTid nul\nInklusion på ventelisten\n\n\nEvent\nDød\n\n\nObserveret tid\nfutime: tid til død eller sidste opfølgning\n\n\nEvent-indikator\nfustat: 1 = død, 0 = censureret\n\n\n\nTid nul skal være klinisk relevant og sammenlignelig mellem patienter."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#censureret-betyder-ikke-event-fri-for-evigt",
+    "href": "slides/overlevelsesanalyse.html#censureret-betyder-ikke-event-fri-for-evigt",
+    "title": "Overlevelsesanalyse",
+    "section": "Censureret betyder ikke event-fri for evigt",
+    "text": "Censureret betyder ikke event-fri for evigt\n\nA dør efter 3 måneder: Vi kender dødstidspunktet.\nB er i live efter 3 måneder og tabes derefter til opfølgning: Vi ved kun, at dødstidspunktet ligger senere.\n\nB er højrecensureret efter 3 måneder.\nB bidrager med information indtil da. Vi hverken fjerner B eller registrerer et dødsfald ved måned 3."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#ikke-informativ-censurering",
+    "href": "slides/overlevelsesanalyse.html#ikke-informativ-censurering",
+    "title": "Overlevelsesanalyse",
+    "section": "Ikke-informativ censurering",
+    "text": "Ikke-informativ censurering\nCensurerede skal, givet de variable analysen tager højde for, være repræsentative for dem, der stadig følges, med hensyn til fremtidig eventtid.\n\nStudiets planlagte afslutning er ofte en rimelig censureringsgrund.\nHvis de mest syge forsvinder fra opfølgningen, kan overlevelsen blive overvurderet.\nOgså administrativ censurering kan give problemer, hvis prognosen ændres med kalenderperioden for inklusion.\n\nÅrsagen til censurering skal vurderes."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#tre-centrale-begreber",
+    "href": "slides/overlevelsesanalyse.html#tre-centrale-begreber",
+    "title": "Overlevelsesanalyse",
+    "section": "Tre centrale begreber",
+    "text": "Tre centrale begreber\n\\[S(t)=P(T&gt;t)\\]\nOverlevelsesfunktionen: Sandsynligheden for at være event-fri efter tid \\(t\\).\nRisikosættet: De personer, som stadig observeres og endnu ikke har haft event lige før \\(t\\).\nHazard \\(h(t)\\): Den øjeblikkelige event-rate blandt dem, der endnu er event-frie. En rate har enhed fx pr. måned og er ikke en sandsynlighed."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#et-lille-datasæt",
+    "href": "slides/overlevelsesanalyse.html#et-lille-datasæt",
+    "title": "Overlevelsesanalyse",
+    "section": "Et lille datasæt",
+    "text": "Et lille datasæt\n\n\n\nPatient\nTid (måneder)\nEvent\n\n\n\n\nA\n2\n1\n\n\nB\n3\n0\n\n\nC\n4\n1\n\n\nD\n4\n1\n\n\nE\n6\n0\n\n\nF\n7\n1\n\n\n\nSpørgsmål: Hvem er i risiko lige før måned 4?\n\nC, D, E og F. A er død, og B er censureret."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#kaplanmeier-ét-trin-ad-gangen",
+    "href": "slides/overlevelsesanalyse.html#kaplanmeier-ét-trin-ad-gangen",
+    "title": "Overlevelsesanalyse",
+    "section": "Kaplan–Meier: ét trin ad gangen",
+    "text": "Kaplan–Meier: ét trin ad gangen\n\\[\\widehat S(t)=\\prod_{t_i\\leq t}\\left(1-\\frac{d_i}{n_i}\\right)\\]\n\\(n_i\\): antal i risiko lige før eventtidspunkt \\(t_i\\).\n\\(d_i\\): antal events ved \\(t_i\\) (kan være flere end ét).\n\n\n\nTid\nI risiko\nEvents\nBetinget overlevelse\n\\(\\widehat S(t)\\)\n\n\n\n\n2\n6\n1\n\\(5/6\\)\n\\(0.833\\)\n\n\n4\n4\n2\n\\(2/4\\)\n\\(0.417\\)\n\n\n7\n1\n1\n\\(0/1\\)\n\\(0\\)\n\n\n\nCensurering ved 3 og 6 reducerer senere risikosæt, men giver ikke et fald i kurven."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#sådan-ser-kurven-ud",
+    "href": "slides/overlevelsesanalyse.html#sådan-ser-kurven-ud",
+    "title": "Overlevelsesanalyse",
+    "section": "Sådan ser kurven ud",
+    "text": "Sådan ser kurven ud\n\n\n\nKaplan–Meier for de seks illustrative patienter. Plusser markerer censurering.\n\n\nDen sidste del bygger på meget få personer. Et stort trin er ikke nødvendigvis stærk evidens."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#prøv-kaplanmeier-i-r",
+    "href": "slides/overlevelsesanalyse.html#prøv-kaplanmeier-i-r",
+    "title": "Overlevelsesanalyse",
+    "section": "Prøv Kaplan–Meier i R",
+    "text": "Prøv Kaplan–Meier i R\n\nKør cellen. Data er et konstrueret undervisningseksempel, ikke eksamensdata.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#hvad-betyder-r-koden",
+    "href": "slides/overlevelsesanalyse.html#hvad-betyder-r-koden",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad betyder R-koden?",
+    "text": "Hvad betyder R-koden?\nsurvfit(Surv(tid, event == 1) ~ 1, data = lille)\n\nSurv() samler tid og event-indikator i et overlevelsesobjekt.\nevent == 1 angiver eksplicit, hvad der tæller som event.\n~ 1 giver én samlet kurve.\n~ factor(gruppe) ville give en kurve pr. gruppe.\n\nKontrollér altid kodningen: I andre datasæt kan fx 1 betyde censureret og 2 betyde død."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#læs-en-overlevelseskurve",
+    "href": "slides/overlevelsesanalyse.html#læs-en-overlevelseskurve",
+    "title": "Overlevelsesanalyse",
+    "section": "Læs en overlevelseskurve",
+    "text": "Læs en overlevelseskurve\n\nHøjden ved \\(t\\) estimerer sandsynligheden for at være event-fri efter \\(t\\).\nEt fald viser events. Et censureringsmærke viser afsluttet observation uden event.\nKonfidensbånd viser usikkerhed, som typisk vokser sent i forløbet.\nEn tabel med antal i risiko viser, hvor mange kurven bygger på.\n\nKurven estimerer ikke, hvornår en bestemt patient vil dø."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#median-overlevelse",
+    "href": "slides/overlevelsesanalyse.html#median-overlevelse",
+    "title": "Overlevelsesanalyse",
+    "section": "Median overlevelse",
+    "text": "Median overlevelse\nMedianen er det første tidspunkt, hvor \\(\\widehat S(t)\\leq 0.5\\).\nI vores lille eksempel er medianen 4 måneder.\nHvis kurven aldrig når 0.5, er medianen ikke nået og kan ikke estimeres ud fra den observerede kurve.\nTo grupper kan have samme median og alligevel have forskellige overlevelsesforløb. Se på hele kurven."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#fra-kurver-til-en-test",
+    "href": "slides/overlevelsesanalyse.html#fra-kurver-til-en-test",
+    "title": "Overlevelsesanalyse",
+    "section": "Fra kurver til en test",
+    "text": "Fra kurver til en test\nKaplan–Meier: Hvordan ser overlevelsen ud?\nLog-rank: Er der evidens imod ens overlevelsesfunktioner i grupperne?\nCox-regression: Hvordan hænger forklarende variable sammen med hazard, eventuelt efter justering?\nEn figur, en p-værdi og et effektmål besvarer forskellige spørgsmål."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#log-rank-testen",
+    "href": "slides/overlevelsesanalyse.html#log-rank-testen",
+    "title": "Overlevelsesanalyse",
+    "section": "Log-rank-testen",
+    "text": "Log-rank-testen\n\\[H_0:S_0(t)=S_1(t)\\text{ for alle }t\\]\nVed hvert eventtidspunkt sammenligner testen observerede events med de forventede under nulhypotesen, ud fra gruppernes risikosæt.\nAfvigelserne samles over opfølgningen.\nsurvdiff(..., rho = 0) er den almindelige log-rank-test; rho = 0 er standard.\nFor to grupper sammenlignes teststørrelsen med en \\(\\chi^2\\)-fordeling med 1 frihedsgrad."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2a-tidligere-kirurgi",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2a-tidligere-kirurgi",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2a: tidligere kirurgi",
+    "text": "Eksamen 2a: tidligere kirurgi\n\nsurgery angiver bypassoperation før inklusion på ventelisten.\nsurvdiff(Surv(futime, fustat == 1) ~ factor(surgery),\n         data = d_sems)\nUdskrift fra eksamenssættet:\n                   N Observed Expected (O-E)^2/E (O-E)^2/V\nfactor(surgery)=0  87       66     58.6     0.938      4.44\nfactor(surgery)=1  16        9     16.4     3.348      4.44\n\nChisq= 4.4 on 1 degrees of freedom, p= 0.04\nHvilken analyse er det, og hvad kan vi konkludere?"
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2a-læs-tabellen",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2a-læs-tabellen",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2a: læs tabellen",
+    "text": "Eksamen 2a: læs tabellen\n\n\n\nKolonne\nBetydning\n\n\n\n\nN\nAntal patienter i gruppen\n\n\nObserved\nObserverede dødsfald\n\n\nExpected\nForventede dødsfald under \\(H_0\\), ud fra risikosættene\n\n\n\nUden tidligere kirurgi: 66 mod 58.6 forventede dødsfald.\nMed tidligere kirurgi: 9 mod 16.4 forventede dødsfald.\nDet peger mod bedre overlevelse i gruppen med tidligere kirurgi. De to bidrag i sidste kolonne skal ikke lægges sammen til teststørrelsen."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2a-et-muligt-svar",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2a-et-muligt-svar",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2a: et muligt svar",
+    "text": "Eksamen 2a: et muligt svar\nDer er tale om en log-rank-test af nulhypotesen om ens overlevelsesfunktioner blandt patienter med og uden tidligere kirurgi.\nMed \\(p=0.04\\) forkastes nulhypotesen på 5 %-niveau. Der er evidens for forskel i overlevelse.\nGruppen med tidligere kirurgi har færre dødsfald end forventet under nulhypotesen, hvilket peger mod bedre overlevelse i denne gruppe.\nTesten giver hverken en hazard ratio eller dokumentation for en kausal virkning af kirurgi."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#log-rank-hvad-skal-vi-passe-på",
+    "href": "slides/overlevelsesanalyse.html#log-rank-hvad-skal-vi-passe-på",
+    "title": "Overlevelsesanalyse",
+    "section": "Log-rank: hvad skal vi passe på?",
+    "text": "Log-rank: hvad skal vi passe på?\n\nTesten tager højde for censurering, men forudsætter passende, ikke-informativ censurering.\nDen estimerer ikke effektens størrelse og justerer ikke i sig selv for andre prognostiske variable.\nDen har god styrke ved proportionale hazards.\nVed krydsende kurver kan tidlige og sene forskelle udligne hinanden.\n\nProportionale hazards er ikke et krav for at definere nulhypotesen om ens kurver. Problemet ved krydsende kurver er især styrke og fortolkning."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#hazard-ratio-er-et-rateforhold",
+    "href": "slides/overlevelsesanalyse.html#hazard-ratio-er-et-rateforhold",
+    "title": "Overlevelsesanalyse",
+    "section": "Hazard ratio er et rateforhold",
+    "text": "Hazard ratio er et rateforhold\n\\[HR=\\frac{h_1(t)}{h_0(t)}\\]\n\n\\(HR=1\\): Samme hazard.\n\\(HR=0.70\\): 30 % lavere hazard i gruppe 1 end i referencegruppen.\n\\(HR=1.50\\): 50 % højere hazard.\n\nUnder proportional hazards-antagelsen er forholdet konstant over tid.\nHR = 0.70 betyder ikke 30 % lavere sandsynlighed for død inden et bestemt tidspunkt eller 30 % længere levetid."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#cox-proportional-hazards-modellen",
+    "href": "slides/overlevelsesanalyse.html#cox-proportional-hazards-modellen",
+    "title": "Overlevelsesanalyse",
+    "section": "Cox proportional hazards-modellen",
+    "text": "Cox proportional hazards-modellen\n\\[h(t\\mid X)=h_0(t)\\exp(\\beta_1X_1+\\cdots+\\beta_pX_p)\\]\n\n\\(h_0(t)\\) er baseline hazard; vi behøver ikke specificere dens form.\n\\(\\beta_j\\) er en log-hazard ratio.\n\\(\\exp(\\beta_j)\\) er HR for én enheds stigning i \\(X_j\\), når øvrige variable holdes konstante.\n\nModellen håndterer censurering og flere forklarende variable samtidigt."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#referencegruppe-og-enheder",
+    "href": "slides/overlevelsesanalyse.html#referencegruppe-og-enheder",
+    "title": "Overlevelsesanalyse",
+    "section": "Referencegruppe og enheder",
+    "text": "Referencegruppe og enheder\nFor en indikator \\(X=0/1\\):\n\\[\\frac{h(t\\mid X=1)}{h(t\\mid X=0)}=e^\\beta\\]\nVed ombytning af referencen bliver HR til \\(1/HR\\).\nFor alder målt i år er \\(e^{\\beta_{alder}}\\) HR pr. år og \\(e^{10\\beta_{alder}}\\) HR for 10 års forskel.\nEn justeret sammenhæng er ikke automatisk en kausal effekt."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#prøv-en-justeret-cox-model-i-r",
+    "href": "slides/overlevelsesanalyse.html#prøv-en-justeret-cox-model-i-r",
+    "title": "Overlevelsesanalyse",
+    "section": "Prøv en justeret Cox-model i R",
+    "text": "Prøv en justeret Cox-model i R\nEt separat eksempel med survival-pakkens lungekræftdata. Her er 2 = død og 1 = censureret; dette er ikke eksamensdata.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLæs HR for kvinde sammenlignet med mand ved samme alder. HR for age er pr. ekstra år. Dette er observerede sammenhænge."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#sådan-læses-en-cox-udskrift",
+    "href": "slides/overlevelsesanalyse.html#sådan-læses-en-cox-udskrift",
+    "title": "Overlevelsesanalyse",
+    "section": "Sådan læses en Cox-udskrift",
+    "text": "Sådan læses en Cox-udskrift\n\n\n\nFelt\nBetydning\n\n\n\n\ncoef\nEstimeret \\(\\beta\\): log-HR\n\n\nexp(coef)\nEstimeret HR\n\n\nse(coef)\nStandardfejl for log-HR\n\n\nz\n\\(\\widehat\\beta/SE(\\widehat\\beta)\\)\n\n\nPr(&gt;|z|)\nTosidet Wald-test af \\(\\beta=0\\), dvs. HR = 1\n\n\n\nEt 95 % Wald-konfidensinterval for HR er:\n\\[\\exp\\left(\\widehat\\beta\\pm 1.96\\,SE(\\widehat\\beta)\\right)\\]"
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2b-transplantation",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2b-transplantation",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2b: transplantation",
+    "text": "Eksamen 2b: transplantation\n\nsummary(coxph(Surv(futime, fustat == 1) ~ factor(transplant),\n              data = d_sems))\nn= 103, number of events= 75\n\n                      coef exp(coef) se(coef)      z Pr(&gt;|z|)\nfactor(transplant)1 -1.3234    0.2662   0.2438 -5.428 5.69e-08\ntransplant angiver, om patienten fik en transplantation under opfølgningen.\n\nHvilken model er det?\nHvordan læses tallet 0.2662?\nEr denne analyse korrekt tilrettelagt?"
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2b-den-umiddelbare-fortolkning",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2b-den-umiddelbare-fortolkning",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2b: den umiddelbare fortolkning",
+    "text": "Eksamen 2b: den umiddelbare fortolkning\n\\[HR=e^{-1.3234}\\approx 0.266\\]\nPatienter klassificeret som transplanterede har i denne model cirka 73 % lavere hazard for død end patienter klassificeret som ikke-transplanterede.\n\\[95\\%\\text{-KI}=\\exp(-1.3234\\pm1.96\\cdot0.2438)\n\\approx(0.165;\\,0.429)\\]\nP-værdien er meget lille. Men en lille p-værdi retter ikke en forkert analyse."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#beregn-hr-og-konfidensinterval",
+    "href": "slides/overlevelsesanalyse.html#beregn-hr-og-konfidensinterval",
+    "title": "Overlevelsesanalyse",
+    "section": "Beregn HR og konfidensinterval",
+    "text": "Beregn HR og konfidensinterval\nKør cellen og prøv derefter at ændre beta til 0.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHvad er nulværdien for henholdsvis koefficienten og HR?\n\n\\(\\beta=0\\) svarer til \\(HR=1\\)."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#fejlen-vi-bruger-viden-fra-fremtiden",
+    "href": "slides/overlevelsesanalyse.html#fejlen-vi-bruger-viden-fra-fremtiden",
+    "title": "Overlevelsesanalyse",
+    "section": "Fejlen: vi bruger viden fra fremtiden",
+    "text": "Fejlen: vi bruger viden fra fremtiden\nPatienten skal overleve frem til transplantationen for at kunne blive klassificeret som transplanteret.\nHvis hele forløbet fra ventelisteinklusion tælles som transplanteret, tilskriver vi gruppen tid, hvor patienten endnu ikke var transplanteret, men nødvendigvis overlevede.\nDet kaldes immortal time bias.\nTidlige dødsfald kan kun havne i gruppen uden transplantation. Sammenligningen giver dermed den transplanterede gruppe en kunstig fordel."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#en-patient-med-transplantation-på-dag-30",
+    "href": "slides/overlevelsesanalyse.html#en-patient-med-transplantation-på-dag-30",
+    "title": "Overlevelsesanalyse",
+    "section": "En patient med transplantation på dag 30",
+    "text": "En patient med transplantation på dag 30\n\n\n\nPeriode\nFaktisk status\nDen naive analyse bruger\n\n\n\n\nDag 0–30\nIkke transplanteret\nTransplanteret\n\n\nDag 30–100\nTransplanteret\nTransplanteret\n\n\n\nPatienten dør på dag 100.\nDe første 30 dage er fejlagtigt tilskrevet transplantation. En anden patient, som dør på dag 10, kan aldrig nå at komme i transplantationsgruppen.\nImmortal beskriver klassifikationen af tiden; patienten er selvfølgelig ikke biologisk udødelig."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#eksamen-2b-et-muligt-kritisk-svar",
+    "href": "slides/overlevelsesanalyse.html#eksamen-2b-et-muligt-kritisk-svar",
+    "title": "Overlevelsesanalyse",
+    "section": "Eksamen 2b: et muligt kritisk svar",
+    "text": "Eksamen 2b: et muligt kritisk svar\nDet er en Cox-regression. Den estimerede HR er 0.266, umiddelbart svarende til cirka 73 % lavere dødsrate blandt transplanterede.\nAnalysen er imidlertid fejlbehæftet, fordi transplantation sker under opfølgningen og behandles som en fast baseline-variabel.\nPatienterne skal overleve frem til transplantation for at blive klassificeret som transplanterede. Denne immortal time bias giver transplantation en kunstig overlevelsesfordel og trækker HR nedad.\nResultatet kan derfor ikke bruges som et pålideligt estimat for transplantationens effekt."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#hvordan-tænkes-tiden-korrekt",
+    "href": "slides/overlevelsesanalyse.html#hvordan-tænkes-tiden-korrekt",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvordan tænkes tiden korrekt?",
+    "text": "Hvordan tænkes tiden korrekt?\nTransplantationsstatus skal være tidsafhængig: 0 før transplantation, 1 efter.\nEt illustrativt forløb kan opdeles sådan:\n\n\n\nid\nstart\nstop\ndød ved stop\ntransplanteret\n\n\n\n\n1\n0\n30\n0\n0\n\n\n1\n30\n100\n1\n1\n\n\n\ncoxph(Surv(start, stop, event) ~ transplant, data = intervaller)\n\nPrincippet ligger ud over den nødvendige beregning i opgave 2b. Korrekt tidskodning fjerner denne fejlkilde, men sikrer ikke i sig selv kontrol for confounding."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#tidligere-kirurgi-eller-senere-transplantation",
+    "href": "slides/overlevelsesanalyse.html#tidligere-kirurgi-eller-senere-transplantation",
+    "title": "Overlevelsesanalyse",
+    "section": "Tidligere kirurgi eller senere transplantation?",
+    "text": "Tidligere kirurgi eller senere transplantation?\n\n\n\n\n\n\n\n\n\nsurgery\ntransplant\n\n\n\n\nTidspunkt\nFør inklusion\nUnder opfølgningen\n\n\nKendt ved tid nul?\nJa\nFremtidig transplantation: nej\n\n\nFast gruppe fra tid nul?\nRimelig tidskodning\nSkaber immortal time bias\n\n\n\nSpørg altid: Kunne vi have bestemt gruppen på det tidspunkt, hvor opfølgningen begyndte?"
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#proportionale-hazards",
+    "href": "slides/overlevelsesanalyse.html#proportionale-hazards",
+    "title": "Overlevelsesanalyse",
+    "section": "Proportionale hazards",
+    "text": "Proportionale hazards\nCox-modellen med faste koefficienter antager et konstant hazardforhold over tid.\nDet betyder ikke, at hazard er konstant, eller at overlevelseskurverne har konstant afstand.\nKrydsende kurver, forsinket separation eller en biologisk forventning om ændret effekt giver anledning til nærmere vurdering.\nTil diagnostik findes cox.zph(fit) og tilhørende plots. En ikke-signifikant test er ikke bevis for, at antagelsen holder."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#én-hr-kan-skjule-tidsforløbet",
+    "href": "slides/overlevelsesanalyse.html#én-hr-kan-skjule-tidsforløbet",
+    "title": "Overlevelsesanalyse",
+    "section": "Én HR kan skjule tidsforløbet",
+    "text": "Én HR kan skjule tidsforløbet\nHvis hazardforholdet ændres over tid, kan én samlet HR være en misvisende opsummering og afhænge af opfølgningslængden.\nSelv i et randomiseret studie sammenligner hazard ved et senere tidspunkt de personer, der stadig er event-frie i hver gruppe.\nDisse grupper kan over tid have forskellig sammensætning, fordi event og overlevelse har selekteret dem forskelligt.\nSe også på overlevelseskurver og absolutte forskelle ved relevante tidspunkter."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#competing-risks",
+    "href": "slides/overlevelsesanalyse.html#competing-risks",
+    "title": "Overlevelsesanalyse",
+    "section": "Competing risks",
+    "text": "Competing risks\nVed tid til recidiv kan patienten dø uden først at få recidiv. Død forhindrer da det event, vi undersøger.\nVed tid til melanomdød er død af andre årsager en konkurrerende hændelse.\nMan kan ikke uden videre censurere konkurrerende hændelser og fortolke \\(1-\\widehat S(t)\\) som sandsynligheden for det bestemte event i virkeligheden.\nDet kræver andre metoder, som ligger uden for dette kursus. Ved tid til død af alle årsager er andre dødsårsager en del af eventet."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#øvelse-vælg-metode-og-fortolkning",
+    "href": "slides/overlevelsesanalyse.html#øvelse-vælg-metode-og-fortolkning",
+    "title": "Overlevelsesanalyse",
+    "section": "Øvelse: vælg metode og fortolkning",
+    "text": "Øvelse: vælg metode og fortolkning\n\nVi ønsker sandsynligheden for at være i live efter 1 år. Hvilken metode?\nTo grupper har \\(p=0.30\\) i en log-rank-test. Har vi vist ens overlevelse?\nEn Cox-model giver \\(\\beta=\\log(1.5)\\) for alder pr. 10 år. Hvad betyder det?\nVi grupperer patienter efter, om de gennemfører 6 måneders behandling. Hvilken fejl kan opstå?"
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#øvelse-svar",
+    "href": "slides/overlevelsesanalyse.html#øvelse-svar",
+    "title": "Overlevelsesanalyse",
+    "section": "Øvelse: svar",
+    "text": "Øvelse: svar\n\nKaplan–Meier: aflæs eller beregn \\(\\widehat S(1\\text{ år})\\), og angiv usikkerhed.\nNej. Vi har ikke tilstrækkelig evidens til at forkaste ens kurver; det dokumenterer ikke lighed.\n50 % højere hazard ved 10 års højere alder, med øvrige variable holdt konstante og under modellens antagelser.\nImmortal time bias, hvis hele opfølgningen fra start tilskrives en gruppe bestemt af senere gennemførelse."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#tjekliste-til-eksamenssvaret",
+    "href": "slides/overlevelsesanalyse.html#tjekliste-til-eksamenssvaret",
+    "title": "Overlevelsesanalyse",
+    "section": "Tjekliste til eksamenssvaret",
+    "text": "Tjekliste til eksamenssvaret\n\nData: Hvad er tid nul, event og censurering?\nMetode: Kaplan–Meier, log-rank eller Cox?\nHypotese: Ens kurver eller HR = 1?\nTal: Reference, retning, størrelse og usikkerhed.\nKritik: Censurering, PH, confounding og tidsafhængig eksponering.\n\nI opgave 2b er den afgørende pointe immortal time bias, ikke blot at p-værdien er lille."
+  },
+  {
+    "objectID": "slides/overlevelsesanalyse.html#materiale-og-r-dokumentation",
+    "href": "slides/overlevelsesanalyse.html#materiale-og-r-dokumentation",
+    "title": "Overlevelsesanalyse",
+    "section": "Materiale og R-dokumentation",
+    "text": "Materiale og R-dokumentation\nFagligt niveau og emner følger Torben Martinussens SEMS-forelæsninger:\n\nF11: Overlevelsesanalyse I. Hvad, pitfalls.\nF12: Overlevelsesanalyse II. Kaplan-Meier og Log-rank test.\nF13: Overlevelsesanalyse III. Cox-regression.\n\nEksamenseksempler og viste udskrifter: SEMS, ordinær eksamen 22. maj 2026, Statistik, opgave 2a–b, inklusive modelbesvarelse. Patientdata fra opgaven er ikke vedlagt; udskrifterne er gengivet, ikke genberegnet. Det lille seks-patienters datasæt er konstrueret.\nR-pakken survival: funktionsoversigt · Surv · survdiff · coxph"
   }
 ]
