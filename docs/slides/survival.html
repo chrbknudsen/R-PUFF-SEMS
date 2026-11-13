@@ -2046,48 +2046,85 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Hvad er det?</h2>
 <div class="smaller">
 <p>Generelt:</p>
-<p>Fra vi starter med at observere patienter - hvornår indtræffer en hændelse?</p>
+<p>Fra vi starter med at observere et eller andet - hvornår indtræffer en hændelse?</p>
 <p>Bruges til at undersøge patienters overlevelse.</p>
 <p>Men også til:</p>
 <ul>
 <li>tilbagefald (recidiv)</li>
 <li>infektion</li>
-<li>udskrivedlse</li>
+<li>udskrivelse</li>
 <li>hvornår virksomheder mister kunder</li>
 <li>hvornår en dims i en maskine fejler</li>
 </ul>
 <p>Tid til hændelse!</p>
 </div>
+<aside class="notes">
+<p>Hvorfor? Det er selvfølgelig vældig interessant om patienterne overlever ved en given behandling. Det er ofte mere interessant hvor længe de overlever.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="hvordan-kan-vi-beskrive-det" class="slide level2">
 <h2>Hvordan kan vi beskrive det?</h2>
 <ul>
-<li>Vi skal vide hvornår hændelsen indtræffer
+<li class="fragment">Vi skal vide hvornår hændelsen indtræffer
 <ul>
-<li>Vi skal derfor kende et starttidspunkt</li>
+<li class="fragment">Så vi skal kende et starttidspunkt</li>
 </ul></li>
-<li>Hvor mange patienter er i studiet på et givet tidspunkt?
+<li class="fragment">Hvor mange patienter er i studiet på et givet tidspunkt?
 <ul>
-<li>Det ændrer sig over tid!</li>
+<li class="fragment">Det ændrer sig over tid!</li>
 </ul></li>
 </ul>
+<div class="fragment">
 <p>På et givet tidspunkt har de patienter der er tilbage, en given risiko for at opleve hændelsen.</p>
-<p>Det kalder vi for hazard:</p>
+</div>
+<div class="fragment">
+<p>Det kalder vi for “hazard”:</p>
 <p><span class="math display">\[h(t)\]</span></p>
+</div>
 </section>
 <section id="hvad-kan-vi-udlede-af-hazard" class="slide level2">
 <h2>Hvad kan vi udlede af hazard?</h2>
-<p>Hvis vi kender hazard, ved vi hvor mange der (sandsynligvis) har oplevet hændelsen fra start til nu.</p>
-<p>Så ved vi også hvor mange der er hændelsesfri (har overlevet)</p>
+<div class="smaller">
+<div class="fragment">
+<p>Hvis vi kender hazard, ved vi hvor mange der (sandsynligvis) har oplevet hændelsen fra start til et bestemt tidspunkt.</p>
+</div>
+<div class="fragment">
+<p>Hvis hazard på både dag 1 og dag 2 er 0.1</p>
+</div>
+<div class="fragment">
+<p>Så kan vi regne ud hvor mange der oplevede hændelsen dag 1.</p>
+</div>
+<div class="fragment">
+<p>Der er så nogen tilbage. De har samme hazard for at opleve hændelsen dag 2.</p>
+</div>
+<div class="fragment">
+<p>Er der 100 fra start, er der 90 tilbage efter dag 1. Og efter dag 2 er der 81.</p>
+</div>
+<div class="fragment">
+<p>Det beskriver hvor mange der er hændelsesfri på et givet tidspunkt.</p>
+</div>
+<div class="fragment">
 <p>Det kalder vi overlevelsesfunktionen:</p>
 <p><span class="math display">\[S(t)\]</span></p>
+</div>
+</div>
 </section>
 <section id="overlevelsesfunktionen" class="slide level2">
 <h2>Overlevelsesfunktionen</h2>
 <div class="smaller">
 <p>På et tidspunkt t har vi overlevelsen <span class="math inline">\(S(t)\)</span>.</p>
 <p>Et infinitisemalt tidsrum senere er der indtruffet et antal hændelser. Overlevelsen er nu <span class="math inline">\(S'(t)\)</span>. Det er ændringen. Vi kan også beskrive det som hældningen af overlevelseskurven.</p>
-<p>Den <code>hazard</code> der var er derfor:</p>
+<p>Den <code>hazard</code> der var, er derfor:</p>
 <p><span class="math display">\[h(t) = -\frac{S'(t)}{S(t)}\]</span></p>
 <p>Med lidt matematik kan vi så beregne <span class="math inline">\(S(t)\)</span>:</p>
 <p><span class="math display">\[
@@ -2133,13 +2170,13 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 <section id="faldgruber" class="slide level2">
 <h2>Faldgruber</h2>
 <div class="smaller">
-<p>Vi lærer en del af hvor mange der oplever hændelsen efter en bestemt tid.</p>
+<p>Vi lærer en del af hvor mange, der oplever hændelsen efter en bestemt tid.</p>
 <p>Vi lærer mere hvis vi også inddrager de der ikke har haft hændelsen endnu (er hændelsesfrie)</p>
 <p>Det introducerer muligheden for fejlkilder…</p>
 <ul>
 <li class="fragment">Vi kan tabe kontakten til patienterne, og kender ikke status efter sidste kontakt.</li>
 <li class="fragment">Patienten kan dø af noget andet end det vi undersøger.</li>
-<li class="fragment">Studeres infektioner, kan patienten teste negativ efter tre uger, men positiv efter 5. Det faktiske tidspunkt for infektionen er ukendt.</li>
+<li class="fragment">Studeres infektioner, kan patienten teste negativ efter tre uger, men positiv efter fem. Det faktiske tidspunkt for infektionen er ukendt.</li>
 <li class="fragment">Patienten testede positiv allerede da studiet startede. Infektionstidspunkt er ukendt.</li>
 <li class="fragment">Patienten er i live (hændelsesfri) ved studiets afslutning. Om eller hvornår hændelsen indtræffer er ukendt.</li>
 <li class="fragment">Studiet foretages over mange år. Behandlingsformer og prognoser kan ændre sig. Nogen patienter bidrager derfor med en anden hazard end andre.</li>
@@ -2157,30 +2194,44 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 <li><strong>Administrativ højrecensurering</strong>: Patienten er hændelsesfri ved studiets afslutning</li>
 <li><strong>Informativ administrativ censurering</strong>: Behandling/prognose ændres sig over tid.</li>
 </ul>
-<p>Ang. sidste - hvis patienterne har fælles slutdato, får de sidst inkluderede kortere opfølgning. Bedres prognosen samtidig, er der en sammenhæng mellem længden af opfølgning og overlevelse. Og så er den administrative censur ikke kun censur, men også information.</p>
+<div class="reallysmall">
+<p>Informativ administrativ censurering - hvis patienterne har fælles slutdato, får de sidst inkluderede kortere opfølgning. Bedres prognosen samtidig, er der en sammenhæng mellem længden af opfølgning og overlevelse. Og så er den administrative censur ikke kun censur, men også information.</p>
+</div>
 </div>
 </section>
 <section id="vi-skal-altid-forholde-os-til-censuren" class="slide level2">
 <h2>Vi skal altid forholde os til censuren!</h2>
 <p>Det er fristende at fjerne censurerede patienter fra analyse.</p>
 <p>Men den højrecensurerede patient bidrager jo med information frem til tidspunktet for censuren!</p>
-<p>Det kunne skyldes at vi sammenligner to behandlinger. I den ene overlever patienterne frem til studiet afsluttes. De bliver (administrativt) højrecensurerede. I den anden dør de inden studiet slutter. De bliver ikke censureret. Fjerner vi de censurerede patienter fra studiet, bliver vurderingen af overlevelsen skæv.</p>
+<p>Det kunne skyldes at vi sammenligner to behandlinger.</p>
+<p>I den ene overlever (de fleste) patienter frem til studiet afsluttes. De bliver (administrativt) højrecensurerede.</p>
+<p>I den anden dør de (de fleste) inden studiet slutter. De bliver ikke censureret.</p>
+<p>Fjerner vi de censurerede patienter fra studiet, bliver vurderingen af overlevelsen skæv.</p>
 </section>
 <section id="vi-antager-noget" class="slide level2">
 <h2>Vi antager noget!</h2>
-<p>Mere avancerede teknikker kan håndtere censur der er informativ. De simple modeller vi ser på her, antager at censuren <em>ikke</em> er informativ.</p>
-<p>Det kan vi også formulere som at det at en patient ikke er censureret, ikke må kunne bruges til at forudsige resultatet.</p>
+<div class="smaller">
+<p>Mere avancerede teknikker kan håndtere censur der er informativ. De simple modeller vi ser på her, antager at censuren <em>ikke</em> er informativ, mens administrativ censur i almindelighed er harmløs.</p>
+<p>Det kan vi også formulere som at det, at en patient ikke er censureret, ikke må kunne bruges til at forudsige resultatet.</p>
 <p>Hvis meget syge patienter forsvinder ud af opfølgning (højrecensureres), kan vores estimat for overlevelse blive for optimistisk.</p>
-<p>Administrativ censur er almindeligvis harmløs.</p>
 <p>Bedres prognosen over tid, og strækker studiet sig over flere år, kan administrativ censur være et problem</p>
+<div class="evensmaller">
 <p>Med mindre vi kan inkludere tiden (periode) i analysen, så kan den være harmløs (og nyttig) igen.</p>
+</div>
+</div>
 </section>
 <section id="en-særlig-bias" class="slide level2">
 <h2>En særlig bias</h2>
-<p>Immortal time bias</p>
+<div class="smaller">
+<p>“Immortal time bias”</p>
 <p>Vi undersøger overlevelsen efter en behandling, og sætter starttidspunktet til inklusion på venteliste.</p>
 <p>Kun de patienter der overlever frem til de får behandlingen, kan få behandlingen. De er “garanteret” at de ikke dør før de får behandlingen. De er “udødelige”.</p>
-<p>Helt kort: Hvis vi sammenligner en eksponeret gruppe med en ueksponeret gruppe, og kommer til at tælle tiden før eksponeringen som eksponeret tid, får den eksponerede gruppe en kunstig fordel - fordi de definitorisk har skulle være hændelsesfri i hele perioden indtil eksponeringen.</p>
+<p>Helt kort:</p>
+<p>Sammenligner vi en eksponeret gruppe med en ueksponeret gruppe.</p>
+<p>Og kommer til at tælle tiden før eksponeringen som eksponeret tid.</p>
+<p>Får den eksponerede gruppe en kunstig fordel.</p>
+<p>Fordi de definitorisk har skulle være hændelsesfri i hele perioden indtil eksponeringen.</p>
+</div>
 </section>
 <section id="hvad-med-competing-risks" class="slide level2">
 <h2>Hvad med competing risks?</h2>
@@ -2188,21 +2239,36 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 </section>
 <section id="risikosæt" class="slide level2">
 <h2>Risikosæt</h2>
-<p>Det er de patienter der stadig er under risiko for at opleve hændelsen på et bestemt tidspunkt.</p>
+<p>Eller: “antal i risiko” eller “antal under risiko”, “risikogruppen”, “risikopopulation”, “eksponerede”, “risk set”, “at risk”, “at risk group”. KBHMN.</p>
+<p>De patienter, der stadig er under risiko for at opleve hændelsen på et bestemt tidspunkt.</p>
+<p>Og altså hverken er har oplevet hændelsen (endnu), eller er blevet censurerede.</p>
 <p>Det er det antal der skal ganges med hazard på et givet tidspunkt for at estimere hvor mange der kommer til at opleve hændelsen på det tidspunkt.</p>
 </section>
 <section id="hvordan-udvikler-det-sig" class="slide level2">
 <h2>Hvordan udvikler det sig?</h2>
 <p>Er der flere eller færre patienter efter en hændelse?</p>
+<div class="fragment">
 <p>Der er færre. En patient er død.</p>
+</div>
+<div class="fragment">
 <p>Risikosættet bliver derfor mindre.</p>
+</div>
+<div class="fragment">
 <p>Hvad når der sker censurering?</p>
+</div>
+<div class="fragment">
 <p>Så bliver risikosættet også mindre. Men de patienter der censureres efter et år, var stadig med i risikosættet indtil da.</p>
+</div>
+<div class="fragment">
+<p>Det betyder at en enkelt hændelse i slutningen af studiet kan give ret store fald i overlevelsen.</p>
+</div>
 </section>
 <section id="sku-vi-ikke-se-noget-data" class="slide level2">
 <h2>Sku vi ikke se noget data?</h2>
 <div class="evensmaller">
-<p>Når vi arbejder med overlevelsesanalyse, er standardpakken <code>survival</code>. Er den ikke installeret, gøres det med: <code>installl.packages("survival")</code>. Vi er også glade for <code>tidyverse</code> pakken. <code>survival</code> har medfølgende data, blandt andet overlevelse af patienter med fremskreden lungekræft. Vi betragter den relevante del af datasættet:</p>
+<p>Når vi arbejder med overlevelsesanalyse, er standardpakken <code>survival</code>.</p>
+<p>Er den ikke installeret, gøres det med: <code>installl.packages("survival")</code>.</p>
+<p><code>survival</code> har medfølgende data, blandt andet overlevelse af patienter med fremskreden lungekræft. Vi betragter den relevante del af datasættet:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb1-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse)</span>
@@ -2224,15 +2290,19 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 </section>
 <section id="kaplan-meier" class="slide level2">
 <h2>Kaplan-Meier</h2>
-<p>Vi kan godt give os i kast med at tælle og altsådden noget. Men det bliver I ikke bedt om for så skulle nogen finde ud af at distribuere data til jer.</p>
+<p>Et estimat af overlevelseskurven.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> lung)</span>
 <span id="cb3-2"><a aria-label="2"></a><span class="fu">plot</span>(fit, <span class="at">mark.time =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="survival_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="survival_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><div class="reallysmall">
+<p>Vi kan godt give os i kast med at tælle og alsådden noget. Men det bliver I ikke bedt om for så skulle nogen finde ud af at distribuere data til jer til eksamen.</p>
+</div>
+</section>
 <section id="hvad-skete-der-der" class="slide level2">
 <h2>Hvad skete der der?</h2>
+<div class="reallysmall">
 <p><code>fit &lt;- survfit(Surv(time, status == 2)~1, data = lung)</code></p>
 <p><code>Surv(time, status == 2)</code> laver et “survival objekt”. Det formatterer data, så funktionen <code>Surv</code> kan forstå dem.</p>
 <p>Det er almindeligt at vi blot skriver det sådan. Fuldt udfoldet med argumentnavne bliver det:</p>
@@ -2244,67 +2314,116 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 </div>
 </div>
 <p>Patient 1 har hændelse efter 306 dage, patient 2 efter 455 dage, patient 3 er højrecensureret efter 1010, og var stadig i live.</p>
-<p><code>survfit(Surv(time, status == 2)~1, data = lung)</code> fitter det survival objekt Surv leverer. Vi siger “som funktion af 1” med <code>~1</code>. Vi medtager alle observationer, og opdeler ikke efter noget. Vi skal specificere hvilket data vi arbejder på, med <code>data = lung</code>. Resultatet gemmer vi i objektet <code>fit</code></p>
+<p><code>survfit(Surv(time, status == 2)~1, data = lung)</code> fitter det survival objekt Surv leverer.</p>
+<p>Vi siger “som funktion af 1” med <code>~1</code>: Dvs alle observationer medtages, der opdeles ikke efter noget. Vi skal specificere hvilket data vi arbejder på, med <code>data = lung</code>. Resultatet gemmer vi i objektet <code>fit</code></p>
 <p>Endelig plotter vi med <code>plot(fit, mark.time = TRUE)</code></p>
-<p><code>mark.time = TRUE</code> specificerer at vi også plotter hvornår der er censureringshændelser</p>
+<p><code>mark.time = TRUE</code> specificerer at vi også plotter hvornår der er censureringshændelser. De vises ved lodrette streger i plottet.</p>
+</div>
 </section>
 <section id="hvad-skal-vi-kunne-sige-ud-fra-det" class="slide level2">
 <h2>Hvad skal vi kunne sige ud fra det?</h2>
-
-<img data-src="survival_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p>Vi skal kunne aflæse overlevelsen på et bestemt tidspunkt. Enheden på x-aksen er i dage, så ved 365 dage kan vi aflæse 1-års overlevelsen. Vi estimerer den til ca 41% ved 365 dage.</p>
-<p>Vi skal kunne aflæse medianoverlevelsen. Det er der hvor kurven passerer 50%. Det er ca. 310 dage.</p>
-<p>Vi skal kunne forklare trin og mærker. Kurven falder ved dødsfald (hændelse). Mærkerne (+) viser højrecensurering.</p>
-<p>Vi skal vide at de højrecensurerede patienter bidrager med information, og er i risikosættet frem til mærket.</p>
-<p>Vi skal forstå, at risikosættet bliver mindre for hvert fald i kurven. Og for hver censurering.</p>
-<p>Vi skal derfor også forstå, at overlevelsen efter 800 dage, baserer sig på ret få patienter. Der er ikke mange tilbage i risikosættet.</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="survival_files/figure-revealjs/survivalkurve-read-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="reallysmall">
+<p>Aflæse overlevelsen til en bestemt tid. Enheden på x er dage =&gt; ved 365 dage kan 1-års overlevelsen aflæses. Den estimeres til ca 41%</p>
+<p>Aflæse medianoverlevelsen. Det er der hvor kurven passerer 50%. Det er ca. 310 dage.</p>
+<p>Forklare trin og mærker. Kurven falder ved dødsfald (hændelse). Mærkerne (+) viser højrecensurering.</p>
+</div>
+</div><div class="column">
+<div class="reallysmall">
+<p>De højrecensurerede patienter bidrager med information, og er i risikosættet frem til mærket.</p>
+<p>Forstå, at risikosættet bliver mindre for hvert fald i kurven. Og for hver censurering.</p>
+<p>Og derfor, at overlevelsen efter 800 dage, baserer sig på ret få patienter.</p>
 <p>Selve kurven viser den estimerede overlevelseskurve (S(t)).</p>
 <p>De stiplede linier er 95% KI.</p>
 <p>Hvorfor bliver det bredere over tid?</p>
+<div class="fragment">
 <p>Fordi risikosættet bliver mindre. Fuldstændigt som da vi beregnede KI på proportioner!</p>
+</div>
+</div>
+</div></div>
 </section>
 <section id="kan-vi-få-mere-data-ud" class="slide level2">
 <h2>Kan vi få mere data ud?</h2>
 <p>Ja, men det får I i givet fald som tabel, og skal ikke selv producere den:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  time n.risk n.event n.censor      surv      cumhaz     std.err    std.chaz
-1    5    228       1        0 0.9956140 0.004385965 0.004376336 0.004385965
-2   11    227       3        0 0.9824561 0.017601824 0.008694643 0.008800928
-3   12    224       1        0 0.9780702 0.022066110 0.009699183 0.009868444
-4   13    223       2        0 0.9692982 0.031034720 0.011424650 0.011730480
-5   15    221       1        0 0.9649123 0.035559606 0.012185800 0.012572938
-6   26    220       1        0 0.9605263 0.040105061 0.012895585 0.013369365
-      lower     upper
-1 0.9870734 1.0000000
-2 0.9655619 0.9996460
-3 0.9592437 0.9972662
-4 0.9471630 0.9919508
-5 0.9413217 0.9890941
-6 0.9355811 0.9861367</code></pre>
+<pre><code>  time n.risk n.event n.censor      surv      cumhaz     std.err    std.chaz     lower     upper
+1    5    228       1        0 0.9956140 0.004385965 0.004376336 0.004385965 0.9870734 1.0000000
+2   11    227       3        0 0.9824561 0.017601824 0.008694643 0.008800928 0.9655619 0.9996460
+3   12    224       1        0 0.9780702 0.022066110 0.009699183 0.009868444 0.9592437 0.9972662
+4   13    223       2        0 0.9692982 0.031034720 0.011424650 0.011730480 0.9471630 0.9919508
+5   15    221       1        0 0.9649123 0.035559606 0.012185800 0.012572938 0.9413217 0.9890941
+6   26    220       1        0 0.9605263 0.040105061 0.012895585 0.013369365 0.9355811 0.9861367</code></pre>
 </div>
 </div>
-<p>Til opfølgningstiden 5, var der n.risk = 228 i risikosættet. Der indtræder n.event= 1 event. n.censor = 0 er blevet censureret på det tidspunkt. Overlevelsen (surv) er derefter på 99.6%. Den kumulerede hazard (cumhaz) patienterne er blevet udsat for er 0.44%. std.err er standardfejlen på surv, std.chaz er standardfejlen på cumhaz. Og lower/upper er nedre og øvre grænser for et 95% KI for surv.</p>
+<div class="evensmaller">
+<p>Til opfølgningstidspunktet = 5:</p>
+<p>var der n.risk = 228 i risikosættet.</p>
+<p>Der indtræder n.event= 1 event.</p>
+<p>n.censor = 0 er blevet censureret på det tidspunkt.</p>
+<p>Overlevelsen (surv) er derefter på 99.6%.</p>
+<p>Den kumulerede hazard (cumhaz) patienterne er blevet udsat for er 0.44%.</p>
+<p>std.err er standardfejlen på surv</p>
+<p>std.chaz er standardfejlen på cumhaz</p>
+<p>lower/upper er nedre og øvre grænser for et 95% KI for surv.</p>
+</div>
 </section>
 <section id="er-der-forskel-på-kønnene" class="slide level2">
 <h2>Er der forskel på kønnene?</h2>
-<p>Det er der, vi laver et Kaplan-Meier estimat af overlevelsen som funktion af køn, og plotter. Det vil her være nyttigt at få at vide at mænd er blå og kvinder røde.</p>
+<p>Vi laver et Kaplan-Meier estimat af overlevelsen som funktion af køn, og plotter.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>)<span class="sc">~</span>sex, <span class="at">data =</span> lung)</span>
 <span id="cb6-2"><a aria-label="2"></a><span class="fu">plot</span>(fit, <span class="at">mark.time =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="survival_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>Hvad kan vi læse ud af det?</p>
-<p>Vi skal kunne læse det samme som før. Men nu er den estimerede 1-års overlevelse forskellig mellem de to køn. Mænd ca. 34%, kvinder ca. 53%. Det kan vi også udtrykke som at kvinders estimerede 1-års overlevelse er ca. 19 procentpoint højere.</p>
+<img data-src="survival_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><div class="evensmaller">
+<p>Det vil her være nyttigt at få at vide at mænd er blå og kvinder røde.</p>
+</div>
+</section>
+<section id="hvad-kan-vi-se-af-det" class="slide level2">
+<h2>Hvad kan vi se af det?</h2>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="survival_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="smaller">
+<p>Vi skal kunne læse det samme som før.</p>
+<p>Men nu er den estimerede 1-års overlevelse forskellig mellem de to køn.</p>
+<p>Mænd ca. 34%, kvinder ca. 53%.</p>
+<p>Det kan vi også udtrykke som at kvinders estimerede 1-års overlevelse er ca. 19 procentpoint højere.</p>
+<p>Og nej, det kan vi ikke meningsfyldt på denne graf…</p>
+</div>
+</div><div class="column">
+<div class="smaller">
 <p>Medianoverlevelsen er også forskellig, 270 vs 426 dage for mænd hhv kvinder.</p>
-<p>Vi kan se at kvinders overlevelseskurve er højere end mænds gennem næsten hele opfølgningen. Vi</p>
+<p>Vi kan se at kvinders overlevelseskurve er højere end mænds gennem næsten hele opfølgningen.</p>
 <p>Kan vi konkludere at der er forskel?</p>
 <p>Nope. Der skal være meget tydelig (MEGET) forskel på de to kurver for at vi kan det grafisk. Overlappet mellem KI’er fortæller os også at det er noget snask.</p>
+</div>
+</div></div>
 </section>
 <section id="kan-vi-få-mere-at-vide" class="slide level2">
 <h2>Kan vi få mere at vide?</h2>
 <p>Ja. men ikke meget</p>
 
-<img data-src="survival_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><p>Der tilføjes hvor mange der er “i risiko” for de to køn.</p>
+<img data-src="survival_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p>Der tilføjes hvor mange der er “i risiko” for de to køn.</p>
 </section>
 <section id="hvis-i-selv-skal" class="slide level2">
 <h2>Hvis I selv skal</h2>
@@ -2323,20 +2442,24 @@ S(t) &amp;= \exp\left(-\int_0^t h(u)\,du\right) \\
 <span id="cb7-12"><a aria-label="12"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="faldgruber-1" class="slide level2">
-<h2>Faldgruber</h2>
-<p>Medianen bruger kun et punkt på kurven. To kurver kan have samme median og være <em>meget</em> forskellige. Hvis kurven aldrig kommer under 0.5, kan medianen ikke estimeres.</p>
+<section id="faldgruber-ved-kaplan-meier" class="slide level2">
+<h2>Faldgruber ved Kaplan-Meier</h2>
+<ul>
+<li>Medianen bruger kun et punkt på kurven.</li>
+<li>To kurver kan have samme median og være <em>meget</em> forskellige.</li>
+<li>Hvis kurven aldrig kommer under 0.5, kan medianen ikke estimeres.</li>
+</ul>
 </section>
-<section id="hvad-er-den-god-til" class="slide level2">
-<h2>Hvad er den god til?</h2>
+<section id="hvad-er-km-god-til" class="slide level2">
+<h2>Hvad er KM god til?</h2>
 <ul>
 <li>deskriptiv beskrivelse af survival (overlevelsesfunktionen) over tid</li>
 <li>visualisering af censur og størrelsen af risikosættet.</li>
 <li>enkel sammenligning af to (eller flere) grupper</li>
 </ul>
 </section>
-<section id="hvad-kan-den-ikke" class="slide level2">
-<h2>Hvad kan den ikke?</h2>
+<section id="hvad-kan-km-ikke" class="slide level2">
+<h2>Hvad kan KM ikke?</h2>
 <ul>
 <li>justere for andre parametre</li>
 <li>Håndtere forklarende (kontinuærte) variable</li>
@@ -2359,7 +2482,7 @@ sex=2  90       53     73.4      5.68      10.3
  Chisq= 10.3  on 1 degrees of freedom, p= 0.001 </code></pre>
 </div>
 </div>
-<p>Nu er det ikke survfit, men survdiff.</p>
+<p>Nu er det ikke survfit, men survdiff!</p>
 <p>Hvad skal vi kunne læse af det?</p>
 <p>Der var 138 mænd i studiet. Vi observerede 112 dødsfald blandt dem. Der var 90 kvinder i studiet. Blandt dem observerede vi 53 dødsfald.</p>
 <p>For hvert punkt i datasættet, beregnes det forventede antal dødsfald for mænd og kvinder, under antagelse af at der ikke er forskel på hazard for de to grupper. Det samlede, kumulerede antal dødsfald for mænd, hhv kvinder er 91.6 og 73.4</p>
@@ -2375,6 +2498,1643 @@ sex=2  90       53     73.4      5.68      10.3
 <section id="svagheder" class="slide level2">
 <h2>Svagheder</h2>
 <p>Giver evidens mod null-hypotesen (hvis altså den gør) Siger intet om effektstørrelse baseres på antagelse om proportional hazard</p>
+</section>
+<section id="hvad-var-proportional-hazard" class="slide level2">
+<h2>Hvad var proportional hazard?</h2>
+<p>Hazard var den risiko en gruppe under risiko havde for at opleve hændelsen.</p>
+<p>I følge jeres undervisning:</p>
+<p>Den øjeblikkelige event-rate omkrint tid t blandt dem, der stadig er event-frie lige før t.</p>
+<p>Det er altid til et bestemt punkt. Og vi har mere end en gruppe.</p>
+<p>Fænomenet proportional hazard udtrykker at der er en proportionalitet mellem to hazard kurver, to grupper.</p>
+<p>Hvis hazard for den ene gruppe fordobles fra uge 1 til uge 7. Så fordobles hazard for den anden gruppe også (fra uge 1 til uge 7).</p>
+<p>Den faktiske hazard kan godt ændre sig undervejs. Men så ændrer den sig for begge grupper.</p>
+</section>
+<section id="hazard-ratio" class="slide level2">
+<h2>Hazard ratio</h2>
+<p>Og det er det forhold vi er på jagt efter når vi vil se forskel på to grupper. Hvad er hazard ratio (HR) mellem to grupper:</p>
+<p><span class="math display">\[HR = \frac{h_{kvinder}}{h_{mænd}}\]</span></p>
+<p>Det er den vi antager er konstant over tid.</p>
+<p>Hvis HR er ca 0.20, så er der ca. 20% lavere hazard for kvinder som der er for mænd.</p>
+<p>Det fortæller intet om medianoverlevelsen. Eller den relative risiko grupperne imellem til et bestemt tidspunkt.</p>
+</section>
+<section id="hvordan-finder-vi-så-den" class="slide level2">
+<h2>Hvordan finder vi så den?</h2>
+<p>Kaplan-Meier estimerer survival - evt som funktion af en eller flere kategoriske variable.</p>
+<p>Cox proportional hazards modellen estimerer hazard - som funktion af en eller flere variable.</p>
+<p>Den antager at der eksisterer en <code>baseline hazard</code>, som kan stige, eller falde, som funktion af forklarende variable.</p>
+<p><span class="math display">\[
+h(t | X) = h_0(t)\exp(\beta_1x_1 + \beta_2x_2 + ... + \beta_kx_k )
+\]</span> Hvis man tager logaritmen på begge sider - så begynder det at ligne noget lineært:</p>
+<p><span class="math display">\[\ln(h(t)) = \alpha(t) + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k
+\]</span></p>
+<p>Det behøver vi ikke bruge tid på - men der er (som sædvanligt) - en lidt dybere sammenhæng mellem tingene…</p>
+</section>
+<section id="i-praksis" class="slide level2">
+<h2>I praksis</h2>
+<p>Vi ser stadig på lungekræft. Det så ud til at dødeligheden var forskellig mellem køn.</p>
+<p>Cox modellen siger at</p>
+<p><span class="math display">\[
+h(t) = h_0(t)\exp(\beta\cdot\text{køn})
+\]</span> Her har vi sat mænd som baseline, med værdien 0. Exponential leddet bliver da 1 for mænd (<span class="math inline">\(\exp(\beta \cdot 0) = 1\)</span>), og <span class="math inline">\(\beta\)</span> for kvinder.</p>
+<p>Hazard ratio bliver så:</p>
+<p><span class="math display">\[HR = \frac{h_0(t)\exp(\beta)}{h_0(t)} = \exp(\beta)\]</span> ## Og i praksis</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status == 2) ~ factor(sex), data = lung)
+
+  n= 228, number of events= 165 
+
+                coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+factor(sex)2 -0.5310    0.5880   0.1672 -3.176  0.00149 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+             exp(coef) exp(-coef) lower .95 upper .95
+factor(sex)2     0.588      1.701    0.4237     0.816
+
+Concordance= 0.579  (se = 0.021 )
+Likelihood ratio test= 10.63  on 1 df,   p=0.001
+Wald test            = 10.09  on 1 df,   p=0.001
+Score (logrank) test = 10.33  on 1 df,   p=0.001</code></pre>
+</div>
+</div>
+<p>I dette datasæt er mænd kodet som 1 og kvinder som 2.</p>
+<p>Hvad kan vi læse af det?</p>
+<p>228 patienter. 165 hændelser (død). resten er højre censurerede. Vi ved at mænd er kodet som 1 - de er referencegruppen. factor(sex)2 sammenligner kvinder med mænd.</p>
+<p>Blandt patienter, der stadig er i live på samme tidspunkt i opfølgningen, er kvindernes estimerede øjeblikkelige dødsrate cirka 41 % lavere end mændenes (HR 0,588, 95 % KI 0,424–0,816, (p=0{,}00149)). Under antagelsen om proportionale hazards gælder det samme forhold gennem hele opfølgningen.</p>
+</section>
+<section id="korrigeret-for" class="slide level2">
+<h2>Korrigeret for</h2>
+<p>Eller - “multipel regression”</p>
+<p>Hvad nu hvis det ikke kun er køn, men også alder der påvirker overlevelseskurven? Eller forskellig dosis af medicin? Eller forskellige typer af implantater?</p>
+<p>Cox-regressionen tillader os - fuldstændig som vi har set med andre regressioner, at have mere end en forklarende variabel:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status == 2) ~ factor(sex) + age, 
+    data = lung)
+
+  n= 228, number of events= 165 
+
+                  coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
+factor(sex)2 -0.513219  0.598566  0.167458 -3.065  0.00218 **
+age           0.017045  1.017191  0.009223  1.848  0.06459 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+             exp(coef) exp(-coef) lower .95 upper .95
+factor(sex)2    0.5986     1.6707    0.4311    0.8311
+age             1.0172     0.9831    0.9990    1.0357
+
+Concordance= 0.603  (se = 0.025 )
+Likelihood ratio test= 14.12  on 2 df,   p=9e-04
+Wald test            = 13.47  on 2 df,   p=0.001
+Score (logrank) test = 13.72  on 2 df,   p=0.001</code></pre>
+</div>
+</div>
+<p>Hvordan læser vi det?</p>
+</section>
+<section id="styrker-1" class="slide level2">
+<h2>Styrker</h2>
+<p>Tager højde for censurering Tillader flere forklarende variable Kan laves uden at kende hazard-funktionen Den alle bruger</p>
+</section>
+<section id="svagheder-1" class="slide level2">
+<h2>Svagheder</h2>
+<p>Cox-regressionen antager proportional hazard (der er kun en simpel faktor til forskel)</p>
+<p>Det kan være tvivlsomt hvis</p>
+<p>KM-kurverne krydser er antagelsen om proportional hazard være tvivlsom der er tydeligt forsinket effekt af behandling er PH også tvivlsom der er grund til at tro at effekten af behandling ændres over tid</p>
+</section>
+<section id="faldgruber-1" class="slide level2">
+<h2>Faldgruber</h2>
+<p>Hazard Ratio er: - en ratio, ikke en risiko - forskellig fra forskel i median overlevelsen - svær at fortolke klinisk - ikke kausalt enkel. - ikke en behandlingseffekt</p>
+</section>
+<section id="en-opgave" class="slide level2">
+<h2>En opgave</h2>
+</section>
+<section id="opgave-2" class="slide level2">
+<h2>Opgave 2</h2>
+<p>Data stammer fra Stanford Heart Transplant studiet, hvor patienter med svær hjertesygdom blev fulgt over tid fra de blev inkluderet på en venteliste med henblik på at få foretaget en hjertetransplantation. Nogle patienter modtog en hjertetransplantation under opfølgningen. Det primære endepunkt er tid til død fra inklusion i studiet. Følgende variable er til rådighed:</p>
+<ul>
+<li><code>futime</code>: Opfølgningstid fra patienten blev inkluderet på venteliste til død eller lost to follow-up.</li>
+<li><code>fustat</code>: Event-indikator (1 = død, 0 = censureret)</li>
+<li><code>transplant</code>: Indikator for om patienten har fået transplantation (1 = ja, 0 = nej)</li>
+<li><code>wait.time</code>: Tid til transplantation</li>
+<li><code>surgery</code>: Indikator for tidligere kirurgi (bypass operation) foretaget før inklusion i studiet.</li>
+</ul>
+</section>
+<section id="de-første-seks-datalinjer" class="slide level2">
+<h2>De første seks datalinjer</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a><span class="fu">head</span>(d_sems)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="klbhmjofwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#klbhmjofwz table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#klbhmjofwz thead, #klbhmjofwz tbody, #klbhmjofwz tfoot, #klbhmjofwz tr, #klbhmjofwz td, #klbhmjofwz th {
+  border-style: none;
+}
+
+#klbhmjofwz p {
+  margin: 0;
+  padding: 0;
+}
+
+#klbhmjofwz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#klbhmjofwz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#klbhmjofwz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#klbhmjofwz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#klbhmjofwz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#klbhmjofwz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#klbhmjofwz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#klbhmjofwz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#klbhmjofwz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#klbhmjofwz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#klbhmjofwz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#klbhmjofwz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#klbhmjofwz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#klbhmjofwz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#klbhmjofwz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbhmjofwz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#klbhmjofwz .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#klbhmjofwz .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#klbhmjofwz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbhmjofwz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#klbhmjofwz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbhmjofwz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#klbhmjofwz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbhmjofwz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#klbhmjofwz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbhmjofwz .gt_left {
+  text-align: left;
+}
+
+#klbhmjofwz .gt_center {
+  text-align: center;
+}
+
+#klbhmjofwz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#klbhmjofwz .gt_font_normal {
+  font-weight: normal;
+}
+
+#klbhmjofwz .gt_font_bold {
+  font-weight: bold;
+}
+
+#klbhmjofwz .gt_font_italic {
+  font-style: italic;
+}
+
+#klbhmjofwz .gt_super {
+  font-size: 65%;
+}
+
+#klbhmjofwz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#klbhmjofwz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#klbhmjofwz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#klbhmjofwz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#klbhmjofwz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#klbhmjofwz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#klbhmjofwz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#klbhmjofwz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#klbhmjofwz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Row" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="fustat" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">fustat</th>
+<th id="futime" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">futime</th>
+<th id="wait.time" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">wait.time</th>
+<th id="transplant" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">transplant</th>
+<th id="surgery" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">surgery</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Row">1</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">49</td>
+<td class="gt_row gt_left" headers="wait.time">NA</td>
+<td class="gt_row gt_left" headers="transplant">0</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Row">2</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">5</td>
+<td class="gt_row gt_left" headers="wait.time">NA</td>
+<td class="gt_row gt_left" headers="transplant">0</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Row">3</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">15</td>
+<td class="gt_row gt_left" headers="wait.time">0</td>
+<td class="gt_row gt_left" headers="transplant">1</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Row">4</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">38</td>
+<td class="gt_row gt_left" headers="wait.time">35</td>
+<td class="gt_row gt_left" headers="transplant">1</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Row">5</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">17</td>
+<td class="gt_row gt_left" headers="wait.time">NA</td>
+<td class="gt_row gt_left" headers="transplant">0</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Row">6</td>
+<td class="gt_row gt_left" headers="fustat">1</td>
+<td class="gt_row gt_left" headers="futime">2</td>
+<td class="gt_row gt_left" headers="wait.time">NA</td>
+<td class="gt_row gt_left" headers="transplant">0</td>
+<td class="gt_row gt_left" headers="surgery">0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="opgave-2a" class="slide level2">
+<h2>Opgave 2a</h2>
+<p>En forsker lavede følgende analyse:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, fustat <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">~</span> <span class="fu">factor</span>(surgery), <span class="at">data =</span> d_sems)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="qtnyppewla" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#qtnyppewla table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qtnyppewla thead, #qtnyppewla tbody, #qtnyppewla tfoot, #qtnyppewla tr, #qtnyppewla td, #qtnyppewla th {
+  border-style: none;
+}
+
+#qtnyppewla p {
+  margin: 0;
+  padding: 0;
+}
+
+#qtnyppewla .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qtnyppewla .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qtnyppewla .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qtnyppewla .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qtnyppewla .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qtnyppewla .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qtnyppewla .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qtnyppewla .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qtnyppewla .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qtnyppewla .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qtnyppewla .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qtnyppewla .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qtnyppewla .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qtnyppewla .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qtnyppewla .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtnyppewla .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qtnyppewla .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#qtnyppewla .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#qtnyppewla .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtnyppewla .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qtnyppewla .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtnyppewla .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qtnyppewla .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtnyppewla .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qtnyppewla .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtnyppewla .gt_left {
+  text-align: left;
+}
+
+#qtnyppewla .gt_center {
+  text-align: center;
+}
+
+#qtnyppewla .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qtnyppewla .gt_font_normal {
+  font-weight: normal;
+}
+
+#qtnyppewla .gt_font_bold {
+  font-weight: bold;
+}
+
+#qtnyppewla .gt_font_italic {
+  font-style: italic;
+}
+
+#qtnyppewla .gt_super {
+  font-size: 65%;
+}
+
+#qtnyppewla .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qtnyppewla .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qtnyppewla .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qtnyppewla .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qtnyppewla .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qtnyppewla .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qtnyppewla .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qtnyppewla .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qtnyppewla div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Row" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="N" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">N</th>
+<th id="Observed" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Observed</th>
+<th id="Expected" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Expected</th>
+<th id="a(O-E)^2/E" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">(O-E)^2/E</th>
+<th id="a(O-E)^2/V" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">(O-E)^2/V</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Row">factor(surgery)=0</td>
+<td class="gt_row gt_left" headers="N">87</td>
+<td class="gt_row gt_left" headers="Observed">66</td>
+<td class="gt_row gt_left" headers="Expected">58.6</td>
+<td class="gt_row gt_left" headers="a(O-E)^2/E">0.938</td>
+<td class="gt_row gt_left" headers="a(O-E)^2/V">4.44</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Row">factor(surgery)=1</td>
+<td class="gt_row gt_left" headers="N">16</td>
+<td class="gt_row gt_left" headers="Observed">9</td>
+<td class="gt_row gt_left" headers="Expected">16.4</td>
+<td class="gt_row gt_left" headers="a(O-E)^2/E">3.348</td>
+<td class="gt_row gt_left" headers="a(O-E)^2/V">4.44</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><code>Chisq= 4.4 on 1 degrees of freedom, p= 0.04</code></p>
+<p><strong>a)</strong> Hvilken analyse er der tale om og hvad kan du konkludere på baggrund af den?</p>
+</section>
+<section id="opgave-2b" class="slide level2">
+<h2>Opgave 2b</h2>
+<p>Nu blev følgende analyse udført med tilhørende udskrift:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a><span class="fu">summary</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(futime, fustat <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">~</span> <span class="fu">factor</span>(transplant), <span class="at">data =</span> d_sems))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>n= 103, number of events= 75</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="mzifnkoypl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#mzifnkoypl table {
+  font-family: 'Courier Prime', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mzifnkoypl thead, #mzifnkoypl tbody, #mzifnkoypl tfoot, #mzifnkoypl tr, #mzifnkoypl td, #mzifnkoypl th {
+  border-style: none;
+}
+
+#mzifnkoypl p {
+  margin: 0;
+  padding: 0;
+}
+
+#mzifnkoypl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mzifnkoypl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mzifnkoypl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mzifnkoypl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mzifnkoypl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mzifnkoypl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mzifnkoypl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mzifnkoypl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mzifnkoypl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mzifnkoypl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mzifnkoypl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mzifnkoypl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mzifnkoypl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mzifnkoypl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mzifnkoypl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzifnkoypl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mzifnkoypl .gt_row_group_first td {
+  border-top-width: 0px;
+}
+
+#mzifnkoypl .gt_row_group_first th {
+  border-top-width: 0px;
+}
+
+#mzifnkoypl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzifnkoypl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mzifnkoypl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzifnkoypl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mzifnkoypl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzifnkoypl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mzifnkoypl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzifnkoypl .gt_left {
+  text-align: left;
+}
+
+#mzifnkoypl .gt_center {
+  text-align: center;
+}
+
+#mzifnkoypl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mzifnkoypl .gt_font_normal {
+  font-weight: normal;
+}
+
+#mzifnkoypl .gt_font_bold {
+  font-weight: bold;
+}
+
+#mzifnkoypl .gt_font_italic {
+  font-style: italic;
+}
+
+#mzifnkoypl .gt_super {
+  font-size: 65%;
+}
+
+#mzifnkoypl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mzifnkoypl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mzifnkoypl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mzifnkoypl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mzifnkoypl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mzifnkoypl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mzifnkoypl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mzifnkoypl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mzifnkoypl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Row" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="coef" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">coef</th>
+<th id="exp(coef)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">exp(coef)</th>
+<th id="se(coef)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">se(coef)</th>
+<th id="z" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">z</th>
+<th id="Pr(>|z|)" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pr(&gt;|z|)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Row">factor(transplant)1</td>
+<td class="gt_row gt_left" headers="coef">-1.3234</td>
+<td class="gt_row gt_left" headers="exp(coef)">0.2662</td>
+<td class="gt_row gt_left" headers="se(coef)">0.2438</td>
+<td class="gt_row gt_left" headers="z">-5.428</td>
+<td class="gt_row gt_left" headers="Pr(>|z|)">5.69e-08 ***</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>b)</strong> Hvilken type analyse er der tale om, og hvordan fortolkes resultatet? Vurder herefter kritisk, om analysen er korrekt i denne sammenhæng. Hvis ikke, beskriv hvilket problem der opstår, og hvordan det påvirker konklusionen.</p>
+</section>
+<section id="punktnoter-til-fordeling" class="slide level2">
+<h2>Punktnoter til fordeling</h2>
+<p>Samme femårsoverlevelse kan dække over meget forskellige forløb. Tjek først, hvad hændelsen er, hvor tiden starter, og hvilken enhed den måles i. Kurvens højde ved et givet tidspunkt er den estimerede sandsynlighed for stadig at være hændelsesfri. Kurven falder ved observerede hændelser og ligger fladt imellem dem. En censureringsstreg viser, hvor længe en deltager bidrog med opfølgning. Frafald kan skævvride kurven, hvis det hænger sammen med deltagernes prognose. En lang, flad hale kan bygge på ganske få deltagere. Tjek number at risk. Når få er i risiko, kan én hændelse give et stort fald. Den lodrette afstand mellem to kurver ved samme tidspunkt er en forskel i procentpoint. Krydsende kurver giver grund til at undersøge, om hazardforholdet ændrer sig over tid. Medianen aflæses dér, hvor kurven når eller passerer 50 %. »Median ikke nået« kan også skyldes kort opfølgning. Log-rank-testen sammenligner de samlede overlevelsesforløb. Ved proportionale hazards betyder HR = 0,70 en 30 % lavere øjeblikkelig hændelsesrate blandt dem, der stadig er hændelsesfri. En lille p-værdi kan sagtens ledsage en klinisk beskeden forskel.</p>
 </section>
 <section id="kolonne-med-interaktiv-kode" class="slide level2">
 <h2>kolonne med interaktiv kode</h2>
@@ -2458,7 +4218,7 @@ sex=2  90       53     73.4      5.68      10.3
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -2583,12 +4343,12 @@ sex=2  90       53     73.4      5.68      10.3
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1440,
 
-        height: 700,
+        height: 810,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 4.0e-2,
 
         math: {
           mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',

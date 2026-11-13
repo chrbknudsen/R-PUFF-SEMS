@@ -4,7 +4,7 @@
     "href": "slides/survival.html#hvad-er-det",
     "title": "Overlevelsesanalyse",
     "section": "Hvad er det?",
-    "text": "Hvad er det?\n\nGenerelt:\nFra vi starter med at observere patienter - hvornår indtræffer en hændelse?\nBruges til at undersøge patienters overlevelse.\nMen også til:\n\ntilbagefald (recidiv)\ninfektion\nudskrivedlse\nhvornår virksomheder mister kunder\nhvornår en dims i en maskine fejler\n\nTid til hændelse!"
+    "text": "Hvad er det?\n\nGenerelt:\nFra vi starter med at observere et eller andet - hvornår indtræffer en hændelse?\nBruges til at undersøge patienters overlevelse.\nMen også til:\n\ntilbagefald (recidiv)\ninfektion\nudskrivelse\nhvornår virksomheder mister kunder\nhvornår en dims i en maskine fejler\n\nTid til hændelse!\n\n\nHvorfor? Det er selvfølgelig vældig interessant om patienterne overlever ved en given behandling. Det er ofte mere interessant hvor længe de overlever."
   },
   {
     "objectID": "slides/survival.html#kolonne-med-interaktiv-kode",
@@ -3259,21 +3259,21 @@
     "href": "slides/survival.html#hvordan-kan-vi-beskrive-det",
     "title": "Overlevelsesanalyse",
     "section": "Hvordan kan vi beskrive det?",
-    "text": "Hvordan kan vi beskrive det?\n\nVi skal vide hvornår hændelsen indtræffer\n\nVi skal derfor kende et starttidspunkt\n\nHvor mange patienter er i studiet på et givet tidspunkt?\n\nDet ændrer sig over tid!\n\n\nPå et givet tidspunkt har de patienter der er tilbage, en given risiko for at opleve hændelsen.\nDet kalder vi for hazard:\n\\[h(t)\\]"
+    "text": "Hvordan kan vi beskrive det?\n\nVi skal vide hvornår hændelsen indtræffer\n\nSå vi skal kende et starttidspunkt\n\nHvor mange patienter er i studiet på et givet tidspunkt?\n\nDet ændrer sig over tid!\n\n\n\nPå et givet tidspunkt har de patienter der er tilbage, en given risiko for at opleve hændelsen.\n\n\nDet kalder vi for “hazard”:\n\\[h(t)\\]"
   },
   {
     "objectID": "slides/survival.html#overlevelsesfunktionen",
     "href": "slides/survival.html#overlevelsesfunktionen",
     "title": "Overlevelsesanalyse",
     "section": "Overlevelsesfunktionen",
-    "text": "Overlevelsesfunktionen\n\nPå et tidspunkt t har vi overlevelsen \\(S(t)\\).\nEt infinitisemalt tidsrum senere er der indtruffet et antal hændelser. Overlevelsen er nu \\(S'(t)\\). Det er ændringen. Vi kan også beskrive det som hældningen af overlevelseskurven.\nDen hazard der var er derfor:\n\\[h(t) = -\\frac{S'(t)}{S(t)}\\]\nMed lidt matematik kan vi så beregne \\(S(t)\\):\n\\[\nS(t) = \\exp\\left(-\\int_0^t h(u)\\,du\\right)\n\\]"
+    "text": "Overlevelsesfunktionen\n\nPå et tidspunkt t har vi overlevelsen \\(S(t)\\).\nEt infinitisemalt tidsrum senere er der indtruffet et antal hændelser. Overlevelsen er nu \\(S'(t)\\). Det er ændringen. Vi kan også beskrive det som hældningen af overlevelseskurven.\nDen hazard der var, er derfor:\n\\[h(t) = -\\frac{S'(t)}{S(t)}\\]\nMed lidt matematik kan vi så beregne \\(S(t)\\):\n\\[\nS(t) = \\exp\\left(-\\int_0^t h(u)\\,du\\right)\n\\]"
   },
   {
     "objectID": "slides/survival.html#hvad-kan-vi-udlede-af-hazard",
     "href": "slides/survival.html#hvad-kan-vi-udlede-af-hazard",
     "title": "Overlevelsesanalyse",
     "section": "Hvad kan vi udlede af hazard?",
-    "text": "Hvad kan vi udlede af hazard?\nHvis vi kender hazard, ved vi hvor mange der (sandsynligvis) har oplevet hændelsen fra start til nu.\nSå ved vi også hvor mange der er hændelsesfri (har overlevet)\nDet kalder vi overlevelsesfunktionen:\n\\[S(t)\\]"
+    "text": "Hvad kan vi udlede af hazard?\n\n\nHvis vi kender hazard, ved vi hvor mange der (sandsynligvis) har oplevet hændelsen fra start til et bestemt tidspunkt.\n\n\nHvis hazard på både dag 1 og dag 2 er 0.1\n\n\nSå kan vi regne ud hvor mange der oplevede hændelsen dag 1.\n\n\nDer er så nogen tilbage. De har samme hazard for at opleve hændelsen dag 2.\n\n\nEr der 100 fra start, er der 90 tilbage efter dag 1. Og efter dag 2 er der 81.\n\n\nDet beskriver hvor mange der er hændelsesfri på et givet tidspunkt.\n\n\nDet kalder vi overlevelsesfunktionen:\n\\[S(t)\\]"
   },
   {
     "objectID": "slides/survival.html#kan-vi-bruge-den-til-noget",
@@ -3301,35 +3301,35 @@
     "href": "slides/survival.html#faldgruber",
     "title": "Overlevelsesanalyse",
     "section": "Faldgruber",
-    "text": "Faldgruber\n\nVi lærer en del af hvor mange der oplever hændelsen efter en bestemt tid.\nVi lærer mere hvis vi også inddrager de der ikke har haft hændelsen endnu (er hændelsesfrie)\nDet introducerer muligheden for fejlkilder…\n\nVi kan tabe kontakten til patienterne, og kender ikke status efter sidste kontakt.\nPatienten kan dø af noget andet end det vi undersøger.\nStuderes infektioner, kan patienten teste negativ efter tre uger, men positiv efter 5. Det faktiske tidspunkt for infektionen er ukendt.\nPatienten testede positiv allerede da studiet startede. Infektionstidspunkt er ukendt.\nPatienten er i live (hændelsesfri) ved studiets afslutning. Om eller hvornår hændelsen indtræffer er ukendt.\nStudiet foretages over mange år. Behandlingsformer og prognoser kan ændre sig. Nogen patienter bidrager derfor med en anden hazard end andre."
+    "text": "Faldgruber\n\nVi lærer en del af hvor mange, der oplever hændelsen efter en bestemt tid.\nVi lærer mere hvis vi også inddrager de der ikke har haft hændelsen endnu (er hændelsesfrie)\nDet introducerer muligheden for fejlkilder…\n\nVi kan tabe kontakten til patienterne, og kender ikke status efter sidste kontakt.\nPatienten kan dø af noget andet end det vi undersøger.\nStuderes infektioner, kan patienten teste negativ efter tre uger, men positiv efter fem. Det faktiske tidspunkt for infektionen er ukendt.\nPatienten testede positiv allerede da studiet startede. Infektionstidspunkt er ukendt.\nPatienten er i live (hændelsesfri) ved studiets afslutning. Om eller hvornår hændelsen indtræffer er ukendt.\nStudiet foretages over mange år. Behandlingsformer og prognoser kan ændre sig. Nogen patienter bidrager derfor med en anden hazard end andre."
   },
   {
     "objectID": "slides/survival.html#hvad-kalder-vi-det",
     "href": "slides/survival.html#hvad-kalder-vi-det",
     "title": "Overlevelsesanalyse",
     "section": "Hvad kalder vi det?",
-    "text": "Hvad kalder vi det?\n\n\nHøjrecensurering: Kontakten ophører mens patienten er hændelsesfri.\nVenstrecensurering: Positiv allerede ved første observation\nIntervalcensurering: Negativ test efter tre uger, positiv efter 5\nKonkurrerende hændelse: Patienten dør af anden årsag end det vi undersøger. Det vil vi behandle som en højrecensurering.\nAdministrativ højrecensurering: Patienten er hændelsesfri ved studiets afslutning\nInformativ administrativ censurering: Behandling/prognose ændres sig over tid.\n\nAng. sidste - hvis patienterne har fælles slutdato, får de sidst inkluderede kortere opfølgning. Bedres prognosen samtidig, er der en sammenhæng mellem længden af opfølgning og overlevelse. Og så er den administrative censur ikke kun censur, men også information."
+    "text": "Hvad kalder vi det?\n\n\nHøjrecensurering: Kontakten ophører mens patienten er hændelsesfri.\nVenstrecensurering: Positiv allerede ved første observation\nIntervalcensurering: Negativ test efter tre uger, positiv efter 5\nKonkurrerende hændelse: Patienten dør af anden årsag end det vi undersøger. Det vil vi behandle som en højrecensurering.\nAdministrativ højrecensurering: Patienten er hændelsesfri ved studiets afslutning\nInformativ administrativ censurering: Behandling/prognose ændres sig over tid.\n\n\nInformativ administrativ censurering - hvis patienterne har fælles slutdato, får de sidst inkluderede kortere opfølgning. Bedres prognosen samtidig, er der en sammenhæng mellem længden af opfølgning og overlevelse. Og så er den administrative censur ikke kun censur, men også information."
   },
   {
     "objectID": "slides/survival.html#vi-skal-altid-forholde-os-til-censuren",
     "href": "slides/survival.html#vi-skal-altid-forholde-os-til-censuren",
     "title": "Overlevelsesanalyse",
     "section": "Vi skal altid forholde os til censuren!",
-    "text": "Vi skal altid forholde os til censuren!\nDet er fristende at fjerne censurerede patienter fra analyse.\nMen den højrecensurerede patient bidrager jo med information frem til tidspunktet for censuren!\nDet kunne skyldes at vi sammenligner to behandlinger. I den ene overlever patienterne frem til studiet afsluttes. De bliver (administrativt) højrecensurerede. I den anden dør de inden studiet slutter. De bliver ikke censureret. Fjerner vi de censurerede patienter fra studiet, bliver vurderingen af overlevelsen skæv."
+    "text": "Vi skal altid forholde os til censuren!\nDet er fristende at fjerne censurerede patienter fra analyse.\nMen den højrecensurerede patient bidrager jo med information frem til tidspunktet for censuren!\nDet kunne skyldes at vi sammenligner to behandlinger.\nI den ene overlever (de fleste) patienter frem til studiet afsluttes. De bliver (administrativt) højrecensurerede.\nI den anden dør de (de fleste) inden studiet slutter. De bliver ikke censureret.\nFjerner vi de censurerede patienter fra studiet, bliver vurderingen af overlevelsen skæv."
   },
   {
     "objectID": "slides/survival.html#vi-antager-noget",
     "href": "slides/survival.html#vi-antager-noget",
     "title": "Overlevelsesanalyse",
     "section": "Vi antager noget!",
-    "text": "Vi antager noget!\nMere avancerede teknikker kan håndtere censur der er informativ. De simple modeller vi ser på her, antager at censuren ikke er informativ.\nDet kan vi også formulere som at det at en patient ikke er censureret, ikke må kunne bruges til at forudsige resultatet.\nHvis meget syge patienter forsvinder ud af opfølgning (højrecensureres), kan vores estimat for overlevelse blive for optimistisk.\nAdministrativ censur er almindeligvis harmløs.\nBedres prognosen over tid, og strækker studiet sig over flere år, kan administrativ censur være et problem\nMed mindre vi kan inkludere tiden (periode) i analysen, så kan den være harmløs (og nyttig) igen."
+    "text": "Vi antager noget!\n\nMere avancerede teknikker kan håndtere censur der er informativ. De simple modeller vi ser på her, antager at censuren ikke er informativ, mens administrativ censur i almindelighed er harmløs.\nDet kan vi også formulere som at det, at en patient ikke er censureret, ikke må kunne bruges til at forudsige resultatet.\nHvis meget syge patienter forsvinder ud af opfølgning (højrecensureres), kan vores estimat for overlevelse blive for optimistisk.\nBedres prognosen over tid, og strækker studiet sig over flere år, kan administrativ censur være et problem\n\nMed mindre vi kan inkludere tiden (periode) i analysen, så kan den være harmløs (og nyttig) igen."
   },
   {
     "objectID": "slides/survival.html#en-særlig-bias",
     "href": "slides/survival.html#en-særlig-bias",
     "title": "Overlevelsesanalyse",
     "section": "En særlig bias",
-    "text": "En særlig bias\nImmortal time bias\nVi undersøger overlevelsen efter en behandling, og sætter starttidspunktet til inklusion på venteliste.\nKun de patienter der overlever frem til de får behandlingen, kan få behandlingen. De er “garanteret” at de ikke dør før de får behandlingen. De er “udødelige”.\nHelt kort: Hvis vi sammenligner en eksponeret gruppe med en ueksponeret gruppe, og kommer til at tælle tiden før eksponeringen som eksponeret tid, får den eksponerede gruppe en kunstig fordel - fordi de definitorisk har skulle være hændelsesfri i hele perioden indtil eksponeringen."
+    "text": "En særlig bias\n\n“Immortal time bias”\nVi undersøger overlevelsen efter en behandling, og sætter starttidspunktet til inklusion på venteliste.\nKun de patienter der overlever frem til de får behandlingen, kan få behandlingen. De er “garanteret” at de ikke dør før de får behandlingen. De er “udødelige”.\nHelt kort:\nSammenligner vi en eksponeret gruppe med en ueksponeret gruppe.\nOg kommer til at tælle tiden før eksponeringen som eksponeret tid.\nFår den eksponerede gruppe en kunstig fordel.\nFordi de definitorisk har skulle være hændelsesfri i hele perioden indtil eksponeringen."
   },
   {
     "objectID": "slides/survival.html#hvad-med-competing-risks",
@@ -3343,7 +3343,7 @@
     "href": "slides/survival.html#sku-vi-ikke-se-noget-data",
     "title": "Overlevelsesanalyse",
     "section": "Sku vi ikke se noget data?",
-    "text": "Sku vi ikke se noget data?\n\nNår vi arbejder med overlevelsesanalyse, er standardpakken survival. Er den ikke installeret, gøres det med: installl.packages(\"survival\"). Vi er også glade for tidyverse pakken. survival har medfølgende data, blandt andet overlevelse af patienter med fremskreden lungekræft. Vi betragter den relevante del af datasættet:\n\nlibrary(survival)\nlibrary(tidyverse)\nlung |&gt; select(time, status, sex) |&gt; head()\n\n  time status sex\n1  306      2   1\n2  455      2   1\n3 1010      1   1\n4  210      2   1\n5  883      2   1\n6 1022      1   1\n\n\nMere komplext er data ikke.\nPatient 1 var mand (sex = 1), og han døde (status = 2) efter 306 dages opfølgning (time).\nPatient 3 var også mand, og blev højrecensureret (status = 1) efter 1010 dage, hvor han stadig var i live."
+    "text": "Sku vi ikke se noget data?\n\nNår vi arbejder med overlevelsesanalyse, er standardpakken survival.\nEr den ikke installeret, gøres det med: installl.packages(\"survival\").\nsurvival har medfølgende data, blandt andet overlevelse af patienter med fremskreden lungekræft. Vi betragter den relevante del af datasættet:\n\nlibrary(survival)\nlibrary(tidyverse)\nlung |&gt; select(time, status, sex) |&gt; head()\n\n  time status sex\n1  306      2   1\n2  455      2   1\n3 1010      1   1\n4  210      2   1\n5  883      2   1\n6 1022      1   1\n\n\nMere komplext er data ikke.\nPatient 1 var mand (sex = 1), og han døde (status = 2) efter 306 dages opfølgning (time).\nPatient 3 var også mand, og blev højrecensureret (status = 1) efter 1010 dage, hvor han stadig var i live."
   },
   {
     "objectID": "slides/survival.html#et-par-graf",
@@ -3357,49 +3357,49 @@
     "href": "slides/survival.html#risikosæt",
     "title": "Overlevelsesanalyse",
     "section": "Risikosæt",
-    "text": "Risikosæt\nDet er de patienter der stadig er under risiko for at opleve hændelsen på et bestemt tidspunkt.\nDet er det antal der skal ganges med hazard på et givet tidspunkt for at estimere hvor mange der kommer til at opleve hændelsen på det tidspunkt."
+    "text": "Risikosæt\nEller: “antal i risiko” eller “antal under risiko”, “risikogruppen”, “risikopopulation”, “eksponerede”, “risk set”, “at risk”, “at risk group”. KBHMN.\nDe patienter, der stadig er under risiko for at opleve hændelsen på et bestemt tidspunkt.\nOg altså hverken er har oplevet hændelsen (endnu), eller er blevet censurerede.\nDet er det antal der skal ganges med hazard på et givet tidspunkt for at estimere hvor mange der kommer til at opleve hændelsen på det tidspunkt."
   },
   {
     "objectID": "slides/survival.html#hvordan-udvikler-det-sig",
     "href": "slides/survival.html#hvordan-udvikler-det-sig",
     "title": "Overlevelsesanalyse",
     "section": "Hvordan udvikler det sig?",
-    "text": "Hvordan udvikler det sig?\nEr der flere eller færre patienter efter en hændelse?\nDer er færre. En patient er død.\nRisikosættet bliver derfor mindre.\nHvad når der sker censurering?\nSå bliver risikosættet også mindre. Men de patienter der censureres efter et år, var stadig med i risikosættet indtil da."
+    "text": "Hvordan udvikler det sig?\nEr der flere eller færre patienter efter en hændelse?\n\nDer er færre. En patient er død.\n\n\nRisikosættet bliver derfor mindre.\n\n\nHvad når der sker censurering?\n\n\nSå bliver risikosættet også mindre. Men de patienter der censureres efter et år, var stadig med i risikosættet indtil da.\n\n\nDet betyder at en enkelt hændelse i slutningen af studiet kan give ret store fald i overlevelsen."
   },
   {
     "objectID": "slides/survival.html#kaplan-meier",
     "href": "slides/survival.html#kaplan-meier",
     "title": "Overlevelsesanalyse",
     "section": "Kaplan-Meier",
-    "text": "Kaplan-Meier\nVi kan godt give os i kast med at tælle og altsådden noget. Men det bliver I ikke bedt om for så skulle nogen finde ud af at distribuere data til jer.\n\nfit &lt;- survfit(Surv(time, status == 2)~1, data = lung)\nplot(fit, mark.time = TRUE)"
+    "text": "Kaplan-Meier\nEt estimat af overlevelseskurven.\n\nfit &lt;- survfit(Surv(time, status == 2)~1, data = lung)\nplot(fit, mark.time = TRUE)\n\n\n\nVi kan godt give os i kast med at tælle og alsådden noget. Men det bliver I ikke bedt om for så skulle nogen finde ud af at distribuere data til jer til eksamen."
   },
   {
     "objectID": "slides/survival.html#hvad-skete-der-der",
     "href": "slides/survival.html#hvad-skete-der-der",
     "title": "Overlevelsesanalyse",
     "section": "Hvad skete der der?",
-    "text": "Hvad skete der der?\nfit &lt;- survfit(Surv(time, status == 2)~1, data = lung)\nSurv(time, status == 2) laver et “survival objekt”. Det formatterer data, så funktionen Surv kan forstå dem.\nDet er almindeligt at vi blot skriver det sådan. Fuldt udfoldet med argumentnavne bliver det:\nSurv(time = time, event = status == 2)\nDet ser således ud:\n\n\n[1]  306   455  1010+  210   883  1022+\n\n\nPatient 1 har hændelse efter 306 dage, patient 2 efter 455 dage, patient 3 er højrecensureret efter 1010, og var stadig i live.\nsurvfit(Surv(time, status == 2)~1, data = lung) fitter det survival objekt Surv leverer. Vi siger “som funktion af 1” med ~1. Vi medtager alle observationer, og opdeler ikke efter noget. Vi skal specificere hvilket data vi arbejder på, med data = lung. Resultatet gemmer vi i objektet fit\nEndelig plotter vi med plot(fit, mark.time = TRUE)\nmark.time = TRUE specificerer at vi også plotter hvornår der er censureringshændelser"
+    "text": "Hvad skete der der?\n\nfit &lt;- survfit(Surv(time, status == 2)~1, data = lung)\nSurv(time, status == 2) laver et “survival objekt”. Det formatterer data, så funktionen Surv kan forstå dem.\nDet er almindeligt at vi blot skriver det sådan. Fuldt udfoldet med argumentnavne bliver det:\nSurv(time = time, event = status == 2)\nDet ser således ud:\n\n\n[1]  306   455  1010+  210   883  1022+\n\n\nPatient 1 har hændelse efter 306 dage, patient 2 efter 455 dage, patient 3 er højrecensureret efter 1010, og var stadig i live.\nsurvfit(Surv(time, status == 2)~1, data = lung) fitter det survival objekt Surv leverer.\nVi siger “som funktion af 1” med ~1: Dvs alle observationer medtages, der opdeles ikke efter noget. Vi skal specificere hvilket data vi arbejder på, med data = lung. Resultatet gemmer vi i objektet fit\nEndelig plotter vi med plot(fit, mark.time = TRUE)\nmark.time = TRUE specificerer at vi også plotter hvornår der er censureringshændelser. De vises ved lodrette streger i plottet."
   },
   {
     "objectID": "slides/survival.html#hvad-skal-vi-kunne-sige-ud-fra-det",
     "href": "slides/survival.html#hvad-skal-vi-kunne-sige-ud-fra-det",
     "title": "Overlevelsesanalyse",
     "section": "Hvad skal vi kunne sige ud fra det?",
-    "text": "Hvad skal vi kunne sige ud fra det?\n\nVi skal kunne aflæse overlevelsen på et bestemt tidspunkt. Enheden på x-aksen er i dage, så ved 365 dage kan vi aflæse 1-års overlevelsen. Vi estimerer den til ca 41% ved 365 dage.\nVi skal kunne aflæse medianoverlevelsen. Det er der hvor kurven passerer 50%. Det er ca. 310 dage.\nVi skal kunne forklare trin og mærker. Kurven falder ved dødsfald (hændelse). Mærkerne (+) viser højrecensurering.\nVi skal vide at de højrecensurerede patienter bidrager med information, og er i risikosættet frem til mærket.\nVi skal forstå, at risikosættet bliver mindre for hvert fald i kurven. Og for hver censurering.\nVi skal derfor også forstå, at overlevelsen efter 800 dage, baserer sig på ret få patienter. Der er ikke mange tilbage i risikosættet.\nSelve kurven viser den estimerede overlevelseskurve (S(t)).\nDe stiplede linier er 95% KI.\nHvorfor bliver det bredere over tid?\nFordi risikosættet bliver mindre. Fuldstændigt som da vi beregnede KI på proportioner!"
+    "text": "Hvad skal vi kunne sige ud fra det?\n\n\n\n\n\n\n\n\n\n\n\n\nAflæse overlevelsen til en bestemt tid. Enheden på x er dage =&gt; ved 365 dage kan 1-års overlevelsen aflæses. Den estimeres til ca 41%\nAflæse medianoverlevelsen. Det er der hvor kurven passerer 50%. Det er ca. 310 dage.\nForklare trin og mærker. Kurven falder ved dødsfald (hændelse). Mærkerne (+) viser højrecensurering.\n\n\n\nDe højrecensurerede patienter bidrager med information, og er i risikosættet frem til mærket.\nForstå, at risikosættet bliver mindre for hvert fald i kurven. Og for hver censurering.\nOg derfor, at overlevelsen efter 800 dage, baserer sig på ret få patienter.\nSelve kurven viser den estimerede overlevelseskurve (S(t)).\nDe stiplede linier er 95% KI.\nHvorfor bliver det bredere over tid?\n\nFordi risikosættet bliver mindre. Fuldstændigt som da vi beregnede KI på proportioner!"
   },
   {
     "objectID": "slides/survival.html#kan-vi-få-mere-data-ud",
     "href": "slides/survival.html#kan-vi-få-mere-data-ud",
     "title": "Overlevelsesanalyse",
     "section": "Kan vi få mere data ud?",
-    "text": "Kan vi få mere data ud?\nJa, men det får I i givet fald som tabel, og skal ikke selv producere den:\n\n\n  time n.risk n.event n.censor      surv      cumhaz     std.err    std.chaz\n1    5    228       1        0 0.9956140 0.004385965 0.004376336 0.004385965\n2   11    227       3        0 0.9824561 0.017601824 0.008694643 0.008800928\n3   12    224       1        0 0.9780702 0.022066110 0.009699183 0.009868444\n4   13    223       2        0 0.9692982 0.031034720 0.011424650 0.011730480\n5   15    221       1        0 0.9649123 0.035559606 0.012185800 0.012572938\n6   26    220       1        0 0.9605263 0.040105061 0.012895585 0.013369365\n      lower     upper\n1 0.9870734 1.0000000\n2 0.9655619 0.9996460\n3 0.9592437 0.9972662\n4 0.9471630 0.9919508\n5 0.9413217 0.9890941\n6 0.9355811 0.9861367\n\n\nTil opfølgningstiden 5, var der n.risk = 228 i risikosættet. Der indtræder n.event= 1 event. n.censor = 0 er blevet censureret på det tidspunkt. Overlevelsen (surv) er derefter på 99.6%. Den kumulerede hazard (cumhaz) patienterne er blevet udsat for er 0.44%. std.err er standardfejlen på surv, std.chaz er standardfejlen på cumhaz. Og lower/upper er nedre og øvre grænser for et 95% KI for surv."
+    "text": "Kan vi få mere data ud?\nJa, men det får I i givet fald som tabel, og skal ikke selv producere den:\n\n\n  time n.risk n.event n.censor      surv      cumhaz     std.err    std.chaz     lower     upper\n1    5    228       1        0 0.9956140 0.004385965 0.004376336 0.004385965 0.9870734 1.0000000\n2   11    227       3        0 0.9824561 0.017601824 0.008694643 0.008800928 0.9655619 0.9996460\n3   12    224       1        0 0.9780702 0.022066110 0.009699183 0.009868444 0.9592437 0.9972662\n4   13    223       2        0 0.9692982 0.031034720 0.011424650 0.011730480 0.9471630 0.9919508\n5   15    221       1        0 0.9649123 0.035559606 0.012185800 0.012572938 0.9413217 0.9890941\n6   26    220       1        0 0.9605263 0.040105061 0.012895585 0.013369365 0.9355811 0.9861367\n\n\n\nTil opfølgningstidspunktet = 5:\nvar der n.risk = 228 i risikosættet.\nDer indtræder n.event= 1 event.\nn.censor = 0 er blevet censureret på det tidspunkt.\nOverlevelsen (surv) er derefter på 99.6%.\nDen kumulerede hazard (cumhaz) patienterne er blevet udsat for er 0.44%.\nstd.err er standardfejlen på surv\nstd.chaz er standardfejlen på cumhaz\nlower/upper er nedre og øvre grænser for et 95% KI for surv."
   },
   {
     "objectID": "slides/survival.html#er-der-forskel-på-kønnene",
     "href": "slides/survival.html#er-der-forskel-på-kønnene",
     "title": "Overlevelsesanalyse",
     "section": "Er der forskel på kønnene?",
-    "text": "Er der forskel på kønnene?\nDet er der, vi laver et Kaplan-Meier estimat af overlevelsen som funktion af køn, og plotter. Det vil her være nyttigt at få at vide at mænd er blå og kvinder røde.\n\nfit &lt;- survfit(Surv(time, status == 2)~sex, data = lung)\nplot(fit, mark.time = TRUE, col = c(\"blue\", \"red\"), conf.int = TRUE)\n\n\nHvad kan vi læse ud af det?\nVi skal kunne læse det samme som før. Men nu er den estimerede 1-års overlevelse forskellig mellem de to køn. Mænd ca. 34%, kvinder ca. 53%. Det kan vi også udtrykke som at kvinders estimerede 1-års overlevelse er ca. 19 procentpoint højere.\nMedianoverlevelsen er også forskellig, 270 vs 426 dage for mænd hhv kvinder.\nVi kan se at kvinders overlevelseskurve er højere end mænds gennem næsten hele opfølgningen. Vi\nKan vi konkludere at der er forskel?\nNope. Der skal være meget tydelig (MEGET) forskel på de to kurver for at vi kan det grafisk. Overlappet mellem KI’er fortæller os også at det er noget snask."
+    "text": "Er der forskel på kønnene?\nVi laver et Kaplan-Meier estimat af overlevelsen som funktion af køn, og plotter.\n\nfit &lt;- survfit(Surv(time, status == 2)~sex, data = lung)\nplot(fit, mark.time = TRUE, col = c(\"blue\", \"red\"), conf.int = TRUE)\n\n\n\nDet vil her være nyttigt at få at vide at mænd er blå og kvinder røde."
   },
   {
     "objectID": "slides/survival.html#kan-vi-få-mere-at-vide",
@@ -3420,7 +3420,7 @@
     "href": "slides/survival.html#faldgruber-1",
     "title": "Overlevelsesanalyse",
     "section": "Faldgruber",
-    "text": "Faldgruber\nMedianen bruger kun et punkt på kurven. To kurver kan have samme median og være meget forskellige. Hvis kurven aldrig kommer under 0.5, kan medianen ikke estimeres."
+    "text": "Faldgruber\nHazard Ratio er: - en ratio, ikke en risiko - forskellig fra forskel i median overlevelsen - svær at fortolke klinisk - ikke kausalt enkel. - ikke en behandlingseffekt"
   },
   {
     "objectID": "slides/survival.html#hvad-er-den-god-til",
@@ -3441,7 +3441,7 @@
     "href": "slides/survival.html#hvordan-ser-vi-så-forskel",
     "title": "Overlevelsesanalyse",
     "section": "Hvordan ser vi så forskel?",
-    "text": "Hvordan ser vi så forskel?\nDet findes der en statistisk test til: log-rank test.\nVi genbruger vores data fra før, hvor vi estimerede overlevelseskurverne for de to køn:\n\n\nCall:\nsurvdiff(formula = Surv(time, status == 2) ~ sex, data = lung)\n\n        N Observed Expected (O-E)^2/E (O-E)^2/V\nsex=1 138      112     91.6      4.55      10.3\nsex=2  90       53     73.4      5.68      10.3\n\n Chisq= 10.3  on 1 degrees of freedom, p= 0.001 \n\n\nNu er det ikke survfit, men survdiff.\nHvad skal vi kunne læse af det?\nDer var 138 mænd i studiet. Vi observerede 112 dødsfald blandt dem. Der var 90 kvinder i studiet. Blandt dem observerede vi 53 dødsfald.\nFor hvert punkt i datasættet, beregnes det forventede antal dødsfald for mænd og kvinder, under antagelse af at der ikke er forskel på hazard for de to grupper. Det samlede, kumulerede antal dødsfald for mænd, hhv kvinder er 91.6 og 73.4\nTeknikken kan forstås som en art kumuleret chi^2 test. Og derfor en chisq værdi. Den giver en p-værdi på 0.001.\nDerfor kan vi forkaste null-hypotesen på et 5% niveau. Der er statistisk evidens for en forskel i overlevelsen mellem mænd og kvinder.\nMændene havde flere dødsfald end forventet under null-hypotesen. Kvinderne færre. Det stemmer overens med Kaplan-Meier kurverne, hvor kvinderne har en højere estimeret overlevelse gennem næsten hele opfølgningen.\nDer justeres ikke for noget i sammenligningen."
+    "text": "Hvordan ser vi så forskel?\nDet findes der en statistisk test til: log-rank test.\nVi genbruger vores data fra før, hvor vi estimerede overlevelseskurverne for de to køn:\n\n\nCall:\nsurvdiff(formula = Surv(time, status == 2) ~ sex, data = lung)\n\n        N Observed Expected (O-E)^2/E (O-E)^2/V\nsex=1 138      112     91.6      4.55      10.3\nsex=2  90       53     73.4      5.68      10.3\n\n Chisq= 10.3  on 1 degrees of freedom, p= 0.001 \n\n\nNu er det ikke survfit, men survdiff!\nHvad skal vi kunne læse af det?\nDer var 138 mænd i studiet. Vi observerede 112 dødsfald blandt dem. Der var 90 kvinder i studiet. Blandt dem observerede vi 53 dødsfald.\nFor hvert punkt i datasættet, beregnes det forventede antal dødsfald for mænd og kvinder, under antagelse af at der ikke er forskel på hazard for de to grupper. Det samlede, kumulerede antal dødsfald for mænd, hhv kvinder er 91.6 og 73.4\nTeknikken kan forstås som en art kumuleret chi^2 test. Og derfor en chisq værdi. Den giver en p-værdi på 0.001.\nDerfor kan vi forkaste null-hypotesen på et 5% niveau. Der er statistisk evidens for en forskel i overlevelsen mellem mænd og kvinder.\nMændene havde flere dødsfald end forventet under null-hypotesen. Kvinderne færre. Det stemmer overens med Kaplan-Meier kurverne, hvor kvinderne har en højere estimeret overlevelse gennem næsten hele opfølgningen.\nDer justeres ikke for noget i sammenligningen."
   },
   {
     "objectID": "slides/survival.html#styrker",
@@ -3456,5 +3456,131 @@
     "title": "Overlevelsesanalyse",
     "section": "Svagheder",
     "text": "Svagheder\nGiver evidens mod null-hypotesen (hvis altså den gør) Siger intet om effektstørrelse baseres på antagelse om proportional hazard"
+  },
+  {
+    "objectID": "slides/survival.html#hvad-var-proportional-hazard",
+    "href": "slides/survival.html#hvad-var-proportional-hazard",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad var proportional hazard?",
+    "text": "Hvad var proportional hazard?\nHazard var den risiko en gruppe under risiko havde for at opleve hændelsen.\nI følge jeres undervisning:\nDen øjeblikkelige event-rate omkrint tid t blandt dem, der stadig er event-frie lige før t.\nDet er altid til et bestemt punkt. Og vi har mere end en gruppe.\nFænomenet proportional hazard udtrykker at der er en proportionalitet mellem to hazard kurver, to grupper.\nHvis hazard for den ene gruppe fordobles fra uge 1 til uge 7. Så fordobles hazard for den anden gruppe også (fra uge 1 til uge 7).\nDen faktiske hazard kan godt ændre sig undervejs. Men så ændrer den sig for begge grupper."
+  },
+  {
+    "objectID": "slides/survival.html#hazard-ratio",
+    "href": "slides/survival.html#hazard-ratio",
+    "title": "Overlevelsesanalyse",
+    "section": "Hazard ratio",
+    "text": "Hazard ratio\nOg det er det forhold vi er på jagt efter når vi vil se forskel på to grupper. Hvad er hazard ratio (HR) mellem to grupper:\n\\[HR = \\frac{h_{kvinder}}{h_{mænd}}\\]\nDet er den vi antager er konstant over tid.\nHvis HR er ca 0.20, så er der ca. 20% lavere hazard for kvinder som der er for mænd.\nDet fortæller intet om medianoverlevelsen. Eller den relative risiko grupperne imellem til et bestemt tidspunkt."
+  },
+  {
+    "objectID": "slides/survival.html#hvordan-finder-vi-så-den",
+    "href": "slides/survival.html#hvordan-finder-vi-så-den",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvordan finder vi så den?",
+    "text": "Hvordan finder vi så den?\nKaplan-Meier estimerer survival - evt som funktion af en eller flere kategoriske variable.\nCox proportional hazards modellen estimerer hazard - som funktion af en eller flere variable.\nDen antager at der eksisterer en baseline hazard, som kan stige, eller falde, som funktion af forklarende variable.\n\\[\nh(t | X) = h_0(t)\\exp(\\beta_1x_1 + \\beta_2x_2 + ... + \\beta_kx_k )\n\\] Hvis man tager logaritmen på begge sider - så begynder det at ligne noget lineært:\n\\[\\ln(h(t)) = \\alpha(t) + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_k x_k\n\\]\nDet behøver vi ikke bruge tid på - men der er (som sædvanligt) - en lidt dybere sammenhæng mellem tingene…"
+  },
+  {
+    "objectID": "slides/survival.html#i-praksis",
+    "href": "slides/survival.html#i-praksis",
+    "title": "Overlevelsesanalyse",
+    "section": "I praksis",
+    "text": "I praksis\nVi ser stadig på lungekræft. Det så ud til at dødeligheden var forskellig mellem køn.\nCox modellen siger at\n\\[\nh(t) = h_0(t)\\exp(\\beta\\cdot\\text{køn})\n\\] Her har vi sat mænd som baseline, med værdien 0. Exponential leddet bliver da 1 for mænd (\\(\\exp(\\beta \\cdot 0) = 1\\)), og \\(\\beta\\) for kvinder.\nHazard ratio bliver så:\n\\[HR = \\frac{h_0(t)\\exp(\\beta)}{h_0(t)} = \\exp(\\beta)\\] ## Og i praksis\n\n\nCall:\ncoxph(formula = Surv(time, status == 2) ~ factor(sex), data = lung)\n\n  n= 228, number of events= 165 \n\n                coef exp(coef) se(coef)      z Pr(&gt;|z|)   \nfactor(sex)2 -0.5310    0.5880   0.1672 -3.176  0.00149 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n             exp(coef) exp(-coef) lower .95 upper .95\nfactor(sex)2     0.588      1.701    0.4237     0.816\n\nConcordance= 0.579  (se = 0.021 )\nLikelihood ratio test= 10.63  on 1 df,   p=0.001\nWald test            = 10.09  on 1 df,   p=0.001\nScore (logrank) test = 10.33  on 1 df,   p=0.001\n\n\nI dette datasæt er mænd kodet som 1 og kvinder som 2.\nHvad kan vi læse af det?\n228 patienter. 165 hændelser (død). resten er højre censurerede. Vi ved at mænd er kodet som 1 - de er referencegruppen. factor(sex)2 sammenligner kvinder med mænd.\nBlandt patienter, der stadig er i live på samme tidspunkt i opfølgningen, er kvindernes estimerede øjeblikkelige dødsrate cirka 41 % lavere end mændenes (HR 0,588, 95 % KI 0,424–0,816, (p=0{,}00149)). Under antagelsen om proportionale hazards gælder det samme forhold gennem hele opfølgningen."
+  },
+  {
+    "objectID": "slides/survival.html#korrigeret-for",
+    "href": "slides/survival.html#korrigeret-for",
+    "title": "Overlevelsesanalyse",
+    "section": "Korrigeret for",
+    "text": "Korrigeret for\nEller - “multipel regression”\nHvad nu hvis det ikke kun er køn, men også alder der påvirker overlevelseskurven? Eller forskellig dosis af medicin? Eller forskellige typer af implantater?\nCox-regressionen tillader os - fuldstændig som vi har set med andre regressioner, at have mere end en forklarende variabel:\n\n\nCall:\ncoxph(formula = Surv(time, status == 2) ~ factor(sex) + age, \n    data = lung)\n\n  n= 228, number of events= 165 \n\n                  coef exp(coef)  se(coef)      z Pr(&gt;|z|)   \nfactor(sex)2 -0.513219  0.598566  0.167458 -3.065  0.00218 **\nage           0.017045  1.017191  0.009223  1.848  0.06459 . \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n             exp(coef) exp(-coef) lower .95 upper .95\nfactor(sex)2    0.5986     1.6707    0.4311    0.8311\nage             1.0172     0.9831    0.9990    1.0357\n\nConcordance= 0.603  (se = 0.025 )\nLikelihood ratio test= 14.12  on 2 df,   p=9e-04\nWald test            = 13.47  on 2 df,   p=0.001\nScore (logrank) test = 13.72  on 2 df,   p=0.001\n\n\nHvordan læser vi det?"
+  },
+  {
+    "objectID": "slides/survival.html#styrker-1",
+    "href": "slides/survival.html#styrker-1",
+    "title": "Overlevelsesanalyse",
+    "section": "Styrker",
+    "text": "Styrker\nTager højde for censurering Tillader flere forklarende variable Kan laves uden at kende hazard-funktionen Den alle bruger"
+  },
+  {
+    "objectID": "slides/survival.html#svagheder-1",
+    "href": "slides/survival.html#svagheder-1",
+    "title": "Overlevelsesanalyse",
+    "section": "Svagheder",
+    "text": "Svagheder\nCox-regressionen antager proportional hazard (der er kun en simpel faktor til forskel)\nDet kan være tvivlsomt hvis\nKM-kurverne krydser er antagelsen om proportional hazard være tvivlsom der er tydeligt forsinket effekt af behandling er PH også tvivlsom der er grund til at tro at effekten af behandling ændres over tid"
+  },
+  {
+    "objectID": "slides/survival.html#faldgruber-2",
+    "href": "slides/survival.html#faldgruber-2",
+    "title": "Overlevelsesanalyse",
+    "section": "Faldgruber",
+    "text": "Faldgruber\nHazard Ratio er: - en ratio, ikke en risiko - forskellig fra forskel i median overlevelsen - svær at fortolke klinisk - ikke kausalt enkel. - ikke en behandlingseffekt"
+  },
+  {
+    "objectID": "slides/survival.html#en-opgave",
+    "href": "slides/survival.html#en-opgave",
+    "title": "Overlevelsesanalyse",
+    "section": "En opgave",
+    "text": "En opgave"
+  },
+  {
+    "objectID": "slides/survival.html#opgave-2",
+    "href": "slides/survival.html#opgave-2",
+    "title": "Overlevelsesanalyse",
+    "section": "Opgave 2",
+    "text": "Opgave 2\nData stammer fra Stanford Heart Transplant studiet, hvor patienter med svær hjertesygdom blev fulgt over tid fra de blev inkluderet på en venteliste med henblik på at få foretaget en hjertetransplantation. Nogle patienter modtog en hjertetransplantation under opfølgningen. Det primære endepunkt er tid til død fra inklusion i studiet. Følgende variable er til rådighed:\n\nfutime: Opfølgningstid fra patienten blev inkluderet på venteliste til død eller lost to follow-up.\nfustat: Event-indikator (1 = død, 0 = censureret)\ntransplant: Indikator for om patienten har fået transplantation (1 = ja, 0 = nej)\nwait.time: Tid til transplantation\nsurgery: Indikator for tidligere kirurgi (bypass operation) foretaget før inklusion i studiet."
+  },
+  {
+    "objectID": "slides/survival.html#de-første-seks-datalinjer",
+    "href": "slides/survival.html#de-første-seks-datalinjer",
+    "title": "Overlevelsesanalyse",
+    "section": "De første seks datalinjer",
+    "text": "De første seks datalinjer\n\nhead(d_sems)\n\n\n\n\n\n\n\n\n\n\nfustat\nfutime\nwait.time\ntransplant\nsurgery\n\n\n\n\n1\n1\n49\nNA\n0\n0\n\n\n2\n1\n5\nNA\n0\n0\n\n\n3\n1\n15\n0\n1\n0\n\n\n4\n1\n38\n35\n1\n0\n\n\n5\n1\n17\nNA\n0\n0\n\n\n6\n1\n2\nNA\n0\n0"
+  },
+  {
+    "objectID": "slides/survival.html#opgave-2a",
+    "href": "slides/survival.html#opgave-2a",
+    "title": "Overlevelsesanalyse",
+    "section": "Opgave 2a",
+    "text": "Opgave 2a\nEn forsker lavede følgende analyse:\n\nsurvdiff(Surv(futime, fustat == 1) ~ factor(surgery), data = d_sems)\n\n\n\n\n\n\n\n\n\n\nN\nObserved\nExpected\n(O-E)^2/E\n(O-E)^2/V\n\n\n\n\nfactor(surgery)=0\n87\n66\n58.6\n0.938\n4.44\n\n\nfactor(surgery)=1\n16\n9\n16.4\n3.348\n4.44\n\n\n\n\n\n\n\nChisq= 4.4 on 1 degrees of freedom, p= 0.04\na) Hvilken analyse er der tale om og hvad kan du konkludere på baggrund af den?"
+  },
+  {
+    "objectID": "slides/survival.html#opgave-2b",
+    "href": "slides/survival.html#opgave-2b",
+    "title": "Overlevelsesanalyse",
+    "section": "Opgave 2b",
+    "text": "Opgave 2b\nNu blev følgende analyse udført med tilhørende udskrift:\n\nsummary(coxph(Surv(futime, fustat == 1) ~ factor(transplant), data = d_sems))\n\nn= 103, number of events= 75\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\nz\nPr(&gt;|z|)\n\n\n\n\nfactor(transplant)1\n-1.3234\n0.2662\n0.2438\n-5.428\n5.69e-08 ***\n\n\n\n\n\n\n\nb) Hvilken type analyse er der tale om, og hvordan fortolkes resultatet? Vurder herefter kritisk, om analysen er korrekt i denne sammenhæng. Hvis ikke, beskriv hvilket problem der opstår, og hvordan det påvirker konklusionen."
+  },
+  {
+    "objectID": "slides/survival.html#punktnoter-til-fordeling",
+    "href": "slides/survival.html#punktnoter-til-fordeling",
+    "title": "Overlevelsesanalyse",
+    "section": "Punktnoter til fordeling",
+    "text": "Punktnoter til fordeling\nSamme femårsoverlevelse kan dække over meget forskellige forløb. Tjek først, hvad hændelsen er, hvor tiden starter, og hvilken enhed den måles i. Kurvens højde ved et givet tidspunkt er den estimerede sandsynlighed for stadig at være hændelsesfri. Kurven falder ved observerede hændelser og ligger fladt imellem dem. En censureringsstreg viser, hvor længe en deltager bidrog med opfølgning. Frafald kan skævvride kurven, hvis det hænger sammen med deltagernes prognose. En lang, flad hale kan bygge på ganske få deltagere. Tjek number at risk. Når få er i risiko, kan én hændelse give et stort fald. Den lodrette afstand mellem to kurver ved samme tidspunkt er en forskel i procentpoint. Krydsende kurver giver grund til at undersøge, om hazardforholdet ændrer sig over tid. Medianen aflæses dér, hvor kurven når eller passerer 50 %. »Median ikke nået« kan også skyldes kort opfølgning. Log-rank-testen sammenligner de samlede overlevelsesforløb. Ved proportionale hazards betyder HR = 0,70 en 30 % lavere øjeblikkelig hændelsesrate blandt dem, der stadig er hændelsesfri. En lille p-værdi kan sagtens ledsage en klinisk beskeden forskel."
+  },
+  {
+    "objectID": "slides/survival.html#hvad-kan-vi-se-af-det",
+    "href": "slides/survival.html#hvad-kan-vi-se-af-det",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad kan vi se af det?",
+    "text": "Hvad kan vi se af det?\n\n\n\n\n\n\n\n\n\n\n\n\nVi skal kunne læse det samme som før.\nMen nu er den estimerede 1-års overlevelse forskellig mellem de to køn.\nMænd ca. 34%, kvinder ca. 53%.\nDet kan vi også udtrykke som at kvinders estimerede 1-års overlevelse er ca. 19 procentpoint højere.\nOg nej, det kan vi ikke meningsfyldt på denne graf…\n\n\n\nMedianoverlevelsen er også forskellig, 270 vs 426 dage for mænd hhv kvinder.\nVi kan se at kvinders overlevelseskurve er højere end mænds gennem næsten hele opfølgningen.\nKan vi konkludere at der er forskel?\nNope. Der skal være meget tydelig (MEGET) forskel på de to kurver for at vi kan det grafisk. Overlappet mellem KI’er fortæller os også at det er noget snask."
+  },
+  {
+    "objectID": "slides/survival.html#faldgruber-ved-kaplan-meier",
+    "href": "slides/survival.html#faldgruber-ved-kaplan-meier",
+    "title": "Overlevelsesanalyse",
+    "section": "Faldgruber ved Kaplan-Meier",
+    "text": "Faldgruber ved Kaplan-Meier\n\nMedianen bruger kun et punkt på kurven.\nTo kurver kan have samme median og være meget forskellige.\nHvis kurven aldrig kommer under 0.5, kan medianen ikke estimeres."
+  },
+  {
+    "objectID": "slides/survival.html#hvad-er-km-god-til",
+    "href": "slides/survival.html#hvad-er-km-god-til",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad er KM god til?",
+    "text": "Hvad er KM god til?\n\ndeskriptiv beskrivelse af survival (overlevelsesfunktionen) over tid\nvisualisering af censur og størrelsen af risikosættet.\nenkel sammenligning af to (eller flere) grupper"
+  },
+  {
+    "objectID": "slides/survival.html#hvad-kan-km-ikke",
+    "href": "slides/survival.html#hvad-kan-km-ikke",
+    "title": "Overlevelsesanalyse",
+    "section": "Hvad kan KM ikke?",
+    "text": "Hvad kan KM ikke?\n\njustere for andre parametre\nHåndtere forklarende (kontinuærte) variable\nestimere hvad forskellen i hazard er for de to (eller flere) grupper (andet end punktvis)"
   }
 ]
