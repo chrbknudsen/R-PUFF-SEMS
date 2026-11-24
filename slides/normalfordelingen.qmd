@@ -1207,8 +1207,6 @@ $1-\mu = 0.524\sigma \Leftrightarrow 1 - \mu = 0.534\cdot3.32 \Leftrightarrow 1 
 ::::
 
 
-
-
 ## Hvorfor er den vigtig for jer?
 
 Ret ofte er der en typeopgave der grundlæggende tester om I forstår normalfordelingen. 
